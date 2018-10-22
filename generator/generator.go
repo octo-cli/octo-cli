@@ -83,6 +83,15 @@ type (
 		IDName           string
 		DocumentationURL string
 		Params           routeParams
+		Requests []interface{}
+		Responses []struct {
+			Headers struct {
+				Status string
+				ContentType string `json:"content-type"`
+			}
+			Body interface{}
+			Description interface{}
+		}
 	}
 
 	runMethodArgHelper struct {
@@ -122,7 +131,7 @@ type (
 			RouteName string
 			Command   map[string]struct {
 				RoutesName string
-				Args       []string
+				ArgNames   []string
 			}
 		}
 	}
@@ -169,6 +178,7 @@ func (k *genCliRun) Run() error {
 	return errors.Wrap(err, "")
 }
 
+//noinspection GoUnhandledErrorResult
 func (k *genCliUpdateRoutes) Run() error {
 	resp, err := http.Get(k.RoutesURL)
 	if err != nil {
@@ -184,6 +194,7 @@ func (k *genCliUpdateRoutes) Run() error {
 	return errors.Wrap(err, "")
 }
 
+//noinspection GoUnhandledErrorResult
 func (k *genCliUpdateTestdata) Run() error {
 	url := "https://octokit.github.io/routes/index.json"
 	routesPath := "generator/testdata/routes.json"
@@ -232,7 +243,7 @@ func buildSvcs(routesPath, configFile string) ([]svc, error) {
 			svcRoutesName = flagName(svcName)
 		}
 		var cmdNames []string
-		for cmdName, _ := range hsvc.Command {
+		for cmdName := range hsvc.Command {
 			cmdNames = append(cmdNames, cmdName)
 		}
 		sort.Strings(cmdNames)
@@ -243,15 +254,8 @@ func buildSvcs(routesPath, configFile string) ([]svc, error) {
 			if routesName == "" {
 				routesName = flagName(cmdName)
 			}
-			cmds[i] = newCmd(cmdName, rt.svcRoutes(svcRoutesName).findByIdName(routesName), hcmd.Args...)
+			cmds[i] = newCmd(cmdName, rt.svcRoutes(svcRoutesName).findByIdName(routesName), hcmd.ArgNames...)
 		}
-		//for cmdName, hcmd := range hsvc.Command {
-		//	routesName := hcmd.RoutesName
-		//	if routesName == "" {
-		//		routesName = flagName(cmdName)
-		//	}
-		//	cmds = append(cmds, newCmd(cmdName, rt.svcRoutes(svcRoutesName).findByIdName(routesName), hcmd.Args...))
-		//}
 		svcs = append(svcs, svc{
 			Name:     svcName,
 			Commands: cmds,
@@ -263,6 +267,10 @@ func buildSvcs(routesPath, configFile string) ([]svc, error) {
 func main() {
 	k := kong.Parse(&genCli{})
 	err := k.Run()
+	if err != nil {
+		fmt.Printf("%+v", err)
+		fmt.Println(err)
+	}
 	k.FatalIfErrorf(err)
 }
 
@@ -272,8 +280,7 @@ func writeOutput(outputPath string, svcs []svc) error {
 		if err != nil {
 			return errors.Wrap(err, "")
 		}
-		fp := filepath.Join(outputPath, p.outputPath("services"))
-		err = p.writeToFile(fp)
+		err = p.writeToDir(filepath.Join(outputPath, p.outputDir("services")))
 		if err != nil {
 			return errors.Wrap(err, "")
 		}
@@ -409,6 +416,24 @@ func (p *pkg) write(wr io.Writer) error {
 	return errors.Wrap(err, "")
 }
 
+func (p *pkg) writeGoFile(wr io.Writer, template string) error {
+	var buf bytes.Buffer
+	err := tmpl.ExecuteTemplate(&buf, template, p)
+	if err != nil {
+		return errors.Wrap(err, "")
+	}
+	out, err := format.Source(buf.Bytes())
+	if err != nil {
+		return errors.Wrap(err, "")
+	}
+	out, err = imports.Process("", out, nil)
+	if err != nil {
+		return errors.Wrap(err, "")
+	}
+	_, err = wr.Write(out)
+	return errors.Wrap(err, "")
+}
+
 func (s *svc) writePkg(wr io.Writer) error {
 	pkg, err := s.pkg()
 	if err != nil {
@@ -418,23 +443,34 @@ func (s *svc) writePkg(wr io.Writer) error {
 	return errors.Wrap(err, "")
 }
 
-func (p *pkg) outputPath(servicesBase string) string {
-	return filepath.Join(servicesBase, p.PackageName, p.PackageName+".go")
+func (p *pkg) outputDir(servicesBase string) string {
+	return filepath.Join(servicesBase, p.PackageName)
 }
 
-func (p *pkg) writeToFile(filename string) error {
-	dir := filepath.Dir(filename)
-	err := os.MkdirAll(dir, 0755)
+func (p *pkg) writeToDir(path string) error  {
+	err := os.MkdirAll(path, 0755)
 	if err != nil {
 		return errors.Wrap(err, "")
 	}
-	var buf bytes.Buffer
-	err = p.write(&buf)
-	if err != nil {
-		return errors.Wrap(err, "")
+	f := []struct{
+		filename, templateName string
+	}{
+		{filename: p.PackageName + ".go", templateName: "svcpackage"},
+		{filename: "testhelper_test.go", templateName: "testhelper"},
 	}
-	err = ioutil.WriteFile(filename, buf.Bytes(), 0644)
-	return errors.Wrap(err, "")
+	for _, v := range f {
+		var buf bytes.Buffer
+		err = p.writeGoFile(&buf, v.templateName)
+		if err != nil {
+			return errors.Wrap(err, "")
+		}
+		fl := filepath.Join(path, v.filename)
+		err = ioutil.WriteFile(fl, buf.Bytes(), 0644)
+		if err != nil {
+			return errors.Wrap(err, "")
+		}
+	}
+	return nil
 }
 
 func flagName(fieldName string) string {
@@ -480,6 +516,47 @@ func funcInTypes(funcType reflect.Type, offset int) []reflect.Type {
 	return types
 }
 
+func commonStructFields() ([]structField, error) {
+	var structFields []structField
+
+	foo := []struct{
+		Name string
+		Type string
+		Tags []*structtag.Tag
+	}{
+		{
+			Name: "Token",
+			Type: "string",
+			Tags: []*structtag.Tag{
+				newTag("env", "GITHUB_TOKEN"),
+				newTag("required", ""),
+			},
+		},
+		{
+			Name: "APIBaseURL",
+			Type: "string",
+			Tags: []*structtag.Tag{
+				newTag("env", "GITHUB_API_BASE_URL"),
+				newTag("default", "https://api.github.com"),
+			},
+		},
+	}
+
+	for _, sf := range foo {
+		tgs, err := newTags(sf.Tags...)
+		if  err != nil {
+			return nil, errors.Wrap(err, "")
+		}
+		structFields = append(structFields, structField{
+			Name: sf.Name,
+			Type: sf.Type,
+			Tags: tgs,
+		})
+	}
+
+	return structFields, nil
+}
+
 func buildCommandStruct(svcName, funcName string, apiFunc reflect.Method, c cmd) (*structTmplHelper, error) {
 	structName := svcName + funcName + "Cmd"
 	argNames := c.ArgNames
@@ -487,12 +564,10 @@ func buildCommandStruct(svcName, funcName string, apiFunc reflect.Method, c cmd)
 		argNames[i] = toArgName(argName)
 	}
 	fullArgNames := argNames
-	tgs, err := newTags(newTag("env", "GITHUB_TOKEN"), newTag("required", ""))
+
+	structFields, err := commonStructFields()
 	if err != nil {
 		return nil, errors.Wrap(err, "")
-	}
-	var structFields = []structField{
-		{Name: "Token", Type: "string", Tags: tgs},
 	}
 
 	var oss []optionsStruct
@@ -513,7 +588,7 @@ func buildCommandStruct(svcName, funcName string, apiFunc reflect.Method, c cmd)
 				Type: oStruct.StructName,
 			}
 			structFields = append(structFields, field)
-		case reflect.String, reflect.Int:
+		case reflect.String, reflect.Int, reflect.Bool:
 			if len(argNames) < 1 {
 				return nil, fmt.Errorf("not enough argNames")
 			}
@@ -521,7 +596,7 @@ func buildCommandStruct(svcName, funcName string, apiFunc reflect.Method, c cmd)
 			argNames = argNames[1:]
 			param := c.Route.Params.findByArgName(argName)
 			field := newStructField(argName, inType.Kind().String(), &structtag.Tags{})
-			if param.Required {
+			if param != nil && param.Required {
 				err := field.Tags.Set(newTag("required", ""))
 				if err != nil {
 					return nil, errors.Wrap(err, "")
@@ -544,7 +619,7 @@ func buildCommandStruct(svcName, funcName string, apiFunc reflect.Method, c cmd)
 			}
 			structFields = append(structFields, *field)
 		default:
-			return nil, fmt.Errorf(`unsupported type: "%s"`, inType.Kind().String())
+			return nil, fmt.Errorf(`buildCommandStruct: unsupported type: "%s"`, inType.Kind().String())
 		}
 	}
 	runMethod, err := generateRunMethod(svcName, funcName, apiFunc, fullArgNames...)
@@ -586,7 +661,7 @@ func generateRunMethod(svcName, funcName string, apiFunc reflect.Method, argName
 				return nil, fmt.Errorf("only pointers to structs are allowed")
 			}
 			runStruct.Args = append(runStruct.Args, runMethodArgHelper{Name: inType.Elem().Name(), IsPtr: true})
-		case reflect.String, reflect.Int:
+		case reflect.String, reflect.Int, reflect.Bool:
 			if len(argNames) < 1 {
 				return nil, fmt.Errorf("not enough argNames")
 			}
@@ -603,7 +678,7 @@ func generateRunMethod(svcName, funcName string, apiFunc reflect.Method, argName
 				Name: argName,
 			})
 		default:
-			return nil, fmt.Errorf("unsupported type: %v", inType.Kind())
+			return nil, fmt.Errorf("generateRunMethod: unsupported type: %v", inType.Kind())
 		}
 	}
 
@@ -798,6 +873,7 @@ func (r rtServices) svcRoutes(serviceName string) *svcRoutes {
 	return &sr
 }
 
+// language=GoTemplate
 const pkgTemplate = `
 {{define "run_method_arg"}}{{if .IsPtr}}c.to{{.Name}}(k){{else}}c.{{.Name}}{{end}}{{end}}
 
@@ -807,9 +883,10 @@ const pkgTemplate = `
 	{{if .}}
 	func (c *{{.StructName}}) Run(k *kong.Context) error {
 			ctx := context.Background()
-			ts := oauth2.StaticTokenSource(&oauth2.Token{AccessToken: c.Token})
-			tc := oauth2.NewClient(ctx, ts)
-			client := github.NewClient(tc)
+			client, e := buildGithubClient(ctx, c.Token, c.APIBaseURL)
+			if e != nil {
+				return e
+			}
 			{{if .HasElement}}element, {{end}}_, err := client.{{.SvcName}}.{{.FuncName}}(ctx, {{template "run_method_args" .}})
 			{{if .HasElement}}	if err != nil {
 			return err
@@ -866,14 +943,80 @@ const pkgTemplate = `
 {{end}}
 
 {{define "svcpackage"}}
-	// Code generated by ghx generator DO NOT EDIT
+	// Code generated by go-github-cli/generator DO NOT EDIT
 	package {{$.PackageName}}
 
 	import ( {{range .Imports}}
 	   "{{.}}"{{end}}
 	)
+
+	var transportWrapper interface {
+		SetTransport(t http.RoundTripper)
+		http.RoundTripper
+	}
+	
+	func buildGithubClient(ctx context.Context, token, apiBaseURL string) (*github.Client, error) {
+		apiBaseURL  = strings.TrimSuffix(apiBaseURL, "/") + "/"
+		ts := oauth2.StaticTokenSource(&oauth2.Token{AccessToken: token})
+		tc := oauth2.NewClient(ctx, ts)
+		if transportWrapper != nil {
+			transportWrapper.SetTransport(tc.Transport)
+			tc.Transport = transportWrapper
+		}
+		client := github.NewClient(tc)
+		baseURL, err := url.Parse(apiBaseURL)
+		client.BaseURL = baseURL
+		return client, err
+	}
+
 	{{range .CmdHelpers}}{{template "structtype" .}}{{end}}
 	{{range .OptionStructs}}{{template "options_struct" .}}{{end}}
+{{end}}
+
+{{define "testhelper"}}
+	// Code generated by go-github-cli/generator DO NOT EDIT
+	package {{$.PackageName}}
+
+	import (
+		"bytes"
+		"github.com/alecthomas/kong"
+		"github.com/dnaeon/go-vcr/recorder"
+		"github.com/stretchr/testify/require"
+		"os"
+		"path/filepath"
+		"testing"
+	)
+	
+	func init() {
+		tkn, ok := os.LookupEnv("TESTUSER_TOKEN")
+		if !ok {
+			tkn = "deadbeef"
+		}
+		os.Setenv("GITHUB_TOKEN", tkn)
+	}
+	
+	func startVCR(t *testing.T, recPath string) *recorder.Recorder {
+		t.Helper()
+		var err error
+		rec, err := recorder.New(recPath)
+		require.Nil(t, err)
+		transportWrapper = rec
+		return rec
+	}
+	
+	func testCmdLine(t *testing.T, fixtureName string, cmdStruct interface{}, cmdline ...string) (stdout bytes.Buffer, stderr bytes.Buffer, err error) {
+		t.Helper()
+		rec := startVCR(t, filepath.Join("testdata", "fixtures", fixtureName))
+		defer rec.Stop()
+		p, e := kong.New(cmdStruct)
+		require.Nil(t, e)
+		p.Stdout = &stdout
+		p.Stderr = &stderr
+		k, e := p.Parse(cmdline)
+		require.Nil(t, e)
+		err = k.Run()
+		return
+	}
 {{end}}
 
 `

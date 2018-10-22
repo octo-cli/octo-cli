@@ -14,6 +14,15 @@
   version = "v1.1.1"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/dnaeon/go-vcr"
+  packages = [
+    "cassette",
+    "recorder"
+  ]
+  revision = "5637cf3d8a31b20882d79bd0e53a186d3821b155"
+
+[[projects]]
   name = "github.com/fatih/camelcase"
   packages = ["."]
   revision = "44e46d280b43ec1531bb25252440e34f1b800b65"
@@ -123,9 +132,15 @@
   revision = "ae0ab99deb4dc413a2b4bd6c8bdd0eb67f1e4d06"
   version = "v1.2.0"
 
+[[projects]]
+  name = "gopkg.in/yaml.v2"
+  packages = ["."]
+  revision = "5420a8b6744d3b0345ab293f6fcba19c978f1183"
+  version = "v2.2.1"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "96e327f47b4495940068025b1671b5567e16da674dd312ef8be7e46c61e663aa"
+  inputs-digest = "25b0e5eb568d01b7815114ed9591757d8a3c30b7abf6c0e79ffe0f60029d1f66"
   solver-name = "gps-cdcl"
   solver-version = 1

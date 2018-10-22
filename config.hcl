@@ -1,16 +1,24 @@
 Service Issues {
   Command Edit {
-    Args = ["Owner", "Repo", "Number"]
+    ArgNames = ["Owner", "Repo", "Number"]
   }
   Command Create {}
   Command Lock {}
   Command AddLabelsToIssue {
     RoutesName = "add-labels"
-    Args = ["Owner", "Repo", "Number", "Labels"]
+    ArgNames = ["Owner", "Repo", "Number", "Labels"]
+  }
+  Command List{
+    ArgNames = ["All"]
   }
 }
 
 Service Organizations {
   RouteName = "orgs"
+  Command Get {}
+}
+
+Service Repositories {
+  RouteName = "repos"
   Command Get {}
 }

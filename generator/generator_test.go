@@ -35,6 +35,7 @@ func Test_svc_writePkg(t *testing.T) {
 			newCmd("AddLabelsToIssue", rts.findByIdName("add-labels"), "Owner", "Repo", "Number", "Labels"),
 			newCmd("Create", rts.findByIdName("create"), "Owner", "Repo"),
 			newCmd("Edit", rts.findByIdName("edit")),
+			newCmd("List", rts.findByIdName("list"), "All"),
 			newCmd("Lock", rts.findByIdName("lock"), "Owner", "Repo", "Number"),
 		},
 	}
@@ -51,7 +52,9 @@ func Test_genCliRun_Run(t *testing.T) {
 	err = os.MkdirAll("./tmp", 0755)
 	require.Nil(t, err)
 	tempDir, err := ioutil.TempDir("./tmp", "")
-	defer os.RemoveAll(tempDir)
+	defer func() {
+		require.Nil(t, os.RemoveAll(tempDir))
+	}()
 	require.Nil(t, err)
 	k := &genCliRun{
 		RoutesPath: "testdata/routes.json",
@@ -73,7 +76,6 @@ func nsf(t *testing.T, name, ftype string, tag ...*structtag.Tag) *structField {
 }
 
 func Test_buildCommandStruct(t *testing.T) {
-
 	t.Run("Issues Edit", func(t *testing.T) {
 		rts := testRtServices.svcRoutes("issues")
 
@@ -97,6 +99,7 @@ func Test_buildCommandStruct(t *testing.T) {
 			RunMethod: wantRunMethod,
 			Fields: []structField{
 				*nsf(t, "Token", "string", newTag("env", "GITHUB_TOKEN"), newTag("required", "")),
+				*nsf(t, "APIBaseURL", "string", newTag("env", "GITHUB_API_BASE_URL"), newTag("default", "https://api.github.com")),
 				*nsf(t, "Owner", "string", newTag("required", "")),
 				*nsf(t, "Repo", "string", newTag("required", "")),
 				*nsf(t, "Number", "int", newTag("required", "")),
@@ -126,6 +129,7 @@ func Test_buildCommandStruct(t *testing.T) {
 			Name: "IssuesListByOrgCmd",
 			Fields: []structField{
 				*nsf(t, "Token", "string", newTag("env", "GITHUB_TOKEN"), newTag("required", "")),
+				*nsf(t, "APIBaseURL", "string", newTag("env", "GITHUB_API_BASE_URL"), newTag("default", "https://api.github.com")),
 				*nsf(t, "Org", "string", newTag("required", "")),
 				{Type: "issuesListByOrgCmdIssueListOptionsFlags"},
 			},
