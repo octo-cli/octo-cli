@@ -33,11 +33,11 @@ func Test_svc_writePkg(t *testing.T) {
 	issueSvc := svc{
 		Name: "Issues",
 		Commands: []cmd{
-			newCmd("AddLabelsToIssue", rts.FindByIdName("add-labels"), "Owner", "Repo", "Number", "Labels"),
-			newCmd("Create", rts.FindByIdName("create"), "Owner", "Repo"),
-			newCmd("Edit", rts.FindByIdName("edit")),
-			newCmd("List", rts.FindByIdName("list"), "All"),
-			newCmd("Lock", rts.FindByIdName("lock"), "Owner", "Repo", "Number"),
+			newCmd("AddLabelsToIssue", rts.FindByIDName("add-labels"), "Owner", "Repo", "Number", "Labels"),
+			newCmd("Create", rts.FindByIDName("create"), "Owner", "Repo"),
+			newCmd("Edit", rts.FindByIDName("edit")),
+			newCmd("List", rts.FindByIDName("list"), "All"),
+			newCmd("Lock", rts.FindByIDName("lock"), "Owner", "Repo", "Number"),
 		},
 	}
 
@@ -86,7 +86,7 @@ func Test_buildCommandStruct(t *testing.T) {
 		method, ok := field.Type.MethodByName("Edit")
 		assert.True(t, ok)
 		c := cmd{
-			Route:    rts.FindByIdName("edit"),
+			Route:    rts.FindByIDName("edit"),
 			ArgNames: []string{"Owner", "Repo", "Number"},
 		}
 		got, err := buildCommandStruct("Issues", "Edit", method, c)
@@ -120,7 +120,7 @@ func Test_buildCommandStruct(t *testing.T) {
 		method, ok := field.Type.MethodByName("ListByOrg")
 		assert.True(t, ok)
 		c := cmd{
-			Route:    rts.FindByIdName("list-for-org"),
+			Route:    rts.FindByIDName("list-for-org"),
 			ArgNames: []string{"Org"},
 		}
 		got, err := buildCommandStruct("Issues", "ListByOrg", method, c)
@@ -198,7 +198,7 @@ func Test_fieldFlagName(t *testing.T) {
 		Labels     []string `url:"labels,comma,omitempty"`
 		LockReason string   `json:"lock_reason,omitempty"`
 		NoTag      string
-		JsonDiff   *string `json:"something_different,omitempty"`
+		JSONDiff   *string `json:"something_different,omitempty"`
 	}
 
 	t.Run("no tag", func(t *testing.T) {
@@ -207,7 +207,7 @@ func Test_fieldFlagName(t *testing.T) {
 	})
 
 	t.Run("from json", func(t *testing.T) {
-		field, _ := reflect.TypeOf(example{}).FieldByName("JsonDiff")
+		field, _ := reflect.TypeOf(example{}).FieldByName("JSONDiff")
 		assert.Equal(t, "something-different", fieldFlagName(field))
 	})
 
@@ -289,13 +289,13 @@ func Test_generateOptionsStruct(t *testing.T) {
 	}
 
 	type example struct {
-		Body       *string  `json:"body,omitempty"`
-		Labels     []string `url:"labels,comma,omitempty"`
-		LockReason string   `json:"lock_reason,omitempty"`
-		NoTag      string
-		JsonDiff   *string `json:"something_different,omitempty"`
-		anonStruct     //nolint:megacheck
-		*anonPtrStruct //nolint:megacheck
+		Body           *string  `json:"body,omitempty"`
+		Labels         []string `url:"labels,comma,omitempty"`
+		LockReason     string   `json:"lock_reason,omitempty"`
+		NoTag          string
+		JSONDiff       *string `json:"something_different,omitempty"`
+		anonStruct             //nolint:megacheck
+		*anonPtrStruct         //nolint:megacheck
 	}
 
 	t.Run("val setters", func(t *testing.T) {
@@ -308,7 +308,7 @@ func Test_generateOptionsStruct(t *testing.T) {
 				{TargetIsPtr: false, Name: "Labels", FlagName: "labels"},
 				{TargetIsPtr: false, Name: "LockReason", FlagName: "lock-reason"},
 				{TargetIsPtr: false, Name: "NoTag", FlagName: "no-tag"},
-				{TargetIsPtr: true, Name: "JsonDiff", FlagName: "something-different"},
+				{TargetIsPtr: true, Name: "JSONDiff", FlagName: "something-different"},
 				{TargetIsPtr: false, Name: "AnonOne", FlagName: "anon1"},
 				{TargetIsPtr: false, Name: "AnonPtrOne", FlagName: "anonptr1"},
 			}

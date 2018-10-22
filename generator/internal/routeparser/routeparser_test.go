@@ -25,7 +25,7 @@ func TestRoutes_FindByIdName(t *testing.T) {
 		&Route{IDName: "other"},
 		want,
 	}
-	got := routes.FindByIdName("foo")
+	got := routes.FindByIDName("foo")
 	assert.Equal(t, want, got)
 }
 

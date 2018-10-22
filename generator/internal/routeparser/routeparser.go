@@ -64,8 +64,8 @@ func ParseRoutesFile(file string) (map[string]Routes, error) {
 	return sm, errors.Wrap(err, "failed unmarshalling json")
 }
 
-//FindByIdName returns the Route with the given IDName
-func (r *Routes) FindByIdName(idName string) *Route {
+//FindByIDName returns the Route with the given IDName
+func (r *Routes) FindByIDName(idName string) *Route {
 	for _, route := range *r {
 		if route != nil && route.IDName == idName {
 			return route

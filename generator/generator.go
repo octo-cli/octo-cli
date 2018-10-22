@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"github.com/WillAbides/go-github-cli/generator/internal"
+	"github.com/WillAbides/go-github-cli/generator/internal/configparser"
 	"github.com/WillAbides/go-github-cli/generator/internal/routeparser"
 	"go/format"
 	"io"
@@ -20,7 +21,6 @@ import (
 	"github.com/fatih/camelcase"
 	"github.com/fatih/structtag"
 	"github.com/google/go-github/github"
-	"github.com/hashicorp/hcl"
 	"github.com/pkg/errors"
 	"golang.org/x/tools/imports"
 )
@@ -77,16 +77,6 @@ type (
 		StructName string
 		MainStruct structTmplHelper
 		ToFunc     toFuncTmplHelper
-	}
-
-	configHcl struct {
-		Service map[string]struct {
-			RouteName string
-			Command   map[string]struct {
-				RoutesName string
-				ArgNames   []string
-			}
-		}
 	}
 
 	genCli struct {
@@ -190,16 +180,11 @@ func (k *genCliUpdateTestdata) Run() error {
 func buildSvcs(routesPath, configFile string) ([]svc, error) {
 	rt, err := routeparser.ParseRoutesFile(routesPath)
 	if err != nil {
-		return nil, errors.Wrap(err, "")
+		return nil, errors.Wrapf(err, "failed parsing routes at %q", routesPath)
 	}
-	hConfig := &configHcl{}
-	hConfigBytes, err := ioutil.ReadFile(configFile)
+	hConfig, err := configparser.ParseConfigFile(configFile)
 	if err != nil {
-		return nil, errors.Wrap(err, "")
-	}
-	err = hcl.Decode(hConfig, string(hConfigBytes))
-	if err != nil {
-		return nil, errors.Wrap(err, "")
+		return nil, errors.Wrapf(err, "failed parsing config file at %q", configFile)
 	}
 
 	var svcs []svc
@@ -222,7 +207,7 @@ func buildSvcs(routesPath, configFile string) ([]svc, error) {
 				routesName = flagName(cmdName)
 			}
 			routes := rt[svcRoutesName]
-			route := routes.FindByIdName(routesName)
+			route := routes.FindByIDName(routesName)
 			cmds[i] = newCmd(cmdName, route, hcmd.ArgNames...)
 		}
 		svcs = append(svcs, svc{
@@ -416,12 +401,12 @@ func (p *pkg) outputDir(servicesBase string) string {
 	return filepath.Join(servicesBase, p.PackageName)
 }
 
-func (p *pkg) writeToDir(path string) error  {
+func (p *pkg) writeToDir(path string) error {
 	err := os.MkdirAll(path, 0755)
 	if err != nil {
 		return errors.Wrap(err, "")
 	}
-	f := []struct{
+	f := []struct {
 		filename, templateName string
 	}{
 		{filename: p.PackageName + ".go", templateName: "svcpackage"},
@@ -457,8 +442,7 @@ func funcInTypes(funcType reflect.Type, offset int) []reflect.Type {
 
 func commonStructFields() ([]structField, error) {
 	var structFields []structField
-
-	foo := []struct{
+	for _, sf := range []struct {
 		Name string
 		Type string
 		Tags []*structtag.Tag
@@ -479,11 +463,9 @@ func commonStructFields() ([]structField, error) {
 				newTag("default", "https://api.github.com"),
 			},
 		},
-	}
-
-	for _, sf := range foo {
+	} {
 		tgs, err := newTags(sf.Tags...)
-		if  err != nil {
+		if err != nil {
 			return nil, errors.Wrap(err, "")
 		}
 		structFields = append(structFields, structField{
@@ -492,7 +474,6 @@ func commonStructFields() ([]structField, error) {
 			Tags: tgs,
 		})
 	}
-
 	return structFields, nil
 }
 

@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-// takes input like "foo-bar" and returns "FooBar"
+//ToArgName takes input like "foo-bar" and returns "FooBar"
 func ToArgName(in string) string {
 	out := in
 	for _, separator := range []string{"_", "-"} {
@@ -18,6 +18,7 @@ func ToArgName(in string) string {
 	return out
 }
 
+//Unexport takes some camelcased strings and returns a camelcased, unexported, truncated version
 func Unexport(name ...string) string {
 	var words []string
 	for _, v := range name {
