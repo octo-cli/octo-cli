@@ -1,4 +1,4 @@
-package main
+package generator
 
 import (
 	"bytes"
@@ -9,7 +9,6 @@ import (
 	"go/format"
 	"io"
 	"io/ioutil"
-	"net/http"
 	"os"
 	"path/filepath"
 	"reflect"
@@ -17,7 +16,6 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/alecthomas/kong"
 	"github.com/fatih/camelcase"
 	"github.com/fatih/structtag"
 	"github.com/google/go-github/github"
@@ -26,8 +24,8 @@ import (
 )
 
 type (
-	// svc represents a group of api endpoints such as Issues, Organizations or Git
-	svc struct {
+	// Svc represents a group of api endpoints such as Issues, Organizations or Git
+	Svc struct {
 		Name     string
 		Commands []cmd
 	}
@@ -79,25 +77,6 @@ type (
 		ToFunc     toFuncTmplHelper
 	}
 
-	genCli struct {
-		Run            genCliRun            `cmd:"" help:"generate production code"`
-		UpdateRoutes   genCliUpdateRoutes   `cmd:"" help:"update routes.json with the latest"`
-		UpdateTestdata genCliUpdateTestdata `cmd:"" help:"updates routes.json and exampleapp in generator/testdata"`
-	}
-
-	genCliUpdateRoutes struct {
-		RoutesPath string `type:"existingfile" default:"routes.json"`
-		RoutesURL  string `default:"https://octokit.github.io/routes/index.json"`
-	}
-
-	genCliRun struct {
-		RoutesPath string `type:"existingfile" default:"routes.json"`
-		ConfigFile string `type:"existingfile" default:"config.hcl"`
-		OutputPath string `type:"existingdir" default:"."`
-	}
-
-	genCliUpdateTestdata struct{}
-
 	valSetter struct {
 		TargetIsPtr bool
 		Name        string
@@ -126,58 +105,8 @@ var (
 	tmpl = template.Must(template.New("").Parse(pkgTemplate))
 )
 
-func (k *genCliRun) Run() error {
-	svcs, err := buildSvcs(k.RoutesPath, k.ConfigFile)
-	if err != nil {
-		return errors.Wrap(err, "")
-	}
-	err = writeOutput(k.OutputPath, svcs)
-	return errors.Wrap(err, "")
-}
-
-//noinspection GoUnhandledErrorResult
-func (k *genCliUpdateRoutes) Run() error {
-	resp, err := http.Get(k.RoutesURL)
-	if err != nil {
-		return errors.Wrap(err, "")
-	}
-	defer resp.Body.Close()
-	outFile, err := os.Create(k.RoutesPath)
-	if err != nil {
-		return errors.Wrap(err, "")
-	}
-	defer outFile.Close()
-	_, err = io.Copy(outFile, resp.Body)
-	return errors.Wrap(err, "")
-}
-
-//noinspection GoUnhandledErrorResult
-func (k *genCliUpdateTestdata) Run() error {
-	url := "https://octokit.github.io/routes/index.json"
-	routesPath := "generator/testdata/routes.json"
-	resp, err := http.Get(url)
-	if err != nil {
-		return errors.Wrap(err, "")
-	}
-	defer resp.Body.Close()
-	outFile, err := os.Create(routesPath)
-	if err != nil {
-		return errors.Wrap(err, "")
-	}
-	defer outFile.Close()
-	_, err = io.Copy(outFile, resp.Body)
-	if err != nil {
-		return errors.Wrap(err, "")
-	}
-	svcs, err := buildSvcs(routesPath, "generator/testdata/exampleapp_config.hcl")
-	if err != nil {
-		return errors.Wrap(err, "")
-	}
-	err = writeOutput("generator/testdata/exampleapp", svcs)
-	return errors.Wrap(err, "")
-}
-
-func buildSvcs(routesPath, configFile string) ([]svc, error) {
+//BuildSvcs builds services
+func BuildSvcs(routesPath, configFile string) ([]Svc, error) {
 	rt, err := routeparser.ParseRoutesFile(routesPath)
 	if err != nil {
 		return nil, errors.Wrapf(err, "failed parsing routes at %q", routesPath)
@@ -187,7 +116,7 @@ func buildSvcs(routesPath, configFile string) ([]svc, error) {
 		return nil, errors.Wrapf(err, "failed parsing config file at %q", configFile)
 	}
 
-	var svcs []svc
+	var svcs []Svc
 
 	for svcName, hsvc := range hConfig.Service {
 		svcRoutesName := hsvc.RouteName
@@ -210,7 +139,7 @@ func buildSvcs(routesPath, configFile string) ([]svc, error) {
 			route := routes.FindByIDName(routesName)
 			cmds[i] = newCmd(cmdName, route, hcmd.ArgNames...)
 		}
-		svcs = append(svcs, svc{
+		svcs = append(svcs, Svc{
 			Name:     svcName,
 			Commands: cmds,
 		})
@@ -218,17 +147,8 @@ func buildSvcs(routesPath, configFile string) ([]svc, error) {
 	return svcs, nil
 }
 
-func main() {
-	k := kong.Parse(&genCli{})
-	err := k.Run()
-	if err != nil {
-		fmt.Printf("%+v", err)
-		fmt.Println(err)
-	}
-	k.FatalIfErrorf(err)
-}
-
-func writeOutput(outputPath string, svcs []svc) error {
+//WriteOutput writes services output to the given path
+func WriteOutput(outputPath string, svcs []Svc) error {
 	for _, s := range svcs {
 		p, err := s.pkg()
 		if err != nil {
@@ -314,12 +234,12 @@ func newSvcCmd(svcName string, cmds []cmd) (*structTmplHelper, error) {
 	}, nil
 }
 
-func (s *svc) getStructField() (reflect.StructField, bool) {
+func (s *Svc) getStructField() (reflect.StructField, bool) {
 	clientType := reflect.TypeOf(github.Client{})
 	return clientType.FieldByName(s.Name)
 }
 
-func (s *svc) pkg() (*pkg, error) {
+func (s *Svc) pkg() (*pkg, error) {
 	field, ok := s.getStructField()
 	if !ok {
 		return nil, errors.New("can't find structField")
@@ -388,7 +308,7 @@ func (p *pkg) writeGoFile(wr io.Writer, template string) error {
 	return errors.Wrap(err, "")
 }
 
-func (s *svc) writePkg(wr io.Writer) error {
+func (s *Svc) writePkg(wr io.Writer) error {
 	pkg, err := s.pkg()
 	if err != nil {
 		return errors.Wrap(err, "")
