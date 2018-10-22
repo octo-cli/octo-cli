@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"github.com/WillAbides/go-github-cli/generator/internal/routeparser"
 	"github.com/google/go-github/github"
 	"io/ioutil"
 	"os"
@@ -15,11 +16,11 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-var testRtServices *rtServices
+var testRtServices map[string]routeparser.Routes
 
 func init() {
 	var terr error
-	testRtServices, terr = getRtServices("testdata/routes.json")
+	testRtServices, terr = routeparser.ParseRoutesFile("testdata/routes.json")
 	if terr != nil {
 		panic(terr)
 	}
@@ -28,15 +29,15 @@ func init() {
 func Test_svc_writePkg(t *testing.T) {
 	want, err := ioutil.ReadFile("testdata/exampleapp/services/issuessvc/issuessvc.go")
 	require.Nil(t, err)
-	rts := testRtServices.svcRoutes("issues")
+	rts := testRtServices["issues"]
 	issueSvc := svc{
 		Name: "Issues",
 		Commands: []cmd{
-			newCmd("AddLabelsToIssue", rts.findByIdName("add-labels"), "Owner", "Repo", "Number", "Labels"),
-			newCmd("Create", rts.findByIdName("create"), "Owner", "Repo"),
-			newCmd("Edit", rts.findByIdName("edit")),
-			newCmd("List", rts.findByIdName("list"), "All"),
-			newCmd("Lock", rts.findByIdName("lock"), "Owner", "Repo", "Number"),
+			newCmd("AddLabelsToIssue", rts.FindByIdName("add-labels"), "Owner", "Repo", "Number", "Labels"),
+			newCmd("Create", rts.FindByIdName("create"), "Owner", "Repo"),
+			newCmd("Edit", rts.FindByIdName("edit")),
+			newCmd("List", rts.FindByIdName("list"), "All"),
+			newCmd("Lock", rts.FindByIdName("lock"), "Owner", "Repo", "Number"),
 		},
 	}
 
@@ -77,7 +78,7 @@ func nsf(t *testing.T, name, ftype string, tag ...*structtag.Tag) *structField {
 
 func Test_buildCommandStruct(t *testing.T) {
 	t.Run("Issues Edit", func(t *testing.T) {
-		rts := testRtServices.svcRoutes("issues")
+		rts := testRtServices["issues"]
 
 		s := svc{Name: "Issues"}
 		field, ok := s.getStructField()
@@ -85,7 +86,7 @@ func Test_buildCommandStruct(t *testing.T) {
 		method, ok := field.Type.MethodByName("Edit")
 		assert.True(t, ok)
 		c := cmd{
-			Route:    rts.findByIdName("edit"),
+			Route:    rts.FindByIdName("edit"),
 			ArgNames: []string{"Owner", "Repo", "Number"},
 		}
 		got, err := buildCommandStruct("Issues", "Edit", method, c)
@@ -111,7 +112,7 @@ func Test_buildCommandStruct(t *testing.T) {
 	})
 
 	t.Run("Issues ListByOrg", func(t *testing.T) {
-		rts := testRtServices.svcRoutes("issues")
+		rts := testRtServices["issues"]
 
 		s := svc{Name: "Issues"}
 		field, ok := s.getStructField()
@@ -119,7 +120,7 @@ func Test_buildCommandStruct(t *testing.T) {
 		method, ok := field.Type.MethodByName("ListByOrg")
 		assert.True(t, ok)
 		c := cmd{
-			Route:    rts.findByIdName("list-for-org"),
+			Route:    rts.FindByIdName("list-for-org"),
 			ArgNames: []string{"Org"},
 		}
 		got, err := buildCommandStruct("Issues", "ListByOrg", method, c)
@@ -139,11 +140,6 @@ func Test_buildCommandStruct(t *testing.T) {
 		assert.Equal(t, want.Fields, got.Fields)
 	})
 
-}
-
-func Test_unexport(t *testing.T) {
-	uu := unexport("IssueListOptionsFlags")
-	assert.Equal(t, "issueListOptionsFlags", uu)
 }
 
 func Test_generateRunMethod(t *testing.T) {

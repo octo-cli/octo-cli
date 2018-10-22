@@ -2,8 +2,9 @@ package main
 
 import (
 	"bytes"
-	"encoding/json"
 	"fmt"
+	"github.com/WillAbides/go-github-cli/generator/internal"
+	"github.com/WillAbides/go-github-cli/generator/internal/routeparser"
 	"go/format"
 	"io"
 	"io/ioutil"
@@ -25,73 +26,25 @@ import (
 )
 
 type (
+	// svc represents a group of api endpoints such as Issues, Organizations or Git
 	svc struct {
 		Name     string
 		Commands []cmd
 	}
 
+	// cmd represents a cli command that will be generated
+	cmd struct {
+		Name     string
+		ArgNames []string
+		Route    *routeparser.Route
+	}
+
+	// pkg represents the go package that will be created for a svc
 	pkg struct {
 		PackageName   string
 		Imports       []string
 		CmdHelpers    []*structTmplHelper
 		OptionStructs []optionsStruct
-	}
-
-	cmd struct {
-		Name     string
-		ArgNames []string
-		Route    *svcRoute
-	}
-
-	routeParams []*routeParam
-
-	routeParam struct {
-		Name        string
-		Type        string
-		Description string
-		Default     interface{}
-		Required    bool
-		Enum        []interface{}
-		Location    string
-		MapTo       string
-	}
-
-	svcRoutes []*svcRoute
-
-	rtServices map[string]svcRoutes
-
-	valSetter struct {
-		TargetIsPtr bool
-		Name        string
-		FlagName    string
-	}
-
-	toFuncTmplHelper struct {
-		ReceiverName         string
-		TargetName           string
-		TargetType           string
-		ValSetters           []valSetter
-		IncludePointerHelper bool
-	}
-
-	svcRoute struct {
-		Description      string
-		Method           string
-		Path             string
-		Name             string
-		EnabledForApps   bool
-		IDName           string
-		DocumentationURL string
-		Params           routeParams
-		Requests []interface{}
-		Responses []struct {
-			Headers struct {
-				Status string
-				ContentType string `json:"content-type"`
-			}
-			Body interface{}
-			Description interface{}
-		}
 	}
 
 	runMethodArgHelper struct {
@@ -154,6 +107,20 @@ type (
 	}
 
 	genCliUpdateTestdata struct{}
+
+	valSetter struct {
+		TargetIsPtr bool
+		Name        string
+		FlagName    string
+	}
+
+	toFuncTmplHelper struct {
+		ReceiverName         string
+		TargetName           string
+		TargetType           string
+		ValSetters           []valSetter
+		IncludePointerHelper bool
+	}
 )
 
 var (
@@ -221,7 +188,7 @@ func (k *genCliUpdateTestdata) Run() error {
 }
 
 func buildSvcs(routesPath, configFile string) ([]svc, error) {
-	rt, err := getRtServices(routesPath)
+	rt, err := routeparser.ParseRoutesFile(routesPath)
 	if err != nil {
 		return nil, errors.Wrap(err, "")
 	}
@@ -254,7 +221,9 @@ func buildSvcs(routesPath, configFile string) ([]svc, error) {
 			if routesName == "" {
 				routesName = flagName(cmdName)
 			}
-			cmds[i] = newCmd(cmdName, rt.svcRoutes(svcRoutesName).findByIdName(routesName), hcmd.ArgNames...)
+			routes := rt[svcRoutesName]
+			route := routes.FindByIdName(routesName)
+			cmds[i] = newCmd(cmdName, route, hcmd.ArgNames...)
 		}
 		svcs = append(svcs, svc{
 			Name:     svcName,
@@ -288,11 +257,11 @@ func writeOutput(outputPath string, svcs []svc) error {
 	return nil
 }
 
-func newCmd(name string, rt *svcRoute, argNames ...string) cmd {
+func newCmd(name string, rt *routeparser.Route, argNames ...string) cmd {
 	if len(argNames) == 0 {
 		for _, p := range rt.Params {
 			if p.Location == "url" {
-				argNames = append(argNames, toArgName(p.Name))
+				argNames = append(argNames, internal.ToArgName(p.Name))
 			}
 		}
 	}
@@ -478,36 +447,6 @@ func flagName(fieldName string) string {
 	return strings.Replace(s, "_", "-", -1)
 }
 
-func unexport(name ...string) string {
-	var words []string
-	for _, v := range name {
-		w := camelcase.Split(v)
-		for i, ww := range w {
-			w[i] = strings.Title(ww)
-		}
-		words = append(words, w...)
-	}
-
-	if len(words) < 1 {
-		return ""
-	}
-	words[0] = strings.ToLower(words[0])
-	return strings.Join(words, "")
-}
-
-// takes input like "foo-bar" and returns "FooBar"
-func toArgName(in string) string {
-	out := in
-	for _, separator := range []string{"_", "-"} {
-		words := strings.Split(out, separator)
-		for i, word := range words {
-			words[i] = strings.Title(word)
-		}
-		out = strings.Join(words, "")
-	}
-	return out
-}
-
 func funcInTypes(funcType reflect.Type, offset int) []reflect.Type {
 	var types []reflect.Type
 	for i := offset; i < funcType.NumIn(); i++ {
@@ -561,7 +500,7 @@ func buildCommandStruct(svcName, funcName string, apiFunc reflect.Method, c cmd)
 	structName := svcName + funcName + "Cmd"
 	argNames := c.ArgNames
 	for i, argName := range argNames {
-		argNames[i] = toArgName(argName)
+		argNames[i] = internal.ToArgName(argName)
 	}
 	fullArgNames := argNames
 
@@ -594,7 +533,7 @@ func buildCommandStruct(svcName, funcName string, apiFunc reflect.Method, c cmd)
 			}
 			argName := argNames[0]
 			argNames = argNames[1:]
-			param := c.Route.Params.findByArgName(argName)
+			param := c.Route.ArgParam(argName)
 			field := newStructField(argName, inType.Kind().String(), &structtag.Tags{})
 			if param != nil && param.Required {
 				err := field.Tags.Set(newTag("required", ""))
@@ -609,7 +548,7 @@ func buildCommandStruct(svcName, funcName string, apiFunc reflect.Method, c cmd)
 			}
 			argName := argNames[0]
 			argNames = argNames[1:]
-			param := c.Route.Params.findByArgName(argName)
+			param := c.Route.ArgParam(argName)
 			field := newStructField(argName, inType.String(), &structtag.Tags{})
 			if param.Required {
 				err := field.Tags.Set(newTag("required", ""))
@@ -686,7 +625,7 @@ func generateRunMethod(svcName, funcName string, apiFunc reflect.Method, argName
 }
 
 func optionsStructName(methodName string, requestType reflect.Type) string {
-	return unexport(methodName, requestType.Name()+"Flags")
+	return internal.Unexport(methodName, requestType.Name()+"Flags")
 }
 
 func typeToFields(inType reflect.Type) []reflect.StructField {
@@ -706,7 +645,7 @@ func typeToFields(inType reflect.Type) []reflect.StructField {
 	return fields
 }
 
-func generateOptionsStruct(cmdName string, requestType reflect.Type, route *svcRoute) (*optionsStruct, error) {
+func generateOptionsStruct(cmdName string, requestType reflect.Type, route *routeparser.Route) (*optionsStruct, error) {
 	structName := optionsStructName(cmdName, requestType)
 
 	fields := typeToFields(requestType)
@@ -738,7 +677,7 @@ func generateOptionsStruct(cmdName string, requestType reflect.Type, route *svcR
 	return &oStruct, err
 }
 
-func getStructFields(fields []reflect.StructField, route *svcRoute) ([]structField, error) {
+func getStructFields(fields []reflect.StructField, route *routeparser.Route) ([]structField, error) {
 	var structFields []structField
 	for _, field := range fields {
 		if field.Type.Kind() == reflect.Ptr {
@@ -749,7 +688,7 @@ func getStructFields(fields []reflect.StructField, route *svcRoute) ([]structFie
 			return nil, errors.Wrap(err, "")
 		}
 		if route != nil {
-			param := route.Params.forField(field)
+			param := route.FieldParam(field)
 			if param == nil {
 				continue
 			}
@@ -777,19 +716,6 @@ func getStructFields(fields []reflect.StructField, route *svcRoute) ([]structFie
 
 	}
 	return structFields, nil
-}
-
-func (p *routeParams) forField(f reflect.StructField) *routeParam {
-	jsonTag := f.Tag.Get("json")
-	var name string
-
-	if jsonTag == "" {
-		name = strings.Join(camelcase.Split(f.Name), "-")
-	} else {
-		name = strings.Split(jsonTag, ",")[0]
-	}
-
-	return p.findByName(name)
 }
 
 func fieldFlagName(f reflect.StructField) string {
@@ -829,48 +755,6 @@ func generateToRequestFunc(fields []reflect.StructField, structName string, targ
 		IncludePointerHelper: inclPtrHelper,
 		ValSetters:           vss,
 	}
-}
-
-func (p *routeParams) findByArgName(name string) *routeParam {
-	for _, param := range *p {
-		if toArgName(param.Name) == toArgName(name) {
-			return param
-		}
-	}
-	return nil
-}
-
-func (p *routeParams) findByName(name string) *routeParam {
-	for _, param := range *p {
-		if param.Name == name {
-			return param
-		}
-	}
-	return nil
-}
-
-func (r *svcRoutes) findByIdName(idName string) *svcRoute {
-	for _, route := range *r {
-		if route.IDName == idName {
-			return route
-		}
-	}
-	return nil
-}
-
-func getRtServices(file string) (*rtServices, error) {
-	var sm rtServices
-	bts, err := ioutil.ReadFile(file)
-	if err != nil {
-		return nil, errors.Wrap(err, "")
-	}
-	err = json.Unmarshal(bts, &sm)
-	return &sm, errors.Wrap(err, "")
-}
-
-func (r rtServices) svcRoutes(serviceName string) *svcRoutes {
-	sr := r[serviceName]
-	return &sr
 }
 
 // language=GoTemplate
