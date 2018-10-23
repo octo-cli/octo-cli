@@ -1,26 +1,18 @@
 package generator
 
 import (
-	"bytes"
 	"fmt"
 	"github.com/WillAbides/go-github-cli/generator/internal"
 	"github.com/WillAbides/go-github-cli/generator/internal/configparser"
+	"github.com/WillAbides/go-github-cli/generator/internal/packagewriter"
 	"github.com/WillAbides/go-github-cli/generator/internal/routeparser"
-	"go/format"
-	"io"
-	"io/ioutil"
-	"os"
-	"path/filepath"
-	"reflect"
-	"sort"
-	"strings"
-	"text/template"
-
 	"github.com/fatih/camelcase"
 	"github.com/fatih/structtag"
 	"github.com/google/go-github/github"
 	"github.com/pkg/errors"
-	"golang.org/x/tools/imports"
+	"reflect"
+	"sort"
+	"strings"
 )
 
 type (
@@ -101,8 +93,6 @@ var (
 		"golang.org/x/oauth2",
 		"time",
 	}
-
-	tmpl = template.Must(template.New("").Parse(pkgTemplate))
 )
 
 //BuildSvcs builds services
@@ -154,7 +144,7 @@ func WriteOutput(outputPath string, svcs []Svc) error {
 		if err != nil {
 			return errors.Wrap(err, "")
 		}
-		err = p.writeToDir(filepath.Join(outputPath, p.outputDir("services")))
+		err = packagewriter.WritePackageFiles(outputPath, p.PackageName, p)
 		if err != nil {
 			return errors.Wrap(err, "")
 		}
@@ -270,81 +260,6 @@ func (s *Svc) pkg() (*pkg, error) {
 		Imports:     pkgImports,
 		CmdHelpers:  cmdHelpers,
 	}, nil
-}
-
-func (p *pkg) write(wr io.Writer) error {
-	var buf bytes.Buffer
-	err := tmpl.ExecuteTemplate(&buf, "svcpackage", p)
-	if err != nil {
-		return errors.Wrap(err, "")
-	}
-	out, err := format.Source(buf.Bytes())
-	if err != nil {
-		return errors.Wrap(err, "")
-	}
-	out, err = imports.Process("", out, nil)
-	if err != nil {
-		return errors.Wrap(err, "")
-	}
-	_, err = wr.Write(out)
-	return errors.Wrap(err, "")
-}
-
-func (p *pkg) writeGoFile(wr io.Writer, template string) error {
-	var buf bytes.Buffer
-	err := tmpl.ExecuteTemplate(&buf, template, p)
-	if err != nil {
-		return errors.Wrap(err, "")
-	}
-	out, err := format.Source(buf.Bytes())
-	if err != nil {
-		return errors.Wrap(err, "")
-	}
-	out, err = imports.Process("", out, nil)
-	if err != nil {
-		return errors.Wrap(err, "")
-	}
-	_, err = wr.Write(out)
-	return errors.Wrap(err, "")
-}
-
-func (s *Svc) writePkg(wr io.Writer) error {
-	pkg, err := s.pkg()
-	if err != nil {
-		return errors.Wrap(err, "")
-	}
-	err = pkg.write(wr)
-	return errors.Wrap(err, "")
-}
-
-func (p *pkg) outputDir(servicesBase string) string {
-	return filepath.Join(servicesBase, p.PackageName)
-}
-
-func (p *pkg) writeToDir(path string) error {
-	err := os.MkdirAll(path, 0755)
-	if err != nil {
-		return errors.Wrap(err, "")
-	}
-	f := []struct {
-		filename, templateName string
-	}{
-		{filename: p.PackageName + ".go", templateName: "svcpackage"},
-		{filename: "testhelper_test.go", templateName: "testhelper"},
-	}
-	for _, v := range f {
-		var buf bytes.Buffer
-		err = p.writeGoFile(&buf, v.templateName)
-		if err != nil {
-			return errors.Wrap(err, "")
-		}
-		fl := filepath.Join(path, v.filename)
-		err = ioutil.WriteFile(fl, buf.Bytes(), 0644)
-		if err != nil {
-			return errors.Wrap(err, "")
-		}
-	}
-	return nil
 }
 
 func flagName(fieldName string) string {
@@ -563,19 +478,14 @@ func generateOptionsStruct(cmdName string, requestType reflect.Type, route *rout
 			}
 		}
 	}
-
-	oStruct := optionsStruct{
+	return &optionsStruct{
 		StructName: structName,
 		MainStruct: structTmplHelper{
 			Name:   structName,
 			Fields: structFields,
 		},
 		ToFunc: generateToRequestFunc(keeperFields, structName, requestType),
-	}
-
-	var buf bytes.Buffer
-	err = tmpl.ExecuteTemplate(&buf, "options_struct", &oStruct)
-	return &oStruct, err
+	}, err
 }
 
 func getStructFields(fields []reflect.StructField, route *routeparser.Route) ([]structField, error) {
@@ -657,151 +567,3 @@ func generateToRequestFunc(fields []reflect.StructField, structName string, targ
 		ValSetters:           vss,
 	}
 }
-
-// language=GoTemplate
-const pkgTemplate = `
-{{define "run_method_arg"}}{{if .IsPtr}}c.to{{.Name}}(k){{else}}c.{{.Name}}{{end}}{{end}}
-
-{{define "run_method_args"}}{{range $index, $element := .Args}}{{if $index}}, {{end}}{{template "run_method_arg" .}}{{end}}{{end}}
-
-{{define "run_method"}}
-	{{if .}}
-	func (c *{{.StructName}}) Run(k *kong.Context) error {
-			ctx := context.Background()
-			client, e := buildGithubClient(ctx, c.Token, c.APIBaseURL)
-			if e != nil {
-				return e
-			}
-			{{if .HasElement}}element, {{end}}_, err := client.{{.SvcName}}.{{.FuncName}}(ctx, {{template "run_method_args" .}})
-			{{if .HasElement}}	if err != nil {
-			return err
-		}
-		return json.NewEncoder(k.Stdout).Encode(element){{else}}	return err{{end}}
-	}
-	{{end}}
-{{end}}
-
-{{define "structtype"}}
-	type {{.Name}} struct { {{range .Fields}}
-		{{.Name}} {{.Type}} {{if .Tags}}{{printf "%#q" .Tags}} {{end}}{{end}}
-	}
-	{{template "run_method" .RunMethod}}{{template "options_structs" .OptionsStructs}}
-{{end}}
-
-{{define "tofunc"}}
-	func (t {{.ReceiverName}}) to{{.TargetName}}(k *kong.Context) *{{.TargetType}} {
-		val := &{{.TargetType}}{}
-		{{if .IncludePointerHelper}}
-			isValueSet := func (valueName string) bool {
-				if k == nil {
-					return false
-				}
-				for _, flag := range k.Flags() {
-					if flag.Name == valueName {
-						return flag.Set
-					}
-				}
-				return false
-			}
-		{{end}}
-		{{template "val_setters" .ValSetters}}
-		return val
-	}
-{{end}}
-
-{{define "val_setters"}}{{range .}}{{template "val_setter" .}}{{end}}{{end}}
-
-{{define "val_setter"}}{{if .TargetIsPtr}}	if isValueSet("{{.FlagName}}") {
-		val.{{.Name}} = &t.{{.Name}}
-	}{{else}}	val.{{.Name}} = t.{{.Name}}{{end}}
-
-{{end}}
-
-{{define "options_struct"}}
-{{template "structtype" .MainStruct}}
-
-{{template "tofunc" .ToFunc}}
-{{end}}
-
-{{define "options_structs"}}
-{{range .}}{{template "options_struct" .}}{{end}}
-{{end}}
-
-{{define "svcpackage"}}
-	// Code generated by go-github-cli/generator DO NOT EDIT
-	package {{$.PackageName}}
-
-	import ( {{range .Imports}}
-	   "{{.}}"{{end}}
-	)
-
-	var transportWrapper interface {
-		SetTransport(t http.RoundTripper)
-		http.RoundTripper
-	}
-	
-	func buildGithubClient(ctx context.Context, token, apiBaseURL string) (*github.Client, error) {
-		apiBaseURL  = strings.TrimSuffix(apiBaseURL, "/") + "/"
-		ts := oauth2.StaticTokenSource(&oauth2.Token{AccessToken: token})
-		tc := oauth2.NewClient(ctx, ts)
-		if transportWrapper != nil {
-			transportWrapper.SetTransport(tc.Transport)
-			tc.Transport = transportWrapper
-		}
-		client := github.NewClient(tc)
-		baseURL, err := url.Parse(apiBaseURL)
-		client.BaseURL = baseURL
-		return client, err
-	}
-
-	{{range .CmdHelpers}}{{template "structtype" .}}{{end}}
-	{{range .OptionStructs}}{{template "options_struct" .}}{{end}}
-{{end}}
-
-{{define "testhelper"}}
-	// Code generated by go-github-cli/generator DO NOT EDIT
-	package {{$.PackageName}}
-
-	import (
-		"bytes"
-		"github.com/alecthomas/kong"
-		"github.com/dnaeon/go-vcr/recorder"
-		"github.com/stretchr/testify/require"
-		"os"
-		"path/filepath"
-		"testing"
-	)
-	
-	func init() {
-		tkn, ok := os.LookupEnv("TESTUSER_TOKEN")
-		if !ok {
-			tkn = "deadbeef"
-		}
-		os.Setenv("GITHUB_TOKEN", tkn)
-	}
-	
-	func startVCR(t *testing.T, recPath string) *recorder.Recorder {
-		t.Helper()
-		var err error
-		rec, err := recorder.New(recPath)
-		require.Nil(t, err)
-		transportWrapper = rec
-		return rec
-	}
-	
-	func testCmdLine(t *testing.T, fixtureName string, cmdStruct interface{}, cmdline ...string) (stdout bytes.Buffer, stderr bytes.Buffer, err error) {
-		t.Helper()
-		rec := startVCR(t, filepath.Join("testdata", "fixtures", fixtureName))
-		defer rec.Stop()
-		p, e := kong.New(cmdStruct)
-		require.Nil(t, e)
-		p.Stdout = &stdout
-		p.Stderr = &stderr
-		k, e := p.Parse(cmdline)
-		require.Nil(t, e)
-		err = k.Run()
-		return
-	}
-{{end}}
-
-`
