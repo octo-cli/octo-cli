@@ -144,7 +144,7 @@ const pkgTemplate = `
 		return client, err
 	}
 
-	{{range .CmdHelpers}}{{template "structtype" .}}{{end}}
+	{{range .Structs}}{{template "structtype" .}}{{end}}
 {{end}}
 
 {{define "testhelper"}}

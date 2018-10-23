@@ -2,6 +2,10 @@ package generator
 
 import (
 	"fmt"
+	"reflect"
+	"sort"
+	"strings"
+
 	"github.com/WillAbides/go-github-cli/generator/internal"
 	"github.com/WillAbides/go-github-cli/generator/internal/configparser"
 	"github.com/WillAbides/go-github-cli/generator/internal/routeparser"
@@ -9,36 +13,31 @@ import (
 	"github.com/fatih/structtag"
 	"github.com/google/go-github/github"
 	"github.com/pkg/errors"
-	"reflect"
-	"sort"
-	"strings"
 )
 
-type (
-	// Svc represents a group of api endpoints such as Issues, Organizations or Git
-	Svc struct {
-		Name     string
-		Commands []*cmd
-	}
+// Svc represents a group of api endpoints such as Issues, Organizations or Git
+type Svc struct {
+	Name     string
+	Commands []*cmd
+}
 
-	// cmd represents a cli command that will be generated
-	cmd struct {
-		Name     string
-		ArgNames []string
-		Route    *routeparser.Route
-	}
-)
+// cmd represents a cli command that will be generated
+type cmd struct {
+	Name     string
+	ArgNames []string
+	Route    *routeparser.Route
+}
 
-var (
-	pkgImports = []string{
-		"context",
-		"encoding/json",
-		"github.com/alecthomas/kong",
-		"github.com/google/go-github/github",
-		"golang.org/x/oauth2",
-		"time",
-	}
-)
+// pkgImports is the imports to include in a package.
+//   these will go through goimports to remove unused imports
+var pkgImports = []string{
+	"context",
+	"encoding/json",
+	"github.com/alecthomas/kong",
+	"github.com/google/go-github/github",
+	"golang.org/x/oauth2",
+	"time",
+}
 
 //BuildSvcs builds services
 func BuildSvcs(routesPath, configFile string) ([]Svc, error) {
@@ -142,13 +141,20 @@ func newSvcCmd(svcName string, cmds []*cmd) *internal.StructTmplHelper {
 	}
 }
 
-func (s *Svc) getStructField() (reflect.StructField, bool) {
+//clientServiceType returns the go-github client's type for this service
+//  for example: *github.IssuesService for issues
+func (s *Svc) clientServiceType() (reflect.Type, bool) {
 	clientType := reflect.TypeOf(github.Client{})
-	return clientType.FieldByName(s.Name)
+	field, ok := clientType.FieldByName(s.Name)
+	if ok {
+		return field.Type, ok
+	}
+	return nil, ok
 }
 
+//ToPkg creates a Pkg for a service
 func (s Svc) ToPkg() (*internal.Pkg, error) {
-	field, ok := s.getStructField()
+	clientType, ok := s.clientServiceType()
 	if !ok {
 		return nil, errors.New("can't find structField")
 	}
@@ -158,11 +164,11 @@ func (s Svc) ToPkg() (*internal.Pkg, error) {
 	}
 
 	for _, c := range s.Commands {
-		method, ok := field.Type.MethodByName(c.Name)
+		clientMethod, ok := clientType.MethodByName(c.Name)
 		if !ok {
 			return nil, errors.New("can't find method")
 		}
-		cmdHelper, err := buildCommandStruct(s.Name, method.Name, method, c)
+		cmdHelper, err := buildCommandStruct(s.Name, clientMethod.Name, clientMethod.Type, c)
 		if err != nil {
 			return nil, errors.Wrap(err, "creating cmdHelper")
 		}
@@ -172,15 +178,17 @@ func (s Svc) ToPkg() (*internal.Pkg, error) {
 	return &internal.Pkg{
 		PackageName: strings.ToLower(s.Name + "svc"),
 		Imports:     pkgImports,
-		CmdHelpers:  cmdHelpers,
+		Structs:     cmdHelpers,
 	}, nil
 }
 
+//flagName converts a camelcase string to whatever-this-is-called to be used in cli flags
 func flagName(fieldName string) string {
 	s := strings.ToLower(strings.Join(camelcase.Split(fieldName), "-"))
 	return strings.Replace(s, "_", "-", -1)
 }
 
+//funcInTypes returns the input types of a function
 func funcInTypes(funcType reflect.Type, offset int) []reflect.Type {
 	var types []reflect.Type
 	for i := offset; i < funcType.NumIn(); i++ {
@@ -189,7 +197,9 @@ func funcInTypes(funcType reflect.Type, offset int) []reflect.Type {
 	return types
 }
 
-func buildCommandStruct(svcName, funcName string, apiFunc reflect.Method, c *cmd) (*internal.StructTmplHelper, error) {
+//buildCommandStruct creates the StructTmplHelper representing the struct for a cli command
+//  example: IssuesCreateCmd
+func buildCommandStruct(svcName, funcName string, clientMethodType reflect.Type, c *cmd) (*internal.StructTmplHelper, error) {
 	structName := svcName + funcName + "Cmd"
 	argNames := c.ArgNames
 	for i, argName := range argNames {
@@ -212,17 +222,17 @@ func buildCommandStruct(svcName, funcName string, apiFunc reflect.Method, c *cmd
 
 	var oss []internal.StructTmplHelper
 
-	inTypes := funcInTypes(apiFunc.Type, 2)
+	inTypes := funcInTypes(clientMethodType, 2)
 	for _, inType := range inTypes {
 		switch inType.Kind() {
 		case reflect.Ptr:
 			if inType.Elem().Kind() != reflect.Struct {
 				return nil, fmt.Errorf("only pointers to structs are allowed")
 			}
-			oStruct := generateOptionsStruct(structName, inType.Elem(), c.Route)
+			oStruct := buildOptionsStruct(structName, inType.Elem(), c.Route)
 			oss = append(oss, *oStruct)
 			structFields = append(structFields, internal.StructField{
-				Type: optionsStructName(structName, inType.Elem()),
+				Type: oStruct.Name,
 			})
 		case reflect.String, reflect.Int, reflect.Bool, reflect.Slice:
 			if len(argNames) < 1 {
@@ -244,7 +254,7 @@ func buildCommandStruct(svcName, funcName string, apiFunc reflect.Method, c *cmd
 			return nil, fmt.Errorf(`buildCommandStruct: unsupported type: "%s"`, inType.Kind().String())
 		}
 	}
-	runMethod, err := generateRunMethod(svcName, funcName, apiFunc, fullArgNames...)
+	runMethod, err := buildRunMethod(svcName, funcName, clientMethodType, fullArgNames...)
 	if err != nil {
 		return nil, err
 	}
@@ -256,9 +266,10 @@ func buildCommandStruct(svcName, funcName string, apiFunc reflect.Method, c *cmd
 	}, nil
 }
 
-func generateRunMethod(svcName, funcName string, apiFunc reflect.Method, argNames ...string) (*internal.RunMethod, error) {
-	apiFuncType := apiFunc.Type
-	numOut := apiFuncType.NumOut()
+//buildRunMethod creates the Run() method for a command struct.
+//  example: func (c *IssuesCreateCmd) Run(k *kong.Context)
+func buildRunMethod(svcName, funcName string, clientMethodType reflect.Type, argNames ...string) (*internal.RunMethod, error) {
+	numOut := clientMethodType.NumOut()
 	structName := svcName + funcName + "Cmd"
 
 	runStruct := &internal.RunMethod{
@@ -275,7 +286,7 @@ func generateRunMethod(svcName, funcName string, apiFunc reflect.Method, argName
 		return nil, fmt.Errorf("we only take funcs that return 2 or 3 args, not %d", numOut)
 	}
 
-	inTypes := funcInTypes(apiFuncType, 2)
+	inTypes := funcInTypes(clientMethodType, 2)
 	for _, inType := range inTypes {
 		switch inType.Kind() {
 		case reflect.Ptr:
@@ -291,17 +302,14 @@ func generateRunMethod(svcName, funcName string, apiFunc reflect.Method, argName
 			argNames = argNames[1:]
 			runStruct.Args = append(runStruct.Args, internal.RunMethodArg{Name: argName})
 		default:
-			return nil, fmt.Errorf("generateRunMethod: unsupported type: %v", inType.Kind())
+			return nil, fmt.Errorf("buildRunMethod: unsupported type: %v", inType.Kind())
 		}
 	}
 
 	return runStruct, nil
 }
 
-func optionsStructName(methodName string, requestType reflect.Type) string {
-	return internal.Unexport(methodName, requestType.Name()+"Flags")
-}
-
+//typeToFields returns all the fields in a struct.  It recurses on anonymous members.
 func typeToFields(inType reflect.Type) []reflect.StructField {
 	var fields []reflect.StructField
 	for i := 0; i < inType.NumField(); i++ {
@@ -319,11 +327,13 @@ func typeToFields(inType reflect.Type) []reflect.StructField {
 	return fields
 }
 
-func generateOptionsStruct(cmdName string, requestType reflect.Type, route *routeparser.Route) *internal.StructTmplHelper {
-	structName := optionsStructName(cmdName, requestType)
+//buildOptionsStruct builds a struct for cli flag that map to an "opts" struct in go-github
+//  example: issuesCreateCmdIssueRequestFlags
+func buildOptionsStruct(cmdName string, requestType reflect.Type, route *routeparser.Route) *internal.StructTmplHelper {
+	structName := internal.Unexport(cmdName, requestType.Name(), "Flags")
 
 	fields := typeToFields(requestType)
-	structFields := getStructFields(fields, route)
+	structFields := getOptionsStructFields(fields, route)
 
 	var keeperFields []reflect.StructField
 	for _, field := range fields {
@@ -336,11 +346,12 @@ func generateOptionsStruct(cmdName string, requestType reflect.Type, route *rout
 	return &internal.StructTmplHelper{
 		Name:   structName,
 		Fields: structFields,
-		ToFunc: generateToRequestFunc(keeperFields, structName, requestType),
+		ToFunc: buildToRequestFunction(keeperFields, structName, requestType),
 	}
 }
 
-func getStructFields(fields []reflect.StructField, route *routeparser.Route) []internal.StructField {
+//getOptionsStructFields is a helper for buildOptionsStruct that filters fields and builds structFields.
+func getOptionsStructFields(fields []reflect.StructField, route *routeparser.Route) []internal.StructField {
 	var structFields []internal.StructField
 	for _, field := range fields {
 		if field.Type.Kind() == reflect.Ptr {
@@ -386,7 +397,8 @@ func fieldFlagName(f reflect.StructField) string {
 	return strings.ToLower(strings.Replace(name, "_", "-", -1))
 }
 
-func generateToRequestFunc(fields []reflect.StructField, structName string, targetType reflect.Type) *internal.ToFunc {
+//buildToRequestFunction builds a ToFunc to convert a cli options struct to a go-github options struct
+func buildToRequestFunction(fields []reflect.StructField, structName string, targetType reflect.Type) *internal.ToFunc {
 	var valSetters []internal.ValSetter
 	for _, field := range fields {
 		valSetters = append(valSetters, internal.ValSetter{

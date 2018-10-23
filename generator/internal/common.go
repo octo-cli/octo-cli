@@ -106,5 +106,5 @@ type ValSetter struct {
 type Pkg struct {
 	PackageName string
 	Imports     []string
-	CmdHelpers  []*StructTmplHelper
+	Structs     []*StructTmplHelper
 }

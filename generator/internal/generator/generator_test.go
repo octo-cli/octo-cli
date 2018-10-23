@@ -36,17 +36,17 @@ func Test_buildCommandStruct(t *testing.T) {
 		rts := testRtServices["issues"]
 
 		s := Svc{Name: "Issues"}
-		field, ok := s.getStructField()
+		clientType, ok := s.clientServiceType()
 		assert.True(t, ok)
-		method, ok := field.Type.MethodByName("Edit")
+		method, ok := clientType.MethodByName("Edit")
 		assert.True(t, ok)
-		got, err := buildCommandStruct("Issues", "Edit", method, &cmd{
+		got, err := buildCommandStruct("Issues", "Edit", method.Type, &cmd{
 			Route:    rts.FindByIDName("edit"),
 			ArgNames: []string{"Owner", "Repo", "Number"},
 		})
 		assert.Nil(t, err)
 
-		wantRunMethod, err := generateRunMethod("Issues", "Edit", method, "Owner", "Repo", "Number")
+		wantRunMethod, err := buildRunMethod("Issues", "Edit", method.Type, "Owner", "Repo", "Number")
 		require.Nil(t, err)
 
 		want := &internal.StructTmplHelper{
@@ -69,11 +69,11 @@ func Test_buildCommandStruct(t *testing.T) {
 		rts := testRtServices["issues"]
 
 		s := Svc{Name: "Issues"}
-		field, ok := s.getStructField()
+		clientType, ok := s.clientServiceType()
 		assert.True(t, ok)
-		method, ok := field.Type.MethodByName("ListByOrg")
+		method, ok := clientType.MethodByName("ListByOrg")
 		assert.True(t, ok)
-		got, err := buildCommandStruct("Issues", "ListByOrg", method, &cmd{
+		got, err := buildCommandStruct("Issues", "ListByOrg", method.Type, &cmd{
 			Route:    rts.FindByIDName("list-for-org"),
 			ArgNames: []string{"Org"},
 		})
@@ -95,7 +95,7 @@ func Test_buildCommandStruct(t *testing.T) {
 
 }
 
-func Test_generateRunMethod(t *testing.T) {
+func Test_buildRunMethod(t *testing.T) {
 	t.Run("Issues Edit", func(t *testing.T) {
 		want := &internal.RunMethod{
 			StructName: "IssuesEditCmd",
@@ -111,11 +111,11 @@ func Test_generateRunMethod(t *testing.T) {
 		}
 
 		s := Svc{Name: "Issues"}
-		field, ok := s.getStructField()
+		clientType, ok := s.clientServiceType()
 		require.True(t, ok)
-		method, ok := field.Type.MethodByName("Edit")
+		method, ok := clientType.MethodByName("Edit")
 		assert.True(t, ok)
-		got, err := generateRunMethod("Issues", "Edit", method, "Owner", "Repo", "Number")
+		got, err := buildRunMethod("Issues", "Edit", method.Type, "Owner", "Repo", "Number")
 		assert.Nil(t, err)
 		assert.Equal(t, want, got)
 	})
@@ -135,11 +135,11 @@ func Test_generateRunMethod(t *testing.T) {
 		}
 
 		s := Svc{Name: "Issues"}
-		field, ok := s.getStructField()
+		clientType, ok := s.clientServiceType()
 		assert.True(t, ok)
-		method, ok := field.Type.MethodByName("Lock")
+		method, ok := clientType.MethodByName("Lock")
 		assert.True(t, ok)
-		got, err := generateRunMethod("Issues", "Lock", method, "Owner", "Repo", "Number")
+		got, err := buildRunMethod("Issues", "Lock", method.Type, "Owner", "Repo", "Number")
 		assert.Nil(t, err)
 		assert.Equal(t, want, got)
 	})
@@ -176,7 +176,7 @@ func Test_getStructFields(t *testing.T) {
 			nsf(t, "Page", "int", newTag("name", "page")),
 			nsf(t, "PerPage", "int", newTag("name", "per-page")),
 		}
-		got := getStructFields(fields, nil)
+		got := getOptionsStructFields(fields, nil)
 		assert.Equal(t, want, got)
 	})
 
@@ -192,16 +192,16 @@ func Test_getStructFields(t *testing.T) {
 			nsf(t, "Page", "int", newTag("name", "page")),
 			nsf(t, "PerPage", "int", newTag("name", "per-page")),
 		}
-		got := getStructFields(fields, nil)
+		got := getOptionsStructFields(fields, nil)
 		assert.Equal(t, want, got)
 	})
 }
 
-func Test_generateOptionsStruct(t *testing.T) {
+func Test_buildOptionsStructt(t *testing.T) {
 	t.Run("fields", func(t *testing.T) {
 		t.Run("github.ListOptions", func(t *testing.T) {
 			mt := reflect.TypeOf(github.ListOptions{})
-			oStruct := generateOptionsStruct("", mt, nil)
+			oStruct := buildOptionsStruct("", mt, nil)
 			want := []internal.StructField{
 				nsf(t, "Page", "int", newTag("name", "page")),
 				nsf(t, "PerPage", "int", newTag("name", "per-page")),
@@ -212,7 +212,7 @@ func Test_generateOptionsStruct(t *testing.T) {
 
 		t.Run("github.IssueListOptions", func(t *testing.T) {
 			mt := reflect.TypeOf(github.IssueListOptions{})
-			oStruct := generateOptionsStruct("", mt, nil)
+			oStruct := buildOptionsStruct("", mt, nil)
 			want := []internal.StructField{
 				nsf(t, "Filter", "string", newTag("name", "filter")),
 				nsf(t, "State", "string", newTag("name", "state")),
@@ -249,7 +249,7 @@ func Test_generateOptionsStruct(t *testing.T) {
 	t.Run("val setters", func(t *testing.T) {
 		t.Run("ex", func(t *testing.T) {
 			mt := reflect.TypeOf(example{})
-			oStruct := generateOptionsStruct("", mt, nil)
+			oStruct := buildOptionsStruct("", mt, nil)
 			want := []internal.ValSetter{
 				{TargetIsPtr: true, Name: "Body", FlagName: "body"},
 				{TargetIsPtr: false, Name: "Labels", FlagName: "labels"},
@@ -264,7 +264,7 @@ func Test_generateOptionsStruct(t *testing.T) {
 
 		t.Run("github.IssueListOptions", func(t *testing.T) {
 			mt := reflect.TypeOf(github.IssueListOptions{})
-			oStruct := generateOptionsStruct("", mt, nil)
+			oStruct := buildOptionsStruct("", mt, nil)
 
 			want := []internal.ValSetter{
 				{Name: "Filter", FlagName: "filter", TargetIsPtr: false},
@@ -282,7 +282,7 @@ func Test_generateOptionsStruct(t *testing.T) {
 
 		t.Run("github.ListOptions", func(t *testing.T) {
 			mt := reflect.TypeOf(github.ListOptions{})
-			oStruct := generateOptionsStruct("", mt, nil)
+			oStruct := buildOptionsStruct("", mt, nil)
 
 			want := []internal.ValSetter{
 				{Name: "Page", FlagName: "page", TargetIsPtr: false},
