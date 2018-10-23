@@ -55,7 +55,7 @@ func TestPlayWithOutput(t *testing.T) {
 	err = json.Unmarshal(stdout.Bytes(), &gotIssue)
 	assert.Nil(t, err)
 
-		tp, err := template.New("").Funcs(template.FuncMap{"wider": func(a, b interface{}) string {return fmt.Sprintf("%-20s%d", a, b)}}).Parse(`
+	tp, err := template.New("").Funcs(template.FuncMap{"wider": func(a, b interface{}) string { return fmt.Sprintf("%-20s%d", a, b) }}).Parse(`
 	Number	{{.Number}}
 	State	{{.State}}
 	Title	{{.Title}}
@@ -68,11 +68,11 @@ func TestPlayWithOutput(t *testing.T) {
 	{{if .Assignees}}Assignees{{range .Assignees}}	{{.Login}}
 	{{end}}{{end}}
 	`)
-		assert.Nil(t, err)
+	assert.Nil(t, err)
 
-		w := tabwriter.NewWriter(os.Stdout, 8,8, 8, ' ', 0)
-		err = tp.Execute(w, gotIssue)
-		assert.Nil(t, err)
-		err = w.Flush()
-		assert.Nil(t, err)
+	w := tabwriter.NewWriter(os.Stdout, 8, 8, 8, ' ', 0)
+	err = tp.Execute(w, gotIssue)
+	assert.Nil(t, err)
+	err = w.Flush()
+	assert.Nil(t, err)
 }
