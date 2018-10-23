@@ -96,12 +96,12 @@ func Test_buildCommandStruct(t *testing.T) {
 
 func Test_generateRunMethod(t *testing.T) {
 	t.Run("Issues Edit", func(t *testing.T) {
-		want := &runMethodHelper{
+		want := &runMethod{
 			StructName: "IssuesEditCmd",
 			HasElement: true,
 			SvcName:    "Issues",
 			FuncName:   "Edit",
-			Args: []runMethodArgHelper{
+			Args: []runMethodArg{
 				{Name: "Owner"},
 				{Name: "Repo"},
 				{Name: "Number"},
@@ -120,12 +120,12 @@ func Test_generateRunMethod(t *testing.T) {
 	})
 
 	t.Run("Issues Lock", func(t *testing.T) {
-		want := &runMethodHelper{
+		want := &runMethod{
 			StructName: "IssuesLockCmd",
 			HasElement: false,
 			SvcName:    "Issues",
 			FuncName:   "Lock",
-			Args: []runMethodArgHelper{
+			Args: []runMethodArg{
 				{Name: "Owner"},
 				{Name: "Repo"},
 				{Name: "Number"},

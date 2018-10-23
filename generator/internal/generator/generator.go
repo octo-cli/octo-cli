@@ -37,23 +37,25 @@ type (
 		OptionStructs []optionsStruct
 	}
 
-	runMethodArgHelper struct {
+	//runMethodArg is an argument for a runMethod
+	runMethodArg struct {
 		Name  string
 		IsPtr bool
 	}
 
-	runMethodHelper struct {
+	//runMethod represents the Run() method for a cmd struct
+	runMethod struct {
 		StructName string
 		HasElement bool
 		SvcName    string
 		FuncName   string
-		Args       []runMethodArgHelper
+		Args       []runMethodArg
 	}
 
 	structTmplHelper struct {
 		Name           string
 		Fields         []structField
-		RunMethod      *runMethodHelper
+		RunMethod      *runMethod
 		OptionsStructs []optionsStruct
 	}
 
@@ -321,12 +323,12 @@ func buildCommandStruct(svcName, funcName string, apiFunc reflect.Method, c *cmd
 	}, nil
 }
 
-func generateRunMethod(svcName, funcName string, apiFunc reflect.Method, argNames ...string) (*runMethodHelper, error) {
+func generateRunMethod(svcName, funcName string, apiFunc reflect.Method, argNames ...string) (*runMethod, error) {
 	apiFuncType := apiFunc.Type
 	numOut := apiFuncType.NumOut()
 	structName := svcName + funcName + "Cmd"
 
-	runStruct := &runMethodHelper{
+	runStruct := &runMethod{
 		StructName: structName,
 		FuncName:   funcName,
 		SvcName:    svcName,
@@ -347,14 +349,14 @@ func generateRunMethod(svcName, funcName string, apiFunc reflect.Method, argName
 			if inType.Elem().Kind() != reflect.Struct {
 				return nil, fmt.Errorf("only pointers to structs are allowed")
 			}
-			runStruct.Args = append(runStruct.Args, runMethodArgHelper{Name: inType.Elem().Name(), IsPtr: true})
+			runStruct.Args = append(runStruct.Args, runMethodArg{Name: inType.Elem().Name(), IsPtr: true})
 		case reflect.String, reflect.Int, reflect.Bool,reflect.Slice:
 			if len(argNames) < 1 {
 				return nil, fmt.Errorf("not enough argNames")
 			}
 			argName := argNames[0]
 			argNames = argNames[1:]
-			runStruct.Args = append(runStruct.Args, runMethodArgHelper{Name: argName})
+			runStruct.Args = append(runStruct.Args, runMethodArg{Name: argName})
 		default:
 			return nil, fmt.Errorf("generateRunMethod: unsupported type: %v", inType.Kind())
 		}
