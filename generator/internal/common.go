@@ -2,6 +2,7 @@ package internal
 
 import (
 	"github.com/fatih/camelcase"
+	"github.com/fatih/structtag"
 	"strings"
 )
 
@@ -34,4 +35,67 @@ func Unexport(name ...string) string {
 	}
 	words[0] = strings.ToLower(words[0])
 	return strings.Join(words, "")
+}
+
+//RunMethodArg is an argument for a RunMethod
+type RunMethodArg struct {
+	Name  string
+	IsPtr bool
+}
+
+//RunMethod represents the Run() method for a cmd struct
+type RunMethod struct {
+	StructName string
+	HasElement bool
+	SvcName    string
+	FuncName   string
+	Args       []RunMethodArg
+}
+
+// StructTmplHelper represents a struct for the template to build. It can also include other structs and a run method
+//    when it represents a command struct
+type StructTmplHelper struct {
+	Name         string
+	Fields       []StructField
+	ChildStructs []StructTmplHelper
+	RunMethod    *RunMethod
+	ToFunc       *ToFunc
+}
+
+// StructField is one field in a StructTmplHelper
+type StructField struct {
+	Name string
+	Type string
+	Tags *structtag.Tags
+}
+
+//ToFunc represents the function that converts a cli options struct to a go-github options struct
+//  an example is from issues create is:
+//    func (t issuesCreateCmdIssueRequestFlags) toIssueRequest(k *kong.Context) *github.IssueRequest
+type ToFunc struct {
+	ReceiverName         string
+	TargetName           string
+	TargetType           string
+	ValSetters           []ValSetter
+	IncludePointerHelper bool // determines whether the generated func should include the "isValueSet" helper
+}
+
+//ValSetter sets one value in a toFunc
+//  example output: `val.LockReason = t.LockReason`
+//
+//  or:
+//    if isValueSet("labels") {
+//      val.Labels = &t.Labels
+//    }
+type ValSetter struct {
+	TargetIsPtr bool
+	Name        string
+	FlagName    string
+}
+
+// ToPkg represents the go package that will be created for a svc
+type Pkg struct {
+	PackageName string
+	Imports     []string
+	CmdHelpers  []*StructTmplHelper
 }

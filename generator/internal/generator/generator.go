@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/WillAbides/go-github-cli/generator/internal"
 	"github.com/WillAbides/go-github-cli/generator/internal/configparser"
-	"github.com/WillAbides/go-github-cli/generator/internal/packagewriter"
 	"github.com/WillAbides/go-github-cli/generator/internal/routeparser"
 	"github.com/fatih/camelcase"
 	"github.com/fatih/structtag"
@@ -27,77 +26,6 @@ type (
 		Name     string
 		ArgNames []string
 		Route    *routeparser.Route
-	}
-
-	// pkg represents the go package that will be created for a svc
-	pkg struct {
-		PackageName   string
-		Imports       []string
-		CmdHelpers    []*structTmplHelper
-		OptionStructs []optionsStruct
-	}
-
-	//runMethodArg is an argument for a runMethod
-	runMethodArg struct {
-		Name  string
-		IsPtr bool
-	}
-
-	//runMethod represents the Run() method for a cmd struct
-	runMethod struct {
-		StructName string
-		HasElement bool
-		SvcName    string
-		FuncName   string
-		Args       []runMethodArg
-	}
-
-	// structTmplHelper represents a struct for the template to build. It can also include other structs and a run method
-	//    when it represents a command struct
-	structTmplHelper struct {
-		Name           string
-		Fields         []structField
-		RunMethod      *runMethod
-		OptionsStructs []optionsStruct
-	}
-
-	// structField is one field in a structTmplHelper
-	structField struct {
-		Name string
-		Type string
-		Tags *structtag.Tags
-	}
-
-	//optionsStruct represents a struct anonymously included in a command struct to get additional flags for a command
-	//  an example is `issuesCreateCmdIssueRequestFlags` in the issues service
-	optionsStruct struct {
-		StructName string
-		MainStruct structTmplHelper
-		ToFunc     toFunc
-	}
-
-	//toFunc represents the function that converts a cli options struct to a go-github options struct
-	//  an example is from issues create is:
-	//    func (t issuesCreateCmdIssueRequestFlags) toIssueRequest(k *kong.Context) *github.IssueRequest
-	toFunc struct {
-		ReceiverName         string
-		TargetName           string
-		TargetType           string
-		ValSetters           []valSetter
-		IncludePointerHelper bool			// determines whether the generated func should include the "isValueSet" helper
-	}
-
-	//valSetter sets one value in a toFunc
-	//  example output: `val.LockReason = t.LockReason`
-	//
-	//  or:
-	//    if isValueSet("labels") {
-	//      val.Labels = &t.Labels
-	//    }
-	valSetter struct {
-		TargetIsPtr bool
-		Name        string
-		FlagName    string
 	}
 )
 
@@ -154,21 +82,6 @@ func BuildSvcs(routesPath, configFile string) ([]Svc, error) {
 	return svcs, nil
 }
 
-//WriteOutput writes services output to the given path
-func WriteOutput(outputPath string, svcs []Svc) error {
-	for _, s := range svcs {
-		p, err := s.pkg()
-		if err != nil {
-			return errors.Wrap(err, "")
-		}
-		err = packagewriter.WritePackageFiles(outputPath, p.PackageName, p)
-		if err != nil {
-			return errors.Wrap(err, "")
-		}
-	}
-	return nil
-}
-
 //newCmd creates a new cmd.  If argNames is empty, it infers them from them from url parameters
 func newCmd(name string, rt *routeparser.Route, argNames ...string) *cmd {
 	if len(argNames) == 0 {
@@ -209,21 +122,21 @@ func newTags(tag ...*structtag.Tag) *structtag.Tags {
 }
 
 //appendTag appends one of more tags to a *structtag.Tags
-func appendTag(tags *structtag.Tags, tag ...*structtag.Tag) *structtag.Tags{
+func appendTag(tags *structtag.Tags, tag ...*structtag.Tag) *structtag.Tags {
 	return newTags(append(tags.Tags(), tag...)...)
 }
 
 //newSvcCmd create a structTmplHelper that represents the top level command of a service
-func newSvcCmd(svcName string, cmds []*cmd) *structTmplHelper {
-	var fields []structField
+func newSvcCmd(svcName string, cmds []*cmd) *internal.StructTmplHelper {
+	var fields []internal.StructField
 	for _, cmd := range cmds {
-		fields = append(fields, structField{
+		fields = append(fields, internal.StructField{
 			Name: cmd.Name,
 			Type: svcName + cmd.Name + "Cmd",
 			Tags: newTags(newTag("cmd", ""), newTag("help", cmd.Route.Name)),
 		})
 	}
-	return &structTmplHelper{
+	return &internal.StructTmplHelper{
 		Name:   svcName + "Cmd",
 		Fields: fields,
 	}
@@ -234,13 +147,13 @@ func (s *Svc) getStructField() (reflect.StructField, bool) {
 	return clientType.FieldByName(s.Name)
 }
 
-func (s *Svc) pkg() (*pkg, error) {
+func (s Svc) ToPkg() (*internal.Pkg, error) {
 	field, ok := s.getStructField()
 	if !ok {
 		return nil, errors.New("can't find structField")
 	}
 
-	cmdHelpers := []*structTmplHelper{
+	cmdHelpers := []*internal.StructTmplHelper{
 		newSvcCmd(s.Name, s.Commands),
 	}
 
@@ -256,7 +169,7 @@ func (s *Svc) pkg() (*pkg, error) {
 		cmdHelpers = append(cmdHelpers, cmdHelper)
 	}
 
-	return &pkg{
+	return &internal.Pkg{
 		PackageName: strings.ToLower(s.Name + "svc"),
 		Imports:     pkgImports,
 		CmdHelpers:  cmdHelpers,
@@ -276,7 +189,7 @@ func funcInTypes(funcType reflect.Type, offset int) []reflect.Type {
 	return types
 }
 
-func buildCommandStruct(svcName, funcName string, apiFunc reflect.Method, c *cmd) (*structTmplHelper, error) {
+func buildCommandStruct(svcName, funcName string, apiFunc reflect.Method, c *cmd) (*internal.StructTmplHelper, error) {
 	structName := svcName + funcName + "Cmd"
 	argNames := c.ArgNames
 	for i, argName := range argNames {
@@ -284,7 +197,7 @@ func buildCommandStruct(svcName, funcName string, apiFunc reflect.Method, c *cmd
 	}
 	fullArgNames := argNames
 
-	structFields := []structField{
+	structFields := []internal.StructField{
 		{
 			Name: "Token",
 			Type: "string",
@@ -297,7 +210,7 @@ func buildCommandStruct(svcName, funcName string, apiFunc reflect.Method, c *cmd
 		},
 	}
 
-	var oss []optionsStruct
+	var oss []internal.StructTmplHelper
 
 	inTypes := funcInTypes(apiFunc.Type, 2)
 	for _, inType := range inTypes {
@@ -308,8 +221,8 @@ func buildCommandStruct(svcName, funcName string, apiFunc reflect.Method, c *cmd
 			}
 			oStruct := generateOptionsStruct(structName, inType.Elem(), c.Route)
 			oss = append(oss, *oStruct)
-			structFields = append(structFields, structField{
-				Type: oStruct.StructName,
+			structFields = append(structFields, internal.StructField{
+				Type: optionsStructName(structName, inType.Elem()),
 			})
 		case reflect.String, reflect.Int, reflect.Bool, reflect.Slice:
 			if len(argNames) < 1 {
@@ -318,7 +231,7 @@ func buildCommandStruct(svcName, funcName string, apiFunc reflect.Method, c *cmd
 			argName := argNames[0]
 			argNames = argNames[1:]
 			param := c.Route.ArgParam(argName)
-			field := structField{
+			field := internal.StructField{
 				Name: argName,
 				Type: inType.String(),
 				Tags: &structtag.Tags{},
@@ -335,20 +248,20 @@ func buildCommandStruct(svcName, funcName string, apiFunc reflect.Method, c *cmd
 	if err != nil {
 		return nil, err
 	}
-	return &structTmplHelper{
-		Name:           structName,
-		Fields:         structFields,
-		RunMethod:      runMethod,
-		OptionsStructs: oss,
+	return &internal.StructTmplHelper{
+		Name:         structName,
+		Fields:       structFields,
+		RunMethod:    runMethod,
+		ChildStructs: oss,
 	}, nil
 }
 
-func generateRunMethod(svcName, funcName string, apiFunc reflect.Method, argNames ...string) (*runMethod, error) {
+func generateRunMethod(svcName, funcName string, apiFunc reflect.Method, argNames ...string) (*internal.RunMethod, error) {
 	apiFuncType := apiFunc.Type
 	numOut := apiFuncType.NumOut()
 	structName := svcName + funcName + "Cmd"
 
-	runStruct := &runMethod{
+	runStruct := &internal.RunMethod{
 		StructName: structName,
 		FuncName:   funcName,
 		SvcName:    svcName,
@@ -369,14 +282,14 @@ func generateRunMethod(svcName, funcName string, apiFunc reflect.Method, argName
 			if inType.Elem().Kind() != reflect.Struct {
 				return nil, fmt.Errorf("only pointers to structs are allowed")
 			}
-			runStruct.Args = append(runStruct.Args, runMethodArg{Name: inType.Elem().Name(), IsPtr: true})
-		case reflect.String, reflect.Int, reflect.Bool,reflect.Slice:
+			runStruct.Args = append(runStruct.Args, internal.RunMethodArg{Name: inType.Elem().Name(), IsPtr: true})
+		case reflect.String, reflect.Int, reflect.Bool, reflect.Slice:
 			if len(argNames) < 1 {
 				return nil, fmt.Errorf("not enough argNames")
 			}
 			argName := argNames[0]
 			argNames = argNames[1:]
-			runStruct.Args = append(runStruct.Args, runMethodArg{Name: argName})
+			runStruct.Args = append(runStruct.Args, internal.RunMethodArg{Name: argName})
 		default:
 			return nil, fmt.Errorf("generateRunMethod: unsupported type: %v", inType.Kind())
 		}
@@ -406,7 +319,7 @@ func typeToFields(inType reflect.Type) []reflect.StructField {
 	return fields
 }
 
-func generateOptionsStruct(cmdName string, requestType reflect.Type, route *routeparser.Route) *optionsStruct {
+func generateOptionsStruct(cmdName string, requestType reflect.Type, route *routeparser.Route) *internal.StructTmplHelper {
 	structName := optionsStructName(cmdName, requestType)
 
 	fields := typeToFields(requestType)
@@ -420,18 +333,15 @@ func generateOptionsStruct(cmdName string, requestType reflect.Type, route *rout
 			}
 		}
 	}
-	return &optionsStruct{
-		StructName: structName,
-		MainStruct: structTmplHelper{
-			Name:   structName,
-			Fields: structFields,
-		},
+	return &internal.StructTmplHelper{
+		Name:   structName,
+		Fields: structFields,
 		ToFunc: generateToRequestFunc(keeperFields, structName, requestType),
 	}
 }
 
-func getStructFields(fields []reflect.StructField, route *routeparser.Route) []structField {
-	var structFields []structField
+func getStructFields(fields []reflect.StructField, route *routeparser.Route) []internal.StructField {
+	var structFields []internal.StructField
 	for _, field := range fields {
 		if field.Type.Kind() == reflect.Ptr {
 			field.Type = field.Type.Elem()
@@ -453,7 +363,7 @@ func getStructFields(fields []reflect.StructField, route *routeparser.Route) []s
 				tags = appendTag(tags, newTag("help", param.Description))
 			}
 		}
-		structFields = append(structFields, structField{
+		structFields = append(structFields, internal.StructField{
 			Name: field.Name,
 			Type: field.Type.String(),
 			Tags: tags,
@@ -475,7 +385,7 @@ func fieldFlagName(f reflect.StructField) string {
 	return strings.ToLower(strings.Replace(name, "_", "-", -1))
 }
 
-func generateToRequestFunc(fields []reflect.StructField, structName string, targetType reflect.Type) toFunc {
+func generateToRequestFunc(fields []reflect.StructField, structName string, targetType reflect.Type) *internal.ToFunc {
 	inclPtrHelper := false
 	for _, v := range fields {
 		if v.Type.Kind() == reflect.Ptr {
@@ -484,16 +394,16 @@ func generateToRequestFunc(fields []reflect.StructField, structName string, targ
 		}
 	}
 
-	var vss []valSetter
+	var vss []internal.ValSetter
 	for _, field := range fields {
-		vss = append(vss, valSetter{
+		vss = append(vss, internal.ValSetter{
 			Name:        field.Name,
 			FlagName:    fieldFlagName(field),
 			TargetIsPtr: field.Type.Kind() == reflect.Ptr,
 		})
 	}
 
-	return toFunc{
+	return &internal.ToFunc{
 		ReceiverName:         structName,
 		TargetName:           targetType.Name(),
 		TargetType:           targetType.String(),

@@ -2,6 +2,7 @@ package packagewriter
 
 import (
 	"bytes"
+	"github.com/WillAbides/go-github-cli/generator/internal"
 	"github.com/pkg/errors"
 	"go/format"
 	"golang.org/x/tools/imports"
@@ -13,18 +14,24 @@ import (
 
 var tmpl = template.Must(template.New("").Parse(pkgTemplate))
 
-//WritePackageFiles writes the files for a package to the services directory at the given basePath
-func WritePackageFiles(basePath string, packageName string, p interface{}) error {
-	packagePath := filepath.Join(basePath, "services", packageName)
-	err := os.MkdirAll(packagePath, 0755)
+func WritePackageFiles(basePath string, pkger Packager) error {
+	pkg, err := pkger.ToPkg()
+	if err != nil {
+		return errors.Wrap(err, "failed running ToPkg()")
+	}
+	if pkg.PackageName == "" {
+		return errors.Wrap(err, "packages need names")
+	}
+	packagePath := filepath.Join(basePath, "services", pkg.PackageName)
+	err = os.MkdirAll(packagePath, 0755)
 	if err != nil {
 		return errors.Wrapf(err, "failed creating directory: %q", packagePath)
 	}
-	err = writeGoFile(packageName+".go", "svcpackage", p, packagePath)
+	err = writeGoFile(pkg.PackageName+".go", "svcpackage", pkg, packagePath)
 	if err != nil {
 		return errors.Wrap(err, "failed writing svcpackage template")
 	}
-	err = writeGoFile("testhelper_test.go", "testhelper", p, packagePath)
+	err = writeGoFile("testhelper_test.go", "testhelper", pkg, packagePath)
 	return errors.Wrap(err, "failed writing testhelper template")
 }
 
@@ -45,6 +52,10 @@ func writeGoFile(filename, templateName string, p interface{}, path string) erro
 	}
 	fl := filepath.Join(path, filename)
 	return ioutil.WriteFile(fl, out, 0644)
+}
+
+type Packager interface{
+	ToPkg() (*internal.Pkg, error)
 }
 
 // language=GoTemplate
@@ -74,10 +85,10 @@ const pkgTemplate = `
 	type {{.Name}} struct { {{range .Fields}}
 		{{.Name}} {{.Type}} {{if .Tags}}{{printf "%#q" .Tags}} {{end}}{{end}}
 	}
-	{{template "run_method" .RunMethod}}{{template "options_structs" .OptionsStructs}}
+	{{template "run_method" .RunMethod}}{{template "tofunc" .ToFunc}}{{range .ChildStructs}}{{template "structtype" .}}{{end}}
 {{end}}
 
-{{define "tofunc"}}
+{{define "tofunc"}}{{if .}}
 	func (t {{.ReceiverName}}) to{{.TargetName}}(k *kong.Context) *{{.TargetType}} {
 		val := &{{.TargetType}}{}
 		{{if .IncludePointerHelper}}
@@ -96,7 +107,7 @@ const pkgTemplate = `
 		{{template "val_setters" .ValSetters}}
 		return val
 	}
-{{end}}
+{{end}}{{end}}
 
 {{define "val_setters"}}{{range .}}{{template "val_setter" .}}{{end}}{{end}}
 
@@ -104,16 +115,6 @@ const pkgTemplate = `
 		val.{{.Name}} = &t.{{.Name}}
 	}{{else}}	val.{{.Name}} = t.{{.Name}}{{end}}
 
-{{end}}
-
-{{define "options_struct"}}
-{{template "structtype" .MainStruct}}
-
-{{template "tofunc" .ToFunc}}
-{{end}}
-
-{{define "options_structs"}}
-{{range .}}{{template "options_struct" .}}{{end}}
 {{end}}
 
 {{define "svcpackage"}}
@@ -144,7 +145,6 @@ const pkgTemplate = `
 	}
 
 	{{range .CmdHelpers}}{{template "structtype" .}}{{end}}
-	{{range .OptionStructs}}{{template "options_struct" .}}{{end}}
 {{end}}
 
 {{define "testhelper"}}
@@ -194,3 +194,4 @@ const pkgTemplate = `
 {{end}}
 
 `
+

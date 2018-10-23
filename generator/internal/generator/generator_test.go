@@ -2,6 +2,7 @@ package generator
 
 import (
 	"fmt"
+	"github.com/WillAbides/go-github-cli/generator/internal"
 	"github.com/WillAbides/go-github-cli/generator/internal/routeparser"
 	"github.com/fatih/structtag"
 	"github.com/google/go-github/github"
@@ -21,9 +22,9 @@ func init() {
 	}
 }
 
-func nsf(t *testing.T, name, ftype string, tag ...*structtag.Tag) structField {
+func nsf(t *testing.T, name, ftype string, tag ...*structtag.Tag) internal.StructField {
 	t.Helper()
-	return structField{
+	return internal.StructField{
 		Name: name,
 		Type: ftype,
 		Tags: newTags(tag...),
@@ -48,10 +49,10 @@ func Test_buildCommandStruct(t *testing.T) {
 		wantRunMethod, err := generateRunMethod("Issues", "Edit", method, "Owner", "Repo", "Number")
 		require.Nil(t, err)
 
-		want := &structTmplHelper{
+		want := &internal.StructTmplHelper{
 			Name:      "IssuesEditCmd",
 			RunMethod: wantRunMethod,
-			Fields: []structField{
+			Fields: []internal.StructField{
 				nsf(t, "Token", "string", newTag("env", "GITHUB_TOKEN"), newTag("required", "")),
 				nsf(t, "APIBaseURL", "string", newTag("env", "GITHUB_API_BASE_URL"), newTag("default", "https://api.github.com")),
 				nsf(t, "Owner", "string", newTag("required", "")),
@@ -60,7 +61,7 @@ func Test_buildCommandStruct(t *testing.T) {
 				{Type: "issuesEditCmdIssueRequestFlags"},
 			},
 		}
-		got.OptionsStructs = nil
+		got.ChildStructs = nil
 		assert.Equal(t, want, got)
 	})
 
@@ -78,9 +79,9 @@ func Test_buildCommandStruct(t *testing.T) {
 		})
 		assert.Nil(t, err)
 
-		want := &structTmplHelper{
+		want := &internal.StructTmplHelper{
 			Name: "IssuesListByOrgCmd",
-			Fields: []structField{
+			Fields: []internal.StructField{
 				nsf(t, "Token", "string", newTag("env", "GITHUB_TOKEN"), newTag("required", "")),
 				nsf(t, "APIBaseURL", "string", newTag("env", "GITHUB_API_BASE_URL"), newTag("default", "https://api.github.com")),
 				nsf(t, "Org", "string", newTag("required", "")),
@@ -96,12 +97,12 @@ func Test_buildCommandStruct(t *testing.T) {
 
 func Test_generateRunMethod(t *testing.T) {
 	t.Run("Issues Edit", func(t *testing.T) {
-		want := &runMethod{
+		want := &internal.RunMethod{
 			StructName: "IssuesEditCmd",
 			HasElement: true,
 			SvcName:    "Issues",
 			FuncName:   "Edit",
-			Args: []runMethodArg{
+			Args: []internal.RunMethodArg{
 				{Name: "Owner"},
 				{Name: "Repo"},
 				{Name: "Number"},
@@ -120,12 +121,12 @@ func Test_generateRunMethod(t *testing.T) {
 	})
 
 	t.Run("Issues Lock", func(t *testing.T) {
-		want := &runMethod{
+		want := &internal.RunMethod{
 			StructName: "IssuesLockCmd",
 			HasElement: false,
 			SvcName:    "Issues",
 			FuncName:   "Lock",
-			Args: []runMethodArg{
+			Args: []internal.RunMethodArg{
 				{Name: "Owner"},
 				{Name: "Repo"},
 				{Name: "Number"},
@@ -171,7 +172,7 @@ func Test_fieldFlagName(t *testing.T) {
 func Test_getStructFields(t *testing.T) {
 	t.Run("github.ListOptions", func(t *testing.T) {
 		fields := typeToFields(reflect.TypeOf(github.ListOptions{}))
-		want := []structField{
+		want := []internal.StructField{
 			nsf(t, "Page", "int", newTag("name", "page")),
 			nsf(t, "PerPage", "int", newTag("name", "per-page")),
 		}
@@ -181,7 +182,7 @@ func Test_getStructFields(t *testing.T) {
 
 	t.Run("github.IssueListOptions", func(t *testing.T) {
 		fields := typeToFields(reflect.TypeOf(github.IssueListOptions{}))
-		want := []structField{
+		want := []internal.StructField{
 			nsf(t, "Filter", "string", newTag("name", "filter")),
 			nsf(t, "State", "string", newTag("name", "state")),
 			nsf(t, "Labels", "[]string", newTag("name", "labels")),
@@ -201,18 +202,18 @@ func Test_generateOptionsStruct(t *testing.T) {
 		t.Run("github.ListOptions", func(t *testing.T) {
 			mt := reflect.TypeOf(github.ListOptions{})
 			oStruct := generateOptionsStruct("", mt, nil)
-			want := []structField{
+			want := []internal.StructField{
 				nsf(t, "Page", "int", newTag("name", "page")),
 				nsf(t, "PerPage", "int", newTag("name", "per-page")),
 			}
-			assert.Equal(t, want, oStruct.MainStruct.Fields)
+			assert.Equal(t, want, oStruct.Fields)
 			fmt.Println(oStruct.ToFunc.ValSetters)
 		})
 
 		t.Run("github.IssueListOptions", func(t *testing.T) {
 			mt := reflect.TypeOf(github.IssueListOptions{})
 			oStruct := generateOptionsStruct("", mt, nil)
-			want := []structField{
+			want := []internal.StructField{
 				nsf(t, "Filter", "string", newTag("name", "filter")),
 				nsf(t, "State", "string", newTag("name", "state")),
 				nsf(t, "Labels", "[]string", newTag("name", "labels")),
@@ -222,7 +223,7 @@ func Test_generateOptionsStruct(t *testing.T) {
 				nsf(t, "Page", "int", newTag("name", "page")),
 				nsf(t, "PerPage", "int", newTag("name", "per-page")),
 			}
-			assert.Equal(t, want, oStruct.MainStruct.Fields)
+			assert.Equal(t, want, oStruct.Fields)
 			fmt.Println(oStruct.ToFunc.ValSetters)
 		})
 	})
@@ -249,7 +250,7 @@ func Test_generateOptionsStruct(t *testing.T) {
 		t.Run("ex", func(t *testing.T) {
 			mt := reflect.TypeOf(example{})
 			oStruct := generateOptionsStruct("", mt, nil)
-			want := []valSetter{
+			want := []internal.ValSetter{
 				{TargetIsPtr: true, Name: "Body", FlagName: "body"},
 				{TargetIsPtr: false, Name: "Labels", FlagName: "labels"},
 				{TargetIsPtr: false, Name: "LockReason", FlagName: "lock-reason"},
@@ -265,7 +266,7 @@ func Test_generateOptionsStruct(t *testing.T) {
 			mt := reflect.TypeOf(github.IssueListOptions{})
 			oStruct := generateOptionsStruct("", mt, nil)
 
-			want := []valSetter{
+			want := []internal.ValSetter{
 				{Name: "Filter", FlagName: "filter", TargetIsPtr: false},
 				{Name: "State", FlagName: "state", TargetIsPtr: false},
 				{Name: "Labels", FlagName: "labels", TargetIsPtr: false},
@@ -283,7 +284,7 @@ func Test_generateOptionsStruct(t *testing.T) {
 			mt := reflect.TypeOf(github.ListOptions{})
 			oStruct := generateOptionsStruct("", mt, nil)
 
-			want := []valSetter{
+			want := []internal.ValSetter{
 				{Name: "Page", FlagName: "page", TargetIsPtr: false},
 				{Name: "PerPage", FlagName: "per-page", TargetIsPtr: false},
 			}

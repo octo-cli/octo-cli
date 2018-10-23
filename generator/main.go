@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+	"github.com/WillAbides/go-github-cli/generator/internal"
 	"github.com/WillAbides/go-github-cli/generator/internal/generator"
+	"github.com/WillAbides/go-github-cli/generator/internal/packagewriter"
 	"io"
 	"net/http"
 	"os"
@@ -37,7 +39,16 @@ func (k *genCliRun) Run() error {
 	if err != nil {
 		return errors.Wrap(err, "")
 	}
-	err = generator.WriteOutput(k.OutputPath, svcs)
+	for _, svc := range svcs {
+		err = packagewriter.WritePackageFiles(k.OutputPath, svc)
+	}
+	var toPkgers []interface{ ToPkg() (*internal.Pkg, error) }
+	for _, v := range svcs {
+		toPkgers = append(toPkgers, v)
+		if err != nil {
+			return errors.Wrap(err, "failed writing package files")
+		}
+	}
 	return errors.Wrap(err, "")
 }
 
@@ -92,7 +103,12 @@ func (k *genCliUpdateTestdata) Run() error {
 	if err != nil {
 		return errors.Wrap(err, "")
 	}
-	err = generator.WriteOutput("generator/testdata/exampleapp", svcs)
+	for _, svc := range svcs {
+		err = packagewriter.WritePackageFiles("generator/testdata/exampleapp", svc)
+		if err != nil {
+			return errors.Wrap(err, "failed writing package files")
+		}
+	}
 	return errors.Wrap(err, "")
 }
 
