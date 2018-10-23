@@ -21,27 +21,6 @@ func init() {
 	}
 }
 
-//func Test_svc_writePkg(t *testing.T) {
-//	want, err := ioutil.ReadFile("../../testdata/exampleapp/services/issuessvc/issuessvc.go")
-//	require.Nil(t, err)
-//	rts := testRtServices["issues"]
-//	issueSvc := Svc{
-//		Name: "Issues",
-//		Commands: []cmd{
-//			newCmd("AddLabelsToIssue", rts.FindByIDName("add-labels"), "Owner", "Repo", "Number", "Labels"),
-//			newCmd("Create", rts.FindByIDName("create"), "Owner", "Repo"),
-//			newCmd("Edit", rts.FindByIDName("edit")),
-//			newCmd("List", rts.FindByIDName("list"), "All"),
-//			newCmd("Lock", rts.FindByIDName("lock"), "Owner", "Repo", "Number"),
-//		},
-//	}
-//
-//	var buf bytes.Buffer
-//	err = issueSvc.writePkg(&buf)
-//	assert.Nil(t, err)
-//	assert.Equal(t, string(want), buf.String())
-//}
-
 func nsf(t *testing.T, name, ftype string, tag ...*structtag.Tag) *structField {
 	t.Helper()
 	tags := newTags(tag...)

@@ -297,20 +297,7 @@ func buildCommandStruct(svcName, funcName string, apiFunc reflect.Method, c cmd)
 				Type: oStruct.StructName,
 			}
 			structFields = append(structFields, field)
-		case reflect.String, reflect.Int, reflect.Bool:
-			if len(argNames) < 1 {
-				return nil, fmt.Errorf("not enough argNames")
-			}
-			argName := argNames[0]
-			argNames = argNames[1:]
-			param := c.Route.ArgParam(argName)
-			fieldTags := &structtag.Tags{}
-			if param != nil && param.Required {
-				fieldTags = newTags(newTag("required", ""))
-			}
-			field := newStructField(argName, inType.String(), fieldTags)
-			structFields = append(structFields, *field)
-		case reflect.Slice:
+		case reflect.String, reflect.Int, reflect.Bool, reflect.Slice:
 			if len(argNames) < 1 {
 				return nil, fmt.Errorf("not enough argNames")
 			}
@@ -366,22 +353,13 @@ func generateRunMethod(svcName, funcName string, apiFunc reflect.Method, argName
 				return nil, fmt.Errorf("only pointers to structs are allowed")
 			}
 			runStruct.Args = append(runStruct.Args, runMethodArgHelper{Name: inType.Elem().Name(), IsPtr: true})
-		case reflect.String, reflect.Int, reflect.Bool:
+		case reflect.String, reflect.Int, reflect.Bool,reflect.Slice:
 			if len(argNames) < 1 {
 				return nil, fmt.Errorf("not enough argNames")
 			}
 			argName := argNames[0]
 			argNames = argNames[1:]
 			runStruct.Args = append(runStruct.Args, runMethodArgHelper{Name: argName})
-		case reflect.Slice:
-			if len(argNames) < 1 {
-				return nil, fmt.Errorf("not enough argNames")
-			}
-			argName := argNames[0]
-			argNames = argNames[1:]
-			runStruct.Args = append(runStruct.Args, runMethodArgHelper{
-				Name: argName,
-			})
 		default:
 			return nil, fmt.Errorf("generateRunMethod: unsupported type: %v", inType.Kind())
 		}
