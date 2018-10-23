@@ -373,6 +373,7 @@ func getStructFields(fields []reflect.StructField, route *routeparser.Route) []i
 	return structFields
 }
 
+//fieldFlagName gets the flag name for a field either from its json tag or its name
 func fieldFlagName(f reflect.StructField) string {
 	jsonTag := f.Tag.Get("json")
 	var name string
@@ -386,17 +387,9 @@ func fieldFlagName(f reflect.StructField) string {
 }
 
 func generateToRequestFunc(fields []reflect.StructField, structName string, targetType reflect.Type) *internal.ToFunc {
-	inclPtrHelper := false
-	for _, v := range fields {
-		if v.Type.Kind() == reflect.Ptr {
-			inclPtrHelper = true
-			break
-		}
-	}
-
-	var vss []internal.ValSetter
+	var valSetters []internal.ValSetter
 	for _, field := range fields {
-		vss = append(vss, internal.ValSetter{
+		valSetters = append(valSetters, internal.ValSetter{
 			Name:        field.Name,
 			FlagName:    fieldFlagName(field),
 			TargetIsPtr: field.Type.Kind() == reflect.Ptr,
@@ -404,10 +397,9 @@ func generateToRequestFunc(fields []reflect.StructField, structName string, targ
 	}
 
 	return &internal.ToFunc{
-		ReceiverName:         structName,
-		TargetName:           targetType.Name(),
-		TargetType:           targetType.String(),
-		IncludePointerHelper: inclPtrHelper,
-		ValSetters:           vss,
+		ReceiverName: structName,
+		TargetName:   targetType.Name(),
+		TargetType:   targetType.String(),
+		ValSetters:   valSetters,
 	}
 }
