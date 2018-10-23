@@ -168,16 +168,6 @@ func newCmd(name string, rt *routeparser.Route, argNames ...string) cmd {
 	}
 }
 
-func (c *cmd) tags() (*structtag.Tags, error) {
-	tags := &structtag.Tags{}
-	err := tags.Set(newTag("cmd", ""))
-	if err != nil {
-		return nil, errors.Wrap(err, "")
-	}
-	err = tags.Set(&structtag.Tag{Key: "help", Name: c.Route.Name})
-	return tags, errors.Wrap(err, "")
-}
-
 func newStructField(name, ftype string, tgs *structtag.Tags) *structField {
 	return &structField{
 		Name: name,
@@ -194,34 +184,34 @@ func newTag(key, name string, options ...string) *structtag.Tag {
 	}
 }
 
-func newTags(tags ...*structtag.Tag) (*structtag.Tags, error) {
-	tgs := &structtag.Tags{}
-	for _, tag := range tags {
-		err := tgs.Set(tag)
-		if err != nil {
-			return nil, errors.Wrap(err, "")
-		}
-	}
-	return tgs, nil
+func appendTag(tags *structtag.Tags, tag ...*structtag.Tag) *structtag.Tags{
+	return newTags(append(tags.Tags(), tag...)...)
 }
 
-func newSvcCmd(svcName string, cmds []cmd) (*structTmplHelper, error) {
+func newTags(tag ...*structtag.Tag) *structtag.Tags {
+	tags := &structtag.Tags{}
+	for _, tag := range tag {
+		err := tags.Set(tag)
+		if err != nil {
+			panic(err)
+		}
+	}
+	return tags
+}
+
+func newSvcCmd(svcName string, cmds []cmd) *structTmplHelper {
 	var fields []structField
 	for _, cmd := range cmds {
-		tgs, err := cmd.tags()
-		if err != nil {
-			return nil, errors.Wrap(err, "")
-		}
 		fields = append(fields, structField{
 			Name: cmd.Name,
 			Type: svcName + cmd.Name + "Cmd",
-			Tags: tgs,
+			Tags: newTags(newTag("cmd", ""), newTag("help", cmd.Route.Name)),
 		})
 	}
 	return &structTmplHelper{
 		Name:   svcName + "Cmd",
 		Fields: fields,
-	}, nil
+	}
 }
 
 func (s *Svc) getStructField() (reflect.StructField, bool) {
@@ -235,12 +225,8 @@ func (s *Svc) pkg() (*pkg, error) {
 		return nil, errors.New("can't find structField")
 	}
 
-	sc, err := newSvcCmd(s.Name, s.Commands)
-	if err != nil {
-		return nil, errors.Wrap(err, "")
-	}
 	cmdHelpers := []*structTmplHelper{
-		sc,
+		newSvcCmd(s.Name, s.Commands),
 	}
 
 	for _, c := range s.Commands {
@@ -275,43 +261,6 @@ func funcInTypes(funcType reflect.Type, offset int) []reflect.Type {
 	return types
 }
 
-func commonStructFields() ([]structField, error) {
-	var structFields []structField
-	for _, sf := range []struct {
-		Name string
-		Type string
-		Tags []*structtag.Tag
-	}{
-		{
-			Name: "Token",
-			Type: "string",
-			Tags: []*structtag.Tag{
-				newTag("env", "GITHUB_TOKEN"),
-				newTag("required", ""),
-			},
-		},
-		{
-			Name: "APIBaseURL",
-			Type: "string",
-			Tags: []*structtag.Tag{
-				newTag("env", "GITHUB_API_BASE_URL"),
-				newTag("default", "https://api.github.com"),
-			},
-		},
-	} {
-		tgs, err := newTags(sf.Tags...)
-		if err != nil {
-			return nil, errors.Wrap(err, "")
-		}
-		structFields = append(structFields, structField{
-			Name: sf.Name,
-			Type: sf.Type,
-			Tags: tgs,
-		})
-	}
-	return structFields, nil
-}
-
 func buildCommandStruct(svcName, funcName string, apiFunc reflect.Method, c cmd) (*structTmplHelper, error) {
 	structName := svcName + funcName + "Cmd"
 	argNames := c.ArgNames
@@ -320,9 +269,17 @@ func buildCommandStruct(svcName, funcName string, apiFunc reflect.Method, c cmd)
 	}
 	fullArgNames := argNames
 
-	structFields, err := commonStructFields()
-	if err != nil {
-		return nil, errors.Wrap(err, "")
+	structFields := []structField{
+		{
+			Name: "Token",
+			Type: "string",
+			Tags: newTags(newTag("env", "GITHUB_TOKEN"), newTag("required", "")),
+		},
+		{
+			Name: "APIBaseURL",
+			Type: "string",
+			Tags: newTags(newTag("env", "GITHUB_API_BASE_URL"), newTag("default", "https://api.github.com")),
+		},
 	}
 
 	var oss []optionsStruct
@@ -334,10 +291,7 @@ func buildCommandStruct(svcName, funcName string, apiFunc reflect.Method, c cmd)
 			if inType.Elem().Kind() != reflect.Struct {
 				return nil, fmt.Errorf("only pointers to structs are allowed")
 			}
-			oStruct, err := generateOptionsStruct(structName, inType.Elem(), c.Route)
-			if err != nil {
-				return nil, errors.Wrap(err, "")
-			}
+			oStruct := generateOptionsStruct(structName, inType.Elem(), c.Route)
 			oss = append(oss, *oStruct)
 			field := structField{
 				Type: oStruct.StructName,
@@ -350,13 +304,11 @@ func buildCommandStruct(svcName, funcName string, apiFunc reflect.Method, c cmd)
 			argName := argNames[0]
 			argNames = argNames[1:]
 			param := c.Route.ArgParam(argName)
-			field := newStructField(argName, inType.Kind().String(), &structtag.Tags{})
+			fieldTags := &structtag.Tags{}
 			if param != nil && param.Required {
-				err := field.Tags.Set(newTag("required", ""))
-				if err != nil {
-					return nil, errors.Wrap(err, "")
-				}
+				fieldTags = newTags(newTag("required", ""))
 			}
+			field := newStructField(argName, inType.String(), fieldTags)
 			structFields = append(structFields, *field)
 		case reflect.Slice:
 			if len(argNames) < 1 {
@@ -365,13 +317,11 @@ func buildCommandStruct(svcName, funcName string, apiFunc reflect.Method, c cmd)
 			argName := argNames[0]
 			argNames = argNames[1:]
 			param := c.Route.ArgParam(argName)
-			field := newStructField(argName, inType.String(), &structtag.Tags{})
-			if param.Required {
-				err := field.Tags.Set(newTag("required", ""))
-				if err != nil {
-					return nil, errors.Wrap(err, "")
-				}
+			fieldTags := &structtag.Tags{}
+			if param != nil && param.Required {
+				fieldTags = newTags(newTag("required", ""))
 			}
+			field := newStructField(argName, inType.String(), fieldTags)
 			structFields = append(structFields, *field)
 		default:
 			return nil, fmt.Errorf(`buildCommandStruct: unsupported type: "%s"`, inType.Kind().String())
@@ -461,14 +411,11 @@ func typeToFields(inType reflect.Type) []reflect.StructField {
 	return fields
 }
 
-func generateOptionsStruct(cmdName string, requestType reflect.Type, route *routeparser.Route) (*optionsStruct, error) {
+func generateOptionsStruct(cmdName string, requestType reflect.Type, route *routeparser.Route) *optionsStruct {
 	structName := optionsStructName(cmdName, requestType)
 
 	fields := typeToFields(requestType)
-	structFields, err := getStructFields(fields, route)
-	if err != nil {
-		return nil, errors.Wrap(err, "")
-	}
+	structFields := getStructFields(fields, route)
 
 	var keeperFields []reflect.StructField
 	for _, field := range fields {
@@ -485,19 +432,16 @@ func generateOptionsStruct(cmdName string, requestType reflect.Type, route *rout
 			Fields: structFields,
 		},
 		ToFunc: generateToRequestFunc(keeperFields, structName, requestType),
-	}, err
+	}
 }
 
-func getStructFields(fields []reflect.StructField, route *routeparser.Route) ([]structField, error) {
+func getStructFields(fields []reflect.StructField, route *routeparser.Route) []structField {
 	var structFields []structField
 	for _, field := range fields {
 		if field.Type.Kind() == reflect.Ptr {
 			field.Type = field.Type.Elem()
 		}
-		tags, err := newTags(newTag("name", flagName(field.Name)))
-		if err != nil {
-			return nil, errors.Wrap(err, "")
-		}
+		tags := newTags(newTag("name", flagName(field.Name)))
 		if route != nil {
 			param := route.FieldParam(field)
 			if param == nil {
@@ -506,27 +450,19 @@ func getStructFields(fields []reflect.StructField, route *routeparser.Route) ([]
 			if param.Location != "body" {
 				continue
 			}
-			if param != nil {
-				if param.Required {
-					err := tags.Set(newTag("required", ""))
-					if err != nil {
-						return nil, errors.Wrap(err, "")
-					}
-				}
+			if param.Required {
+				tags = appendTag(tags, newTag("required", ""))
+			}
 
-				if param.Description != "" {
-					err := tags.Set(newTag("help", param.Description))
-					if err != nil {
-						return nil, errors.Wrap(err, "")
-					}
-				}
+			if param.Description != "" {
+				tags = appendTag(tags, newTag("help", param.Description))
 			}
 		}
 		sField := newStructField(field.Name, field.Type.String(), tags)
 		structFields = append(structFields, *sField)
 
 	}
-	return structFields, nil
+	return structFields
 }
 
 func fieldFlagName(f reflect.StructField) string {

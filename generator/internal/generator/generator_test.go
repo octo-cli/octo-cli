@@ -44,8 +44,7 @@ func init() {
 
 func nsf(t *testing.T, name, ftype string, tag ...*structtag.Tag) *structField {
 	t.Helper()
-	tags, err := newTags(tag...)
-	require.Nil(t, err)
+	tags := newTags(tag...)
 	return newStructField(name, ftype, tags)
 }
 
@@ -196,8 +195,7 @@ func Test_getStructFields(t *testing.T) {
 			*nsf(t, "Page", "int", newTag("name", "page")),
 			*nsf(t, "PerPage", "int", newTag("name", "per-page")),
 		}
-		got, err := getStructFields(fields, nil)
-		assert.Nil(t, err)
+		got := getStructFields(fields, nil)
 		assert.Equal(t, want, got)
 	})
 
@@ -213,8 +211,7 @@ func Test_getStructFields(t *testing.T) {
 			*nsf(t, "Page", "int", newTag("name", "page")),
 			*nsf(t, "PerPage", "int", newTag("name", "per-page")),
 		}
-		got, err := getStructFields(fields, nil)
-		assert.Nil(t, err)
+		got := getStructFields(fields, nil)
 		assert.Equal(t, want, got)
 	})
 }
@@ -223,8 +220,7 @@ func Test_generateOptionsStruct(t *testing.T) {
 	t.Run("fields", func(t *testing.T) {
 		t.Run("github.ListOptions", func(t *testing.T) {
 			mt := reflect.TypeOf(github.ListOptions{})
-			oStruct, err := generateOptionsStruct("", mt, nil)
-			assert.Nil(t, err)
+			oStruct := generateOptionsStruct("", mt, nil)
 			want := []structField{
 				*nsf(t, "Page", "int", newTag("name", "page")),
 				*nsf(t, "PerPage", "int", newTag("name", "per-page")),
@@ -235,8 +231,7 @@ func Test_generateOptionsStruct(t *testing.T) {
 
 		t.Run("github.IssueListOptions", func(t *testing.T) {
 			mt := reflect.TypeOf(github.IssueListOptions{})
-			oStruct, err := generateOptionsStruct("", mt, nil)
-			assert.Nil(t, err)
+			oStruct := generateOptionsStruct("", mt, nil)
 			want := []structField{
 				*nsf(t, "Filter", "string", newTag("name", "filter")),
 				*nsf(t, "State", "string", newTag("name", "state")),
@@ -273,8 +268,7 @@ func Test_generateOptionsStruct(t *testing.T) {
 	t.Run("val setters", func(t *testing.T) {
 		t.Run("ex", func(t *testing.T) {
 			mt := reflect.TypeOf(example{})
-			oStruct, err := generateOptionsStruct("", mt, nil)
-			assert.Nil(t, err)
+			oStruct := generateOptionsStruct("", mt, nil)
 			want := []valSetter{
 				{TargetIsPtr: true, Name: "Body", FlagName: "body"},
 				{TargetIsPtr: false, Name: "Labels", FlagName: "labels"},
@@ -289,8 +283,7 @@ func Test_generateOptionsStruct(t *testing.T) {
 
 		t.Run("github.IssueListOptions", func(t *testing.T) {
 			mt := reflect.TypeOf(github.IssueListOptions{})
-			oStruct, err := generateOptionsStruct("", mt, nil)
-			assert.Nil(t, err)
+			oStruct := generateOptionsStruct("", mt, nil)
 
 			want := []valSetter{
 				{Name: "Filter", FlagName: "filter", TargetIsPtr: false},
@@ -308,8 +301,7 @@ func Test_generateOptionsStruct(t *testing.T) {
 
 		t.Run("github.ListOptions", func(t *testing.T) {
 			mt := reflect.TypeOf(github.ListOptions{})
-			oStruct, err := generateOptionsStruct("", mt, nil)
-			assert.Nil(t, err)
+			oStruct := generateOptionsStruct("", mt, nil)
 
 			want := []valSetter{
 				{Name: "Page", FlagName: "page", TargetIsPtr: false},
