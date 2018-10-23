@@ -52,6 +52,8 @@ type (
 		Args       []runMethodArg
 	}
 
+	// structTmplHelper represents a struct for the template to build. It can also include other structs and a run method
+	//    when it represents a command struct
 	structTmplHelper struct {
 		Name           string
 		Fields         []structField
@@ -59,30 +61,43 @@ type (
 		OptionsStructs []optionsStruct
 	}
 
+	// structField is one field in a structTmplHelper
 	structField struct {
 		Name string
 		Type string
 		Tags *structtag.Tags
 	}
 
+	//optionsStruct represents a struct anonymously included in a command struct to get additional flags for a command
+	//  an example is `issuesCreateCmdIssueRequestFlags` in the issues service
 	optionsStruct struct {
 		StructName string
 		MainStruct structTmplHelper
-		ToFunc     toFuncTmplHelper
+		ToFunc     toFunc
 	}
 
-	valSetter struct {
-		TargetIsPtr bool
-		Name        string
-		FlagName    string
-	}
-
-	toFuncTmplHelper struct {
+	//toFunc represents the function that converts a cli options struct to a go-github options struct
+	//  an example is from issues create is:
+	//    func (t issuesCreateCmdIssueRequestFlags) toIssueRequest(k *kong.Context) *github.IssueRequest
+	toFunc struct {
 		ReceiverName         string
 		TargetName           string
 		TargetType           string
 		ValSetters           []valSetter
-		IncludePointerHelper bool
+		IncludePointerHelper bool			// determines whether the generated func should include the "isValueSet" helper
+	}
+
+	//valSetter sets one value in a toFunc
+	//  example output: `val.LockReason = t.LockReason`
+	//
+	//  or:
+	//    if isValueSet("labels") {
+	//      val.Labels = &t.Labels
+	//    }
+	valSetter struct {
+		TargetIsPtr bool
+		Name        string
+		FlagName    string
 	}
 )
 
@@ -171,6 +186,7 @@ func newCmd(name string, rt *routeparser.Route, argNames ...string) *cmd {
 	}
 }
 
+//newTag is a helper to create a new *structtag.Tag with fewer lines of code
 func newTag(key, name string, options ...string) *structtag.Tag {
 	return &structtag.Tag{
 		Key:     key,
@@ -179,10 +195,8 @@ func newTag(key, name string, options ...string) *structtag.Tag {
 	}
 }
 
-func appendTag(tags *structtag.Tags, tag ...*structtag.Tag) *structtag.Tags{
-	return newTags(append(tags.Tags(), tag...)...)
-}
-
+//newTags creates a new *structtag.Tags from a list of tags
+//  it will panic if one of the tags has no key
 func newTags(tag ...*structtag.Tag) *structtag.Tags {
 	tags := &structtag.Tags{}
 	for _, tag := range tag {
@@ -194,6 +208,12 @@ func newTags(tag ...*structtag.Tag) *structtag.Tags {
 	return tags
 }
 
+//appendTag appends one of more tags to a *structtag.Tags
+func appendTag(tags *structtag.Tags, tag ...*structtag.Tag) *structtag.Tags{
+	return newTags(append(tags.Tags(), tag...)...)
+}
+
+//newSvcCmd create a structTmplHelper that represents the top level command of a service
 func newSvcCmd(svcName string, cmds []*cmd) *structTmplHelper {
 	var fields []structField
 	for _, cmd := range cmds {
@@ -455,7 +475,7 @@ func fieldFlagName(f reflect.StructField) string {
 	return strings.ToLower(strings.Replace(name, "_", "-", -1))
 }
 
-func generateToRequestFunc(fields []reflect.StructField, structName string, targetType reflect.Type) toFuncTmplHelper {
+func generateToRequestFunc(fields []reflect.StructField, structName string, targetType reflect.Type) toFunc {
 	inclPtrHelper := false
 	for _, v := range fields {
 		if v.Type.Kind() == reflect.Ptr {
@@ -473,7 +493,7 @@ func generateToRequestFunc(fields []reflect.StructField, structName string, targ
 		})
 	}
 
-	return toFuncTmplHelper{
+	return toFunc{
 		ReceiverName:         structName,
 		TargetName:           targetType.Name(),
 		TargetType:           targetType.String(),
