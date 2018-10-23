@@ -19,7 +19,7 @@ type (
 	// Svc represents a group of api endpoints such as Issues, Organizations or Git
 	Svc struct {
 		Name     string
-		Commands []cmd
+		Commands []*cmd
 	}
 
 	// cmd represents a cli command that will be generated
@@ -118,7 +118,7 @@ func BuildSvcs(routesPath, configFile string) ([]Svc, error) {
 			cmdNames = append(cmdNames, cmdName)
 		}
 		sort.Strings(cmdNames)
-		cmds := make([]cmd, len(cmdNames))
+		cmds := make([]*cmd, len(cmdNames))
 		for i, cmdName := range cmdNames {
 			hcmd := hsvc.Command[cmdName]
 			routesName := hcmd.RoutesName
@@ -152,7 +152,8 @@ func WriteOutput(outputPath string, svcs []Svc) error {
 	return nil
 }
 
-func newCmd(name string, rt *routeparser.Route, argNames ...string) cmd {
+//newCmd creates a new cmd.  If argNames is empty, it infers them from them from url parameters
+func newCmd(name string, rt *routeparser.Route, argNames ...string) *cmd {
 	if len(argNames) == 0 {
 		for _, p := range rt.Params {
 			if p.Location == "url" {
@@ -161,18 +162,10 @@ func newCmd(name string, rt *routeparser.Route, argNames ...string) cmd {
 		}
 	}
 
-	return cmd{
+	return &cmd{
 		Name:     name,
 		ArgNames: argNames,
 		Route:    rt,
-	}
-}
-
-func newStructField(name, ftype string, tgs *structtag.Tags) *structField {
-	return &structField{
-		Name: name,
-		Type: ftype,
-		Tags: tgs,
 	}
 }
 
@@ -199,7 +192,7 @@ func newTags(tag ...*structtag.Tag) *structtag.Tags {
 	return tags
 }
 
-func newSvcCmd(svcName string, cmds []cmd) *structTmplHelper {
+func newSvcCmd(svcName string, cmds []*cmd) *structTmplHelper {
 	var fields []structField
 	for _, cmd := range cmds {
 		fields = append(fields, structField{
@@ -261,7 +254,7 @@ func funcInTypes(funcType reflect.Type, offset int) []reflect.Type {
 	return types
 }
 
-func buildCommandStruct(svcName, funcName string, apiFunc reflect.Method, c cmd) (*structTmplHelper, error) {
+func buildCommandStruct(svcName, funcName string, apiFunc reflect.Method, c *cmd) (*structTmplHelper, error) {
 	structName := svcName + funcName + "Cmd"
 	argNames := c.ArgNames
 	for i, argName := range argNames {
@@ -293,10 +286,9 @@ func buildCommandStruct(svcName, funcName string, apiFunc reflect.Method, c cmd)
 			}
 			oStruct := generateOptionsStruct(structName, inType.Elem(), c.Route)
 			oss = append(oss, *oStruct)
-			field := structField{
+			structFields = append(structFields, structField{
 				Type: oStruct.StructName,
-			}
-			structFields = append(structFields, field)
+			})
 		case reflect.String, reflect.Int, reflect.Bool, reflect.Slice:
 			if len(argNames) < 1 {
 				return nil, fmt.Errorf("not enough argNames")
@@ -304,12 +296,15 @@ func buildCommandStruct(svcName, funcName string, apiFunc reflect.Method, c cmd)
 			argName := argNames[0]
 			argNames = argNames[1:]
 			param := c.Route.ArgParam(argName)
-			fieldTags := &structtag.Tags{}
-			if param != nil && param.Required {
-				fieldTags = newTags(newTag("required", ""))
+			field := structField{
+				Name: argName,
+				Type: inType.String(),
+				Tags: &structtag.Tags{},
 			}
-			field := newStructField(argName, inType.String(), fieldTags)
-			structFields = append(structFields, *field)
+			if param != nil && param.Required {
+				field.Tags = appendTag(field.Tags, newTag("required", ""))
+			}
+			structFields = append(structFields, field)
 		default:
 			return nil, fmt.Errorf(`buildCommandStruct: unsupported type: "%s"`, inType.Kind().String())
 		}
@@ -436,8 +431,11 @@ func getStructFields(fields []reflect.StructField, route *routeparser.Route) []s
 				tags = appendTag(tags, newTag("help", param.Description))
 			}
 		}
-		sField := newStructField(field.Name, field.Type.String(), tags)
-		structFields = append(structFields, *sField)
+		structFields = append(structFields, structField{
+			Name: field.Name,
+			Type: field.Type.String(),
+			Tags: tags,
+		})
 
 	}
 	return structFields

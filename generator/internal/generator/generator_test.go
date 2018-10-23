@@ -21,10 +21,13 @@ func init() {
 	}
 }
 
-func nsf(t *testing.T, name, ftype string, tag ...*structtag.Tag) *structField {
+func nsf(t *testing.T, name, ftype string, tag ...*structtag.Tag) structField {
 	t.Helper()
-	tags := newTags(tag...)
-	return newStructField(name, ftype, tags)
+	return structField{
+		Name: name,
+		Type: ftype,
+		Tags: newTags(tag...),
+	}
 }
 
 func Test_buildCommandStruct(t *testing.T) {
@@ -36,11 +39,10 @@ func Test_buildCommandStruct(t *testing.T) {
 		assert.True(t, ok)
 		method, ok := field.Type.MethodByName("Edit")
 		assert.True(t, ok)
-		c := cmd{
+		got, err := buildCommandStruct("Issues", "Edit", method, &cmd{
 			Route:    rts.FindByIDName("edit"),
 			ArgNames: []string{"Owner", "Repo", "Number"},
-		}
-		got, err := buildCommandStruct("Issues", "Edit", method, c)
+		})
 		assert.Nil(t, err)
 
 		wantRunMethod, err := generateRunMethod("Issues", "Edit", method, "Owner", "Repo", "Number")
@@ -50,11 +52,11 @@ func Test_buildCommandStruct(t *testing.T) {
 			Name:      "IssuesEditCmd",
 			RunMethod: wantRunMethod,
 			Fields: []structField{
-				*nsf(t, "Token", "string", newTag("env", "GITHUB_TOKEN"), newTag("required", "")),
-				*nsf(t, "APIBaseURL", "string", newTag("env", "GITHUB_API_BASE_URL"), newTag("default", "https://api.github.com")),
-				*nsf(t, "Owner", "string", newTag("required", "")),
-				*nsf(t, "Repo", "string", newTag("required", "")),
-				*nsf(t, "Number", "int", newTag("required", "")),
+				nsf(t, "Token", "string", newTag("env", "GITHUB_TOKEN"), newTag("required", "")),
+				nsf(t, "APIBaseURL", "string", newTag("env", "GITHUB_API_BASE_URL"), newTag("default", "https://api.github.com")),
+				nsf(t, "Owner", "string", newTag("required", "")),
+				nsf(t, "Repo", "string", newTag("required", "")),
+				nsf(t, "Number", "int", newTag("required", "")),
 				{Type: "issuesEditCmdIssueRequestFlags"},
 			},
 		}
@@ -70,19 +72,18 @@ func Test_buildCommandStruct(t *testing.T) {
 		assert.True(t, ok)
 		method, ok := field.Type.MethodByName("ListByOrg")
 		assert.True(t, ok)
-		c := cmd{
+		got, err := buildCommandStruct("Issues", "ListByOrg", method, &cmd{
 			Route:    rts.FindByIDName("list-for-org"),
 			ArgNames: []string{"Org"},
-		}
-		got, err := buildCommandStruct("Issues", "ListByOrg", method, c)
+		})
 		assert.Nil(t, err)
 
 		want := &structTmplHelper{
 			Name: "IssuesListByOrgCmd",
 			Fields: []structField{
-				*nsf(t, "Token", "string", newTag("env", "GITHUB_TOKEN"), newTag("required", "")),
-				*nsf(t, "APIBaseURL", "string", newTag("env", "GITHUB_API_BASE_URL"), newTag("default", "https://api.github.com")),
-				*nsf(t, "Org", "string", newTag("required", "")),
+				nsf(t, "Token", "string", newTag("env", "GITHUB_TOKEN"), newTag("required", "")),
+				nsf(t, "APIBaseURL", "string", newTag("env", "GITHUB_API_BASE_URL"), newTag("default", "https://api.github.com")),
+				nsf(t, "Org", "string", newTag("required", "")),
 				{Type: "issuesListByOrgCmdIssueListOptionsFlags"},
 			},
 		}
@@ -171,8 +172,8 @@ func Test_getStructFields(t *testing.T) {
 	t.Run("github.ListOptions", func(t *testing.T) {
 		fields := typeToFields(reflect.TypeOf(github.ListOptions{}))
 		want := []structField{
-			*nsf(t, "Page", "int", newTag("name", "page")),
-			*nsf(t, "PerPage", "int", newTag("name", "per-page")),
+			nsf(t, "Page", "int", newTag("name", "page")),
+			nsf(t, "PerPage", "int", newTag("name", "per-page")),
 		}
 		got := getStructFields(fields, nil)
 		assert.Equal(t, want, got)
@@ -181,14 +182,14 @@ func Test_getStructFields(t *testing.T) {
 	t.Run("github.IssueListOptions", func(t *testing.T) {
 		fields := typeToFields(reflect.TypeOf(github.IssueListOptions{}))
 		want := []structField{
-			*nsf(t, "Filter", "string", newTag("name", "filter")),
-			*nsf(t, "State", "string", newTag("name", "state")),
-			*nsf(t, "Labels", "[]string", newTag("name", "labels")),
-			*nsf(t, "Sort", "string", newTag("name", "sort")),
-			*nsf(t, "Direction", "string", newTag("name", "direction")),
-			*nsf(t, "Since", "time.Time", newTag("name", "since")),
-			*nsf(t, "Page", "int", newTag("name", "page")),
-			*nsf(t, "PerPage", "int", newTag("name", "per-page")),
+			nsf(t, "Filter", "string", newTag("name", "filter")),
+			nsf(t, "State", "string", newTag("name", "state")),
+			nsf(t, "Labels", "[]string", newTag("name", "labels")),
+			nsf(t, "Sort", "string", newTag("name", "sort")),
+			nsf(t, "Direction", "string", newTag("name", "direction")),
+			nsf(t, "Since", "time.Time", newTag("name", "since")),
+			nsf(t, "Page", "int", newTag("name", "page")),
+			nsf(t, "PerPage", "int", newTag("name", "per-page")),
 		}
 		got := getStructFields(fields, nil)
 		assert.Equal(t, want, got)
@@ -201,8 +202,8 @@ func Test_generateOptionsStruct(t *testing.T) {
 			mt := reflect.TypeOf(github.ListOptions{})
 			oStruct := generateOptionsStruct("", mt, nil)
 			want := []structField{
-				*nsf(t, "Page", "int", newTag("name", "page")),
-				*nsf(t, "PerPage", "int", newTag("name", "per-page")),
+				nsf(t, "Page", "int", newTag("name", "page")),
+				nsf(t, "PerPage", "int", newTag("name", "per-page")),
 			}
 			assert.Equal(t, want, oStruct.MainStruct.Fields)
 			fmt.Println(oStruct.ToFunc.ValSetters)
@@ -212,14 +213,14 @@ func Test_generateOptionsStruct(t *testing.T) {
 			mt := reflect.TypeOf(github.IssueListOptions{})
 			oStruct := generateOptionsStruct("", mt, nil)
 			want := []structField{
-				*nsf(t, "Filter", "string", newTag("name", "filter")),
-				*nsf(t, "State", "string", newTag("name", "state")),
-				*nsf(t, "Labels", "[]string", newTag("name", "labels")),
-				*nsf(t, "Sort", "string", newTag("name", "sort")),
-				*nsf(t, "Direction", "string", newTag("name", "direction")),
-				*nsf(t, "Since", "time.Time", newTag("name", "since")),
-				*nsf(t, "Page", "int", newTag("name", "page")),
-				*nsf(t, "PerPage", "int", newTag("name", "per-page")),
+				nsf(t, "Filter", "string", newTag("name", "filter")),
+				nsf(t, "State", "string", newTag("name", "state")),
+				nsf(t, "Labels", "[]string", newTag("name", "labels")),
+				nsf(t, "Sort", "string", newTag("name", "sort")),
+				nsf(t, "Direction", "string", newTag("name", "direction")),
+				nsf(t, "Since", "time.Time", newTag("name", "since")),
+				nsf(t, "Page", "int", newTag("name", "page")),
+				nsf(t, "PerPage", "int", newTag("name", "per-page")),
 			}
 			assert.Equal(t, want, oStruct.MainStruct.Fields)
 			fmt.Println(oStruct.ToFunc.ValSetters)
