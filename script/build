@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Exit if any subcommand fails
+set -e
+
+# Ensure we're always running from the project root
+cd "$(dirname "$0")/.."
+
+go fmt ./...
+go build -o bin/go-github-cli
