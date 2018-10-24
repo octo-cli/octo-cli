@@ -73,10 +73,10 @@ type StructField struct {
 //  an example is from issues create is:
 //    func (t issuesCreateCmdIssueRequestFlags) toIssueRequest(k *kong.Context) *github.IssueRequest
 type ToFunc struct {
-	ReceiverName            string
-	TargetName              string
-	TargetType              string
-	ValSetters              []ValSetter
+	ReceiverName string
+	TargetName   string
+	TargetType   string
+	ValSetters   []ValSetter
 }
 
 //IncludePointerHelper determines whether the generated func should include the "isValueSet" helper

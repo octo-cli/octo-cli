@@ -10,7 +10,6 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-
 func Test_genCliRun_Run(t *testing.T) {
 	wantIssuessvc, err := ioutil.ReadFile("testdata/exampleapp/services/issuessvc/issuessvc.go")
 	require.Nil(t, err)
@@ -32,4 +31,3 @@ func Test_genCliRun_Run(t *testing.T) {
 	assert.Nil(t, err)
 	assert.Equal(t, string(wantIssuessvc), string(gotIssuessvc))
 }
-
