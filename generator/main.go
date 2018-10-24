@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/WillAbides/go-github-cli/generator/internal"
-	"github.com/WillAbides/go-github-cli/generator/internal/generator"
-	"github.com/WillAbides/go-github-cli/generator/internal/packagewriter"
+	"github.com/go-github-cli/go-github-cli/generator/internal"
+	"github.com/go-github-cli/go-github-cli/generator/internal/generator"
+	"github.com/go-github-cli/go-github-cli/generator/internal/packagewriter"
 	"io"
 	"net/http"
 	"os"

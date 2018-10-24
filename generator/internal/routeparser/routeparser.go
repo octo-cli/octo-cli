@@ -6,8 +6,8 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/WillAbides/go-github-cli/generator/internal"
 	"github.com/fatih/camelcase"
+	"github.com/go-github-cli/go-github-cli/generator/internal"
 	"github.com/pkg/errors"
 )
 
