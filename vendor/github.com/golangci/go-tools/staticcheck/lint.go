@@ -20,8 +20,8 @@ import (
 	"github.com/golangci/go-tools/functions"
 	"github.com/golangci/go-tools/internal/sharedcheck"
 	"github.com/golangci/go-tools/lint"
-	"github.com/golangci/go-tools/staticcheck/vrp"
 	"github.com/golangci/tools/go/ssa"
+	"github.com/golangci/go-tools/staticcheck/vrp"
 
 	"golang.org/x/tools/go/ast/astutil"
 )

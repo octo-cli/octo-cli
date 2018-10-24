@@ -4,9 +4,9 @@ import (
 	"go/token"
 	"go/types"
 
-	"github.com/golangci/go-tools/lint"
 	"github.com/golangci/tools/go/callgraph"
 	"github.com/golangci/tools/go/ssa"
+	"github.com/golangci/go-tools/lint"
 )
 
 // IsStub reports whether a function is a stub. A function is

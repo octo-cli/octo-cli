@@ -44,15 +44,15 @@ func (r *readfile) isJoinFunc(n ast.Node, c *gosec.Context) bool {
 				}
 			}
 
-			// try and resolve identity
-			if ident, ok := arg.(*ast.Ident); ok {
-				obj := c.Info.ObjectOf(ident)
-				if _, ok := obj.(*types.Var); ok && !gosec.TryResolve(ident, c) {
-					return true
-				}
+		// try and resolve identity
+		if ident, ok := arg.(*ast.Ident); ok {
+			obj := c.Info.ObjectOf(ident)
+			if _, ok := obj.(*types.Var); ok && !gosec.TryResolve(ident, c) {
+				return true
 			}
 		}
 	}
+}
 	return false
 }
 

@@ -21,8 +21,8 @@ import (
 	"strings"
 
 	"github.com/golangci/go-tools/lint"
-	"github.com/golangci/go-tools/version"
 	"github.com/golangci/tools/go/ssa"
+	"github.com/golangci/go-tools/version"
 
 	"golang.org/x/tools/go/loader"
 )

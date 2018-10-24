@@ -4,10 +4,10 @@ import (
 	"go/types"
 	"sync"
 
-	"github.com/golangci/go-tools/staticcheck/vrp"
 	"github.com/golangci/tools/go/callgraph"
 	"github.com/golangci/tools/go/callgraph/static"
 	"github.com/golangci/tools/go/ssa"
+	"github.com/golangci/go-tools/staticcheck/vrp"
 )
 
 var stdlibDescs = map[string]Description{

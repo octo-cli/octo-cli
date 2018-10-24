@@ -23,10 +23,10 @@ import (
 	"sync"
 	"unicode"
 
-	"github.com/golangci/tools/go/ssa"
-	"github.com/golangci/tools/go/ssa/ssautil"
 	"golang.org/x/tools/go/ast/astutil"
 	"golang.org/x/tools/go/loader"
+	"github.com/golangci/tools/go/ssa"
+	"github.com/golangci/tools/go/ssa/ssautil"
 )
 
 type Job struct {

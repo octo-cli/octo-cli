@@ -24,12 +24,12 @@ import (
 	"github.com/golangci/tools/go/callgraph"
 	"github.com/golangci/tools/go/callgraph/cha"
 	"github.com/golangci/tools/go/callgraph/rta"
+	"golang.org/x/tools/go/loader"
 	"github.com/golangci/tools/go/ssa"
 	"github.com/golangci/tools/go/ssa/ssautil"
-	"golang.org/x/tools/go/loader"
 
-	"github.com/golangci/lint"
 	"github.com/kisielk/gotool"
+	"github.com/golangci/lint"
 )
 
 // UnusedParams returns a list of human-readable issues that point out unused
