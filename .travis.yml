@@ -6,7 +6,7 @@ install: true
 notifications:
   email: false
 before_script:
-  - go install -pkgdir ./vendor github.com/golangci/golangci-lint/cmd/golangci-lint
+  - go build ./vendor/github.com/golangci/golangci-lint/cmd/golangci-lint/
 script:
-  - golangci-lint run       # run a bunch of code checkers/linters in parallel
-  - go test -v -race ./...  # Run all the tests with the race detector enabled
+  - ./golangci-lint run
+  - go test -v -race ./...
