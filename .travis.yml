@@ -1,0 +1,12 @@
+sudo: false
+language: go
+go:
+  - "1.11.x"
+install: true
+notifications:
+  email: false
+before_script:
+  - script/bootstrap
+script:
+  - ./script/lint
+  - ./script/test

@@ -1,19 +1,13 @@
-#!/bin/sh
-# script/bootstrap: Resolve dependencies that the application requires to run.
+#!/bin/bash
 
-# Exit if any subcommand fails
 set -e
 
-# Ensure we're always running from the project root
-cd "$(dirname "$0")/.."
+ROOTPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
+cd "$ROOTPATH"
 
-if [ -f "Brewfile" ] && [ "$(uname -s)" = "Darwin" ]; then
-    brew bundle check >/dev/null 2>&1  || {
-        echo "==> Installing Homebrew dependencies…"
-        brew bundle
-    }
+if [[ ! -x "$(which go)" ]]; then
+  echo >&2 "this requires an installation of go to build."
+  exit 1
 fi
 
-command -v golint > /dev/null 2>&1 ||{
-    go get -u golang.org/x/lint/golint
-}
+go build -o "$ROOTPATH/bin/golangci-lint" ./vendor/github.com/golangci/golangci-lint/cmd/golangci-lint/

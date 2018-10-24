@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -e
+
+cd "$( dirname "${BASH_SOURCE[0]}" )/.."
+[ -f "bin/golangci-lint" ] || script/bootstrap
+bin/golangci-lint run
