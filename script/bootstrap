@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e
+
+ROOTPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
+cd "$ROOTPATH"
+
+if [[ ! -x "$(which go)" ]]; then
+  echo >&2 "this requires an installation of go to build."
+  exit 1
+fi
+
+go build -o "$ROOTPATH/bin/golangci-lint" ./vendor/github.com/golangci/golangci-lint/cmd/golangci-lint/
