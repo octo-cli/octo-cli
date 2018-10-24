@@ -1,3 +1,5 @@
+required = ["github.com/golangci/golangci-lint/cmd/golangci-lint"]
+
 [[constraint]]
   name = "github.com/alecthomas/kong"
   version = "0.1.9"
