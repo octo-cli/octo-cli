@@ -1,7 +1,7 @@
 # Build
 FROM golang:1.11-alpine AS go-github-cli-build-env
 
-RUN apk add --no-cache git musl-dev gcc
+RUN apk add --no-cache git musl-dev gcc bash
 
 WORKDIR /go/src/github.com/go-github-cli/go-github-cli
 COPY . .
