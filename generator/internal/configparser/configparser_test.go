@@ -3,7 +3,7 @@ package configparser_test
 import (
 	"testing"
 
-	. "github.com/WillAbides/go-github-cli/generator/internal/configparser"
+	. "github.com/go-github-cli/go-github-cli/generator/internal/configparser"
 	"github.com/stretchr/testify/assert"
 )
 

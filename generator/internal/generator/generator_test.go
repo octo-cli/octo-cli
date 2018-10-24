@@ -2,9 +2,9 @@ package generator
 
 import (
 	"fmt"
-	"github.com/WillAbides/go-github-cli/generator/internal"
-	"github.com/WillAbides/go-github-cli/generator/internal/routeparser"
 	"github.com/fatih/structtag"
+	"github.com/go-github-cli/go-github-cli/generator/internal"
+	"github.com/go-github-cli/go-github-cli/generator/internal/routeparser"
 	"github.com/google/go-github/github"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -237,13 +237,13 @@ func Test_buildOptionsStructt(t *testing.T) {
 	}
 
 	type example struct {
-		Body       *string  `json:"body,omitempty"`
-		Labels     []string `url:"labels,comma,omitempty"`
-		LockReason string   `json:"lock_reason,omitempty"`
-		NoTag      string
-		JSONDiff   *string `json:"something_different,omitempty"`
-		anonStruct     //nolint:megacheck
-		*anonPtrStruct //nolint:megacheck
+		Body           *string  `json:"body,omitempty"`
+		Labels         []string `url:"labels,comma,omitempty"`
+		LockReason     string   `json:"lock_reason,omitempty"`
+		NoTag          string
+		JSONDiff       *string `json:"something_different,omitempty"`
+		anonStruct             //nolint:megacheck
+		*anonPtrStruct         //nolint:megacheck
 	}
 
 	t.Run("val setters", func(t *testing.T) {

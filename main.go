@@ -1,10 +1,10 @@
 package main
 
 import (
-	"github.com/WillAbides/go-github-cli/services/issuessvc"
-	"github.com/WillAbides/go-github-cli/services/organizationssvc"
-	"github.com/WillAbides/go-github-cli/services/repositoriessvc"
 	"github.com/alecthomas/kong"
+	"github.com/go-github-cli/go-github-cli/services/issuessvc"
+	"github.com/go-github-cli/go-github-cli/services/organizationssvc"
+	"github.com/go-github-cli/go-github-cli/services/repositoriessvc"
 )
 
 type CLI struct {

@@ -2,7 +2,7 @@ package packagewriter
 
 import (
 	"bytes"
-	"github.com/WillAbides/go-github-cli/generator/internal"
+	"github.com/go-github-cli/go-github-cli/generator/internal"
 	"github.com/pkg/errors"
 	"go/format"
 	"golang.org/x/tools/imports"
@@ -54,7 +54,7 @@ func writeGoFile(filename, templateName string, p interface{}, path string) erro
 	return ioutil.WriteFile(fl, out, 0644)
 }
 
-type Packager interface{
+type Packager interface {
 	ToPkg() (*internal.Pkg, error)
 }
 
@@ -194,4 +194,3 @@ const pkgTemplate = `
 {{end}}
 
 `
-

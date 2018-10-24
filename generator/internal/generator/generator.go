@@ -6,11 +6,11 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/WillAbides/go-github-cli/generator/internal"
-	"github.com/WillAbides/go-github-cli/generator/internal/configparser"
-	"github.com/WillAbides/go-github-cli/generator/internal/routeparser"
 	"github.com/fatih/camelcase"
 	"github.com/fatih/structtag"
+	"github.com/go-github-cli/go-github-cli/generator/internal"
+	"github.com/go-github-cli/go-github-cli/generator/internal/configparser"
+	"github.com/go-github-cli/go-github-cli/generator/internal/routeparser"
 	"github.com/google/go-github/github"
 	"github.com/pkg/errors"
 )

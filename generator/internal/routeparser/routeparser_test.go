@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	. "github.com/WillAbides/go-github-cli/generator/internal/routeparser"
+	. "github.com/go-github-cli/go-github-cli/generator/internal/routeparser"
 	"github.com/stretchr/testify/assert"
 )
 
