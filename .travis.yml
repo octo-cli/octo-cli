@@ -1,0 +1,12 @@
+sudo: false
+language: go
+go:
+  - "1.11.x"
+install: true
+notifications:
+  email: false
+before_script:
+  - go build ./vendor/github.com/golangci/golangci-lint/cmd/golangci-lint/
+script:
+  - ./golangci-lint run
+  - go test -v -race ./...

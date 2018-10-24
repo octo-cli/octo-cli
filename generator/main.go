@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"github.com/go-github-cli/go-github-cli/generator/internal"
 	"github.com/go-github-cli/go-github-cli/generator/internal/generator"
 	"github.com/go-github-cli/go-github-cli/generator/internal/packagewriter"
 	"io"
@@ -41,15 +40,11 @@ func (k *genCliRun) Run() error {
 	}
 	for _, svc := range svcs {
 		err = packagewriter.WritePackageFiles(k.OutputPath, svc)
-	}
-	var toPkgers []interface{ ToPkg() (*internal.Pkg, error) }
-	for _, v := range svcs {
-		toPkgers = append(toPkgers, v)
 		if err != nil {
-			return errors.Wrap(err, "failed writing package files")
+			return errors.Wrap(err, "")
 		}
 	}
-	return errors.Wrap(err, "")
+	return nil
 }
 
 func (k *genCliUpdateRoutes) Run() error {
