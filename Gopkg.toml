@@ -5,24 +5,12 @@ required = ["github.com/golangci/golangci-lint/cmd/golangci-lint"]
   version = "0.1.9"
 
 [[constraint]]
-  name = "github.com/fatih/camelcase"
-  version = "1.0.0"
-
-[[constraint]]
   name = "github.com/fatih/structtag"
   version = "1.0.0"
 
 [[constraint]]
-  name = "github.com/google/go-github"
-  version = "18.2.0"
-
-[[constraint]]
   name = "github.com/pkg/errors"
   version = "0.8.0"
-
-[[constraint]]
-  branch = "master"
-  name = "golang.org/x/oauth2"
 
 [[constraint]]
   branch = "master"
