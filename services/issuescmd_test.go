@@ -95,7 +95,7 @@ func TestPlayWithOutput(t *testing.T) {
 	err = json.Unmarshal(stdout.Bytes(), &got)
 	assert.Nil(t, err)
 
-	for k, _ := range got {
+	for k := range got {
 		fmt.Println(k)
 	}
 
