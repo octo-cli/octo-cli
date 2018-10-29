@@ -2,21 +2,18 @@ package main
 
 import (
 	"fmt"
-	"github.com/go-github-cli/go-github-cli/generator/internal/generator"
-	"github.com/go-github-cli/go-github-cli/generator/internal/packagewriter"
+	"github.com/alecthomas/kong"
+	"github.com/pkg/errors"
 	"io"
 	"net/http"
 	"os"
-
-	"github.com/alecthomas/kong"
-	"github.com/pkg/errors"
 )
 
 type (
 	genCli struct {
 		Run            genCliRun            `cmd:"" help:"generate production code"`
 		UpdateRoutes   genCliUpdateRoutes   `cmd:"" help:"update routes.json with the latest"`
-		UpdateTestdata genCliUpdateTestdata `cmd:"" help:"updates routes.json and exampleapp in generator/testdata"`
+		UpdateTestdata genCliUpdateTestdata `cmd:"" help:"updates routes.json and services in generator/testdata"`
 	}
 
 	genCliUpdateRoutes struct {
@@ -26,24 +23,14 @@ type (
 
 	genCliRun struct {
 		RoutesPath string `type:"existingfile" default:"routes.json"`
-		ConfigFile string `type:"existingfile" default:"config.hcl"`
-		OutputPath string `type:"existingdir" default:"."`
+		OutputPath string `type:"existingdir" default:"./services"`
 	}
 
 	genCliUpdateTestdata struct{}
 )
 
 func (k *genCliRun) Run() error {
-	svcs, err := generator.BuildSvcs(k.RoutesPath, k.ConfigFile)
-	if err != nil {
-		return errors.Wrap(err, "")
-	}
-	for _, svc := range svcs {
-		err = packagewriter.WritePackageFiles(k.OutputPath, svc)
-		if err != nil {
-			return errors.Wrap(err, "")
-		}
-	}
+	Generate(k.RoutesPath, k.OutputPath)
 	return nil
 }
 
@@ -94,16 +81,9 @@ func (k *genCliUpdateTestdata) Run() error {
 	if err != nil {
 		return err
 	}
-	svcs, err := generator.BuildSvcs(routesPath, "generator/testdata/exampleapp_config.hcl")
-	if err != nil {
-		return errors.Wrap(err, "")
-	}
-	for _, svc := range svcs {
-		err = packagewriter.WritePackageFiles("generator/testdata/exampleapp", svc)
-		if err != nil {
-			return errors.Wrap(err, "failed writing package files")
-		}
-	}
+
+	Generate(routesPath, "generator/testdata/services")
+
 	return errors.Wrap(err, "")
 }
 

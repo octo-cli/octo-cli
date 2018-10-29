@@ -2,19 +2,15 @@ package main
 
 import (
 	"github.com/alecthomas/kong"
-	"github.com/go-github-cli/go-github-cli/services/issuessvc"
-	"github.com/go-github-cli/go-github-cli/services/organizationssvc"
-	"github.com/go-github-cli/go-github-cli/services/repositoriessvc"
+	"github.com/go-github-cli/go-github-cli/services"
 )
 
-type CLI struct {
-	Issues        issuessvc.IssuesCmd               `cmd:""`
-	Organizations organizationssvc.OrganizationsCmd `cmd:""`
-	Repositories  repositoriessvc.RepositoriesCmd   `cmd:""`
-}
-
 func main() {
-	cli := &CLI{}
+	cli := &services.CLI{}
 	k := kong.Parse(cli)
-	k.FatalIfErrorf(k.Run(k))
+	valueIsSetMap := map[string]bool{}
+	for _, flag := range k.Flags() {
+		valueIsSetMap[flag.Name] = flag.Set
+	}
+	k.FatalIfErrorf(k.Run(valueIsSetMap))
 }

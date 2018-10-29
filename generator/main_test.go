@@ -4,6 +4,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"sort"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -11,23 +12,66 @@ import (
 )
 
 func Test_genCliRun_Run(t *testing.T) {
-	wantIssuessvc, err := ioutil.ReadFile("testdata/exampleapp/services/issuessvc/issuessvc.go")
+	t.Run("creates the right files", func(t *testing.T) {
+		tempDir, cleanTempDir := createTempDir(t)
+		defer cleanTempDir()
+		k := &genCliRun{
+			RoutesPath: "testdata/routes.json",
+			OutputPath: tempDir,
+		}
+		err := k.Run()
+		assert.Nil(t, err)
+		genFiles := getDirectoryFileNames(t, tempDir)
+		wantFiles := getDirectoryFileNames(t, "testdata/services")
+		assert.Equal(t, wantFiles, genFiles)
+	})
+
+	t.Run("file content matches", func(t *testing.T) {
+		tempDir, cleanTempDir := createTempDir(t)
+		defer cleanTempDir()
+		k := &genCliRun{
+			RoutesPath: "testdata/routes.json",
+			OutputPath: tempDir,
+		}
+		err := k.Run()
+		assert.Nil(t, err)
+		wantFiles := getDirectoryFileNames(t, "testdata/services")
+		for _, wantFile := range wantFiles {
+			wantData := readFile(t, "testdata/services", wantFile)
+			gotData := readFile(t, tempDir, wantFile)
+			assert.Equalf(t, string(wantData), string(gotData), "file contents are not equal for %q", wantFile)
+		}
+
+	})
+}
+
+func readFile(t *testing.T, path ...string) []byte {
+	t.Helper()
+	data, err := ioutil.ReadFile(filepath.Join(path...))
 	require.Nil(t, err)
-	err = os.MkdirAll("./tmp", 0755)
+	return data
+}
+
+func createTempDir(t *testing.T) (string, func()) {
+	t.Helper()
+	err := os.MkdirAll("./tmp", 0755)
 	require.Nil(t, err)
 	tempDir, err := ioutil.TempDir("./tmp", "")
-	defer func() {
-		require.Nil(t, os.RemoveAll(tempDir))
-	}()
 	require.Nil(t, err)
-	k := &genCliRun{
-		RoutesPath: "testdata/routes.json",
-		OutputPath: tempDir,
-		ConfigFile: "testdata/exampleapp_config.hcl",
+	return tempDir, func() {
+		t.Helper()
+		require.Nil(t, os.RemoveAll(tempDir))
 	}
-	err = k.Run()
-	assert.Nil(t, err)
-	gotIssuessvc, err := ioutil.ReadFile(filepath.Join(tempDir, "services/issuessvc/issuessvc.go"))
-	assert.Nil(t, err)
-	assert.Equal(t, string(wantIssuessvc), string(gotIssuessvc))
+}
+
+func getDirectoryFileNames(t *testing.T, dir string) []string {
+	t.Helper()
+	var out []string
+	files, err := ioutil.ReadDir(dir)
+	require.Nil(t, err)
+	for _, v := range files {
+		out = append(out, v.Name())
+	}
+	sort.Strings(out)
+	return out
 }
