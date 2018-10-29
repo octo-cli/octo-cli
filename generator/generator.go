@@ -195,7 +195,7 @@ type SvcTmpl struct {
 
 type FileTmpl struct {
 	PrimaryStructs []StructTmplHelper
-	SvcTmpls []SvcTmpl
+	SvcTmpls       []SvcTmpl
 }
 
 var tmpl = template.Must(template.New("").Parse(tmplt))

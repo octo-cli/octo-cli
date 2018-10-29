@@ -2,8 +2,10 @@ package services
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
+	"golang.org/x/oauth2"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -67,7 +69,6 @@ func (c *baseCmd) updateURLQuery(paramName string, value interface{}) {
 	}
 }
 
-
 func (c *baseCmd) newRequest(method string) (*http.Request, error) {
 	u := strings.Join([]string{
 		strings.TrimSuffix(c.APIBaseURL, "/"),
@@ -91,18 +92,21 @@ func (c *baseCmd) newRequest(method string) (*http.Request, error) {
 		req.Header.Set("Content-Type", "application/json")
 	}
 	req.Header.Set("Accept", "application/vnd.github.v3+json")
-	req.Header.Set("Authorization", "Bearer " + c.Token)
 	return req, nil
 }
 
-var customTransport interface {
+var transportWrapper interface {
+	SetTransport(t http.RoundTripper)
 	http.RoundTripper
 }
 
-func buildClient() (*http.Client) {
-	return &http.Client{
-		Transport: customTransport,
+func (c *baseCmd) httpClient() *http.Client {
+	tc := oauth2.NewClient(context.Background(), oauth2.StaticTokenSource(&oauth2.Token{AccessToken: c.Token}))
+	if transportWrapper != nil {
+		transportWrapper.SetTransport(tc.Transport)
+		tc.Transport = transportWrapper
 	}
+	return tc
 }
 
 func (c *baseCmd) doRequest(method string) error {
@@ -111,7 +115,7 @@ func (c *baseCmd) doRequest(method string) error {
 		return err
 	}
 
-	resp, err := buildClient().Do(req)
+	resp, err := c.httpClient().Do(req)
 	if err != nil {
 		return err
 	}

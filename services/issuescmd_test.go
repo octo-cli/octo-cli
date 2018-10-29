@@ -24,19 +24,22 @@ func init() {
 	_ = os.Setenv("GITHUB_TOKEN", tkn)
 }
 
-func startVCR(t *testing.T, recPath string) *recorder.Recorder {
+func startVCR(t *testing.T, recPath string) func() {
 	t.Helper()
 	var err error
 	rec, err := recorder.New(recPath)
 	require.Nil(t, err)
-	customTransport = rec
-	return rec
+	transportWrapper = rec
+	return func(){
+		t.Helper()
+		require.Nil(t, rec.Stop())
+	}
 }
 
 func testCmdLine(t *testing.T, fixtureName string, cmdStruct interface{}, cmdline ...string) (sout bytes.Buffer, serr bytes.Buffer, err error) {
 	t.Helper()
-	rec := startVCR(t, filepath.Join("testdata", "fixtures", fixtureName))
-	defer func() {_ = rec.Stop()}()
+	recCleanup := startVCR(t, filepath.Join("testdata", "fixtures", fixtureName))
+	defer recCleanup()
 	p, e := kong.New(cmdStruct)
 
 	require.Nil(t, e)
@@ -94,10 +97,6 @@ func TestPlayWithOutput(t *testing.T) {
 	var got map[string]interface{}
 	err = json.Unmarshal(stdout.Bytes(), &got)
 	assert.Nil(t, err)
-
-	for k := range got {
-		fmt.Println(k)
-	}
 
 	tp, err := template.New("").Funcs(template.FuncMap{"wider": func(a, b interface{}) string { return fmt.Sprintf("%-20s%d", a, b) }}).Parse(`
 	Number	{{.number}}
