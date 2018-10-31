@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestPrettyPrintJson(t *testing.T) {
+func Test_prettyPrintJSON(t *testing.T) {
 	for _, test := range []struct {
 		name  string
 		input string
