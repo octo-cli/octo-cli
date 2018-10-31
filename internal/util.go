@@ -40,7 +40,7 @@ func formatOutput(jsonBytes []byte, format string) ([]byte, error) {
 }
 
 //OutputResult writes the body of an http.Response to stdout
-func OutputResult(resp *http.Response, rawJSON bool, format string, stdout io.Writer) error {
+func OutputResult(resp *http.Response, rawOutput bool, format string, stdout io.Writer) error {
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return err
@@ -55,7 +55,7 @@ func OutputResult(resp *http.Response, rawJSON bool, format string, stdout io.Wr
 			return err
 		}
 	} else {
-		if !rawJSON {
+		if !rawOutput {
 			body, err = prettyPrintJSON(body)
 			if err != nil {
 				return err

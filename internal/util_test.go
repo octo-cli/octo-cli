@@ -48,9 +48,9 @@ func Test_prettyPrintJSON(t *testing.T) {
 
 func TestOutputResult(t *testing.T) {
 	type args struct {
-		respBody string
-		rawJSON  bool
-		format   string
+		respBody  string
+		rawOutput bool
+		format    string
 	}
 	tests := []struct {
 		name       string
@@ -61,9 +61,9 @@ func TestOutputResult(t *testing.T) {
 		{
 			name: "raw text",
 			args: args{
-				respBody: "hello",
-				rawJSON:  true,
-				format:   "",
+				respBody:  "hello",
+				rawOutput: true,
+				format:    "",
 			},
 			wantStdout: "hello",
 			wantErr:    false,
@@ -71,9 +71,9 @@ func TestOutputResult(t *testing.T) {
 		{
 			name: "raw json",
 			args: args{
-				respBody: `{"hello": "hi"}`,
-				rawJSON:  true,
-				format:   "",
+				respBody:  `{"hello": "hi"}`,
+				rawOutput: true,
+				format:    "",
 			},
 			wantStdout: `{"hello": "hi"}`,
 			wantErr:    false,
@@ -81,9 +81,9 @@ func TestOutputResult(t *testing.T) {
 		{
 			name: "pretty json",
 			args: args{
-				respBody: `{"hello": "hi"}`,
-				rawJSON:  false,
-				format:   "",
+				respBody:  `{"hello": "hi"}`,
+				rawOutput: false,
+				format:    "",
 			},
 			wantStdout: `{
   "hello": "hi"
@@ -93,9 +93,9 @@ func TestOutputResult(t *testing.T) {
 		{
 			name: "invalid json",
 			args: args{
-				respBody: `{"hello": "hi"`,
-				rawJSON:  false,
-				format:   "",
+				respBody:  `{"hello": "hi"`,
+				rawOutput: false,
+				format:    "",
 			},
 			wantStdout: "",
 			wantErr:    true,
@@ -103,9 +103,9 @@ func TestOutputResult(t *testing.T) {
 		{
 			name: "format",
 			args: args{
-				respBody: `{"hello": "hi"}`,
-				rawJSON:  false,
-				format:   "hello {{.hello}}",
+				respBody:  `{"hello": "hi"}`,
+				rawOutput: false,
+				format:    "hello {{.hello}}",
 			},
 			wantStdout: "hello hi",
 			wantErr:    false,
@@ -117,7 +117,7 @@ func TestOutputResult(t *testing.T) {
 			resp := &http.Response{
 				Body: ioutil.NopCloser(strings.NewReader(tt.args.respBody)),
 			}
-			if err := OutputResult(resp, tt.args.rawJSON, tt.args.format, stdout); (err != nil) != tt.wantErr {
+			if err := OutputResult(resp, tt.args.rawOutput, tt.args.format, stdout); (err != nil) != tt.wantErr {
 				t.Errorf("OutputResult() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
