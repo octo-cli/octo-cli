@@ -18,6 +18,7 @@ type SearchCmd struct {
 
 type SearchReposCmd struct {
 	baseCmd
+	Mercy   bool   "name:\"mercy-preview\" help:\"**Note:** The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.mercy-preview+json\n\n```\""
 	Q       string `required:"" name:"q" help:"The search keywords, as well as any qualifiers."`
 	Sort    string "name:\"sort\" help:\"The sort field. One of `stars`, `forks`, or `updated`.\""
 	Order   string "name:\"order\" help:\"The sort order if `sort` parameter is provided. One of `asc` or `desc`.\""
@@ -28,6 +29,7 @@ type SearchReposCmd struct {
 func (c *SearchReposCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/search/repositories"
+	c.updatePreview("mercy", c.Mercy)
 	c.updateURLQuery("q", c.Q)
 	c.updateURLQuery("sort", c.Sort)
 	c.updateURLQuery("order", c.Order)
@@ -38,6 +40,7 @@ func (c *SearchReposCmd) Run(isValueSetMap map[string]bool) error {
 
 type SearchCommitsCmd struct {
 	baseCmd
+	Cloak   bool   "name:\"cloak-preview\" required:\"\" help:\"The Commit Search API is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](/changes/2017-01-05-commit-search-api/) for full details.\n\nTo access the API you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.cloak-preview\n\n```\""
 	Q       string `required:"" name:"q" help:"The search terms."`
 	Sort    string "name:\"sort\" help:\"The sort field. Can be `author-date` or `committer-date`.\""
 	Order   string "name:\"order\" help:\"The sort order if `sort` parameter is provided. One of `asc` or `desc`.\""
@@ -48,6 +51,7 @@ type SearchCommitsCmd struct {
 func (c *SearchCommitsCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/search/commits"
+	c.updatePreview("cloak", c.Cloak)
 	c.updateURLQuery("q", c.Q)
 	c.updateURLQuery("sort", c.Sort)
 	c.updateURLQuery("order", c.Order)
@@ -78,16 +82,18 @@ func (c *SearchCodeCmd) Run(isValueSetMap map[string]bool) error {
 
 type SearchIssuesCmd struct {
 	baseCmd
-	Q       string `required:"" name:"q" help:"The search terms."`
-	Sort    string "name:\"sort\" help:\"The sort field. Can be `comments`, `created`, or `updated`.\""
-	Order   string "name:\"order\" help:\"The sort order if `sort` parameter is provided. One of `asc` or `desc`.\""
-	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64  `name:"page" help:"Page number of the results to fetch."`
+	Symmetra bool   "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
+	Q        string `required:"" name:"q" help:"The search terms."`
+	Sort     string "name:\"sort\" help:\"The sort field. Can be `comments`, `created`, or `updated`.\""
+	Order    string "name:\"order\" help:\"The sort order if `sort` parameter is provided. One of `asc` or `desc`.\""
+	PerPage  int64  `name:"per_page" help:"Results per page (max 100)"`
+	Page     int64  `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *SearchIssuesCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/search/issues"
+	c.updatePreview("symmetra", c.Symmetra)
 	c.updateURLQuery("q", c.Q)
 	c.updateURLQuery("sort", c.Sort)
 	c.updateURLQuery("order", c.Order)
@@ -118,18 +124,21 @@ func (c *SearchUsersCmd) Run(isValueSetMap map[string]bool) error {
 
 type SearchTopicsCmd struct {
 	baseCmd
-	Q string `required:"" name:"q" help:"The search terms."`
+	Mercy bool   "name:\"mercy-preview\" help:\"**Note:** The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.mercy-preview+json\n\n```\""
+	Q     string `required:"" name:"q" help:"The search terms."`
 }
 
 func (c *SearchTopicsCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/search/topics"
+	c.updatePreview("mercy", c.Mercy)
 	c.updateURLQuery("q", c.Q)
 	return c.doRequest("GET")
 }
 
 type SearchLabelsCmd struct {
 	baseCmd
+	Symmetra     bool   "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	RepositoryId int64  `required:"" name:"repository_id" help:"The id of the repository."`
 	Q            string `required:"" name:"q" help:"The search keywords."`
 	Sort         string "name:\"sort\" help:\"The sort field. Can be one of `created` or `updated`.\""
@@ -139,6 +148,7 @@ type SearchLabelsCmd struct {
 func (c *SearchLabelsCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/search/labels"
+	c.updatePreview("symmetra", c.Symmetra)
 	c.updateURLQuery("repository_id", c.RepositoryId)
 	c.updateURLQuery("q", c.Q)
 	c.updateURLQuery("sort", c.Sort)

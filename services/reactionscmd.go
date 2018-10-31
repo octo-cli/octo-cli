@@ -20,17 +20,19 @@ type ReactionsCmd struct {
 
 type ReactionsListForCommitCommentCmd struct {
 	baseCmd
-	Owner     string `required:"" name:"owner"`
-	Repo      string `required:"" name:"repo"`
-	CommentId int64  `required:"" name:"comment_id"`
-	Content   string `name:"content" help:"Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to a commit comment."`
-	PerPage   int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page      int64  `name:"page" help:"Page number of the results to fetch."`
+	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"**Note:** APIs for managing reactions are currently available for developers to preview. See the [blog post](/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview+json\n\n```\""
+	Owner        string `required:"" name:"owner"`
+	Repo         string `required:"" name:"repo"`
+	CommentId    int64  `required:"" name:"comment_id"`
+	Content      string `name:"content" help:"Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to a commit comment."`
+	PerPage      int64  `name:"per_page" help:"Results per page (max 100)"`
+	Page         int64  `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *ReactionsListForCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/comments/:comment_id/reactions"
+	c.updatePreview("squirrel-girl", c.SquirrelGirl)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLPath("comment_id", c.CommentId)
@@ -42,15 +44,17 @@ func (c *ReactionsListForCommitCommentCmd) Run(isValueSetMap map[string]bool) er
 
 type ReactionsCreateForCommitCommentCmd struct {
 	baseCmd
-	Owner     string `required:"" name:"owner"`
-	Repo      string `required:"" name:"repo"`
-	CommentId int64  `required:"" name:"comment_id"`
-	Content   string `required:"" name:"content" help:"The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the commit comment."`
+	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"**Note:** APIs for managing reactions are currently available for developers to preview. See the [blog post](/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview+json\n\n```\""
+	Owner        string `required:"" name:"owner"`
+	Repo         string `required:"" name:"repo"`
+	CommentId    int64  `required:"" name:"comment_id"`
+	Content      string `required:"" name:"content" help:"The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the commit comment."`
 }
 
 func (c *ReactionsCreateForCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/comments/:comment_id/reactions"
+	c.updatePreview("squirrel-girl", c.SquirrelGirl)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLPath("comment_id", c.CommentId)
@@ -60,17 +64,19 @@ func (c *ReactionsCreateForCommitCommentCmd) Run(isValueSetMap map[string]bool) 
 
 type ReactionsListForIssueCmd struct {
 	baseCmd
-	Owner   string `required:"" name:"owner"`
-	Repo    string `required:"" name:"repo"`
-	Number  int64  `required:"" name:"number"`
-	Content string `name:"content" help:"Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to an issue."`
-	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64  `name:"page" help:"Page number of the results to fetch."`
+	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"**Note:** APIs for managing reactions are currently available for developers to preview. See the [blog post](/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview+json\n\n```\""
+	Owner        string `required:"" name:"owner"`
+	Repo         string `required:"" name:"repo"`
+	Number       int64  `required:"" name:"number"`
+	Content      string `name:"content" help:"Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to an issue."`
+	PerPage      int64  `name:"per_page" help:"Results per page (max 100)"`
+	Page         int64  `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *ReactionsListForIssueCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/issues/:number/reactions"
+	c.updatePreview("squirrel-girl", c.SquirrelGirl)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLPath("number", c.Number)
@@ -82,15 +88,17 @@ func (c *ReactionsListForIssueCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReactionsCreateForIssueCmd struct {
 	baseCmd
-	Owner   string `required:"" name:"owner"`
-	Repo    string `required:"" name:"repo"`
-	Number  int64  `required:"" name:"number"`
-	Content string `required:"" name:"content" help:"The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the issue."`
+	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"**Note:** APIs for managing reactions are currently available for developers to preview. See the [blog post](/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview+json\n\n```\""
+	Owner        string `required:"" name:"owner"`
+	Repo         string `required:"" name:"repo"`
+	Number       int64  `required:"" name:"number"`
+	Content      string `required:"" name:"content" help:"The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the issue."`
 }
 
 func (c *ReactionsCreateForIssueCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/issues/:number/reactions"
+	c.updatePreview("squirrel-girl", c.SquirrelGirl)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLPath("number", c.Number)
@@ -100,17 +108,19 @@ func (c *ReactionsCreateForIssueCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReactionsListForIssueCommentCmd struct {
 	baseCmd
-	Owner     string `required:"" name:"owner"`
-	Repo      string `required:"" name:"repo"`
-	CommentId int64  `required:"" name:"comment_id"`
-	Content   string `name:"content" help:"Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to an issue comment."`
-	PerPage   int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page      int64  `name:"page" help:"Page number of the results to fetch."`
+	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"**Note:** APIs for managing reactions are currently available for developers to preview. See the [blog post](/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview+json\n\n```\""
+	Owner        string `required:"" name:"owner"`
+	Repo         string `required:"" name:"repo"`
+	CommentId    int64  `required:"" name:"comment_id"`
+	Content      string `name:"content" help:"Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to an issue comment."`
+	PerPage      int64  `name:"per_page" help:"Results per page (max 100)"`
+	Page         int64  `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *ReactionsListForIssueCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/issues/comments/:comment_id/reactions"
+	c.updatePreview("squirrel-girl", c.SquirrelGirl)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLPath("comment_id", c.CommentId)
@@ -122,15 +132,17 @@ func (c *ReactionsListForIssueCommentCmd) Run(isValueSetMap map[string]bool) err
 
 type ReactionsCreateForIssueCommentCmd struct {
 	baseCmd
-	Owner     string `required:"" name:"owner"`
-	Repo      string `required:"" name:"repo"`
-	CommentId int64  `required:"" name:"comment_id"`
-	Content   string `required:"" name:"content" help:"The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the issue comment."`
+	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"**Note:** APIs for managing reactions are currently available for developers to preview. See the [blog post](/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview+json\n\n```\""
+	Owner        string `required:"" name:"owner"`
+	Repo         string `required:"" name:"repo"`
+	CommentId    int64  `required:"" name:"comment_id"`
+	Content      string `required:"" name:"content" help:"The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the issue comment."`
 }
 
 func (c *ReactionsCreateForIssueCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/issues/comments/:comment_id/reactions"
+	c.updatePreview("squirrel-girl", c.SquirrelGirl)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLPath("comment_id", c.CommentId)
@@ -140,17 +152,19 @@ func (c *ReactionsCreateForIssueCommentCmd) Run(isValueSetMap map[string]bool) e
 
 type ReactionsListForPullRequestReviewCommentCmd struct {
 	baseCmd
-	Owner     string `required:"" name:"owner"`
-	Repo      string `required:"" name:"repo"`
-	CommentId int64  `required:"" name:"comment_id"`
-	Content   string `name:"content" help:"Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to a pull request review comment."`
-	PerPage   int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page      int64  `name:"page" help:"Page number of the results to fetch."`
+	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"**Note:** APIs for managing reactions are currently available for developers to preview. See the [blog post](/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview+json\n\n```\""
+	Owner        string `required:"" name:"owner"`
+	Repo         string `required:"" name:"repo"`
+	CommentId    int64  `required:"" name:"comment_id"`
+	Content      string `name:"content" help:"Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to a pull request review comment."`
+	PerPage      int64  `name:"per_page" help:"Results per page (max 100)"`
+	Page         int64  `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *ReactionsListForPullRequestReviewCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/pulls/comments/:comment_id/reactions"
+	c.updatePreview("squirrel-girl", c.SquirrelGirl)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLPath("comment_id", c.CommentId)
@@ -162,15 +176,17 @@ func (c *ReactionsListForPullRequestReviewCommentCmd) Run(isValueSetMap map[stri
 
 type ReactionsCreateForPullRequestReviewCommentCmd struct {
 	baseCmd
-	Owner     string `required:"" name:"owner"`
-	Repo      string `required:"" name:"repo"`
-	CommentId int64  `required:"" name:"comment_id"`
-	Content   string `required:"" name:"content" help:"The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the pull request review comment."`
+	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"**Note:** APIs for managing reactions are currently available for developers to preview. See the [blog post](/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview+json\n\n```\""
+	Owner        string `required:"" name:"owner"`
+	Repo         string `required:"" name:"repo"`
+	CommentId    int64  `required:"" name:"comment_id"`
+	Content      string `required:"" name:"content" help:"The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the pull request review comment."`
 }
 
 func (c *ReactionsCreateForPullRequestReviewCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/pulls/comments/:comment_id/reactions"
+	c.updatePreview("squirrel-girl", c.SquirrelGirl)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLPath("comment_id", c.CommentId)
@@ -180,6 +196,8 @@ func (c *ReactionsCreateForPullRequestReviewCommentCmd) Run(isValueSetMap map[st
 
 type ReactionsListForTeamDiscussionCmd struct {
 	baseCmd
+	Echo             bool   "name:\"echo-preview\" required:\"\" help:\"**Note:** The team discussions API is currently available for developers to preview. See the [blog post](/changes/2018-02-07-team-discussions-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.echo-preview+json\n\n```\""
+	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"**Note:** APIs for managing reactions are currently available for developers to preview. See the [blog post](/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview+json\n\n```\""
 	TeamId           int64  `required:"" name:"team_id"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	Content          string `name:"content" help:"Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to a team discussion."`
@@ -190,6 +208,8 @@ type ReactionsListForTeamDiscussionCmd struct {
 func (c *ReactionsListForTeamDiscussionCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/teams/:team_id/discussions/:discussion_number/reactions"
+	c.updatePreview("echo", c.Echo)
+	c.updatePreview("squirrel-girl", c.SquirrelGirl)
 	c.updateURLPath("team_id", c.TeamId)
 	c.updateURLPath("discussion_number", c.DiscussionNumber)
 	c.updateURLQuery("content", c.Content)
@@ -200,6 +220,8 @@ func (c *ReactionsListForTeamDiscussionCmd) Run(isValueSetMap map[string]bool) e
 
 type ReactionsCreateForTeamDiscussionCmd struct {
 	baseCmd
+	Echo             bool   "name:\"echo-preview\" required:\"\" help:\"**Note:** The team discussions API is currently available for developers to preview. See the [blog post](/changes/2018-02-07-team-discussions-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.echo-preview+json\n\n```\""
+	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"**Note:** APIs for managing reactions are currently available for developers to preview. See the [blog post](/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview+json\n\n```\""
 	TeamId           int64  `required:"" name:"team_id"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	Content          string `required:"" name:"content" help:"The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the team discussion."`
@@ -208,6 +230,8 @@ type ReactionsCreateForTeamDiscussionCmd struct {
 func (c *ReactionsCreateForTeamDiscussionCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/teams/:team_id/discussions/:discussion_number/reactions"
+	c.updatePreview("echo", c.Echo)
+	c.updatePreview("squirrel-girl", c.SquirrelGirl)
 	c.updateURLPath("team_id", c.TeamId)
 	c.updateURLPath("discussion_number", c.DiscussionNumber)
 	c.updateBody("content", c.Content)
@@ -216,6 +240,8 @@ func (c *ReactionsCreateForTeamDiscussionCmd) Run(isValueSetMap map[string]bool)
 
 type ReactionsListForTeamDiscussionCommentCmd struct {
 	baseCmd
+	Echo             bool   "name:\"echo-preview\" required:\"\" help:\"**Note:** The team discussions API is currently available for developers to preview. See the [blog post](/changes/2018-02-07-team-discussions-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.echo-preview+json\n\n```\""
+	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"**Note:** APIs for managing reactions are currently available for developers to preview. See the [blog post](/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview+json\n\n```\""
 	TeamId           int64  `required:"" name:"team_id"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	CommentNumber    int64  `required:"" name:"comment_number"`
@@ -227,6 +253,8 @@ type ReactionsListForTeamDiscussionCommentCmd struct {
 func (c *ReactionsListForTeamDiscussionCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/teams/:team_id/discussions/:discussion_number/comments/:comment_number/reactions"
+	c.updatePreview("echo", c.Echo)
+	c.updatePreview("squirrel-girl", c.SquirrelGirl)
 	c.updateURLPath("team_id", c.TeamId)
 	c.updateURLPath("discussion_number", c.DiscussionNumber)
 	c.updateURLPath("comment_number", c.CommentNumber)
@@ -238,6 +266,8 @@ func (c *ReactionsListForTeamDiscussionCommentCmd) Run(isValueSetMap map[string]
 
 type ReactionsCreateForTeamDiscussionCommentCmd struct {
 	baseCmd
+	Echo             bool   "name:\"echo-preview\" required:\"\" help:\"**Note:** The team discussions API is currently available for developers to preview. See the [blog post](/changes/2018-02-07-team-discussions-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.echo-preview+json\n\n```\""
+	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"**Note:** APIs for managing reactions are currently available for developers to preview. See the [blog post](/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview+json\n\n```\""
 	TeamId           int64  `required:"" name:"team_id"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	CommentNumber    int64  `required:"" name:"comment_number"`
@@ -247,6 +277,8 @@ type ReactionsCreateForTeamDiscussionCommentCmd struct {
 func (c *ReactionsCreateForTeamDiscussionCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/teams/:team_id/discussions/:discussion_number/comments/:comment_number/reactions"
+	c.updatePreview("echo", c.Echo)
+	c.updatePreview("squirrel-girl", c.SquirrelGirl)
 	c.updateURLPath("team_id", c.TeamId)
 	c.updateURLPath("discussion_number", c.DiscussionNumber)
 	c.updateURLPath("comment_number", c.CommentNumber)
@@ -256,12 +288,16 @@ func (c *ReactionsCreateForTeamDiscussionCommentCmd) Run(isValueSetMap map[strin
 
 type ReactionsDeleteCmd struct {
 	baseCmd
-	ReactionId int64 `required:"" name:"reaction_id"`
+	Echo         bool  "name:\"echo-preview\" required:\"\" help:\"**Note:** The team discussions API is currently available for developers to preview. See the [blog post](/changes/2018-02-07-team-discussions-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.echo-preview+json\n\n```\""
+	SquirrelGirl bool  "name:\"squirrel-girl-preview\" required:\"\" help:\"**Note:** APIs for managing reactions are currently available for developers to preview. See the [blog post](/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview+json\n\n```\""
+	ReactionId   int64 `required:"" name:"reaction_id"`
 }
 
 func (c *ReactionsDeleteCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/reactions/:reaction_id"
+	c.updatePreview("echo", c.Echo)
+	c.updatePreview("squirrel-girl", c.SquirrelGirl)
 	c.updateURLPath("reaction_id", c.ReactionId)
 	return c.doRequest("DELETE")
 }

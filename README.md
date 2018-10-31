@@ -129,43 +129,43 @@ Commands:
   apps get-by-slug --token=STRING --app_slug=STRING
     Get a single GitHub App
 
-  apps get-authenticated --token=STRING
+  apps get-authenticated --token=STRING --machine-man-preview
     Get the authenticated GitHub App
 
-  apps list-installations --token=STRING
+  apps list-installations --token=STRING --machine-man-preview
     Find installations
 
-  apps get-installation --token=STRING --installation_id=INT-64
+  apps get-installation --token=STRING --machine-man-preview --installation_id=INT-64
     Get a single installation
 
-  apps list-installations-for-authenticated-user --token=STRING
+  apps list-installations-for-authenticated-user --token=STRING --machine-man-preview
     List installations for user
 
-  apps create-installation-token --token=STRING --installation_id=INT-64
+  apps create-installation-token --token=STRING --machine-man-preview --installation_id=INT-64
     Create a new installation token
 
-  apps find-org-installation --token=STRING --org=STRING
+  apps find-org-installation --token=STRING --machine-man-preview --org=STRING
     Find organization installation
 
-  apps find-repo-installation --token=STRING --owner=STRING --repo=STRING
+  apps find-repo-installation --token=STRING --machine-man-preview --owner=STRING --repo=STRING
     Find repository installation
 
-  apps find-user-installation --token=STRING --username=STRING
+  apps find-user-installation --token=STRING --machine-man-preview --username=STRING
     Find user installation
 
-  apps create-from-manifest --token=STRING --code=STRING
+  apps create-from-manifest --token=STRING --fury-preview --code=STRING
     Create a GitHub App from a manifest
 
   apps list-repos --token=STRING
     List repositories
 
-  apps list-installation-repos-for-authenticated-user --token=STRING --installation_id=INT-64
+  apps list-installation-repos-for-authenticated-user --token=STRING --machine-man-preview --installation_id=INT-64
     List repositories accessible to the user for an installation
 
-  apps add-repo-to-installation --token=STRING --installation_id=INT-64 --repository_id=INT-64
+  apps add-repo-to-installation --token=STRING --machine-man-preview --installation_id=INT-64 --repository_id=INT-64
     Add repository to installation
 
-  apps remove-repo-from-installation --token=STRING --installation_id=INT-64 --repository_id=INT-64
+  apps remove-repo-from-installation --token=STRING --machine-man-preview --installation_id=INT-64 --repository_id=INT-64
     Remove repository from installation
 
   apps list-plans --token=STRING
@@ -193,28 +193,28 @@ Commands:
   apps list-marketplace-purchases-for-authenticated-user-stubbed --token=STRING
     Get a user's Marketplace purchases (stubbed)
 
-  checks list-for-ref --token=STRING --owner=STRING --repo=STRING --ref=STRING
+  checks list-for-ref --token=STRING --antiope-preview --owner=STRING --repo=STRING --ref=STRING
     List check runs for a specific ref
 
-  checks list-for-suite --token=STRING --owner=STRING --repo=STRING --check_suite_id=INT-64
+  checks list-for-suite --token=STRING --antiope-preview --owner=STRING --repo=STRING --check_suite_id=INT-64
     List check runs in a check suite
 
-  checks get --token=STRING --owner=STRING --repo=STRING --check_run_id=INT-64
+  checks get --token=STRING --antiope-preview --owner=STRING --repo=STRING --check_run_id=INT-64
     Get a single check run
 
-  checks list-annotations --token=STRING --owner=STRING --repo=STRING --check_run_id=INT-64
+  checks list-annotations --token=STRING --antiope-preview --owner=STRING --repo=STRING --check_run_id=INT-64
     List annotations for a check run
 
-  checks get-suite --token=STRING --owner=STRING --repo=STRING --check_suite_id=INT-64
+  checks get-suite --token=STRING --antiope-preview --owner=STRING --repo=STRING --check_suite_id=INT-64
     Get a single check suite
 
-  checks list-suites-for-ref --token=STRING --owner=STRING --repo=STRING --ref=STRING
+  checks list-suites-for-ref --token=STRING --antiope-preview --owner=STRING --repo=STRING --ref=STRING
     List check suites for a specific ref
 
-  checks create-suite --token=STRING --owner=STRING --repo=STRING --head_sha=STRING
+  checks create-suite --token=STRING --antiope-preview --owner=STRING --repo=STRING --head_sha=STRING
     Create a check suite
 
-  checks rerequest-suite --token=STRING --owner=STRING --repo=STRING --check_suite_id=INT-64
+  checks rerequest-suite --token=STRING --antiope-preview --owner=STRING --repo=STRING --check_suite_id=INT-64
     Rerequest check suite
 
   codes-of-conduct list-conduct-codes --token=STRING
@@ -437,7 +437,7 @@ Commands:
   issues delete-milestone --token=STRING --owner=STRING --repo=STRING --number=INT-64
     Delete a milestone
 
-  issues list-events-for-timeline --token=STRING --owner=STRING --repo=STRING --number=INT-64
+  issues list-events-for-timeline --token=STRING --mockingbird-preview --owner=STRING --repo=STRING --number=INT-64
     List events for an issue
 
   licenses list --token=STRING
@@ -476,28 +476,28 @@ Commands:
   migrations unlock-repo-for-org --token=STRING --org=STRING --migration_id=INT-64 --repo_name=STRING
     Unlock an organization repository
 
-  migrations start-import --token=STRING --owner=STRING --repo=STRING --vcs_url=STRING
+  migrations start-import --token=STRING --barred-rock-preview --owner=STRING --repo=STRING --vcs_url=STRING
     Start an import
 
-  migrations get-import-progress --token=STRING --owner=STRING --repo=STRING
+  migrations get-import-progress --token=STRING --barred-rock-preview --owner=STRING --repo=STRING
     Get import progress
 
-  migrations update-import --token=STRING --owner=STRING --repo=STRING
+  migrations update-import --token=STRING --barred-rock-preview --owner=STRING --repo=STRING
     Update existing import
 
-  migrations get-commit-authors --token=STRING --owner=STRING --repo=STRING
+  migrations get-commit-authors --token=STRING --barred-rock-preview --owner=STRING --repo=STRING
     Get commit authors
 
-  migrations map-commit-author --token=STRING --owner=STRING --repo=STRING --author_id=INT-64
+  migrations map-commit-author --token=STRING --barred-rock-preview --owner=STRING --repo=STRING --author_id=INT-64
     Map a commit author
 
-  migrations set-lfs-preference --token=STRING --owner=STRING --repo=STRING --use_lfs=STRING
+  migrations set-lfs-preference --token=STRING --barred-rock-preview --owner=STRING --repo=STRING --use_lfs=STRING
     Set Git LFS preference
 
-  migrations get-large-files --token=STRING --owner=STRING --repo=STRING
+  migrations get-large-files --token=STRING --barred-rock-preview --owner=STRING --repo=STRING
     Get large files
 
-  migrations cancel-import --token=STRING --owner=STRING --repo=STRING
+  migrations cancel-import --token=STRING --barred-rock-preview --owner=STRING --repo=STRING
     Cancel an import
 
   migrations start-for-authenticated-user --token=STRING --repositories=REPOSITORIES,...
@@ -656,73 +656,73 @@ Commands:
   orgs delete-hook --token=STRING --org=STRING --hook_id=INT-64
     Delete a hook
 
-  projects list-for-repo --token=STRING --owner=STRING --repo=STRING
+  projects list-for-repo --token=STRING --inertia-preview --owner=STRING --repo=STRING
     List repository projects
 
-  projects list-for-org --token=STRING --org=STRING
+  projects list-for-org --token=STRING --inertia-preview --org=STRING
     List organization projects
 
-  projects get --token=STRING --project_id=INT-64
+  projects get --token=STRING --inertia-preview --project_id=INT-64
     Get a project
 
-  projects create-for-repo --token=STRING --owner=STRING --repo=STRING --name=STRING
+  projects create-for-repo --token=STRING --inertia-preview --owner=STRING --repo=STRING --name=STRING
     Create a repository project
 
-  projects create-for-org --token=STRING --org=STRING --name=STRING
+  projects create-for-org --token=STRING --inertia-preview --org=STRING --name=STRING
     Create an organization project
 
-  projects update --token=STRING --project_id=INT-64
+  projects update --token=STRING --inertia-preview --project_id=INT-64
     Update a project
 
-  projects delete --token=STRING --project_id=INT-64
+  projects delete --token=STRING --inertia-preview --project_id=INT-64
     Delete a project
 
-  projects list-cards --token=STRING --column_id=INT-64
+  projects list-cards --token=STRING --inertia-preview --column_id=INT-64
     List project cards
 
-  projects get-card --token=STRING --card_id=INT-64
+  projects get-card --token=STRING --inertia-preview --card_id=INT-64
     Get a project card
 
-  projects create-card --token=STRING --column_id=INT-64
+  projects create-card --token=STRING --inertia-preview --column_id=INT-64
     Create a project card
 
-  projects update-card --token=STRING --card_id=INT-64
+  projects update-card --token=STRING --inertia-preview --card_id=INT-64
     Update a project card
 
-  projects delete-card --token=STRING --card_id=INT-64
+  projects delete-card --token=STRING --inertia-preview --card_id=INT-64
     Delete a project card
 
-  projects move-card --token=STRING --card_id=INT-64 --position=STRING
+  projects move-card --token=STRING --inertia-preview --card_id=INT-64 --position=STRING
     Move a project card
 
-  projects list-collaborators --token=STRING --project_id=INT-64
+  projects list-collaborators --token=STRING --inertia-preview --project_id=INT-64
     List collaborators
 
-  projects review-user-permission-level --token=STRING --project_id=INT-64 --username=STRING
+  projects review-user-permission-level --token=STRING --inertia-preview --project_id=INT-64 --username=STRING
     Review a user's permission level
 
-  projects add-collaborator --token=STRING --project_id=INT-64 --username=STRING
+  projects add-collaborator --token=STRING --inertia-preview --project_id=INT-64 --username=STRING
     Add user as a collaborator
 
-  projects remove-collaborator --token=STRING --project_id=INT-64 --username=STRING
+  projects remove-collaborator --token=STRING --inertia-preview --project_id=INT-64 --username=STRING
     Remove user as a collaborator
 
-  projects list-columns --token=STRING --project_id=INT-64
+  projects list-columns --token=STRING --inertia-preview --project_id=INT-64
     List project columns
 
-  projects get-column --token=STRING --column_id=INT-64
+  projects get-column --token=STRING --inertia-preview --column_id=INT-64
     Get a project column
 
-  projects create-column --token=STRING --project_id=INT-64 --name=STRING
+  projects create-column --token=STRING --inertia-preview --project_id=INT-64 --name=STRING
     Create a project column
 
-  projects update-column --token=STRING --column_id=INT-64 --name=STRING
+  projects update-column --token=STRING --inertia-preview --column_id=INT-64 --name=STRING
     Update a project column
 
-  projects delete-column --token=STRING --column_id=INT-64
+  projects delete-column --token=STRING --inertia-preview --column_id=INT-64
     Delete a project column
 
-  projects move-column --token=STRING --column_id=INT-64 --position=STRING
+  projects move-column --token=STRING --inertia-preview --column_id=INT-64 --position=STRING
     Move a project column
 
   pulls list --token=STRING --owner=STRING --repo=STRING
@@ -803,43 +803,43 @@ Commands:
   rate-limit get --token=STRING
     Get your current rate limit status
 
-  reactions list-for-commit-comment --token=STRING --owner=STRING --repo=STRING --comment_id=INT-64
+  reactions list-for-commit-comment --token=STRING --squirrel-girl-preview --owner=STRING --repo=STRING --comment_id=INT-64
     List reactions for a commit comment
 
-  reactions create-for-commit-comment --token=STRING --owner=STRING --repo=STRING --comment_id=INT-64 --content=STRING
+  reactions create-for-commit-comment --token=STRING --squirrel-girl-preview --owner=STRING --repo=STRING --comment_id=INT-64 --content=STRING
     Create reaction for a commit comment
 
-  reactions list-for-issue --token=STRING --owner=STRING --repo=STRING --number=INT-64
+  reactions list-for-issue --token=STRING --squirrel-girl-preview --owner=STRING --repo=STRING --number=INT-64
     List reactions for an issue
 
-  reactions create-for-issue --token=STRING --owner=STRING --repo=STRING --number=INT-64 --content=STRING
+  reactions create-for-issue --token=STRING --squirrel-girl-preview --owner=STRING --repo=STRING --number=INT-64 --content=STRING
     Create reaction for an issue
 
-  reactions list-for-issue-comment --token=STRING --owner=STRING --repo=STRING --comment_id=INT-64
+  reactions list-for-issue-comment --token=STRING --squirrel-girl-preview --owner=STRING --repo=STRING --comment_id=INT-64
     List reactions for an issue comment
 
-  reactions create-for-issue-comment --token=STRING --owner=STRING --repo=STRING --comment_id=INT-64 --content=STRING
+  reactions create-for-issue-comment --token=STRING --squirrel-girl-preview --owner=STRING --repo=STRING --comment_id=INT-64 --content=STRING
     Create reaction for an issue comment
 
-  reactions list-for-pull-request-review-comment --token=STRING --owner=STRING --repo=STRING --comment_id=INT-64
+  reactions list-for-pull-request-review-comment --token=STRING --squirrel-girl-preview --owner=STRING --repo=STRING --comment_id=INT-64
     List reactions for a pull request review comment
 
-  reactions create-for-pull-request-review-comment --token=STRING --owner=STRING --repo=STRING --comment_id=INT-64 --content=STRING
+  reactions create-for-pull-request-review-comment --token=STRING --squirrel-girl-preview --owner=STRING --repo=STRING --comment_id=INT-64 --content=STRING
     Create reaction for a pull request review comment
 
-  reactions list-for-team-discussion --token=STRING --team_id=INT-64 --discussion_number=INT-64
+  reactions list-for-team-discussion --token=STRING --echo-preview --squirrel-girl-preview --team_id=INT-64 --discussion_number=INT-64
     List reactions for a team discussion
 
-  reactions create-for-team-discussion --token=STRING --team_id=INT-64 --discussion_number=INT-64 --content=STRING
+  reactions create-for-team-discussion --token=STRING --echo-preview --squirrel-girl-preview --team_id=INT-64 --discussion_number=INT-64 --content=STRING
     Create reaction for a team discussion
 
-  reactions list-for-team-discussion-comment --token=STRING --team_id=INT-64 --discussion_number=INT-64 --comment_number=INT-64
+  reactions list-for-team-discussion-comment --token=STRING --echo-preview --squirrel-girl-preview --team_id=INT-64 --discussion_number=INT-64 --comment_number=INT-64
     List reactions for a team discussion comment
 
-  reactions create-for-team-discussion-comment --token=STRING --team_id=INT-64 --discussion_number=INT-64 --comment_number=INT-64 --content=STRING
+  reactions create-for-team-discussion-comment --token=STRING --echo-preview --squirrel-girl-preview --team_id=INT-64 --discussion_number=INT-64 --comment_number=INT-64 --content=STRING
     Create reaction for a team discussion comment
 
-  reactions delete --token=STRING --reaction_id=INT-64
+  reactions delete --token=STRING --echo-preview --squirrel-girl-preview --reaction_id=INT-64
     Delete a reaction
 
   repos list --token=STRING
@@ -887,7 +887,7 @@ Commands:
   repos delete --token=STRING --owner=STRING --repo=STRING
     Delete a repository
 
-  repos transfer --token=STRING --owner=STRING --repo=STRING
+  repos transfer --token=STRING --nightshade-preview --owner=STRING --repo=STRING
     Transfer a repository
 
   repos list-branches --token=STRING --owner=STRING --repo=STRING
@@ -929,13 +929,13 @@ Commands:
   repos remove-protected-branch-pull-request-review-enforcement --token=STRING --owner=STRING --repo=STRING --branch=STRING
     Remove pull request review enforcement of protected branch
 
-  repos get-protected-branch-required-signatures --token=STRING --owner=STRING --repo=STRING --branch=STRING
+  repos get-protected-branch-required-signatures --token=STRING --zzzax-preview --owner=STRING --repo=STRING --branch=STRING
     Get required signatures of protected branch
 
-  repos add-protected-branch-required-signatures --token=STRING --owner=STRING --repo=STRING --branch=STRING
+  repos add-protected-branch-required-signatures --token=STRING --zzzax-preview --owner=STRING --repo=STRING --branch=STRING
     Add required signatures of protected branch
 
-  repos remove-protected-branch-required-signatures --token=STRING --owner=STRING --repo=STRING --branch=STRING
+  repos remove-protected-branch-required-signatures --token=STRING --zzzax-preview --owner=STRING --repo=STRING --branch=STRING
     Remove required signatures of protected branch
 
   repos get-protected-branch-admin-enforcement --token=STRING --owner=STRING --repo=STRING --branch=STRING
@@ -1100,13 +1100,13 @@ Commands:
   repos merge --token=STRING --owner=STRING --repo=STRING --base=STRING --head=STRING
     Perform a merge
 
-  repos get-pages --token=STRING --owner=STRING --repo=STRING
+  repos get-pages --token=STRING --mister-fantastic-preview --owner=STRING --repo=STRING
     Get information about a Pages site
 
-  repos update-information-about-pages-site --token=STRING --owner=STRING --repo=STRING
+  repos update-information-about-pages-site --token=STRING --mister-fantastic-preview --owner=STRING --repo=STRING
     Update information about a Pages site
 
-  repos request-page-build --token=STRING --owner=STRING --repo=STRING
+  repos request-page-build --token=STRING --mister-fantastic-preview --owner=STRING --repo=STRING
     Request a page build
 
   repos list-pages-builds --token=STRING --owner=STRING --repo=STRING
@@ -1223,7 +1223,7 @@ Commands:
   search repos --token=STRING --q=STRING
     Search repositories
 
-  search commits --token=STRING --q=STRING
+  search commits --token=STRING --cloak-preview --q=STRING
     Search commits
 
   search code --token=STRING --q=STRING
@@ -1268,7 +1268,7 @@ Commands:
   teams delete --token=STRING --team_id=INT-64
     Delete team
 
-  teams list-child --token=STRING --team_id=INT-64
+  teams list-child --token=STRING --hellcat-preview --team_id=INT-64
     List child teams
 
   teams list-repos --token=STRING --team_id=INT-64
@@ -1286,46 +1286,46 @@ Commands:
   teams list-for-authenticated-user --token=STRING
     List user teams
 
-  teams list-projects --token=STRING --team_id=INT-64
+  teams list-projects --token=STRING --inertia-preview --team_id=INT-64
     List team projects
 
-  teams review-project --token=STRING --team_id=INT-64 --project_id=INT-64
+  teams review-project --token=STRING --inertia-preview --team_id=INT-64 --project_id=INT-64
     Review a team project
 
-  teams add-or-update-project --token=STRING --team_id=INT-64 --project_id=INT-64
+  teams add-or-update-project --token=STRING --inertia-preview --team_id=INT-64 --project_id=INT-64
     Add or update team project
 
   teams remove-project --token=STRING --team_id=INT-64 --project_id=INT-64
     Remove team project
 
-  teams list-discussions --token=STRING --team_id=INT-64
+  teams list-discussions --token=STRING --echo-preview --team_id=INT-64
     List discussions
 
-  teams get-discussion --token=STRING --team_id=INT-64 --discussion_number=INT-64
+  teams get-discussion --token=STRING --echo-preview --team_id=INT-64 --discussion_number=INT-64
     Get a single discussion
 
-  teams create-discussion --token=STRING --team_id=INT-64 --title=STRING --body=STRING
+  teams create-discussion --token=STRING --echo-preview --team_id=INT-64 --title=STRING --body=STRING
     Create a discussion
 
-  teams edit-discussion --token=STRING --team_id=INT-64 --discussion_number=INT-64
+  teams edit-discussion --token=STRING --echo-preview --team_id=INT-64 --discussion_number=INT-64
     Edit a discussion
 
-  teams delete-discussion --token=STRING --team_id=INT-64 --discussion_number=INT-64
+  teams delete-discussion --token=STRING --echo-preview --team_id=INT-64 --discussion_number=INT-64
     Delete a discussion
 
-  teams list-discussion-comments --token=STRING --team_id=INT-64 --discussion_number=INT-64
+  teams list-discussion-comments --token=STRING --echo-preview --team_id=INT-64 --discussion_number=INT-64
     List comments
 
-  teams get-discussion-comment --token=STRING --team_id=INT-64 --discussion_number=INT-64 --comment_number=INT-64
+  teams get-discussion-comment --token=STRING --echo-preview --team_id=INT-64 --discussion_number=INT-64 --comment_number=INT-64
     Get a single comment
 
-  teams create-discussion-comment --token=STRING --team_id=INT-64 --discussion_number=INT-64 --body=STRING
+  teams create-discussion-comment --token=STRING --echo-preview --team_id=INT-64 --discussion_number=INT-64 --body=STRING
     Create a comment
 
-  teams edit-discussion-comment --token=STRING --team_id=INT-64 --discussion_number=INT-64 --comment_number=INT-64 --body=STRING
+  teams edit-discussion-comment --token=STRING --echo-preview --team_id=INT-64 --discussion_number=INT-64 --comment_number=INT-64 --body=STRING
     Edit a comment
 
-  teams delete-discussion-comment --token=STRING --team_id=INT-64 --discussion_number=INT-64 --comment_number=INT-64
+  teams delete-discussion-comment --token=STRING --echo-preview --team_id=INT-64 --discussion_number=INT-64 --comment_number=INT-64
     Delete a comment
 
   teams list-members --token=STRING --team_id=INT-64
@@ -1361,7 +1361,7 @@ Commands:
   users update-authenticated --token=STRING
     Update the authenticated user
 
-  users get-context-for-user --token=STRING --username=STRING
+  users get-context-for-user --token=STRING --hagar-preview --username=STRING
     Get contextual information about a user
 
   users list --token=STRING

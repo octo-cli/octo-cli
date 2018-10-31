@@ -20,6 +20,7 @@ type (
 		DocumentationURL string
 		Params           []*Param
 		Requests         []interface{}
+		Previews         []*Preview
 	}
 
 	//Param represents one parameter for a Route such as repo name or issue number
@@ -36,6 +37,13 @@ type (
 
 	//Routes is a collection or Routes
 	Routes []*Route
+
+	//Preview is a preview header
+	Preview struct {
+		Name        string
+		Description string
+		Required    bool
+	}
 )
 
 //ParseRoutesFile parses the routes.json at a given path and returns a *RoutesFile

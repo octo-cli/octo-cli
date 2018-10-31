@@ -41,23 +41,27 @@ func (c *AppsGetBySlugCmd) Run(isValueSetMap map[string]bool) error {
 
 type AppsGetAuthenticatedCmd struct {
 	baseCmd
+	MachineMan bool "name:\"machine-man-preview\" required:\"\" help:\"**Note:** To access the API with your GitHub App, you must provide a custom [media type](/v3/media) in the `Accept` Header for your requests.\n\n`application/vnd.github.machine-man-preview+json`\""
 }
 
 func (c *AppsGetAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/app"
+	c.updatePreview("machine-man", c.MachineMan)
 	return c.doRequest("GET")
 }
 
 type AppsListInstallationsCmd struct {
 	baseCmd
-	PerPage int64 `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64 `name:"page" help:"Page number of the results to fetch."`
+	MachineMan bool  "name:\"machine-man-preview\" required:\"\" help:\"**Note:** To access the API with your GitHub App, you must provide a custom [media type](/v3/media) in the `Accept` Header for your requests.\n\n`application/vnd.github.machine-man-preview+json`\""
+	PerPage    int64 `name:"per_page" help:"Results per page (max 100)"`
+	Page       int64 `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *AppsListInstallationsCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/app/installations"
+	c.updatePreview("machine-man", c.MachineMan)
 	c.updateURLQuery("per_page", c.PerPage)
 	c.updateURLQuery("page", c.Page)
 	return c.doRequest("GET")
@@ -65,25 +69,29 @@ func (c *AppsListInstallationsCmd) Run(isValueSetMap map[string]bool) error {
 
 type AppsGetInstallationCmd struct {
 	baseCmd
+	MachineMan     bool  "name:\"machine-man-preview\" required:\"\" help:\"**Note:** To access the API with your GitHub App, you must provide a custom [media type](/v3/media) in the `Accept` Header for your requests.\n\n`application/vnd.github.machine-man-preview+json`\""
 	InstallationId int64 `required:"" name:"installation_id"`
 }
 
 func (c *AppsGetInstallationCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/app/installations/:installation_id"
+	c.updatePreview("machine-man", c.MachineMan)
 	c.updateURLPath("installation_id", c.InstallationId)
 	return c.doRequest("GET")
 }
 
 type AppsListInstallationsForAuthenticatedUserCmd struct {
 	baseCmd
-	PerPage int64 `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64 `name:"page" help:"Page number of the results to fetch."`
+	MachineMan bool  "name:\"machine-man-preview\" required:\"\" help:\"**Note:** To access the API with your GitHub App, you must provide a custom [media type](/v3/media) in the `Accept` Header for your requests.\n\n`application/vnd.github.machine-man-preview+json`\""
+	PerPage    int64 `name:"per_page" help:"Results per page (max 100)"`
+	Page       int64 `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *AppsListInstallationsForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/user/installations"
+	c.updatePreview("machine-man", c.MachineMan)
 	c.updateURLQuery("per_page", c.PerPage)
 	c.updateURLQuery("page", c.Page)
 	return c.doRequest("GET")
@@ -91,37 +99,43 @@ func (c *AppsListInstallationsForAuthenticatedUserCmd) Run(isValueSetMap map[str
 
 type AppsCreateInstallationTokenCmd struct {
 	baseCmd
+	MachineMan     bool  "name:\"machine-man-preview\" required:\"\" help:\"**Note:** To access the API with your GitHub App, you must provide a custom [media type](/v3/media) in the `Accept` Header for your requests.\n\n`application/vnd.github.machine-man-preview+json`\""
 	InstallationId int64 `required:"" name:"installation_id"`
 }
 
 func (c *AppsCreateInstallationTokenCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/app/installations/:installation_id/access_tokens"
+	c.updatePreview("machine-man", c.MachineMan)
 	c.updateURLPath("installation_id", c.InstallationId)
 	return c.doRequest("POST")
 }
 
 type AppsFindOrgInstallationCmd struct {
 	baseCmd
-	Org string `required:"" name:"org"`
+	MachineMan bool   "name:\"machine-man-preview\" required:\"\" help:\"**Note:** To access the API with your GitHub App, you must provide a custom [media type](/v3/media) in the `Accept` Header for your requests.\n\n`application/vnd.github.machine-man-preview+json`\""
+	Org        string `required:"" name:"org"`
 }
 
 func (c *AppsFindOrgInstallationCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/orgs/:org/installation"
+	c.updatePreview("machine-man", c.MachineMan)
 	c.updateURLPath("org", c.Org)
 	return c.doRequest("GET")
 }
 
 type AppsFindRepoInstallationCmd struct {
 	baseCmd
-	Owner string `required:"" name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	MachineMan bool   "name:\"machine-man-preview\" required:\"\" help:\"**Note:** To access the API with your GitHub App, you must provide a custom [media type](/v3/media) in the `Accept` Header for your requests.\n\n`application/vnd.github.machine-man-preview+json`\""
+	Owner      string `required:"" name:"owner"`
+	Repo       string `required:"" name:"repo"`
 }
 
 func (c *AppsFindRepoInstallationCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/installation"
+	c.updatePreview("machine-man", c.MachineMan)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	return c.doRequest("GET")
@@ -129,24 +143,28 @@ func (c *AppsFindRepoInstallationCmd) Run(isValueSetMap map[string]bool) error {
 
 type AppsFindUserInstallationCmd struct {
 	baseCmd
-	Username string `required:"" name:"username"`
+	MachineMan bool   "name:\"machine-man-preview\" required:\"\" help:\"**Note:** To access the API with your GitHub App, you must provide a custom [media type](/v3/media) in the `Accept` Header for your requests.\n\n`application/vnd.github.machine-man-preview+json`\""
+	Username   string `required:"" name:"username"`
 }
 
 func (c *AppsFindUserInstallationCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/users/:username/installation"
+	c.updatePreview("machine-man", c.MachineMan)
 	c.updateURLPath("username", c.Username)
 	return c.doRequest("GET")
 }
 
 type AppsCreateFromManifestCmd struct {
 	baseCmd
+	Fury bool   "name:\"fury-preview\" required:\"\" help:\"**Note:** GitHub App Manifests are currently available for developers to preview. To access this API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.fury-preview+json\n\n```\""
 	Code string `required:"" name:"code"`
 }
 
 func (c *AppsCreateFromManifestCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/app-manifests/:code/conversions"
+	c.updatePreview("fury", c.Fury)
 	c.updateURLPath("code", c.Code)
 	return c.doRequest("POST")
 }
@@ -167,6 +185,8 @@ func (c *AppsListReposCmd) Run(isValueSetMap map[string]bool) error {
 
 type AppsListInstallationReposForAuthenticatedUserCmd struct {
 	baseCmd
+	MachineMan     bool  "name:\"machine-man-preview\" required:\"\" help:\"**Note:** To access the API with your GitHub App, you must provide a custom [media type](/v3/media) in the `Accept` Header for your requests.\n\n`application/vnd.github.machine-man-preview+json`\""
+	Mercy          bool  "name:\"mercy-preview\" help:\"**Note:** The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.mercy-preview+json\n\n```\""
 	InstallationId int64 `required:"" name:"installation_id"`
 	PerPage        int64 `name:"per_page" help:"Results per page (max 100)"`
 	Page           int64 `name:"page" help:"Page number of the results to fetch."`
@@ -175,6 +195,8 @@ type AppsListInstallationReposForAuthenticatedUserCmd struct {
 func (c *AppsListInstallationReposForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/user/installations/:installation_id/repositories"
+	c.updatePreview("machine-man", c.MachineMan)
+	c.updatePreview("mercy", c.Mercy)
 	c.updateURLPath("installation_id", c.InstallationId)
 	c.updateURLQuery("per_page", c.PerPage)
 	c.updateURLQuery("page", c.Page)
@@ -183,6 +205,7 @@ func (c *AppsListInstallationReposForAuthenticatedUserCmd) Run(isValueSetMap map
 
 type AppsAddRepoToInstallationCmd struct {
 	baseCmd
+	MachineMan     bool  "name:\"machine-man-preview\" required:\"\" help:\"**Note:** To access the API with your GitHub App, you must provide a custom [media type](/v3/media) in the `Accept` Header for your requests.\n\n`application/vnd.github.machine-man-preview+json`\""
 	InstallationId int64 `required:"" name:"installation_id"`
 	RepositoryId   int64 `required:"" name:"repository_id"`
 }
@@ -190,6 +213,7 @@ type AppsAddRepoToInstallationCmd struct {
 func (c *AppsAddRepoToInstallationCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/user/installations/:installation_id/repositories/:repository_id"
+	c.updatePreview("machine-man", c.MachineMan)
 	c.updateURLPath("installation_id", c.InstallationId)
 	c.updateURLPath("repository_id", c.RepositoryId)
 	return c.doRequest("PUT")
@@ -197,6 +221,7 @@ func (c *AppsAddRepoToInstallationCmd) Run(isValueSetMap map[string]bool) error 
 
 type AppsRemoveRepoFromInstallationCmd struct {
 	baseCmd
+	MachineMan     bool  "name:\"machine-man-preview\" required:\"\" help:\"**Note:** To access the API with your GitHub App, you must provide a custom [media type](/v3/media) in the `Accept` Header for your requests.\n\n`application/vnd.github.machine-man-preview+json`\""
 	InstallationId int64 `required:"" name:"installation_id"`
 	RepositoryId   int64 `required:"" name:"repository_id"`
 }
@@ -204,6 +229,7 @@ type AppsRemoveRepoFromInstallationCmd struct {
 func (c *AppsRemoveRepoFromInstallationCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/user/installations/:installation_id/repositories/:repository_id"
+	c.updatePreview("machine-man", c.MachineMan)
 	c.updateURLPath("installation_id", c.InstallationId)
 	c.updateURLPath("repository_id", c.RepositoryId)
 	return c.doRequest("DELETE")

@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"fmt"
 	"github.com/go-github-cli/go-github-cli/internal"
 	"golang.org/x/oauth2"
 	"io"
@@ -21,6 +22,7 @@ type baseCmd struct {
 	isValueSetMap map[string]bool
 	url           url.URL
 	reqBody       *map[string]interface{}
+	acceptHeaders []string
 	Token         string `env:"GITHUB_TOKEN" required:""`
 	APIBaseURL    string `env:"GITHUB_API_BASE_URL" default:"https://api.github.com"`
 	RawOutput     bool   `help:"don't format json output."`
@@ -53,6 +55,13 @@ func (c *baseCmd) updateURLPath(valName string, value interface{}) {
 		strVal = ""
 	}
 	c.url.Path = strings.Replace(c.url.Path, ":"+valName, strVal, 1)
+}
+
+func (c *baseCmd) updatePreview(previewName string, value bool) {
+	if value {
+		accept := fmt.Sprintf("application/vnd.github.%s-preview+json", previewName)
+		c.acceptHeaders = append(c.acceptHeaders, accept)
+	}
 }
 
 func (c *baseCmd) updateURLQuery(paramName string, value interface{}) {
@@ -92,7 +101,9 @@ func (c *baseCmd) newRequest(method string) (*http.Request, error) {
 	if c.reqBody != nil {
 		req.Header.Set("Content-Type", "application/json")
 	}
-	req.Header.Set("Accept", "application/vnd.github.v3+json")
+	acceptHeaders := []string{"application/vnd.github.v3+json"}
+	acceptHeaders = append(acceptHeaders, c.acceptHeaders...)
+	req.Header.Set("Accept", strings.Join(acceptHeaders, ", "))
 	return req, nil
 }
 
