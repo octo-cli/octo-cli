@@ -121,7 +121,7 @@ func TestOutputResult(t *testing.T) {
 				t.Errorf("OutputResult() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			assert.Equal(t, tt.wantStdout, stdout.String())
+			assert.Equal(t, tt.wantStdout, strings.TrimSuffix(stdout.String(), "\n"))
 
 		})
 	}
