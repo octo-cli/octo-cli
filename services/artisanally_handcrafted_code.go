@@ -24,6 +24,7 @@ type baseCmd struct {
 	Token         string `env:"GITHUB_TOKEN" required:""`
 	APIBaseURL    string `env:"GITHUB_API_BASE_URL" default:"https://api.github.com"`
 	RawOutput     bool   `help:"don't format json output."`
+	Format        string `help:"format output with a go template"`
 }
 
 func (c *baseCmd) isValueSet(valueName string) bool {
@@ -120,5 +121,5 @@ func (c *baseCmd) doRequest(method string) error {
 		return err
 	}
 
-	return internal.OutputResult(resp, c.RawOutput, stdout)
+	return internal.OutputResult(resp, c.RawOutput, c.Format, stdout)
 }
