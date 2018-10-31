@@ -4,10 +4,9 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"fmt"
+	"github.com/go-github-cli/go-github-cli/internal"
 	"golang.org/x/oauth2"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"net/url"
 	"os"
@@ -24,6 +23,7 @@ type baseCmd struct {
 	reqBody       *map[string]interface{}
 	Token         string `env:"GITHUB_TOKEN" required:""`
 	APIBaseURL    string `env:"GITHUB_API_BASE_URL" default:"https://api.github.com"`
+	RawOutput     bool   `help:"don't format json output."`
 }
 
 func (c *baseCmd) isValueSet(valueName string) bool {
@@ -120,14 +120,5 @@ func (c *baseCmd) doRequest(method string) error {
 		return err
 	}
 
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return err
-	}
-	err = resp.Body.Close()
-	if err != nil {
-		return err
-	}
-	_, err = fmt.Fprintln(stdout, string(body))
-	return err
+	return internal.OutputResult(resp, c.RawOutput, stdout)
 }

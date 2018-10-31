@@ -30,7 +30,7 @@ func startVCR(t *testing.T, recPath string) func() {
 	rec, err := recorder.New(recPath)
 	require.Nil(t, err)
 	transportWrapper = rec
-	return func(){
+	return func() {
 		t.Helper()
 		require.Nil(t, rec.Stop())
 	}
