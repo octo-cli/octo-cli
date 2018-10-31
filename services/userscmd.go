@@ -85,6 +85,7 @@ func (c *UsersUpdateAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
 
 type UsersGetContextForUserCmd struct {
 	baseCmd
+	Hagar       bool   "name:\"hagar-preview\" required:\"\" help:\"**Note:** You can now retrieve someone's hovercard information in different contexts using the Hovercard API. This feature is currently available for developers to preview. See the [blog post](/changes/2018-03-21-hovercard-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.hagar-preview+json\n\n```\""
 	Username    string `required:"" name:"username"`
 	SubjectType string "name:\"subject_type\" help:\"Identifies which additional information you'd like to receive about the person's hovercard. Can be `organization`, `repository`, `issue`, `pull_request`. **Required** when using `subject_id`.\""
 	SubjectId   string "name:\"subject_id\" help:\"Uses the ID for the `subject_type` you specified. **Required** when using `subject_type`.\""
@@ -93,6 +94,7 @@ type UsersGetContextForUserCmd struct {
 func (c *UsersGetContextForUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/users/:username/hovercard"
+	c.updatePreview("hagar", c.Hagar)
 	c.updateURLPath("username", c.Username)
 	c.updateURLQuery("subject_type", c.SubjectType)
 	c.updateURLQuery("subject_id", c.SubjectId)

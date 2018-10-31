@@ -337,6 +337,7 @@ func (c *ReposEditCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposListTopicsCmd struct {
 	baseCmd
+	Mercy bool   "name:\"mercy-preview\" help:\"**Note:** The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.mercy-preview+json\n\n```\""
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
@@ -344,6 +345,7 @@ type ReposListTopicsCmd struct {
 func (c *ReposListTopicsCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/topics"
+	c.updatePreview("mercy", c.Mercy)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	return c.doRequest("GET")
@@ -351,6 +353,7 @@ func (c *ReposListTopicsCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposReplaceTopicsCmd struct {
 	baseCmd
+	Mercy bool     "name:\"mercy-preview\" help:\"**Note:** The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.mercy-preview+json\n\n```\""
 	Owner string   `required:"" name:"owner"`
 	Repo  string   `required:"" name:"repo"`
 	Names []string "required:\"\" name:\"names\" help:\"An array of topics to add to the repository. Pass one or more topics to _replace_ the set of existing topics. Send an empty array (`[]`) to clear all topics from the repository.\""
@@ -359,6 +362,7 @@ type ReposReplaceTopicsCmd struct {
 func (c *ReposReplaceTopicsCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/topics"
+	c.updatePreview("mercy", c.Mercy)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateBody("names", c.Names)
@@ -451,15 +455,17 @@ func (c *ReposDeleteCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposTransferCmd struct {
 	baseCmd
-	Owner    string  `required:"" name:"owner"`
-	Repo     string  `required:"" name:"repo"`
-	NewOwner string  `name:"new_owner" help:"**Required:** The username or organization name the repository will be transferred to."`
-	TeamIds  []int64 `name:"team_ids" help:"ID of the team or teams to add to the repository. Teams can only be added to organization-owned repositories."`
+	Nightshade bool    "name:\"nightshade-preview\" required:\"\" help:\"**Note:** The [Repository Transfer API](/changes/2017-11-09-repository-transfer-api-preview) is currently available for developers to preview. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.nightshade-preview+json\n\n```\""
+	Owner      string  `required:"" name:"owner"`
+	Repo       string  `required:"" name:"repo"`
+	NewOwner   string  `name:"new_owner" help:"**Required:** The username or organization name the repository will be transferred to."`
+	TeamIds    []int64 `name:"team_ids" help:"ID of the team or teams to add to the repository. Teams can only be added to organization-owned repositories."`
 }
 
 func (c *ReposTransferCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/transfer"
+	c.updatePreview("nightshade", c.Nightshade)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateBody("new_owner", c.NewOwner)
@@ -505,14 +511,16 @@ func (c *ReposGetBranchCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetBranchProtectionCmd struct {
 	baseCmd
-	Owner  string `required:"" name:"owner"`
-	Repo   string `required:"" name:"repo"`
-	Branch string `required:"" name:"branch"`
+	LukeCage bool   "name:\"luke-cage-preview\" help:\"**Note:** The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.luke-cage-preview+json\n\n```\""
+	Owner    string `required:"" name:"owner"`
+	Repo     string `required:"" name:"repo"`
+	Branch   string `required:"" name:"branch"`
 }
 
 func (c *ReposGetBranchProtectionCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection"
+	c.updatePreview("luke-cage", c.LukeCage)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLPath("branch", c.Branch)
@@ -659,14 +667,16 @@ func (c *ReposRemoveProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueS
 
 type ReposGetProtectedBranchPullRequestReviewEnforcementCmd struct {
 	baseCmd
-	Owner  string `required:"" name:"owner"`
-	Repo   string `required:"" name:"repo"`
-	Branch string `required:"" name:"branch"`
+	LukeCage bool   "name:\"luke-cage-preview\" help:\"**Note:** The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.luke-cage-preview+json\n\n```\""
+	Owner    string `required:"" name:"owner"`
+	Repo     string `required:"" name:"repo"`
+	Branch   string `required:"" name:"branch"`
 }
 
 func (c *ReposGetProtectedBranchPullRequestReviewEnforcementCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/required_pull_request_reviews"
+	c.updatePreview("luke-cage", c.LukeCage)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLPath("branch", c.Branch)
@@ -691,6 +701,7 @@ func (c *ReposRemoveProtectedBranchPullRequestReviewEnforcementCmd) Run(isValueS
 
 type ReposGetProtectedBranchRequiredSignaturesCmd struct {
 	baseCmd
+	Zzzax  bool   "name:\"zzzax-preview\" required:\"\" help:\"**Note:** Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.zzzax-preview+json\n\n```\""
 	Owner  string `required:"" name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Branch string `required:"" name:"branch"`
@@ -699,6 +710,7 @@ type ReposGetProtectedBranchRequiredSignaturesCmd struct {
 func (c *ReposGetProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/required_signatures"
+	c.updatePreview("zzzax", c.Zzzax)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLPath("branch", c.Branch)
@@ -707,6 +719,7 @@ func (c *ReposGetProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[str
 
 type ReposAddProtectedBranchRequiredSignaturesCmd struct {
 	baseCmd
+	Zzzax  bool   "name:\"zzzax-preview\" required:\"\" help:\"**Note:** Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.zzzax-preview+json\n\n```\""
 	Owner  string `required:"" name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Branch string `required:"" name:"branch"`
@@ -715,6 +728,7 @@ type ReposAddProtectedBranchRequiredSignaturesCmd struct {
 func (c *ReposAddProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/required_signatures"
+	c.updatePreview("zzzax", c.Zzzax)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLPath("branch", c.Branch)
@@ -723,6 +737,7 @@ func (c *ReposAddProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[str
 
 type ReposRemoveProtectedBranchRequiredSignaturesCmd struct {
 	baseCmd
+	Zzzax  bool   "name:\"zzzax-preview\" required:\"\" help:\"**Note:** Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.zzzax-preview+json\n\n```\""
 	Owner  string `required:"" name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Branch string `required:"" name:"branch"`
@@ -731,6 +746,7 @@ type ReposRemoveProtectedBranchRequiredSignaturesCmd struct {
 func (c *ReposRemoveProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/required_signatures"
+	c.updatePreview("zzzax", c.Zzzax)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLPath("branch", c.Branch)
@@ -819,6 +835,7 @@ func (c *ReposRemoveProtectedBranchRestrictionsCmd) Run(isValueSetMap map[string
 
 type ReposListProtectedBranchTeamRestrictionsCmd struct {
 	baseCmd
+	Hellcat bool   "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
 	Owner   string `required:"" name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	Branch  string `required:"" name:"branch"`
@@ -829,6 +846,7 @@ type ReposListProtectedBranchTeamRestrictionsCmd struct {
 func (c *ReposListProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/restrictions/teams"
+	c.updatePreview("hellcat", c.Hellcat)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLPath("branch", c.Branch)
@@ -839,15 +857,17 @@ func (c *ReposListProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[stri
 
 type ReposReplaceProtectedBranchTeamRestrictionsCmd struct {
 	baseCmd
-	Owner  string   `required:"" name:"owner"`
-	Repo   string   `required:"" name:"repo"`
-	Branch string   `required:"" name:"branch"`
-	Teams  []string `required:"" name:"teams"`
+	Hellcat bool     "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
+	Owner   string   `required:"" name:"owner"`
+	Repo    string   `required:"" name:"repo"`
+	Branch  string   `required:"" name:"branch"`
+	Teams   []string `required:"" name:"teams"`
 }
 
 func (c *ReposReplaceProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/restrictions/teams"
+	c.updatePreview("hellcat", c.Hellcat)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLPath("branch", c.Branch)
@@ -857,15 +877,17 @@ func (c *ReposReplaceProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[s
 
 type ReposAddProtectedBranchTeamRestrictionsCmd struct {
 	baseCmd
-	Owner  string   `required:"" name:"owner"`
-	Repo   string   `required:"" name:"repo"`
-	Branch string   `required:"" name:"branch"`
-	Teams  []string `required:"" name:"teams"`
+	Hellcat bool     "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
+	Owner   string   `required:"" name:"owner"`
+	Repo    string   `required:"" name:"repo"`
+	Branch  string   `required:"" name:"branch"`
+	Teams   []string `required:"" name:"teams"`
 }
 
 func (c *ReposAddProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/restrictions/teams"
+	c.updatePreview("hellcat", c.Hellcat)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLPath("branch", c.Branch)
@@ -875,15 +897,17 @@ func (c *ReposAddProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[strin
 
 type ReposRemoveProtectedBranchTeamRestrictionsCmd struct {
 	baseCmd
-	Owner  string   `required:"" name:"owner"`
-	Repo   string   `required:"" name:"repo"`
-	Branch string   `required:"" name:"branch"`
-	Teams  []string `required:"" name:"teams"`
+	Hellcat bool     "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
+	Owner   string   `required:"" name:"owner"`
+	Repo    string   `required:"" name:"repo"`
+	Branch  string   `required:"" name:"branch"`
+	Teams   []string `required:"" name:"teams"`
 }
 
 func (c *ReposRemoveProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/restrictions/teams"
+	c.updatePreview("hellcat", c.Hellcat)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLPath("branch", c.Branch)
@@ -963,6 +987,7 @@ func (c *ReposRemoveProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[st
 
 type ReposListCollaboratorsCmd struct {
 	baseCmd
+	Hellcat     bool   "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
 	Owner       string `required:"" name:"owner"`
 	Repo        string `required:"" name:"repo"`
 	Affiliation string "name:\"affiliation\" help:\"Filter collaborators returned by their affiliation. Can be one of:  \n\\* `outside`: All outside collaborators of an organization-owned repository.  \n\\* `direct`: All collaborators with permissions to an organization-owned repository, regardless of organization membership status.  \n\\* `all`: All collaborators the authenticated user can see.\""
@@ -973,6 +998,7 @@ type ReposListCollaboratorsCmd struct {
 func (c *ReposListCollaboratorsCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/collaborators"
+	c.updatePreview("hellcat", c.Hellcat)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLQuery("affiliation", c.Affiliation)
@@ -983,6 +1009,7 @@ func (c *ReposListCollaboratorsCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposCheckCollaboratorCmd struct {
 	baseCmd
+	Hellcat  bool   "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
 	Owner    string `required:"" name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	Username string `required:"" name:"username"`
@@ -991,6 +1018,7 @@ type ReposCheckCollaboratorCmd struct {
 func (c *ReposCheckCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/collaborators/:username"
+	c.updatePreview("hellcat", c.Hellcat)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLPath("username", c.Username)
@@ -1049,15 +1077,17 @@ func (c *ReposRemoveCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposListCommitCommentsCmd struct {
 	baseCmd
-	Owner   string `required:"" name:"owner"`
-	Repo    string `required:"" name:"repo"`
-	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64  `name:"page" help:"Page number of the results to fetch."`
+	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview\n\n```\n\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.\""
+	Owner        string `required:"" name:"owner"`
+	Repo         string `required:"" name:"repo"`
+	PerPage      int64  `name:"per_page" help:"Results per page (max 100)"`
+	Page         int64  `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *ReposListCommitCommentsCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/comments"
+	c.updatePreview("squirrel-girl", c.SquirrelGirl)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLQuery("per_page", c.PerPage)
@@ -1067,16 +1097,18 @@ func (c *ReposListCommitCommentsCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposListCommentsForCommitCmd struct {
 	baseCmd
-	Owner   string `required:"" name:"owner"`
-	Repo    string `required:"" name:"repo"`
-	Ref     string `required:"" name:"ref"`
-	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64  `name:"page" help:"Page number of the results to fetch."`
+	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview\n\n```\n\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.\""
+	Owner        string `required:"" name:"owner"`
+	Repo         string `required:"" name:"repo"`
+	Ref          string `required:"" name:"ref"`
+	PerPage      int64  `name:"per_page" help:"Results per page (max 100)"`
+	Page         int64  `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *ReposListCommentsForCommitCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/commits/:ref/comments"
+	c.updatePreview("squirrel-girl", c.SquirrelGirl)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLPath("ref", c.Ref)
@@ -1111,14 +1143,16 @@ func (c *ReposCreateCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetCommitCommentCmd struct {
 	baseCmd
-	Owner     string `required:"" name:"owner"`
-	Repo      string `required:"" name:"repo"`
-	CommentId int64  `required:"" name:"comment_id"`
+	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview\n\n```\n\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.\""
+	Owner        string `required:"" name:"owner"`
+	Repo         string `required:"" name:"repo"`
+	CommentId    int64  `required:"" name:"comment_id"`
 }
 
 func (c *ReposGetCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/comments/:comment_id"
+	c.updatePreview("squirrel-girl", c.SquirrelGirl)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLPath("comment_id", c.CommentId)
@@ -1375,6 +1409,7 @@ func (c *ReposRemoveDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposListDeploymentsCmd struct {
 	baseCmd
+	AntMan      bool   "name:\"ant-man-preview\" help:\"**Note:** The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.ant-man-preview+json\n\n```\""
 	Owner       string `required:"" name:"owner"`
 	Repo        string `required:"" name:"repo"`
 	Sha         string `name:"sha" help:"The SHA recorded at creation time."`
@@ -1388,6 +1423,7 @@ type ReposListDeploymentsCmd struct {
 func (c *ReposListDeploymentsCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/deployments"
+	c.updatePreview("ant-man", c.AntMan)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLQuery("sha", c.Sha)
@@ -1401,6 +1437,8 @@ func (c *ReposListDeploymentsCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetDeploymentCmd struct {
 	baseCmd
+	MachineMan   bool   "name:\"machine-man-preview\" help:\"**Note:** If a deployment is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](/changes/2016-09-14-Integrations-Early-Access).\n\nTo receive the `performed_via_github_app` object is the response, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.machine-man-preview\n\n```\""
+	AntMan       bool   "name:\"ant-man-preview\" help:\"**Note:** The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.ant-man-preview+json\n\n```\""
 	Owner        string `required:"" name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	DeploymentId int64  `required:"" name:"deployment_id"`
@@ -1409,6 +1447,8 @@ type ReposGetDeploymentCmd struct {
 func (c *ReposGetDeploymentCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/deployments/:deployment_id"
+	c.updatePreview("machine-man", c.MachineMan)
+	c.updatePreview("ant-man", c.AntMan)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLPath("deployment_id", c.DeploymentId)
@@ -1417,6 +1457,7 @@ func (c *ReposGetDeploymentCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposCreateDeploymentCmd struct {
 	baseCmd
+	AntMan                bool     "name:\"ant-man-preview\" help:\"**Note:** The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.ant-man-preview+json\n\n```\""
 	Owner                 string   `required:"" name:"owner"`
 	Repo                  string   `required:"" name:"repo"`
 	Ref                   string   `required:"" name:"ref" help:"The ref to deploy. This can be a branch, tag, or SHA."`
@@ -1433,6 +1474,7 @@ type ReposCreateDeploymentCmd struct {
 func (c *ReposCreateDeploymentCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/deployments"
+	c.updatePreview("ant-man", c.AntMan)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateBody("ref", c.Ref)
@@ -1449,6 +1491,8 @@ func (c *ReposCreateDeploymentCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposListDeploymentStatusesCmd struct {
 	baseCmd
+	Flash        bool   "name:\"flash-preview\" help:\"**Note:** New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.\n\nTo access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must provide the following custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.flash-preview+json\n\n```\""
+	AntMan       bool   "name:\"ant-man-preview\" help:\"**Note:** The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.ant-man-preview+json\n\n```\""
 	Owner        string `required:"" name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	DeploymentId int64  `required:"" name:"deployment_id"`
@@ -1459,6 +1503,8 @@ type ReposListDeploymentStatusesCmd struct {
 func (c *ReposListDeploymentStatusesCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/deployments/:deployment_id/statuses"
+	c.updatePreview("flash", c.Flash)
+	c.updatePreview("ant-man", c.AntMan)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLPath("deployment_id", c.DeploymentId)
@@ -1469,6 +1515,9 @@ func (c *ReposListDeploymentStatusesCmd) Run(isValueSetMap map[string]bool) erro
 
 type ReposGetDeploymentStatusCmd struct {
 	baseCmd
+	MachineMan   bool   "name:\"machine-man-preview\" help:\"**Note:** If a deployment is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](/changes/2016-09-14-Integrations-Early-Access).\n\nTo receive the `performed_via_github_app` object is the response, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.machine-man-preview\n\n```\""
+	Flash        bool   "name:\"flash-preview\" help:\"**Note:** New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.\n\nTo access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must provide the following custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.flash-preview+json\n\n```\""
+	AntMan       bool   "name:\"ant-man-preview\" help:\"**Note:** The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.ant-man-preview+json\n\n```\""
 	Owner        string `required:"" name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	DeploymentId int64  `required:"" name:"deployment_id"`
@@ -1478,6 +1527,9 @@ type ReposGetDeploymentStatusCmd struct {
 func (c *ReposGetDeploymentStatusCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/deployments/:deployment_id/statuses/:status_id"
+	c.updatePreview("machine-man", c.MachineMan)
+	c.updatePreview("flash", c.Flash)
+	c.updatePreview("ant-man", c.AntMan)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLPath("deployment_id", c.DeploymentId)
@@ -1487,6 +1539,8 @@ func (c *ReposGetDeploymentStatusCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposCreateDeploymentStatusCmd struct {
 	baseCmd
+	Flash          bool   "name:\"flash-preview\" help:\"**Note:** New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.\n\nTo access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must provide the following custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.flash-preview+json\n\n```\""
+	AntMan         bool   "name:\"ant-man-preview\" help:\"**Note:** The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.ant-man-preview+json\n\n```\""
 	Owner          string `required:"" name:"owner"`
 	Repo           string `required:"" name:"repo"`
 	DeploymentId   int64  `required:"" name:"deployment_id"`
@@ -1502,6 +1556,8 @@ type ReposCreateDeploymentStatusCmd struct {
 func (c *ReposCreateDeploymentStatusCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/deployments/:deployment_id/statuses"
+	c.updatePreview("flash", c.Flash)
+	c.updatePreview("ant-man", c.AntMan)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLPath("deployment_id", c.DeploymentId)
@@ -1713,13 +1769,15 @@ func (c *ReposMergeCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetPagesCmd struct {
 	baseCmd
-	Owner string `required:"" name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	MisterFantastic bool   "name:\"mister-fantastic-preview\" required:\"\" help:\"**Note:** The GitHub Pages API on GitHub is currently available for developers to preview. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.mister-fantastic-preview+json\n\n```\""
+	Owner           string `required:"" name:"owner"`
+	Repo            string `required:"" name:"repo"`
 }
 
 func (c *ReposGetPagesCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/pages"
+	c.updatePreview("mister-fantastic", c.MisterFantastic)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	return c.doRequest("GET")
@@ -1727,15 +1785,17 @@ func (c *ReposGetPagesCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposUpdateInformationAboutPagesSiteCmd struct {
 	baseCmd
-	Owner  string `required:"" name:"owner"`
-	Repo   string `required:"" name:"repo"`
-	Cname  string "name:\"cname\" help:\"Specify a custom domain for the repository. Sending a `null` value will remove the custom domain. For more about custom domains, see '[Using a custom domain with GitHub Pages](https://help.github.com/articles/using-a-custom-domain-with-github-pages/).'\""
-	Source string "name:\"source\" help:\"Update the source for the repository. Must include the branch name, and may optionally specify the subdirectory `/docs`. Possible values are `'gh-pages'`, `'master'`, and `'master /docs'`.\""
+	MisterFantastic bool   "name:\"mister-fantastic-preview\" required:\"\" help:\"**Note:** The GitHub Pages API on GitHub is currently available for developers to preview. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.mister-fantastic-preview+json\n\n```\""
+	Owner           string `required:"" name:"owner"`
+	Repo            string `required:"" name:"repo"`
+	Cname           string "name:\"cname\" help:\"Specify a custom domain for the repository. Sending a `null` value will remove the custom domain. For more about custom domains, see '[Using a custom domain with GitHub Pages](https://help.github.com/articles/using-a-custom-domain-with-github-pages/).'\""
+	Source          string "name:\"source\" help:\"Update the source for the repository. Must include the branch name, and may optionally specify the subdirectory `/docs`. Possible values are `'gh-pages'`, `'master'`, and `'master /docs'`.\""
 }
 
 func (c *ReposUpdateInformationAboutPagesSiteCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/pages"
+	c.updatePreview("mister-fantastic", c.MisterFantastic)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateBody("cname", c.Cname)
@@ -1745,13 +1805,15 @@ func (c *ReposUpdateInformationAboutPagesSiteCmd) Run(isValueSetMap map[string]b
 
 type ReposRequestPageBuildCmd struct {
 	baseCmd
-	Owner string `required:"" name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	MisterFantastic bool   "name:\"mister-fantastic-preview\" required:\"\" help:\"This endpoint is currently available for developers to preview. During the preview period, the API may change without advance notice.\n\nTo access this endpoint during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.mister-fantastic-preview+json\n\n```\""
+	Owner           string `required:"" name:"owner"`
+	Repo            string `required:"" name:"repo"`
 }
 
 func (c *ReposRequestPageBuildCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/pages/builds"
+	c.updatePreview("mister-fantastic", c.MisterFantastic)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	return c.doRequest("POST")

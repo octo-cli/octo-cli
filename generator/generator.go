@@ -37,6 +37,7 @@ var updateMethodMap = map[string]string{
 	"body":    "updateBody",
 	"query":   "updateURLQuery",
 	"headers": "updateHeader",
+	"preview": "updatePreview",
 }
 
 func Generate(routesPath, outputPath string) {
@@ -85,6 +86,27 @@ func Generate(routesPath, outputPath string) {
 			}
 
 			skipThisRoute := false
+			for _, preview := range route.Previews {
+				tags := newTags(newTag("name", preview.Name+"-preview"))
+				if preview.Required {
+					setTag(tags, newTag("required", ""))
+				}
+				setTag(tags, newTag("help", preview.Description))
+
+				previewParamName := ToArgName(preview.Name)
+				tmplHelper.Fields = append(tmplHelper.Fields,
+					StructField{
+						Name: previewParamName,
+						Type: "bool",
+						Tags: tags,
+					},
+				)
+				runMethod.Params = append(runMethod.Params, RunMethodParam{
+					Name:         preview.Name,
+					UpdateMethod: updateMethodMap["preview"],
+					ValueField:   previewParamName,
+				})
+			}
 			for _, param := range route.Params {
 				paramName := ToArgName(param.Name)
 				paramType, ok := paramTypes[param.Type]

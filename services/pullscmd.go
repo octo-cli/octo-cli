@@ -32,6 +32,7 @@ type PullsCmd struct {
 
 type PullsListCmd struct {
 	baseCmd
+	Symmetra  bool   "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	Owner     string `required:"" name:"owner"`
 	Repo      string `required:"" name:"repo"`
 	State     string "name:\"state\" help:\"Either `open`, `closed`, or `all` to filter by state.\""
@@ -46,6 +47,7 @@ type PullsListCmd struct {
 func (c *PullsListCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/pulls"
+	c.updatePreview("symmetra", c.Symmetra)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLQuery("state", c.State)
@@ -60,14 +62,16 @@ func (c *PullsListCmd) Run(isValueSetMap map[string]bool) error {
 
 type PullsGetCmd struct {
 	baseCmd
-	Owner  string `required:"" name:"owner"`
-	Repo   string `required:"" name:"repo"`
-	Number int64  `required:"" name:"number"`
+	Symmetra bool   "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
+	Owner    string `required:"" name:"owner"`
+	Repo     string `required:"" name:"repo"`
+	Number   int64  `required:"" name:"number"`
 }
 
 func (c *PullsGetCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/pulls/:number"
+	c.updatePreview("symmetra", c.Symmetra)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLPath("number", c.Number)
@@ -76,6 +80,7 @@ func (c *PullsGetCmd) Run(isValueSetMap map[string]bool) error {
 
 type PullsCreateCmd struct {
 	baseCmd
+	Symmetra            bool   "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	Owner               string `required:"" name:"owner"`
 	Repo                string `required:"" name:"repo"`
 	Title               string `required:"" name:"title" help:"The title of the pull request."`
@@ -88,6 +93,7 @@ type PullsCreateCmd struct {
 func (c *PullsCreateCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/pulls"
+	c.updatePreview("symmetra", c.Symmetra)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateBody("title", c.Title)
@@ -100,6 +106,7 @@ func (c *PullsCreateCmd) Run(isValueSetMap map[string]bool) error {
 
 type PullsCreateFromIssueCmd struct {
 	baseCmd
+	Symmetra            bool   "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	Owner               string `required:"" name:"owner"`
 	Repo                string `required:"" name:"repo"`
 	Issue               int64  `required:"" name:"issue" help:"The issue number in this repository to turn into a Pull Request."`
@@ -111,6 +118,7 @@ type PullsCreateFromIssueCmd struct {
 func (c *PullsCreateFromIssueCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/pulls"
+	c.updatePreview("symmetra", c.Symmetra)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateBody("issue", c.Issue)
@@ -122,6 +130,7 @@ func (c *PullsCreateFromIssueCmd) Run(isValueSetMap map[string]bool) error {
 
 type PullsUpdateCmd struct {
 	baseCmd
+	Symmetra            bool   "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	Owner               string `required:"" name:"owner"`
 	Repo                string `required:"" name:"repo"`
 	Number              int64  `required:"" name:"number"`
@@ -135,6 +144,7 @@ type PullsUpdateCmd struct {
 func (c *PullsUpdateCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/pulls/:number"
+	c.updatePreview("symmetra", c.Symmetra)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLPath("number", c.Number)
@@ -348,19 +358,21 @@ func (c *PullsDismissReviewCmd) Run(isValueSetMap map[string]bool) error {
 
 type PullsListCommentsCmd struct {
 	baseCmd
-	Owner     string `required:"" name:"owner"`
-	Repo      string `required:"" name:"repo"`
-	Number    int64  `required:"" name:"number"`
-	Sort      string "name:\"sort\" help:\"Can be either `created` or `updated` comments.\""
-	Direction string "name:\"direction\" help:\"Can be either `asc` or `desc`. Ignored without `sort` parameter.\""
-	Since     string "name:\"since\" help:\"This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Only returns comments `updated` at or after this time.\""
-	PerPage   int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page      int64  `name:"page" help:"Page number of the results to fetch."`
+	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the review comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview\n\n```\n\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.\""
+	Owner        string `required:"" name:"owner"`
+	Repo         string `required:"" name:"repo"`
+	Number       int64  `required:"" name:"number"`
+	Sort         string "name:\"sort\" help:\"Can be either `created` or `updated` comments.\""
+	Direction    string "name:\"direction\" help:\"Can be either `asc` or `desc`. Ignored without `sort` parameter.\""
+	Since        string "name:\"since\" help:\"This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Only returns comments `updated` at or after this time.\""
+	PerPage      int64  `name:"per_page" help:"Results per page (max 100)"`
+	Page         int64  `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *PullsListCommentsCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/pulls/:number/comments"
+	c.updatePreview("squirrel-girl", c.SquirrelGirl)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLPath("number", c.Number)
@@ -374,18 +386,20 @@ func (c *PullsListCommentsCmd) Run(isValueSetMap map[string]bool) error {
 
 type PullsListCommentsForRepoCmd struct {
 	baseCmd
-	Owner     string `required:"" name:"owner"`
-	Repo      string `required:"" name:"repo"`
-	Sort      string "name:\"sort\" help:\"Can be either `created` or `updated` comments.\""
-	Direction string "name:\"direction\" help:\"Can be either `asc` or `desc`. Ignored without `sort` parameter.\""
-	Since     string "name:\"since\" help:\"This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Only returns comments `updated` at or after this time.\""
-	PerPage   int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page      int64  `name:"page" help:"Page number of the results to fetch."`
+	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the review comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview\n\n```\n\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.\""
+	Owner        string `required:"" name:"owner"`
+	Repo         string `required:"" name:"repo"`
+	Sort         string "name:\"sort\" help:\"Can be either `created` or `updated` comments.\""
+	Direction    string "name:\"direction\" help:\"Can be either `asc` or `desc`. Ignored without `sort` parameter.\""
+	Since        string "name:\"since\" help:\"This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Only returns comments `updated` at or after this time.\""
+	PerPage      int64  `name:"per_page" help:"Results per page (max 100)"`
+	Page         int64  `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *PullsListCommentsForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/pulls/comments"
+	c.updatePreview("squirrel-girl", c.SquirrelGirl)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLQuery("sort", c.Sort)
@@ -398,14 +412,16 @@ func (c *PullsListCommentsForRepoCmd) Run(isValueSetMap map[string]bool) error {
 
 type PullsGetCommentCmd struct {
 	baseCmd
-	Owner     string `required:"" name:"owner"`
-	Repo      string `required:"" name:"repo"`
-	CommentId int64  `required:"" name:"comment_id"`
+	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the review comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview\n\n```\n\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.\""
+	Owner        string `required:"" name:"owner"`
+	Repo         string `required:"" name:"repo"`
+	CommentId    int64  `required:"" name:"comment_id"`
 }
 
 func (c *PullsGetCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/pulls/comments/:comment_id"
+	c.updatePreview("squirrel-girl", c.SquirrelGirl)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLPath("comment_id", c.CommentId)
@@ -512,6 +528,7 @@ func (c *PullsListReviewRequestsCmd) Run(isValueSetMap map[string]bool) error {
 
 type PullsCreateReviewRequestCmd struct {
 	baseCmd
+	Symmetra      bool     "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	Owner         string   `required:"" name:"owner"`
 	Repo          string   `required:"" name:"repo"`
 	Number        int64    `required:"" name:"number"`
@@ -522,6 +539,7 @@ type PullsCreateReviewRequestCmd struct {
 func (c *PullsCreateReviewRequestCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/repos/:owner/:repo/pulls/:number/requested_reviewers"
+	c.updatePreview("symmetra", c.Symmetra)
 	c.updateURLPath("owner", c.Owner)
 	c.updateURLPath("repo", c.Repo)
 	c.updateURLPath("number", c.Number)

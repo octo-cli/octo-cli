@@ -333,6 +333,7 @@ func (c *OrgsRemoveMembershipCmd) Run(isValueSetMap map[string]bool) error {
 
 type OrgsListInvitationTeamsCmd struct {
 	baseCmd
+	Dazzler      bool   "name:\"dazzler-preview\" help:\"**Note:** You can now use the API to invite users to a GitHub organization. This feature is currently available for developers to preview. See the [blog post](/changes/2018-01-25-organization-invitation-api-preview) for full details. To access this feature, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.dazzler-preview+json\n\n```\""
 	Org          string `required:"" name:"org"`
 	InvitationId int64  `required:"" name:"invitation_id"`
 	PerPage      int64  `name:"per_page" help:"Results per page (max 100)"`
@@ -342,6 +343,7 @@ type OrgsListInvitationTeamsCmd struct {
 func (c *OrgsListInvitationTeamsCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/orgs/:org/invitations/:invitation_id/teams"
+	c.updatePreview("dazzler", c.Dazzler)
 	c.updateURLPath("org", c.Org)
 	c.updateURLPath("invitation_id", c.InvitationId)
 	c.updateURLQuery("per_page", c.PerPage)
@@ -351,6 +353,7 @@ func (c *OrgsListInvitationTeamsCmd) Run(isValueSetMap map[string]bool) error {
 
 type OrgsListPendingInvitationsCmd struct {
 	baseCmd
+	Dazzler bool   "name:\"dazzler-preview\" help:\"**Note:** You can now use the API to invite users to a GitHub organization. This feature is currently available for developers to preview. See the [blog post](/changes/2018-01-25-organization-invitation-api-preview) for full details. To access this feature, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.dazzler-preview+json\n\n```\""
 	Org     string `required:"" name:"org"`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64  `name:"page" help:"Page number of the results to fetch."`
@@ -359,6 +362,7 @@ type OrgsListPendingInvitationsCmd struct {
 func (c *OrgsListPendingInvitationsCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/orgs/:org/invitations"
+	c.updatePreview("dazzler", c.Dazzler)
 	c.updateURLPath("org", c.Org)
 	c.updateURLQuery("per_page", c.PerPage)
 	c.updateURLQuery("page", c.Page)
@@ -367,6 +371,7 @@ func (c *OrgsListPendingInvitationsCmd) Run(isValueSetMap map[string]bool) error
 
 type OrgsCreateInvitationCmd struct {
 	baseCmd
+	Dazzler   bool    "name:\"dazzler-preview\" help:\"**Note:** You can now use the API to invite users to a GitHub organization. This feature is currently available for developers to preview. See the [blog post](/changes/2018-01-25-organization-invitation-api-preview) for full details. To access this feature, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.dazzler-preview+json\n\n```\""
 	Org       string  `required:"" name:"org"`
 	InviteeId int64   "name:\"invitee_id\" help:\"**Required unless you provide `email`**. GitHub user ID for the person you are inviting.\""
 	Email     string  "name:\"email\" help:\"**Required unless you provide `invitee_id`**. Email address of the person you are inviting, which can be an existing GitHub user.\""
@@ -377,6 +382,7 @@ type OrgsCreateInvitationCmd struct {
 func (c *OrgsCreateInvitationCmd) Run(isValueSetMap map[string]bool) error {
 	c.isValueSetMap = isValueSetMap
 	c.url.Path = "/orgs/:org/invitations"
+	c.updatePreview("dazzler", c.Dazzler)
 	c.updateURLPath("org", c.Org)
 	c.updateBody("invitee_id", c.InviteeId)
 	c.updateBody("email", c.Email)
