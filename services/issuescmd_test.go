@@ -55,12 +55,12 @@ func testCmdLine(t *testing.T, fixtureName string, cmdStruct interface{}, cmdlin
 	defer recCleanup()
 	p, e := kong.New(cmdStruct)
 
-	require.Nil(t, e)
+	require.NoError(t, e)
 	stdout = &sout
 	stderr = &serr
 
 	k, e := p.Parse(cmdline)
-	require.Nil(t, e)
+	require.NoError(t, e)
 	valueIsSetMap := map[string]bool{}
 	for _, flag := range k.Flags() {
 		valueIsSetMap[flag.Name] = flag.Set
@@ -80,12 +80,13 @@ func TestCreate(t *testing.T) {
 		`--labels=label2`,
 		`--milestone=1`,
 		`--assignees=go-github-cli-testuser`,
+		`--raw-output`,
 	)
-	assert.Nil(t, err)
+	assert.NoError(t, err)
 	assert.Empty(t, stderr.String())
 	var got map[string]interface{}
 	err = json.Unmarshal(stdout.Bytes(), &got)
-	assert.Nil(t, err)
+	assert.NoError(t, err)
 	assert.Equal(t, "test this", got["title"])
 	assert.Equal(t, "test this body", got["body"])
 	assert.Len(t, got["labels"], 2)
@@ -104,12 +105,13 @@ func TestPlayWithOutput(t *testing.T) {
 		`--labels=label2`,
 		`--milestone=1`,
 		`--assignees=go-github-cli-testuser`,
+		`--raw-output`,
 	)
-	assert.Nil(t, err)
+	assert.NoError(t, err)
 	assert.Empty(t, stderr.String())
 	var got map[string]interface{}
 	err = json.Unmarshal(stdout.Bytes(), &got)
-	assert.Nil(t, err)
+	assert.NoError(t, err)
 
 	tp, err := template.New("").Funcs(template.FuncMap{"wider": func(a, b interface{}) string { return fmt.Sprintf("%-20s%d", a, b) }}).Parse(`
 	Number	{{.number}}
@@ -124,10 +126,10 @@ func TestPlayWithOutput(t *testing.T) {
 	{{if .assignees}}Assignees{{range .assignees}}	{{.login}}
 	{{end}}{{end}}
 	`)
-	assert.Nil(t, err)
+	assert.NoError(t, err)
 	w := tabwriter.NewWriter(os.Stdout, 8, 8, 8, ' ', 0)
 	err = tp.Execute(w, got)
-	assert.Nil(t, err)
+	assert.NoError(t, err)
 	err = w.Flush()
-	assert.Nil(t, err)
+	assert.NoError(t, err)
 }
