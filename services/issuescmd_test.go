@@ -4,7 +4,10 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"github.com/dnaeon/go-vcr/cassette"
 	"github.com/stretchr/testify/assert"
+	"io/ioutil"
+	"net/http"
 	"os"
 	"path/filepath"
 	"testing"
@@ -28,6 +31,16 @@ func startVCR(t *testing.T, recPath string) func() {
 	t.Helper()
 	var err error
 	rec, err := recorder.New(recPath)
+	rec.SetMatcher(func(r *http.Request, i cassette.Request) bool {
+		var b bytes.Buffer
+		if _, err := b.ReadFrom(r.Body); err != nil {
+			return false
+		}
+		r.Body = ioutil.NopCloser(&b)
+		return cassette.DefaultMatcher(r, i) &&
+			(b.String() == "" || b.String() == i.Body) &&
+			r.Header.Get("Accept") == i.Headers.Get("Accept")
+	})
 	require.Nil(t, err)
 	transportWrapper = rec
 	return func() {
