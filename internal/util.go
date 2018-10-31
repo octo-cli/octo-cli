@@ -62,6 +62,6 @@ func OutputResult(resp *http.Response, rawOutput bool, format string, stdout io.
 			}
 		}
 	}
-	_, err = fmt.Fprint(stdout, string(body))
+	_, err = fmt.Fprintln(stdout, string(body))
 	return err
 }
