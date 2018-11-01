@@ -6,5 +6,4 @@ set -e
 # Ensure we're always running from the project root
 cd "$(dirname "$0")/.."
 
-go fmt ./...
-go build -o bin/go-github-cli
+go build -o bin/go-github-cli -ldflags "-X main.version=${VERSION:-development}"
