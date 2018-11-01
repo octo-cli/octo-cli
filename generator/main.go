@@ -24,13 +24,24 @@ type (
 	genCliRun struct {
 		RoutesPath string `type:"existingfile" default:"routes.json"`
 		OutputPath string `type:"existingdir" default:"./services"`
+		Verify     bool   `help:"Verify a new run won't change anything"`
 	}
 
 	genCliUpdateTestdata struct{}
 )
 
 func (k *genCliRun) Run() error {
-	Generate(k.RoutesPath, k.OutputPath)
+	if k.Verify {
+		diffs, err := verify(k.RoutesPath, k.OutputPath)
+		if err != nil {
+			return errors.New("error verifying")
+		}
+		if len(diffs) > 0 {
+			return fmt.Errorf("some files did not match: %v", diffs)
+		}
+	} else {
+		Generate(k.RoutesPath, k.OutputPath)
+	}
 	return nil
 }
 
@@ -90,9 +101,5 @@ func (k *genCliUpdateTestdata) Run() error {
 func main() {
 	k := kong.Parse(&genCli{})
 	err := k.Run()
-	if err != nil {
-		fmt.Printf("%+v", err)
-		fmt.Println(err)
-	}
 	k.FatalIfErrorf(err)
 }
