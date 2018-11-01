@@ -2,7 +2,6 @@ package main
 
 import (
 	"bytes"
-	"fmt"
 	"github.com/fatih/structtag"
 	"github.com/pkg/errors"
 	"go/format"
@@ -237,10 +236,7 @@ func Generate(routesPath, outputPath string) {
 		}
 	}
 	for filename, fileTmpl := range files {
-		fmt.Println(filename)
-
 		err = writeGoFile(filename, "main", fileTmpl, outputPath)
-
 		if err != nil {
 			panic(err)
 		}
