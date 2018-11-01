@@ -40,6 +40,73 @@ var updateMethodMap = map[string]string{
 	"preview": "updatePreview",
 }
 
+func dirFileMap(path string) (map[string][]byte, error) {
+	output := map[string][]byte{}
+	fileInfos, err := ioutil.ReadDir(path)
+	if err != nil {
+		return nil, err
+	}
+	for _, fileInfo := range fileInfos {
+		fileInfo.Sys()
+		if fileInfo.IsDir() {
+			continue
+		}
+		fileBytes, err := ioutil.ReadFile(filepath.Join(path, fileInfo.Name()))
+		if err != nil {
+			return nil, err
+		}
+		output[fileInfo.Name()] = fileBytes
+	}
+	return output, nil
+}
+
+func verify(routesPath, outputPath string) ([]string, error) {
+	err := os.MkdirAll("./tmp", 0755)
+	if err != nil {
+		return nil, err
+	}
+	tempDir, err := ioutil.TempDir("./tmp", "")
+	if err != nil {
+		return nil, err
+	}
+	defer func() {
+		_ = os.RemoveAll(tempDir)
+	}()
+	Generate(routesPath, tempDir)
+
+	wantFiles, err := dirFileMap(tempDir)
+	if err != nil {
+		return nil, err
+	}
+	gotFiles, err := dirFileMap(outputPath)
+	if err != nil {
+		return nil, err
+	}
+	diffFiles := map[string]interface{}{}
+	for name, wantBytes := range wantFiles {
+		gotBytes := gotFiles[name]
+		if !bytes.Equal(gotBytes, wantBytes) {
+			diffFiles[name] = nil
+		}
+	}
+	for name := range gotFiles {
+		if _, ok := wantFiles[name]; !ok {
+			diffFiles[name] = nil
+		}
+	}
+
+	var output []string
+
+	for v := range diffFiles {
+		if strings.HasSuffix(v, "_test.go") ||
+			strings.HasSuffix(v, "artisanally_handcrafted_code.go") {
+			continue
+		}
+		output = append(output, v)
+	}
+	return output, nil
+}
+
 func Generate(routesPath, outputPath string) {
 	CLITmpl := StructTmplHelper{
 		Name: "CLI",

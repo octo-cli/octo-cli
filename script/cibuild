@@ -1,0 +1,23 @@
+#!/bin/sh
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+EXITCODE=0
+fail() {
+  EXITCODE=1
+}
+echo "running script/test"
+script/test || fail
+
+echo "running script/golint"
+script/golint || fail
+
+echo "running script/lint"
+script/lint || fail
+
+echo "script/generate --verify"
+script/generate --verify  || fail
+
+exit $EXITCODE
