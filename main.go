@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/alecthomas/kong"
-	"github.com/go-github-cli/go-github-cli/services"
+	"github.com/octo-cli/octo-cli/services"
 )
 
 var version = "development"
