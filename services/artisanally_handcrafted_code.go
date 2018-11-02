@@ -5,7 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/go-github-cli/go-github-cli/internal"
+	"github.com/octo-cli/octo-cli/internal"
 	"golang.org/x/oauth2"
 	"io"
 	"net/http"

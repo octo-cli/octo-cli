@@ -72,14 +72,14 @@ func testCmdLine(t *testing.T, fixtureName string, cmdStruct interface{}, cmdlin
 func TestCreate(t *testing.T) {
 	stdout, stderr, err := testCmdLine(t, "test_issues_create", &IssuesCmd{},
 		`create`,
-		`--owner=go-github-cli-testorg`,
+		`--owner=octo-cli-testorg`,
 		`--repo=test-create-issue`,
 		`--title=test this`,
 		`--body=test this body`,
 		`--labels=label1`,
 		`--labels=label2`,
 		`--milestone=1`,
-		`--assignees=go-github-cli-testuser`,
+		`--assignees=octo-cli-testuser`,
 		`--raw-output`,
 	)
 	assert.NoError(t, err)
@@ -97,14 +97,14 @@ func TestCreate(t *testing.T) {
 func TestPlayWithOutput(t *testing.T) {
 	stdout, stderr, err := testCmdLine(t, "test_issues_create", &IssuesCmd{},
 		`create`,
-		`--owner=go-github-cli-testorg`,
+		`--owner=octo-cli-testorg`,
 		`--repo=test-create-issue`,
 		`--title=test this`,
 		`--body=test this body`,
 		`--labels=label1`,
 		`--labels=label2`,
 		`--milestone=1`,
-		`--assignees=go-github-cli-testuser`,
+		`--assignees=octo-cli-testuser`,
 		`--raw-output`,
 	)
 	assert.NoError(t, err)
