@@ -1,8 +1,7 @@
 # octo-cli
 
 `octo-cli` is a cli client for GitHub's REST API.  It is generated
-by inspecting [go-github](https://github.com/google/go-github) and
-https://octokit.github.io/routes/.
+by inspecting https://octokit.github.io/routes/.
 
 See ./generator for more on how it is generated.
 
