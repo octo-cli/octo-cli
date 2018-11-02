@@ -6,4 +6,4 @@ set -e
 # Ensure we're always running from the project root
 cd "$(dirname "$0")/.."
 
-go build -o bin/octo-cli -ldflags "-X main.version=${VERSION:-development}"
+go build -o bin/octo -ldflags "-X main.version=${VERSION:-development}"

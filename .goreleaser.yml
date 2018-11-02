@@ -5,6 +5,7 @@ builds:
   - darwin
   - linux
   - windows
+  binary: octo
 archive:
   replacements:
     darwin: Darwin

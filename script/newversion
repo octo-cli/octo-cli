@@ -1,0 +1,29 @@
+#!/bin/sh
+# returns the version for a new build
+# with no params, it just uses the current version replacing the timestamp with the latest routes.json update time
+# you can add --patch, --minor or --major to iterate the respective version levels
+set -e
+
+cd "$(dirname "$0")/.."
+
+latest="$(script/latestversion --nots)"
+major="$(echo $latest | cut -d. -f 1)"
+minor="$(echo $latest | cut -d. -f 2)"
+patch="$(echo $latest | cut -d. -f 3)"
+
+if [ "--major" == "$1" ]; then
+  major=$((major + 1))
+  minor=0
+  patch=0
+fi
+
+if [ "--minor" == "$1" ]; then
+  minor=$((minor + 1))
+  patch=0
+fi
+
+if [ "--patch" == "$1" ]; then
+  patch=$((patch + 1))
+fi
+
+echo "$major.$minor.$patch-$(cat routes-last-modified.txt)"
