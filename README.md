@@ -1,6 +1,6 @@
-# go-github-cli
+# octo-cli
 
-`go-github-cli` is a cli client for GitHub's REST API.  It is generated
+`octo-cli` is a cli client for GitHub's REST API.  It is generated
 by inspecting [go-github](https://github.com/google/go-github) and
 https://octokit.github.io/routes/.
 
@@ -8,7 +8,7 @@ See ./generator for more on how it is generated.
 
 ## Work In Progress
 
- go-github-cli is a work in progress.  Use it with
+ octo-cli is a work in progress.  Use it with
 caution.
 
 ## Usage
@@ -18,7 +18,7 @@ avoid putting credentials on the command line.
 
 
 ```
-Usage: go-github-cli <command>
+Usage: octo-cli <command>
 
 Flags:
   --help    Show context-sensitive help.
@@ -1448,6 +1448,6 @@ Commands:
   users delete-gpg-key --token=STRING --gpg_key_id=INT-64
     Delete a GPG key
 
-Run "go-github-cli <command> --help" for more information on a command.
+Run "octo-cli <command> --help" for more information on a command.
 ```
 
