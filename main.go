@@ -2,13 +2,13 @@ package main
 
 import (
 	"github.com/alecthomas/kong"
-	"github.com/octo-cli/octo-cli/services"
+	"github.com/octo-cli/octo-cli/generated"
 )
 
 var version = "development"
 
 type cli struct {
-	services.CLI
+	generated.CLI
 	Version kong.VersionFlag
 }
 

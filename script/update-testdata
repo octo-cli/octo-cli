@@ -5,4 +5,4 @@ set -e
 cd "$(dirname "$0")/.."
 routes_path="./generator/testdata/routes.json"
 cp -f ./routes.json "$routes_path"
-script/generate --routes-path "$routes_path" --output-path "./generator/testdata/services"
+script/generate --routes-path "$routes_path" --output-path "./generator/testdata/generated"

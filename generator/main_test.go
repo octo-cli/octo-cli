@@ -22,7 +22,7 @@ func Test_genCliRun_Run(t *testing.T) {
 		err := k.Run()
 		assert.Nil(t, err)
 		genFiles := getDirectoryFileNames(t, tempDir)
-		wantFiles := getDirectoryFileNames(t, "testdata/services")
+		wantFiles := getDirectoryFileNames(t, "testdata/generated")
 		assert.Equal(t, wantFiles, genFiles)
 	})
 
@@ -35,9 +35,9 @@ func Test_genCliRun_Run(t *testing.T) {
 		}
 		err := k.Run()
 		assert.Nil(t, err)
-		wantFiles := getDirectoryFileNames(t, "testdata/services")
+		wantFiles := getDirectoryFileNames(t, "testdata/generated")
 		for _, wantFile := range wantFiles {
-			wantData := readFile(t, "testdata/services", wantFile)
+			wantData := readFile(t, "testdata/generated", wantFile)
 			gotData := readFile(t, tempDir, wantFile)
 			assert.Equalf(t, string(wantData), string(gotData), "file contents are not equal for %q", wantFile)
 		}
