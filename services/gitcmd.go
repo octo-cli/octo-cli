@@ -2,6 +2,8 @@
 
 package services
 
+import "github.com/octo-cli/octo-cli/internal"
+
 type GitCmd struct {
 	GetBlob    GitGetBlobCmd    `cmd:"" help:"Get a blob"`
 	CreateBlob GitCreateBlobCmd `cmd:"" help:"Create a blob"`
@@ -16,23 +18,23 @@ type GitCmd struct {
 }
 
 type GitGetBlobCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner   string `required:"" name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	FileSha string `required:"" name:"file_sha"`
 }
 
 func (c *GitGetBlobCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/git/blobs/:file_sha"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("file_sha", c.FileSha)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/git/blobs/:file_sha")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("file_sha", c.FileSha)
+	return c.DoRequest("GET")
 }
 
 type GitCreateBlobCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner    string `required:"" name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	Content  string `required:"" name:"content" help:"The new blob's content."`
@@ -40,49 +42,49 @@ type GitCreateBlobCmd struct {
 }
 
 func (c *GitCreateBlobCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/git/blobs"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateBody("content", c.Content)
-	c.updateBody("encoding", c.Encoding)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/git/blobs")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("content", c.Content)
+	c.UpdateBody("encoding", c.Encoding)
+	return c.DoRequest("POST")
 }
 
 type GitGetCommitCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner     string `required:"" name:"owner"`
 	Repo      string `required:"" name:"repo"`
 	CommitSha string `required:"" name:"commit_sha"`
 }
 
 func (c *GitGetCommitCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/git/commits/:commit_sha"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("commit_sha", c.CommitSha)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/git/commits/:commit_sha")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("commit_sha", c.CommitSha)
+	return c.DoRequest("GET")
 }
 
 type GitGetRefCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	Ref   string "required:\"\" name:\"ref\" help:\"Must be formatted as `heads/branch`, not just `branch`\""
 }
 
 func (c *GitGetRefCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/git/refs/:ref"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("ref", c.Ref)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/git/refs/:ref")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("ref", c.Ref)
+	return c.DoRequest("GET")
 }
 
 type GitListRefsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner     string `required:"" name:"owner"`
 	Repo      string `required:"" name:"repo"`
 	Namespace string "name:\"namespace\" help:\"Filter by sub-namespace (reference prefix). Most commen examples would be `'heads/'` and `'tags/'` to retrieve branches or tags\""
@@ -91,18 +93,18 @@ type GitListRefsCmd struct {
 }
 
 func (c *GitListRefsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/git/refs/:namespace"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("namespace", c.Namespace)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/git/refs/:namespace")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("namespace", c.Namespace)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type GitCreateRefCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	Ref   string "required:\"\" name:\"ref\" help:\"The name of the fully qualified reference (ie: `refs/heads/master`). If it doesn't start with 'refs' and have at least two slashes, it will be rejected.\""
@@ -110,17 +112,17 @@ type GitCreateRefCmd struct {
 }
 
 func (c *GitCreateRefCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/git/refs"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateBody("ref", c.Ref)
-	c.updateBody("sha", c.Sha)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/git/refs")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("ref", c.Ref)
+	c.UpdateBody("sha", c.Sha)
+	return c.DoRequest("POST")
 }
 
 type GitUpdateRefCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	Ref   string `required:"" name:"ref"`
@@ -129,50 +131,50 @@ type GitUpdateRefCmd struct {
 }
 
 func (c *GitUpdateRefCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/git/refs/:ref"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("ref", c.Ref)
-	c.updateBody("sha", c.Sha)
-	c.updateBody("force", c.Force)
-	return c.doRequest("PATCH")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/git/refs/:ref")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("ref", c.Ref)
+	c.UpdateBody("sha", c.Sha)
+	c.UpdateBody("force", c.Force)
+	return c.DoRequest("PATCH")
 }
 
 type GitDeleteRefCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	Ref   string `required:"" name:"ref"`
 }
 
 func (c *GitDeleteRefCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/git/refs/:ref"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("ref", c.Ref)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/git/refs/:ref")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("ref", c.Ref)
+	return c.DoRequest("DELETE")
 }
 
 type GitGetTagCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner  string `required:"" name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	TagSha string `required:"" name:"tag_sha"`
 }
 
 func (c *GitGetTagCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/git/tags/:tag_sha"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("tag_sha", c.TagSha)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/git/tags/:tag_sha")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("tag_sha", c.TagSha)
+	return c.DoRequest("GET")
 }
 
 type GitGetTreeCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner     string `required:"" name:"owner"`
 	Repo      string `required:"" name:"repo"`
 	TreeSha   string `required:"" name:"tree_sha"`
@@ -180,11 +182,11 @@ type GitGetTreeCmd struct {
 }
 
 func (c *GitGetTreeCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/git/trees/:tree_sha"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("tree_sha", c.TreeSha)
-	c.updateURLQuery("recursive", c.Recursive)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/git/trees/:tree_sha")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("tree_sha", c.TreeSha)
+	c.UpdateURLQuery("recursive", c.Recursive)
+	return c.DoRequest("GET")
 }

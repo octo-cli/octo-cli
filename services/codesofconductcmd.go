@@ -2,6 +2,8 @@
 
 package services
 
+import "github.com/octo-cli/octo-cli/internal"
+
 type CodesOfConductCmd struct {
 	ListConductCodes CodesOfConductListConductCodesCmd `cmd:"" help:"List all codes of conduct"`
 	GetConductCode   CodesOfConductGetConductCodeCmd   `cmd:"" help:"Get an individual code of conduct"`
@@ -9,37 +11,37 @@ type CodesOfConductCmd struct {
 }
 
 type CodesOfConductListConductCodesCmd struct {
-	baseCmd
+	internal.BaseCmd
 }
 
 func (c *CodesOfConductListConductCodesCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/codes_of_conduct"
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/codes_of_conduct")
+	return c.DoRequest("GET")
 }
 
 type CodesOfConductGetConductCodeCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Key string `required:"" name:"key"`
 }
 
 func (c *CodesOfConductGetConductCodeCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/codes_of_conduct/:key"
-	c.updateURLPath("key", c.Key)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/codes_of_conduct/:key")
+	c.UpdateURLPath("key", c.Key)
+	return c.DoRequest("GET")
 }
 
 type CodesOfConductGetForRepoCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
 func (c *CodesOfConductGetForRepoCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/community/code_of_conduct"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/community/code_of_conduct")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
 }

@@ -2,6 +2,8 @@
 
 package services
 
+import "github.com/octo-cli/octo-cli/internal"
+
 type TeamsCmd struct {
 	List                     TeamsListCmd                     `cmd:"" help:"List teams"`
 	Get                      TeamsGetCmd                      `cmd:"" help:"Get team"`
@@ -39,7 +41,7 @@ type TeamsCmd struct {
 }
 
 type TeamsListCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Hellcat bool   "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
 	Org     string `required:"" name:"org"`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
@@ -47,31 +49,31 @@ type TeamsListCmd struct {
 }
 
 func (c *TeamsListCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org/teams"
-	c.updatePreview("hellcat", c.Hellcat)
-	c.updateURLPath("org", c.Org)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/teams")
+	c.UpdatePreview("hellcat", c.Hellcat)
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type TeamsGetCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Hellcat bool  "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
 	TeamId  int64 `required:"" name:"team_id"`
 }
 
 func (c *TeamsGetCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/teams/:team_id"
-	c.updatePreview("hellcat", c.Hellcat)
-	c.updateURLPath("team_id", c.TeamId)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/:team_id")
+	c.UpdatePreview("hellcat", c.Hellcat)
+	c.UpdateURLPath("team_id", c.TeamId)
+	return c.DoRequest("GET")
 }
 
 type TeamsCreateCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Hellcat      bool     "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
 	Org          string   `required:"" name:"org"`
 	Name         string   `required:"" name:"name" help:"The name of the team."`
@@ -84,22 +86,22 @@ type TeamsCreateCmd struct {
 }
 
 func (c *TeamsCreateCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org/teams"
-	c.updatePreview("hellcat", c.Hellcat)
-	c.updateURLPath("org", c.Org)
-	c.updateBody("name", c.Name)
-	c.updateBody("description", c.Description)
-	c.updateBody("maintainers", c.Maintainers)
-	c.updateBody("repo_names", c.RepoNames)
-	c.updateBody("privacy", c.Privacy)
-	c.updateBody("permission", c.Permission)
-	c.updateBody("parent_team_id", c.ParentTeamId)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/teams")
+	c.UpdatePreview("hellcat", c.Hellcat)
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateBody("name", c.Name)
+	c.UpdateBody("description", c.Description)
+	c.UpdateBody("maintainers", c.Maintainers)
+	c.UpdateBody("repo_names", c.RepoNames)
+	c.UpdateBody("privacy", c.Privacy)
+	c.UpdateBody("permission", c.Permission)
+	c.UpdateBody("parent_team_id", c.ParentTeamId)
+	return c.DoRequest("POST")
 }
 
 type TeamsEditCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Hellcat      bool   "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
 	TeamId       int64  `required:"" name:"team_id"`
 	Name         string `required:"" name:"name" help:"The name of the team."`
@@ -110,34 +112,34 @@ type TeamsEditCmd struct {
 }
 
 func (c *TeamsEditCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/teams/:team_id"
-	c.updatePreview("hellcat", c.Hellcat)
-	c.updateURLPath("team_id", c.TeamId)
-	c.updateBody("name", c.Name)
-	c.updateBody("description", c.Description)
-	c.updateBody("privacy", c.Privacy)
-	c.updateBody("permission", c.Permission)
-	c.updateBody("parent_team_id", c.ParentTeamId)
-	return c.doRequest("PATCH")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/:team_id")
+	c.UpdatePreview("hellcat", c.Hellcat)
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateBody("name", c.Name)
+	c.UpdateBody("description", c.Description)
+	c.UpdateBody("privacy", c.Privacy)
+	c.UpdateBody("permission", c.Permission)
+	c.UpdateBody("parent_team_id", c.ParentTeamId)
+	return c.DoRequest("PATCH")
 }
 
 type TeamsDeleteCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Hellcat bool  "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
 	TeamId  int64 `required:"" name:"team_id"`
 }
 
 func (c *TeamsDeleteCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/teams/:team_id"
-	c.updatePreview("hellcat", c.Hellcat)
-	c.updateURLPath("team_id", c.TeamId)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/:team_id")
+	c.UpdatePreview("hellcat", c.Hellcat)
+	c.UpdateURLPath("team_id", c.TeamId)
+	return c.DoRequest("DELETE")
 }
 
 type TeamsListChildCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Hellcat bool  "name:\"hellcat-preview\" required:\"\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
 	TeamId  int64 `required:"" name:"team_id"`
 	PerPage int64 `name:"per_page" help:"Results per page (max 100)"`
@@ -145,17 +147,17 @@ type TeamsListChildCmd struct {
 }
 
 func (c *TeamsListChildCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/teams/:team_id/teams"
-	c.updatePreview("hellcat", c.Hellcat)
-	c.updateURLPath("team_id", c.TeamId)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/:team_id/teams")
+	c.UpdatePreview("hellcat", c.Hellcat)
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type TeamsListReposCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Hellcat bool  "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
 	TeamId  int64 `required:"" name:"team_id"`
 	PerPage int64 `name:"per_page" help:"Results per page (max 100)"`
@@ -163,17 +165,17 @@ type TeamsListReposCmd struct {
 }
 
 func (c *TeamsListReposCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/teams/:team_id/repos"
-	c.updatePreview("hellcat", c.Hellcat)
-	c.updateURLPath("team_id", c.TeamId)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/:team_id/repos")
+	c.UpdatePreview("hellcat", c.Hellcat)
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type TeamsCheckManagesRepoCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Hellcat bool   "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
 	TeamId  int64  `required:"" name:"team_id"`
 	Owner   string `required:"" name:"owner"`
@@ -181,17 +183,17 @@ type TeamsCheckManagesRepoCmd struct {
 }
 
 func (c *TeamsCheckManagesRepoCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/teams/:team_id/repos/:owner/:repo"
-	c.updatePreview("hellcat", c.Hellcat)
-	c.updateURLPath("team_id", c.TeamId)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/:team_id/repos/:owner/:repo")
+	c.UpdatePreview("hellcat", c.Hellcat)
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
 }
 
 type TeamsAddOrUpdateRepoCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Hellcat    bool   "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
 	TeamId     int64  `required:"" name:"team_id"`
 	Owner      string `required:"" name:"owner"`
@@ -200,50 +202,50 @@ type TeamsAddOrUpdateRepoCmd struct {
 }
 
 func (c *TeamsAddOrUpdateRepoCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/teams/:team_id/repos/:owner/:repo"
-	c.updatePreview("hellcat", c.Hellcat)
-	c.updateURLPath("team_id", c.TeamId)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateBody("permission", c.Permission)
-	return c.doRequest("PUT")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/:team_id/repos/:owner/:repo")
+	c.UpdatePreview("hellcat", c.Hellcat)
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("permission", c.Permission)
+	return c.DoRequest("PUT")
 }
 
 type TeamsRemoveRepoCmd struct {
-	baseCmd
+	internal.BaseCmd
 	TeamId int64  `required:"" name:"team_id"`
 	Owner  string `required:"" name:"owner"`
 	Repo   string `required:"" name:"repo"`
 }
 
 func (c *TeamsRemoveRepoCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/teams/:team_id/repos/:owner/:repo"
-	c.updateURLPath("team_id", c.TeamId)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/:team_id/repos/:owner/:repo")
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("DELETE")
 }
 
 type TeamsListForAuthenticatedUserCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Hellcat bool  "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
 	PerPage int64 `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64 `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *TeamsListForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/teams"
-	c.updatePreview("hellcat", c.Hellcat)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/teams")
+	c.UpdatePreview("hellcat", c.Hellcat)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type TeamsListProjectsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Inertia bool  "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.inertia-preview+json\n\n```\""
 	Hellcat bool  "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
 	TeamId  int64 `required:"" name:"team_id"`
@@ -252,18 +254,18 @@ type TeamsListProjectsCmd struct {
 }
 
 func (c *TeamsListProjectsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/teams/:team_id/projects"
-	c.updatePreview("inertia", c.Inertia)
-	c.updatePreview("hellcat", c.Hellcat)
-	c.updateURLPath("team_id", c.TeamId)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/:team_id/projects")
+	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdatePreview("hellcat", c.Hellcat)
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type TeamsReviewProjectCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Inertia   bool  "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.inertia-preview+json\n\n```\""
 	Hellcat   bool  "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
 	TeamId    int64 `required:"" name:"team_id"`
@@ -271,17 +273,17 @@ type TeamsReviewProjectCmd struct {
 }
 
 func (c *TeamsReviewProjectCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/teams/:team_id/projects/:project_id"
-	c.updatePreview("inertia", c.Inertia)
-	c.updatePreview("hellcat", c.Hellcat)
-	c.updateURLPath("team_id", c.TeamId)
-	c.updateURLPath("project_id", c.ProjectId)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/:team_id/projects/:project_id")
+	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdatePreview("hellcat", c.Hellcat)
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("project_id", c.ProjectId)
+	return c.DoRequest("GET")
 }
 
 type TeamsAddOrUpdateProjectCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Inertia    bool   "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.inertia-preview+json\n\n```\""
 	Hellcat    bool   "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
 	TeamId     int64  `required:"" name:"team_id"`
@@ -290,32 +292,32 @@ type TeamsAddOrUpdateProjectCmd struct {
 }
 
 func (c *TeamsAddOrUpdateProjectCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/teams/:team_id/projects/:project_id"
-	c.updatePreview("inertia", c.Inertia)
-	c.updatePreview("hellcat", c.Hellcat)
-	c.updateURLPath("team_id", c.TeamId)
-	c.updateURLPath("project_id", c.ProjectId)
-	c.updateBody("permission", c.Permission)
-	return c.doRequest("PUT")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/:team_id/projects/:project_id")
+	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdatePreview("hellcat", c.Hellcat)
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("project_id", c.ProjectId)
+	c.UpdateBody("permission", c.Permission)
+	return c.DoRequest("PUT")
 }
 
 type TeamsRemoveProjectCmd struct {
-	baseCmd
+	internal.BaseCmd
 	TeamId    int64 `required:"" name:"team_id"`
 	ProjectId int64 `required:"" name:"project_id"`
 }
 
 func (c *TeamsRemoveProjectCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/teams/:team_id/projects/:project_id"
-	c.updateURLPath("team_id", c.TeamId)
-	c.updateURLPath("project_id", c.ProjectId)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/:team_id/projects/:project_id")
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("project_id", c.ProjectId)
+	return c.DoRequest("DELETE")
 }
 
 type TeamsListDiscussionsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Echo         bool   "name:\"echo-preview\" required:\"\" help:\"**Note:** The team discussions API is currently available for developers to preview. See the [blog post](/changes/2018-02-07-team-discussions-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.echo-preview+json\n\n```\""
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"**Note:** The [reactions API](/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions. See the [blog post](/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.squirrel-girl-preview\n\n```\""
 	TeamId       int64  `required:"" name:"team_id"`
@@ -325,19 +327,19 @@ type TeamsListDiscussionsCmd struct {
 }
 
 func (c *TeamsListDiscussionsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/teams/:team_id/discussions"
-	c.updatePreview("echo", c.Echo)
-	c.updatePreview("squirrel-girl", c.SquirrelGirl)
-	c.updateURLPath("team_id", c.TeamId)
-	c.updateURLQuery("direction", c.Direction)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/:team_id/discussions")
+	c.UpdatePreview("echo", c.Echo)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLQuery("direction", c.Direction)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type TeamsGetDiscussionCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Echo             bool  "name:\"echo-preview\" required:\"\" help:\"**Note:** The team discussions API is currently available for developers to preview. See the [blog post](/changes/2018-02-07-team-discussions-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.echo-preview+json\n\n```\""
 	SquirrelGirl     bool  "name:\"squirrel-girl-preview\" help:\"**Note:** The [reactions API](/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions. See the [blog post](/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.squirrel-girl-preview\n\n```\""
 	TeamId           int64 `required:"" name:"team_id"`
@@ -345,17 +347,17 @@ type TeamsGetDiscussionCmd struct {
 }
 
 func (c *TeamsGetDiscussionCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/teams/:team_id/discussions/:discussion_number"
-	c.updatePreview("echo", c.Echo)
-	c.updatePreview("squirrel-girl", c.SquirrelGirl)
-	c.updateURLPath("team_id", c.TeamId)
-	c.updateURLPath("discussion_number", c.DiscussionNumber)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/:team_id/discussions/:discussion_number")
+	c.UpdatePreview("echo", c.Echo)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
+	return c.DoRequest("GET")
 }
 
 type TeamsCreateDiscussionCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Echo         bool   "name:\"echo-preview\" required:\"\" help:\"**Note:** The team discussions API is currently available for developers to preview. See the [blog post](/changes/2018-02-07-team-discussions-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.echo-preview+json\n\n```\""
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"**Note:** The [reactions API](/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions. See the [blog post](/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.squirrel-girl-preview\n\n```\""
 	TeamId       int64  `required:"" name:"team_id"`
@@ -365,19 +367,19 @@ type TeamsCreateDiscussionCmd struct {
 }
 
 func (c *TeamsCreateDiscussionCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/teams/:team_id/discussions"
-	c.updatePreview("echo", c.Echo)
-	c.updatePreview("squirrel-girl", c.SquirrelGirl)
-	c.updateURLPath("team_id", c.TeamId)
-	c.updateBody("title", c.Title)
-	c.updateBody("body", c.Body)
-	c.updateBody("private", c.Private)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/:team_id/discussions")
+	c.UpdatePreview("echo", c.Echo)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateBody("title", c.Title)
+	c.UpdateBody("body", c.Body)
+	c.UpdateBody("private", c.Private)
+	return c.DoRequest("POST")
 }
 
 type TeamsEditDiscussionCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Echo             bool   "name:\"echo-preview\" required:\"\" help:\"**Note:** The team discussions API is currently available for developers to preview. See the [blog post](/changes/2018-02-07-team-discussions-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.echo-preview+json\n\n```\""
 	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" help:\"**Note:** The [reactions API](/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions. See the [blog post](/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.squirrel-girl-preview\n\n```\""
 	TeamId           int64  `required:"" name:"team_id"`
@@ -387,35 +389,35 @@ type TeamsEditDiscussionCmd struct {
 }
 
 func (c *TeamsEditDiscussionCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/teams/:team_id/discussions/:discussion_number"
-	c.updatePreview("echo", c.Echo)
-	c.updatePreview("squirrel-girl", c.SquirrelGirl)
-	c.updateURLPath("team_id", c.TeamId)
-	c.updateURLPath("discussion_number", c.DiscussionNumber)
-	c.updateBody("title", c.Title)
-	c.updateBody("body", c.Body)
-	return c.doRequest("PATCH")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/:team_id/discussions/:discussion_number")
+	c.UpdatePreview("echo", c.Echo)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
+	c.UpdateBody("title", c.Title)
+	c.UpdateBody("body", c.Body)
+	return c.DoRequest("PATCH")
 }
 
 type TeamsDeleteDiscussionCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Echo             bool  "name:\"echo-preview\" required:\"\" help:\"**Note:** The team discussions API is currently available for developers to preview. See the [blog post](/changes/2018-02-07-team-discussions-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.echo-preview+json\n\n```\""
 	TeamId           int64 `required:"" name:"team_id"`
 	DiscussionNumber int64 `required:"" name:"discussion_number"`
 }
 
 func (c *TeamsDeleteDiscussionCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/teams/:team_id/discussions/:discussion_number"
-	c.updatePreview("echo", c.Echo)
-	c.updateURLPath("team_id", c.TeamId)
-	c.updateURLPath("discussion_number", c.DiscussionNumber)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/:team_id/discussions/:discussion_number")
+	c.UpdatePreview("echo", c.Echo)
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
+	return c.DoRequest("DELETE")
 }
 
 type TeamsListDiscussionCommentsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Echo             bool   "name:\"echo-preview\" required:\"\" help:\"**Note:** The team discussions API is currently available for developers to preview. See the [blog post](/changes/2018-02-07-team-discussions-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.echo-preview+json\n\n```\""
 	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" help:\"**Note:** The [reactions API](/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions. See the [blog post](/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.squirrel-girl-preview\n\n```\""
 	TeamId           int64  `required:"" name:"team_id"`
@@ -426,20 +428,20 @@ type TeamsListDiscussionCommentsCmd struct {
 }
 
 func (c *TeamsListDiscussionCommentsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/teams/:team_id/discussions/:discussion_number/comments"
-	c.updatePreview("echo", c.Echo)
-	c.updatePreview("squirrel-girl", c.SquirrelGirl)
-	c.updateURLPath("team_id", c.TeamId)
-	c.updateURLPath("discussion_number", c.DiscussionNumber)
-	c.updateURLQuery("direction", c.Direction)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/:team_id/discussions/:discussion_number/comments")
+	c.UpdatePreview("echo", c.Echo)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
+	c.UpdateURLQuery("direction", c.Direction)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type TeamsGetDiscussionCommentCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Echo             bool  "name:\"echo-preview\" required:\"\" help:\"**Note:** The team discussions API is currently available for developers to preview. See the [blog post](/changes/2018-02-07-team-discussions-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.echo-preview+json\n\n```\""
 	SquirrelGirl     bool  "name:\"squirrel-girl-preview\" help:\"**Note:** The [reactions API](/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions. See the [blog post](/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.squirrel-girl-preview\n\n```\""
 	TeamId           int64 `required:"" name:"team_id"`
@@ -448,18 +450,18 @@ type TeamsGetDiscussionCommentCmd struct {
 }
 
 func (c *TeamsGetDiscussionCommentCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/teams/:team_id/discussions/:discussion_number/comments/:comment_number"
-	c.updatePreview("echo", c.Echo)
-	c.updatePreview("squirrel-girl", c.SquirrelGirl)
-	c.updateURLPath("team_id", c.TeamId)
-	c.updateURLPath("discussion_number", c.DiscussionNumber)
-	c.updateURLPath("comment_number", c.CommentNumber)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/:team_id/discussions/:discussion_number/comments/:comment_number")
+	c.UpdatePreview("echo", c.Echo)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
+	c.UpdateURLPath("comment_number", c.CommentNumber)
+	return c.DoRequest("GET")
 }
 
 type TeamsCreateDiscussionCommentCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Echo             bool   "name:\"echo-preview\" required:\"\" help:\"**Note:** The team discussions API is currently available for developers to preview. See the [blog post](/changes/2018-02-07-team-discussions-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.echo-preview+json\n\n```\""
 	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" help:\"**Note:** The [reactions API](/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions. See the [blog post](/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.squirrel-girl-preview\n\n```\""
 	TeamId           int64  `required:"" name:"team_id"`
@@ -468,18 +470,18 @@ type TeamsCreateDiscussionCommentCmd struct {
 }
 
 func (c *TeamsCreateDiscussionCommentCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/teams/:team_id/discussions/:discussion_number/comments"
-	c.updatePreview("echo", c.Echo)
-	c.updatePreview("squirrel-girl", c.SquirrelGirl)
-	c.updateURLPath("team_id", c.TeamId)
-	c.updateURLPath("discussion_number", c.DiscussionNumber)
-	c.updateBody("body", c.Body)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/:team_id/discussions/:discussion_number/comments")
+	c.UpdatePreview("echo", c.Echo)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
+	c.UpdateBody("body", c.Body)
+	return c.DoRequest("POST")
 }
 
 type TeamsEditDiscussionCommentCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Echo             bool   "name:\"echo-preview\" required:\"\" help:\"**Note:** The team discussions API is currently available for developers to preview. See the [blog post](/changes/2018-02-07-team-discussions-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.echo-preview+json\n\n```\""
 	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" help:\"**Note:** The [reactions API](/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions. See the [blog post](/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.squirrel-girl-preview\n\n```\""
 	TeamId           int64  `required:"" name:"team_id"`
@@ -489,19 +491,19 @@ type TeamsEditDiscussionCommentCmd struct {
 }
 
 func (c *TeamsEditDiscussionCommentCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/teams/:team_id/discussions/:discussion_number/comments/:comment_number"
-	c.updatePreview("echo", c.Echo)
-	c.updatePreview("squirrel-girl", c.SquirrelGirl)
-	c.updateURLPath("team_id", c.TeamId)
-	c.updateURLPath("discussion_number", c.DiscussionNumber)
-	c.updateURLPath("comment_number", c.CommentNumber)
-	c.updateBody("body", c.Body)
-	return c.doRequest("PATCH")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/:team_id/discussions/:discussion_number/comments/:comment_number")
+	c.UpdatePreview("echo", c.Echo)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
+	c.UpdateURLPath("comment_number", c.CommentNumber)
+	c.UpdateBody("body", c.Body)
+	return c.DoRequest("PATCH")
 }
 
 type TeamsDeleteDiscussionCommentCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Echo             bool  "name:\"echo-preview\" required:\"\" help:\"**Note:** The team discussions API is currently available for developers to preview. See the [blog post](/changes/2018-02-07-team-discussions-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.echo-preview+json\n\n```\""
 	TeamId           int64 `required:"" name:"team_id"`
 	DiscussionNumber int64 `required:"" name:"discussion_number"`
@@ -509,17 +511,17 @@ type TeamsDeleteDiscussionCommentCmd struct {
 }
 
 func (c *TeamsDeleteDiscussionCommentCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/teams/:team_id/discussions/:discussion_number/comments/:comment_number"
-	c.updatePreview("echo", c.Echo)
-	c.updateURLPath("team_id", c.TeamId)
-	c.updateURLPath("discussion_number", c.DiscussionNumber)
-	c.updateURLPath("comment_number", c.CommentNumber)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/:team_id/discussions/:discussion_number/comments/:comment_number")
+	c.UpdatePreview("echo", c.Echo)
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
+	c.UpdateURLPath("comment_number", c.CommentNumber)
+	return c.DoRequest("DELETE")
 }
 
 type TeamsListMembersCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Hellcat bool   "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
 	TeamId  int64  `required:"" name:"team_id"`
 	Role    string "name:\"role\" help:\"Filters members returned by their role in the team. Can be one of:  \n\\* `member` - normal members of the team.  \n\\* `maintainer` - team maintainers.  \n\\* `all` - all members of the team.\""
@@ -528,106 +530,106 @@ type TeamsListMembersCmd struct {
 }
 
 func (c *TeamsListMembersCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/teams/:team_id/members"
-	c.updatePreview("hellcat", c.Hellcat)
-	c.updateURLPath("team_id", c.TeamId)
-	c.updateURLQuery("role", c.Role)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/:team_id/members")
+	c.UpdatePreview("hellcat", c.Hellcat)
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLQuery("role", c.Role)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type TeamsGetMemberCmd struct {
-	baseCmd
+	internal.BaseCmd
 	TeamId   int64  `required:"" name:"team_id"`
 	Username string `required:"" name:"username"`
 }
 
 func (c *TeamsGetMemberCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/teams/:team_id/members/:username"
-	c.updateURLPath("team_id", c.TeamId)
-	c.updateURLPath("username", c.Username)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/:team_id/members/:username")
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("GET")
 }
 
 type TeamsAddMemberCmd struct {
-	baseCmd
+	internal.BaseCmd
 	TeamId   int64  `required:"" name:"team_id"`
 	Username string `required:"" name:"username"`
 }
 
 func (c *TeamsAddMemberCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/teams/:team_id/members/:username"
-	c.updateURLPath("team_id", c.TeamId)
-	c.updateURLPath("username", c.Username)
-	return c.doRequest("PUT")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/:team_id/members/:username")
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("PUT")
 }
 
 type TeamsRemoveMemberCmd struct {
-	baseCmd
+	internal.BaseCmd
 	TeamId   int64  `required:"" name:"team_id"`
 	Username string `required:"" name:"username"`
 }
 
 func (c *TeamsRemoveMemberCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/teams/:team_id/members/:username"
-	c.updateURLPath("team_id", c.TeamId)
-	c.updateURLPath("username", c.Username)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/:team_id/members/:username")
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("DELETE")
 }
 
 type TeamsGetMembershipCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Hellcat  bool   "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
 	TeamId   int64  `required:"" name:"team_id"`
 	Username string `required:"" name:"username"`
 }
 
 func (c *TeamsGetMembershipCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/teams/:team_id/memberships/:username"
-	c.updatePreview("hellcat", c.Hellcat)
-	c.updateURLPath("team_id", c.TeamId)
-	c.updateURLPath("username", c.Username)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/:team_id/memberships/:username")
+	c.UpdatePreview("hellcat", c.Hellcat)
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("GET")
 }
 
 type TeamsAddOrUpdateMembershipCmd struct {
-	baseCmd
+	internal.BaseCmd
 	TeamId   int64  `required:"" name:"team_id"`
 	Username string `required:"" name:"username"`
 	Role     string "name:\"role\" help:\"The role that this user should have in the team. Can be one of:  \n\\* `member` - a normal member of the team.  \n\\* `maintainer` - a team maintainer. Able to add/remove other team members, promote other team members to team maintainer, and edit the team's name and description.\""
 }
 
 func (c *TeamsAddOrUpdateMembershipCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/teams/:team_id/memberships/:username"
-	c.updateURLPath("team_id", c.TeamId)
-	c.updateURLPath("username", c.Username)
-	c.updateBody("role", c.Role)
-	return c.doRequest("PUT")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/:team_id/memberships/:username")
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("username", c.Username)
+	c.UpdateBody("role", c.Role)
+	return c.DoRequest("PUT")
 }
 
 type TeamsRemoveMembershipCmd struct {
-	baseCmd
+	internal.BaseCmd
 	TeamId   int64  `required:"" name:"team_id"`
 	Username string `required:"" name:"username"`
 }
 
 func (c *TeamsRemoveMembershipCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/teams/:team_id/memberships/:username"
-	c.updateURLPath("team_id", c.TeamId)
-	c.updateURLPath("username", c.Username)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/:team_id/memberships/:username")
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("DELETE")
 }
 
 type TeamsListPendingInvitationsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Dazzler bool  "name:\"dazzler-preview\" help:\"**Note:** You can now use the API to invite users to a GitHub organization. This feature is currently available for developers to preview. See the [blog post](/changes/2018-01-25-organization-invitation-api-preview) for full details. To access this feature, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.dazzler-preview+json\n\n```\""
 	TeamId  int64 `required:"" name:"team_id"`
 	PerPage int64 `name:"per_page" help:"Results per page (max 100)"`
@@ -635,11 +637,11 @@ type TeamsListPendingInvitationsCmd struct {
 }
 
 func (c *TeamsListPendingInvitationsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/teams/:team_id/invitations"
-	c.updatePreview("dazzler", c.Dazzler)
-	c.updateURLPath("team_id", c.TeamId)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/:team_id/invitations")
+	c.UpdatePreview("dazzler", c.Dazzler)
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }

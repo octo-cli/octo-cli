@@ -2,6 +2,8 @@
 
 package services
 
+import "github.com/octo-cli/octo-cli/internal"
+
 type UsersCmd struct {
 	GetByUsername                     UsersGetByUsernameCmd                     `cmd:"" help:"Get a single user"`
 	GetAuthenticated                  UsersGetAuthenticatedCmd                  `cmd:"" help:"Get the authenticated user"`
@@ -38,29 +40,29 @@ type UsersCmd struct {
 }
 
 type UsersGetByUsernameCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Username string `required:"" name:"username"`
 }
 
 func (c *UsersGetByUsernameCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/users/:username"
-	c.updateURLPath("username", c.Username)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/users/:username")
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("GET")
 }
 
 type UsersGetAuthenticatedCmd struct {
-	baseCmd
+	internal.BaseCmd
 }
 
 func (c *UsersGetAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user"
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user")
+	return c.DoRequest("GET")
 }
 
 type UsersUpdateAuthenticatedCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Name     string `name:"name" help:"The new name of the user."`
 	Email    string `name:"email" help:"The publicly visible email address of the user."`
 	Blog     string `name:"blog" help:"The new blog URL of the user."`
@@ -71,20 +73,20 @@ type UsersUpdateAuthenticatedCmd struct {
 }
 
 func (c *UsersUpdateAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user"
-	c.updateBody("name", c.Name)
-	c.updateBody("email", c.Email)
-	c.updateBody("blog", c.Blog)
-	c.updateBody("company", c.Company)
-	c.updateBody("location", c.Location)
-	c.updateBody("hireable", c.Hireable)
-	c.updateBody("bio", c.Bio)
-	return c.doRequest("PATCH")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user")
+	c.UpdateBody("name", c.Name)
+	c.UpdateBody("email", c.Email)
+	c.UpdateBody("blog", c.Blog)
+	c.UpdateBody("company", c.Company)
+	c.UpdateBody("location", c.Location)
+	c.UpdateBody("hireable", c.Hireable)
+	c.UpdateBody("bio", c.Bio)
+	return c.DoRequest("PATCH")
 }
 
 type UsersGetContextForUserCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Hagar       bool   "name:\"hagar-preview\" required:\"\" help:\"**Note:** You can now retrieve someone's hovercard information in different contexts using the Hovercard API. This feature is currently available for developers to preview. See the [blog post](/changes/2018-03-21-hovercard-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.hagar-preview+json\n\n```\""
 	Username    string `required:"" name:"username"`
 	SubjectType string "name:\"subject_type\" help:\"Identifies which additional information you'd like to receive about the person's hovercard. Can be `organization`, `repository`, `issue`, `pull_request`. **Required** when using `subject_id`.\""
@@ -92,383 +94,383 @@ type UsersGetContextForUserCmd struct {
 }
 
 func (c *UsersGetContextForUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/users/:username/hovercard"
-	c.updatePreview("hagar", c.Hagar)
-	c.updateURLPath("username", c.Username)
-	c.updateURLQuery("subject_type", c.SubjectType)
-	c.updateURLQuery("subject_id", c.SubjectId)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/users/:username/hovercard")
+	c.UpdatePreview("hagar", c.Hagar)
+	c.UpdateURLPath("username", c.Username)
+	c.UpdateURLQuery("subject_type", c.SubjectType)
+	c.UpdateURLQuery("subject_id", c.SubjectId)
+	return c.DoRequest("GET")
 }
 
 type UsersListCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Since   string `name:"since" help:"The integer ID of the last User that you've seen."`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64  `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *UsersListCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/users"
-	c.updateURLQuery("since", c.Since)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/users")
+	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type UsersListBlockedCmd struct {
-	baseCmd
+	internal.BaseCmd
 }
 
 func (c *UsersListBlockedCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/blocks"
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/blocks")
+	return c.DoRequest("GET")
 }
 
 type UsersCheckBlockedCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Username string `required:"" name:"username"`
 }
 
 func (c *UsersCheckBlockedCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/blocks/:username"
-	c.updateURLPath("username", c.Username)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/blocks/:username")
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("GET")
 }
 
 type UsersBlockCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Username string `required:"" name:"username"`
 }
 
 func (c *UsersBlockCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/blocks/:username"
-	c.updateURLPath("username", c.Username)
-	return c.doRequest("PUT")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/blocks/:username")
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("PUT")
 }
 
 type UsersUnblockCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Username string `required:"" name:"username"`
 }
 
 func (c *UsersUnblockCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/blocks/:username"
-	c.updateURLPath("username", c.Username)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/blocks/:username")
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("DELETE")
 }
 
 type UsersListEmailsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	PerPage int64 `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64 `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *UsersListEmailsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/emails"
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/emails")
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type UsersListPublicEmailsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	PerPage int64 `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64 `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *UsersListPublicEmailsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/public_emails"
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/public_emails")
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type UsersAddEmailsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Emails []string "required:\"\" name:\"emails\" help:\"Adds one or more email addresses to your GitHub account. Must contain at least one email address. **Note:** Alternatively, you can pass a single email address or an `array` of emails addresses directly, but we recommend that you pass an object using the `emails` key.\""
 }
 
 func (c *UsersAddEmailsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/emails"
-	c.updateBody("emails", c.Emails)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/emails")
+	c.UpdateBody("emails", c.Emails)
+	return c.DoRequest("POST")
 }
 
 type UsersDeleteEmailsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Emails []string "required:\"\" name:\"emails\" help:\"Deletes one or more email addresses from your GitHub account. Must contain at least one email address. **Note:** Alternatively, you can pass a single email address or an `array` of emails addresses directly, but we recommend that you pass an object using the `emails` key.\""
 }
 
 func (c *UsersDeleteEmailsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/emails"
-	c.updateBody("emails", c.Emails)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/emails")
+	c.UpdateBody("emails", c.Emails)
+	return c.DoRequest("DELETE")
 }
 
 type UsersTogglePrimaryEmailVisibilityCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Email      string `required:"" name:"email" help:"Specify the _primary_ email address that needs a visibility change."`
 	Visibility string "required:\"\" name:\"visibility\" help:\"Use `public` to enable an authenticated user to view the specified email address, or use `private` so this primary email address cannot be seen publicly.\""
 }
 
 func (c *UsersTogglePrimaryEmailVisibilityCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/email/visibility"
-	c.updateBody("email", c.Email)
-	c.updateBody("visibility", c.Visibility)
-	return c.doRequest("PATCH")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/email/visibility")
+	c.UpdateBody("email", c.Email)
+	c.UpdateBody("visibility", c.Visibility)
+	return c.DoRequest("PATCH")
 }
 
 type UsersListFollowersForUserCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Username string `required:"" name:"username"`
 	PerPage  int64  `name:"per_page" help:"Results per page (max 100)"`
 	Page     int64  `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *UsersListFollowersForUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/users/:username/followers"
-	c.updateURLPath("username", c.Username)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/users/:username/followers")
+	c.UpdateURLPath("username", c.Username)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type UsersListFollowersForAuthenticatedUserCmd struct {
-	baseCmd
+	internal.BaseCmd
 	PerPage int64 `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64 `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *UsersListFollowersForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/followers"
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/followers")
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type UsersListFollowingForUserCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Username string `required:"" name:"username"`
 	PerPage  int64  `name:"per_page" help:"Results per page (max 100)"`
 	Page     int64  `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *UsersListFollowingForUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/users/:username/following"
-	c.updateURLPath("username", c.Username)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/users/:username/following")
+	c.UpdateURLPath("username", c.Username)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type UsersListFollowingForAuthenticatedUserCmd struct {
-	baseCmd
+	internal.BaseCmd
 	PerPage int64 `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64 `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *UsersListFollowingForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/following"
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/following")
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type UsersCheckFollowingCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Username string `required:"" name:"username"`
 }
 
 func (c *UsersCheckFollowingCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/following/:username"
-	c.updateURLPath("username", c.Username)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/following/:username")
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("GET")
 }
 
 type UsersCheckFollowingForUserCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Username   string `required:"" name:"username"`
 	TargetUser string `required:"" name:"target_user"`
 }
 
 func (c *UsersCheckFollowingForUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/users/:username/following/:target_user"
-	c.updateURLPath("username", c.Username)
-	c.updateURLPath("target_user", c.TargetUser)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/users/:username/following/:target_user")
+	c.UpdateURLPath("username", c.Username)
+	c.UpdateURLPath("target_user", c.TargetUser)
+	return c.DoRequest("GET")
 }
 
 type UsersFollowCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Username string `required:"" name:"username"`
 }
 
 func (c *UsersFollowCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/following/:username"
-	c.updateURLPath("username", c.Username)
-	return c.doRequest("PUT")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/following/:username")
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("PUT")
 }
 
 type UsersUnfollowCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Username string `required:"" name:"username"`
 }
 
 func (c *UsersUnfollowCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/following/:username"
-	c.updateURLPath("username", c.Username)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/following/:username")
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("DELETE")
 }
 
 type UsersListPublicKeysForUserCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Username string `required:"" name:"username"`
 	PerPage  int64  `name:"per_page" help:"Results per page (max 100)"`
 	Page     int64  `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *UsersListPublicKeysForUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/users/:username/keys"
-	c.updateURLPath("username", c.Username)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/users/:username/keys")
+	c.UpdateURLPath("username", c.Username)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type UsersListPublicKeysCmd struct {
-	baseCmd
+	internal.BaseCmd
 	PerPage int64 `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64 `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *UsersListPublicKeysCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/keys"
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/keys")
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type UsersGetPublicKeyCmd struct {
-	baseCmd
+	internal.BaseCmd
 	KeyId int64 `required:"" name:"key_id"`
 }
 
 func (c *UsersGetPublicKeyCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/keys/:key_id"
-	c.updateURLPath("key_id", c.KeyId)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/keys/:key_id")
+	c.UpdateURLPath("key_id", c.KeyId)
+	return c.DoRequest("GET")
 }
 
 type UsersCreatePublicKeyCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Title string `name:"title" help:"A descriptive name for the new key. Use a name that will help you recognize this key in your GitHub account. For example, if you're using a personal Mac, you might call this key 'Personal MacBook Air'."`
 	Key   string `name:"key" help:"The public SSH key to add to your GitHub account. See '[Generating a new SSH key](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)' for guidance on how to create a public SSH key."`
 }
 
 func (c *UsersCreatePublicKeyCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/keys"
-	c.updateBody("title", c.Title)
-	c.updateBody("key", c.Key)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/keys")
+	c.UpdateBody("title", c.Title)
+	c.UpdateBody("key", c.Key)
+	return c.DoRequest("POST")
 }
 
 type UsersDeletePublicKeyCmd struct {
-	baseCmd
+	internal.BaseCmd
 	KeyId int64 `required:"" name:"key_id"`
 }
 
 func (c *UsersDeletePublicKeyCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/keys/:key_id"
-	c.updateURLPath("key_id", c.KeyId)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/keys/:key_id")
+	c.UpdateURLPath("key_id", c.KeyId)
+	return c.DoRequest("DELETE")
 }
 
 type UsersListGpgKeysForUserCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Username string `required:"" name:"username"`
 	PerPage  int64  `name:"per_page" help:"Results per page (max 100)"`
 	Page     int64  `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *UsersListGpgKeysForUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/users/:username/gpg_keys"
-	c.updateURLPath("username", c.Username)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/users/:username/gpg_keys")
+	c.UpdateURLPath("username", c.Username)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type UsersListGpgKeysCmd struct {
-	baseCmd
+	internal.BaseCmd
 	PerPage int64 `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64 `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *UsersListGpgKeysCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/gpg_keys"
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/gpg_keys")
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type UsersGetGpgKeyCmd struct {
-	baseCmd
+	internal.BaseCmd
 	GpgKeyId int64 `required:"" name:"gpg_key_id"`
 }
 
 func (c *UsersGetGpgKeyCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/gpg_keys/:gpg_key_id"
-	c.updateURLPath("gpg_key_id", c.GpgKeyId)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/gpg_keys/:gpg_key_id")
+	c.UpdateURLPath("gpg_key_id", c.GpgKeyId)
+	return c.DoRequest("GET")
 }
 
 type UsersCreateGpgKeyCmd struct {
-	baseCmd
+	internal.BaseCmd
 	ArmoredPublicKey string `name:"armored_public_key" help:"Your GPG key, generated in ASCII-armored format. See '[Generating a new GPG key](https://help.github.com/articles/generating-a-new-gpg-key/)' for help creating a GPG key."`
 }
 
 func (c *UsersCreateGpgKeyCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/gpg_keys"
-	c.updateBody("armored_public_key", c.ArmoredPublicKey)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/gpg_keys")
+	c.UpdateBody("armored_public_key", c.ArmoredPublicKey)
+	return c.DoRequest("POST")
 }
 
 type UsersDeleteGpgKeyCmd struct {
-	baseCmd
+	internal.BaseCmd
 	GpgKeyId int64 `required:"" name:"gpg_key_id"`
 }
 
 func (c *UsersDeleteGpgKeyCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/gpg_keys/:gpg_key_id"
-	c.updateURLPath("gpg_key_id", c.GpgKeyId)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/gpg_keys/:gpg_key_id")
+	c.UpdateURLPath("gpg_key_id", c.GpgKeyId)
+	return c.DoRequest("DELETE")
 }

@@ -2,6 +2,8 @@
 
 package services
 
+import "github.com/octo-cli/octo-cli/internal"
+
 type OrgsCmd struct {
 	ListForCurrentUser                 OrgsListForCurrentUserCmd                 `cmd:"" help:"List your organizations"`
 	List                               OrgsListCmd                               `cmd:"" help:"List all organizations"`
@@ -38,65 +40,65 @@ type OrgsCmd struct {
 }
 
 type OrgsListForCurrentUserCmd struct {
-	baseCmd
+	internal.BaseCmd
 	PerPage int64 `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64 `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *OrgsListForCurrentUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/orgs"
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/orgs")
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type OrgsListCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Since   string `name:"since" help:"The integer ID of the last Organization that you've seen."`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64  `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *OrgsListCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/organizations"
-	c.updateURLQuery("since", c.Since)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/organizations")
+	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type OrgsListForUserCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Username string `required:"" name:"username"`
 	PerPage  int64  `name:"per_page" help:"Results per page (max 100)"`
 	Page     int64  `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *OrgsListForUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/users/:username/orgs"
-	c.updateURLPath("username", c.Username)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/users/:username/orgs")
+	c.UpdateURLPath("username", c.Username)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type OrgsGetCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Org string `required:"" name:"org"`
 }
 
 func (c *OrgsGetCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org"
-	c.updateURLPath("org", c.Org)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org")
+	c.UpdateURLPath("org", c.Org)
+	return c.DoRequest("GET")
 }
 
 type OrgsEditCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Org                          string `required:"" name:"org"`
 	BillingEmail                 string `name:"billing_email" help:"Billing email address. This address is not publicized."`
 	Company                      string `name:"company" help:"The company name."`
@@ -111,78 +113,78 @@ type OrgsEditCmd struct {
 }
 
 func (c *OrgsEditCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org"
-	c.updateURLPath("org", c.Org)
-	c.updateBody("billing_email", c.BillingEmail)
-	c.updateBody("company", c.Company)
-	c.updateBody("email", c.Email)
-	c.updateBody("location", c.Location)
-	c.updateBody("name", c.Name)
-	c.updateBody("description", c.Description)
-	c.updateBody("has_organization_projects", c.HasOrganizationProjects)
-	c.updateBody("has_repository_projects", c.HasRepositoryProjects)
-	c.updateBody("default_repository_permission", c.DefaultRepositoryPermission)
-	c.updateBody("members_can_create_repositories", c.MembersCanCreateRepositories)
-	return c.doRequest("PATCH")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateBody("billing_email", c.BillingEmail)
+	c.UpdateBody("company", c.Company)
+	c.UpdateBody("email", c.Email)
+	c.UpdateBody("location", c.Location)
+	c.UpdateBody("name", c.Name)
+	c.UpdateBody("description", c.Description)
+	c.UpdateBody("has_organization_projects", c.HasOrganizationProjects)
+	c.UpdateBody("has_repository_projects", c.HasRepositoryProjects)
+	c.UpdateBody("default_repository_permission", c.DefaultRepositoryPermission)
+	c.UpdateBody("members_can_create_repositories", c.MembersCanCreateRepositories)
+	return c.DoRequest("PATCH")
 }
 
 type OrgsListBlockedUsersCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Org string `required:"" name:"org"`
 }
 
 func (c *OrgsListBlockedUsersCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org/blocks"
-	c.updateURLPath("org", c.Org)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/blocks")
+	c.UpdateURLPath("org", c.Org)
+	return c.DoRequest("GET")
 }
 
 type OrgsCheckBlockedUserCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Username string `required:"" name:"username"`
 }
 
 func (c *OrgsCheckBlockedUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org/blocks/:username"
-	c.updateURLPath("org", c.Org)
-	c.updateURLPath("username", c.Username)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/blocks/:username")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("GET")
 }
 
 type OrgsBlockUserCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Username string `required:"" name:"username"`
 }
 
 func (c *OrgsBlockUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org/blocks/:username"
-	c.updateURLPath("org", c.Org)
-	c.updateURLPath("username", c.Username)
-	return c.doRequest("PUT")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/blocks/:username")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("PUT")
 }
 
 type OrgsUnblockUserCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Username string `required:"" name:"username"`
 }
 
 func (c *OrgsUnblockUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org/blocks/:username"
-	c.updateURLPath("org", c.Org)
-	c.updateURLPath("username", c.Username)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/blocks/:username")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("DELETE")
 }
 
 type OrgsListMembersCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Org     string `required:"" name:"org"`
 	Filter  string "name:\"filter\" help:\"Filter members returned in the list. Can be one of:  \n\\* `2fa_disabled` - Members without [two-factor authentication](https://github.com/blog/1614-two-factor-authentication) enabled. Available for organization owners.  \n\\* `all` - All members the authenticated user can see.\""
 	Role    string "name:\"role\" help:\"Filter members returned by their role. Can be one of:  \n\\* `all` - All members of the organization, regardless of role.  \n\\* `admin` - Organization owners.  \n\\* `member` - Non-owner organization members.\""
@@ -191,148 +193,148 @@ type OrgsListMembersCmd struct {
 }
 
 func (c *OrgsListMembersCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org/members"
-	c.updateURLPath("org", c.Org)
-	c.updateURLQuery("filter", c.Filter)
-	c.updateURLQuery("role", c.Role)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/members")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLQuery("filter", c.Filter)
+	c.UpdateURLQuery("role", c.Role)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type OrgsCheckMembershipCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Username string `required:"" name:"username"`
 }
 
 func (c *OrgsCheckMembershipCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org/members/:username"
-	c.updateURLPath("org", c.Org)
-	c.updateURLPath("username", c.Username)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/members/:username")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("GET")
 }
 
 type OrgsRemoveMemberCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Username string `required:"" name:"username"`
 }
 
 func (c *OrgsRemoveMemberCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org/members/:username"
-	c.updateURLPath("org", c.Org)
-	c.updateURLPath("username", c.Username)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/members/:username")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("DELETE")
 }
 
 type OrgsListPublicMembersCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Org     string `required:"" name:"org"`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64  `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *OrgsListPublicMembersCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org/public_members"
-	c.updateURLPath("org", c.Org)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/public_members")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type OrgsCheckPublicMembershipCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Username string `required:"" name:"username"`
 }
 
 func (c *OrgsCheckPublicMembershipCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org/public_members/:username"
-	c.updateURLPath("org", c.Org)
-	c.updateURLPath("username", c.Username)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/public_members/:username")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("GET")
 }
 
 type OrgsPublicizeMembershipCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Username string `required:"" name:"username"`
 }
 
 func (c *OrgsPublicizeMembershipCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org/public_members/:username"
-	c.updateURLPath("org", c.Org)
-	c.updateURLPath("username", c.Username)
-	return c.doRequest("PUT")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/public_members/:username")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("PUT")
 }
 
 type OrgsConcealMembershipCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Username string `required:"" name:"username"`
 }
 
 func (c *OrgsConcealMembershipCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org/public_members/:username"
-	c.updateURLPath("org", c.Org)
-	c.updateURLPath("username", c.Username)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/public_members/:username")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("DELETE")
 }
 
 type OrgsGetMembershipForUserCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Username string `required:"" name:"username"`
 }
 
 func (c *OrgsGetMembershipForUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org/memberships/:username"
-	c.updateURLPath("org", c.Org)
-	c.updateURLPath("username", c.Username)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/memberships/:username")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("GET")
 }
 
 type OrgsAddOrUpdateMembershipCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Username string `required:"" name:"username"`
 	Role     string "name:\"role\" help:\"The role to give the user in the organization. Can be one of:  \n\\* `admin` - The user will become an owner of the organization.  \n\\* `member` - The user will become a non-owner member of the organization.\""
 }
 
 func (c *OrgsAddOrUpdateMembershipCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org/memberships/:username"
-	c.updateURLPath("org", c.Org)
-	c.updateURLPath("username", c.Username)
-	c.updateBody("role", c.Role)
-	return c.doRequest("PUT")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/memberships/:username")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("username", c.Username)
+	c.UpdateBody("role", c.Role)
+	return c.DoRequest("PUT")
 }
 
 type OrgsRemoveMembershipCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Username string `required:"" name:"username"`
 }
 
 func (c *OrgsRemoveMembershipCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org/memberships/:username"
-	c.updateURLPath("org", c.Org)
-	c.updateURLPath("username", c.Username)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/memberships/:username")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("DELETE")
 }
 
 type OrgsListInvitationTeamsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Dazzler      bool   "name:\"dazzler-preview\" help:\"**Note:** You can now use the API to invite users to a GitHub organization. This feature is currently available for developers to preview. See the [blog post](/changes/2018-01-25-organization-invitation-api-preview) for full details. To access this feature, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.dazzler-preview+json\n\n```\""
 	Org          string `required:"" name:"org"`
 	InvitationId int64  `required:"" name:"invitation_id"`
@@ -341,18 +343,18 @@ type OrgsListInvitationTeamsCmd struct {
 }
 
 func (c *OrgsListInvitationTeamsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org/invitations/:invitation_id/teams"
-	c.updatePreview("dazzler", c.Dazzler)
-	c.updateURLPath("org", c.Org)
-	c.updateURLPath("invitation_id", c.InvitationId)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/invitations/:invitation_id/teams")
+	c.UpdatePreview("dazzler", c.Dazzler)
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("invitation_id", c.InvitationId)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type OrgsListPendingInvitationsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Dazzler bool   "name:\"dazzler-preview\" help:\"**Note:** You can now use the API to invite users to a GitHub organization. This feature is currently available for developers to preview. See the [blog post](/changes/2018-01-25-organization-invitation-api-preview) for full details. To access this feature, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.dazzler-preview+json\n\n```\""
 	Org     string `required:"" name:"org"`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
@@ -360,17 +362,17 @@ type OrgsListPendingInvitationsCmd struct {
 }
 
 func (c *OrgsListPendingInvitationsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org/invitations"
-	c.updatePreview("dazzler", c.Dazzler)
-	c.updateURLPath("org", c.Org)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/invitations")
+	c.UpdatePreview("dazzler", c.Dazzler)
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type OrgsCreateInvitationCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Dazzler   bool    "name:\"dazzler-preview\" help:\"**Note:** You can now use the API to invite users to a GitHub organization. This feature is currently available for developers to preview. See the [blog post](/changes/2018-01-25-organization-invitation-api-preview) for full details. To access this feature, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.dazzler-preview+json\n\n```\""
 	Org       string  `required:"" name:"org"`
 	InviteeId int64   "name:\"invitee_id\" help:\"**Required unless you provide `email`**. GitHub user ID for the person you are inviting.\""
@@ -380,61 +382,61 @@ type OrgsCreateInvitationCmd struct {
 }
 
 func (c *OrgsCreateInvitationCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org/invitations"
-	c.updatePreview("dazzler", c.Dazzler)
-	c.updateURLPath("org", c.Org)
-	c.updateBody("invitee_id", c.InviteeId)
-	c.updateBody("email", c.Email)
-	c.updateBody("role", c.Role)
-	c.updateBody("team_ids", c.TeamIds)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/invitations")
+	c.UpdatePreview("dazzler", c.Dazzler)
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateBody("invitee_id", c.InviteeId)
+	c.UpdateBody("email", c.Email)
+	c.UpdateBody("role", c.Role)
+	c.UpdateBody("team_ids", c.TeamIds)
+	return c.DoRequest("POST")
 }
 
 type OrgsListMembershipsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	State   string "name:\"state\" help:\"Indicates the state of the memberships to return. Can be either `active` or `pending`. If not specified, the API returns both active and pending memberships.\""
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64  `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *OrgsListMembershipsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/memberships/orgs"
-	c.updateURLQuery("state", c.State)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/memberships/orgs")
+	c.UpdateURLQuery("state", c.State)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type OrgsGetMembershipCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Org string `required:"" name:"org"`
 }
 
 func (c *OrgsGetMembershipCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/memberships/orgs/:org"
-	c.updateURLPath("org", c.Org)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/memberships/orgs/:org")
+	c.UpdateURLPath("org", c.Org)
+	return c.DoRequest("GET")
 }
 
 type OrgsEditMembershipCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Org   string `required:"" name:"org"`
 	State string "required:\"\" name:\"state\" help:\"The state that the membership should be in. Only `'active'` will be accepted.\""
 }
 
 func (c *OrgsEditMembershipCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/memberships/orgs/:org"
-	c.updateURLPath("org", c.Org)
-	c.updateBody("state", c.State)
-	return c.doRequest("PATCH")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/memberships/orgs/:org")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateBody("state", c.State)
+	return c.DoRequest("PATCH")
 }
 
 type OrgsListOutsideCollaboratorsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Org     string `required:"" name:"org"`
 	Filter  string "name:\"filter\" help:\"Filter the list of outside collaborators. Can be one of:  \n\\* `2fa_disabled`: Outside collaborators without [two-factor authentication](https://github.com/blog/1614-two-factor-authentication) enabled.  \n\\* `all`: All outside collaborators.\""
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
@@ -442,97 +444,97 @@ type OrgsListOutsideCollaboratorsCmd struct {
 }
 
 func (c *OrgsListOutsideCollaboratorsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org/outside_collaborators"
-	c.updateURLPath("org", c.Org)
-	c.updateURLQuery("filter", c.Filter)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/outside_collaborators")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLQuery("filter", c.Filter)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type OrgsRemoveOutsideCollaboratorCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Username string `required:"" name:"username"`
 }
 
 func (c *OrgsRemoveOutsideCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org/outside_collaborators/:username"
-	c.updateURLPath("org", c.Org)
-	c.updateURLPath("username", c.Username)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/outside_collaborators/:username")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("DELETE")
 }
 
 type OrgsConvertMemberToOutsideCollaboratorCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Username string `required:"" name:"username"`
 }
 
 func (c *OrgsConvertMemberToOutsideCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org/outside_collaborators/:username"
-	c.updateURLPath("org", c.Org)
-	c.updateURLPath("username", c.Username)
-	return c.doRequest("PUT")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/outside_collaborators/:username")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("PUT")
 }
 
 type OrgsListHooksCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Org     string `required:"" name:"org"`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64  `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *OrgsListHooksCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org/hooks"
-	c.updateURLPath("org", c.Org)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/hooks")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type OrgsGetHookCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Org    string `required:"" name:"org"`
 	HookId int64  `required:"" name:"hook_id"`
 }
 
 func (c *OrgsGetHookCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org/hooks/:hook_id"
-	c.updateURLPath("org", c.Org)
-	c.updateURLPath("hook_id", c.HookId)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/hooks/:hook_id")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("hook_id", c.HookId)
+	return c.DoRequest("GET")
 }
 
 type OrgsPingHookCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Org    string `required:"" name:"org"`
 	HookId int64  `required:"" name:"hook_id"`
 }
 
 func (c *OrgsPingHookCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org/hooks/:hook_id/pings"
-	c.updateURLPath("org", c.Org)
-	c.updateURLPath("hook_id", c.HookId)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/hooks/:hook_id/pings")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("hook_id", c.HookId)
+	return c.DoRequest("POST")
 }
 
 type OrgsDeleteHookCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Org    string `required:"" name:"org"`
 	HookId int64  `required:"" name:"hook_id"`
 }
 
 func (c *OrgsDeleteHookCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org/hooks/:hook_id"
-	c.updateURLPath("org", c.Org)
-	c.updateURLPath("hook_id", c.HookId)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/hooks/:hook_id")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("hook_id", c.HookId)
+	return c.DoRequest("DELETE")
 }

@@ -2,6 +2,8 @@
 
 package services
 
+import "github.com/octo-cli/octo-cli/internal"
+
 type ChecksCmd struct {
 	ListForRef       ChecksListForRefCmd       `cmd:"" help:"List check runs for a specific ref"`
 	ListForSuite     ChecksListForSuiteCmd     `cmd:"" help:"List check runs in a check suite"`
@@ -14,7 +16,7 @@ type ChecksCmd struct {
 }
 
 type ChecksListForRefCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Antiope   bool   "name:\"antiope-preview\" required:\"\" help:\"The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.antiope-preview+json\n\n```\""
 	Owner     string `required:"" name:"owner"`
 	Repo      string `required:"" name:"repo"`
@@ -27,22 +29,22 @@ type ChecksListForRefCmd struct {
 }
 
 func (c *ChecksListForRefCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/commits/:ref/check-runs"
-	c.updatePreview("antiope", c.Antiope)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("ref", c.Ref)
-	c.updateURLQuery("check_name", c.CheckName)
-	c.updateURLQuery("status", c.Status)
-	c.updateURLQuery("filter", c.Filter)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/commits/:ref/check-runs")
+	c.UpdatePreview("antiope", c.Antiope)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("ref", c.Ref)
+	c.UpdateURLQuery("check_name", c.CheckName)
+	c.UpdateURLQuery("status", c.Status)
+	c.UpdateURLQuery("filter", c.Filter)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ChecksListForSuiteCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Antiope      bool   "name:\"antiope-preview\" required:\"\" help:\"The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.antiope-preview+json\n\n```\""
 	Owner        string `required:"" name:"owner"`
 	Repo         string `required:"" name:"repo"`
@@ -55,22 +57,22 @@ type ChecksListForSuiteCmd struct {
 }
 
 func (c *ChecksListForSuiteCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/check-suites/:check_suite_id/check-runs"
-	c.updatePreview("antiope", c.Antiope)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("check_suite_id", c.CheckSuiteId)
-	c.updateURLQuery("check_name", c.CheckName)
-	c.updateURLQuery("status", c.Status)
-	c.updateURLQuery("filter", c.Filter)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/check-suites/:check_suite_id/check-runs")
+	c.UpdatePreview("antiope", c.Antiope)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("check_suite_id", c.CheckSuiteId)
+	c.UpdateURLQuery("check_name", c.CheckName)
+	c.UpdateURLQuery("status", c.Status)
+	c.UpdateURLQuery("filter", c.Filter)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ChecksGetCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Antiope    bool   "name:\"antiope-preview\" required:\"\" help:\"The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.antiope-preview+json\n\n```\""
 	Owner      string `required:"" name:"owner"`
 	Repo       string `required:"" name:"repo"`
@@ -78,17 +80,17 @@ type ChecksGetCmd struct {
 }
 
 func (c *ChecksGetCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/check-runs/:check_run_id"
-	c.updatePreview("antiope", c.Antiope)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("check_run_id", c.CheckRunId)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/check-runs/:check_run_id")
+	c.UpdatePreview("antiope", c.Antiope)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("check_run_id", c.CheckRunId)
+	return c.DoRequest("GET")
 }
 
 type ChecksListAnnotationsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Antiope    bool   "name:\"antiope-preview\" required:\"\" help:\"The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.antiope-preview+json\n\n```\""
 	Owner      string `required:"" name:"owner"`
 	Repo       string `required:"" name:"repo"`
@@ -98,19 +100,19 @@ type ChecksListAnnotationsCmd struct {
 }
 
 func (c *ChecksListAnnotationsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/check-runs/:check_run_id/annotations"
-	c.updatePreview("antiope", c.Antiope)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("check_run_id", c.CheckRunId)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/check-runs/:check_run_id/annotations")
+	c.UpdatePreview("antiope", c.Antiope)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("check_run_id", c.CheckRunId)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ChecksGetSuiteCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Antiope      bool   "name:\"antiope-preview\" required:\"\" help:\"The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.antiope-preview+json\n\n```\""
 	Owner        string `required:"" name:"owner"`
 	Repo         string `required:"" name:"repo"`
@@ -118,17 +120,17 @@ type ChecksGetSuiteCmd struct {
 }
 
 func (c *ChecksGetSuiteCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/check-suites/:check_suite_id"
-	c.updatePreview("antiope", c.Antiope)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("check_suite_id", c.CheckSuiteId)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/check-suites/:check_suite_id")
+	c.UpdatePreview("antiope", c.Antiope)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("check_suite_id", c.CheckSuiteId)
+	return c.DoRequest("GET")
 }
 
 type ChecksListSuitesForRefCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Antiope   bool   "name:\"antiope-preview\" required:\"\" help:\"The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.antiope-preview+json\n\n```\""
 	Owner     string `required:"" name:"owner"`
 	Repo      string `required:"" name:"repo"`
@@ -140,21 +142,21 @@ type ChecksListSuitesForRefCmd struct {
 }
 
 func (c *ChecksListSuitesForRefCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/commits/:ref/check-suites"
-	c.updatePreview("antiope", c.Antiope)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("ref", c.Ref)
-	c.updateURLQuery("app_id", c.AppId)
-	c.updateURLQuery("check_name", c.CheckName)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/commits/:ref/check-suites")
+	c.UpdatePreview("antiope", c.Antiope)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("ref", c.Ref)
+	c.UpdateURLQuery("app_id", c.AppId)
+	c.UpdateURLQuery("check_name", c.CheckName)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ChecksCreateSuiteCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Antiope bool   "name:\"antiope-preview\" required:\"\" help:\"The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.antiope-preview+json\n\n```\""
 	Owner   string `required:"" name:"owner"`
 	Repo    string `required:"" name:"repo"`
@@ -162,17 +164,17 @@ type ChecksCreateSuiteCmd struct {
 }
 
 func (c *ChecksCreateSuiteCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/check-suites"
-	c.updatePreview("antiope", c.Antiope)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateBody("head_sha", c.HeadSha)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/check-suites")
+	c.UpdatePreview("antiope", c.Antiope)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("head_sha", c.HeadSha)
+	return c.DoRequest("POST")
 }
 
 type ChecksRerequestSuiteCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Antiope      bool   "name:\"antiope-preview\" required:\"\" help:\"The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.antiope-preview+json\n\n```\""
 	Owner        string `required:"" name:"owner"`
 	Repo         string `required:"" name:"repo"`
@@ -180,11 +182,11 @@ type ChecksRerequestSuiteCmd struct {
 }
 
 func (c *ChecksRerequestSuiteCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/check-suites/:check_suite_id/rerequest"
-	c.updatePreview("antiope", c.Antiope)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("check_suite_id", c.CheckSuiteId)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/check-suites/:check_suite_id/rerequest")
+	c.UpdatePreview("antiope", c.Antiope)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("check_suite_id", c.CheckSuiteId)
+	return c.DoRequest("POST")
 }

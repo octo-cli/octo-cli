@@ -2,16 +2,18 @@
 
 package services
 
+import "github.com/octo-cli/octo-cli/internal"
+
 type EmojisCmd struct {
 	Get EmojisGetCmd `cmd:"" help:"Get"`
 }
 
 type EmojisGetCmd struct {
-	baseCmd
+	internal.BaseCmd
 }
 
 func (c *EmojisGetCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/emojis"
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/emojis")
+	return c.DoRequest("GET")
 }

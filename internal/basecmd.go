@@ -1,11 +1,10 @@
-package services
+package internal
 
 import (
 	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/octo-cli/octo-cli/internal"
 	"golang.org/x/oauth2"
 	"io"
 	"net/http"
@@ -15,19 +14,22 @@ import (
 	"strings"
 )
 
-// Stdout is where to write output
-var Stdout io.Writer = os.Stdout
+var (
+	// Stdout is where to write output
+	Stdout io.Writer = os.Stdout
 
-// Stderr is where to write error output
-var Stderr io.Writer = os.Stderr
+	// Stderr is where to write error output
+	Stderr io.Writer = os.Stderr
 
-// TransportWrapper is a wrapper for the http transport that we use for go-vcr tests
-var TransportWrapper interface {
-	SetTransport(t http.RoundTripper)
-	http.RoundTripper
-}
+	// TransportWrapper is a wrapper for the http transport that we use for go-vcr tests
+	TransportWrapper interface {
+		SetTransport(t http.RoundTripper)
+		http.RoundTripper
+	}
+)
 
-type baseCmd struct {
+// BaseCmd is included in all command structs in services
+type BaseCmd struct {
 	isValueSetMap map[string]bool
 	url           url.URL
 	reqBody       *map[string]interface{}
@@ -38,11 +40,22 @@ type baseCmd struct {
 	Format        string `help:"format output with a go template"`
 }
 
-func (c *baseCmd) isValueSet(valueName string) bool {
+//SetURLPath sets the path of url
+func (c *BaseCmd) SetURLPath(path string) {
+	c.url.Path = path
+}
+
+//SetIsValueSetMap sets isValueSetMap
+func (c *BaseCmd) SetIsValueSetMap(isValueSetMap map[string]bool) {
+	c.isValueSetMap = isValueSetMap
+}
+
+func (c *BaseCmd) isValueSet(valueName string) bool {
 	return c.isValueSetMap[valueName]
 }
 
-func (c *baseCmd) updateBody(flagName string, value interface{}) {
+//UpdateBody adds a flag's value a request body
+func (c *BaseCmd) UpdateBody(flagName string, value interface{}) {
 	if c.reqBody == nil {
 		c.reqBody = &map[string]interface{}{}
 	}
@@ -53,7 +66,8 @@ func (c *baseCmd) updateBody(flagName string, value interface{}) {
 	}
 }
 
-func (c *baseCmd) updateURLPath(valName string, value interface{}) {
+//UpdateURLPath sets a param in the url path
+func (c *BaseCmd) UpdateURLPath(valName string, value interface{}) {
 	var strVal string
 	switch v := value.(type) {
 	case string:
@@ -66,14 +80,16 @@ func (c *baseCmd) updateURLPath(valName string, value interface{}) {
 	c.url.Path = strings.Replace(c.url.Path, ":"+valName, strVal, 1)
 }
 
-func (c *baseCmd) updatePreview(previewName string, value bool) {
+//UpdatePreview adds a preview header to a request
+func (c *BaseCmd) UpdatePreview(previewName string, value bool) {
 	if value {
 		accept := fmt.Sprintf("application/vnd.github.%s-preview+json", previewName)
 		c.acceptHeaders = append(c.acceptHeaders, accept)
 	}
 }
 
-func (c *baseCmd) updateURLQuery(paramName string, value interface{}) {
+//UpdateURLQuery sets a param value in a url query
+func (c *BaseCmd) UpdateURLQuery(paramName string, value interface{}) {
 	var strVal string
 	switch v := value.(type) {
 	case string:
@@ -88,7 +104,7 @@ func (c *baseCmd) updateURLQuery(paramName string, value interface{}) {
 	}
 }
 
-func (c *baseCmd) newRequest(method string) (*http.Request, error) {
+func (c *BaseCmd) newRequest(method string) (*http.Request, error) {
 	u := strings.Join([]string{
 		strings.TrimSuffix(c.APIBaseURL, "/"),
 		strings.TrimPrefix(c.url.String(), "/"),
@@ -116,7 +132,7 @@ func (c *baseCmd) newRequest(method string) (*http.Request, error) {
 	return req, nil
 }
 
-func (c *baseCmd) httpClient() *http.Client {
+func (c *BaseCmd) httpClient() *http.Client {
 	tc := oauth2.NewClient(context.Background(), oauth2.StaticTokenSource(&oauth2.Token{AccessToken: c.Token}))
 	if TransportWrapper != nil {
 		TransportWrapper.SetTransport(tc.Transport)
@@ -125,7 +141,8 @@ func (c *baseCmd) httpClient() *http.Client {
 	return tc
 }
 
-func (c *baseCmd) doRequest(method string) error {
+//DoRequest performs a request
+func (c *BaseCmd) DoRequest(method string) error {
 	req, err := c.newRequest(method)
 	if err != nil {
 		return err
@@ -136,5 +153,5 @@ func (c *baseCmd) doRequest(method string) error {
 		return err
 	}
 
-	return internal.OutputResult(resp, c.RawOutput, c.Format, Stdout)
+	return OutputResult(resp, c.RawOutput, c.Format, Stdout)
 }

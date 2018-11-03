@@ -2,6 +2,8 @@
 
 package services
 
+import "github.com/octo-cli/octo-cli/internal"
+
 type ReposCmd struct {
 	List                                               ReposListCmd                                               `cmd:"" help:"List your repositories"`
 	ListForUser                                        ReposListForUserCmd                                        `cmd:"" help:"List user repositories"`
@@ -126,7 +128,7 @@ type ReposCmd struct {
 }
 
 type ReposListCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Visibility  string "name:\"visibility\" help:\"Can be one of `all`, `public`, or `private`.\""
 	Affiliation string "name:\"affiliation\" help:\"Comma-separated list of values. Can include:  \n\\* `owner`: Repositories that are owned by the authenticated user.  \n\\* `collaborator`: Repositories that the user has been added to as a collaborator.  \n\\* `organization_member`: Repositories that the user has access to through being a member of an organization. This includes every repository on every team that the user is on.\""
 	Type        string "name:\"type\" help:\"Can be one of `all`, `owner`, `public`, `private`, `member`. Default: `all`  \n  \nWill cause a `422` error if used in the same request as **visibility** or **affiliation**. Will cause a `422` error if used in the same request as **visibility** or **affiliation**.\""
@@ -137,20 +139,20 @@ type ReposListCmd struct {
 }
 
 func (c *ReposListCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/repos"
-	c.updateURLQuery("visibility", c.Visibility)
-	c.updateURLQuery("affiliation", c.Affiliation)
-	c.updateURLQuery("type", c.Type)
-	c.updateURLQuery("sort", c.Sort)
-	c.updateURLQuery("direction", c.Direction)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/repos")
+	c.UpdateURLQuery("visibility", c.Visibility)
+	c.UpdateURLQuery("affiliation", c.Affiliation)
+	c.UpdateURLQuery("type", c.Type)
+	c.UpdateURLQuery("sort", c.Sort)
+	c.UpdateURLQuery("direction", c.Direction)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ReposListForUserCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Username  string `required:"" name:"username"`
 	Type      string "name:\"type\" help:\"Can be one of `all`, `owner`, `member`.\""
 	Sort      string "name:\"sort\" help:\"Can be one of `created`, `updated`, `pushed`, `full_name`.\""
@@ -160,19 +162,19 @@ type ReposListForUserCmd struct {
 }
 
 func (c *ReposListForUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/users/:username/repos"
-	c.updateURLPath("username", c.Username)
-	c.updateURLQuery("type", c.Type)
-	c.updateURLQuery("sort", c.Sort)
-	c.updateURLQuery("direction", c.Direction)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/users/:username/repos")
+	c.UpdateURLPath("username", c.Username)
+	c.UpdateURLQuery("type", c.Type)
+	c.UpdateURLQuery("sort", c.Sort)
+	c.UpdateURLQuery("direction", c.Direction)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ReposListForOrgCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Org     string `required:"" name:"org"`
 	Type    string "name:\"type\" help:\"Can be one of `all`, `public`, `private`, `forks`, `sources`, `member`.\""
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
@@ -180,33 +182,33 @@ type ReposListForOrgCmd struct {
 }
 
 func (c *ReposListForOrgCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org/repos"
-	c.updateURLPath("org", c.Org)
-	c.updateURLQuery("type", c.Type)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/repos")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLQuery("type", c.Type)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ReposListPublicCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Since   string `name:"since" help:"The integer ID of the last Repository that you've seen."`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64  `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *ReposListPublicCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repositories"
-	c.updateURLQuery("since", c.Since)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repositories")
+	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ReposCreateForAuthenticatedUserCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Name              string `required:"" name:"name" help:"The name of the repository."`
 	Description       string `name:"description" help:"A short description of the repository."`
 	Homepage          string `name:"homepage" help:"A URL with more information about the repository."`
@@ -224,27 +226,27 @@ type ReposCreateForAuthenticatedUserCmd struct {
 }
 
 func (c *ReposCreateForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/repos"
-	c.updateBody("name", c.Name)
-	c.updateBody("description", c.Description)
-	c.updateBody("homepage", c.Homepage)
-	c.updateBody("private", c.Private)
-	c.updateBody("has_issues", c.HasIssues)
-	c.updateBody("has_projects", c.HasProjects)
-	c.updateBody("has_wiki", c.HasWiki)
-	c.updateBody("team_id", c.TeamId)
-	c.updateBody("auto_init", c.AutoInit)
-	c.updateBody("gitignore_template", c.GitignoreTemplate)
-	c.updateBody("license_template", c.LicenseTemplate)
-	c.updateBody("allow_squash_merge", c.AllowSquashMerge)
-	c.updateBody("allow_merge_commit", c.AllowMergeCommit)
-	c.updateBody("allow_rebase_merge", c.AllowRebaseMerge)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/repos")
+	c.UpdateBody("name", c.Name)
+	c.UpdateBody("description", c.Description)
+	c.UpdateBody("homepage", c.Homepage)
+	c.UpdateBody("private", c.Private)
+	c.UpdateBody("has_issues", c.HasIssues)
+	c.UpdateBody("has_projects", c.HasProjects)
+	c.UpdateBody("has_wiki", c.HasWiki)
+	c.UpdateBody("team_id", c.TeamId)
+	c.UpdateBody("auto_init", c.AutoInit)
+	c.UpdateBody("gitignore_template", c.GitignoreTemplate)
+	c.UpdateBody("license_template", c.LicenseTemplate)
+	c.UpdateBody("allow_squash_merge", c.AllowSquashMerge)
+	c.UpdateBody("allow_merge_commit", c.AllowMergeCommit)
+	c.UpdateBody("allow_rebase_merge", c.AllowRebaseMerge)
+	return c.DoRequest("POST")
 }
 
 type ReposCreateInOrgCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Org               string `required:"" name:"org"`
 	Name              string `required:"" name:"name" help:"The name of the repository."`
 	Description       string `name:"description" help:"A short description of the repository."`
@@ -263,42 +265,42 @@ type ReposCreateInOrgCmd struct {
 }
 
 func (c *ReposCreateInOrgCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org/repos"
-	c.updateURLPath("org", c.Org)
-	c.updateBody("name", c.Name)
-	c.updateBody("description", c.Description)
-	c.updateBody("homepage", c.Homepage)
-	c.updateBody("private", c.Private)
-	c.updateBody("has_issues", c.HasIssues)
-	c.updateBody("has_projects", c.HasProjects)
-	c.updateBody("has_wiki", c.HasWiki)
-	c.updateBody("team_id", c.TeamId)
-	c.updateBody("auto_init", c.AutoInit)
-	c.updateBody("gitignore_template", c.GitignoreTemplate)
-	c.updateBody("license_template", c.LicenseTemplate)
-	c.updateBody("allow_squash_merge", c.AllowSquashMerge)
-	c.updateBody("allow_merge_commit", c.AllowMergeCommit)
-	c.updateBody("allow_rebase_merge", c.AllowRebaseMerge)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/repos")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateBody("name", c.Name)
+	c.UpdateBody("description", c.Description)
+	c.UpdateBody("homepage", c.Homepage)
+	c.UpdateBody("private", c.Private)
+	c.UpdateBody("has_issues", c.HasIssues)
+	c.UpdateBody("has_projects", c.HasProjects)
+	c.UpdateBody("has_wiki", c.HasWiki)
+	c.UpdateBody("team_id", c.TeamId)
+	c.UpdateBody("auto_init", c.AutoInit)
+	c.UpdateBody("gitignore_template", c.GitignoreTemplate)
+	c.UpdateBody("license_template", c.LicenseTemplate)
+	c.UpdateBody("allow_squash_merge", c.AllowSquashMerge)
+	c.UpdateBody("allow_merge_commit", c.AllowMergeCommit)
+	c.UpdateBody("allow_rebase_merge", c.AllowRebaseMerge)
+	return c.DoRequest("POST")
 }
 
 type ReposGetCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
 func (c *ReposGetCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
 }
 
 type ReposEditCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner            string `required:"" name:"owner"`
 	Repo             string `required:"" name:"repo"`
 	Name             string `required:"" name:"name" help:"The name of the repository."`
@@ -316,43 +318,43 @@ type ReposEditCmd struct {
 }
 
 func (c *ReposEditCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateBody("name", c.Name)
-	c.updateBody("description", c.Description)
-	c.updateBody("homepage", c.Homepage)
-	c.updateBody("private", c.Private)
-	c.updateBody("has_issues", c.HasIssues)
-	c.updateBody("has_projects", c.HasProjects)
-	c.updateBody("has_wiki", c.HasWiki)
-	c.updateBody("default_branch", c.DefaultBranch)
-	c.updateBody("allow_squash_merge", c.AllowSquashMerge)
-	c.updateBody("allow_merge_commit", c.AllowMergeCommit)
-	c.updateBody("allow_rebase_merge", c.AllowRebaseMerge)
-	c.updateBody("archived", c.Archived)
-	return c.doRequest("PATCH")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("name", c.Name)
+	c.UpdateBody("description", c.Description)
+	c.UpdateBody("homepage", c.Homepage)
+	c.UpdateBody("private", c.Private)
+	c.UpdateBody("has_issues", c.HasIssues)
+	c.UpdateBody("has_projects", c.HasProjects)
+	c.UpdateBody("has_wiki", c.HasWiki)
+	c.UpdateBody("default_branch", c.DefaultBranch)
+	c.UpdateBody("allow_squash_merge", c.AllowSquashMerge)
+	c.UpdateBody("allow_merge_commit", c.AllowMergeCommit)
+	c.UpdateBody("allow_rebase_merge", c.AllowRebaseMerge)
+	c.UpdateBody("archived", c.Archived)
+	return c.DoRequest("PATCH")
 }
 
 type ReposListTopicsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Mercy bool   "name:\"mercy-preview\" help:\"**Note:** The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.mercy-preview+json\n\n```\""
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
 func (c *ReposListTopicsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/topics"
-	c.updatePreview("mercy", c.Mercy)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/topics")
+	c.UpdatePreview("mercy", c.Mercy)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
 }
 
 type ReposReplaceTopicsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Mercy bool     "name:\"mercy-preview\" help:\"**Note:** The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.mercy-preview+json\n\n```\""
 	Owner string   `required:"" name:"owner"`
 	Repo  string   `required:"" name:"repo"`
@@ -360,17 +362,17 @@ type ReposReplaceTopicsCmd struct {
 }
 
 func (c *ReposReplaceTopicsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/topics"
-	c.updatePreview("mercy", c.Mercy)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateBody("names", c.Names)
-	return c.doRequest("PUT")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/topics")
+	c.UpdatePreview("mercy", c.Mercy)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("names", c.Names)
+	return c.DoRequest("PUT")
 }
 
 type ReposListContributorsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner   string `required:"" name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	Anon    string "name:\"anon\" help:\"Set to `1` or `true` to include anonymous contributors in results.\""
@@ -379,32 +381,32 @@ type ReposListContributorsCmd struct {
 }
 
 func (c *ReposListContributorsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/contributors"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLQuery("anon", c.Anon)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/contributors")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("anon", c.Anon)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ReposListLanguagesCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
 func (c *ReposListLanguagesCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/languages"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/languages")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
 }
 
 type ReposListTeamsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner   string `required:"" name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
@@ -412,17 +414,17 @@ type ReposListTeamsCmd struct {
 }
 
 func (c *ReposListTeamsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/teams"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/teams")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ReposListTagsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner   string `required:"" name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
@@ -430,31 +432,31 @@ type ReposListTagsCmd struct {
 }
 
 func (c *ReposListTagsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/tags"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/tags")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ReposDeleteCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
 func (c *ReposDeleteCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("DELETE")
 }
 
 type ReposTransferCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Nightshade bool    "name:\"nightshade-preview\" required:\"\" help:\"**Note:** The [Repository Transfer API](/changes/2017-11-09-repository-transfer-api-preview) is currently available for developers to preview. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.nightshade-preview+json\n\n```\""
 	Owner      string  `required:"" name:"owner"`
 	Repo       string  `required:"" name:"repo"`
@@ -463,18 +465,18 @@ type ReposTransferCmd struct {
 }
 
 func (c *ReposTransferCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/transfer"
-	c.updatePreview("nightshade", c.Nightshade)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateBody("new_owner", c.NewOwner)
-	c.updateBody("team_ids", c.TeamIds)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/transfer")
+	c.UpdatePreview("nightshade", c.Nightshade)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("new_owner", c.NewOwner)
+	c.UpdateBody("team_ids", c.TeamIds)
+	return c.DoRequest("POST")
 }
 
 type ReposListBranchesCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner     string `required:"" name:"owner"`
 	Repo      string `required:"" name:"repo"`
 	Protected bool   "name:\"protected\" help:\"Setting to `true` returns only protected branches.\""
@@ -483,34 +485,34 @@ type ReposListBranchesCmd struct {
 }
 
 func (c *ReposListBranchesCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/branches"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLQuery("protected", c.Protected)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("protected", c.Protected)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ReposGetBranchCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner  string `required:"" name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Branch string `required:"" name:"branch"`
 }
 
 func (c *ReposGetBranchCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/branches/:branch"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("branch", c.Branch)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	return c.DoRequest("GET")
 }
 
 type ReposGetBranchProtectionCmd struct {
-	baseCmd
+	internal.BaseCmd
 	LukeCage bool   "name:\"luke-cage-preview\" help:\"**Note:** The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.luke-cage-preview+json\n\n```\""
 	Owner    string `required:"" name:"owner"`
 	Repo     string `required:"" name:"repo"`
@@ -518,49 +520,49 @@ type ReposGetBranchProtectionCmd struct {
 }
 
 func (c *ReposGetBranchProtectionCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection"
-	c.updatePreview("luke-cage", c.LukeCage)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("branch", c.Branch)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection")
+	c.UpdatePreview("luke-cage", c.LukeCage)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	return c.DoRequest("GET")
 }
 
 type ReposRemoveBranchProtectionCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner  string `required:"" name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Branch string `required:"" name:"branch"`
 }
 
 func (c *ReposRemoveBranchProtectionCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("branch", c.Branch)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	return c.DoRequest("DELETE")
 }
 
 type ReposGetProtectedBranchRequiredStatusChecksCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner  string `required:"" name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Branch string `required:"" name:"branch"`
 }
 
 func (c *ReposGetProtectedBranchRequiredStatusChecksCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/required_status_checks"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("branch", c.Branch)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_status_checks")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	return c.DoRequest("GET")
 }
 
 type ReposUpdateProtectedBranchRequiredStatusChecksCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner    string   `required:"" name:"owner"`
 	Repo     string   `required:"" name:"repo"`
 	Branch   string   `required:"" name:"branch"`
@@ -569,50 +571,50 @@ type ReposUpdateProtectedBranchRequiredStatusChecksCmd struct {
 }
 
 func (c *ReposUpdateProtectedBranchRequiredStatusChecksCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/required_status_checks"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("branch", c.Branch)
-	c.updateBody("strict", c.Strict)
-	c.updateBody("contexts", c.Contexts)
-	return c.doRequest("PATCH")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_status_checks")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateBody("strict", c.Strict)
+	c.UpdateBody("contexts", c.Contexts)
+	return c.DoRequest("PATCH")
 }
 
 type ReposRemoveProtectedBranchRequiredStatusChecksCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner  string `required:"" name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Branch string `required:"" name:"branch"`
 }
 
 func (c *ReposRemoveProtectedBranchRequiredStatusChecksCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/required_status_checks"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("branch", c.Branch)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_status_checks")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	return c.DoRequest("DELETE")
 }
 
 type ReposListProtectedBranchRequiredStatusChecksContextsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner  string `required:"" name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Branch string `required:"" name:"branch"`
 }
 
 func (c *ReposListProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("branch", c.Branch)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	return c.DoRequest("GET")
 }
 
 type ReposReplaceProtectedBranchRequiredStatusChecksContextsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner    string   `required:"" name:"owner"`
 	Repo     string   `required:"" name:"repo"`
 	Branch   string   `required:"" name:"branch"`
@@ -620,17 +622,17 @@ type ReposReplaceProtectedBranchRequiredStatusChecksContextsCmd struct {
 }
 
 func (c *ReposReplaceProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("branch", c.Branch)
-	c.updateBody("contexts", c.Contexts)
-	return c.doRequest("PUT")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateBody("contexts", c.Contexts)
+	return c.DoRequest("PUT")
 }
 
 type ReposAddProtectedBranchRequiredStatusChecksContextsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner    string   `required:"" name:"owner"`
 	Repo     string   `required:"" name:"repo"`
 	Branch   string   `required:"" name:"branch"`
@@ -638,17 +640,17 @@ type ReposAddProtectedBranchRequiredStatusChecksContextsCmd struct {
 }
 
 func (c *ReposAddProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("branch", c.Branch)
-	c.updateBody("contexts", c.Contexts)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateBody("contexts", c.Contexts)
+	return c.DoRequest("POST")
 }
 
 type ReposRemoveProtectedBranchRequiredStatusChecksContextsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner    string   `required:"" name:"owner"`
 	Repo     string   `required:"" name:"repo"`
 	Branch   string   `required:"" name:"branch"`
@@ -656,17 +658,17 @@ type ReposRemoveProtectedBranchRequiredStatusChecksContextsCmd struct {
 }
 
 func (c *ReposRemoveProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("branch", c.Branch)
-	c.updateBody("contexts", c.Contexts)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateBody("contexts", c.Contexts)
+	return c.DoRequest("DELETE")
 }
 
 type ReposGetProtectedBranchPullRequestReviewEnforcementCmd struct {
-	baseCmd
+	internal.BaseCmd
 	LukeCage bool   "name:\"luke-cage-preview\" help:\"**Note:** The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.luke-cage-preview+json\n\n```\""
 	Owner    string `required:"" name:"owner"`
 	Repo     string `required:"" name:"repo"`
@@ -674,33 +676,33 @@ type ReposGetProtectedBranchPullRequestReviewEnforcementCmd struct {
 }
 
 func (c *ReposGetProtectedBranchPullRequestReviewEnforcementCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/required_pull_request_reviews"
-	c.updatePreview("luke-cage", c.LukeCage)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("branch", c.Branch)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_pull_request_reviews")
+	c.UpdatePreview("luke-cage", c.LukeCage)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	return c.DoRequest("GET")
 }
 
 type ReposRemoveProtectedBranchPullRequestReviewEnforcementCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner  string `required:"" name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Branch string `required:"" name:"branch"`
 }
 
 func (c *ReposRemoveProtectedBranchPullRequestReviewEnforcementCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/required_pull_request_reviews"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("branch", c.Branch)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_pull_request_reviews")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	return c.DoRequest("DELETE")
 }
 
 type ReposGetProtectedBranchRequiredSignaturesCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Zzzax  bool   "name:\"zzzax-preview\" required:\"\" help:\"**Note:** Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.zzzax-preview+json\n\n```\""
 	Owner  string `required:"" name:"owner"`
 	Repo   string `required:"" name:"repo"`
@@ -708,17 +710,17 @@ type ReposGetProtectedBranchRequiredSignaturesCmd struct {
 }
 
 func (c *ReposGetProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/required_signatures"
-	c.updatePreview("zzzax", c.Zzzax)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("branch", c.Branch)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_signatures")
+	c.UpdatePreview("zzzax", c.Zzzax)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	return c.DoRequest("GET")
 }
 
 type ReposAddProtectedBranchRequiredSignaturesCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Zzzax  bool   "name:\"zzzax-preview\" required:\"\" help:\"**Note:** Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.zzzax-preview+json\n\n```\""
 	Owner  string `required:"" name:"owner"`
 	Repo   string `required:"" name:"repo"`
@@ -726,17 +728,17 @@ type ReposAddProtectedBranchRequiredSignaturesCmd struct {
 }
 
 func (c *ReposAddProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/required_signatures"
-	c.updatePreview("zzzax", c.Zzzax)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("branch", c.Branch)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_signatures")
+	c.UpdatePreview("zzzax", c.Zzzax)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	return c.DoRequest("POST")
 }
 
 type ReposRemoveProtectedBranchRequiredSignaturesCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Zzzax  bool   "name:\"zzzax-preview\" required:\"\" help:\"**Note:** Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.zzzax-preview+json\n\n```\""
 	Owner  string `required:"" name:"owner"`
 	Repo   string `required:"" name:"repo"`
@@ -744,97 +746,97 @@ type ReposRemoveProtectedBranchRequiredSignaturesCmd struct {
 }
 
 func (c *ReposRemoveProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/required_signatures"
-	c.updatePreview("zzzax", c.Zzzax)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("branch", c.Branch)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_signatures")
+	c.UpdatePreview("zzzax", c.Zzzax)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	return c.DoRequest("DELETE")
 }
 
 type ReposGetProtectedBranchAdminEnforcementCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner  string `required:"" name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Branch string `required:"" name:"branch"`
 }
 
 func (c *ReposGetProtectedBranchAdminEnforcementCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/enforce_admins"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("branch", c.Branch)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/enforce_admins")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	return c.DoRequest("GET")
 }
 
 type ReposAddProtectedBranchAdminEnforcementCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner  string `required:"" name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Branch string `required:"" name:"branch"`
 }
 
 func (c *ReposAddProtectedBranchAdminEnforcementCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/enforce_admins"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("branch", c.Branch)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/enforce_admins")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	return c.DoRequest("POST")
 }
 
 type ReposRemoveProtectedBranchAdminEnforcementCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner  string `required:"" name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Branch string `required:"" name:"branch"`
 }
 
 func (c *ReposRemoveProtectedBranchAdminEnforcementCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/enforce_admins"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("branch", c.Branch)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/enforce_admins")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	return c.DoRequest("DELETE")
 }
 
 type ReposGetProtectedBranchRestrictionsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner  string `required:"" name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Branch string `required:"" name:"branch"`
 }
 
 func (c *ReposGetProtectedBranchRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/restrictions"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("branch", c.Branch)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	return c.DoRequest("GET")
 }
 
 type ReposRemoveProtectedBranchRestrictionsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner  string `required:"" name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Branch string `required:"" name:"branch"`
 }
 
 func (c *ReposRemoveProtectedBranchRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/restrictions"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("branch", c.Branch)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	return c.DoRequest("DELETE")
 }
 
 type ReposListProtectedBranchTeamRestrictionsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Hellcat bool   "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
 	Owner   string `required:"" name:"owner"`
 	Repo    string `required:"" name:"repo"`
@@ -844,19 +846,19 @@ type ReposListProtectedBranchTeamRestrictionsCmd struct {
 }
 
 func (c *ReposListProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/restrictions/teams"
-	c.updatePreview("hellcat", c.Hellcat)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("branch", c.Branch)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions/teams")
+	c.UpdatePreview("hellcat", c.Hellcat)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ReposReplaceProtectedBranchTeamRestrictionsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Hellcat bool     "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
 	Owner   string   `required:"" name:"owner"`
 	Repo    string   `required:"" name:"repo"`
@@ -865,18 +867,18 @@ type ReposReplaceProtectedBranchTeamRestrictionsCmd struct {
 }
 
 func (c *ReposReplaceProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/restrictions/teams"
-	c.updatePreview("hellcat", c.Hellcat)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("branch", c.Branch)
-	c.updateBody("teams", c.Teams)
-	return c.doRequest("PUT")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions/teams")
+	c.UpdatePreview("hellcat", c.Hellcat)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateBody("teams", c.Teams)
+	return c.DoRequest("PUT")
 }
 
 type ReposAddProtectedBranchTeamRestrictionsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Hellcat bool     "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
 	Owner   string   `required:"" name:"owner"`
 	Repo    string   `required:"" name:"repo"`
@@ -885,18 +887,18 @@ type ReposAddProtectedBranchTeamRestrictionsCmd struct {
 }
 
 func (c *ReposAddProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/restrictions/teams"
-	c.updatePreview("hellcat", c.Hellcat)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("branch", c.Branch)
-	c.updateBody("teams", c.Teams)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions/teams")
+	c.UpdatePreview("hellcat", c.Hellcat)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateBody("teams", c.Teams)
+	return c.DoRequest("POST")
 }
 
 type ReposRemoveProtectedBranchTeamRestrictionsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Hellcat bool     "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
 	Owner   string   `required:"" name:"owner"`
 	Repo    string   `required:"" name:"repo"`
@@ -905,34 +907,34 @@ type ReposRemoveProtectedBranchTeamRestrictionsCmd struct {
 }
 
 func (c *ReposRemoveProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/restrictions/teams"
-	c.updatePreview("hellcat", c.Hellcat)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("branch", c.Branch)
-	c.updateBody("teams", c.Teams)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions/teams")
+	c.UpdatePreview("hellcat", c.Hellcat)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateBody("teams", c.Teams)
+	return c.DoRequest("DELETE")
 }
 
 type ReposListProtectedBranchUserRestrictionsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner  string `required:"" name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Branch string `required:"" name:"branch"`
 }
 
 func (c *ReposListProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/restrictions/users"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("branch", c.Branch)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions/users")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	return c.DoRequest("GET")
 }
 
 type ReposReplaceProtectedBranchUserRestrictionsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner  string   `required:"" name:"owner"`
 	Repo   string   `required:"" name:"repo"`
 	Branch string   `required:"" name:"branch"`
@@ -940,17 +942,17 @@ type ReposReplaceProtectedBranchUserRestrictionsCmd struct {
 }
 
 func (c *ReposReplaceProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/restrictions/users"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("branch", c.Branch)
-	c.updateBody("users", c.Users)
-	return c.doRequest("PUT")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions/users")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateBody("users", c.Users)
+	return c.DoRequest("PUT")
 }
 
 type ReposAddProtectedBranchUserRestrictionsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner  string   `required:"" name:"owner"`
 	Repo   string   `required:"" name:"repo"`
 	Branch string   `required:"" name:"branch"`
@@ -958,17 +960,17 @@ type ReposAddProtectedBranchUserRestrictionsCmd struct {
 }
 
 func (c *ReposAddProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/restrictions/users"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("branch", c.Branch)
-	c.updateBody("users", c.Users)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions/users")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateBody("users", c.Users)
+	return c.DoRequest("POST")
 }
 
 type ReposRemoveProtectedBranchUserRestrictionsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner  string   `required:"" name:"owner"`
 	Repo   string   `required:"" name:"repo"`
 	Branch string   `required:"" name:"branch"`
@@ -976,17 +978,17 @@ type ReposRemoveProtectedBranchUserRestrictionsCmd struct {
 }
 
 func (c *ReposRemoveProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/branches/:branch/protection/restrictions/users"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("branch", c.Branch)
-	c.updateBody("users", c.Users)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions/users")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateBody("users", c.Users)
+	return c.DoRequest("DELETE")
 }
 
 type ReposListCollaboratorsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Hellcat     bool   "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
 	Owner       string `required:"" name:"owner"`
 	Repo        string `required:"" name:"repo"`
@@ -996,19 +998,19 @@ type ReposListCollaboratorsCmd struct {
 }
 
 func (c *ReposListCollaboratorsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/collaborators"
-	c.updatePreview("hellcat", c.Hellcat)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLQuery("affiliation", c.Affiliation)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/collaborators")
+	c.UpdatePreview("hellcat", c.Hellcat)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("affiliation", c.Affiliation)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ReposCheckCollaboratorCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Hellcat  bool   "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
 	Owner    string `required:"" name:"owner"`
 	Repo     string `required:"" name:"repo"`
@@ -1016,33 +1018,33 @@ type ReposCheckCollaboratorCmd struct {
 }
 
 func (c *ReposCheckCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/collaborators/:username"
-	c.updatePreview("hellcat", c.Hellcat)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("username", c.Username)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/collaborators/:username")
+	c.UpdatePreview("hellcat", c.Hellcat)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("GET")
 }
 
 type ReposGetCollaboratorPermissionLevelCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner    string `required:"" name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	Username string `required:"" name:"username"`
 }
 
 func (c *ReposGetCollaboratorPermissionLevelCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/collaborators/:username/permission"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("username", c.Username)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/collaborators/:username/permission")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("GET")
 }
 
 type ReposAddCollaboratorCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner      string `required:"" name:"owner"`
 	Repo       string `required:"" name:"repo"`
 	Username   string `required:"" name:"username"`
@@ -1050,33 +1052,33 @@ type ReposAddCollaboratorCmd struct {
 }
 
 func (c *ReposAddCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/collaborators/:username"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("username", c.Username)
-	c.updateBody("permission", c.Permission)
-	return c.doRequest("PUT")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/collaborators/:username")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("username", c.Username)
+	c.UpdateBody("permission", c.Permission)
+	return c.DoRequest("PUT")
 }
 
 type ReposRemoveCollaboratorCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner    string `required:"" name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	Username string `required:"" name:"username"`
 }
 
 func (c *ReposRemoveCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/collaborators/:username"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("username", c.Username)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/collaborators/:username")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("DELETE")
 }
 
 type ReposListCommitCommentsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview\n\n```\n\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.\""
 	Owner        string `required:"" name:"owner"`
 	Repo         string `required:"" name:"repo"`
@@ -1085,18 +1087,18 @@ type ReposListCommitCommentsCmd struct {
 }
 
 func (c *ReposListCommitCommentsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/comments"
-	c.updatePreview("squirrel-girl", c.SquirrelGirl)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/comments")
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ReposListCommentsForCommitCmd struct {
-	baseCmd
+	internal.BaseCmd
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview\n\n```\n\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.\""
 	Owner        string `required:"" name:"owner"`
 	Repo         string `required:"" name:"repo"`
@@ -1106,19 +1108,19 @@ type ReposListCommentsForCommitCmd struct {
 }
 
 func (c *ReposListCommentsForCommitCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/commits/:ref/comments"
-	c.updatePreview("squirrel-girl", c.SquirrelGirl)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("ref", c.Ref)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/commits/:ref/comments")
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("ref", c.Ref)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ReposCreateCommitCommentCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner    string `required:"" name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	Sha      string `required:"" name:"sha"`
@@ -1129,20 +1131,20 @@ type ReposCreateCommitCommentCmd struct {
 }
 
 func (c *ReposCreateCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/commits/:sha/comments"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("sha", c.Sha)
-	c.updateBody("body", c.Body)
-	c.updateBody("path", c.Path)
-	c.updateBody("position", c.Position)
-	c.updateBody("line", c.Line)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/commits/:sha/comments")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("sha", c.Sha)
+	c.UpdateBody("body", c.Body)
+	c.UpdateBody("path", c.Path)
+	c.UpdateBody("position", c.Position)
+	c.UpdateBody("line", c.Line)
+	return c.DoRequest("POST")
 }
 
 type ReposGetCommitCommentCmd struct {
-	baseCmd
+	internal.BaseCmd
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview\n\n```\n\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.\""
 	Owner        string `required:"" name:"owner"`
 	Repo         string `required:"" name:"repo"`
@@ -1150,17 +1152,17 @@ type ReposGetCommitCommentCmd struct {
 }
 
 func (c *ReposGetCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/comments/:comment_id"
-	c.updatePreview("squirrel-girl", c.SquirrelGirl)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("comment_id", c.CommentId)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/comments/:comment_id")
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("comment_id", c.CommentId)
+	return c.DoRequest("GET")
 }
 
 type ReposUpdateCommitCommentCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner     string `required:"" name:"owner"`
 	Repo      string `required:"" name:"repo"`
 	CommentId int64  `required:"" name:"comment_id"`
@@ -1168,33 +1170,33 @@ type ReposUpdateCommitCommentCmd struct {
 }
 
 func (c *ReposUpdateCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/comments/:comment_id"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("comment_id", c.CommentId)
-	c.updateBody("body", c.Body)
-	return c.doRequest("PATCH")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/comments/:comment_id")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("comment_id", c.CommentId)
+	c.UpdateBody("body", c.Body)
+	return c.DoRequest("PATCH")
 }
 
 type ReposDeleteCommitCommentCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner     string `required:"" name:"owner"`
 	Repo      string `required:"" name:"repo"`
 	CommentId int64  `required:"" name:"comment_id"`
 }
 
 func (c *ReposDeleteCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/comments/:comment_id"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("comment_id", c.CommentId)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/comments/:comment_id")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("comment_id", c.CommentId)
+	return c.DoRequest("DELETE")
 }
 
 type ReposListCommitsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner   string `required:"" name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	Sha     string `name:"sha" help:"SHA or branch to start listing commits from."`
@@ -1207,54 +1209,54 @@ type ReposListCommitsCmd struct {
 }
 
 func (c *ReposListCommitsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/commits"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLQuery("sha", c.Sha)
-	c.updateURLQuery("path", c.Path)
-	c.updateURLQuery("author", c.Author)
-	c.updateURLQuery("since", c.Since)
-	c.updateURLQuery("until", c.Until)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/commits")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("sha", c.Sha)
+	c.UpdateURLQuery("path", c.Path)
+	c.UpdateURLQuery("author", c.Author)
+	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("until", c.Until)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ReposGetCommitCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	Sha   string `required:"" name:"sha"`
 }
 
 func (c *ReposGetCommitCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/commits/:sha"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("sha", c.Sha)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/commits/:sha")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("sha", c.Sha)
+	return c.DoRequest("GET")
 }
 
 type ReposGetCommitRefShaCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	Ref   string `required:"" name:"ref"`
 }
 
 func (c *ReposGetCommitRefShaCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/commits/:ref"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("ref", c.Ref)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/commits/:ref")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("ref", c.Ref)
+	return c.DoRequest("GET")
 }
 
 type ReposCompareCommitsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	Base  string `required:"" name:"base"`
@@ -1262,47 +1264,47 @@ type ReposCompareCommitsCmd struct {
 }
 
 func (c *ReposCompareCommitsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/compare/:base...:head"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("base", c.Base)
-	c.updateURLPath("head", c.Head)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/compare/:base...:head")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("base", c.Base)
+	c.UpdateURLPath("head", c.Head)
+	return c.DoRequest("GET")
 }
 
 type ReposRetrieveCommunityProfileMetricsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
 func (c *ReposRetrieveCommunityProfileMetricsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/community/profile"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/community/profile")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
 }
 
 type ReposGetReadmeCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	Ref   string `name:"ref" help:"The name of the commit/branch/tag."`
 }
 
 func (c *ReposGetReadmeCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/readme"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLQuery("ref", c.Ref)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/readme")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("ref", c.Ref)
+	return c.DoRequest("GET")
 }
 
 type ReposGetContentsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	Path  string `required:"" name:"path" help:"The content path."`
@@ -1310,17 +1312,17 @@ type ReposGetContentsCmd struct {
 }
 
 func (c *ReposGetContentsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/contents/:path"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("path", c.Path)
-	c.updateURLQuery("ref", c.Ref)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/contents/:path")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("path", c.Path)
+	c.UpdateURLQuery("ref", c.Ref)
+	return c.DoRequest("GET")
 }
 
 type ReposGetArchiveLinkCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner         string `required:"" name:"owner"`
 	Repo          string `required:"" name:"repo"`
 	ArchiveFormat string "required:\"\" name:\"archive_format\" help:\"Can be either `tarball` or `zipball`.\""
@@ -1328,17 +1330,17 @@ type ReposGetArchiveLinkCmd struct {
 }
 
 func (c *ReposGetArchiveLinkCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/:archive_format/:ref"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("archive_format", c.ArchiveFormat)
-	c.updateURLPath("ref", c.Ref)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/:archive_format/:ref")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("archive_format", c.ArchiveFormat)
+	c.UpdateURLPath("ref", c.Ref)
+	return c.DoRequest("GET")
 }
 
 type ReposListDeployKeysCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner   string `required:"" name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
@@ -1346,33 +1348,33 @@ type ReposListDeployKeysCmd struct {
 }
 
 func (c *ReposListDeployKeysCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/keys"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/keys")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ReposGetDeployKeyCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	KeyId int64  `required:"" name:"key_id"`
 }
 
 func (c *ReposGetDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/keys/:key_id"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("key_id", c.KeyId)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/keys/:key_id")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("key_id", c.KeyId)
+	return c.DoRequest("GET")
 }
 
 type ReposAddDeployKeyCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner    string `required:"" name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	Title    string `name:"title" help:"A name for the key."`
@@ -1381,34 +1383,34 @@ type ReposAddDeployKeyCmd struct {
 }
 
 func (c *ReposAddDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/keys"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateBody("title", c.Title)
-	c.updateBody("key", c.Key)
-	c.updateBody("read_only", c.ReadOnly)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/keys")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("title", c.Title)
+	c.UpdateBody("key", c.Key)
+	c.UpdateBody("read_only", c.ReadOnly)
+	return c.DoRequest("POST")
 }
 
 type ReposRemoveDeployKeyCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	KeyId int64  `required:"" name:"key_id"`
 }
 
 func (c *ReposRemoveDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/keys/:key_id"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("key_id", c.KeyId)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/keys/:key_id")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("key_id", c.KeyId)
+	return c.DoRequest("DELETE")
 }
 
 type ReposListDeploymentsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	AntMan      bool   "name:\"ant-man-preview\" help:\"**Note:** The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.ant-man-preview+json\n\n```\""
 	Owner       string `required:"" name:"owner"`
 	Repo        string `required:"" name:"repo"`
@@ -1421,22 +1423,22 @@ type ReposListDeploymentsCmd struct {
 }
 
 func (c *ReposListDeploymentsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/deployments"
-	c.updatePreview("ant-man", c.AntMan)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLQuery("sha", c.Sha)
-	c.updateURLQuery("ref", c.Ref)
-	c.updateURLQuery("task", c.Task)
-	c.updateURLQuery("environment", c.Environment)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/deployments")
+	c.UpdatePreview("ant-man", c.AntMan)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("sha", c.Sha)
+	c.UpdateURLQuery("ref", c.Ref)
+	c.UpdateURLQuery("task", c.Task)
+	c.UpdateURLQuery("environment", c.Environment)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ReposGetDeploymentCmd struct {
-	baseCmd
+	internal.BaseCmd
 	MachineMan   bool   "name:\"machine-man-preview\" help:\"**Note:** If a deployment is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](/changes/2016-09-14-Integrations-Early-Access).\n\nTo receive the `performed_via_github_app` object is the response, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.machine-man-preview\n\n```\""
 	AntMan       bool   "name:\"ant-man-preview\" help:\"**Note:** The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.ant-man-preview+json\n\n```\""
 	Owner        string `required:"" name:"owner"`
@@ -1445,18 +1447,18 @@ type ReposGetDeploymentCmd struct {
 }
 
 func (c *ReposGetDeploymentCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/deployments/:deployment_id"
-	c.updatePreview("machine-man", c.MachineMan)
-	c.updatePreview("ant-man", c.AntMan)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("deployment_id", c.DeploymentId)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/deployments/:deployment_id")
+	c.UpdatePreview("machine-man", c.MachineMan)
+	c.UpdatePreview("ant-man", c.AntMan)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("deployment_id", c.DeploymentId)
+	return c.DoRequest("GET")
 }
 
 type ReposCreateDeploymentCmd struct {
-	baseCmd
+	internal.BaseCmd
 	AntMan                bool     "name:\"ant-man-preview\" help:\"**Note:** The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.ant-man-preview+json\n\n```\""
 	Owner                 string   `required:"" name:"owner"`
 	Repo                  string   `required:"" name:"repo"`
@@ -1472,25 +1474,25 @@ type ReposCreateDeploymentCmd struct {
 }
 
 func (c *ReposCreateDeploymentCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/deployments"
-	c.updatePreview("ant-man", c.AntMan)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateBody("ref", c.Ref)
-	c.updateBody("task", c.Task)
-	c.updateBody("auto_merge", c.AutoMerge)
-	c.updateBody("required_contexts", c.RequiredContexts)
-	c.updateBody("payload", c.Payload)
-	c.updateBody("environment", c.Environment)
-	c.updateBody("description", c.Description)
-	c.updateBody("transient_environment", c.TransientEnvironment)
-	c.updateBody("production_environment", c.ProductionEnvironment)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/deployments")
+	c.UpdatePreview("ant-man", c.AntMan)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("ref", c.Ref)
+	c.UpdateBody("task", c.Task)
+	c.UpdateBody("auto_merge", c.AutoMerge)
+	c.UpdateBody("required_contexts", c.RequiredContexts)
+	c.UpdateBody("payload", c.Payload)
+	c.UpdateBody("environment", c.Environment)
+	c.UpdateBody("description", c.Description)
+	c.UpdateBody("transient_environment", c.TransientEnvironment)
+	c.UpdateBody("production_environment", c.ProductionEnvironment)
+	return c.DoRequest("POST")
 }
 
 type ReposListDeploymentStatusesCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Flash        bool   "name:\"flash-preview\" help:\"**Note:** New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.\n\nTo access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must provide the following custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.flash-preview+json\n\n```\""
 	AntMan       bool   "name:\"ant-man-preview\" help:\"**Note:** The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.ant-man-preview+json\n\n```\""
 	Owner        string `required:"" name:"owner"`
@@ -1501,20 +1503,20 @@ type ReposListDeploymentStatusesCmd struct {
 }
 
 func (c *ReposListDeploymentStatusesCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/deployments/:deployment_id/statuses"
-	c.updatePreview("flash", c.Flash)
-	c.updatePreview("ant-man", c.AntMan)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("deployment_id", c.DeploymentId)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/deployments/:deployment_id/statuses")
+	c.UpdatePreview("flash", c.Flash)
+	c.UpdatePreview("ant-man", c.AntMan)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("deployment_id", c.DeploymentId)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ReposGetDeploymentStatusCmd struct {
-	baseCmd
+	internal.BaseCmd
 	MachineMan   bool   "name:\"machine-man-preview\" help:\"**Note:** If a deployment is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](/changes/2016-09-14-Integrations-Early-Access).\n\nTo receive the `performed_via_github_app` object is the response, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.machine-man-preview\n\n```\""
 	Flash        bool   "name:\"flash-preview\" help:\"**Note:** New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.\n\nTo access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must provide the following custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.flash-preview+json\n\n```\""
 	AntMan       bool   "name:\"ant-man-preview\" help:\"**Note:** The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.ant-man-preview+json\n\n```\""
@@ -1525,20 +1527,20 @@ type ReposGetDeploymentStatusCmd struct {
 }
 
 func (c *ReposGetDeploymentStatusCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/deployments/:deployment_id/statuses/:status_id"
-	c.updatePreview("machine-man", c.MachineMan)
-	c.updatePreview("flash", c.Flash)
-	c.updatePreview("ant-man", c.AntMan)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("deployment_id", c.DeploymentId)
-	c.updateURLPath("status_id", c.StatusId)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/deployments/:deployment_id/statuses/:status_id")
+	c.UpdatePreview("machine-man", c.MachineMan)
+	c.UpdatePreview("flash", c.Flash)
+	c.UpdatePreview("ant-man", c.AntMan)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("deployment_id", c.DeploymentId)
+	c.UpdateURLPath("status_id", c.StatusId)
+	return c.DoRequest("GET")
 }
 
 type ReposCreateDeploymentStatusCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Flash          bool   "name:\"flash-preview\" help:\"**Note:** New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.\n\nTo access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must provide the following custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.flash-preview+json\n\n```\""
 	AntMan         bool   "name:\"ant-man-preview\" help:\"**Note:** The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.ant-man-preview+json\n\n```\""
 	Owner          string `required:"" name:"owner"`
@@ -1554,25 +1556,25 @@ type ReposCreateDeploymentStatusCmd struct {
 }
 
 func (c *ReposCreateDeploymentStatusCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/deployments/:deployment_id/statuses"
-	c.updatePreview("flash", c.Flash)
-	c.updatePreview("ant-man", c.AntMan)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("deployment_id", c.DeploymentId)
-	c.updateBody("state", c.State)
-	c.updateBody("target_url", c.TargetUrl)
-	c.updateBody("log_url", c.LogUrl)
-	c.updateBody("description", c.Description)
-	c.updateBody("environment", c.Environment)
-	c.updateBody("environment_url", c.EnvironmentUrl)
-	c.updateBody("auto_inactive", c.AutoInactive)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/deployments/:deployment_id/statuses")
+	c.UpdatePreview("flash", c.Flash)
+	c.UpdatePreview("ant-man", c.AntMan)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("deployment_id", c.DeploymentId)
+	c.UpdateBody("state", c.State)
+	c.UpdateBody("target_url", c.TargetUrl)
+	c.UpdateBody("log_url", c.LogUrl)
+	c.UpdateBody("description", c.Description)
+	c.UpdateBody("environment", c.Environment)
+	c.UpdateBody("environment_url", c.EnvironmentUrl)
+	c.UpdateBody("auto_inactive", c.AutoInactive)
+	return c.DoRequest("POST")
 }
 
 type ReposListDownloadsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner   string `required:"" name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
@@ -1580,49 +1582,49 @@ type ReposListDownloadsCmd struct {
 }
 
 func (c *ReposListDownloadsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/downloads"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/downloads")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ReposGetDownloadCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner      string `required:"" name:"owner"`
 	Repo       string `required:"" name:"repo"`
 	DownloadId int64  `required:"" name:"download_id"`
 }
 
 func (c *ReposGetDownloadCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/downloads/:download_id"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("download_id", c.DownloadId)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/downloads/:download_id")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("download_id", c.DownloadId)
+	return c.DoRequest("GET")
 }
 
 type ReposDeleteDownloadCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner      string `required:"" name:"owner"`
 	Repo       string `required:"" name:"repo"`
 	DownloadId int64  `required:"" name:"download_id"`
 }
 
 func (c *ReposDeleteDownloadCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/downloads/:download_id"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("download_id", c.DownloadId)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/downloads/:download_id")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("download_id", c.DownloadId)
+	return c.DoRequest("DELETE")
 }
 
 type ReposListForksCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner   string `required:"" name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	Sort    string "name:\"sort\" help:\"The sort order. Can be either `newest`, `oldest`, or `stargazers`.\""
@@ -1631,34 +1633,34 @@ type ReposListForksCmd struct {
 }
 
 func (c *ReposListForksCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/forks"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLQuery("sort", c.Sort)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/forks")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("sort", c.Sort)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ReposCreateForkCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner        string `required:"" name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	Organization string `name:"organization" help:"Optional parameter to specify the organization name if forking into an organization."`
 }
 
 func (c *ReposCreateForkCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/forks"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateBody("organization", c.Organization)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/forks")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("organization", c.Organization)
+	return c.DoRequest("POST")
 }
 
 type ReposListInvitationsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner   string `required:"" name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
@@ -1666,33 +1668,33 @@ type ReposListInvitationsCmd struct {
 }
 
 func (c *ReposListInvitationsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/invitations"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/invitations")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ReposDeleteInvitationCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner        string `required:"" name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	InvitationId int64  `required:"" name:"invitation_id"`
 }
 
 func (c *ReposDeleteInvitationCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/invitations/:invitation_id"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("invitation_id", c.InvitationId)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/invitations/:invitation_id")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("invitation_id", c.InvitationId)
+	return c.DoRequest("DELETE")
 }
 
 type ReposUpdateInvitationCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner        string `required:"" name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	InvitationId int64  `required:"" name:"invitation_id"`
@@ -1700,55 +1702,55 @@ type ReposUpdateInvitationCmd struct {
 }
 
 func (c *ReposUpdateInvitationCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/invitations/:invitation_id"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("invitation_id", c.InvitationId)
-	c.updateBody("permissions", c.Permissions)
-	return c.doRequest("PATCH")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/invitations/:invitation_id")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("invitation_id", c.InvitationId)
+	c.UpdateBody("permissions", c.Permissions)
+	return c.DoRequest("PATCH")
 }
 
 type ReposListInvitationsForAuthenticatedUserCmd struct {
-	baseCmd
+	internal.BaseCmd
 	PerPage int64 `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64 `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *ReposListInvitationsForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/repository_invitations"
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/repository_invitations")
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ReposAcceptInvitationCmd struct {
-	baseCmd
+	internal.BaseCmd
 	InvitationId int64 `required:"" name:"invitation_id"`
 }
 
 func (c *ReposAcceptInvitationCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/repository_invitations/:invitation_id"
-	c.updateURLPath("invitation_id", c.InvitationId)
-	return c.doRequest("PATCH")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/repository_invitations/:invitation_id")
+	c.UpdateURLPath("invitation_id", c.InvitationId)
+	return c.DoRequest("PATCH")
 }
 
 type ReposDeclineInvitationCmd struct {
-	baseCmd
+	internal.BaseCmd
 	InvitationId int64 `required:"" name:"invitation_id"`
 }
 
 func (c *ReposDeclineInvitationCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/repository_invitations/:invitation_id"
-	c.updateURLPath("invitation_id", c.InvitationId)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/repository_invitations/:invitation_id")
+	c.UpdateURLPath("invitation_id", c.InvitationId)
+	return c.DoRequest("DELETE")
 }
 
 type ReposMergeCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner         string `required:"" name:"owner"`
 	Repo          string `required:"" name:"repo"`
 	Base          string `required:"" name:"base" help:"The name of the base branch that the head will be merged into."`
@@ -1757,34 +1759,34 @@ type ReposMergeCmd struct {
 }
 
 func (c *ReposMergeCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/merges"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateBody("base", c.Base)
-	c.updateBody("head", c.Head)
-	c.updateBody("commit_message", c.CommitMessage)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/merges")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("base", c.Base)
+	c.UpdateBody("head", c.Head)
+	c.UpdateBody("commit_message", c.CommitMessage)
+	return c.DoRequest("POST")
 }
 
 type ReposGetPagesCmd struct {
-	baseCmd
+	internal.BaseCmd
 	MisterFantastic bool   "name:\"mister-fantastic-preview\" required:\"\" help:\"**Note:** The GitHub Pages API on GitHub is currently available for developers to preview. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.mister-fantastic-preview+json\n\n```\""
 	Owner           string `required:"" name:"owner"`
 	Repo            string `required:"" name:"repo"`
 }
 
 func (c *ReposGetPagesCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/pages"
-	c.updatePreview("mister-fantastic", c.MisterFantastic)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pages")
+	c.UpdatePreview("mister-fantastic", c.MisterFantastic)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
 }
 
 type ReposUpdateInformationAboutPagesSiteCmd struct {
-	baseCmd
+	internal.BaseCmd
 	MisterFantastic bool   "name:\"mister-fantastic-preview\" required:\"\" help:\"**Note:** The GitHub Pages API on GitHub is currently available for developers to preview. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.mister-fantastic-preview+json\n\n```\""
 	Owner           string `required:"" name:"owner"`
 	Repo            string `required:"" name:"repo"`
@@ -1793,34 +1795,34 @@ type ReposUpdateInformationAboutPagesSiteCmd struct {
 }
 
 func (c *ReposUpdateInformationAboutPagesSiteCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/pages"
-	c.updatePreview("mister-fantastic", c.MisterFantastic)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateBody("cname", c.Cname)
-	c.updateBody("source", c.Source)
-	return c.doRequest("PUT")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pages")
+	c.UpdatePreview("mister-fantastic", c.MisterFantastic)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("cname", c.Cname)
+	c.UpdateBody("source", c.Source)
+	return c.DoRequest("PUT")
 }
 
 type ReposRequestPageBuildCmd struct {
-	baseCmd
+	internal.BaseCmd
 	MisterFantastic bool   "name:\"mister-fantastic-preview\" required:\"\" help:\"This endpoint is currently available for developers to preview. During the preview period, the API may change without advance notice.\n\nTo access this endpoint during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.mister-fantastic-preview+json\n\n```\""
 	Owner           string `required:"" name:"owner"`
 	Repo            string `required:"" name:"repo"`
 }
 
 func (c *ReposRequestPageBuildCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/pages/builds"
-	c.updatePreview("mister-fantastic", c.MisterFantastic)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pages/builds")
+	c.UpdatePreview("mister-fantastic", c.MisterFantastic)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("POST")
 }
 
 type ReposListPagesBuildsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner   string `required:"" name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
@@ -1828,47 +1830,47 @@ type ReposListPagesBuildsCmd struct {
 }
 
 func (c *ReposListPagesBuildsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/pages/builds"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pages/builds")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ReposGetLatestPagesBuildCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
 func (c *ReposGetLatestPagesBuildCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/pages/builds/latest"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pages/builds/latest")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
 }
 
 type ReposGetPagesBuildCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner   string `required:"" name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	BuildId int64  `required:"" name:"build_id"`
 }
 
 func (c *ReposGetPagesBuildCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/pages/builds/:build_id"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("build_id", c.BuildId)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pages/builds/:build_id")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("build_id", c.BuildId)
+	return c.DoRequest("GET")
 }
 
 type ReposListReleasesCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner   string `required:"" name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
@@ -1876,63 +1878,63 @@ type ReposListReleasesCmd struct {
 }
 
 func (c *ReposListReleasesCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/releases"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/releases")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ReposGetReleaseCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner     string `required:"" name:"owner"`
 	Repo      string `required:"" name:"repo"`
 	ReleaseId int64  `required:"" name:"release_id"`
 }
 
 func (c *ReposGetReleaseCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/releases/:release_id"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("release_id", c.ReleaseId)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/releases/:release_id")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("release_id", c.ReleaseId)
+	return c.DoRequest("GET")
 }
 
 type ReposGetLatestReleaseCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
 func (c *ReposGetLatestReleaseCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/releases/latest"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/releases/latest")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
 }
 
 type ReposGetReleaseByTagCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	Tag   string `required:"" name:"tag"`
 }
 
 func (c *ReposGetReleaseByTagCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/releases/tags/:tag"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("tag", c.Tag)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/releases/tags/:tag")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("tag", c.Tag)
+	return c.DoRequest("GET")
 }
 
 type ReposCreateReleaseCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner           string `required:"" name:"owner"`
 	Repo            string `required:"" name:"repo"`
 	TagName         string `required:"" name:"tag_name" help:"The name of the tag."`
@@ -1944,21 +1946,21 @@ type ReposCreateReleaseCmd struct {
 }
 
 func (c *ReposCreateReleaseCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/releases"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateBody("tag_name", c.TagName)
-	c.updateBody("target_commitish", c.TargetCommitish)
-	c.updateBody("name", c.Name)
-	c.updateBody("body", c.Body)
-	c.updateBody("draft", c.Draft)
-	c.updateBody("prerelease", c.Prerelease)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/releases")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("tag_name", c.TagName)
+	c.UpdateBody("target_commitish", c.TargetCommitish)
+	c.UpdateBody("name", c.Name)
+	c.UpdateBody("body", c.Body)
+	c.UpdateBody("draft", c.Draft)
+	c.UpdateBody("prerelease", c.Prerelease)
+	return c.DoRequest("POST")
 }
 
 type ReposEditReleaseCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner           string `required:"" name:"owner"`
 	Repo            string `required:"" name:"repo"`
 	ReleaseId       int64  `required:"" name:"release_id"`
@@ -1971,38 +1973,38 @@ type ReposEditReleaseCmd struct {
 }
 
 func (c *ReposEditReleaseCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/releases/:release_id"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("release_id", c.ReleaseId)
-	c.updateBody("tag_name", c.TagName)
-	c.updateBody("target_commitish", c.TargetCommitish)
-	c.updateBody("name", c.Name)
-	c.updateBody("body", c.Body)
-	c.updateBody("draft", c.Draft)
-	c.updateBody("prerelease", c.Prerelease)
-	return c.doRequest("PATCH")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/releases/:release_id")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("release_id", c.ReleaseId)
+	c.UpdateBody("tag_name", c.TagName)
+	c.UpdateBody("target_commitish", c.TargetCommitish)
+	c.UpdateBody("name", c.Name)
+	c.UpdateBody("body", c.Body)
+	c.UpdateBody("draft", c.Draft)
+	c.UpdateBody("prerelease", c.Prerelease)
+	return c.DoRequest("PATCH")
 }
 
 type ReposDeleteReleaseCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner     string `required:"" name:"owner"`
 	Repo      string `required:"" name:"repo"`
 	ReleaseId int64  `required:"" name:"release_id"`
 }
 
 func (c *ReposDeleteReleaseCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/releases/:release_id"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("release_id", c.ReleaseId)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/releases/:release_id")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("release_id", c.ReleaseId)
+	return c.DoRequest("DELETE")
 }
 
 type ReposListAssetsForReleaseCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner     string `required:"" name:"owner"`
 	Repo      string `required:"" name:"repo"`
 	ReleaseId int64  `required:"" name:"release_id"`
@@ -2011,34 +2013,34 @@ type ReposListAssetsForReleaseCmd struct {
 }
 
 func (c *ReposListAssetsForReleaseCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/releases/:release_id/assets"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("release_id", c.ReleaseId)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/releases/:release_id/assets")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("release_id", c.ReleaseId)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ReposGetReleaseAssetCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner   string `required:"" name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	AssetId int64  `required:"" name:"asset_id"`
 }
 
 func (c *ReposGetReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/releases/assets/:asset_id"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("asset_id", c.AssetId)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/releases/assets/:asset_id")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("asset_id", c.AssetId)
+	return c.DoRequest("GET")
 }
 
 type ReposEditReleaseAssetCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner   string `required:"" name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	AssetId int64  `required:"" name:"asset_id"`
@@ -2047,104 +2049,104 @@ type ReposEditReleaseAssetCmd struct {
 }
 
 func (c *ReposEditReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/releases/assets/:asset_id"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("asset_id", c.AssetId)
-	c.updateBody("name", c.Name)
-	c.updateBody("label", c.Label)
-	return c.doRequest("PATCH")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/releases/assets/:asset_id")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("asset_id", c.AssetId)
+	c.UpdateBody("name", c.Name)
+	c.UpdateBody("label", c.Label)
+	return c.DoRequest("PATCH")
 }
 
 type ReposDeleteReleaseAssetCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner   string `required:"" name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	AssetId int64  `required:"" name:"asset_id"`
 }
 
 func (c *ReposDeleteReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/releases/assets/:asset_id"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("asset_id", c.AssetId)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/releases/assets/:asset_id")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("asset_id", c.AssetId)
+	return c.DoRequest("DELETE")
 }
 
 type ReposGetContributorsStatsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
 func (c *ReposGetContributorsStatsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/stats/contributors"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/stats/contributors")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
 }
 
 type ReposGetCommitActivityStatsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
 func (c *ReposGetCommitActivityStatsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/stats/commit_activity"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/stats/commit_activity")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
 }
 
 type ReposGetCodeFrequencyStatsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
 func (c *ReposGetCodeFrequencyStatsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/stats/code_frequency"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/stats/code_frequency")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
 }
 
 type ReposGetParticipationStatsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
 func (c *ReposGetParticipationStatsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/stats/participation"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/stats/participation")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
 }
 
 type ReposGetPunchCardStatsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
 func (c *ReposGetPunchCardStatsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/stats/punch_card"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/stats/punch_card")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
 }
 
 type ReposCreateStatusCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner       string `required:"" name:"owner"`
 	Repo        string `required:"" name:"repo"`
 	Sha         string `required:"" name:"sha"`
@@ -2155,20 +2157,20 @@ type ReposCreateStatusCmd struct {
 }
 
 func (c *ReposCreateStatusCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/statuses/:sha"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("sha", c.Sha)
-	c.updateBody("state", c.State)
-	c.updateBody("target_url", c.TargetUrl)
-	c.updateBody("description", c.Description)
-	c.updateBody("context", c.Context)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/statuses/:sha")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("sha", c.Sha)
+	c.UpdateBody("state", c.State)
+	c.UpdateBody("target_url", c.TargetUrl)
+	c.UpdateBody("description", c.Description)
+	c.UpdateBody("context", c.Context)
+	return c.DoRequest("POST")
 }
 
 type ReposListStatusesForRefCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner   string `required:"" name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	Ref     string `required:"" name:"ref"`
@@ -2177,94 +2179,94 @@ type ReposListStatusesForRefCmd struct {
 }
 
 func (c *ReposListStatusesForRefCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/commits/:ref/statuses"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("ref", c.Ref)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/commits/:ref/statuses")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("ref", c.Ref)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ReposGetCombinedStatusForRefCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	Ref   string `required:"" name:"ref"`
 }
 
 func (c *ReposGetCombinedStatusForRefCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/commits/:ref/status"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("ref", c.Ref)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/commits/:ref/status")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("ref", c.Ref)
+	return c.DoRequest("GET")
 }
 
 type ReposGetTopReferrersCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
 func (c *ReposGetTopReferrersCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/traffic/popular/referrers"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/traffic/popular/referrers")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
 }
 
 type ReposGetTopPathsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
 func (c *ReposGetTopPathsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/traffic/popular/paths"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/traffic/popular/paths")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
 }
 
 type ReposGetViewsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	Per   string "name:\"per\" help:\"Must be one of: `day`, `week`.\""
 }
 
 func (c *ReposGetViewsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/traffic/views"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLQuery("per", c.Per)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/traffic/views")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("per", c.Per)
+	return c.DoRequest("GET")
 }
 
 type ReposGetClonesCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	Per   string "name:\"per\" help:\"Must be one of: `day`, `week`.\""
 }
 
 func (c *ReposGetClonesCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/traffic/clones"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLQuery("per", c.Per)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/traffic/clones")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("per", c.Per)
+	return c.DoRequest("GET")
 }
 
 type ReposListHooksCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner   string `required:"" name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
@@ -2272,75 +2274,75 @@ type ReposListHooksCmd struct {
 }
 
 func (c *ReposListHooksCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/hooks"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/hooks")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ReposGetHookCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner  string `required:"" name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	HookId int64  `required:"" name:"hook_id"`
 }
 
 func (c *ReposGetHookCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/hooks/:hook_id"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("hook_id", c.HookId)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/hooks/:hook_id")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("hook_id", c.HookId)
+	return c.DoRequest("GET")
 }
 
 type ReposTestPushHookCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner  string `required:"" name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	HookId int64  `required:"" name:"hook_id"`
 }
 
 func (c *ReposTestPushHookCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/hooks/:hook_id/tests"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("hook_id", c.HookId)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/hooks/:hook_id/tests")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("hook_id", c.HookId)
+	return c.DoRequest("POST")
 }
 
 type ReposPingHookCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner  string `required:"" name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	HookId int64  `required:"" name:"hook_id"`
 }
 
 func (c *ReposPingHookCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/hooks/:hook_id/pings"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("hook_id", c.HookId)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/hooks/:hook_id/pings")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("hook_id", c.HookId)
+	return c.DoRequest("POST")
 }
 
 type ReposDeleteHookCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner  string `required:"" name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	HookId int64  `required:"" name:"hook_id"`
 }
 
 func (c *ReposDeleteHookCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/hooks/:hook_id"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("hook_id", c.HookId)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/hooks/:hook_id")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("hook_id", c.HookId)
+	return c.DoRequest("DELETE")
 }

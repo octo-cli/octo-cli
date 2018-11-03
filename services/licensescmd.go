@@ -2,6 +2,8 @@
 
 package services
 
+import "github.com/octo-cli/octo-cli/internal"
+
 type LicensesCmd struct {
 	List       LicensesListCmd       `cmd:"" help:"List all licenses"`
 	Get        LicensesGetCmd        `cmd:"" help:"Get an individual license"`
@@ -9,37 +11,37 @@ type LicensesCmd struct {
 }
 
 type LicensesListCmd struct {
-	baseCmd
+	internal.BaseCmd
 }
 
 func (c *LicensesListCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/licenses"
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/licenses")
+	return c.DoRequest("GET")
 }
 
 type LicensesGetCmd struct {
-	baseCmd
+	internal.BaseCmd
 	License string `required:"" name:"license"`
 }
 
 func (c *LicensesGetCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/licenses/:license"
-	c.updateURLPath("license", c.License)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/licenses/:license")
+	c.UpdateURLPath("license", c.License)
+	return c.DoRequest("GET")
 }
 
 type LicensesGetForRepoCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
 func (c *LicensesGetForRepoCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/license"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/license")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
 }

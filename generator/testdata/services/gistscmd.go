@@ -2,6 +2,8 @@
 
 package services
 
+import "github.com/octo-cli/octo-cli/internal"
+
 type GistsCmd struct {
 	ListPublicForUser GistsListPublicForUserCmd `cmd:"" help:"List public gists for the specified user"`
 	List              GistsListCmd              `cmd:"" help:"List the authenticated user's gists or if called anonymously, this will return all public gists"`
@@ -24,7 +26,7 @@ type GistsCmd struct {
 }
 
 type GistsListPublicForUserCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Username string `required:"" name:"username"`
 	Since    string "name:\"since\" help:\"A timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Only gists updated at or after this time are returned.\""
 	PerPage  int64  `name:"per_page" help:"Results per page (max 100)"`
@@ -32,251 +34,251 @@ type GistsListPublicForUserCmd struct {
 }
 
 func (c *GistsListPublicForUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/users/:username/gists"
-	c.updateURLPath("username", c.Username)
-	c.updateURLQuery("since", c.Since)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/users/:username/gists")
+	c.UpdateURLPath("username", c.Username)
+	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type GistsListCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Since   string "name:\"since\" help:\"A timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Only gists updated at or after this time are returned.\""
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64  `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *GistsListCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/gists"
-	c.updateURLQuery("since", c.Since)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/gists")
+	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type GistsListPublicCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Since   string "name:\"since\" help:\"A timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Only gists updated at or after this time are returned.\""
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64  `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *GistsListPublicCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/gists/public"
-	c.updateURLQuery("since", c.Since)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/gists/public")
+	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type GistsListStarredCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Since   string "name:\"since\" help:\"A timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`. Only gists updated at or after this time are returned.\""
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64  `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *GistsListStarredCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/gists/starred"
-	c.updateURLQuery("since", c.Since)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/gists/starred")
+	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type GistsGetCmd struct {
-	baseCmd
+	internal.BaseCmd
 	GistId string `required:"" name:"gist_id"`
 }
 
 func (c *GistsGetCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/gists/:gist_id"
-	c.updateURLPath("gist_id", c.GistId)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/gists/:gist_id")
+	c.UpdateURLPath("gist_id", c.GistId)
+	return c.DoRequest("GET")
 }
 
 type GistsGetRevisionCmd struct {
-	baseCmd
+	internal.BaseCmd
 	GistId string `required:"" name:"gist_id"`
 	Sha    string `required:"" name:"sha"`
 }
 
 func (c *GistsGetRevisionCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/gists/:gist_id/:sha"
-	c.updateURLPath("gist_id", c.GistId)
-	c.updateURLPath("sha", c.Sha)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/gists/:gist_id/:sha")
+	c.UpdateURLPath("gist_id", c.GistId)
+	c.UpdateURLPath("sha", c.Sha)
+	return c.DoRequest("GET")
 }
 
 type GistsListCommitsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	GistId  string `required:"" name:"gist_id"`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64  `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *GistsListCommitsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/gists/:gist_id/commits"
-	c.updateURLPath("gist_id", c.GistId)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/gists/:gist_id/commits")
+	c.UpdateURLPath("gist_id", c.GistId)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type GistsStarCmd struct {
-	baseCmd
+	internal.BaseCmd
 	GistId string `required:"" name:"gist_id"`
 }
 
 func (c *GistsStarCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/gists/:gist_id/star"
-	c.updateURLPath("gist_id", c.GistId)
-	return c.doRequest("PUT")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/gists/:gist_id/star")
+	c.UpdateURLPath("gist_id", c.GistId)
+	return c.DoRequest("PUT")
 }
 
 type GistsUnstarCmd struct {
-	baseCmd
+	internal.BaseCmd
 	GistId string `required:"" name:"gist_id"`
 }
 
 func (c *GistsUnstarCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/gists/:gist_id/star"
-	c.updateURLPath("gist_id", c.GistId)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/gists/:gist_id/star")
+	c.UpdateURLPath("gist_id", c.GistId)
+	return c.DoRequest("DELETE")
 }
 
 type GistsCheckIsStarredCmd struct {
-	baseCmd
+	internal.BaseCmd
 	GistId string `required:"" name:"gist_id"`
 }
 
 func (c *GistsCheckIsStarredCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/gists/:gist_id/star"
-	c.updateURLPath("gist_id", c.GistId)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/gists/:gist_id/star")
+	c.UpdateURLPath("gist_id", c.GistId)
+	return c.DoRequest("GET")
 }
 
 type GistsForkCmd struct {
-	baseCmd
+	internal.BaseCmd
 	GistId string `required:"" name:"gist_id"`
 }
 
 func (c *GistsForkCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/gists/:gist_id/forks"
-	c.updateURLPath("gist_id", c.GistId)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/gists/:gist_id/forks")
+	c.UpdateURLPath("gist_id", c.GistId)
+	return c.DoRequest("POST")
 }
 
 type GistsListForksCmd struct {
-	baseCmd
+	internal.BaseCmd
 	GistId  string `required:"" name:"gist_id"`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64  `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *GistsListForksCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/gists/:gist_id/forks"
-	c.updateURLPath("gist_id", c.GistId)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/gists/:gist_id/forks")
+	c.UpdateURLPath("gist_id", c.GistId)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type GistsDeleteCmd struct {
-	baseCmd
+	internal.BaseCmd
 	GistId string `required:"" name:"gist_id"`
 }
 
 func (c *GistsDeleteCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/gists/:gist_id"
-	c.updateURLPath("gist_id", c.GistId)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/gists/:gist_id")
+	c.UpdateURLPath("gist_id", c.GistId)
+	return c.DoRequest("DELETE")
 }
 
 type GistsListCommentsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	GistId  string `required:"" name:"gist_id"`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64  `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *GistsListCommentsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/gists/:gist_id/comments"
-	c.updateURLPath("gist_id", c.GistId)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/gists/:gist_id/comments")
+	c.UpdateURLPath("gist_id", c.GistId)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type GistsGetCommentCmd struct {
-	baseCmd
+	internal.BaseCmd
 	GistId    string `required:"" name:"gist_id"`
 	CommentId int64  `required:"" name:"comment_id"`
 }
 
 func (c *GistsGetCommentCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/gists/:gist_id/comments/:comment_id"
-	c.updateURLPath("gist_id", c.GistId)
-	c.updateURLPath("comment_id", c.CommentId)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/gists/:gist_id/comments/:comment_id")
+	c.UpdateURLPath("gist_id", c.GistId)
+	c.UpdateURLPath("comment_id", c.CommentId)
+	return c.DoRequest("GET")
 }
 
 type GistsCreateCommentCmd struct {
-	baseCmd
+	internal.BaseCmd
 	GistId string `required:"" name:"gist_id"`
 	Body   string `required:"" name:"body" help:"The comment text."`
 }
 
 func (c *GistsCreateCommentCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/gists/:gist_id/comments"
-	c.updateURLPath("gist_id", c.GistId)
-	c.updateBody("body", c.Body)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/gists/:gist_id/comments")
+	c.UpdateURLPath("gist_id", c.GistId)
+	c.UpdateBody("body", c.Body)
+	return c.DoRequest("POST")
 }
 
 type GistsEditCommentCmd struct {
-	baseCmd
+	internal.BaseCmd
 	GistId    string `required:"" name:"gist_id"`
 	CommentId int64  `required:"" name:"comment_id"`
 	Body      string `required:"" name:"body" help:"The comment text."`
 }
 
 func (c *GistsEditCommentCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/gists/:gist_id/comments/:comment_id"
-	c.updateURLPath("gist_id", c.GistId)
-	c.updateURLPath("comment_id", c.CommentId)
-	c.updateBody("body", c.Body)
-	return c.doRequest("PATCH")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/gists/:gist_id/comments/:comment_id")
+	c.UpdateURLPath("gist_id", c.GistId)
+	c.UpdateURLPath("comment_id", c.CommentId)
+	c.UpdateBody("body", c.Body)
+	return c.DoRequest("PATCH")
 }
 
 type GistsDeleteCommentCmd struct {
-	baseCmd
+	internal.BaseCmd
 	GistId    string `required:"" name:"gist_id"`
 	CommentId int64  `required:"" name:"comment_id"`
 }
 
 func (c *GistsDeleteCommentCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/gists/:gist_id/comments/:comment_id"
-	c.updateURLPath("gist_id", c.GistId)
-	c.updateURLPath("comment_id", c.CommentId)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/gists/:gist_id/comments/:comment_id")
+	c.UpdateURLPath("gist_id", c.GistId)
+	c.UpdateURLPath("comment_id", c.CommentId)
+	return c.DoRequest("DELETE")
 }

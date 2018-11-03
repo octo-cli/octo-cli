@@ -2,6 +2,8 @@
 
 package services
 
+import "github.com/octo-cli/octo-cli/internal"
+
 type ScimCmd struct {
 	GetProvisionedIdentitiesList   ScimGetProvisionedIdentitiesListCmd   `cmd:"" help:"Get a list of provisioned identities"`
 	GetProvisioningDetailsForUser  ScimGetProvisioningDetailsForUserCmd  `cmd:"" help:"Get provisioning details for a single user"`
@@ -12,7 +14,7 @@ type ScimCmd struct {
 }
 
 type ScimGetProvisionedIdentitiesListCmd struct {
-	baseCmd
+	internal.BaseCmd
 	OrganizationId int64  `required:"" name:"organization_id"`
 	StartIndex     int64  `name:"startIndex" help:"Used for pagination: the index of the first result to return"`
 	Count          int64  `name:"count" help:"Used for pagination: the number of results to return"`
@@ -20,79 +22,79 @@ type ScimGetProvisionedIdentitiesListCmd struct {
 }
 
 func (c *ScimGetProvisionedIdentitiesListCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/scim/v2/organizations/:organization_id/Users"
-	c.updateURLPath("organization_id", c.OrganizationId)
-	c.updateURLQuery("startIndex", c.StartIndex)
-	c.updateURLQuery("count", c.Count)
-	c.updateURLQuery("filter", c.Filter)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/scim/v2/organizations/:organization_id/Users")
+	c.UpdateURLPath("organization_id", c.OrganizationId)
+	c.UpdateURLQuery("startIndex", c.StartIndex)
+	c.UpdateURLQuery("count", c.Count)
+	c.UpdateURLQuery("filter", c.Filter)
+	return c.DoRequest("GET")
 }
 
 type ScimGetProvisioningDetailsForUserCmd struct {
-	baseCmd
+	internal.BaseCmd
 	OrganizationId       int64  `required:"" name:"organization_id"`
 	ExternalIdentityGuid string `required:"" name:"external_identity_guid"`
 }
 
 func (c *ScimGetProvisioningDetailsForUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/scim/v2/organizations/:organization_id/Users/:external_identity_guid"
-	c.updateURLPath("organization_id", c.OrganizationId)
-	c.updateURLPath("external_identity_guid", c.ExternalIdentityGuid)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/scim/v2/organizations/:organization_id/Users/:external_identity_guid")
+	c.UpdateURLPath("organization_id", c.OrganizationId)
+	c.UpdateURLPath("external_identity_guid", c.ExternalIdentityGuid)
+	return c.DoRequest("GET")
 }
 
 type ScimProvisionInviteUsersCmd struct {
-	baseCmd
+	internal.BaseCmd
 	OrganizationId int64 `required:"" name:"organization_id"`
 }
 
 func (c *ScimProvisionInviteUsersCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/scim/v2/organizations/:organization_id/Users"
-	c.updateURLPath("organization_id", c.OrganizationId)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/scim/v2/organizations/:organization_id/Users")
+	c.UpdateURLPath("organization_id", c.OrganizationId)
+	return c.DoRequest("POST")
 }
 
 type ScimUpdateProvisionedOrgMembershipCmd struct {
-	baseCmd
+	internal.BaseCmd
 	OrganizationId       int64  `required:"" name:"organization_id"`
 	ExternalIdentityGuid string `required:"" name:"external_identity_guid"`
 }
 
 func (c *ScimUpdateProvisionedOrgMembershipCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/scim/v2/organizations/:organization_id/Users/:external_identity_guid"
-	c.updateURLPath("organization_id", c.OrganizationId)
-	c.updateURLPath("external_identity_guid", c.ExternalIdentityGuid)
-	return c.doRequest("PUT")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/scim/v2/organizations/:organization_id/Users/:external_identity_guid")
+	c.UpdateURLPath("organization_id", c.OrganizationId)
+	c.UpdateURLPath("external_identity_guid", c.ExternalIdentityGuid)
+	return c.DoRequest("PUT")
 }
 
 type ScimUpdateUserAttributeCmd struct {
-	baseCmd
+	internal.BaseCmd
 	OrganizationId       int64  `required:"" name:"organization_id"`
 	ExternalIdentityGuid string `required:"" name:"external_identity_guid"`
 }
 
 func (c *ScimUpdateUserAttributeCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/scim/v2/organizations/:organization_id/Users/:external_identity_guid"
-	c.updateURLPath("organization_id", c.OrganizationId)
-	c.updateURLPath("external_identity_guid", c.ExternalIdentityGuid)
-	return c.doRequest("PATCH")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/scim/v2/organizations/:organization_id/Users/:external_identity_guid")
+	c.UpdateURLPath("organization_id", c.OrganizationId)
+	c.UpdateURLPath("external_identity_guid", c.ExternalIdentityGuid)
+	return c.DoRequest("PATCH")
 }
 
 type ScimRemoveUserFromOrgCmd struct {
-	baseCmd
+	internal.BaseCmd
 	OrganizationId       int64  `required:"" name:"organization_id"`
 	ExternalIdentityGuid string `required:"" name:"external_identity_guid"`
 }
 
 func (c *ScimRemoveUserFromOrgCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/scim/v2/organizations/:organization_id/Users/:external_identity_guid"
-	c.updateURLPath("organization_id", c.OrganizationId)
-	c.updateURLPath("external_identity_guid", c.ExternalIdentityGuid)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/scim/v2/organizations/:organization_id/Users/:external_identity_guid")
+	c.UpdateURLPath("organization_id", c.OrganizationId)
+	c.UpdateURLPath("external_identity_guid", c.ExternalIdentityGuid)
+	return c.DoRequest("DELETE")
 }

@@ -2,16 +2,18 @@
 
 package services
 
+import "github.com/octo-cli/octo-cli/internal"
+
 type MetaCmd struct {
 	Get MetaGetCmd `cmd:"" help:"Get"`
 }
 
 type MetaGetCmd struct {
-	baseCmd
+	internal.BaseCmd
 }
 
 func (c *MetaGetCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/meta"
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/meta")
+	return c.DoRequest("GET")
 }

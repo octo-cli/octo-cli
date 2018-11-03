@@ -2,6 +2,8 @@
 
 package services
 
+import "github.com/octo-cli/octo-cli/internal"
+
 type IssuesCmd struct {
 	List                     IssuesListCmd                     `cmd:"" help:"List all issues assigned to the authenticated user across all visible repositories including owned repositories, member repositories, and organization repositories"`
 	ListForAuthenticatedUser IssuesListForAuthenticatedUserCmd `cmd:"" help:"List all issues across owned and member repositories assigned to the authenticated user"`
@@ -45,7 +47,7 @@ type IssuesCmd struct {
 }
 
 type IssuesListCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Symmetra     bool   "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	MachineMan   bool   "name:\"machine-man-preview\" help:\"**Note:** If an issue is opened via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](/changes/2016-09-14-Integrations-Early-Access).\n\nTo receive the `performed_via_github_app` object is the response, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.machine-man-preview\n\n```\""
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview\n\n```\n\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.\""
@@ -60,24 +62,24 @@ type IssuesListCmd struct {
 }
 
 func (c *IssuesListCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/issues"
-	c.updatePreview("symmetra", c.Symmetra)
-	c.updatePreview("machine-man", c.MachineMan)
-	c.updatePreview("squirrel-girl", c.SquirrelGirl)
-	c.updateURLQuery("filter", c.Filter)
-	c.updateURLQuery("state", c.State)
-	c.updateURLQuery("labels", c.Labels)
-	c.updateURLQuery("sort", c.Sort)
-	c.updateURLQuery("direction", c.Direction)
-	c.updateURLQuery("since", c.Since)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/issues")
+	c.UpdatePreview("symmetra", c.Symmetra)
+	c.UpdatePreview("machine-man", c.MachineMan)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateURLQuery("filter", c.Filter)
+	c.UpdateURLQuery("state", c.State)
+	c.UpdateURLQuery("labels", c.Labels)
+	c.UpdateURLQuery("sort", c.Sort)
+	c.UpdateURLQuery("direction", c.Direction)
+	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type IssuesListForAuthenticatedUserCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Symmetra     bool   "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	MachineMan   bool   "name:\"machine-man-preview\" help:\"**Note:** If an issue is opened via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](/changes/2016-09-14-Integrations-Early-Access).\n\nTo receive the `performed_via_github_app` object is the response, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.machine-man-preview\n\n```\""
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview\n\n```\n\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.\""
@@ -92,24 +94,24 @@ type IssuesListForAuthenticatedUserCmd struct {
 }
 
 func (c *IssuesListForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/user/issues"
-	c.updatePreview("symmetra", c.Symmetra)
-	c.updatePreview("machine-man", c.MachineMan)
-	c.updatePreview("squirrel-girl", c.SquirrelGirl)
-	c.updateURLQuery("filter", c.Filter)
-	c.updateURLQuery("state", c.State)
-	c.updateURLQuery("labels", c.Labels)
-	c.updateURLQuery("sort", c.Sort)
-	c.updateURLQuery("direction", c.Direction)
-	c.updateURLQuery("since", c.Since)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/issues")
+	c.UpdatePreview("symmetra", c.Symmetra)
+	c.UpdatePreview("machine-man", c.MachineMan)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateURLQuery("filter", c.Filter)
+	c.UpdateURLQuery("state", c.State)
+	c.UpdateURLQuery("labels", c.Labels)
+	c.UpdateURLQuery("sort", c.Sort)
+	c.UpdateURLQuery("direction", c.Direction)
+	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type IssuesListForOrgCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Symmetra     bool   "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	MachineMan   bool   "name:\"machine-man-preview\" help:\"**Note:** If an issue is opened via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](/changes/2016-09-14-Integrations-Early-Access).\n\nTo receive the `performed_via_github_app` object is the response, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.machine-man-preview\n\n```\""
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview\n\n```\n\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.\""
@@ -125,25 +127,25 @@ type IssuesListForOrgCmd struct {
 }
 
 func (c *IssuesListForOrgCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org/issues"
-	c.updatePreview("symmetra", c.Symmetra)
-	c.updatePreview("machine-man", c.MachineMan)
-	c.updatePreview("squirrel-girl", c.SquirrelGirl)
-	c.updateURLPath("org", c.Org)
-	c.updateURLQuery("filter", c.Filter)
-	c.updateURLQuery("state", c.State)
-	c.updateURLQuery("labels", c.Labels)
-	c.updateURLQuery("sort", c.Sort)
-	c.updateURLQuery("direction", c.Direction)
-	c.updateURLQuery("since", c.Since)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/issues")
+	c.UpdatePreview("symmetra", c.Symmetra)
+	c.UpdatePreview("machine-man", c.MachineMan)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLQuery("filter", c.Filter)
+	c.UpdateURLQuery("state", c.State)
+	c.UpdateURLQuery("labels", c.Labels)
+	c.UpdateURLQuery("sort", c.Sort)
+	c.UpdateURLQuery("direction", c.Direction)
+	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type IssuesListForRepoCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Symmetra     bool   "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	MachineMan   bool   "name:\"machine-man-preview\" help:\"**Note:** If an issue is opened via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](/changes/2016-09-14-Integrations-Early-Access).\n\nTo receive the `performed_via_github_app` object is the response, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.machine-man-preview\n\n```\""
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview\n\n```\n\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.\""
@@ -163,29 +165,29 @@ type IssuesListForRepoCmd struct {
 }
 
 func (c *IssuesListForRepoCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/issues"
-	c.updatePreview("symmetra", c.Symmetra)
-	c.updatePreview("machine-man", c.MachineMan)
-	c.updatePreview("squirrel-girl", c.SquirrelGirl)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLQuery("milestone", c.Milestone)
-	c.updateURLQuery("state", c.State)
-	c.updateURLQuery("assignee", c.Assignee)
-	c.updateURLQuery("creator", c.Creator)
-	c.updateURLQuery("mentioned", c.Mentioned)
-	c.updateURLQuery("labels", c.Labels)
-	c.updateURLQuery("sort", c.Sort)
-	c.updateURLQuery("direction", c.Direction)
-	c.updateURLQuery("since", c.Since)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/issues")
+	c.UpdatePreview("symmetra", c.Symmetra)
+	c.UpdatePreview("machine-man", c.MachineMan)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("milestone", c.Milestone)
+	c.UpdateURLQuery("state", c.State)
+	c.UpdateURLQuery("assignee", c.Assignee)
+	c.UpdateURLQuery("creator", c.Creator)
+	c.UpdateURLQuery("mentioned", c.Mentioned)
+	c.UpdateURLQuery("labels", c.Labels)
+	c.UpdateURLQuery("sort", c.Sort)
+	c.UpdateURLQuery("direction", c.Direction)
+	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type IssuesGetCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Symmetra     bool   "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview\n\n```\n\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.\""
 	Owner        string `required:"" name:"owner"`
@@ -194,18 +196,18 @@ type IssuesGetCmd struct {
 }
 
 func (c *IssuesGetCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/issues/:number"
-	c.updatePreview("symmetra", c.Symmetra)
-	c.updatePreview("squirrel-girl", c.SquirrelGirl)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/issues/:number")
+	c.UpdatePreview("symmetra", c.Symmetra)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	return c.DoRequest("GET")
 }
 
 type IssuesCreateCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Symmetra  bool     "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	Owner     string   `required:"" name:"owner"`
 	Repo      string   `required:"" name:"repo"`
@@ -218,22 +220,22 @@ type IssuesCreateCmd struct {
 }
 
 func (c *IssuesCreateCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/issues"
-	c.updatePreview("symmetra", c.Symmetra)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateBody("title", c.Title)
-	c.updateBody("body", c.Body)
-	c.updateBody("assignee", c.Assignee)
-	c.updateBody("milestone", c.Milestone)
-	c.updateBody("labels", c.Labels)
-	c.updateBody("assignees", c.Assignees)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/issues")
+	c.UpdatePreview("symmetra", c.Symmetra)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("title", c.Title)
+	c.UpdateBody("body", c.Body)
+	c.UpdateBody("assignee", c.Assignee)
+	c.UpdateBody("milestone", c.Milestone)
+	c.UpdateBody("labels", c.Labels)
+	c.UpdateBody("assignees", c.Assignees)
+	return c.DoRequest("POST")
 }
 
 type IssuesEditCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Symmetra  bool     "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	Owner     string   `required:"" name:"owner"`
 	Repo      string   `required:"" name:"repo"`
@@ -248,24 +250,24 @@ type IssuesEditCmd struct {
 }
 
 func (c *IssuesEditCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/issues/:number"
-	c.updatePreview("symmetra", c.Symmetra)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	c.updateBody("title", c.Title)
-	c.updateBody("body", c.Body)
-	c.updateBody("assignee", c.Assignee)
-	c.updateBody("state", c.State)
-	c.updateBody("milestone", c.Milestone)
-	c.updateBody("labels", c.Labels)
-	c.updateBody("assignees", c.Assignees)
-	return c.doRequest("PATCH")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/issues/:number")
+	c.UpdatePreview("symmetra", c.Symmetra)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	c.UpdateBody("title", c.Title)
+	c.UpdateBody("body", c.Body)
+	c.UpdateBody("assignee", c.Assignee)
+	c.UpdateBody("state", c.State)
+	c.UpdateBody("milestone", c.Milestone)
+	c.UpdateBody("labels", c.Labels)
+	c.UpdateBody("assignees", c.Assignees)
+	return c.DoRequest("PATCH")
 }
 
 type IssuesLockCmd struct {
-	baseCmd
+	internal.BaseCmd
 	SailorV    bool   "name:\"sailor-v-preview\" help:\"**Note:** You can now add a reason when you lock an issue. This feature is currently available for developers to preview. See the [blog post](/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.sailor-v-preview+json\n\n```\""
 	Owner      string `required:"" name:"owner"`
 	Repo       string `required:"" name:"repo"`
@@ -274,34 +276,34 @@ type IssuesLockCmd struct {
 }
 
 func (c *IssuesLockCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/issues/:number/lock"
-	c.updatePreview("sailor-v", c.SailorV)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	c.updateBody("lock_reason", c.LockReason)
-	return c.doRequest("PUT")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/issues/:number/lock")
+	c.UpdatePreview("sailor-v", c.SailorV)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	c.UpdateBody("lock_reason", c.LockReason)
+	return c.DoRequest("PUT")
 }
 
 type IssuesUnlockCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner  string `required:"" name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Number int64  `required:"" name:"number"`
 }
 
 func (c *IssuesUnlockCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/issues/:number/lock"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/issues/:number/lock")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	return c.DoRequest("DELETE")
 }
 
 type IssuesListAssigneesCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner   string `required:"" name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
@@ -309,33 +311,33 @@ type IssuesListAssigneesCmd struct {
 }
 
 func (c *IssuesListAssigneesCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/assignees"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/assignees")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type IssuesCheckAssigneeCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner    string `required:"" name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	Assignee string `required:"" name:"assignee"`
 }
 
 func (c *IssuesCheckAssigneeCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/assignees/:assignee"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("assignee", c.Assignee)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/assignees/:assignee")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("assignee", c.Assignee)
+	return c.DoRequest("GET")
 }
 
 type IssuesAddAssigneesCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Symmetra  bool     "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	Owner     string   `required:"" name:"owner"`
 	Repo      string   `required:"" name:"repo"`
@@ -344,18 +346,18 @@ type IssuesAddAssigneesCmd struct {
 }
 
 func (c *IssuesAddAssigneesCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/issues/:number/assignees"
-	c.updatePreview("symmetra", c.Symmetra)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	c.updateBody("assignees", c.Assignees)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/issues/:number/assignees")
+	c.UpdatePreview("symmetra", c.Symmetra)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	c.UpdateBody("assignees", c.Assignees)
+	return c.DoRequest("POST")
 }
 
 type IssuesRemoveAssigneesCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Symmetra  bool     "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	Owner     string   `required:"" name:"owner"`
 	Repo      string   `required:"" name:"repo"`
@@ -364,18 +366,18 @@ type IssuesRemoveAssigneesCmd struct {
 }
 
 func (c *IssuesRemoveAssigneesCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/issues/:number/assignees"
-	c.updatePreview("symmetra", c.Symmetra)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	c.updateBody("assignees", c.Assignees)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/issues/:number/assignees")
+	c.UpdatePreview("symmetra", c.Symmetra)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	c.UpdateBody("assignees", c.Assignees)
+	return c.DoRequest("DELETE")
 }
 
 type IssuesListCommentsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview\n\n```\n\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.\""
 	Owner        string `required:"" name:"owner"`
 	Repo         string `required:"" name:"repo"`
@@ -386,20 +388,20 @@ type IssuesListCommentsCmd struct {
 }
 
 func (c *IssuesListCommentsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/issues/:number/comments"
-	c.updatePreview("squirrel-girl", c.SquirrelGirl)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	c.updateURLQuery("since", c.Since)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/issues/:number/comments")
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type IssuesListCommentsForRepoCmd struct {
-	baseCmd
+	internal.BaseCmd
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview\n\n```\n\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.\""
 	Owner        string `required:"" name:"owner"`
 	Repo         string `required:"" name:"repo"`
@@ -409,19 +411,19 @@ type IssuesListCommentsForRepoCmd struct {
 }
 
 func (c *IssuesListCommentsForRepoCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/issues/comments"
-	c.updatePreview("squirrel-girl", c.SquirrelGirl)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLQuery("sort", c.Sort)
-	c.updateURLQuery("direction", c.Direction)
-	c.updateURLQuery("since", c.Since)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/issues/comments")
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("sort", c.Sort)
+	c.UpdateURLQuery("direction", c.Direction)
+	c.UpdateURLQuery("since", c.Since)
+	return c.DoRequest("GET")
 }
 
 type IssuesGetCommentCmd struct {
-	baseCmd
+	internal.BaseCmd
 	MachineMan   bool   "name:\"machine-man-preview\" help:\"**Note:** If an issue comment is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](/changes/2016-09-14-Integrations-Early-Access).\n\nTo receive the `performed_via_github_app` object is the response, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.machine-man-preview\n\n```\""
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview\n\n```\n\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.\""
 	Owner        string `required:"" name:"owner"`
@@ -432,20 +434,20 @@ type IssuesGetCommentCmd struct {
 }
 
 func (c *IssuesGetCommentCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/issues/comments/:comment_id"
-	c.updatePreview("machine-man", c.MachineMan)
-	c.updatePreview("squirrel-girl", c.SquirrelGirl)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("comment_id", c.CommentId)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/issues/comments/:comment_id")
+	c.UpdatePreview("machine-man", c.MachineMan)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("comment_id", c.CommentId)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type IssuesCreateCommentCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner  string `required:"" name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Number int64  `required:"" name:"number"`
@@ -453,17 +455,17 @@ type IssuesCreateCommentCmd struct {
 }
 
 func (c *IssuesCreateCommentCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/issues/:number/comments"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	c.updateBody("body", c.Body)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/issues/:number/comments")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	c.UpdateBody("body", c.Body)
+	return c.DoRequest("POST")
 }
 
 type IssuesEditCommentCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner     string `required:"" name:"owner"`
 	Repo      string `required:"" name:"repo"`
 	CommentId int64  `required:"" name:"comment_id"`
@@ -471,33 +473,33 @@ type IssuesEditCommentCmd struct {
 }
 
 func (c *IssuesEditCommentCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/issues/comments/:comment_id"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("comment_id", c.CommentId)
-	c.updateBody("body", c.Body)
-	return c.doRequest("PATCH")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/issues/comments/:comment_id")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("comment_id", c.CommentId)
+	c.UpdateBody("body", c.Body)
+	return c.DoRequest("PATCH")
 }
 
 type IssuesDeleteCommentCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner     string `required:"" name:"owner"`
 	Repo      string `required:"" name:"repo"`
 	CommentId int64  `required:"" name:"comment_id"`
 }
 
 func (c *IssuesDeleteCommentCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/issues/comments/:comment_id"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("comment_id", c.CommentId)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/issues/comments/:comment_id")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("comment_id", c.CommentId)
+	return c.DoRequest("DELETE")
 }
 
 type IssuesListEventsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Starfox bool   "name:\"starfox-preview\" help:\"Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](/changes/2018-09-05-project-card-events).\n\nTo receive the `project_card` attribute, project boards must be [enabled](https://help.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n application/vnd.github.starfox-preview+json\n\n```\""
 	Owner   string `required:"" name:"owner"`
 	Repo    string `required:"" name:"repo"`
@@ -507,19 +509,19 @@ type IssuesListEventsCmd struct {
 }
 
 func (c *IssuesListEventsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/issues/:number/events"
-	c.updatePreview("starfox", c.Starfox)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/issues/:number/events")
+	c.UpdatePreview("starfox", c.Starfox)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type IssuesListEventsForRepoCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Starfox  bool   "name:\"starfox-preview\" help:\"Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](/changes/2018-09-05-project-card-events).\n\nTo receive the `project_card` attribute, project boards must be [enabled](https://help.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n application/vnd.github.starfox-preview+json\n\n```\""
 	Symmetra bool   "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	Owner    string `required:"" name:"owner"`
@@ -529,19 +531,19 @@ type IssuesListEventsForRepoCmd struct {
 }
 
 func (c *IssuesListEventsForRepoCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/issues/events"
-	c.updatePreview("starfox", c.Starfox)
-	c.updatePreview("symmetra", c.Symmetra)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/issues/events")
+	c.UpdatePreview("starfox", c.Starfox)
+	c.UpdatePreview("symmetra", c.Symmetra)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type IssuesGetEventCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Starfox    bool   "name:\"starfox-preview\" help:\"Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](/changes/2018-09-05-project-card-events).\n\nTo receive the `project_card` attribute, project boards must be [enabled](https://help.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n application/vnd.github.starfox-preview+json\n\n```\""
 	Symmetra   bool   "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	MachineMan bool   "name:\"machine-man-preview\" help:\"**Note:** If an issue event is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](/changes/2016-09-14-Integrations-Early-Access).\n\nTo receive the `performed_via_github_app` object is the response, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.machine-man-preview\n\n```\""
@@ -551,19 +553,19 @@ type IssuesGetEventCmd struct {
 }
 
 func (c *IssuesGetEventCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/issues/events/:event_id"
-	c.updatePreview("starfox", c.Starfox)
-	c.updatePreview("symmetra", c.Symmetra)
-	c.updatePreview("machine-man", c.MachineMan)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("event_id", c.EventId)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/issues/events/:event_id")
+	c.UpdatePreview("starfox", c.Starfox)
+	c.UpdatePreview("symmetra", c.Symmetra)
+	c.UpdatePreview("machine-man", c.MachineMan)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("event_id", c.EventId)
+	return c.DoRequest("GET")
 }
 
 type IssuesListLabelsForRepoCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Symmetra bool   "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	Owner    string `required:"" name:"owner"`
 	Repo     string `required:"" name:"repo"`
@@ -572,18 +574,18 @@ type IssuesListLabelsForRepoCmd struct {
 }
 
 func (c *IssuesListLabelsForRepoCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/labels"
-	c.updatePreview("symmetra", c.Symmetra)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/labels")
+	c.UpdatePreview("symmetra", c.Symmetra)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type IssuesGetLabelCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Symmetra bool   "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	Owner    string `required:"" name:"owner"`
 	Repo     string `required:"" name:"repo"`
@@ -591,17 +593,17 @@ type IssuesGetLabelCmd struct {
 }
 
 func (c *IssuesGetLabelCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/labels/:name"
-	c.updatePreview("symmetra", c.Symmetra)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("name", c.Name)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/labels/:name")
+	c.UpdatePreview("symmetra", c.Symmetra)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("name", c.Name)
+	return c.DoRequest("GET")
 }
 
 type IssuesCreateLabelCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Symmetra    bool   "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	Owner       string `required:"" name:"owner"`
 	Repo        string `required:"" name:"repo"`
@@ -611,19 +613,19 @@ type IssuesCreateLabelCmd struct {
 }
 
 func (c *IssuesCreateLabelCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/labels"
-	c.updatePreview("symmetra", c.Symmetra)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateBody("name", c.Name)
-	c.updateBody("color", c.Color)
-	c.updateBody("description", c.Description)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/labels")
+	c.UpdatePreview("symmetra", c.Symmetra)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("name", c.Name)
+	c.UpdateBody("color", c.Color)
+	c.UpdateBody("description", c.Description)
+	return c.DoRequest("POST")
 }
 
 type IssuesUpdateLabelCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Symmetra    bool   "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	Owner       string `required:"" name:"owner"`
 	Repo        string `required:"" name:"repo"`
@@ -634,36 +636,36 @@ type IssuesUpdateLabelCmd struct {
 }
 
 func (c *IssuesUpdateLabelCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/labels/:current_name"
-	c.updatePreview("symmetra", c.Symmetra)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("current_name", c.CurrentName)
-	c.updateBody("name", c.Name)
-	c.updateBody("color", c.Color)
-	c.updateBody("description", c.Description)
-	return c.doRequest("PATCH")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/labels/:current_name")
+	c.UpdatePreview("symmetra", c.Symmetra)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("current_name", c.CurrentName)
+	c.UpdateBody("name", c.Name)
+	c.UpdateBody("color", c.Color)
+	c.UpdateBody("description", c.Description)
+	return c.DoRequest("PATCH")
 }
 
 type IssuesDeleteLabelCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	Name  string `required:"" name:"name"`
 }
 
 func (c *IssuesDeleteLabelCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/labels/:name"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("name", c.Name)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/labels/:name")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("name", c.Name)
+	return c.DoRequest("DELETE")
 }
 
 type IssuesListLabelsOnIssueCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Symmetra bool   "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	Owner    string `required:"" name:"owner"`
 	Repo     string `required:"" name:"repo"`
@@ -673,19 +675,19 @@ type IssuesListLabelsOnIssueCmd struct {
 }
 
 func (c *IssuesListLabelsOnIssueCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/issues/:number/labels"
-	c.updatePreview("symmetra", c.Symmetra)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/issues/:number/labels")
+	c.UpdatePreview("symmetra", c.Symmetra)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type IssuesAddLabelsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Symmetra bool     "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	Owner    string   `required:"" name:"owner"`
 	Repo     string   `required:"" name:"repo"`
@@ -694,18 +696,18 @@ type IssuesAddLabelsCmd struct {
 }
 
 func (c *IssuesAddLabelsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/issues/:number/labels"
-	c.updatePreview("symmetra", c.Symmetra)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	c.updateBody("labels", c.Labels)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/issues/:number/labels")
+	c.UpdatePreview("symmetra", c.Symmetra)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	c.UpdateBody("labels", c.Labels)
+	return c.DoRequest("POST")
 }
 
 type IssuesRemoveLabelCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Symmetra bool   "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	Owner    string `required:"" name:"owner"`
 	Repo     string `required:"" name:"repo"`
@@ -714,18 +716,18 @@ type IssuesRemoveLabelCmd struct {
 }
 
 func (c *IssuesRemoveLabelCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/issues/:number/labels/:name"
-	c.updatePreview("symmetra", c.Symmetra)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	c.updateURLPath("name", c.Name)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/issues/:number/labels/:name")
+	c.UpdatePreview("symmetra", c.Symmetra)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	c.UpdateURLPath("name", c.Name)
+	return c.DoRequest("DELETE")
 }
 
 type IssuesReplaceLabelsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Symmetra bool     "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	Owner    string   `required:"" name:"owner"`
 	Repo     string   `required:"" name:"repo"`
@@ -734,34 +736,34 @@ type IssuesReplaceLabelsCmd struct {
 }
 
 func (c *IssuesReplaceLabelsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/issues/:number/labels"
-	c.updatePreview("symmetra", c.Symmetra)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	c.updateBody("labels", c.Labels)
-	return c.doRequest("PUT")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/issues/:number/labels")
+	c.UpdatePreview("symmetra", c.Symmetra)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	c.UpdateBody("labels", c.Labels)
+	return c.DoRequest("PUT")
 }
 
 type IssuesRemoveLabelsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner  string `required:"" name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Number int64  `required:"" name:"number"`
 }
 
 func (c *IssuesRemoveLabelsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/issues/:number/labels"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/issues/:number/labels")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	return c.DoRequest("DELETE")
 }
 
 type IssuesListLabelsForMilestoneCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Symmetra bool   "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	Owner    string `required:"" name:"owner"`
 	Repo     string `required:"" name:"repo"`
@@ -771,19 +773,19 @@ type IssuesListLabelsForMilestoneCmd struct {
 }
 
 func (c *IssuesListLabelsForMilestoneCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/milestones/:number/labels"
-	c.updatePreview("symmetra", c.Symmetra)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/milestones/:number/labels")
+	c.UpdatePreview("symmetra", c.Symmetra)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type IssuesListMilestonesForRepoCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner     string `required:"" name:"owner"`
 	Repo      string `required:"" name:"repo"`
 	State     string "name:\"state\" help:\"The state of the milestone. Either `open`, `closed`, or `all`.\""
@@ -794,36 +796,36 @@ type IssuesListMilestonesForRepoCmd struct {
 }
 
 func (c *IssuesListMilestonesForRepoCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/milestones"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLQuery("state", c.State)
-	c.updateURLQuery("sort", c.Sort)
-	c.updateURLQuery("direction", c.Direction)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/milestones")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("state", c.State)
+	c.UpdateURLQuery("sort", c.Sort)
+	c.UpdateURLQuery("direction", c.Direction)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type IssuesGetMilestoneCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner  string `required:"" name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Number int64  `required:"" name:"number"`
 }
 
 func (c *IssuesGetMilestoneCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/milestones/:number"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/milestones/:number")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	return c.DoRequest("GET")
 }
 
 type IssuesCreateMilestoneCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner       string `required:"" name:"owner"`
 	Repo        string `required:"" name:"repo"`
 	Title       string `required:"" name:"title" help:"The title of the milestone."`
@@ -833,19 +835,19 @@ type IssuesCreateMilestoneCmd struct {
 }
 
 func (c *IssuesCreateMilestoneCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/milestones"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateBody("title", c.Title)
-	c.updateBody("state", c.State)
-	c.updateBody("description", c.Description)
-	c.updateBody("due_on", c.DueOn)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/milestones")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("title", c.Title)
+	c.UpdateBody("state", c.State)
+	c.UpdateBody("description", c.Description)
+	c.UpdateBody("due_on", c.DueOn)
+	return c.DoRequest("POST")
 }
 
 type IssuesUpdateMilestoneCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner       string `required:"" name:"owner"`
 	Repo        string `required:"" name:"repo"`
 	Number      int64  `required:"" name:"number"`
@@ -856,36 +858,36 @@ type IssuesUpdateMilestoneCmd struct {
 }
 
 func (c *IssuesUpdateMilestoneCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/milestones/:number"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	c.updateBody("title", c.Title)
-	c.updateBody("state", c.State)
-	c.updateBody("description", c.Description)
-	c.updateBody("due_on", c.DueOn)
-	return c.doRequest("PATCH")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/milestones/:number")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	c.UpdateBody("title", c.Title)
+	c.UpdateBody("state", c.State)
+	c.UpdateBody("description", c.Description)
+	c.UpdateBody("due_on", c.DueOn)
+	return c.DoRequest("PATCH")
 }
 
 type IssuesDeleteMilestoneCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner  string `required:"" name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Number int64  `required:"" name:"number"`
 }
 
 func (c *IssuesDeleteMilestoneCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/milestones/:number"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/milestones/:number")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	return c.DoRequest("DELETE")
 }
 
 type IssuesListEventsForTimelineCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Mockingbird bool   "name:\"mockingbird-preview\" required:\"\" help:\"The API to get issue timeline events is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](/changes/2016-05-23-timeline-preview-api/) for full details. To access the API you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.mockingbird-preview\n\n```\""
 	Starfox     bool   "name:\"starfox-preview\" help:\"Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](/changes/2018-09-05-project-card-events).\n\nTo receive the `project_card` attribute, project boards must be [enabled](https://help.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n application/vnd.github.starfox-preview+json\n\n```\""
 	Owner       string `required:"" name:"owner"`
@@ -896,14 +898,14 @@ type IssuesListEventsForTimelineCmd struct {
 }
 
 func (c *IssuesListEventsForTimelineCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/issues/:number/timeline"
-	c.updatePreview("mockingbird", c.Mockingbird)
-	c.updatePreview("starfox", c.Starfox)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/issues/:number/timeline")
+	c.UpdatePreview("mockingbird", c.Mockingbird)
+	c.UpdatePreview("starfox", c.Starfox)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }

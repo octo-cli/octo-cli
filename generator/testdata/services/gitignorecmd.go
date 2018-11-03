@@ -2,29 +2,31 @@
 
 package services
 
+import "github.com/octo-cli/octo-cli/internal"
+
 type GitignoreCmd struct {
 	ListTemplates GitignoreListTemplatesCmd `cmd:"" help:"Listing available templates"`
 	GetTemplate   GitignoreGetTemplateCmd   `cmd:"" help:"Get a single template"`
 }
 
 type GitignoreListTemplatesCmd struct {
-	baseCmd
+	internal.BaseCmd
 }
 
 func (c *GitignoreListTemplatesCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/gitignore/templates"
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/gitignore/templates")
+	return c.DoRequest("GET")
 }
 
 type GitignoreGetTemplateCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Name string `required:"" name:"name"`
 }
 
 func (c *GitignoreGetTemplateCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/gitignore/templates/:name"
-	c.updateURLPath("name", c.Name)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/gitignore/templates/:name")
+	c.UpdateURLPath("name", c.Name)
+	return c.DoRequest("GET")
 }

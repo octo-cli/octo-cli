@@ -2,6 +2,8 @@
 
 package services
 
+import "github.com/octo-cli/octo-cli/internal"
+
 type PullsCmd struct {
 	List                 PullsListCmd                 `cmd:"" help:"List pull requests"`
 	Get                  PullsGetCmd                  `cmd:"" help:"Get a single pull request"`
@@ -31,7 +33,7 @@ type PullsCmd struct {
 }
 
 type PullsListCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Symmetra  bool   "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	Owner     string `required:"" name:"owner"`
 	Repo      string `required:"" name:"repo"`
@@ -45,23 +47,23 @@ type PullsListCmd struct {
 }
 
 func (c *PullsListCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/pulls"
-	c.updatePreview("symmetra", c.Symmetra)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLQuery("state", c.State)
-	c.updateURLQuery("head", c.Head)
-	c.updateURLQuery("base", c.Base)
-	c.updateURLQuery("sort", c.Sort)
-	c.updateURLQuery("direction", c.Direction)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pulls")
+	c.UpdatePreview("symmetra", c.Symmetra)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("state", c.State)
+	c.UpdateURLQuery("head", c.Head)
+	c.UpdateURLQuery("base", c.Base)
+	c.UpdateURLQuery("sort", c.Sort)
+	c.UpdateURLQuery("direction", c.Direction)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type PullsGetCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Symmetra bool   "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	Owner    string `required:"" name:"owner"`
 	Repo     string `required:"" name:"repo"`
@@ -69,17 +71,17 @@ type PullsGetCmd struct {
 }
 
 func (c *PullsGetCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/pulls/:number"
-	c.updatePreview("symmetra", c.Symmetra)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pulls/:number")
+	c.UpdatePreview("symmetra", c.Symmetra)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	return c.DoRequest("GET")
 }
 
 type PullsCreateCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Symmetra            bool   "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	Owner               string `required:"" name:"owner"`
 	Repo                string `required:"" name:"repo"`
@@ -91,21 +93,21 @@ type PullsCreateCmd struct {
 }
 
 func (c *PullsCreateCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/pulls"
-	c.updatePreview("symmetra", c.Symmetra)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateBody("title", c.Title)
-	c.updateBody("head", c.Head)
-	c.updateBody("base", c.Base)
-	c.updateBody("body", c.Body)
-	c.updateBody("maintainer_can_modify", c.MaintainerCanModify)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pulls")
+	c.UpdatePreview("symmetra", c.Symmetra)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("title", c.Title)
+	c.UpdateBody("head", c.Head)
+	c.UpdateBody("base", c.Base)
+	c.UpdateBody("body", c.Body)
+	c.UpdateBody("maintainer_can_modify", c.MaintainerCanModify)
+	return c.DoRequest("POST")
 }
 
 type PullsCreateFromIssueCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Symmetra            bool   "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	Owner               string `required:"" name:"owner"`
 	Repo                string `required:"" name:"repo"`
@@ -116,20 +118,20 @@ type PullsCreateFromIssueCmd struct {
 }
 
 func (c *PullsCreateFromIssueCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/pulls"
-	c.updatePreview("symmetra", c.Symmetra)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateBody("issue", c.Issue)
-	c.updateBody("head", c.Head)
-	c.updateBody("base", c.Base)
-	c.updateBody("maintainer_can_modify", c.MaintainerCanModify)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pulls")
+	c.UpdatePreview("symmetra", c.Symmetra)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("issue", c.Issue)
+	c.UpdateBody("head", c.Head)
+	c.UpdateBody("base", c.Base)
+	c.UpdateBody("maintainer_can_modify", c.MaintainerCanModify)
+	return c.DoRequest("POST")
 }
 
 type PullsUpdateCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Symmetra            bool   "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	Owner               string `required:"" name:"owner"`
 	Repo                string `required:"" name:"repo"`
@@ -142,22 +144,22 @@ type PullsUpdateCmd struct {
 }
 
 func (c *PullsUpdateCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/pulls/:number"
-	c.updatePreview("symmetra", c.Symmetra)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	c.updateBody("title", c.Title)
-	c.updateBody("body", c.Body)
-	c.updateBody("state", c.State)
-	c.updateBody("base", c.Base)
-	c.updateBody("maintainer_can_modify", c.MaintainerCanModify)
-	return c.doRequest("PATCH")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pulls/:number")
+	c.UpdatePreview("symmetra", c.Symmetra)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	c.UpdateBody("title", c.Title)
+	c.UpdateBody("body", c.Body)
+	c.UpdateBody("state", c.State)
+	c.UpdateBody("base", c.Base)
+	c.UpdateBody("maintainer_can_modify", c.MaintainerCanModify)
+	return c.DoRequest("PATCH")
 }
 
 type PullsListCommitsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner   string `required:"" name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	Number  int64  `required:"" name:"number"`
@@ -166,18 +168,18 @@ type PullsListCommitsCmd struct {
 }
 
 func (c *PullsListCommitsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/pulls/:number/commits"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pulls/:number/commits")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type PullsListFilesCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner   string `required:"" name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	Number  int64  `required:"" name:"number"`
@@ -186,34 +188,34 @@ type PullsListFilesCmd struct {
 }
 
 func (c *PullsListFilesCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/pulls/:number/files"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pulls/:number/files")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type PullsCheckIfMergedCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner  string `required:"" name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Number int64  `required:"" name:"number"`
 }
 
 func (c *PullsCheckIfMergedCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/pulls/:number/merge"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pulls/:number/merge")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	return c.DoRequest("GET")
 }
 
 type PullsMergeCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner         string `required:"" name:"owner"`
 	Repo          string `required:"" name:"repo"`
 	Number        int64  `required:"" name:"number"`
@@ -224,20 +226,20 @@ type PullsMergeCmd struct {
 }
 
 func (c *PullsMergeCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/pulls/:number/merge"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	c.updateBody("commit_title", c.CommitTitle)
-	c.updateBody("commit_message", c.CommitMessage)
-	c.updateBody("sha", c.Sha)
-	c.updateBody("merge_method", c.MergeMethod)
-	return c.doRequest("PUT")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pulls/:number/merge")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	c.UpdateBody("commit_title", c.CommitTitle)
+	c.UpdateBody("commit_message", c.CommitMessage)
+	c.UpdateBody("sha", c.Sha)
+	c.UpdateBody("merge_method", c.MergeMethod)
+	return c.DoRequest("PUT")
 }
 
 type PullsListReviewsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner   string `required:"" name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	Number  int64  `required:"" name:"number"`
@@ -246,18 +248,18 @@ type PullsListReviewsCmd struct {
 }
 
 func (c *PullsListReviewsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/pulls/:number/reviews"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pulls/:number/reviews")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type PullsGetReviewCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner    string `required:"" name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	Number   int64  `required:"" name:"number"`
@@ -265,17 +267,17 @@ type PullsGetReviewCmd struct {
 }
 
 func (c *PullsGetReviewCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/pulls/:number/reviews/:review_id"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	c.updateURLPath("review_id", c.ReviewId)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pulls/:number/reviews/:review_id")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	c.UpdateURLPath("review_id", c.ReviewId)
+	return c.DoRequest("GET")
 }
 
 type PullsDeletePendingReviewCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner    string `required:"" name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	Number   int64  `required:"" name:"number"`
@@ -283,17 +285,17 @@ type PullsDeletePendingReviewCmd struct {
 }
 
 func (c *PullsDeletePendingReviewCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/pulls/:number/reviews/:review_id"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	c.updateURLPath("review_id", c.ReviewId)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pulls/:number/reviews/:review_id")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	c.UpdateURLPath("review_id", c.ReviewId)
+	return c.DoRequest("DELETE")
 }
 
 type PullsGetCommentsForReviewCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner    string `required:"" name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	Number   int64  `required:"" name:"number"`
@@ -303,19 +305,19 @@ type PullsGetCommentsForReviewCmd struct {
 }
 
 func (c *PullsGetCommentsForReviewCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/pulls/:number/reviews/:review_id/comments"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	c.updateURLPath("review_id", c.ReviewId)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pulls/:number/reviews/:review_id/comments")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	c.UpdateURLPath("review_id", c.ReviewId)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type PullsSubmitReviewCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner    string `required:"" name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	Number   int64  `required:"" name:"number"`
@@ -325,19 +327,19 @@ type PullsSubmitReviewCmd struct {
 }
 
 func (c *PullsSubmitReviewCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/pulls/:number/reviews/:review_id/events"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	c.updateURLPath("review_id", c.ReviewId)
-	c.updateBody("body", c.Body)
-	c.updateBody("event", c.Event)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pulls/:number/reviews/:review_id/events")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	c.UpdateURLPath("review_id", c.ReviewId)
+	c.UpdateBody("body", c.Body)
+	c.UpdateBody("event", c.Event)
+	return c.DoRequest("POST")
 }
 
 type PullsDismissReviewCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner    string `required:"" name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	Number   int64  `required:"" name:"number"`
@@ -346,18 +348,18 @@ type PullsDismissReviewCmd struct {
 }
 
 func (c *PullsDismissReviewCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/pulls/:number/reviews/:review_id/dismissals"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	c.updateURLPath("review_id", c.ReviewId)
-	c.updateBody("message", c.Message)
-	return c.doRequest("PUT")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pulls/:number/reviews/:review_id/dismissals")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	c.UpdateURLPath("review_id", c.ReviewId)
+	c.UpdateBody("message", c.Message)
+	return c.DoRequest("PUT")
 }
 
 type PullsListCommentsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the review comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview\n\n```\n\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.\""
 	Owner        string `required:"" name:"owner"`
 	Repo         string `required:"" name:"repo"`
@@ -370,22 +372,22 @@ type PullsListCommentsCmd struct {
 }
 
 func (c *PullsListCommentsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/pulls/:number/comments"
-	c.updatePreview("squirrel-girl", c.SquirrelGirl)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	c.updateURLQuery("sort", c.Sort)
-	c.updateURLQuery("direction", c.Direction)
-	c.updateURLQuery("since", c.Since)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pulls/:number/comments")
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	c.UpdateURLQuery("sort", c.Sort)
+	c.UpdateURLQuery("direction", c.Direction)
+	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type PullsListCommentsForRepoCmd struct {
-	baseCmd
+	internal.BaseCmd
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the review comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview\n\n```\n\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.\""
 	Owner        string `required:"" name:"owner"`
 	Repo         string `required:"" name:"repo"`
@@ -397,21 +399,21 @@ type PullsListCommentsForRepoCmd struct {
 }
 
 func (c *PullsListCommentsForRepoCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/pulls/comments"
-	c.updatePreview("squirrel-girl", c.SquirrelGirl)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLQuery("sort", c.Sort)
-	c.updateURLQuery("direction", c.Direction)
-	c.updateURLQuery("since", c.Since)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pulls/comments")
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("sort", c.Sort)
+	c.UpdateURLQuery("direction", c.Direction)
+	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type PullsGetCommentCmd struct {
-	baseCmd
+	internal.BaseCmd
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the review comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview\n\n```\n\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.\""
 	Owner        string `required:"" name:"owner"`
 	Repo         string `required:"" name:"repo"`
@@ -419,17 +421,17 @@ type PullsGetCommentCmd struct {
 }
 
 func (c *PullsGetCommentCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/pulls/comments/:comment_id"
-	c.updatePreview("squirrel-girl", c.SquirrelGirl)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("comment_id", c.CommentId)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pulls/comments/:comment_id")
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("comment_id", c.CommentId)
+	return c.DoRequest("GET")
 }
 
 type PullsCreateCommentCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner    string `required:"" name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	Number   int64  `required:"" name:"number"`
@@ -440,20 +442,20 @@ type PullsCreateCommentCmd struct {
 }
 
 func (c *PullsCreateCommentCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/pulls/:number/comments"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	c.updateBody("body", c.Body)
-	c.updateBody("commit_id", c.CommitId)
-	c.updateBody("path", c.Path)
-	c.updateBody("position", c.Position)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pulls/:number/comments")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	c.UpdateBody("body", c.Body)
+	c.UpdateBody("commit_id", c.CommitId)
+	c.UpdateBody("path", c.Path)
+	c.UpdateBody("position", c.Position)
+	return c.DoRequest("POST")
 }
 
 type PullsCreateCommentReplyCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner     string `required:"" name:"owner"`
 	Repo      string `required:"" name:"repo"`
 	Number    int64  `required:"" name:"number"`
@@ -462,18 +464,18 @@ type PullsCreateCommentReplyCmd struct {
 }
 
 func (c *PullsCreateCommentReplyCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/pulls/:number/comments"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	c.updateBody("body", c.Body)
-	c.updateBody("in_reply_to", c.InReplyTo)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pulls/:number/comments")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	c.UpdateBody("body", c.Body)
+	c.UpdateBody("in_reply_to", c.InReplyTo)
+	return c.DoRequest("POST")
 }
 
 type PullsEditCommentCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner     string `required:"" name:"owner"`
 	Repo      string `required:"" name:"repo"`
 	CommentId int64  `required:"" name:"comment_id"`
@@ -481,33 +483,33 @@ type PullsEditCommentCmd struct {
 }
 
 func (c *PullsEditCommentCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/pulls/comments/:comment_id"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("comment_id", c.CommentId)
-	c.updateBody("body", c.Body)
-	return c.doRequest("PATCH")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pulls/comments/:comment_id")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("comment_id", c.CommentId)
+	c.UpdateBody("body", c.Body)
+	return c.DoRequest("PATCH")
 }
 
 type PullsDeleteCommentCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner     string `required:"" name:"owner"`
 	Repo      string `required:"" name:"repo"`
 	CommentId int64  `required:"" name:"comment_id"`
 }
 
 func (c *PullsDeleteCommentCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/pulls/comments/:comment_id"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("comment_id", c.CommentId)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pulls/comments/:comment_id")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("comment_id", c.CommentId)
+	return c.DoRequest("DELETE")
 }
 
 type PullsListReviewRequestsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner   string `required:"" name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	Number  int64  `required:"" name:"number"`
@@ -516,18 +518,18 @@ type PullsListReviewRequestsCmd struct {
 }
 
 func (c *PullsListReviewRequestsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/pulls/:number/requested_reviewers"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pulls/:number/requested_reviewers")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type PullsCreateReviewRequestCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Symmetra      bool     "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
 	Owner         string   `required:"" name:"owner"`
 	Repo          string   `required:"" name:"repo"`
@@ -537,19 +539,19 @@ type PullsCreateReviewRequestCmd struct {
 }
 
 func (c *PullsCreateReviewRequestCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/pulls/:number/requested_reviewers"
-	c.updatePreview("symmetra", c.Symmetra)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	c.updateBody("reviewers", c.Reviewers)
-	c.updateBody("team_reviewers", c.TeamReviewers)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pulls/:number/requested_reviewers")
+	c.UpdatePreview("symmetra", c.Symmetra)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	c.UpdateBody("reviewers", c.Reviewers)
+	c.UpdateBody("team_reviewers", c.TeamReviewers)
+	return c.DoRequest("POST")
 }
 
 type PullsDeleteReviewRequestCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Owner         string   `required:"" name:"owner"`
 	Repo          string   `required:"" name:"repo"`
 	Number        int64    `required:"" name:"number"`
@@ -558,12 +560,12 @@ type PullsDeleteReviewRequestCmd struct {
 }
 
 func (c *PullsDeleteReviewRequestCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/pulls/:number/requested_reviewers"
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLPath("number", c.Number)
-	c.updateBody("reviewers", c.Reviewers)
-	c.updateBody("team_reviewers", c.TeamReviewers)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pulls/:number/requested_reviewers")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("number", c.Number)
+	c.UpdateBody("reviewers", c.Reviewers)
+	c.UpdateBody("team_reviewers", c.TeamReviewers)
+	return c.DoRequest("DELETE")
 }

@@ -2,6 +2,8 @@
 
 package services
 
+import "github.com/octo-cli/octo-cli/internal"
+
 type ProjectsCmd struct {
 	ListForRepo               ProjectsListForRepoCmd               `cmd:"" help:"List repository projects"`
 	ListForOrg                ProjectsListForOrgCmd                `cmd:"" help:"List organization projects"`
@@ -29,7 +31,7 @@ type ProjectsCmd struct {
 }
 
 type ProjectsListForRepoCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Inertia bool   "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.inertia-preview+json\n\n```\""
 	Owner   string `required:"" name:"owner"`
 	Repo    string `required:"" name:"repo"`
@@ -39,19 +41,19 @@ type ProjectsListForRepoCmd struct {
 }
 
 func (c *ProjectsListForRepoCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/projects"
-	c.updatePreview("inertia", c.Inertia)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateURLQuery("state", c.State)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/projects")
+	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("state", c.State)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ProjectsListForOrgCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Inertia bool   "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.inertia-preview+json\n\n```\""
 	Org     string `required:"" name:"org"`
 	State   string "name:\"state\" help:\"Indicates the state of the projects to return. Can be either `open`, `closed`, or `all`.\""
@@ -60,18 +62,18 @@ type ProjectsListForOrgCmd struct {
 }
 
 func (c *ProjectsListForOrgCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org/projects"
-	c.updatePreview("inertia", c.Inertia)
-	c.updateURLPath("org", c.Org)
-	c.updateURLQuery("state", c.State)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/projects")
+	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLQuery("state", c.State)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ProjectsGetCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Inertia   bool  "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.inertia-preview+json\n\n```\""
 	ProjectId int64 `required:"" name:"project_id"`
 	PerPage   int64 `name:"per_page" help:"Results per page (max 100)"`
@@ -79,17 +81,17 @@ type ProjectsGetCmd struct {
 }
 
 func (c *ProjectsGetCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/projects/:project_id"
-	c.updatePreview("inertia", c.Inertia)
-	c.updateURLPath("project_id", c.ProjectId)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/projects/:project_id")
+	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdateURLPath("project_id", c.ProjectId)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ProjectsCreateForRepoCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Inertia bool   "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.inertia-preview+json\n\n```\""
 	Owner   string `required:"" name:"owner"`
 	Repo    string `required:"" name:"repo"`
@@ -100,20 +102,20 @@ type ProjectsCreateForRepoCmd struct {
 }
 
 func (c *ProjectsCreateForRepoCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/repos/:owner/:repo/projects"
-	c.updatePreview("inertia", c.Inertia)
-	c.updateURLPath("owner", c.Owner)
-	c.updateURLPath("repo", c.Repo)
-	c.updateBody("name", c.Name)
-	c.updateBody("body", c.Body)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/projects")
+	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("name", c.Name)
+	c.UpdateBody("body", c.Body)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("POST")
 }
 
 type ProjectsCreateForOrgCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Inertia bool   "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.inertia-preview+json\n\n```\""
 	Org     string `required:"" name:"org"`
 	Name    string `required:"" name:"name" help:"The name of the project."`
@@ -123,19 +125,19 @@ type ProjectsCreateForOrgCmd struct {
 }
 
 func (c *ProjectsCreateForOrgCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/orgs/:org/projects"
-	c.updatePreview("inertia", c.Inertia)
-	c.updateURLPath("org", c.Org)
-	c.updateBody("name", c.Name)
-	c.updateBody("body", c.Body)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/projects")
+	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateBody("name", c.Name)
+	c.UpdateBody("body", c.Body)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("POST")
 }
 
 type ProjectsUpdateCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Inertia                bool   "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.inertia-preview+json\n\n```\""
 	ProjectId              int64  `required:"" name:"project_id"`
 	Name                   string `name:"name" help:"The name of the project."`
@@ -148,36 +150,36 @@ type ProjectsUpdateCmd struct {
 }
 
 func (c *ProjectsUpdateCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/projects/:project_id"
-	c.updatePreview("inertia", c.Inertia)
-	c.updateURLPath("project_id", c.ProjectId)
-	c.updateBody("name", c.Name)
-	c.updateBody("body", c.Body)
-	c.updateBody("state", c.State)
-	c.updateBody("organization_permission", c.OrganizationPermission)
-	c.updateBody("public", c.Public)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("PATCH")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/projects/:project_id")
+	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdateURLPath("project_id", c.ProjectId)
+	c.UpdateBody("name", c.Name)
+	c.UpdateBody("body", c.Body)
+	c.UpdateBody("state", c.State)
+	c.UpdateBody("organization_permission", c.OrganizationPermission)
+	c.UpdateBody("public", c.Public)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("PATCH")
 }
 
 type ProjectsDeleteCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Inertia   bool  "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.inertia-preview+json\n\n```\""
 	ProjectId int64 `required:"" name:"project_id"`
 }
 
 func (c *ProjectsDeleteCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/projects/:project_id"
-	c.updatePreview("inertia", c.Inertia)
-	c.updateURLPath("project_id", c.ProjectId)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/projects/:project_id")
+	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdateURLPath("project_id", c.ProjectId)
+	return c.DoRequest("DELETE")
 }
 
 type ProjectsListCardsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Inertia       bool   "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.inertia-preview+json\n\n```\""
 	ColumnId      int64  `required:"" name:"column_id"`
 	ArchivedState string "name:\"archived_state\" help:\"Filters the project cards that are returned by the card's state. Can be one of `all`,`archived`, or `not_archived`.\""
@@ -186,32 +188,32 @@ type ProjectsListCardsCmd struct {
 }
 
 func (c *ProjectsListCardsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/projects/columns/:column_id/cards"
-	c.updatePreview("inertia", c.Inertia)
-	c.updateURLPath("column_id", c.ColumnId)
-	c.updateURLQuery("archived_state", c.ArchivedState)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/projects/columns/:column_id/cards")
+	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdateURLPath("column_id", c.ColumnId)
+	c.UpdateURLQuery("archived_state", c.ArchivedState)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ProjectsGetCardCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Inertia bool  "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.inertia-preview+json\n\n```\""
 	CardId  int64 `required:"" name:"card_id"`
 }
 
 func (c *ProjectsGetCardCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/projects/columns/cards/:card_id"
-	c.updatePreview("inertia", c.Inertia)
-	c.updateURLPath("card_id", c.CardId)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/projects/columns/cards/:card_id")
+	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdateURLPath("card_id", c.CardId)
+	return c.DoRequest("GET")
 }
 
 type ProjectsCreateCardCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Inertia     bool   "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.inertia-preview+json\n\n```\""
 	ColumnId    int64  `required:"" name:"column_id"`
 	Note        string "name:\"note\" help:\"The card's note content. Only valid for cards without another type of content, so you must omit when\u00a0specifying `content_id`\u00a0and\u00a0`content_type`.\""
@@ -220,18 +222,18 @@ type ProjectsCreateCardCmd struct {
 }
 
 func (c *ProjectsCreateCardCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/projects/columns/:column_id/cards"
-	c.updatePreview("inertia", c.Inertia)
-	c.updateURLPath("column_id", c.ColumnId)
-	c.updateBody("note", c.Note)
-	c.updateBody("content_id", c.ContentId)
-	c.updateBody("content_type", c.ContentType)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/projects/columns/:column_id/cards")
+	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdateURLPath("column_id", c.ColumnId)
+	c.UpdateBody("note", c.Note)
+	c.UpdateBody("content_id", c.ContentId)
+	c.UpdateBody("content_type", c.ContentType)
+	return c.DoRequest("POST")
 }
 
 type ProjectsUpdateCardCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Inertia  bool   "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.inertia-preview+json\n\n```\""
 	CardId   int64  `required:"" name:"card_id"`
 	Note     string "name:\"note\" help:\"The card's note content. Only valid for cards without another type of content, so this cannot be specified if the card already has a `content_id` and `content_type`.\""
@@ -239,31 +241,31 @@ type ProjectsUpdateCardCmd struct {
 }
 
 func (c *ProjectsUpdateCardCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/projects/columns/cards/:card_id"
-	c.updatePreview("inertia", c.Inertia)
-	c.updateURLPath("card_id", c.CardId)
-	c.updateBody("note", c.Note)
-	c.updateBody("archived", c.Archived)
-	return c.doRequest("PATCH")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/projects/columns/cards/:card_id")
+	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdateURLPath("card_id", c.CardId)
+	c.UpdateBody("note", c.Note)
+	c.UpdateBody("archived", c.Archived)
+	return c.DoRequest("PATCH")
 }
 
 type ProjectsDeleteCardCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Inertia bool  "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.inertia-preview+json\n\n```\""
 	CardId  int64 `required:"" name:"card_id"`
 }
 
 func (c *ProjectsDeleteCardCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/projects/columns/cards/:card_id"
-	c.updatePreview("inertia", c.Inertia)
-	c.updateURLPath("card_id", c.CardId)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/projects/columns/cards/:card_id")
+	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdateURLPath("card_id", c.CardId)
+	return c.DoRequest("DELETE")
 }
 
 type ProjectsMoveCardCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Inertia  bool   "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.inertia-preview+json\n\n```\""
 	CardId   int64  `required:"" name:"card_id"`
 	Position string "required:\"\" name:\"position\" help:\"Can be one of `top`, `bottom`, or `after:<card_id>`, where `<card_id>` is the `id` value of a card in the same column, or in the new column specified by `column_id`.\""
@@ -271,17 +273,17 @@ type ProjectsMoveCardCmd struct {
 }
 
 func (c *ProjectsMoveCardCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/projects/columns/cards/:card_id/moves"
-	c.updatePreview("inertia", c.Inertia)
-	c.updateURLPath("card_id", c.CardId)
-	c.updateBody("position", c.Position)
-	c.updateBody("column_id", c.ColumnId)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/projects/columns/cards/:card_id/moves")
+	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdateURLPath("card_id", c.CardId)
+	c.UpdateBody("position", c.Position)
+	c.UpdateBody("column_id", c.ColumnId)
+	return c.DoRequest("POST")
 }
 
 type ProjectsListCollaboratorsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Inertia     bool   "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.inertia-preview+json\n\n```\""
 	ProjectId   int64  `required:"" name:"project_id"`
 	Affiliation string "name:\"affiliation\" help:\"Filters the collaborators by their affiliation. Can be one of:  \n\\* `outside`: Outside collaborators of a project that are not a member of the project's organization.  \n\\* `direct`: Collaborators with permissions to a project, regardless of organization membership status.  \n\\* `all`: All collaborators the authenticated user can see.\""
@@ -290,34 +292,34 @@ type ProjectsListCollaboratorsCmd struct {
 }
 
 func (c *ProjectsListCollaboratorsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/projects/:project_id/collaborators"
-	c.updatePreview("inertia", c.Inertia)
-	c.updateURLPath("project_id", c.ProjectId)
-	c.updateURLQuery("affiliation", c.Affiliation)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/projects/:project_id/collaborators")
+	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdateURLPath("project_id", c.ProjectId)
+	c.UpdateURLQuery("affiliation", c.Affiliation)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ProjectsReviewUserPermissionLevelCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Inertia   bool   "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.inertia-preview+json\n\n```\""
 	ProjectId int64  `required:"" name:"project_id"`
 	Username  string `required:"" name:"username"`
 }
 
 func (c *ProjectsReviewUserPermissionLevelCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/projects/:project_id/collaborators/:username/permission"
-	c.updatePreview("inertia", c.Inertia)
-	c.updateURLPath("project_id", c.ProjectId)
-	c.updateURLPath("username", c.Username)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/projects/:project_id/collaborators/:username/permission")
+	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdateURLPath("project_id", c.ProjectId)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("GET")
 }
 
 type ProjectsAddCollaboratorCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Inertia    bool   "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.inertia-preview+json\n\n```\""
 	ProjectId  int64  `required:"" name:"project_id"`
 	Username   string `required:"" name:"username"`
@@ -325,33 +327,33 @@ type ProjectsAddCollaboratorCmd struct {
 }
 
 func (c *ProjectsAddCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/projects/:project_id/collaborators/:username"
-	c.updatePreview("inertia", c.Inertia)
-	c.updateURLPath("project_id", c.ProjectId)
-	c.updateURLPath("username", c.Username)
-	c.updateBody("permission", c.Permission)
-	return c.doRequest("PUT")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/projects/:project_id/collaborators/:username")
+	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdateURLPath("project_id", c.ProjectId)
+	c.UpdateURLPath("username", c.Username)
+	c.UpdateBody("permission", c.Permission)
+	return c.DoRequest("PUT")
 }
 
 type ProjectsRemoveCollaboratorCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Inertia   bool   "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.inertia-preview+json\n\n```\""
 	ProjectId int64  `required:"" name:"project_id"`
 	Username  string `required:"" name:"username"`
 }
 
 func (c *ProjectsRemoveCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/projects/:project_id/collaborators/:username"
-	c.updatePreview("inertia", c.Inertia)
-	c.updateURLPath("project_id", c.ProjectId)
-	c.updateURLPath("username", c.Username)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/projects/:project_id/collaborators/:username")
+	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdateURLPath("project_id", c.ProjectId)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("DELETE")
 }
 
 type ProjectsListColumnsCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Inertia   bool  "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.inertia-preview+json\n\n```\""
 	ProjectId int64 `required:"" name:"project_id"`
 	PerPage   int64 `name:"per_page" help:"Results per page (max 100)"`
@@ -359,87 +361,87 @@ type ProjectsListColumnsCmd struct {
 }
 
 func (c *ProjectsListColumnsCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/projects/:project_id/columns"
-	c.updatePreview("inertia", c.Inertia)
-	c.updateURLPath("project_id", c.ProjectId)
-	c.updateURLQuery("per_page", c.PerPage)
-	c.updateURLQuery("page", c.Page)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/projects/:project_id/columns")
+	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdateURLPath("project_id", c.ProjectId)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
 }
 
 type ProjectsGetColumnCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Inertia  bool  "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.inertia-preview+json\n\n```\""
 	ColumnId int64 `required:"" name:"column_id"`
 }
 
 func (c *ProjectsGetColumnCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/projects/columns/:column_id"
-	c.updatePreview("inertia", c.Inertia)
-	c.updateURLPath("column_id", c.ColumnId)
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/projects/columns/:column_id")
+	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdateURLPath("column_id", c.ColumnId)
+	return c.DoRequest("GET")
 }
 
 type ProjectsCreateColumnCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Inertia   bool   "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.inertia-preview+json\n\n```\""
 	ProjectId int64  `required:"" name:"project_id"`
 	Name      string `required:"" name:"name" help:"The name of the column."`
 }
 
 func (c *ProjectsCreateColumnCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/projects/:project_id/columns"
-	c.updatePreview("inertia", c.Inertia)
-	c.updateURLPath("project_id", c.ProjectId)
-	c.updateBody("name", c.Name)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/projects/:project_id/columns")
+	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdateURLPath("project_id", c.ProjectId)
+	c.UpdateBody("name", c.Name)
+	return c.DoRequest("POST")
 }
 
 type ProjectsUpdateColumnCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Inertia  bool   "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.inertia-preview+json\n\n```\""
 	ColumnId int64  `required:"" name:"column_id"`
 	Name     string `required:"" name:"name" help:"The new name of the column."`
 }
 
 func (c *ProjectsUpdateColumnCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/projects/columns/:column_id"
-	c.updatePreview("inertia", c.Inertia)
-	c.updateURLPath("column_id", c.ColumnId)
-	c.updateBody("name", c.Name)
-	return c.doRequest("PATCH")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/projects/columns/:column_id")
+	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdateURLPath("column_id", c.ColumnId)
+	c.UpdateBody("name", c.Name)
+	return c.DoRequest("PATCH")
 }
 
 type ProjectsDeleteColumnCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Inertia  bool  "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.inertia-preview+json\n\n```\""
 	ColumnId int64 `required:"" name:"column_id"`
 }
 
 func (c *ProjectsDeleteColumnCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/projects/columns/:column_id"
-	c.updatePreview("inertia", c.Inertia)
-	c.updateURLPath("column_id", c.ColumnId)
-	return c.doRequest("DELETE")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/projects/columns/:column_id")
+	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdateURLPath("column_id", c.ColumnId)
+	return c.DoRequest("DELETE")
 }
 
 type ProjectsMoveColumnCmd struct {
-	baseCmd
+	internal.BaseCmd
 	Inertia  bool   "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.inertia-preview+json\n\n```\""
 	ColumnId int64  `required:"" name:"column_id"`
 	Position string "required:\"\" name:\"position\" help:\"Can be one of `first`, `last`, or `after:<column_id>`, where `<column_id>` is the `id` value of a column in the same project.\""
 }
 
 func (c *ProjectsMoveColumnCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/projects/columns/:column_id/moves"
-	c.updatePreview("inertia", c.Inertia)
-	c.updateURLPath("column_id", c.ColumnId)
-	c.updateBody("position", c.Position)
-	return c.doRequest("POST")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/projects/columns/:column_id/moves")
+	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdateURLPath("column_id", c.ColumnId)
+	c.UpdateBody("position", c.Position)
+	return c.DoRequest("POST")
 }

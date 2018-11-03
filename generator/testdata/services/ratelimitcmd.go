@@ -2,16 +2,18 @@
 
 package services
 
+import "github.com/octo-cli/octo-cli/internal"
+
 type RateLimitCmd struct {
 	Get RateLimitGetCmd `cmd:"" help:"Get your current rate limit status"`
 }
 
 type RateLimitGetCmd struct {
-	baseCmd
+	internal.BaseCmd
 }
 
 func (c *RateLimitGetCmd) Run(isValueSetMap map[string]bool) error {
-	c.isValueSetMap = isValueSetMap
-	c.url.Path = "/rate_limit"
-	return c.doRequest("GET")
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/rate_limit")
+	return c.DoRequest("GET")
 }
