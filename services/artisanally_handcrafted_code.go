@@ -15,8 +15,17 @@ import (
 	"strings"
 )
 
-var stdout io.Writer = os.Stdout
-var stderr io.Writer = os.Stderr
+// Stdout is where to write output
+var Stdout io.Writer = os.Stdout
+
+// Stderr is where to write error output
+var Stderr io.Writer = os.Stderr
+
+// TransportWrapper is a wrapper for the http transport that we use for go-vcr tests
+var TransportWrapper interface {
+	SetTransport(t http.RoundTripper)
+	http.RoundTripper
+}
 
 type baseCmd struct {
 	isValueSetMap map[string]bool
@@ -107,16 +116,11 @@ func (c *baseCmd) newRequest(method string) (*http.Request, error) {
 	return req, nil
 }
 
-var transportWrapper interface {
-	SetTransport(t http.RoundTripper)
-	http.RoundTripper
-}
-
 func (c *baseCmd) httpClient() *http.Client {
 	tc := oauth2.NewClient(context.Background(), oauth2.StaticTokenSource(&oauth2.Token{AccessToken: c.Token}))
-	if transportWrapper != nil {
-		transportWrapper.SetTransport(tc.Transport)
-		tc.Transport = transportWrapper
+	if TransportWrapper != nil {
+		TransportWrapper.SetTransport(tc.Transport)
+		tc.Transport = TransportWrapper
 	}
 	return tc
 }
@@ -132,5 +136,5 @@ func (c *baseCmd) doRequest(method string) error {
 		return err
 	}
 
-	return internal.OutputResult(resp, c.RawOutput, c.Format, stdout)
+	return internal.OutputResult(resp, c.RawOutput, c.Format, Stdout)
 }
