@@ -28,7 +28,7 @@ var (
 	}
 )
 
-// BaseCmd is included in all command structs in services
+// BaseCmd is included in all command structs in generated
 type BaseCmd struct {
 	isValueSetMap map[string]bool
 	url           url.URL

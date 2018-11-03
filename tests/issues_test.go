@@ -2,14 +2,14 @@ package tests
 
 import (
 	"encoding/json"
-	"github.com/octo-cli/octo-cli/services"
+	"github.com/octo-cli/octo-cli/generated"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestIssues(t *testing.T) {
 	t.Run("Create", func(t *testing.T) {
-		stdout, stderr, err := testCmdLine(t, "test_issues_create", &services.IssuesCmd{},
+		stdout, stderr, err := testCmdLine(t, "test_issues_create", &generated.IssuesCmd{},
 			`create`,
 			`--owner=octo-cli-testorg`,
 			`--repo=test-create-issue`,

@@ -18,7 +18,7 @@ type (
 	genCli struct {
 		Run            genCliRun            `cmd:"" help:"generate production code"`
 		UpdateRoutes   genCliUpdateRoutes   `cmd:"" help:"update routes.json with the latest"`
-		UpdateTestdata genCliUpdateTestdata `cmd:"" help:"updates routes.json and services in generator/testdata"`
+		UpdateTestdata genCliUpdateTestdata `cmd:"" help:"updates routes.json and generated in generator/testdata"`
 	}
 
 	genCliUpdateRoutes struct {
@@ -28,7 +28,7 @@ type (
 
 	genCliRun struct {
 		RoutesPath string `type:"existingfile" default:"routes.json"`
-		OutputPath string `type:"existingdir" default:"./services"`
+		OutputPath string `type:"existingdir" default:"./generated"`
 		Verify     bool   `help:"Verify a new run won't change anything"`
 	}
 
@@ -131,7 +131,7 @@ func (k *genCliUpdateTestdata) Run() error {
 		return err
 	}
 
-	Generate(routesPath, "generator/testdata/services")
+	Generate(routesPath, "generator/testdata/generated")
 
 	return errors.Wrap(err, "")
 }
