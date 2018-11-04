@@ -13,30 +13,31 @@ interactions:
     url: https://api.github.com/repos/octo-cli-testorg/test-create-issue/issues
     method: POST
   response:
-    body: '{"url":"https://api.github.com/repos/octo-cli-testorg/test-create-issue/issues/6","repository_url":"https://api.github.com/repos/octo-cli-testorg/test-create-issue","labels_url":"https://api.github.com/repos/octo-cli-testorg/test-create-issue/issues/6/labels{/name}","comments_url":"https://api.github.com/repos/octo-cli-testorg/test-create-issue/issues/6/comments","events_url":"https://api.github.com/repos/octo-cli-testorg/test-create-issue/issues/6/events","html_url":"https://github.com/octo-cli-testorg/test-create-issue/issues/6","id":375219483,"node_id":"MDU6SXNzdWUzNzUyMTk0ODM=","number":6,"title":"test
+    body: '{"url":"https://api.github.com/repos/octo-cli-testorg/test-create-issue/issues/11","repository_url":"https://api.github.com/repos/octo-cli-testorg/test-create-issue","labels_url":"https://api.github.com/repos/octo-cli-testorg/test-create-issue/issues/11/labels{/name}","comments_url":"https://api.github.com/repos/octo-cli-testorg/test-create-issue/issues/11/comments","events_url":"https://api.github.com/repos/octo-cli-testorg/test-create-issue/issues/11/events","html_url":"https://github.com/octo-cli-testorg/test-create-issue/issues/11","id":377189344,"node_id":"MDU6SXNzdWUzNzcxODkzNDQ=","number":11,"title":"test
       this","user":{"login":"octo-cli-testuser","id":44212809,"node_id":"MDQ6VXNlcjQ0MjEyODA5","avatar_url":"https://avatars0.githubusercontent.com/u/44212809?v=4","gravatar_id":"","url":"https://api.github.com/users/octo-cli-testuser","html_url":"https://github.com/octo-cli-testuser","followers_url":"https://api.github.com/users/octo-cli-testuser/followers","following_url":"https://api.github.com/users/octo-cli-testuser/following{/other_user}","gists_url":"https://api.github.com/users/octo-cli-testuser/gists{/gist_id}","starred_url":"https://api.github.com/users/octo-cli-testuser/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/octo-cli-testuser/subscriptions","organizations_url":"https://api.github.com/users/octo-cli-testuser/orgs","repos_url":"https://api.github.com/users/octo-cli-testuser/repos","events_url":"https://api.github.com/users/octo-cli-testuser/events{/privacy}","received_events_url":"https://api.github.com/users/octo-cli-testuser/received_events","type":"User","site_admin":false},"labels":[{"id":1093660620,"node_id":"MDU6TGFiZWwxMDkzNjYwNjIw","url":"https://api.github.com/repos/octo-cli-testorg/test-create-issue/labels/label1","name":"label1","color":"ededed","default":false},{"id":1093660621,"node_id":"MDU6TGFiZWwxMDkzNjYwNjIx","url":"https://api.github.com/repos/octo-cli-testorg/test-create-issue/labels/label2","name":"label2","color":"ededed","default":false}],"state":"open","locked":false,"assignee":{"login":"octo-cli-testuser","id":44212809,"node_id":"MDQ6VXNlcjQ0MjEyODA5","avatar_url":"https://avatars0.githubusercontent.com/u/44212809?v=4","gravatar_id":"","url":"https://api.github.com/users/octo-cli-testuser","html_url":"https://github.com/octo-cli-testuser","followers_url":"https://api.github.com/users/octo-cli-testuser/followers","following_url":"https://api.github.com/users/octo-cli-testuser/following{/other_user}","gists_url":"https://api.github.com/users/octo-cli-testuser/gists{/gist_id}","starred_url":"https://api.github.com/users/octo-cli-testuser/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/octo-cli-testuser/subscriptions","organizations_url":"https://api.github.com/users/octo-cli-testuser/orgs","repos_url":"https://api.github.com/users/octo-cli-testuser/repos","events_url":"https://api.github.com/users/octo-cli-testuser/events{/privacy}","received_events_url":"https://api.github.com/users/octo-cli-testuser/received_events","type":"User","site_admin":false},"assignees":[{"login":"octo-cli-testuser","id":44212809,"node_id":"MDQ6VXNlcjQ0MjEyODA5","avatar_url":"https://avatars0.githubusercontent.com/u/44212809?v=4","gravatar_id":"","url":"https://api.github.com/users/octo-cli-testuser","html_url":"https://github.com/octo-cli-testuser","followers_url":"https://api.github.com/users/octo-cli-testuser/followers","following_url":"https://api.github.com/users/octo-cli-testuser/following{/other_user}","gists_url":"https://api.github.com/users/octo-cli-testuser/gists{/gist_id}","starred_url":"https://api.github.com/users/octo-cli-testuser/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/octo-cli-testuser/subscriptions","organizations_url":"https://api.github.com/users/octo-cli-testuser/orgs","repos_url":"https://api.github.com/users/octo-cli-testuser/repos","events_url":"https://api.github.com/users/octo-cli-testuser/events{/privacy}","received_events_url":"https://api.github.com/users/octo-cli-testuser/received_events","type":"User","site_admin":false}],"milestone":{"url":"https://api.github.com/repos/octo-cli-testorg/test-create-issue/milestones/1","html_url":"https://github.com/octo-cli-testorg/test-create-issue/milestone/1","labels_url":"https://api.github.com/repos/octo-cli-testorg/test-create-issue/milestones/1/labels","id":3744381,"node_id":"MDk6TWlsZXN0b25lMzc0NDM4MQ==","number":1,"title":"first","description":"first
-      milestone","creator":{"login":"octo-cli-testuser","id":44212809,"node_id":"MDQ6VXNlcjQ0MjEyODA5","avatar_url":"https://avatars0.githubusercontent.com/u/44212809?v=4","gravatar_id":"","url":"https://api.github.com/users/octo-cli-testuser","html_url":"https://github.com/octo-cli-testuser","followers_url":"https://api.github.com/users/octo-cli-testuser/followers","following_url":"https://api.github.com/users/octo-cli-testuser/following{/other_user}","gists_url":"https://api.github.com/users/octo-cli-testuser/gists{/gist_id}","starred_url":"https://api.github.com/users/octo-cli-testuser/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/go-github-cli-testuser/subscriptions","organizations_url":"https://api.github.com/users/go-github-cli-testuser/orgs","repos_url":"https://api.github.com/users/go-github-cli-testuser/repos","events_url":"https://api.github.com/users/go-github-cli-testuser/events{/privacy}","received_events_url":"https://api.github.com/users/go-github-cli-testuser/received_events","type":"User","site_admin":false},"open_issues":6,"closed_issues":0,"state":"open","created_at":"2018-10-16T21:27:27Z","updated_at":"2018-10-29T21:14:22Z","due_on":"2036-01-01T08:00:00Z","closed_at":null},"comments":0,"created_at":"2018-10-29T21:14:22Z","updated_at":"2018-10-29T21:14:22Z","closed_at":null,"author_association":"MEMBER","body":"test
+      milestone","creator":{"login":"octo-cli-testuser","id":44212809,"node_id":"MDQ6VXNlcjQ0MjEyODA5","avatar_url":"https://avatars0.githubusercontent.com/u/44212809?v=4","gravatar_id":"","url":"https://api.github.com/users/octo-cli-testuser","html_url":"https://github.com/octo-cli-testuser","followers_url":"https://api.github.com/users/octo-cli-testuser/followers","following_url":"https://api.github.com/users/octo-cli-testuser/following{/other_user}","gists_url":"https://api.github.com/users/octo-cli-testuser/gists{/gist_id}","starred_url":"https://api.github.com/users/octo-cli-testuser/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/octo-cli-testuser/subscriptions","organizations_url":"https://api.github.com/users/octo-cli-testuser/orgs","repos_url":"https://api.github.com/users/octo-cli-testuser/repos","events_url":"https://api.github.com/users/octo-cli-testuser/events{/privacy}","received_events_url":"https://api.github.com/users/octo-cli-testuser/received_events","type":"User","site_admin":false},"open_issues":11,"closed_issues":0,"state":"open","created_at":"2018-10-16T21:27:27Z","updated_at":"2018-11-04T20:08:45Z","due_on":"2036-01-01T08:00:00Z","closed_at":null},"comments":0,"created_at":"2018-11-04T20:08:45Z","updated_at":"2018-11-04T20:08:46Z","closed_at":null,"author_association":"MEMBER","body":"test
       this body","closed_by":null}'
     headers:
       Access-Control-Allow-Origin:
       - '*'
       Access-Control-Expose-Headers:
-      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
-        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval,
+        X-GitHub-Media-Type
       Cache-Control:
       - private, max-age=60, s-maxage=60
       Content-Length:
-      - "6179"
+      - "5891"
       Content-Security-Policy:
       - default-src 'none'
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 29 Oct 2018 21:14:22 GMT
+      - Sun, 04 Nov 2018 20:08:46 GMT
       Etag:
-      - '"15a65873267960eb7b8d3ea3c81df92f"'
+      - '"68486c259f2108166beb9d881c67458c"'
       Location:
-      - https://api.github.com/repos/go-github-cli-testorg/test-create-issue/issues/6
+      - https://api.github.com/repos/octo-cli-testorg/test-create-issue/issues/11
       Referrer-Policy:
       - origin-when-cross-origin, strict-origin-when-cross-origin
       Server:
@@ -56,16 +57,16 @@ interactions:
       X-Github-Media-Type:
       - github.v3; format=json
       X-Github-Request-Id:
-      - 87C9:7E8C:37C85:83E69:5BD7782D
+      - 918C:1A3F:16CCE42:2DCA72C:5BDF51CD
       X-Oauth-Scopes:
       - admin:gpg_key, admin:org, admin:org_hook, admin:public_key, admin:repo_hook,
         delete_repo, gist, notifications, repo, user, write:discussion
       X-Ratelimit-Limit:
       - "5000"
       X-Ratelimit-Remaining:
-      - "4996"
+      - "4994"
       X-Ratelimit-Reset:
-      - "1540848229"
+      - "1541362786"
       X-Xss-Protection:
       - 1; mode=block
     status: 201 Created
