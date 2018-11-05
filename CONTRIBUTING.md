@@ -51,7 +51,7 @@ pieces.
 Generator is not well tested. Tests consist generating new commands and
 checking whether they match the expected output. Unit tests are needed here.
 
-##### `./generator/testdata`
+### `./generator/testdata`
 As you probably guessed this is test data for generator's few tests. This
 should only be modified by running `./script/update-testdata`.
 
