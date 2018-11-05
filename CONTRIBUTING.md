@@ -24,6 +24,22 @@ Octo-cli is using [Scripts to Rule Them All](https://githubengineering.com/scrip
 - `script/update-routes` - updates `./routes.json` with the latest from https://octokit.github.io/routes/index.json
 - `script/update-testdata` - copies `./routes.json` to `./generator/testdata/routes.json` and runs generator to regenerate `./generator/testdata/generated`
 
+## Issues before PRs
+
+Please create issues to discuss enhancements before spending any significant
+time writing code. This project has a very specific purpose, and pull
+requests that don't move that forward will be rejected. We don't want to
+say no to a PR that you have spent hours on because it doesn't fit the project's
+vision. Please don't make us do that.
+
+## Questions and Help
+
+If you have questions or get stuck, you can create an issue here asking
+for clarification. You can also ask on the [#octo-cli](https://invite.slack.golangbridge.org/)
+channel on [gophers slack](https://invite.slack.golangbridge.org/). I
+created that channel right before typing this, so if you act fast, you
+may just be first post.
+
 ## Project structure
 
 Let's start with what this project is. Octo-cli is a command-line interface
