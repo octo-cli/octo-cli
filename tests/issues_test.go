@@ -3,7 +3,7 @@ package tests
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/octo-cli/octo-cli/generated"
+	"github.com/octo-cli/octo-cli/internal/generated"
 	"github.com/stretchr/testify/assert"
 	"os"
 	"testing"
