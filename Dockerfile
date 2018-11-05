@@ -12,6 +12,6 @@ RUN script/build
 # Package
 FROM alpine
 
-COPY --from=octo-cli-build-env /go/src/github.com/octo-cli/octo-cli/bin/octo-cli /bin/octo-cli
+COPY --from=octo-cli-build-env /go/src/github.com/octo-cli/octo-cli/bin/octo /bin/octo
 RUN apk add --no-cache ca-certificates jq
-ENTRYPOINT ["octo-cli"]
+ENTRYPOINT ["octo"]
