@@ -9,7 +9,7 @@ fail() {
   EXITCODE=1
 }
 echo "running script/test"
-script/test || fail
+script/test -race || fail
 
 echo "running script/golint"
 script/golint || fail
