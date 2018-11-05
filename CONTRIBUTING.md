@@ -33,7 +33,7 @@ structure.
 
 ### `./routes.json`
 `routes.json` is what we download from [Octokit routes](https://octokit.github.io/routes/).
-It is json that describes all the REST endpoints covered in [GitHub'sdocumentation](https://developer.github.com/v3/).
+It is json that describes all the REST endpoints covered in [GitHub's documentation](https://developer.github.com/v3/).
 Updating routes.json will eventually be automated. Until then, only trusted
 octo-cli developers can update routes.json. PRs with changes to routes.json
 will be politely rejected.
