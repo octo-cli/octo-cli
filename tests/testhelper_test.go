@@ -5,7 +5,7 @@ import (
 	"github.com/alecthomas/kong"
 	"github.com/dnaeon/go-vcr/cassette"
 	"github.com/dnaeon/go-vcr/recorder"
-	"github.com/octo-cli/octo-cli/generated"
+	"github.com/octo-cli/octo-cli/internal/generated"
 	"github.com/octo-cli/octo-cli/internal"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/alecthomas/kong"
-	"github.com/octo-cli/octo-cli/generated"
+	"github.com/octo-cli/octo-cli/internal/generated"
 )
 
 var version = "development"

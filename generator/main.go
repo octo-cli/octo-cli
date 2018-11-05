@@ -28,7 +28,7 @@ type (
 
 	genCliRun struct {
 		RoutesPath string `type:"existingfile" default:"routes.json"`
-		OutputPath string `type:"existingdir" default:"./generated"`
+		OutputPath string `type:"existingdir" default:"./internal/generated"`
 		Verify     bool   `help:"Verify a new run won't change anything"`
 	}
 
