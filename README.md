@@ -167,11 +167,13 @@ $ octo issues get --owner octocat --repo Hello-World --number 7 \
 This only shows the required flags for each command.  You can find all available
 flags with the full command plus --help (e.g. `octo orgs edit --help` )
 
+<!--- START HELP OUTPUT --->
 ```
 Usage: octo <command>
 
 Flags:
-  --help    Show context-sensitive help.
+  --help       Show context-sensitive help.
+  --version
 
 Commands:
   activity list-public-events --token=STRING
@@ -1598,6 +1600,7 @@ Commands:
   users delete-gpg-key --token=STRING --gpg_key_id=INT-64
     Delete a GPG key
 
-Run "octo-cli <command> --help" for more information on a command.
-```
+Run "octo <command> --help" for more information on a command.
 
+```
+<!--- END HELP OUTPUT --->

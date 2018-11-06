@@ -1,0 +1,24 @@
+#!/bin/sh
+
+set -e
+
+cd "$(dirname "$0")/.."
+
+README_PATH="${README_PATH:-./README.md}"
+
+if [ "--verify" = "$1" ]; then
+  TMPFILE="$(mktemp)"
+  rm "$TMPFILE"
+  cp ./README.md "$TMPFILE"
+  README_PATH="$TMPFILE" script/update-readme
+  diffs="$(diff "$TMPFILE" "$README_PATH" || true)"
+  if [ -n "$diffs" ]; then
+    echo "$diffs"
+    exit 1
+  fi
+  rm "$TMPFILE"
+else
+  script/build
+  newhelp="$(bin/octo --help 2>/dev/null|| true)"
+  echo "$newhelp" | go run ./generator update-readme-help --readme-path "$README_PATH"
+fi

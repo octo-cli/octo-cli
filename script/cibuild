@@ -20,4 +20,7 @@ script/lint || fail
 echo "script/generate --verify"
 script/generate --verify  || fail
 
+echo "script/update-readme --verify"
+script/update-readme --verify || fail
+
 exit $EXITCODE
