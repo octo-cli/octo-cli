@@ -10,6 +10,15 @@ for scripting.
 
 ## Installation
 
+#### Homebrew
+
+To install with [homebrew](https://brew.sh/):
+
+```
+brew tap octo-cli/octo
+brew install octo
+```
+
 #### The easy and overly trusting way
 
 Do you trust me? Do you even know me? Do you trust me anyway? Do you also
@@ -36,15 +45,6 @@ on your system you can install from source cloning this repo and running
 `go install github.com/octo-cli/octo-cli`. This will install `octo-cli`
 for you. Note that the binary will be named `octo-cli` instead of `octo`.
 You can rename it if you want.
-
-#### Homebrew
-
-To install with [homebrew](https://brew.sh/):
-
-```
-brew tap octo-cli/octo
-brew install octo
-```
 
 #### Scoop and Snapcraft
 
