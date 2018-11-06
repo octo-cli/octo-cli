@@ -1,14 +1,42 @@
 # octo-cli
 
-`octo-cli` is a cli client for GitHub's REST API.  It is generated
-by inspecting https://octokit.github.io/routes/.
+`octo-cli` is a command line client for GitHub's REST API. It is intended to make
+it easier to interact with GitHub in shell scripts. In most cases, it should
+be more convenient than curl and more scriptable than [hub](https://hub.github.com/).
 
-See ./generator for more on how it is generated.
+If you are looking for a command-line client to use interactively, please
+try [hub](https://hub.github.com/) first. `octo-cli` is primarily intended
+for scripting.
 
-## Work In Progress
+## Installation
 
- octo-cli is a work in progress.  Use it with
-caution.
+#### The easy and overly trusting way
+
+Do you trust me? Do you even know me? Do you trust me anyway? Do you also
+happen to have curl available on your system? I may have the answer for you.
+
+Just run the following command to download octo to your current directory:
+
+```
+curl https://raw.githubusercontent.com/octo-cli/octo-cli/master/download.sh | sh
+```
+
+#### The slightly harder and slightly less trusting way
+
+Go to the [latest release](https://github.com/octo-cli/octo-cli/releases/latest), download
+the archive for your operating system and architecture (if you don't know your
+architecture it's probably `x86_64`). Extract the archive using `tar -xzf` or
+equivalent.
+
+#### The smart way
+
+I get it. You don't trust me. I wouldn't trust me either. If you have golang
+on your system you can install from source cloning this repo and running
+`script/build`.  This will create `bin/octo`.  You could also run
+`go install github.com/octo-cli/octo-cli`. This will install `octo-cli`
+for you. Note that the binary will be named `octo-cli` instead of `octo`.
+You can rename it if you want.
+
 
 ## Usage
 
