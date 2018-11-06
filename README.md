@@ -37,9 +37,18 @@ on your system you can install from source cloning this repo and running
 for you. Note that the binary will be named `octo-cli` instead of `octo`.
 You can rename it if you want.
 
-#### Homebrew, Scoop and Snapcraft
+#### Homebrew
 
-Wouldn't it be cool if you could install with homebrew, scoop or snapcraft?
+To install with homebrew:
+
+```
+brew tap octo-cli/octo
+brew install octo
+```
+
+#### Scoop and Snapcraft
+
+Wouldn't it be cool if you could install with scoop or snapcraft?
 I think so, but haven't spent the time to set this up yet. If you have the
 know-how and time to spare, we could [use your help](https://github.com/octo-cli/octo-cli/issues/45).
 
