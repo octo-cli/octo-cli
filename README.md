@@ -1,11 +1,11 @@
 # octo-cli
 
-`octo-cli` is a command line client for GitHub's REST API. It is intended to make
+Octo-cli is a command line client for GitHub's REST API. It is intended to make
 it easier to interact with GitHub in shell scripts. In most cases, it should
 be more convenient than curl and more scriptable than [hub](https://hub.github.com/).
 
 If you are looking for a command-line client to use interactively, please
-try [hub](https://hub.github.com/) first. `octo-cli` is primarily intended
+try [hub](https://hub.github.com/) first. Octo-cli is primarily intended
 for scripting.
 
 ## Installation
@@ -28,7 +28,7 @@ the archive for your operating system and architecture (if you don't know your
 architecture it's probably `x86_64`). Extract the archive using `tar -xzf` or
 equivalent.
 
-#### The smart way
+#### The least trusting way
 
 I get it. You don't trust me. I wouldn't trust me either. If you have golang
 on your system you can install from source cloning this repo and running
@@ -37,15 +37,129 @@ on your system you can install from source cloning this repo and running
 for you. Note that the binary will be named `octo-cli` instead of `octo`.
 You can rename it if you want.
 
+#### Homebrew, Scoop and Snapcraft
+
+Wouldn't it be cool if you could install with homebrew, scoop or snapcraft?
+I think so, but haven't spent the time to set this up yet. If you have the
+know-how and time to spare, we could [use your help](https://github.com/octo-cli/octo-cli/issues/45).
+
+## Versions
+
+Octo-cli's versions are semver-ish in the format of major.minor.patch-timestamp. The
+major.minor.patch part covers the hand-written code in this repo. The
+timestamp portion is when routes.json was last modified.
+
+There are issues with this versioning scheme, so it is likely to change
+in the near future.
+
+## Untested commands
+
+Because octo-cli is still a young project and the subcommands are generated,
+most of the commands haven't been tested or even run. If you run into a
+problem with a command, there is a good chance it's a problem with octo-cli,
+not just your usage. Please create an issue for any problems you run across.
+
+## Contributing
+
+See [CONTRIBUTING.md]
 
 ## Usage
+
+#### Credentials
 
 You can set the environment variable GITHUB_TOKEN instead of using a `--token` flag to
 avoid putting credentials on the command line.
 
+#### GitHub Enterprise
+
+Use octo-cli with GitHub enterprise by setting the environment variable
+GITHUB_API_BASE_URL. Something like `export GITHUB_API_BASE_URL=https://ghe.example.com/v3/api`.
+You can also set this with a flag on each command: `--api-base-url="https://ghe.example.com/v3/api"`.
+
+#### Formatting output
+
+By default, octo-cli outputs formatted json results with line-breaks and
+indenting. You can get unformatted json by adding the `--raw-output` flag.
+
+You can further format output using [go templates](https://golang.org/pkg/text/template/).
+This idea is taken from the docker cli, but not yet implemented as well.
+We don't have all the extra functions that docker provides...yet.
+
+If you have [jq](https://stedolan.github.io/jq/) available, you can format
+results with it. Especially if you aren't a go developer or aren't already
+familiar with go templates, you may be better off spending time learning
+jq syntax that you can use in other places instead of go templates which
+you may not use for anything else.
+
+#### Preview flags
+
+GitHub uses [preview flags](https://developer.github.com/v3/previews/) when
+introducing API changes. These require you to send a preview header when
+submitting a request. Octo-cli will not set these headers automatically.
+Instead it provides flags for you to enable the relevant previews for each
+command.
+
+The decision to not automatically set preview headers is intended to prevent
+users from unknowingly becoming reliant on APIs that are subject to change.
+
+#### Errors
+
+Octo-cli exits non-zero when it sees an http status >= 400. It does no
+error handling beyond this, and it hasn't been decided how we want to
+handle errors.
+
+#### Debugging
+
+There's not currently any way to make octo-cli output any debugging data.
+
+#### Examples
+
+###### Use GITHUB_TOKEN environment variable to set your credentials
+```
+$ octo users get-authenticated
+octo: error: missing flags: --token=STRING
+
+$ export GITHUB_TOKEN=yourpersonalaccesstokenhere
+$ octo users get-authenticated
+{
+  "avatar_url": "https://avatars3.githubusercontent.com/u/56260?v=4",
+...
+}
+```
+
+###### Get an issue
 
 ```
-Usage: octo-cli <command>
+$ octo issues get --owner octocat --repo Hello-World --number 7
+{
+  "assignee": null,
+...
+}
+```
+
+###### Get just the closer and title of an issue using --format
+
+```
+$ octo issues get --owner octocat --repo Hello-World --number 7 \
+> --format '{{.closed_by.login}} - {{.title}}'
+octocat - Hello World in all programming languages
+```
+
+###### Use a preview flag to see a preview flag
+```
+$ octo issues get --owner octocat --repo Hello-World --number 7 \
+> --squirrel-girl-preview \
+> --format {{.reactions.total_count}}
+1
+```
+
+#### Help output
+
+This only shows the required flags for each command.  You can find all available
+flags with the full command plus --help (e.g. `octo orgs edit --help` )
+
+```
+Usage: octo <command>
 
 Flags:
   --help    Show context-sensitive help.
