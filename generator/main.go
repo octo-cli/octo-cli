@@ -1,13 +1,16 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"github.com/alecthomas/kong"
 	"github.com/pkg/errors"
 	"io"
+	"io/ioutil"
 	"net/http"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strings"
 	"time"
 )
@@ -16,9 +19,10 @@ const routesTimestampFormat = "20060102T150405Z0700"
 
 type (
 	genCli struct {
-		Run            genCliRun            `cmd:"" help:"generate production code"`
-		UpdateRoutes   genCliUpdateRoutes   `cmd:"" help:"update routes.json with the latest"`
-		UpdateTestdata genCliUpdateTestdata `cmd:"" help:"updates routes.json and generated in generator/testdata"`
+		Run              genCliRun              `cmd:"" help:"generate production code"`
+		UpdateRoutes     genCliUpdateRoutes     `cmd:"" help:"update routes.json with the latest"`
+		UpdateTestdata   genCliUpdateTestdata   `cmd:"" help:"updates routes.json and generated in generator/testdata"`
+		UpdateReadmeHelp genCliUpdateReadmeHelp `cmd:"" help:"updates the help output section of README.md with whatever you pipe in here."`
 	}
 
 	genCliUpdateRoutes struct {
@@ -32,8 +36,49 @@ type (
 		Verify     bool   `help:"Verify a new run won't change anything"`
 	}
 
+	genCliUpdateReadmeHelp struct {
+		ReadmePath string `type:"existingfile" default:"README.md" help:"path to README.md"`
+	}
+
 	genCliUpdateTestdata struct{}
 )
+
+var readmeRegexp = regexp.MustCompile(`(?s:<!--- START HELP OUTPUT --->.*<!--- END HELP OUTPUT --->)`)
+
+func (k *genCliUpdateReadmeHelp) Run() error {
+	info, err := os.Stdin.Stat()
+	if err != nil {
+		return err
+	}
+
+	if info.Mode()&os.ModeCharDevice != 0 || info.Size() <= 0 {
+		fmt.Println("The command is intended to work with pipes.")
+		fmt.Println("Usage: fortune | gocowsay")
+		return errors.Errorf("generator update-readme-help is intended to work with pipes.\nUsage: echo \"whatever\" | generator update-readme-help")
+	}
+
+	reader := bufio.NewReader(os.Stdin)
+	var helpContent []rune
+
+	for {
+		input, _, err := reader.ReadRune()
+		if err != nil && err == io.EOF {
+			break
+		}
+		helpContent = append(helpContent, input)
+	}
+	newHelp := "<!--- START HELP OUTPUT --->\n```\n" +
+		string(helpContent) +
+		"\n```\n<!--- END HELP OUTPUT --->"
+
+	readmeBytes, err := ioutil.ReadFile(k.ReadmePath)
+	if err != nil {
+		return errors.Wrapf(err, "failed reading file %q", k.ReadmePath)
+	}
+	newReadmeContent := readmeRegexp.ReplaceAll(readmeBytes, []byte(newHelp))
+	err = ioutil.WriteFile(k.ReadmePath, newReadmeContent, 0644)
+	return errors.Wrapf(err, "failed writing file %q", k.ReadmePath)
+}
 
 func (k *genCliRun) Run() error {
 	if k.Verify {

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+set -e
+
+cd "$(dirname "$0")/.."
+script/build
+newhelp="$(bin/octo --help 2>/dev/null|| true)"
+echo "$newhelp" | go run ./generator update-readme-help
