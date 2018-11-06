@@ -8,4 +8,4 @@ notifications:
 before_script:
   - script/bootstrap
 script:
-  - ./script/lint
+  - ./script/cibuild

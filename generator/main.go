@@ -1,7 +1,7 @@
 package main
 
 import (
-	"bufio"
+	"bytes"
 	"fmt"
 	"github.com/alecthomas/kong"
 	"github.com/pkg/errors"
@@ -9,6 +9,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"regexp"
 	"strings"
@@ -38,6 +39,7 @@ type (
 
 	genCliUpdateReadmeHelp struct {
 		ReadmePath string `type:"existingfile" default:"README.md" help:"path to README.md"`
+		Verify     bool   `help:"don't write anything.  Just verify README.md is current"`
 	}
 
 	genCliUpdateTestdata struct{}
@@ -45,39 +47,48 @@ type (
 
 var readmeRegexp = regexp.MustCompile(`(?s:<!--- START HELP OUTPUT --->.*<!--- END HELP OUTPUT --->)`)
 
-func (k *genCliUpdateReadmeHelp) Run() error {
-	info, err := os.Stdin.Stat()
-	if err != nil {
-		return err
+func getHelpOutput() ([]byte, error) {
+	if _, err := os.Stat("routes.json"); err != nil {
+		return nil, errors.New("must be run from octo-cli root")
 	}
-
-	if info.Mode()&os.ModeCharDevice != 0 || info.Size() <= 0 {
-		fmt.Println("The command is intended to work with pipes.")
-		fmt.Println("Usage: fortune | gocowsay")
-		return errors.Errorf("generator update-readme-help is intended to work with pipes.\nUsage: echo \"whatever\" | generator update-readme-help")
-	}
-
-	reader := bufio.NewReader(os.Stdin)
-	var helpContent []rune
-
-	for {
-		input, _, err := reader.ReadRune()
-		if err != nil && err == io.EOF {
-			break
+	cmd := exec.Command("go", "run", ".", "--help")
+	helpOut, err := cmd.Output()
+	switch e := err.(type) {
+	case nil:
+	case *exec.ExitError:
+		if e.Error() != "exit status 1" {
+			return nil, err
 		}
-		helpContent = append(helpContent, input)
+	default:
+		return nil, err
 	}
-	newHelp := "<!--- START HELP OUTPUT --->\n```\n" +
-		string(helpContent) +
-		"\n```\n<!--- END HELP OUTPUT --->"
+	output := []byte("<!--- START HELP OUTPUT --->\n```\n")
+	output = append(output, helpOut...)
+	output = append(output, []byte("\n```\n<!--- END HELP OUTPUT --->")...)
+	return output, nil
+}
 
-	readmeBytes, err := ioutil.ReadFile(k.ReadmePath)
+func (k *genCliUpdateReadmeHelp) Run() error {
+	helpContent, err := getHelpOutput()
+	if err != nil {
+		return errors.Wrap(err, "failed getting help output")
+	}
+
+	oldReadmeContent, err := ioutil.ReadFile(k.ReadmePath)
 	if err != nil {
 		return errors.Wrapf(err, "failed reading file %q", k.ReadmePath)
 	}
-	newReadmeContent := readmeRegexp.ReplaceAll(readmeBytes, []byte(newHelp))
-	err = ioutil.WriteFile(k.ReadmePath, newReadmeContent, 0644)
-	return errors.Wrapf(err, "failed writing file %q", k.ReadmePath)
+	newReadmeContent := readmeRegexp.ReplaceAll(oldReadmeContent, helpContent)
+
+	if k.Verify {
+		if  !bytes.Equal(newReadmeContent, oldReadmeContent) {
+			err = errors.Errorf("%q is not current", k.ReadmePath)
+		}
+	} else {
+		err = ioutil.WriteFile(k.ReadmePath, newReadmeContent, 0644)
+		err = errors.Wrapf(err, "failed writing file %q", k.ReadmePath)
+	}
+	return err
 }
 
 func (k *genCliRun) Run() error {

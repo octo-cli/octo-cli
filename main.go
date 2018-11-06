@@ -13,7 +13,10 @@ type cli struct {
 }
 
 func main() {
-	k := kong.Parse(&cli{}, kong.Vars{"version": version})
+	k := kong.Parse(&cli{},
+		kong.Vars{"version": version},
+		kong.Name("octo"),
+	)
 	valueIsSetMap := map[string]bool{}
 	for _, flag := range k.Flags() {
 		valueIsSetMap[flag.Name] = flag.Set
