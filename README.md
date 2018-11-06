@@ -39,7 +39,7 @@ You can rename it if you want.
 
 #### Homebrew
 
-To install with homebrew:
+To install with [homebrew](https://brew.sh/):
 
 ```
 brew tap octo-cli/octo
