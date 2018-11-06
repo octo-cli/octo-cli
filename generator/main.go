@@ -52,8 +52,6 @@ func (k *genCliUpdateReadmeHelp) Run() error {
 	}
 
 	if info.Mode()&os.ModeCharDevice != 0 || info.Size() <= 0 {
-		fmt.Println("The command is intended to work with pipes.")
-		fmt.Println("Usage: fortune | gocowsay")
 		return errors.Errorf("generator update-readme-help is intended to work with pipes.\nUsage: echo \"whatever\" | generator update-readme-help")
 	}
 
