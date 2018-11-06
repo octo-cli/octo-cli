@@ -1,8 +1,0 @@
-#!/bin/sh
-
-set -e
-
-# Ensure we're always running from the project root
-cd "$(dirname "$0")/.."
-
-golint -set_exit_status $(go list ./... | grep -v "vendor")

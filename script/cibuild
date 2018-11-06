@@ -11,9 +11,6 @@ fail() {
 echo "running script/test"
 script/test -race || fail
 
-echo "running script/golint"
-script/golint || fail
-
 echo "running script/lint"
 script/lint || fail
 
