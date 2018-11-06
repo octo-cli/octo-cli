@@ -24,7 +24,7 @@ var paramTypes = map[string]string{
 
 func sortedRoutesMapKeys(mp map[string]Routes) []string {
 	var keys []string
-	for k, _ := range mp {
+	for k := range mp {
 		keys = append(keys, k)
 	}
 	sort.Strings(keys)
