@@ -5,7 +5,7 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type EmojisCmd struct {
-	Get EmojisGetCmd `cmd:"" help:"Get"`
+	Get EmojisGetCmd `cmd:"" help:"Get - https://developer.github.com/v3/emojis/#emojis"`
 }
 
 type EmojisGetCmd struct {

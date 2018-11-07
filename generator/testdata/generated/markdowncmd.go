@@ -5,8 +5,8 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type MarkdownCmd struct {
-	Render    MarkdownRenderCmd    `cmd:"" help:"Render an arbitrary Markdown document"`
-	RenderRaw MarkdownRenderRawCmd `cmd:"" help:"Render a Markdown document in raw mode"`
+	Render    MarkdownRenderCmd    `cmd:"" help:"Render an arbitrary Markdown document - https://developer.github.com/v3/markdown/#render-an-arbitrary-markdown-document"`
+	RenderRaw MarkdownRenderRawCmd `cmd:"" help:"Render a Markdown document in raw mode - https://developer.github.com/v3/markdown/#render-a-markdown-document-in-raw-mode"`
 }
 
 type MarkdownRenderCmd struct {

@@ -3,8 +3,6 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"github.com/alecthomas/kong"
-	"github.com/pkg/errors"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -14,6 +12,9 @@ import (
 	"regexp"
 	"strings"
 	"time"
+
+	"github.com/alecthomas/kong"
+	"github.com/pkg/errors"
 )
 
 const routesTimestampFormat = "20060102T150405Z0700"
@@ -81,7 +82,7 @@ func (k *genCliUpdateReadmeHelp) Run() error {
 	newReadmeContent := readmeRegexp.ReplaceAll(oldReadmeContent, helpContent)
 
 	if k.Verify {
-		if  !bytes.Equal(newReadmeContent, oldReadmeContent) {
+		if !bytes.Equal(newReadmeContent, oldReadmeContent) {
 			err = errors.Errorf("%q is not current", k.ReadmePath)
 		}
 	} else {

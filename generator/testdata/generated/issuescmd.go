@@ -5,45 +5,45 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type IssuesCmd struct {
-	List                     IssuesListCmd                     `cmd:"" help:"List all issues assigned to the authenticated user across all visible repositories including owned repositories, member repositories, and organization repositories"`
-	ListForAuthenticatedUser IssuesListForAuthenticatedUserCmd `cmd:"" help:"List all issues across owned and member repositories assigned to the authenticated user"`
-	ListForOrg               IssuesListForOrgCmd               `cmd:"" help:"List all issues for a given organization assigned to the authenticated user"`
-	ListForRepo              IssuesListForRepoCmd              `cmd:"" help:"List issues for a repository"`
-	Get                      IssuesGetCmd                      `cmd:"" help:"Get a single issue"`
-	Create                   IssuesCreateCmd                   `cmd:"" help:"Create an issue"`
-	Edit                     IssuesEditCmd                     `cmd:"" help:"Edit an issue"`
-	Lock                     IssuesLockCmd                     `cmd:"" help:"Lock an issue"`
-	Unlock                   IssuesUnlockCmd                   `cmd:"" help:"Unlock an issue"`
-	ListAssignees            IssuesListAssigneesCmd            `cmd:"" help:"List assignees"`
-	CheckAssignee            IssuesCheckAssigneeCmd            `cmd:"" help:"Check assignee"`
-	AddAssignees             IssuesAddAssigneesCmd             `cmd:"" help:"Add assignees to an issue"`
-	RemoveAssignees          IssuesRemoveAssigneesCmd          `cmd:"" help:"Remove assignees from an issue"`
-	ListComments             IssuesListCommentsCmd             `cmd:"" help:"List comments on an issue"`
-	ListCommentsForRepo      IssuesListCommentsForRepoCmd      `cmd:"" help:"List comments in a repository"`
-	GetComment               IssuesGetCommentCmd               `cmd:"" help:"Get a single comment"`
-	CreateComment            IssuesCreateCommentCmd            `cmd:"" help:"Create a comment"`
-	EditComment              IssuesEditCommentCmd              `cmd:"" help:"Edit a comment"`
-	DeleteComment            IssuesDeleteCommentCmd            `cmd:"" help:"Delete a comment"`
-	ListEvents               IssuesListEventsCmd               `cmd:"" help:"List events for an issue"`
-	ListEventsForRepo        IssuesListEventsForRepoCmd        `cmd:"" help:"List events for a repository"`
-	GetEvent                 IssuesGetEventCmd                 `cmd:"" help:"Get a single event"`
-	ListLabelsForRepo        IssuesListLabelsForRepoCmd        `cmd:"" help:"List all labels for this repository"`
-	GetLabel                 IssuesGetLabelCmd                 `cmd:"" help:"Get a single label"`
-	CreateLabel              IssuesCreateLabelCmd              `cmd:"" help:"Create a label"`
-	UpdateLabel              IssuesUpdateLabelCmd              `cmd:"" help:"Update a label"`
-	DeleteLabel              IssuesDeleteLabelCmd              `cmd:"" help:"Delete a label"`
-	ListLabelsOnIssue        IssuesListLabelsOnIssueCmd        `cmd:"" help:"List labels on an issue"`
-	AddLabels                IssuesAddLabelsCmd                `cmd:"" help:"Add labels to an issue"`
-	RemoveLabel              IssuesRemoveLabelCmd              `cmd:"" help:"Remove a label from an issue"`
-	ReplaceLabels            IssuesReplaceLabelsCmd            `cmd:"" help:"Replace all labels for an issue"`
-	RemoveLabels             IssuesRemoveLabelsCmd             `cmd:"" help:"Remove all labels from an issue"`
-	ListLabelsForMilestone   IssuesListLabelsForMilestoneCmd   `cmd:"" help:"Get labels for every issue in a milestone"`
-	ListMilestonesForRepo    IssuesListMilestonesForRepoCmd    `cmd:"" help:"List milestones for a repository"`
-	GetMilestone             IssuesGetMilestoneCmd             `cmd:"" help:"Get a single milestone"`
-	CreateMilestone          IssuesCreateMilestoneCmd          `cmd:"" help:"Create a milestone"`
-	UpdateMilestone          IssuesUpdateMilestoneCmd          `cmd:"" help:"Update a milestone"`
-	DeleteMilestone          IssuesDeleteMilestoneCmd          `cmd:"" help:"Delete a milestone"`
-	ListEventsForTimeline    IssuesListEventsForTimelineCmd    `cmd:"" help:"List events for an issue"`
+	List                     IssuesListCmd                     `cmd:"" help:"List all issues assigned to the authenticated user across all visible repositories including owned repositories, member repositories, and organization repositories - https://developer.github.com/v3/issues/#list-issues"`
+	ListForAuthenticatedUser IssuesListForAuthenticatedUserCmd `cmd:"" help:"List all issues across owned and member repositories assigned to the authenticated user - https://developer.github.com/v3/issues/#list-issues"`
+	ListForOrg               IssuesListForOrgCmd               `cmd:"" help:"List all issues for a given organization assigned to the authenticated user - https://developer.github.com/v3/issues/#list-issues"`
+	ListForRepo              IssuesListForRepoCmd              `cmd:"" help:"List issues for a repository - https://developer.github.com/v3/issues/#list-issues-for-a-repository"`
+	Get                      IssuesGetCmd                      `cmd:"" help:"Get a single issue - https://developer.github.com/v3/issues/#get-a-single-issue"`
+	Create                   IssuesCreateCmd                   `cmd:"" help:"Create an issue - https://developer.github.com/v3/issues/#create-an-issue"`
+	Edit                     IssuesEditCmd                     `cmd:"" help:"Edit an issue - https://developer.github.com/v3/issues/#edit-an-issue"`
+	Lock                     IssuesLockCmd                     `cmd:"" help:"Lock an issue - https://developer.github.com/v3/issues/#lock-an-issue"`
+	Unlock                   IssuesUnlockCmd                   `cmd:"" help:"Unlock an issue - https://developer.github.com/v3/issues/#unlock-an-issue"`
+	ListAssignees            IssuesListAssigneesCmd            `cmd:"" help:"List assignees - https://developer.github.com/v3/issues/assignees/#list-assignees"`
+	CheckAssignee            IssuesCheckAssigneeCmd            `cmd:"" help:"Check assignee - https://developer.github.com/v3/issues/assignees/#check-assignee"`
+	AddAssignees             IssuesAddAssigneesCmd             `cmd:"" help:"Add assignees to an issue - https://developer.github.com/v3/issues/assignees/#add-assignees-to-an-issue"`
+	RemoveAssignees          IssuesRemoveAssigneesCmd          `cmd:"" help:"Remove assignees from an issue - https://developer.github.com/v3/issues/assignees/#remove-assignees-from-an-issue"`
+	ListComments             IssuesListCommentsCmd             `cmd:"" help:"List comments on an issue - https://developer.github.com/v3/issues/comments/#list-comments-on-an-issue"`
+	ListCommentsForRepo      IssuesListCommentsForRepoCmd      `cmd:"" help:"List comments in a repository - https://developer.github.com/v3/issues/comments/#list-comments-in-a-repository"`
+	GetComment               IssuesGetCommentCmd               `cmd:"" help:"Get a single comment - https://developer.github.com/v3/issues/comments/#get-a-single-comment"`
+	CreateComment            IssuesCreateCommentCmd            `cmd:"" help:"Create a comment - https://developer.github.com/v3/issues/comments/#create-a-comment"`
+	EditComment              IssuesEditCommentCmd              `cmd:"" help:"Edit a comment - https://developer.github.com/v3/issues/comments/#edit-a-comment"`
+	DeleteComment            IssuesDeleteCommentCmd            `cmd:"" help:"Delete a comment - https://developer.github.com/v3/issues/comments/#delete-a-comment"`
+	ListEvents               IssuesListEventsCmd               `cmd:"" help:"List events for an issue - https://developer.github.com/v3/issues/events/#list-events-for-an-issue"`
+	ListEventsForRepo        IssuesListEventsForRepoCmd        `cmd:"" help:"List events for a repository - https://developer.github.com/v3/issues/events/#list-events-for-a-repository"`
+	GetEvent                 IssuesGetEventCmd                 `cmd:"" help:"Get a single event - https://developer.github.com/v3/issues/events/#get-a-single-event"`
+	ListLabelsForRepo        IssuesListLabelsForRepoCmd        `cmd:"" help:"List all labels for this repository - https://developer.github.com/v3/issues/labels/#list-all-labels-for-this-repository"`
+	GetLabel                 IssuesGetLabelCmd                 `cmd:"" help:"Get a single label - https://developer.github.com/v3/issues/labels/#get-a-single-label"`
+	CreateLabel              IssuesCreateLabelCmd              `cmd:"" help:"Create a label - https://developer.github.com/v3/issues/labels/#create-a-label"`
+	UpdateLabel              IssuesUpdateLabelCmd              `cmd:"" help:"Update a label - https://developer.github.com/v3/issues/labels/#update-a-label"`
+	DeleteLabel              IssuesDeleteLabelCmd              `cmd:"" help:"Delete a label - https://developer.github.com/v3/issues/labels/#delete-a-label"`
+	ListLabelsOnIssue        IssuesListLabelsOnIssueCmd        `cmd:"" help:"List labels on an issue - https://developer.github.com/v3/issues/labels/#list-labels-on-an-issue"`
+	AddLabels                IssuesAddLabelsCmd                `cmd:"" help:"Add labels to an issue - https://developer.github.com/v3/issues/labels/#add-labels-to-an-issue"`
+	RemoveLabel              IssuesRemoveLabelCmd              `cmd:"" help:"Remove a label from an issue - https://developer.github.com/v3/issues/labels/#remove-a-label-from-an-issue"`
+	ReplaceLabels            IssuesReplaceLabelsCmd            `cmd:"" help:"Replace all labels for an issue - https://developer.github.com/v3/issues/labels/#replace-all-labels-for-an-issue"`
+	RemoveLabels             IssuesRemoveLabelsCmd             `cmd:"" help:"Remove all labels from an issue - https://developer.github.com/v3/issues/labels/#remove-all-labels-from-an-issue"`
+	ListLabelsForMilestone   IssuesListLabelsForMilestoneCmd   `cmd:"" help:"Get labels for every issue in a milestone - https://developer.github.com/v3/issues/labels/#get-labels-for-every-issue-in-a-milestone"`
+	ListMilestonesForRepo    IssuesListMilestonesForRepoCmd    `cmd:"" help:"List milestones for a repository - https://developer.github.com/v3/issues/milestones/#list-milestones-for-a-repository"`
+	GetMilestone             IssuesGetMilestoneCmd             `cmd:"" help:"Get a single milestone - https://developer.github.com/v3/issues/milestones/#get-a-single-milestone"`
+	CreateMilestone          IssuesCreateMilestoneCmd          `cmd:"" help:"Create a milestone - https://developer.github.com/v3/issues/milestones/#create-a-milestone"`
+	UpdateMilestone          IssuesUpdateMilestoneCmd          `cmd:"" help:"Update a milestone - https://developer.github.com/v3/issues/milestones/#update-a-milestone"`
+	DeleteMilestone          IssuesDeleteMilestoneCmd          `cmd:"" help:"Delete a milestone - https://developer.github.com/v3/issues/milestones/#delete-a-milestone"`
+	ListEventsForTimeline    IssuesListEventsForTimelineCmd    `cmd:"" help:"List events for an issue - https://developer.github.com/v3/issues/timeline/#list-events-for-an-issue"`
 }
 
 type IssuesListCmd struct {

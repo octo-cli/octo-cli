@@ -5,38 +5,38 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type UsersCmd struct {
-	GetByUsername                     UsersGetByUsernameCmd                     `cmd:"" help:"Get a single user"`
-	GetAuthenticated                  UsersGetAuthenticatedCmd                  `cmd:"" help:"Get the authenticated user"`
-	UpdateAuthenticated               UsersUpdateAuthenticatedCmd               `cmd:"" help:"Update the authenticated user"`
-	GetContextForUser                 UsersGetContextForUserCmd                 `cmd:"" help:"Get contextual information about a user"`
-	List                              UsersListCmd                              `cmd:"" help:"Get all users"`
-	ListBlocked                       UsersListBlockedCmd                       `cmd:"" help:"List blocked users"`
-	CheckBlocked                      UsersCheckBlockedCmd                      `cmd:"" help:"Check whether you've blocked a user"`
-	Block                             UsersBlockCmd                             `cmd:"" help:"Block a user"`
-	Unblock                           UsersUnblockCmd                           `cmd:"" help:"Unblock a user"`
-	ListEmails                        UsersListEmailsCmd                        `cmd:"" help:"List email addresses for a user"`
-	ListPublicEmails                  UsersListPublicEmailsCmd                  `cmd:"" help:"List public email addresses for a user"`
-	AddEmails                         UsersAddEmailsCmd                         `cmd:"" help:"Add email address(es)"`
-	DeleteEmails                      UsersDeleteEmailsCmd                      `cmd:"" help:"Delete email address(es)"`
-	TogglePrimaryEmailVisibility      UsersTogglePrimaryEmailVisibilityCmd      `cmd:"" help:"Toggle primary email visibility"`
-	ListFollowersForUser              UsersListFollowersForUserCmd              `cmd:"" help:"List a user's followers"`
-	ListFollowersForAuthenticatedUser UsersListFollowersForAuthenticatedUserCmd `cmd:"" help:"List the authenticated user's followers"`
-	ListFollowingForUser              UsersListFollowingForUserCmd              `cmd:"" help:"List who a user is following"`
-	ListFollowingForAuthenticatedUser UsersListFollowingForAuthenticatedUserCmd `cmd:"" help:"List who the authenticated user is following"`
-	CheckFollowing                    UsersCheckFollowingCmd                    `cmd:"" help:"Check if you are following a user"`
-	CheckFollowingForUser             UsersCheckFollowingForUserCmd             `cmd:"" help:"Check if one user follows another"`
-	Follow                            UsersFollowCmd                            `cmd:"" help:"Follow a user"`
-	Unfollow                          UsersUnfollowCmd                          `cmd:"" help:"Unfollow a user"`
-	ListPublicKeysForUser             UsersListPublicKeysForUserCmd             `cmd:"" help:"List public keys for a user"`
-	ListPublicKeys                    UsersListPublicKeysCmd                    `cmd:"" help:"List your public keys"`
-	GetPublicKey                      UsersGetPublicKeyCmd                      `cmd:"" help:"Get a single public key"`
-	CreatePublicKey                   UsersCreatePublicKeyCmd                   `cmd:"" help:"Create a public key"`
-	DeletePublicKey                   UsersDeletePublicKeyCmd                   `cmd:"" help:"Delete a public key"`
-	ListGpgKeysForUser                UsersListGpgKeysForUserCmd                `cmd:"" help:"List GPG keys for a user"`
-	ListGpgKeys                       UsersListGpgKeysCmd                       `cmd:"" help:"List your GPG keys"`
-	GetGpgKey                         UsersGetGpgKeyCmd                         `cmd:"" help:"Get a single GPG key"`
-	CreateGpgKey                      UsersCreateGpgKeyCmd                      `cmd:"" help:"Create a GPG key"`
-	DeleteGpgKey                      UsersDeleteGpgKeyCmd                      `cmd:"" help:"Delete a GPG key"`
+	GetByUsername                     UsersGetByUsernameCmd                     `cmd:"" help:"Get a single user - https://developer.github.com/v3/users/#get-a-single-user"`
+	GetAuthenticated                  UsersGetAuthenticatedCmd                  `cmd:"" help:"Get the authenticated user - https://developer.github.com/v3/users/#get-the-authenticated-user"`
+	UpdateAuthenticated               UsersUpdateAuthenticatedCmd               `cmd:"" help:"Update the authenticated user - https://developer.github.com/v3/users/#update-the-authenticated-user"`
+	GetContextForUser                 UsersGetContextForUserCmd                 `cmd:"" help:"Get contextual information about a user - https://developer.github.com/v3/users/#get-contextual-information-about-a-user"`
+	List                              UsersListCmd                              `cmd:"" help:"Get all users - https://developer.github.com/v3/users/#get-all-users"`
+	ListBlocked                       UsersListBlockedCmd                       `cmd:"" help:"List blocked users - https://developer.github.com/v3/users/blocking/#list-blocked-users"`
+	CheckBlocked                      UsersCheckBlockedCmd                      `cmd:"" help:"Check whether you've blocked a user - https://developer.github.com/v3/users/blocking/#check-whether-youve-blocked-a-user"`
+	Block                             UsersBlockCmd                             `cmd:"" help:"Block a user - https://developer.github.com/v3/users/blocking/#block-a-user"`
+	Unblock                           UsersUnblockCmd                           `cmd:"" help:"Unblock a user - https://developer.github.com/v3/users/blocking/#unblock-a-user"`
+	ListEmails                        UsersListEmailsCmd                        `cmd:"" help:"List email addresses for a user - https://developer.github.com/v3/users/emails/#list-email-addresses-for-a-user"`
+	ListPublicEmails                  UsersListPublicEmailsCmd                  `cmd:"" help:"List public email addresses for a user - https://developer.github.com/v3/users/emails/#list-public-email-addresses-for-a-user"`
+	AddEmails                         UsersAddEmailsCmd                         `cmd:"" help:"Add email address(es) - https://developer.github.com/v3/users/emails/#add-email-addresses"`
+	DeleteEmails                      UsersDeleteEmailsCmd                      `cmd:"" help:"Delete email address(es) - https://developer.github.com/v3/users/emails/#delete-email-addresses"`
+	TogglePrimaryEmailVisibility      UsersTogglePrimaryEmailVisibilityCmd      `cmd:"" help:"Toggle primary email visibility - https://developer.github.com/v3/users/emails/#toggle-primary-email-visibility"`
+	ListFollowersForUser              UsersListFollowersForUserCmd              `cmd:"" help:"List a user's followers - https://developer.github.com/v3/users/followers/#list-followers-of-a-user"`
+	ListFollowersForAuthenticatedUser UsersListFollowersForAuthenticatedUserCmd `cmd:"" help:"List the authenticated user's followers - https://developer.github.com/v3/users/followers/#list-followers-of-a-user"`
+	ListFollowingForUser              UsersListFollowingForUserCmd              `cmd:"" help:"List who a user is following - https://developer.github.com/v3/users/followers/#list-users-followed-by-another-user"`
+	ListFollowingForAuthenticatedUser UsersListFollowingForAuthenticatedUserCmd `cmd:"" help:"List who the authenticated user is following - https://developer.github.com/v3/users/followers/#list-users-followed-by-another-user"`
+	CheckFollowing                    UsersCheckFollowingCmd                    `cmd:"" help:"Check if you are following a user - https://developer.github.com/v3/users/followers/#check-if-you-are-following-a-user"`
+	CheckFollowingForUser             UsersCheckFollowingForUserCmd             `cmd:"" help:"Check if one user follows another - https://developer.github.com/v3/users/followers/#check-if-one-user-follows-another"`
+	Follow                            UsersFollowCmd                            `cmd:"" help:"Follow a user - https://developer.github.com/v3/users/followers/#follow-a-user"`
+	Unfollow                          UsersUnfollowCmd                          `cmd:"" help:"Unfollow a user - https://developer.github.com/v3/users/followers/#unfollow-a-user"`
+	ListPublicKeysForUser             UsersListPublicKeysForUserCmd             `cmd:"" help:"List public keys for a user - https://developer.github.com/v3/users/keys/#list-public-keys-for-a-user"`
+	ListPublicKeys                    UsersListPublicKeysCmd                    `cmd:"" help:"List your public keys - https://developer.github.com/v3/users/keys/#list-your-public-keys"`
+	GetPublicKey                      UsersGetPublicKeyCmd                      `cmd:"" help:"Get a single public key - https://developer.github.com/v3/users/keys/#get-a-single-public-key"`
+	CreatePublicKey                   UsersCreatePublicKeyCmd                   `cmd:"" help:"Create a public key - https://developer.github.com/v3/users/keys/#create-a-public-key"`
+	DeletePublicKey                   UsersDeletePublicKeyCmd                   `cmd:"" help:"Delete a public key - https://developer.github.com/v3/users/keys/#delete-a-public-key"`
+	ListGpgKeysForUser                UsersListGpgKeysForUserCmd                `cmd:"" help:"List GPG keys for a user - https://developer.github.com/v3/users/gpg_keys/#list-gpg-keys-for-a-user"`
+	ListGpgKeys                       UsersListGpgKeysCmd                       `cmd:"" help:"List your GPG keys - https://developer.github.com/v3/users/gpg_keys/#list-your-gpg-keys"`
+	GetGpgKey                         UsersGetGpgKeyCmd                         `cmd:"" help:"Get a single GPG key - https://developer.github.com/v3/users/gpg_keys/#get-a-single-gpg-key"`
+	CreateGpgKey                      UsersCreateGpgKeyCmd                      `cmd:"" help:"Create a GPG key - https://developer.github.com/v3/users/gpg_keys/#create-a-gpg-key"`
+	DeleteGpgKey                      UsersDeleteGpgKeyCmd                      `cmd:"" help:"Delete a GPG key - https://developer.github.com/v3/users/gpg_keys/#delete-a-gpg-key"`
 }
 
 type UsersGetByUsernameCmd struct {

@@ -5,26 +5,26 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type MigrationsCmd struct {
-	StartForOrg                       MigrationsStartForOrgCmd                       `cmd:"" help:"Start an organization migration"`
-	ListForOrg                        MigrationsListForOrgCmd                        `cmd:"" help:"Get a list of organization migrations"`
-	GetStatusForOrg                   MigrationsGetStatusForOrgCmd                   `cmd:"" help:"Get the status of an organization migration"`
-	GetArchiveForOrg                  MigrationsGetArchiveForOrgCmd                  `cmd:"" help:"Download an organization migration archive"`
-	DeleteArchiveForOrg               MigrationsDeleteArchiveForOrgCmd               `cmd:"" help:"Delete an organization migration archive"`
-	UnlockRepoForOrg                  MigrationsUnlockRepoForOrgCmd                  `cmd:"" help:"Unlock an organization repository"`
-	StartImport                       MigrationsStartImportCmd                       `cmd:"" help:"Start an import"`
-	GetImportProgress                 MigrationsGetImportProgressCmd                 `cmd:"" help:"Get import progress"`
-	UpdateImport                      MigrationsUpdateImportCmd                      `cmd:"" help:"Update existing import"`
-	GetCommitAuthors                  MigrationsGetCommitAuthorsCmd                  `cmd:"" help:"Get commit authors"`
-	MapCommitAuthor                   MigrationsMapCommitAuthorCmd                   `cmd:"" help:"Map a commit author"`
-	SetLfsPreference                  MigrationsSetLfsPreferenceCmd                  `cmd:"" help:"Set Git LFS preference"`
-	GetLargeFiles                     MigrationsGetLargeFilesCmd                     `cmd:"" help:"Get large files"`
-	CancelImport                      MigrationsCancelImportCmd                      `cmd:"" help:"Cancel an import"`
-	StartForAuthenticatedUser         MigrationsStartForAuthenticatedUserCmd         `cmd:"" help:"Start a user migration"`
-	ListForAuthenticatedUser          MigrationsListForAuthenticatedUserCmd          `cmd:"" help:"Get a list of user migrations"`
-	GetStatusForAuthenticatedUser     MigrationsGetStatusForAuthenticatedUserCmd     `cmd:"" help:"Get the status of a user migration"`
-	GetArchiveForAuthenticatedUser    MigrationsGetArchiveForAuthenticatedUserCmd    `cmd:"" help:"Download a user migration archive"`
-	DeleteArchiveForAuthenticatedUser MigrationsDeleteArchiveForAuthenticatedUserCmd `cmd:"" help:"Delete a user migration archive"`
-	UnlockRepoForAuthenticatedUser    MigrationsUnlockRepoForAuthenticatedUserCmd    `cmd:"" help:"Unlock a user repository"`
+	StartForOrg                       MigrationsStartForOrgCmd                       `cmd:"" help:"Start an organization migration - https://developer.github.com/v3/migrations/orgs/#start-an-organization-migration"`
+	ListForOrg                        MigrationsListForOrgCmd                        `cmd:"" help:"Get a list of organization migrations - https://developer.github.com/v3/migrations/orgs/#get-a-list-of-organization-migrations"`
+	GetStatusForOrg                   MigrationsGetStatusForOrgCmd                   `cmd:"" help:"Get the status of an organization migration - https://developer.github.com/v3/migrations/orgs/#get-the-status-of-an-organization-migration"`
+	GetArchiveForOrg                  MigrationsGetArchiveForOrgCmd                  `cmd:"" help:"Download an organization migration archive - https://developer.github.com/v3/migrations/orgs/#download-an-organization-migration-archive"`
+	DeleteArchiveForOrg               MigrationsDeleteArchiveForOrgCmd               `cmd:"" help:"Delete an organization migration archive - https://developer.github.com/v3/migrations/orgs/#delete-an-organization-migration-archive"`
+	UnlockRepoForOrg                  MigrationsUnlockRepoForOrgCmd                  `cmd:"" help:"Unlock an organization repository - https://developer.github.com/v3/migrations/orgs/#unlock-an-organization-repository"`
+	StartImport                       MigrationsStartImportCmd                       `cmd:"" help:"Start an import - https://developer.github.com/v3/migrations/source_imports/#start-an-import"`
+	GetImportProgress                 MigrationsGetImportProgressCmd                 `cmd:"" help:"Get import progress - https://developer.github.com/v3/migrations/source_imports/#get-import-progress"`
+	UpdateImport                      MigrationsUpdateImportCmd                      `cmd:"" help:"Update existing import - https://developer.github.com/v3/migrations/source_imports/#update-existing-import"`
+	GetCommitAuthors                  MigrationsGetCommitAuthorsCmd                  `cmd:"" help:"Get commit authors - https://developer.github.com/v3/migrations/source_imports/#get-commit-authors"`
+	MapCommitAuthor                   MigrationsMapCommitAuthorCmd                   `cmd:"" help:"Map a commit author - https://developer.github.com/v3/migrations/source_imports/#map-a-commit-author"`
+	SetLfsPreference                  MigrationsSetLfsPreferenceCmd                  `cmd:"" help:"Set Git LFS preference - https://developer.github.com/v3/migrations/source_imports/#set-git-lfs-preference"`
+	GetLargeFiles                     MigrationsGetLargeFilesCmd                     `cmd:"" help:"Get large files - https://developer.github.com/v3/migrations/source_imports/#get-large-files"`
+	CancelImport                      MigrationsCancelImportCmd                      `cmd:"" help:"Cancel an import - https://developer.github.com/v3/migrations/source_imports/#cancel-an-import"`
+	StartForAuthenticatedUser         MigrationsStartForAuthenticatedUserCmd         `cmd:"" help:"Start a user migration - https://developer.github.com/v3/migrations/users/#start-a-user-migration"`
+	ListForAuthenticatedUser          MigrationsListForAuthenticatedUserCmd          `cmd:"" help:"Get a list of user migrations - https://developer.github.com/v3/migrations/users/#get-a-list-of-user-migrations"`
+	GetStatusForAuthenticatedUser     MigrationsGetStatusForAuthenticatedUserCmd     `cmd:"" help:"Get the status of a user migration - https://developer.github.com/v3/migrations/users/#get-the-status-of-a-user-migration"`
+	GetArchiveForAuthenticatedUser    MigrationsGetArchiveForAuthenticatedUserCmd    `cmd:"" help:"Download a user migration archive - https://developer.github.com/v3/migrations/users/#download-a-user-migration-archive"`
+	DeleteArchiveForAuthenticatedUser MigrationsDeleteArchiveForAuthenticatedUserCmd `cmd:"" help:"Delete a user migration archive - https://developer.github.com/v3/migrations/users/#delete-a-user-migration-archive"`
+	UnlockRepoForAuthenticatedUser    MigrationsUnlockRepoForAuthenticatedUserCmd    `cmd:"" help:"Unlock a user repository - https://developer.github.com/v3/migrations/users/#unlock-a-user-repository"`
 }
 
 type MigrationsStartForOrgCmd struct {

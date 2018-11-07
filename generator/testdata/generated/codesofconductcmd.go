@@ -5,9 +5,9 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type CodesOfConductCmd struct {
-	ListConductCodes CodesOfConductListConductCodesCmd `cmd:"" help:"List all codes of conduct"`
-	GetConductCode   CodesOfConductGetConductCodeCmd   `cmd:"" help:"Get an individual code of conduct"`
-	GetForRepo       CodesOfConductGetForRepoCmd       `cmd:"" help:"Get the contents of a repository's code of conduct"`
+	ListConductCodes CodesOfConductListConductCodesCmd `cmd:"" help:"List all codes of conduct - https://developer.github.com/v3/codes_of_conduct/#list-all-codes-of-conduct"`
+	GetConductCode   CodesOfConductGetConductCodeCmd   `cmd:"" help:"Get an individual code of conduct - https://developer.github.com/v3/codes_of_conduct/#get-an-individual-code-of-conduct"`
+	GetForRepo       CodesOfConductGetForRepoCmd       `cmd:"" help:"Get the contents of a repository's code of conduct - https://developer.github.com/v3/codes_of_conduct/#get-the-contents-of-a-repositorys-code-of-conduct"`
 }
 
 type CodesOfConductListConductCodesCmd struct {
