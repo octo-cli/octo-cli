@@ -2,6 +2,6 @@
 
 set -e
 
-cd "$( dirname "${BASH_SOURCE[0]}" )/.."
+CDPATH= cd -- "$(dirname -- $(dirname -- "$0"))"
 bin/util build-lint
 bin/golangci-lint run --enable=golint
