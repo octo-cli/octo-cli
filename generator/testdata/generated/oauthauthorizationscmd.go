@@ -5,20 +5,20 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type OauthAuthorizationsCmd struct {
-	ListGrants                                OauthAuthorizationsListGrantsCmd                                `cmd:"" help:"List your grants"`
-	GetGrant                                  OauthAuthorizationsGetGrantCmd                                  `cmd:"" help:"Get a single grant"`
-	DeleteGrant                               OauthAuthorizationsDeleteGrantCmd                               `cmd:"" help:"Delete a grant"`
-	ListAuthorizations                        OauthAuthorizationsListAuthorizationsCmd                        `cmd:"" help:"List your authorizations"`
-	GetAuthorization                          OauthAuthorizationsGetAuthorizationCmd                          `cmd:"" help:"Get a single authorization"`
-	CreateAuthorization                       OauthAuthorizationsCreateAuthorizationCmd                       `cmd:"" help:"Create a new authorization"`
-	GetOrCreateAuthorizationForApp            OauthAuthorizationsGetOrCreateAuthorizationForAppCmd            `cmd:"" help:"Get-or-create an authorization for a specific app"`
-	GetOrCreateAuthorizationForAppFingerprint OauthAuthorizationsGetOrCreateAuthorizationForAppFingerprintCmd `cmd:"" help:"Get-or-create an authorization for a specific app and fingerprint"`
-	UpdateAuthorization                       OauthAuthorizationsUpdateAuthorizationCmd                       `cmd:"" help:"Update an existing authorization"`
-	DeleteAuthorization                       OauthAuthorizationsDeleteAuthorizationCmd                       `cmd:"" help:"Delete an authorization"`
-	CheckAuthorization                        OauthAuthorizationsCheckAuthorizationCmd                        `cmd:"" help:"Check an authorization"`
-	ResetAuthorization                        OauthAuthorizationsResetAuthorizationCmd                        `cmd:"" help:"Reset an authorization"`
-	RevokeAuthorizationForApplication         OauthAuthorizationsRevokeAuthorizationForApplicationCmd         `cmd:"" help:"Revoke an authorization for an application"`
-	RevokeGrantForApplication                 OauthAuthorizationsRevokeGrantForApplicationCmd                 `cmd:"" help:"Revoke a grant for an application"`
+	ListGrants                                OauthAuthorizationsListGrantsCmd                                `cmd:"" help:"List your grants - https://developer.github.com/v3/oauth_authorizations/#list-your-grants"`
+	GetGrant                                  OauthAuthorizationsGetGrantCmd                                  `cmd:"" help:"Get a single grant - https://developer.github.com/v3/oauth_authorizations/#get-a-single-grant"`
+	DeleteGrant                               OauthAuthorizationsDeleteGrantCmd                               `cmd:"" help:"Delete a grant - https://developer.github.com/v3/oauth_authorizations/#delete-a-grant"`
+	ListAuthorizations                        OauthAuthorizationsListAuthorizationsCmd                        `cmd:"" help:"List your authorizations - https://developer.github.com/v3/oauth_authorizations/#list-your-authorizations"`
+	GetAuthorization                          OauthAuthorizationsGetAuthorizationCmd                          `cmd:"" help:"Get a single authorization - https://developer.github.com/v3/oauth_authorizations/#get-a-single-authorization"`
+	CreateAuthorization                       OauthAuthorizationsCreateAuthorizationCmd                       `cmd:"" help:"Create a new authorization - https://developer.github.com/v3/oauth_authorizations/#create-a-new-authorization"`
+	GetOrCreateAuthorizationForApp            OauthAuthorizationsGetOrCreateAuthorizationForAppCmd            `cmd:"" help:"Get-or-create an authorization for a specific app - https://developer.github.com/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app"`
+	GetOrCreateAuthorizationForAppFingerprint OauthAuthorizationsGetOrCreateAuthorizationForAppFingerprintCmd `cmd:"" help:"Get-or-create an authorization for a specific app and fingerprint - https://developer.github.com/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint"`
+	UpdateAuthorization                       OauthAuthorizationsUpdateAuthorizationCmd                       `cmd:"" help:"Update an existing authorization - https://developer.github.com/v3/oauth_authorizations/#update-an-existing-authorization"`
+	DeleteAuthorization                       OauthAuthorizationsDeleteAuthorizationCmd                       `cmd:"" help:"Delete an authorization - https://developer.github.com/v3/oauth_authorizations/#delete-an-authorization"`
+	CheckAuthorization                        OauthAuthorizationsCheckAuthorizationCmd                        `cmd:"" help:"Check an authorization - https://developer.github.com/v3/oauth_authorizations/#check-an-authorization"`
+	ResetAuthorization                        OauthAuthorizationsResetAuthorizationCmd                        `cmd:"" help:"Reset an authorization - https://developer.github.com/v3/oauth_authorizations/#reset-an-authorization"`
+	RevokeAuthorizationForApplication         OauthAuthorizationsRevokeAuthorizationForApplicationCmd         `cmd:"" help:"Revoke an authorization for an application - https://developer.github.com/v3/oauth_authorizations/#revoke-an-authorization-for-an-application"`
+	RevokeGrantForApplication                 OauthAuthorizationsRevokeGrantForApplicationCmd                 `cmd:"" help:"Revoke a grant for an application - https://developer.github.com/v3/oauth_authorizations/#revoke-a-grant-for-an-application"`
 }
 
 type OauthAuthorizationsListGrantsCmd struct {

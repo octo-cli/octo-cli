@@ -5,126 +5,126 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type ReposCmd struct {
-	List                                               ReposListCmd                                               `cmd:"" help:"List your repositories"`
-	ListForUser                                        ReposListForUserCmd                                        `cmd:"" help:"List user repositories"`
-	ListForOrg                                         ReposListForOrgCmd                                         `cmd:"" help:"List organization repositories"`
-	ListPublic                                         ReposListPublicCmd                                         `cmd:"" help:"List all public repositories"`
-	CreateForAuthenticatedUser                         ReposCreateForAuthenticatedUserCmd                         `cmd:"" help:"Create a new repository for the authenticated user"`
-	CreateInOrg                                        ReposCreateInOrgCmd                                        `cmd:"" help:"Create a new repository in this organization"`
-	Get                                                ReposGetCmd                                                `cmd:"" help:"Get"`
-	Edit                                               ReposEditCmd                                               `cmd:"" help:"Edit"`
-	ListTopics                                         ReposListTopicsCmd                                         `cmd:"" help:"List all topics for a repository"`
-	ReplaceTopics                                      ReposReplaceTopicsCmd                                      `cmd:"" help:"Replace all topics for a repository"`
-	ListContributors                                   ReposListContributorsCmd                                   `cmd:"" help:"List contributors"`
-	ListLanguages                                      ReposListLanguagesCmd                                      `cmd:"" help:"List languages"`
-	ListTeams                                          ReposListTeamsCmd                                          `cmd:"" help:"List teams"`
-	ListTags                                           ReposListTagsCmd                                           `cmd:"" help:"List tags"`
-	Delete                                             ReposDeleteCmd                                             `cmd:"" help:"Delete a repository"`
-	Transfer                                           ReposTransferCmd                                           `cmd:"" help:"Transfer a repository"`
-	ListBranches                                       ReposListBranchesCmd                                       `cmd:"" help:"List branches"`
-	GetBranch                                          ReposGetBranchCmd                                          `cmd:"" help:"Get branch"`
-	GetBranchProtection                                ReposGetBranchProtectionCmd                                `cmd:"" help:"Get branch protection"`
-	RemoveBranchProtection                             ReposRemoveBranchProtectionCmd                             `cmd:"" help:"Remove branch protection"`
-	GetProtectedBranchRequiredStatusChecks             ReposGetProtectedBranchRequiredStatusChecksCmd             `cmd:"" help:"Get required status checks of protected branch"`
-	UpdateProtectedBranchRequiredStatusChecks          ReposUpdateProtectedBranchRequiredStatusChecksCmd          `cmd:"" help:"Update required status checks of protected branch"`
-	RemoveProtectedBranchRequiredStatusChecks          ReposRemoveProtectedBranchRequiredStatusChecksCmd          `cmd:"" help:"Remove required status checks of protected branch"`
-	ListProtectedBranchRequiredStatusChecksContexts    ReposListProtectedBranchRequiredStatusChecksContextsCmd    `cmd:"" help:"List required status checks contexts of protected branch"`
-	ReplaceProtectedBranchRequiredStatusChecksContexts ReposReplaceProtectedBranchRequiredStatusChecksContextsCmd `cmd:"" help:"Replace required status checks contexts of protected branch"`
-	AddProtectedBranchRequiredStatusChecksContexts     ReposAddProtectedBranchRequiredStatusChecksContextsCmd     `cmd:"" help:"Add required status checks contexts of protected branch"`
-	RemoveProtectedBranchRequiredStatusChecksContexts  ReposRemoveProtectedBranchRequiredStatusChecksContextsCmd  `cmd:"" help:"Remove required status checks contexts of protected branch"`
-	GetProtectedBranchPullRequestReviewEnforcement     ReposGetProtectedBranchPullRequestReviewEnforcementCmd     `cmd:"" help:"Get pull request review enforcement of protected branch"`
-	RemoveProtectedBranchPullRequestReviewEnforcement  ReposRemoveProtectedBranchPullRequestReviewEnforcementCmd  `cmd:"" help:"Remove pull request review enforcement of protected branch"`
-	GetProtectedBranchRequiredSignatures               ReposGetProtectedBranchRequiredSignaturesCmd               `cmd:"" help:"Get required signatures of protected branch"`
-	AddProtectedBranchRequiredSignatures               ReposAddProtectedBranchRequiredSignaturesCmd               `cmd:"" help:"Add required signatures of protected branch"`
-	RemoveProtectedBranchRequiredSignatures            ReposRemoveProtectedBranchRequiredSignaturesCmd            `cmd:"" help:"Remove required signatures of protected branch"`
-	GetProtectedBranchAdminEnforcement                 ReposGetProtectedBranchAdminEnforcementCmd                 `cmd:"" help:"Get admin enforcement of protected branch"`
-	AddProtectedBranchAdminEnforcement                 ReposAddProtectedBranchAdminEnforcementCmd                 `cmd:"" help:"Add admin enforcement of protected branch"`
-	RemoveProtectedBranchAdminEnforcement              ReposRemoveProtectedBranchAdminEnforcementCmd              `cmd:"" help:"Remove admin enforcement of protected branch"`
-	GetProtectedBranchRestrictions                     ReposGetProtectedBranchRestrictionsCmd                     `cmd:"" help:"Get restrictions of protected branch"`
-	RemoveProtectedBranchRestrictions                  ReposRemoveProtectedBranchRestrictionsCmd                  `cmd:"" help:"Remove restrictions of protected branch"`
-	ListProtectedBranchTeamRestrictions                ReposListProtectedBranchTeamRestrictionsCmd                `cmd:"" help:"List team restrictions of protected branch"`
-	ReplaceProtectedBranchTeamRestrictions             ReposReplaceProtectedBranchTeamRestrictionsCmd             `cmd:"" help:"Replace team restrictions of protected branch"`
-	AddProtectedBranchTeamRestrictions                 ReposAddProtectedBranchTeamRestrictionsCmd                 `cmd:"" help:"Add team restrictions of protected branch"`
-	RemoveProtectedBranchTeamRestrictions              ReposRemoveProtectedBranchTeamRestrictionsCmd              `cmd:"" help:"Remove team restrictions of protected branch"`
-	ListProtectedBranchUserRestrictions                ReposListProtectedBranchUserRestrictionsCmd                `cmd:"" help:"List user restrictions of protected branch"`
-	ReplaceProtectedBranchUserRestrictions             ReposReplaceProtectedBranchUserRestrictionsCmd             `cmd:"" help:"Replace user restrictions of protected branch"`
-	AddProtectedBranchUserRestrictions                 ReposAddProtectedBranchUserRestrictionsCmd                 `cmd:"" help:"Add user restrictions of protected branch"`
-	RemoveProtectedBranchUserRestrictions              ReposRemoveProtectedBranchUserRestrictionsCmd              `cmd:"" help:"Remove user restrictions of protected branch"`
-	ListCollaborators                                  ReposListCollaboratorsCmd                                  `cmd:"" help:"List collaborators"`
-	CheckCollaborator                                  ReposCheckCollaboratorCmd                                  `cmd:"" help:"Check if a user is a collaborator"`
-	GetCollaboratorPermissionLevel                     ReposGetCollaboratorPermissionLevelCmd                     `cmd:"" help:"Review a user's permission level"`
-	AddCollaborator                                    ReposAddCollaboratorCmd                                    `cmd:"" help:"Add user as a collaborator"`
-	RemoveCollaborator                                 ReposRemoveCollaboratorCmd                                 `cmd:"" help:"Remove user as a collaborator"`
-	ListCommitComments                                 ReposListCommitCommentsCmd                                 `cmd:"" help:"List commit comments for a repository"`
-	ListCommentsForCommit                              ReposListCommentsForCommitCmd                              `cmd:"" help:"List comments for a single commit"`
-	CreateCommitComment                                ReposCreateCommitCommentCmd                                `cmd:"" help:"Create a commit comment"`
-	GetCommitComment                                   ReposGetCommitCommentCmd                                   `cmd:"" help:"Get a single commit comment"`
-	UpdateCommitComment                                ReposUpdateCommitCommentCmd                                `cmd:"" help:"Update a commit comment"`
-	DeleteCommitComment                                ReposDeleteCommitCommentCmd                                `cmd:"" help:"Delete a commit comment"`
-	ListCommits                                        ReposListCommitsCmd                                        `cmd:"" help:"List commits on a repository"`
-	GetCommit                                          ReposGetCommitCmd                                          `cmd:"" help:"Get a single commit"`
-	GetCommitRefSha                                    ReposGetCommitRefShaCmd                                    `cmd:"" help:"Get the SHA-1 of a commit reference"`
-	CompareCommits                                     ReposCompareCommitsCmd                                     `cmd:"" help:"Compare two commits"`
-	RetrieveCommunityProfileMetrics                    ReposRetrieveCommunityProfileMetricsCmd                    `cmd:"" help:"Retrieve community profile metrics"`
-	GetReadme                                          ReposGetReadmeCmd                                          `cmd:"" help:"Get the README"`
-	GetContents                                        ReposGetContentsCmd                                        `cmd:"" help:"Get contents"`
-	GetArchiveLink                                     ReposGetArchiveLinkCmd                                     `cmd:"" help:"Get archive link"`
-	ListDeployKeys                                     ReposListDeployKeysCmd                                     `cmd:"" help:"List deploy keys"`
-	GetDeployKey                                       ReposGetDeployKeyCmd                                       `cmd:"" help:"Get a deploy key"`
-	AddDeployKey                                       ReposAddDeployKeyCmd                                       `cmd:"" help:"Add a new deploy key"`
-	RemoveDeployKey                                    ReposRemoveDeployKeyCmd                                    `cmd:"" help:"Remove a deploy key"`
-	ListDeployments                                    ReposListDeploymentsCmd                                    `cmd:"" help:"List deployments"`
-	GetDeployment                                      ReposGetDeploymentCmd                                      `cmd:"" help:"Get a single deployment"`
-	CreateDeployment                                   ReposCreateDeploymentCmd                                   `cmd:"" help:"Create a deployment"`
-	ListDeploymentStatuses                             ReposListDeploymentStatusesCmd                             `cmd:"" help:"List deployment statuses"`
-	GetDeploymentStatus                                ReposGetDeploymentStatusCmd                                `cmd:"" help:"Get a single deployment status"`
-	CreateDeploymentStatus                             ReposCreateDeploymentStatusCmd                             `cmd:"" help:"Create a deployment status"`
-	ListDownloads                                      ReposListDownloadsCmd                                      `cmd:"" help:"List downloads for a repository"`
-	GetDownload                                        ReposGetDownloadCmd                                        `cmd:"" help:"Get a single download"`
-	DeleteDownload                                     ReposDeleteDownloadCmd                                     `cmd:"" help:"Delete a download"`
-	ListForks                                          ReposListForksCmd                                          `cmd:"" help:"List forks"`
-	CreateFork                                         ReposCreateForkCmd                                         `cmd:"" help:"Create a fork"`
-	ListInvitations                                    ReposListInvitationsCmd                                    `cmd:"" help:"List invitations for a repository"`
-	DeleteInvitation                                   ReposDeleteInvitationCmd                                   `cmd:"" help:"Delete a repository invitation"`
-	UpdateInvitation                                   ReposUpdateInvitationCmd                                   `cmd:"" help:"Update a repository invitation"`
-	ListInvitationsForAuthenticatedUser                ReposListInvitationsForAuthenticatedUserCmd                `cmd:"" help:"List a user's repository invitations"`
-	AcceptInvitation                                   ReposAcceptInvitationCmd                                   `cmd:"" help:"Accept a repository invitation"`
-	DeclineInvitation                                  ReposDeclineInvitationCmd                                  `cmd:"" help:"Decline a repository invitation"`
-	Merge                                              ReposMergeCmd                                              `cmd:"" help:"Perform a merge"`
-	GetPages                                           ReposGetPagesCmd                                           `cmd:"" help:"Get information about a Pages site"`
-	UpdateInformationAboutPagesSite                    ReposUpdateInformationAboutPagesSiteCmd                    `cmd:"" help:"Update information about a Pages site"`
-	RequestPageBuild                                   ReposRequestPageBuildCmd                                   `cmd:"" help:"Request a page build"`
-	ListPagesBuilds                                    ReposListPagesBuildsCmd                                    `cmd:"" help:"List Pages builds"`
-	GetLatestPagesBuild                                ReposGetLatestPagesBuildCmd                                `cmd:"" help:"Get latest Pages build"`
-	GetPagesBuild                                      ReposGetPagesBuildCmd                                      `cmd:"" help:"Get a specific Pages build"`
-	ListReleases                                       ReposListReleasesCmd                                       `cmd:"" help:"List releases for a repository"`
-	GetRelease                                         ReposGetReleaseCmd                                         `cmd:"" help:"Get a single release"`
-	GetLatestRelease                                   ReposGetLatestReleaseCmd                                   `cmd:"" help:"Get the latest release"`
-	GetReleaseByTag                                    ReposGetReleaseByTagCmd                                    `cmd:"" help:"Get a release by tag name"`
-	CreateRelease                                      ReposCreateReleaseCmd                                      `cmd:"" help:"Create a release"`
-	EditRelease                                        ReposEditReleaseCmd                                        `cmd:"" help:"Edit a release"`
-	DeleteRelease                                      ReposDeleteReleaseCmd                                      `cmd:"" help:"Delete a release"`
-	ListAssetsForRelease                               ReposListAssetsForReleaseCmd                               `cmd:"" help:"List assets for a release"`
-	GetReleaseAsset                                    ReposGetReleaseAssetCmd                                    `cmd:"" help:"Get a single release asset"`
-	EditReleaseAsset                                   ReposEditReleaseAssetCmd                                   `cmd:"" help:"Edit a release asset"`
-	DeleteReleaseAsset                                 ReposDeleteReleaseAssetCmd                                 `cmd:"" help:"Delete a release asset"`
-	GetContributorsStats                               ReposGetContributorsStatsCmd                               `cmd:"" help:"Get contributors list with additions, deletions, and commit counts"`
-	GetCommitActivityStats                             ReposGetCommitActivityStatsCmd                             `cmd:"" help:"Get the last year of commit activity data"`
-	GetCodeFrequencyStats                              ReposGetCodeFrequencyStatsCmd                              `cmd:"" help:"Get the number of additions and deletions per week"`
-	GetParticipationStats                              ReposGetParticipationStatsCmd                              `cmd:"" help:"Get the weekly commit count for the repository owner and everyone else"`
-	GetPunchCardStats                                  ReposGetPunchCardStatsCmd                                  `cmd:"" help:"Get the number of commits per hour in each day"`
-	CreateStatus                                       ReposCreateStatusCmd                                       `cmd:"" help:"Create a status"`
-	ListStatusesForRef                                 ReposListStatusesForRefCmd                                 `cmd:"" help:"List statuses for a specific ref"`
-	GetCombinedStatusForRef                            ReposGetCombinedStatusForRefCmd                            `cmd:"" help:"Get the combined status for a specific ref"`
-	GetTopReferrers                                    ReposGetTopReferrersCmd                                    `cmd:"" help:"List referrers"`
-	GetTopPaths                                        ReposGetTopPathsCmd                                        `cmd:"" help:"List paths"`
-	GetViews                                           ReposGetViewsCmd                                           `cmd:"" help:"Views"`
-	GetClones                                          ReposGetClonesCmd                                          `cmd:"" help:"Clones"`
-	ListHooks                                          ReposListHooksCmd                                          `cmd:"" help:"List hooks"`
-	GetHook                                            ReposGetHookCmd                                            `cmd:"" help:"Get single hook"`
-	TestPushHook                                       ReposTestPushHookCmd                                       `cmd:"" help:"Test a push hook"`
-	PingHook                                           ReposPingHookCmd                                           `cmd:"" help:"Ping a hook"`
-	DeleteHook                                         ReposDeleteHookCmd                                         `cmd:"" help:"Delete a hook"`
+	List                                               ReposListCmd                                               `cmd:"" help:"List your repositories - https://developer.github.com/v3/repos/#list-your-repositories"`
+	ListForUser                                        ReposListForUserCmd                                        `cmd:"" help:"List user repositories - https://developer.github.com/v3/repos/#list-user-repositories"`
+	ListForOrg                                         ReposListForOrgCmd                                         `cmd:"" help:"List organization repositories - https://developer.github.com/v3/repos/#list-organization-repositories"`
+	ListPublic                                         ReposListPublicCmd                                         `cmd:"" help:"List all public repositories - https://developer.github.com/v3/repos/#list-all-public-repositories"`
+	CreateForAuthenticatedUser                         ReposCreateForAuthenticatedUserCmd                         `cmd:"" help:"Create a new repository for the authenticated user - https://developer.github.com/v3/repos/#create"`
+	CreateInOrg                                        ReposCreateInOrgCmd                                        `cmd:"" help:"Create a new repository in this organization - https://developer.github.com/v3/repos/#create"`
+	Get                                                ReposGetCmd                                                `cmd:"" help:"Get - https://developer.github.com/v3/repos/#get"`
+	Edit                                               ReposEditCmd                                               `cmd:"" help:"Edit - https://developer.github.com/v3/repos/#edit"`
+	ListTopics                                         ReposListTopicsCmd                                         `cmd:"" help:"List all topics for a repository - https://developer.github.com/v3/repos/#list-all-topics-for-a-repository"`
+	ReplaceTopics                                      ReposReplaceTopicsCmd                                      `cmd:"" help:"Replace all topics for a repository - https://developer.github.com/v3/repos/#replace-all-topics-for-a-repository"`
+	ListContributors                                   ReposListContributorsCmd                                   `cmd:"" help:"List contributors - https://developer.github.com/v3/repos/#list-contributors"`
+	ListLanguages                                      ReposListLanguagesCmd                                      `cmd:"" help:"List languages - https://developer.github.com/v3/repos/#list-languages"`
+	ListTeams                                          ReposListTeamsCmd                                          `cmd:"" help:"List teams - https://developer.github.com/v3/repos/#list-teams"`
+	ListTags                                           ReposListTagsCmd                                           `cmd:"" help:"List tags - https://developer.github.com/v3/repos/#list-tags"`
+	Delete                                             ReposDeleteCmd                                             `cmd:"" help:"Delete a repository - https://developer.github.com/v3/repos/#delete-a-repository"`
+	Transfer                                           ReposTransferCmd                                           `cmd:"" help:"Transfer a repository - https://developer.github.com/v3/repos/#transfer-a-repository"`
+	ListBranches                                       ReposListBranchesCmd                                       `cmd:"" help:"List branches - https://developer.github.com/v3/repos/branches/#list-branches"`
+	GetBranch                                          ReposGetBranchCmd                                          `cmd:"" help:"Get branch - https://developer.github.com/v3/repos/branches/#get-branch"`
+	GetBranchProtection                                ReposGetBranchProtectionCmd                                `cmd:"" help:"Get branch protection - https://developer.github.com/v3/repos/branches/#get-branch-protection"`
+	RemoveBranchProtection                             ReposRemoveBranchProtectionCmd                             `cmd:"" help:"Remove branch protection - https://developer.github.com/v3/repos/branches/#remove-branch-protection"`
+	GetProtectedBranchRequiredStatusChecks             ReposGetProtectedBranchRequiredStatusChecksCmd             `cmd:"" help:"Get required status checks of protected branch - https://developer.github.com/v3/repos/branches/#get-required-status-checks-of-protected-branch"`
+	UpdateProtectedBranchRequiredStatusChecks          ReposUpdateProtectedBranchRequiredStatusChecksCmd          `cmd:"" help:"Update required status checks of protected branch - https://developer.github.com/v3/repos/branches/#update-required-status-checks-of-protected-branch"`
+	RemoveProtectedBranchRequiredStatusChecks          ReposRemoveProtectedBranchRequiredStatusChecksCmd          `cmd:"" help:"Remove required status checks of protected branch - https://developer.github.com/v3/repos/branches/#remove-required-status-checks-of-protected-branch"`
+	ListProtectedBranchRequiredStatusChecksContexts    ReposListProtectedBranchRequiredStatusChecksContextsCmd    `cmd:"" help:"List required status checks contexts of protected branch - https://developer.github.com/v3/repos/branches/#list-required-status-checks-contexts-of-protected-branch"`
+	ReplaceProtectedBranchRequiredStatusChecksContexts ReposReplaceProtectedBranchRequiredStatusChecksContextsCmd `cmd:"" help:"Replace required status checks contexts of protected branch - https://developer.github.com/v3/repos/branches/#replace-required-status-checks-contexts-of-protected-branch"`
+	AddProtectedBranchRequiredStatusChecksContexts     ReposAddProtectedBranchRequiredStatusChecksContextsCmd     `cmd:"" help:"Add required status checks contexts of protected branch - https://developer.github.com/v3/repos/branches/#add-required-status-checks-contexts-of-protected-branch"`
+	RemoveProtectedBranchRequiredStatusChecksContexts  ReposRemoveProtectedBranchRequiredStatusChecksContextsCmd  `cmd:"" help:"Remove required status checks contexts of protected branch - https://developer.github.com/v3/repos/branches/#remove-required-status-checks-contexts-of-protected-branch"`
+	GetProtectedBranchPullRequestReviewEnforcement     ReposGetProtectedBranchPullRequestReviewEnforcementCmd     `cmd:"" help:"Get pull request review enforcement of protected branch - https://developer.github.com/v3/repos/branches/#get-pull-request-review-enforcement-of-protected-branch"`
+	RemoveProtectedBranchPullRequestReviewEnforcement  ReposRemoveProtectedBranchPullRequestReviewEnforcementCmd  `cmd:"" help:"Remove pull request review enforcement of protected branch - https://developer.github.com/v3/repos/branches/#remove-pull-request-review-enforcement-of-protected-branch"`
+	GetProtectedBranchRequiredSignatures               ReposGetProtectedBranchRequiredSignaturesCmd               `cmd:"" help:"Get required signatures of protected branch - https://developer.github.com/v3/repos/branches/#get-required-signatures-of-protected-branch"`
+	AddProtectedBranchRequiredSignatures               ReposAddProtectedBranchRequiredSignaturesCmd               `cmd:"" help:"Add required signatures of protected branch - https://developer.github.com/v3/repos/branches/#add-required-signatures-of-protected-branch"`
+	RemoveProtectedBranchRequiredSignatures            ReposRemoveProtectedBranchRequiredSignaturesCmd            `cmd:"" help:"Remove required signatures of protected branch - https://developer.github.com/v3/repos/branches/#remove-required-signatures-of-protected-branch"`
+	GetProtectedBranchAdminEnforcement                 ReposGetProtectedBranchAdminEnforcementCmd                 `cmd:"" help:"Get admin enforcement of protected branch - https://developer.github.com/v3/repos/branches/#get-admin-enforcement-of-protected-branch"`
+	AddProtectedBranchAdminEnforcement                 ReposAddProtectedBranchAdminEnforcementCmd                 `cmd:"" help:"Add admin enforcement of protected branch - https://developer.github.com/v3/repos/branches/#add-admin-enforcement-of-protected-branch"`
+	RemoveProtectedBranchAdminEnforcement              ReposRemoveProtectedBranchAdminEnforcementCmd              `cmd:"" help:"Remove admin enforcement of protected branch - https://developer.github.com/v3/repos/branches/#remove-admin-enforcement-of-protected-branch"`
+	GetProtectedBranchRestrictions                     ReposGetProtectedBranchRestrictionsCmd                     `cmd:"" help:"Get restrictions of protected branch - https://developer.github.com/v3/repos/branches/#get-restrictions-of-protected-branch"`
+	RemoveProtectedBranchRestrictions                  ReposRemoveProtectedBranchRestrictionsCmd                  `cmd:"" help:"Remove restrictions of protected branch - https://developer.github.com/v3/repos/branches/#remove-restrictions-of-protected-branch"`
+	ListProtectedBranchTeamRestrictions                ReposListProtectedBranchTeamRestrictionsCmd                `cmd:"" help:"List team restrictions of protected branch - https://developer.github.com/v3/repos/branches/#list-team-restrictions-of-protected-branch"`
+	ReplaceProtectedBranchTeamRestrictions             ReposReplaceProtectedBranchTeamRestrictionsCmd             `cmd:"" help:"Replace team restrictions of protected branch - https://developer.github.com/v3/repos/branches/#replace-team-restrictions-of-protected-branch"`
+	AddProtectedBranchTeamRestrictions                 ReposAddProtectedBranchTeamRestrictionsCmd                 `cmd:"" help:"Add team restrictions of protected branch - https://developer.github.com/v3/repos/branches/#add-team-restrictions-of-protected-branch"`
+	RemoveProtectedBranchTeamRestrictions              ReposRemoveProtectedBranchTeamRestrictionsCmd              `cmd:"" help:"Remove team restrictions of protected branch - https://developer.github.com/v3/repos/branches/#remove-team-restrictions-of-protected-branch"`
+	ListProtectedBranchUserRestrictions                ReposListProtectedBranchUserRestrictionsCmd                `cmd:"" help:"List user restrictions of protected branch - https://developer.github.com/v3/repos/branches/#list-user-restrictions-of-protected-branch"`
+	ReplaceProtectedBranchUserRestrictions             ReposReplaceProtectedBranchUserRestrictionsCmd             `cmd:"" help:"Replace user restrictions of protected branch - https://developer.github.com/v3/repos/branches/#replace-user-restrictions-of-protected-branch"`
+	AddProtectedBranchUserRestrictions                 ReposAddProtectedBranchUserRestrictionsCmd                 `cmd:"" help:"Add user restrictions of protected branch - https://developer.github.com/v3/repos/branches/#add-user-restrictions-of-protected-branch"`
+	RemoveProtectedBranchUserRestrictions              ReposRemoveProtectedBranchUserRestrictionsCmd              `cmd:"" help:"Remove user restrictions of protected branch - https://developer.github.com/v3/repos/branches/#remove-user-restrictions-of-protected-branch"`
+	ListCollaborators                                  ReposListCollaboratorsCmd                                  `cmd:"" help:"List collaborators - https://developer.github.com/v3/repos/collaborators/#list-collaborators"`
+	CheckCollaborator                                  ReposCheckCollaboratorCmd                                  `cmd:"" help:"Check if a user is a collaborator - https://developer.github.com/v3/repos/collaborators/#check-if-a-user-is-a-collaborator"`
+	GetCollaboratorPermissionLevel                     ReposGetCollaboratorPermissionLevelCmd                     `cmd:"" help:"Review a user's permission level - https://developer.github.com/v3/repos/collaborators/#review-a-users-permission-level"`
+	AddCollaborator                                    ReposAddCollaboratorCmd                                    `cmd:"" help:"Add user as a collaborator - https://developer.github.com/v3/repos/collaborators/#add-user-as-a-collaborator"`
+	RemoveCollaborator                                 ReposRemoveCollaboratorCmd                                 `cmd:"" help:"Remove user as a collaborator - https://developer.github.com/v3/repos/collaborators/#remove-user-as-a-collaborator"`
+	ListCommitComments                                 ReposListCommitCommentsCmd                                 `cmd:"" help:"List commit comments for a repository - https://developer.github.com/v3/repos/comments/#list-commit-comments-for-a-repository"`
+	ListCommentsForCommit                              ReposListCommentsForCommitCmd                              `cmd:"" help:"List comments for a single commit - https://developer.github.com/v3/repos/comments/#list-comments-for-a-single-commit"`
+	CreateCommitComment                                ReposCreateCommitCommentCmd                                `cmd:"" help:"Create a commit comment - https://developer.github.com/v3/repos/comments/#create-a-commit-comment"`
+	GetCommitComment                                   ReposGetCommitCommentCmd                                   `cmd:"" help:"Get a single commit comment - https://developer.github.com/v3/repos/comments/#get-a-single-commit-comment"`
+	UpdateCommitComment                                ReposUpdateCommitCommentCmd                                `cmd:"" help:"Update a commit comment - https://developer.github.com/v3/repos/comments/#update-a-commit-comment"`
+	DeleteCommitComment                                ReposDeleteCommitCommentCmd                                `cmd:"" help:"Delete a commit comment - https://developer.github.com/v3/repos/comments/#delete-a-commit-comment"`
+	ListCommits                                        ReposListCommitsCmd                                        `cmd:"" help:"List commits on a repository - https://developer.github.com/v3/repos/commits/#list-commits-on-a-repository"`
+	GetCommit                                          ReposGetCommitCmd                                          `cmd:"" help:"Get a single commit - https://developer.github.com/v3/repos/commits/#get-a-single-commit"`
+	GetCommitRefSha                                    ReposGetCommitRefShaCmd                                    `cmd:"" help:"Get the SHA-1 of a commit reference - https://developer.github.com/v3/repos/commits/#get-the-sha-1-of-a-commit-reference"`
+	CompareCommits                                     ReposCompareCommitsCmd                                     `cmd:"" help:"Compare two commits - https://developer.github.com/v3/repos/commits/#compare-two-commits"`
+	RetrieveCommunityProfileMetrics                    ReposRetrieveCommunityProfileMetricsCmd                    `cmd:"" help:"Retrieve community profile metrics - https://developer.github.com/v3/repos/community/#retrieve-community-profile-metrics"`
+	GetReadme                                          ReposGetReadmeCmd                                          `cmd:"" help:"Get the README - https://developer.github.com/v3/repos/contents/#get-the-readme"`
+	GetContents                                        ReposGetContentsCmd                                        `cmd:"" help:"Get contents - https://developer.github.com/v3/repos/contents/#get-contents"`
+	GetArchiveLink                                     ReposGetArchiveLinkCmd                                     `cmd:"" help:"Get archive link - https://developer.github.com/v3/repos/contents/#get-archive-link"`
+	ListDeployKeys                                     ReposListDeployKeysCmd                                     `cmd:"" help:"List deploy keys - https://developer.github.com/v3/repos/keys/#list-deploy-keys"`
+	GetDeployKey                                       ReposGetDeployKeyCmd                                       `cmd:"" help:"Get a deploy key - https://developer.github.com/v3/repos/keys/#get-a-deploy-key"`
+	AddDeployKey                                       ReposAddDeployKeyCmd                                       `cmd:"" help:"Add a new deploy key - https://developer.github.com/v3/repos/keys/#add-a-new-deploy-key"`
+	RemoveDeployKey                                    ReposRemoveDeployKeyCmd                                    `cmd:"" help:"Remove a deploy key - https://developer.github.com/v3/repos/keys/#remove-a-deploy-key"`
+	ListDeployments                                    ReposListDeploymentsCmd                                    `cmd:"" help:"List deployments - https://developer.github.com/v3/repos/deployments/#list-deployments"`
+	GetDeployment                                      ReposGetDeploymentCmd                                      `cmd:"" help:"Get a single deployment - https://developer.github.com/v3/repos/deployments/#get-a-single-deployment"`
+	CreateDeployment                                   ReposCreateDeploymentCmd                                   `cmd:"" help:"Create a deployment - https://developer.github.com/v3/repos/deployments/#create-a-deployment"`
+	ListDeploymentStatuses                             ReposListDeploymentStatusesCmd                             `cmd:"" help:"List deployment statuses - https://developer.github.com/v3/repos/deployments/#list-deployment-statuses"`
+	GetDeploymentStatus                                ReposGetDeploymentStatusCmd                                `cmd:"" help:"Get a single deployment status - https://developer.github.com/v3/repos/deployments/#get-a-single-deployment-status"`
+	CreateDeploymentStatus                             ReposCreateDeploymentStatusCmd                             `cmd:"" help:"Create a deployment status - https://developer.github.com/v3/repos/deployments/#create-a-deployment-status"`
+	ListDownloads                                      ReposListDownloadsCmd                                      `cmd:"" help:"List downloads for a repository - https://developer.github.com/v3/repos/downloads/#list-downloads-for-a-repository"`
+	GetDownload                                        ReposGetDownloadCmd                                        `cmd:"" help:"Get a single download - https://developer.github.com/v3/repos/downloads/#get-a-single-download"`
+	DeleteDownload                                     ReposDeleteDownloadCmd                                     `cmd:"" help:"Delete a download - https://developer.github.com/v3/repos/downloads/#delete-a-download"`
+	ListForks                                          ReposListForksCmd                                          `cmd:"" help:"List forks - https://developer.github.com/v3/repos/forks/#list-forks"`
+	CreateFork                                         ReposCreateForkCmd                                         `cmd:"" help:"Create a fork - https://developer.github.com/v3/repos/forks/#create-a-fork"`
+	ListInvitations                                    ReposListInvitationsCmd                                    `cmd:"" help:"List invitations for a repository - https://developer.github.com/v3/repos/invitations/#list-invitations-for-a-repository"`
+	DeleteInvitation                                   ReposDeleteInvitationCmd                                   `cmd:"" help:"Delete a repository invitation - https://developer.github.com/v3/repos/invitations/#delete-a-repository-invitation"`
+	UpdateInvitation                                   ReposUpdateInvitationCmd                                   `cmd:"" help:"Update a repository invitation - https://developer.github.com/v3/repos/invitations/#update-a-repository-invitation"`
+	ListInvitationsForAuthenticatedUser                ReposListInvitationsForAuthenticatedUserCmd                `cmd:"" help:"List a user's repository invitations - https://developer.github.com/v3/repos/invitations/#list-a-users-repository-invitations"`
+	AcceptInvitation                                   ReposAcceptInvitationCmd                                   `cmd:"" help:"Accept a repository invitation - https://developer.github.com/v3/repos/invitations/#accept-a-repository-invitation"`
+	DeclineInvitation                                  ReposDeclineInvitationCmd                                  `cmd:"" help:"Decline a repository invitation - https://developer.github.com/v3/repos/invitations/#decline-a-repository-invitation"`
+	Merge                                              ReposMergeCmd                                              `cmd:"" help:"Perform a merge - https://developer.github.com/v3/repos/merging/#perform-a-merge"`
+	GetPages                                           ReposGetPagesCmd                                           `cmd:"" help:"Get information about a Pages site - https://developer.github.com/v3/repos/pages/#get-information-about-a-pages-site"`
+	UpdateInformationAboutPagesSite                    ReposUpdateInformationAboutPagesSiteCmd                    `cmd:"" help:"Update information about a Pages site - https://developer.github.com/v3/repos/pages/#update-information-about-a-pages-site"`
+	RequestPageBuild                                   ReposRequestPageBuildCmd                                   `cmd:"" help:"Request a page build - https://developer.github.com/v3/repos/pages/#request-a-page-build"`
+	ListPagesBuilds                                    ReposListPagesBuildsCmd                                    `cmd:"" help:"List Pages builds - https://developer.github.com/v3/repos/pages/#list-pages-builds"`
+	GetLatestPagesBuild                                ReposGetLatestPagesBuildCmd                                `cmd:"" help:"Get latest Pages build - https://developer.github.com/v3/repos/pages/#get-latest-pages-build"`
+	GetPagesBuild                                      ReposGetPagesBuildCmd                                      `cmd:"" help:"Get a specific Pages build - https://developer.github.com/v3/repos/pages/#get-a-specific-pages-build"`
+	ListReleases                                       ReposListReleasesCmd                                       `cmd:"" help:"List releases for a repository - https://developer.github.com/v3/repos/releases/#list-releases-for-a-repository"`
+	GetRelease                                         ReposGetReleaseCmd                                         `cmd:"" help:"Get a single release - https://developer.github.com/v3/repos/releases/#get-a-single-release"`
+	GetLatestRelease                                   ReposGetLatestReleaseCmd                                   `cmd:"" help:"Get the latest release - https://developer.github.com/v3/repos/releases/#get-the-latest-release"`
+	GetReleaseByTag                                    ReposGetReleaseByTagCmd                                    `cmd:"" help:"Get a release by tag name - https://developer.github.com/v3/repos/releases/#get-a-release-by-tag-name"`
+	CreateRelease                                      ReposCreateReleaseCmd                                      `cmd:"" help:"Create a release - https://developer.github.com/v3/repos/releases/#create-a-release"`
+	EditRelease                                        ReposEditReleaseCmd                                        `cmd:"" help:"Edit a release - https://developer.github.com/v3/repos/releases/#edit-a-release"`
+	DeleteRelease                                      ReposDeleteReleaseCmd                                      `cmd:"" help:"Delete a release - https://developer.github.com/v3/repos/releases/#delete-a-release"`
+	ListAssetsForRelease                               ReposListAssetsForReleaseCmd                               `cmd:"" help:"List assets for a release - https://developer.github.com/v3/repos/releases/#list-assets-for-a-release"`
+	GetReleaseAsset                                    ReposGetReleaseAssetCmd                                    `cmd:"" help:"Get a single release asset - https://developer.github.com/v3/repos/releases/#get-a-single-release-asset"`
+	EditReleaseAsset                                   ReposEditReleaseAssetCmd                                   `cmd:"" help:"Edit a release asset - https://developer.github.com/v3/repos/releases/#edit-a-release-asset"`
+	DeleteReleaseAsset                                 ReposDeleteReleaseAssetCmd                                 `cmd:"" help:"Delete a release asset - https://developer.github.com/v3/repos/releases/#delete-a-release-asset"`
+	GetContributorsStats                               ReposGetContributorsStatsCmd                               `cmd:"" help:"Get contributors list with additions, deletions, and commit counts - https://developer.github.com/v3/repos/statistics/#get-contributors-list-with-additions-deletions-and-commit-counts"`
+	GetCommitActivityStats                             ReposGetCommitActivityStatsCmd                             `cmd:"" help:"Get the last year of commit activity data - https://developer.github.com/v3/repos/statistics/#get-the-last-year-of-commit-activity-data"`
+	GetCodeFrequencyStats                              ReposGetCodeFrequencyStatsCmd                              `cmd:"" help:"Get the number of additions and deletions per week - https://developer.github.com/v3/repos/statistics/#get-the-number-of-additions-and-deletions-per-week"`
+	GetParticipationStats                              ReposGetParticipationStatsCmd                              `cmd:"" help:"Get the weekly commit count for the repository owner and everyone else - https://developer.github.com/v3/repos/statistics/#get-the-weekly-commit-count-for-the-repository-owner-and-everyone-else"`
+	GetPunchCardStats                                  ReposGetPunchCardStatsCmd                                  `cmd:"" help:"Get the number of commits per hour in each day - https://developer.github.com/v3/repos/statistics/#get-the-number-of-commits-per-hour-in-each-day"`
+	CreateStatus                                       ReposCreateStatusCmd                                       `cmd:"" help:"Create a status - https://developer.github.com/v3/repos/statuses/#create-a-status"`
+	ListStatusesForRef                                 ReposListStatusesForRefCmd                                 `cmd:"" help:"List statuses for a specific ref - https://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref"`
+	GetCombinedStatusForRef                            ReposGetCombinedStatusForRefCmd                            `cmd:"" help:"Get the combined status for a specific ref - https://developer.github.com/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref"`
+	GetTopReferrers                                    ReposGetTopReferrersCmd                                    `cmd:"" help:"List referrers - https://developer.github.com/v3/repos/traffic/#list-referrers"`
+	GetTopPaths                                        ReposGetTopPathsCmd                                        `cmd:"" help:"List paths - https://developer.github.com/v3/repos/traffic/#list-paths"`
+	GetViews                                           ReposGetViewsCmd                                           `cmd:"" help:"Views - https://developer.github.com/v3/repos/traffic/#views"`
+	GetClones                                          ReposGetClonesCmd                                          `cmd:"" help:"Clones - https://developer.github.com/v3/repos/traffic/#clones"`
+	ListHooks                                          ReposListHooksCmd                                          `cmd:"" help:"List hooks - https://developer.github.com/v3/repos/hooks/#list-hooks"`
+	GetHook                                            ReposGetHookCmd                                            `cmd:"" help:"Get single hook - https://developer.github.com/v3/repos/hooks/#get-single-hook"`
+	TestPushHook                                       ReposTestPushHookCmd                                       `cmd:"" help:"Test a push hook - https://developer.github.com/v3/repos/hooks/#test-a-push-hook"`
+	PingHook                                           ReposPingHookCmd                                           `cmd:"" help:"Ping a hook - https://developer.github.com/v3/repos/hooks/#ping-a-hook"`
+	DeleteHook                                         ReposDeleteHookCmd                                         `cmd:"" help:"Delete a hook - https://developer.github.com/v3/repos/hooks/#delete-a-hook"`
 }
 
 type ReposListCmd struct {

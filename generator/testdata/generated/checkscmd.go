@@ -5,14 +5,14 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type ChecksCmd struct {
-	ListForRef       ChecksListForRefCmd       `cmd:"" help:"List check runs for a specific ref"`
-	ListForSuite     ChecksListForSuiteCmd     `cmd:"" help:"List check runs in a check suite"`
-	Get              ChecksGetCmd              `cmd:"" help:"Get a single check run"`
-	ListAnnotations  ChecksListAnnotationsCmd  `cmd:"" help:"List annotations for a check run"`
-	GetSuite         ChecksGetSuiteCmd         `cmd:"" help:"Get a single check suite"`
-	ListSuitesForRef ChecksListSuitesForRefCmd `cmd:"" help:"List check suites for a specific ref"`
-	CreateSuite      ChecksCreateSuiteCmd      `cmd:"" help:"Create a check suite"`
-	RerequestSuite   ChecksRerequestSuiteCmd   `cmd:"" help:"Rerequest check suite"`
+	ListForRef       ChecksListForRefCmd       `cmd:"" help:"List check runs for a specific ref - https://developer.github.com/v3/checks/runs/#list-check-runs-for-a-specific-ref"`
+	ListForSuite     ChecksListForSuiteCmd     `cmd:"" help:"List check runs in a check suite - https://developer.github.com/v3/checks/runs/#list-check-runs-in-a-check-suite"`
+	Get              ChecksGetCmd              `cmd:"" help:"Get a single check run - https://developer.github.com/v3/checks/runs/#get-a-single-check-run"`
+	ListAnnotations  ChecksListAnnotationsCmd  `cmd:"" help:"List annotations for a check run - https://developer.github.com/v3/checks/runs/#list-annotations-for-a-check-run"`
+	GetSuite         ChecksGetSuiteCmd         `cmd:"" help:"Get a single check suite - https://developer.github.com/v3/checks/suites/#get-a-single-check-suite"`
+	ListSuitesForRef ChecksListSuitesForRefCmd `cmd:"" help:"List check suites for a specific ref - https://developer.github.com/v3/checks/suites/#list-check-suites-for-a-specific-ref"`
+	CreateSuite      ChecksCreateSuiteCmd      `cmd:"" help:"Create a check suite - https://developer.github.com/v3/checks/suites/#create-a-check-suite"`
+	RerequestSuite   ChecksRerequestSuiteCmd   `cmd:"" help:"Rerequest check suite - https://developer.github.com/v3/checks/suites/#rerequest-check-suite"`
 }
 
 type ChecksListForRefCmd struct {

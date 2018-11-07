@@ -5,24 +5,24 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type GistsCmd struct {
-	ListPublicForUser GistsListPublicForUserCmd `cmd:"" help:"List public gists for the specified user"`
-	List              GistsListCmd              `cmd:"" help:"List the authenticated user's gists or if called anonymously, this will return all public gists"`
-	ListPublic        GistsListPublicCmd        `cmd:"" help:"List all public gists"`
-	ListStarred       GistsListStarredCmd       `cmd:"" help:"List starred gists"`
-	Get               GistsGetCmd               `cmd:"" help:"Get a single gist"`
-	GetRevision       GistsGetRevisionCmd       `cmd:"" help:"Get a specific revision of a gist"`
-	ListCommits       GistsListCommitsCmd       `cmd:"" help:"List gist commits"`
-	Star              GistsStarCmd              `cmd:"" help:"Star a gist"`
-	Unstar            GistsUnstarCmd            `cmd:"" help:"Unstar a gist"`
-	CheckIsStarred    GistsCheckIsStarredCmd    `cmd:"" help:"Check if a gist is starred"`
-	Fork              GistsForkCmd              `cmd:"" help:"Fork a gist"`
-	ListForks         GistsListForksCmd         `cmd:"" help:"List gist forks"`
-	Delete            GistsDeleteCmd            `cmd:"" help:"Delete a gist"`
-	ListComments      GistsListCommentsCmd      `cmd:"" help:"List comments on a gist"`
-	GetComment        GistsGetCommentCmd        `cmd:"" help:"Get a single comment"`
-	CreateComment     GistsCreateCommentCmd     `cmd:"" help:"Create a comment"`
-	EditComment       GistsEditCommentCmd       `cmd:"" help:"Edit a comment"`
-	DeleteComment     GistsDeleteCommentCmd     `cmd:"" help:"Delete a comment"`
+	ListPublicForUser GistsListPublicForUserCmd `cmd:"" help:"List public gists for the specified user - https://developer.github.com/v3/gists/#list-a-users-gists"`
+	List              GistsListCmd              `cmd:"" help:"List the authenticated user's gists or if called anonymously, this will return all public gists - https://developer.github.com/v3/gists/#list-a-users-gists"`
+	ListPublic        GistsListPublicCmd        `cmd:"" help:"List all public gists - https://developer.github.com/v3/gists/#list-all-public-gists"`
+	ListStarred       GistsListStarredCmd       `cmd:"" help:"List starred gists - https://developer.github.com/v3/gists/#list-starred-gists"`
+	Get               GistsGetCmd               `cmd:"" help:"Get a single gist - https://developer.github.com/v3/gists/#get-a-single-gist"`
+	GetRevision       GistsGetRevisionCmd       `cmd:"" help:"Get a specific revision of a gist - https://developer.github.com/v3/gists/#get-a-specific-revision-of-a-gist"`
+	ListCommits       GistsListCommitsCmd       `cmd:"" help:"List gist commits - https://developer.github.com/v3/gists/#list-gist-commits"`
+	Star              GistsStarCmd              `cmd:"" help:"Star a gist - https://developer.github.com/v3/gists/#star-a-gist"`
+	Unstar            GistsUnstarCmd            `cmd:"" help:"Unstar a gist - https://developer.github.com/v3/gists/#unstar-a-gist"`
+	CheckIsStarred    GistsCheckIsStarredCmd    `cmd:"" help:"Check if a gist is starred - https://developer.github.com/v3/gists/#check-if-a-gist-is-starred"`
+	Fork              GistsForkCmd              `cmd:"" help:"Fork a gist - https://developer.github.com/v3/gists/#fork-a-gist"`
+	ListForks         GistsListForksCmd         `cmd:"" help:"List gist forks - https://developer.github.com/v3/gists/#list-gist-forks"`
+	Delete            GistsDeleteCmd            `cmd:"" help:"Delete a gist - https://developer.github.com/v3/gists/#delete-a-gist"`
+	ListComments      GistsListCommentsCmd      `cmd:"" help:"List comments on a gist - https://developer.github.com/v3/gists/comments/#list-comments-on-a-gist"`
+	GetComment        GistsGetCommentCmd        `cmd:"" help:"Get a single comment - https://developer.github.com/v3/gists/comments/#get-a-single-comment"`
+	CreateComment     GistsCreateCommentCmd     `cmd:"" help:"Create a comment - https://developer.github.com/v3/gists/comments/#create-a-comment"`
+	EditComment       GistsEditCommentCmd       `cmd:"" help:"Edit a comment - https://developer.github.com/v3/gists/comments/#edit-a-comment"`
+	DeleteComment     GistsDeleteCommentCmd     `cmd:"" help:"Delete a comment - https://developer.github.com/v3/gists/comments/#delete-a-comment"`
 }
 
 type GistsListPublicForUserCmd struct {

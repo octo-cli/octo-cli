@@ -5,39 +5,39 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type TeamsCmd struct {
-	List                     TeamsListCmd                     `cmd:"" help:"List teams"`
-	Get                      TeamsGetCmd                      `cmd:"" help:"Get team"`
-	Create                   TeamsCreateCmd                   `cmd:"" help:"Create team"`
-	Edit                     TeamsEditCmd                     `cmd:"" help:"Edit team"`
-	Delete                   TeamsDeleteCmd                   `cmd:"" help:"Delete team"`
-	ListChild                TeamsListChildCmd                `cmd:"" help:"List child teams"`
-	ListRepos                TeamsListReposCmd                `cmd:"" help:"List team repos"`
-	CheckManagesRepo         TeamsCheckManagesRepoCmd         `cmd:"" help:"Check if a team manages a repository"`
-	AddOrUpdateRepo          TeamsAddOrUpdateRepoCmd          `cmd:"" help:"Add or update team repository"`
-	RemoveRepo               TeamsRemoveRepoCmd               `cmd:"" help:"Remove team repository"`
-	ListForAuthenticatedUser TeamsListForAuthenticatedUserCmd `cmd:"" help:"List user teams"`
-	ListProjects             TeamsListProjectsCmd             `cmd:"" help:"List team projects"`
-	ReviewProject            TeamsReviewProjectCmd            `cmd:"" help:"Review a team project"`
-	AddOrUpdateProject       TeamsAddOrUpdateProjectCmd       `cmd:"" help:"Add or update team project"`
-	RemoveProject            TeamsRemoveProjectCmd            `cmd:"" help:"Remove team project"`
-	ListDiscussions          TeamsListDiscussionsCmd          `cmd:"" help:"List discussions"`
-	GetDiscussion            TeamsGetDiscussionCmd            `cmd:"" help:"Get a single discussion"`
-	CreateDiscussion         TeamsCreateDiscussionCmd         `cmd:"" help:"Create a discussion"`
-	EditDiscussion           TeamsEditDiscussionCmd           `cmd:"" help:"Edit a discussion"`
-	DeleteDiscussion         TeamsDeleteDiscussionCmd         `cmd:"" help:"Delete a discussion"`
-	ListDiscussionComments   TeamsListDiscussionCommentsCmd   `cmd:"" help:"List comments"`
-	GetDiscussionComment     TeamsGetDiscussionCommentCmd     `cmd:"" help:"Get a single comment"`
-	CreateDiscussionComment  TeamsCreateDiscussionCommentCmd  `cmd:"" help:"Create a comment"`
-	EditDiscussionComment    TeamsEditDiscussionCommentCmd    `cmd:"" help:"Edit a comment"`
-	DeleteDiscussionComment  TeamsDeleteDiscussionCommentCmd  `cmd:"" help:"Delete a comment"`
-	ListMembers              TeamsListMembersCmd              `cmd:"" help:"List team members"`
-	GetMember                TeamsGetMemberCmd                `cmd:"" help:"Get team member"`
-	AddMember                TeamsAddMemberCmd                `cmd:"" help:"Add team member"`
-	RemoveMember             TeamsRemoveMemberCmd             `cmd:"" help:"Remove team member"`
-	GetMembership            TeamsGetMembershipCmd            `cmd:"" help:"Get team membership"`
-	AddOrUpdateMembership    TeamsAddOrUpdateMembershipCmd    `cmd:"" help:"Add or update team membership"`
-	RemoveMembership         TeamsRemoveMembershipCmd         `cmd:"" help:"Remove team membership"`
-	ListPendingInvitations   TeamsListPendingInvitationsCmd   `cmd:"" help:"List pending team invitations"`
+	List                     TeamsListCmd                     `cmd:"" help:"List teams - https://developer.github.com/v3/teams/#list-teams"`
+	Get                      TeamsGetCmd                      `cmd:"" help:"Get team - https://developer.github.com/v3/teams/#get-team"`
+	Create                   TeamsCreateCmd                   `cmd:"" help:"Create team - https://developer.github.com/v3/teams/#create-team"`
+	Edit                     TeamsEditCmd                     `cmd:"" help:"Edit team - https://developer.github.com/v3/teams/#edit-team"`
+	Delete                   TeamsDeleteCmd                   `cmd:"" help:"Delete team - https://developer.github.com/v3/teams/#delete-team"`
+	ListChild                TeamsListChildCmd                `cmd:"" help:"List child teams - https://developer.github.com/v3/teams/#list-child-teams"`
+	ListRepos                TeamsListReposCmd                `cmd:"" help:"List team repos - https://developer.github.com/v3/teams/#list-team-repos"`
+	CheckManagesRepo         TeamsCheckManagesRepoCmd         `cmd:"" help:"Check if a team manages a repository - https://developer.github.com/v3/teams/#check-if-a-team-manages-a-repository"`
+	AddOrUpdateRepo          TeamsAddOrUpdateRepoCmd          `cmd:"" help:"Add or update team repository - https://developer.github.com/v3/teams/#add-or-update-team-repository"`
+	RemoveRepo               TeamsRemoveRepoCmd               `cmd:"" help:"Remove team repository - https://developer.github.com/v3/teams/#remove-team-repository"`
+	ListForAuthenticatedUser TeamsListForAuthenticatedUserCmd `cmd:"" help:"List user teams - https://developer.github.com/v3/teams/#list-user-teams"`
+	ListProjects             TeamsListProjectsCmd             `cmd:"" help:"List team projects - https://developer.github.com/v3/teams/#list-team-projects"`
+	ReviewProject            TeamsReviewProjectCmd            `cmd:"" help:"Review a team project - https://developer.github.com/v3/teams/#review-a-team-project"`
+	AddOrUpdateProject       TeamsAddOrUpdateProjectCmd       `cmd:"" help:"Add or update team project - https://developer.github.com/v3/teams/#add-or-update-team-project"`
+	RemoveProject            TeamsRemoveProjectCmd            `cmd:"" help:"Remove team project - https://developer.github.com/v3/teams/#remove-team-project"`
+	ListDiscussions          TeamsListDiscussionsCmd          `cmd:"" help:"List discussions - https://developer.github.com/v3/teams/discussions/#list-discussions"`
+	GetDiscussion            TeamsGetDiscussionCmd            `cmd:"" help:"Get a single discussion - https://developer.github.com/v3/teams/discussions/#get-a-single-discussion"`
+	CreateDiscussion         TeamsCreateDiscussionCmd         `cmd:"" help:"Create a discussion - https://developer.github.com/v3/teams/discussions/#create-a-discussion"`
+	EditDiscussion           TeamsEditDiscussionCmd           `cmd:"" help:"Edit a discussion - https://developer.github.com/v3/teams/discussions/#edit-a-discussion"`
+	DeleteDiscussion         TeamsDeleteDiscussionCmd         `cmd:"" help:"Delete a discussion - https://developer.github.com/v3/teams/discussions/#delete-a-discussion"`
+	ListDiscussionComments   TeamsListDiscussionCommentsCmd   `cmd:"" help:"List comments - https://developer.github.com/v3/teams/discussion_comments/#list-comments"`
+	GetDiscussionComment     TeamsGetDiscussionCommentCmd     `cmd:"" help:"Get a single comment - https://developer.github.com/v3/teams/discussion_comments/#get-a-single-comment"`
+	CreateDiscussionComment  TeamsCreateDiscussionCommentCmd  `cmd:"" help:"Create a comment - https://developer.github.com/v3/teams/discussion_comments/#create-a-comment"`
+	EditDiscussionComment    TeamsEditDiscussionCommentCmd    `cmd:"" help:"Edit a comment - https://developer.github.com/v3/teams/discussion_comments/#edit-a-comment"`
+	DeleteDiscussionComment  TeamsDeleteDiscussionCommentCmd  `cmd:"" help:"Delete a comment - https://developer.github.com/v3/teams/discussion_comments/#delete-a-comment"`
+	ListMembers              TeamsListMembersCmd              `cmd:"" help:"List team members - https://developer.github.com/v3/teams/members/#list-team-members"`
+	GetMember                TeamsGetMemberCmd                `cmd:"" help:"Get team member - https://developer.github.com/v3/teams/members/#get-team-member"`
+	AddMember                TeamsAddMemberCmd                `cmd:"" help:"Add team member - https://developer.github.com/v3/teams/members/#add-team-member"`
+	RemoveMember             TeamsRemoveMemberCmd             `cmd:"" help:"Remove team member - https://developer.github.com/v3/teams/members/#remove-team-member"`
+	GetMembership            TeamsGetMembershipCmd            `cmd:"" help:"Get team membership - https://developer.github.com/v3/teams/members/#get-team-membership"`
+	AddOrUpdateMembership    TeamsAddOrUpdateMembershipCmd    `cmd:"" help:"Add or update team membership - https://developer.github.com/v3/teams/members/#add-or-update-team-membership"`
+	RemoveMembership         TeamsRemoveMembershipCmd         `cmd:"" help:"Remove team membership - https://developer.github.com/v3/teams/members/#remove-team-membership"`
+	ListPendingInvitations   TeamsListPendingInvitationsCmd   `cmd:"" help:"List pending team invitations - https://developer.github.com/v3/teams/members/#list-pending-team-invitations"`
 }
 
 type TeamsListCmd struct {

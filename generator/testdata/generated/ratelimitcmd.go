@@ -5,7 +5,7 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type RateLimitCmd struct {
-	Get RateLimitGetCmd `cmd:"" help:"Get your current rate limit status"`
+	Get RateLimitGetCmd `cmd:"" help:"Get your current rate limit status - https://developer.github.com/v3/rate_limit/#get-your-current-rate-limit-status"`
 }
 
 type RateLimitGetCmd struct {

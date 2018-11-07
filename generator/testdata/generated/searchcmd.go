@@ -5,17 +5,17 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type SearchCmd struct {
-	Repos        SearchReposCmd        `cmd:"" help:"Search repositories"`
-	Commits      SearchCommitsCmd      `cmd:"" help:"Search commits"`
-	Code         SearchCodeCmd         `cmd:"" help:"Search code"`
-	Issues       SearchIssuesCmd       `cmd:"" help:"Search issues"`
-	Users        SearchUsersCmd        `cmd:"" help:"Search users"`
-	Topics       SearchTopicsCmd       `cmd:"" help:"Search topics"`
-	Labels       SearchLabelsCmd       `cmd:"" help:"Search labels"`
-	IssuesLegacy SearchIssuesLegacyCmd `cmd:"" help:"Search issues"`
-	ReposLegacy  SearchReposLegacyCmd  `cmd:"" help:"Search repositories"`
-	UsersLegacy  SearchUsersLegacyCmd  `cmd:"" help:"Search users"`
-	EmailLegacy  SearchEmailLegacyCmd  `cmd:"" help:"Email search"`
+	Repos        SearchReposCmd        `cmd:"" help:"Search repositories - https://developer.github.com/v3/search/#search-repositories"`
+	Commits      SearchCommitsCmd      `cmd:"" help:"Search commits - https://developer.github.com/v3/search/#search-commits"`
+	Code         SearchCodeCmd         `cmd:"" help:"Search code - https://developer.github.com/v3/search/#search-code"`
+	Issues       SearchIssuesCmd       `cmd:"" help:"Search issues - https://developer.github.com/v3/search/#search-issues"`
+	Users        SearchUsersCmd        `cmd:"" help:"Search users - https://developer.github.com/v3/search/#search-users"`
+	Topics       SearchTopicsCmd       `cmd:"" help:"Search topics - https://developer.github.com/v3/search/#search-topics"`
+	Labels       SearchLabelsCmd       `cmd:"" help:"Search labels - https://developer.github.com/v3/search/#search-labels"`
+	IssuesLegacy SearchIssuesLegacyCmd `cmd:"" help:"Search issues - https://developer.github.com/v3/search/legacy/#search-issues"`
+	ReposLegacy  SearchReposLegacyCmd  `cmd:"" help:"Search repositories - https://developer.github.com/v3/search/legacy/#search-repositories"`
+	UsersLegacy  SearchUsersLegacyCmd  `cmd:"" help:"Search users - https://developer.github.com/v3/search/legacy/#search-users"`
+	EmailLegacy  SearchEmailLegacyCmd  `cmd:"" help:"Email search - https://developer.github.com/v3/search/legacy/#email-search"`
 }
 
 type SearchReposCmd struct {

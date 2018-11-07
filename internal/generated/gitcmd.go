@@ -5,16 +5,16 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type GitCmd struct {
-	GetBlob    GitGetBlobCmd    `cmd:"" help:"Get a blob"`
-	CreateBlob GitCreateBlobCmd `cmd:"" help:"Create a blob"`
-	GetCommit  GitGetCommitCmd  `cmd:"" help:"Get a commit"`
-	GetRef     GitGetRefCmd     `cmd:"" help:"Get a reference"`
-	ListRefs   GitListRefsCmd   `cmd:"" help:"Get all references"`
-	CreateRef  GitCreateRefCmd  `cmd:"" help:"Create a reference"`
-	UpdateRef  GitUpdateRefCmd  `cmd:"" help:"Update a reference"`
-	DeleteRef  GitDeleteRefCmd  `cmd:"" help:"Delete a reference"`
-	GetTag     GitGetTagCmd     `cmd:"" help:"Get a tag"`
-	GetTree    GitGetTreeCmd    `cmd:"" help:"Get a tree"`
+	GetBlob    GitGetBlobCmd    `cmd:"" help:"Get a blob - https://developer.github.com/v3/git/blobs/#get-a-blob"`
+	CreateBlob GitCreateBlobCmd `cmd:"" help:"Create a blob - https://developer.github.com/v3/git/blobs/#create-a-blob"`
+	GetCommit  GitGetCommitCmd  `cmd:"" help:"Get a commit - https://developer.github.com/v3/git/commits/#get-a-commit"`
+	GetRef     GitGetRefCmd     `cmd:"" help:"Get a reference - https://developer.github.com/v3/git/refs/#get-a-reference"`
+	ListRefs   GitListRefsCmd   `cmd:"" help:"Get all references - https://developer.github.com/v3/git/refs/#get-all-references"`
+	CreateRef  GitCreateRefCmd  `cmd:"" help:"Create a reference - https://developer.github.com/v3/git/refs/#create-a-reference"`
+	UpdateRef  GitUpdateRefCmd  `cmd:"" help:"Update a reference - https://developer.github.com/v3/git/refs/#update-a-reference"`
+	DeleteRef  GitDeleteRefCmd  `cmd:"" help:"Delete a reference - https://developer.github.com/v3/git/refs/#delete-a-reference"`
+	GetTag     GitGetTagCmd     `cmd:"" help:"Get a tag - https://developer.github.com/v3/git/tags/#get-a-tag"`
+	GetTree    GitGetTreeCmd    `cmd:"" help:"Get a tree - https://developer.github.com/v3/git/trees/#get-a-tree"`
 }
 
 type GitGetBlobCmd struct {

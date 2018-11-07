@@ -5,31 +5,31 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type PullsCmd struct {
-	List                 PullsListCmd                 `cmd:"" help:"List pull requests"`
-	Get                  PullsGetCmd                  `cmd:"" help:"Get a single pull request"`
-	Create               PullsCreateCmd               `cmd:"" help:"Create a pull request"`
-	CreateFromIssue      PullsCreateFromIssueCmd      `cmd:"" help:"Create a Pull Request from an Issue"`
-	Update               PullsUpdateCmd               `cmd:"" help:"Update a pull request"`
-	ListCommits          PullsListCommitsCmd          `cmd:"" help:"List commits on a pull request"`
-	ListFiles            PullsListFilesCmd            `cmd:"" help:"List pull requests files"`
-	CheckIfMerged        PullsCheckIfMergedCmd        `cmd:"" help:"Get if a pull request has been merged"`
-	Merge                PullsMergeCmd                `cmd:"" help:"Merge a pull request (Merge Button)"`
-	ListReviews          PullsListReviewsCmd          `cmd:"" help:"List reviews on a pull request"`
-	GetReview            PullsGetReviewCmd            `cmd:"" help:"Get a single review"`
-	DeletePendingReview  PullsDeletePendingReviewCmd  `cmd:"" help:"Delete a pending review"`
-	GetCommentsForReview PullsGetCommentsForReviewCmd `cmd:"" help:"Get comments for a single review"`
-	SubmitReview         PullsSubmitReviewCmd         `cmd:"" help:"Submit a pull request review"`
-	DismissReview        PullsDismissReviewCmd        `cmd:"" help:"Dismiss a pull request review"`
-	ListComments         PullsListCommentsCmd         `cmd:"" help:"List comments on a pull request"`
-	ListCommentsForRepo  PullsListCommentsForRepoCmd  `cmd:"" help:"List comments in a repository"`
-	GetComment           PullsGetCommentCmd           `cmd:"" help:"Get a single comment"`
-	CreateComment        PullsCreateCommentCmd        `cmd:"" help:"Create a comment"`
-	CreateCommentReply   PullsCreateCommentReplyCmd   `cmd:"" help:"Create a comment reply"`
-	EditComment          PullsEditCommentCmd          `cmd:"" help:"Edit a comment"`
-	DeleteComment        PullsDeleteCommentCmd        `cmd:"" help:"Delete a comment"`
-	ListReviewRequests   PullsListReviewRequestsCmd   `cmd:"" help:"List review requests"`
-	CreateReviewRequest  PullsCreateReviewRequestCmd  `cmd:"" help:"Create a review request"`
-	DeleteReviewRequest  PullsDeleteReviewRequestCmd  `cmd:"" help:"Delete a review request"`
+	List                 PullsListCmd                 `cmd:"" help:"List pull requests - https://developer.github.com/v3/pulls/#list-pull-requests"`
+	Get                  PullsGetCmd                  `cmd:"" help:"Get a single pull request - https://developer.github.com/v3/pulls/#get-a-single-pull-request"`
+	Create               PullsCreateCmd               `cmd:"" help:"Create a pull request - https://developer.github.com/v3/pulls/#create-a-pull-request"`
+	CreateFromIssue      PullsCreateFromIssueCmd      `cmd:"" help:"Create a Pull Request from an Issue - https://developer.github.com/v3/pulls/#create-a-pull-request"`
+	Update               PullsUpdateCmd               `cmd:"" help:"Update a pull request - https://developer.github.com/v3/pulls/#update-a-pull-request"`
+	ListCommits          PullsListCommitsCmd          `cmd:"" help:"List commits on a pull request - https://developer.github.com/v3/pulls/#list-commits-on-a-pull-request"`
+	ListFiles            PullsListFilesCmd            `cmd:"" help:"List pull requests files - https://developer.github.com/v3/pulls/#list-pull-requests-files"`
+	CheckIfMerged        PullsCheckIfMergedCmd        `cmd:"" help:"Get if a pull request has been merged - https://developer.github.com/v3/pulls/#get-if-a-pull-request-has-been-merged"`
+	Merge                PullsMergeCmd                `cmd:"" help:"Merge a pull request (Merge Button) - https://developer.github.com/v3/pulls/#merge-a-pull-request-merge-button"`
+	ListReviews          PullsListReviewsCmd          `cmd:"" help:"List reviews on a pull request - https://developer.github.com/v3/pulls/reviews/#list-reviews-on-a-pull-request"`
+	GetReview            PullsGetReviewCmd            `cmd:"" help:"Get a single review - https://developer.github.com/v3/pulls/reviews/#get-a-single-review"`
+	DeletePendingReview  PullsDeletePendingReviewCmd  `cmd:"" help:"Delete a pending review - https://developer.github.com/v3/pulls/reviews/#delete-a-pending-review"`
+	GetCommentsForReview PullsGetCommentsForReviewCmd `cmd:"" help:"Get comments for a single review - https://developer.github.com/v3/pulls/reviews/#get-comments-for-a-single-review"`
+	SubmitReview         PullsSubmitReviewCmd         `cmd:"" help:"Submit a pull request review - https://developer.github.com/v3/pulls/reviews/#submit-a-pull-request-review"`
+	DismissReview        PullsDismissReviewCmd        `cmd:"" help:"Dismiss a pull request review - https://developer.github.com/v3/pulls/reviews/#dismiss-a-pull-request-review"`
+	ListComments         PullsListCommentsCmd         `cmd:"" help:"List comments on a pull request - https://developer.github.com/v3/pulls/comments/#list-comments-on-a-pull-request"`
+	ListCommentsForRepo  PullsListCommentsForRepoCmd  `cmd:"" help:"List comments in a repository - https://developer.github.com/v3/pulls/comments/#list-comments-in-a-repository"`
+	GetComment           PullsGetCommentCmd           `cmd:"" help:"Get a single comment - https://developer.github.com/v3/pulls/comments/#get-a-single-comment"`
+	CreateComment        PullsCreateCommentCmd        `cmd:"" help:"Create a comment - https://developer.github.com/v3/pulls/comments/#create-a-comment"`
+	CreateCommentReply   PullsCreateCommentReplyCmd   `cmd:"" help:"Create a comment reply - https://developer.github.com/v3/pulls/comments/#create-a-comment"`
+	EditComment          PullsEditCommentCmd          `cmd:"" help:"Edit a comment - https://developer.github.com/v3/pulls/comments/#edit-a-comment"`
+	DeleteComment        PullsDeleteCommentCmd        `cmd:"" help:"Delete a comment - https://developer.github.com/v3/pulls/comments/#delete-a-comment"`
+	ListReviewRequests   PullsListReviewRequestsCmd   `cmd:"" help:"List review requests - https://developer.github.com/v3/pulls/review_requests/#list-review-requests"`
+	CreateReviewRequest  PullsCreateReviewRequestCmd  `cmd:"" help:"Create a review request - https://developer.github.com/v3/pulls/review_requests/#create-a-review-request"`
+	DeleteReviewRequest  PullsDeleteReviewRequestCmd  `cmd:"" help:"Delete a review request - https://developer.github.com/v3/pulls/review_requests/#delete-a-review-request"`
 }
 
 type PullsListCmd struct {
