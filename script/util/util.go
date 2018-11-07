@@ -36,7 +36,7 @@ type buildLint struct {
 
 func (l *buildLint) Run() error {
 	return buildIfNeeded(filepath.Join(bindir, "golangci-lint"),
-		filepath.Join(scriptdir, "golangci-lint", "main.go"),
+		filepath.Join(scriptdir, "util", "golangci-lint", "main.go"),
 		"",
 		l.Force)
 }

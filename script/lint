@@ -3,5 +3,5 @@
 set -e
 
 cd "$( dirname "${BASH_SOURCE[0]}" )/.."
-[ -f "bin/lint" ] || go build -o bin/lint ./script/util/lint
-bin/lint run --enable=golint
+bin/util build-lint
+bin/golangci-lint run --enable=golint
