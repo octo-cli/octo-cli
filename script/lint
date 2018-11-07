@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 
 set -e
 
-cd "$( dirname "${BASH_SOURCE[0]}" )/.."
-[ -f "bin/golangci-lint" ] || script/bootstrap
+CDPATH= cd -- "$(dirname -- $(dirname -- "$0"))"
+bin/util build-lint
 bin/golangci-lint run --enable=golint
