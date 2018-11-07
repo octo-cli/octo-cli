@@ -4,4 +4,4 @@ set -e
 
 cd "$(dirname "$0")/.."
 
-go run ./generator run $@
+go run ./buildtool generate $@

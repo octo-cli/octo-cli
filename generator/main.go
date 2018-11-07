@@ -1,4 +1,4 @@
-package main
+package generator
 
 import (
 	"bytes"
@@ -20,29 +20,29 @@ const routesTimestampFormat = "20060102T150405Z0700"
 
 type (
 	genCli struct {
-		Run              genCliRun              `cmd:"" help:"generate production code"`
-		UpdateRoutes     genCliUpdateRoutes     `cmd:"" help:"update routes.json with the latest"`
-		UpdateTestdata   genCliUpdateTestdata   `cmd:"" help:"updates routes.json and generated in generator/testdata"`
-		UpdateReadmeHelp genCliUpdateReadmeHelp `cmd:"" help:"updates the help output section of README.md with whatever you pipe in here."`
+		Run              GenerateCmd       `cmd:"" help:"generate production code"`
+		UpdateRoutes     UpdateRoutesCmd   `cmd:"" help:"update routes.json with the latest"`
+		UpdateTestdata   UpdateTestDataCmd `cmd:"" help:"updates routes.json and generated in generator/testdata"`
+		UpdateReadmeHelp UpdateReadme      `cmd:"" help:"updates the help output section of README.md with whatever you pipe in here."`
 	}
 
-	genCliUpdateRoutes struct {
+	UpdateRoutesCmd struct {
 		RoutesPath string `type:"existingfile" default:"routes.json"`
 		RoutesURL  string `default:"https://octokit.github.io/routes/index.json"`
 	}
 
-	genCliRun struct {
+	GenerateCmd struct {
 		RoutesPath string `type:"existingfile" default:"routes.json"`
 		OutputPath string `type:"existingdir" default:"./internal/generated"`
 		Verify     bool   `help:"Verify a new run won't change anything"`
 	}
 
-	genCliUpdateReadmeHelp struct {
+	UpdateReadme struct {
 		ReadmePath string `type:"existingfile" default:"README.md" help:"path to README.md"`
 		Verify     bool   `help:"don't write anything.  Just verify README.md is current"`
 	}
 
-	genCliUpdateTestdata struct{}
+	UpdateTestDataCmd struct{}
 )
 
 var readmeRegexp = regexp.MustCompile(`(?s:<!--- START HELP OUTPUT --->.*<!--- END HELP OUTPUT --->)`)
@@ -68,7 +68,7 @@ func getHelpOutput() ([]byte, error) {
 	return output, nil
 }
 
-func (k *genCliUpdateReadmeHelp) Run() error {
+func (k *UpdateReadme) Run() error {
 	helpContent, err := getHelpOutput()
 	if err != nil {
 		return errors.Wrap(err, "failed getting help output")
@@ -81,7 +81,7 @@ func (k *genCliUpdateReadmeHelp) Run() error {
 	newReadmeContent := readmeRegexp.ReplaceAll(oldReadmeContent, helpContent)
 
 	if k.Verify {
-		if  !bytes.Equal(newReadmeContent, oldReadmeContent) {
+		if !bytes.Equal(newReadmeContent, oldReadmeContent) {
 			err = errors.Errorf("%q is not current", k.ReadmePath)
 		}
 	} else {
@@ -91,7 +91,7 @@ func (k *genCliUpdateReadmeHelp) Run() error {
 	return err
 }
 
-func (k *genCliRun) Run() error {
+func (k *GenerateCmd) Run() error {
 	if k.Verify {
 		diffs, err := verify(k.RoutesPath, k.OutputPath)
 		if err != nil {
@@ -159,11 +159,11 @@ func updateLastModified(routesPath string, resp *http.Response) error {
 	return errors.Wrapf(lmFile.Close(), "failed closing file %q", lmPath)
 }
 
-func (k *genCliUpdateRoutes) Run() error {
+func (k *UpdateRoutesCmd) Run() error {
 	return updateRoutes(k.RoutesURL, k.RoutesPath)
 }
 
-func (k *genCliUpdateTestdata) Run() error {
+func (k *UpdateTestDataCmd) Run() error {
 	url := "https://octokit.github.io/routes/index.json"
 	routesPath := "generator/testdata/routes.json"
 	resp, err := http.Get(url)

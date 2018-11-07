@@ -1,4 +1,4 @@
-package main
+package generator
 
 import (
 	"io/ioutil"
@@ -15,7 +15,7 @@ func Test_genCliRun_Run(t *testing.T) {
 	t.Run("creates the right files", func(t *testing.T) {
 		tempDir, cleanTempDir := createTempDir(t)
 		defer cleanTempDir()
-		k := &genCliRun{
+		k := &GenerateCmd{
 			RoutesPath: "testdata/routes.json",
 			OutputPath: tempDir,
 		}
@@ -29,7 +29,7 @@ func Test_genCliRun_Run(t *testing.T) {
 	t.Run("file content matches", func(t *testing.T) {
 		tempDir, cleanTempDir := createTempDir(t)
 		defer cleanTempDir()
-		k := &genCliRun{
+		k := &GenerateCmd{
 			RoutesPath: "testdata/routes.json",
 			OutputPath: tempDir,
 		}

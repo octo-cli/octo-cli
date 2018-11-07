@@ -4,4 +4,4 @@ set -e
 
 cd "$(dirname "$0")/.."
 
-go run ./generator update-routes $@
+go run ./buildtool update-routes $@

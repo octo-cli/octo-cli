@@ -4,4 +4,4 @@ set -e
 
 cd "$(dirname "$0")/.."
 
-go run ./generator update-readme-help $@
+go run ./buildtool update-readme $@
