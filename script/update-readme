@@ -3,5 +3,5 @@
 set -e
 
 cd "$(dirname "$0")/.."
-
-go run ./buildtool update-readme $@
+script/bootstrap
+bin/buildtool update-readme $@

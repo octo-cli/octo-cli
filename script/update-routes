@@ -3,5 +3,5 @@
 set -e
 
 cd "$(dirname "$0")/.."
-
-go run ./buildtool update-routes $@
+script/bootstrap
+bin/buildtool update-routes $@

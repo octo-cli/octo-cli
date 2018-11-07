@@ -3,5 +3,5 @@
 set -e
 
 cd "$(dirname "$0")/.."
-
-go run ./buildtool generate $@
+script/bootstrap
+bin/buildtool generate $@

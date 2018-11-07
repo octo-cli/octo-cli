@@ -2,4 +2,4 @@
 
 set -e
 CDPATH= cd -- "$(dirname -- $(dirname -- "$0"))"
-go run ./script/util bootstrap $@
+bin/buildtool bootstrap $@ || go run ./buildtool bootstrap $@
