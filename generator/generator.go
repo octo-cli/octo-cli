@@ -2,16 +2,18 @@ package main
 
 import (
 	"bytes"
-	"github.com/fatih/structtag"
-	"github.com/pkg/errors"
+	"fmt"
 	"go/format"
-	"golang.org/x/tools/imports"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"sort"
 	"strings"
 	"text/template"
+
+	"github.com/fatih/structtag"
+	"github.com/pkg/errors"
+	"golang.org/x/tools/imports"
 )
 
 var paramTypes = map[string]string{
@@ -209,10 +211,14 @@ func Generate(routesPath, outputPath string) {
 				CmdStruct: tmplHelper,
 				RunMethod: runMethod,
 			})
+			helpText := route.Name
+			if route.DocumentationURL != "" {
+				helpText = fmt.Sprintf("%v - %v", route.Name, route.DocumentationURL)
+			}
 			svcTmpl.SvcStruct.Fields = append(svcTmpl.SvcStruct.Fields, StructField{
 				Name: ToArgName(route.IDName),
 				Type: structName,
-				Tags: newTags(newTag("cmd", ""), newTag("help", route.Name)),
+				Tags: newTags(newTag("cmd", ""), newTag("help", helpText)),
 			})
 
 		}
