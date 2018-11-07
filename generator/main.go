@@ -3,7 +3,6 @@ package generator
 import (
 	"bytes"
 	"fmt"
-	"github.com/alecthomas/kong"
 	"github.com/pkg/errors"
 	"io"
 	"io/ioutil"
@@ -19,13 +18,6 @@ import (
 const routesTimestampFormat = "20060102T150405Z0700"
 
 type (
-	genCli struct {
-		Run              GenerateCmd       `cmd:"" help:"generate production code"`
-		UpdateRoutes     UpdateRoutesCmd   `cmd:"" help:"update routes.json with the latest"`
-		UpdateTestdata   UpdateTestDataCmd `cmd:"" help:"updates routes.json and generated in generator/testdata"`
-		UpdateReadmeHelp UpdateReadme      `cmd:"" help:"updates the help output section of README.md with whatever you pipe in here."`
-	}
-
 	UpdateRoutesCmd struct {
 		RoutesPath string `type:"existingfile" default:"routes.json"`
 		RoutesURL  string `default:"https://octokit.github.io/routes/index.json"`
@@ -190,10 +182,4 @@ func (k *UpdateTestDataCmd) Run() error {
 	Generate(routesPath, "generator/testdata/generated")
 
 	return errors.Wrap(err, "")
-}
-
-func main() {
-	k := kong.Parse(&genCli{})
-	err := k.Run()
-	k.FatalIfErrorf(err)
 }
