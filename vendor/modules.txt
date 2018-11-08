@@ -15,6 +15,9 @@ github.com/masterminds/semver
 github.com/pkg/errors
 # github.com/pmezard/go-difflib v1.0.0
 github.com/pmezard/go-difflib/difflib
+# github.com/spf13/afero v1.1.2
+github.com/spf13/afero
+github.com/spf13/afero/mem
 # github.com/stretchr/testify v1.2.2
 github.com/stretchr/testify/assert
 github.com/stretchr/testify/require
@@ -24,6 +27,9 @@ golang.org/x/net/context/ctxhttp
 # golang.org/x/oauth2 v0.0.0-20181017192945-9dcd33a902f4
 golang.org/x/oauth2
 golang.org/x/oauth2/internal
+# golang.org/x/text v0.3.0
+golang.org/x/text/transform
+golang.org/x/text/unicode/norm
 # golang.org/x/tools v0.0.0-20181106213628-e21233ffa6c3
 golang.org/x/tools/imports
 golang.org/x/tools/go/ast/astutil

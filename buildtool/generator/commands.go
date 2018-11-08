@@ -2,11 +2,8 @@ package generator
 
 import (
 	"fmt"
-	"io"
-	"net/http"
-	"os"
-
 	"github.com/pkg/errors"
+	"github.com/spf13/afero"
 )
 
 type (
@@ -14,12 +11,14 @@ type (
 		RoutesPath string `type:"existingfile" default:"routes.json"`
 		OutputPath string `type:"existingdir" default:"./internal/generated"`
 		Verify     bool   `help:"Verify a new run won't change anything"`
+		fs         afero.Fs
 	}
-
-	UpdateTestDataCmd struct{}
 )
 
 func (k *GenerateCmd) Run() error {
+	if k.fs == nil {
+		k.fs = afero.NewOsFs()
+	}
 	if k.Verify {
 		diffs, err := verify(k.RoutesPath, k.OutputPath)
 		if err != nil {
@@ -29,36 +28,7 @@ func (k *GenerateCmd) Run() error {
 			return fmt.Errorf("some files did not match: %v", diffs)
 		}
 	} else {
-		Generate(k.RoutesPath, k.OutputPath)
+		Generate(k.RoutesPath, k.OutputPath, k.fs)
 	}
 	return nil
-}
-
-func (k *UpdateTestDataCmd) Run() error {
-	url := "https://octokit.github.io/routes/index.json"
-	routesPath := "buildtool/generator/testdata/routes.json"
-	resp, err := http.Get(url)
-	if err != nil {
-		return errors.Wrap(err, "")
-	}
-	outFile, err := os.Create(routesPath)
-	if err != nil {
-		return errors.Wrap(err, "")
-	}
-	_, err = io.Copy(outFile, resp.Body)
-	if err != nil {
-		return errors.Wrap(err, "")
-	}
-	err = resp.Body.Close()
-	if err != nil {
-		return err
-	}
-	err = outFile.Close()
-	if err != nil {
-		return err
-	}
-
-	Generate(routesPath, "buildtool/generator/testdata/generated")
-
-	return errors.Wrap(err, "")
 }
