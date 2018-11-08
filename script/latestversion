@@ -1,8 +1,8 @@
 #!/bin/sh
-# returns the semver from the latest tag. Drops the leading v
-# pass --nots to drop the -timestamp at the end
+
 set -e
 
 CDPATH= cd -- "$(dirname -- $(dirname -- "$0"))"
 script/bootstrap
+
 bin/buildtool latest-version $@
