@@ -5,6 +5,7 @@ require (
 	github.com/dnaeon/go-vcr v0.0.0-20180920040454-5637cf3d8a31
 	github.com/fatih/structtag v1.0.0
 	github.com/kr/pretty v0.1.0 // indirect
+	github.com/masterminds/semver v1.4.2
 	github.com/pkg/errors v0.8.0
 	github.com/stretchr/testify v1.2.2
 	golang.org/x/net v0.0.0-20181106065722-10aee1819953 // indirect

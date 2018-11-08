@@ -3,12 +3,6 @@
 # pass --nots to drop the -timestamp at the end
 set -e
 
-cd "$(dirname "$0")/.."
-
-if [ "--nots" == "$1" ]; then
-  git describe --tags --match v*[0-9].*[0-9].*[0-9]* --abbrev=0 \
-   | sed -n 's/v\([0-9]*\.[0-9]*\.[0-9]*\).*/\1/p'
-else
-  git describe --tags --match v*[0-9].*[0-9].*[0-9]* --abbrev=0 \
-   | sed -n 's/v\(.*\).*/\1/p'
-fi
+CDPATH= cd -- "$(dirname -- $(dirname -- "$0"))"
+script/bootstrap
+bin/buildtool latest-version $@
