@@ -29,6 +29,7 @@ type cli struct {
 	Lint           lint                  `cmd:"" help:"run lint"`
 	LatestVersion  latestVersionCmd      `cmd:"" help:"get the latest tagged version"`
 	TagRelease     tagReleaseCmd         `cmd:"" help:"create a new version number"`
+	Cibuild        cibuildCmd            `cmd:"" help:"run ci"`
 }
 
 func main() {
@@ -146,4 +147,10 @@ type updateTestDataCmd struct{}
 
 func (k *updateTestDataCmd) Run() error {
 	return updateTestData()
+}
+
+type cibuildCmd struct{}
+
+func (c *cibuildCmd) Run() error {
+	return cibuild()
 }

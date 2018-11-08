@@ -181,3 +181,29 @@ func  updateTestData()  error  {
 
 	return errors.Wrap(err, "")
 }
+
+func cibuild() error {
+	var failures []string
+	for _, script := range [][]string{
+		{"script/test", "-race"},
+		{"script/lint"},
+		{"script/generate", "--verify"},
+		{"script/update-readme", "--verify"},
+	} {
+		fmt.Printf("\nrunning %s\n\n", strings.Join(script, " "))
+		cmd := exec.Command(script[0])
+		if len(script) > 1 {
+			cmd = exec.Command(script[0], script[1:]...)
+		}
+		cmd.Stderr = os.Stderr
+		cmd.Stdout = os.Stdout
+		err := cmd.Run()
+		if err != nil {
+			failures = append(failures, strings.Join(script, " "))
+		}
+	}
+	if len(failures) > 0 {
+		return errors.New("cibuild failed")
+	}
+	return nil
+}
