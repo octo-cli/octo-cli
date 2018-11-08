@@ -2,6 +2,6 @@
 
 set -e
 
-cd "$(dirname "$0")/.."
+CDPATH= cd -- "$(dirname -- $(dirname -- "$0"))"
 script/bootstrap
 bin/buildtool update-readme $@
