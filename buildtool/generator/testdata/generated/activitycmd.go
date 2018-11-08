@@ -5,40 +5,40 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type ActivityCmd struct {
-	ListPublicEvents                     ActivityListPublicEventsCmd                     `cmd:"" help:"List public events"`
-	ListRepoEvents                       ActivityListRepoEventsCmd                       `cmd:"" help:"List repository events"`
-	ListPublicEventsForRepoNetwork       ActivityListPublicEventsForRepoNetworkCmd       `cmd:"" help:"List public events for a network of repositories"`
-	ListPublicEventsForOrg               ActivityListPublicEventsForOrgCmd               `cmd:"" help:"List public events for an organization"`
-	ListReceivedEventsForUser            ActivityListReceivedEventsForUserCmd            `cmd:"" help:"List events that a user has received"`
-	ListReceivedPublicEventsForUser      ActivityListReceivedPublicEventsForUserCmd      `cmd:"" help:"List public events that a user has received"`
-	ListEventsForUser                    ActivityListEventsForUserCmd                    `cmd:"" help:"List events performed by a user"`
-	ListPublicEventsForUser              ActivityListPublicEventsForUserCmd              `cmd:"" help:"List public events performed by a user"`
-	ListEventsForOrg                     ActivityListEventsForOrgCmd                     `cmd:"" help:"List events for an organization"`
-	ListFeeds                            ActivityListFeedsCmd                            `cmd:"" help:"List feeds"`
-	ListNotifications                    ActivityListNotificationsCmd                    `cmd:"" help:"List your notifications"`
-	ListNotificationsForRepo             ActivityListNotificationsForRepoCmd             `cmd:"" help:"List your notifications in a repository"`
-	MarkAsRead                           ActivityMarkAsReadCmd                           `cmd:"" help:"Mark as read"`
-	MarkNotificationsAsReadForRepo       ActivityMarkNotificationsAsReadForRepoCmd       `cmd:"" help:"Mark notifications as read in a repository"`
-	GetThread                            ActivityGetThreadCmd                            `cmd:"" help:"View a single thread"`
-	MarkThreadAsRead                     ActivityMarkThreadAsReadCmd                     `cmd:"" help:"Mark a thread as read"`
-	GetThreadSubscription                ActivityGetThreadSubscriptionCmd                `cmd:"" help:"Get a thread subscription"`
-	SetThreadSubscription                ActivitySetThreadSubscriptionCmd                `cmd:"" help:"Set a thread subscription"`
-	DeleteThreadSubscription             ActivityDeleteThreadSubscriptionCmd             `cmd:"" help:"Delete a thread subscription"`
-	ListStargazersForRepo                ActivityListStargazersForRepoCmd                `cmd:"" help:"List Stargazers"`
-	ListReposStarredByUser               ActivityListReposStarredByUserCmd               `cmd:"" help:"List repositories being starred by a user"`
-	ListReposStarredByAuthenticatedUser  ActivityListReposStarredByAuthenticatedUserCmd  `cmd:"" help:"List repositories being starred by the authenticated user"`
-	CheckStarringRepo                    ActivityCheckStarringRepoCmd                    `cmd:"" help:"Check if you are starring a repository"`
-	StarRepo                             ActivityStarRepoCmd                             `cmd:"" help:"Star a repository"`
-	UnstarRepo                           ActivityUnstarRepoCmd                           `cmd:"" help:"Unstar a repository"`
-	ListWatchersForRepo                  ActivityListWatchersForRepoCmd                  `cmd:"" help:"List watchers"`
-	ListReposWatchedByUser               ActivityListReposWatchedByUserCmd               `cmd:"" help:"List repositories being watched by a user"`
-	ListWatchedReposForAuthenticatedUser ActivityListWatchedReposForAuthenticatedUserCmd `cmd:"" help:"List repositories being watched by the authenticated user"`
-	GetRepoSubscription                  ActivityGetRepoSubscriptionCmd                  `cmd:"" help:"Get a Repository Subscription"`
-	SetRepoSubscription                  ActivitySetRepoSubscriptionCmd                  `cmd:"" help:"Set a Repository Subscription"`
-	DeleteRepoSubscription               ActivityDeleteRepoSubscriptionCmd               `cmd:"" help:"Delete a Repository Subscription"`
-	CheckWatchingRepoLegacy              ActivityCheckWatchingRepoLegacyCmd              `cmd:"" help:"Check if you are watching a repository (LEGACY)"`
-	WatchRepoLegacy                      ActivityWatchRepoLegacyCmd                      `cmd:"" help:"Watch a repository (LEGACY)"`
-	StopWatchingRepoLegacy               ActivityStopWatchingRepoLegacyCmd               `cmd:"" help:"Stop watching a repository (LEGACY)"`
+	ListPublicEvents                     ActivityListPublicEventsCmd                     `cmd:"" help:"List public events - https://developer.github.com/v3/activity/events/#list-public-events"`
+	ListRepoEvents                       ActivityListRepoEventsCmd                       `cmd:"" help:"List repository events - https://developer.github.com/v3/activity/events/#list-repository-events"`
+	ListPublicEventsForRepoNetwork       ActivityListPublicEventsForRepoNetworkCmd       `cmd:"" help:"List public events for a network of repositories - https://developer.github.com/v3/activity/events/#list-public-events-for-a-network-of-repositories"`
+	ListPublicEventsForOrg               ActivityListPublicEventsForOrgCmd               `cmd:"" help:"List public events for an organization - https://developer.github.com/v3/activity/events/#list-public-events-for-an-organization"`
+	ListReceivedEventsForUser            ActivityListReceivedEventsForUserCmd            `cmd:"" help:"List events that a user has received - https://developer.github.com/v3/activity/events/#list-events-that-a-user-has-received"`
+	ListReceivedPublicEventsForUser      ActivityListReceivedPublicEventsForUserCmd      `cmd:"" help:"List public events that a user has received - https://developer.github.com/v3/activity/events/#list-public-events-that-a-user-has-received"`
+	ListEventsForUser                    ActivityListEventsForUserCmd                    `cmd:"" help:"List events performed by a user - https://developer.github.com/v3/activity/events/#list-events-performed-by-a-user"`
+	ListPublicEventsForUser              ActivityListPublicEventsForUserCmd              `cmd:"" help:"List public events performed by a user - https://developer.github.com/v3/activity/events/#list-public-events-performed-by-a-user"`
+	ListEventsForOrg                     ActivityListEventsForOrgCmd                     `cmd:"" help:"List events for an organization - https://developer.github.com/v3/activity/events/#list-events-for-an-organization"`
+	ListFeeds                            ActivityListFeedsCmd                            `cmd:"" help:"List feeds - https://developer.github.com/v3/activity/feeds/#list-feeds"`
+	ListNotifications                    ActivityListNotificationsCmd                    `cmd:"" help:"List your notifications - https://developer.github.com/v3/activity/notifications/#list-your-notifications"`
+	ListNotificationsForRepo             ActivityListNotificationsForRepoCmd             `cmd:"" help:"List your notifications in a repository - https://developer.github.com/v3/activity/notifications/#list-your-notifications-in-a-repository"`
+	MarkAsRead                           ActivityMarkAsReadCmd                           `cmd:"" help:"Mark as read - https://developer.github.com/v3/activity/notifications/#mark-as-read"`
+	MarkNotificationsAsReadForRepo       ActivityMarkNotificationsAsReadForRepoCmd       `cmd:"" help:"Mark notifications as read in a repository - https://developer.github.com/v3/activity/notifications/#mark-notifications-as-read-in-a-repository"`
+	GetThread                            ActivityGetThreadCmd                            `cmd:"" help:"View a single thread - https://developer.github.com/v3/activity/notifications/#view-a-single-thread"`
+	MarkThreadAsRead                     ActivityMarkThreadAsReadCmd                     `cmd:"" help:"Mark a thread as read - https://developer.github.com/v3/activity/notifications/#mark-a-thread-as-read"`
+	GetThreadSubscription                ActivityGetThreadSubscriptionCmd                `cmd:"" help:"Get a thread subscription - https://developer.github.com/v3/activity/notifications/#get-a-thread-subscription"`
+	SetThreadSubscription                ActivitySetThreadSubscriptionCmd                `cmd:"" help:"Set a thread subscription - https://developer.github.com/v3/activity/notifications/#set-a-thread-subscription"`
+	DeleteThreadSubscription             ActivityDeleteThreadSubscriptionCmd             `cmd:"" help:"Delete a thread subscription - https://developer.github.com/v3/activity/notifications/#delete-a-thread-subscription"`
+	ListStargazersForRepo                ActivityListStargazersForRepoCmd                `cmd:"" help:"List Stargazers - https://developer.github.com/v3/activity/starring/#list-stargazers"`
+	ListReposStarredByUser               ActivityListReposStarredByUserCmd               `cmd:"" help:"List repositories being starred by a user - https://developer.github.com/v3/activity/starring/#list-repositories-being-starred"`
+	ListReposStarredByAuthenticatedUser  ActivityListReposStarredByAuthenticatedUserCmd  `cmd:"" help:"List repositories being starred by the authenticated user - https://developer.github.com/v3/activity/starring/#list-repositories-being-starred"`
+	CheckStarringRepo                    ActivityCheckStarringRepoCmd                    `cmd:"" help:"Check if you are starring a repository - https://developer.github.com/v3/activity/starring/#check-if-you-are-starring-a-repository"`
+	StarRepo                             ActivityStarRepoCmd                             `cmd:"" help:"Star a repository - https://developer.github.com/v3/activity/starring/#star-a-repository"`
+	UnstarRepo                           ActivityUnstarRepoCmd                           `cmd:"" help:"Unstar a repository - https://developer.github.com/v3/activity/starring/#unstar-a-repository"`
+	ListWatchersForRepo                  ActivityListWatchersForRepoCmd                  `cmd:"" help:"List watchers - https://developer.github.com/v3/activity/watching/#list-watchers"`
+	ListReposWatchedByUser               ActivityListReposWatchedByUserCmd               `cmd:"" help:"List repositories being watched by a user - https://developer.github.com/v3/activity/watching/#list-repositories-being-watched"`
+	ListWatchedReposForAuthenticatedUser ActivityListWatchedReposForAuthenticatedUserCmd `cmd:"" help:"List repositories being watched by the authenticated user - https://developer.github.com/v3/activity/watching/#list-repositories-being-watched"`
+	GetRepoSubscription                  ActivityGetRepoSubscriptionCmd                  `cmd:"" help:"Get a Repository Subscription - https://developer.github.com/v3/activity/watching/#get-a-repository-subscription"`
+	SetRepoSubscription                  ActivitySetRepoSubscriptionCmd                  `cmd:"" help:"Set a Repository Subscription - https://developer.github.com/v3/activity/watching/#set-a-repository-subscription"`
+	DeleteRepoSubscription               ActivityDeleteRepoSubscriptionCmd               `cmd:"" help:"Delete a Repository Subscription - https://developer.github.com/v3/activity/watching/#delete-a-repository-subscription"`
+	CheckWatchingRepoLegacy              ActivityCheckWatchingRepoLegacyCmd              `cmd:"" help:"Check if you are watching a repository (LEGACY) - https://developer.github.com/v3/activity/watching/#check-if-you-are-watching-a-repository-legacy"`
+	WatchRepoLegacy                      ActivityWatchRepoLegacyCmd                      `cmd:"" help:"Watch a repository (LEGACY) - https://developer.github.com/v3/activity/watching/#watch-a-repository-legacy"`
+	StopWatchingRepoLegacy               ActivityStopWatchingRepoLegacyCmd               `cmd:"" help:"Stop watching a repository (LEGACY) - https://developer.github.com/v3/activity/watching/#stop-watching-a-repository-legacy"`
 }
 
 type ActivityListPublicEventsCmd struct {

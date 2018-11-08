@@ -5,8 +5,8 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type GitignoreCmd struct {
-	ListTemplates GitignoreListTemplatesCmd `cmd:"" help:"Listing available templates"`
-	GetTemplate   GitignoreGetTemplateCmd   `cmd:"" help:"Get a single template"`
+	ListTemplates GitignoreListTemplatesCmd `cmd:"" help:"Listing available templates - https://developer.github.com/v3/gitignore/#listing-available-templates"`
+	GetTemplate   GitignoreGetTemplateCmd   `cmd:"" help:"Get a single template - https://developer.github.com/v3/gitignore/#get-a-single-template"`
 }
 
 type GitignoreListTemplatesCmd struct {

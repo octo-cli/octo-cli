@@ -5,9 +5,9 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type LicensesCmd struct {
-	List       LicensesListCmd       `cmd:"" help:"List all licenses"`
-	Get        LicensesGetCmd        `cmd:"" help:"Get an individual license"`
-	GetForRepo LicensesGetForRepoCmd `cmd:"" help:"Get the contents of a repository's license"`
+	List       LicensesListCmd       `cmd:"" help:"List all licenses - https://developer.github.com/v3/licenses/#list-all-licenses"`
+	Get        LicensesGetCmd        `cmd:"" help:"Get an individual license - https://developer.github.com/v3/licenses/#get-an-individual-license"`
+	GetForRepo LicensesGetForRepoCmd `cmd:"" help:"Get the contents of a repository's license - https://developer.github.com/v3/licenses/#get-the-contents-of-a-repositorys-license"`
 }
 
 type LicensesListCmd struct {

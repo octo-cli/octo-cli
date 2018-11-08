@@ -5,38 +5,38 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type OrgsCmd struct {
-	ListForCurrentUser                 OrgsListForCurrentUserCmd                 `cmd:"" help:"List your organizations"`
-	List                               OrgsListCmd                               `cmd:"" help:"List all organizations"`
-	ListForUser                        OrgsListForUserCmd                        `cmd:"" help:"List user organizations"`
-	Get                                OrgsGetCmd                                `cmd:"" help:"Get an organization"`
-	Edit                               OrgsEditCmd                               `cmd:"" help:"Edit an organization"`
-	ListBlockedUsers                   OrgsListBlockedUsersCmd                   `cmd:"" help:"List blocked users"`
-	CheckBlockedUser                   OrgsCheckBlockedUserCmd                   `cmd:"" help:"Check whether a user is blocked from an organization"`
-	BlockUser                          OrgsBlockUserCmd                          `cmd:"" help:"Block a user"`
-	UnblockUser                        OrgsUnblockUserCmd                        `cmd:"" help:"Unblock a user"`
-	ListMembers                        OrgsListMembersCmd                        `cmd:"" help:"Members list"`
-	CheckMembership                    OrgsCheckMembershipCmd                    `cmd:"" help:"Check membership"`
-	RemoveMember                       OrgsRemoveMemberCmd                       `cmd:"" help:"Remove a member"`
-	ListPublicMembers                  OrgsListPublicMembersCmd                  `cmd:"" help:"Public members list"`
-	CheckPublicMembership              OrgsCheckPublicMembershipCmd              `cmd:"" help:"Check public membership"`
-	PublicizeMembership                OrgsPublicizeMembershipCmd                `cmd:"" help:"Publicize a user's membership"`
-	ConcealMembership                  OrgsConcealMembershipCmd                  `cmd:"" help:"Conceal a user's membership"`
-	GetMembershipForUser               OrgsGetMembershipForUserCmd               `cmd:"" help:"Get organization membership"`
-	AddOrUpdateMembership              OrgsAddOrUpdateMembershipCmd              `cmd:"" help:"Add or update organization membership"`
-	RemoveMembership                   OrgsRemoveMembershipCmd                   `cmd:"" help:"Remove organization membership"`
-	ListInvitationTeams                OrgsListInvitationTeamsCmd                `cmd:"" help:"List organization invitation teams"`
-	ListPendingInvitations             OrgsListPendingInvitationsCmd             `cmd:"" help:"List pending organization invitations"`
-	CreateInvitation                   OrgsCreateInvitationCmd                   `cmd:"" help:"Create organization invitation"`
-	ListMemberships                    OrgsListMembershipsCmd                    `cmd:"" help:"List your organization memberships"`
-	GetMembership                      OrgsGetMembershipCmd                      `cmd:"" help:"Get your organization membership"`
-	EditMembership                     OrgsEditMembershipCmd                     `cmd:"" help:"Edit your organization membership"`
-	ListOutsideCollaborators           OrgsListOutsideCollaboratorsCmd           `cmd:"" help:"List outside collaborators"`
-	RemoveOutsideCollaborator          OrgsRemoveOutsideCollaboratorCmd          `cmd:"" help:"Remove outside collaborator"`
-	ConvertMemberToOutsideCollaborator OrgsConvertMemberToOutsideCollaboratorCmd `cmd:"" help:"Convert member to outside collaborator"`
-	ListHooks                          OrgsListHooksCmd                          `cmd:"" help:"List hooks"`
-	GetHook                            OrgsGetHookCmd                            `cmd:"" help:"Get single hook"`
-	PingHook                           OrgsPingHookCmd                           `cmd:"" help:"Ping a hook"`
-	DeleteHook                         OrgsDeleteHookCmd                         `cmd:"" help:"Delete a hook"`
+	ListForCurrentUser                 OrgsListForCurrentUserCmd                 `cmd:"" help:"List your organizations - https://developer.github.com/v3/orgs/#list-your-organizations"`
+	List                               OrgsListCmd                               `cmd:"" help:"List all organizations - https://developer.github.com/v3/orgs/#list-all-organizations"`
+	ListForUser                        OrgsListForUserCmd                        `cmd:"" help:"List user organizations - https://developer.github.com/v3/orgs/#list-user-organizations"`
+	Get                                OrgsGetCmd                                `cmd:"" help:"Get an organization - https://developer.github.com/v3/orgs/#get-an-organization"`
+	Edit                               OrgsEditCmd                               `cmd:"" help:"Edit an organization - https://developer.github.com/v3/orgs/#edit-an-organization"`
+	ListBlockedUsers                   OrgsListBlockedUsersCmd                   `cmd:"" help:"List blocked users - https://developer.github.com/v3/orgs/blocking/#list-blocked-users"`
+	CheckBlockedUser                   OrgsCheckBlockedUserCmd                   `cmd:"" help:"Check whether a user is blocked from an organization - https://developer.github.com/v3/orgs/blocking/#check-whether-a-user-is-blocked-from-an-organization"`
+	BlockUser                          OrgsBlockUserCmd                          `cmd:"" help:"Block a user - https://developer.github.com/v3/orgs/blocking/#block-a-user"`
+	UnblockUser                        OrgsUnblockUserCmd                        `cmd:"" help:"Unblock a user - https://developer.github.com/v3/orgs/blocking/#unblock-a-user"`
+	ListMembers                        OrgsListMembersCmd                        `cmd:"" help:"Members list - https://developer.github.com/v3/orgs/members/#members-list"`
+	CheckMembership                    OrgsCheckMembershipCmd                    `cmd:"" help:"Check membership - https://developer.github.com/v3/orgs/members/#check-membership"`
+	RemoveMember                       OrgsRemoveMemberCmd                       `cmd:"" help:"Remove a member - https://developer.github.com/v3/orgs/members/#remove-a-member"`
+	ListPublicMembers                  OrgsListPublicMembersCmd                  `cmd:"" help:"Public members list - https://developer.github.com/v3/orgs/members/#public-members-list"`
+	CheckPublicMembership              OrgsCheckPublicMembershipCmd              `cmd:"" help:"Check public membership - https://developer.github.com/v3/orgs/members/#check-public-membership"`
+	PublicizeMembership                OrgsPublicizeMembershipCmd                `cmd:"" help:"Publicize a user's membership - https://developer.github.com/v3/orgs/members/#publicize-a-users-membership"`
+	ConcealMembership                  OrgsConcealMembershipCmd                  `cmd:"" help:"Conceal a user's membership - https://developer.github.com/v3/orgs/members/#conceal-a-users-membership"`
+	GetMembershipForUser               OrgsGetMembershipForUserCmd               `cmd:"" help:"Get organization membership - https://developer.github.com/v3/orgs/members/#get-organization-membership"`
+	AddOrUpdateMembership              OrgsAddOrUpdateMembershipCmd              `cmd:"" help:"Add or update organization membership - https://developer.github.com/v3/orgs/members/#add-or-update-organization-membership"`
+	RemoveMembership                   OrgsRemoveMembershipCmd                   `cmd:"" help:"Remove organization membership - https://developer.github.com/v3/orgs/members/#remove-organization-membership"`
+	ListInvitationTeams                OrgsListInvitationTeamsCmd                `cmd:"" help:"List organization invitation teams - https://developer.github.com/v3/orgs/members/#list-organization-invitation-teams"`
+	ListPendingInvitations             OrgsListPendingInvitationsCmd             `cmd:"" help:"List pending organization invitations - https://developer.github.com/v3/orgs/members/#list-pending-organization-invitations"`
+	CreateInvitation                   OrgsCreateInvitationCmd                   `cmd:"" help:"Create organization invitation - https://developer.github.com/v3/orgs/members/#create-organization-invitation"`
+	ListMemberships                    OrgsListMembershipsCmd                    `cmd:"" help:"List your organization memberships - https://developer.github.com/v3/orgs/members/#list-your-organization-memberships"`
+	GetMembership                      OrgsGetMembershipCmd                      `cmd:"" help:"Get your organization membership - https://developer.github.com/v3/orgs/members/#get-your-organization-membership"`
+	EditMembership                     OrgsEditMembershipCmd                     `cmd:"" help:"Edit your organization membership - https://developer.github.com/v3/orgs/members/#edit-your-organization-membership"`
+	ListOutsideCollaborators           OrgsListOutsideCollaboratorsCmd           `cmd:"" help:"List outside collaborators - https://developer.github.com/v3/orgs/outside_collaborators/#list-outside-collaborators"`
+	RemoveOutsideCollaborator          OrgsRemoveOutsideCollaboratorCmd          `cmd:"" help:"Remove outside collaborator - https://developer.github.com/v3/orgs/outside_collaborators/#remove-outside-collaborator"`
+	ConvertMemberToOutsideCollaborator OrgsConvertMemberToOutsideCollaboratorCmd `cmd:"" help:"Convert member to outside collaborator - https://developer.github.com/v3/orgs/outside_collaborators/#convert-member-to-outside-collaborator"`
+	ListHooks                          OrgsListHooksCmd                          `cmd:"" help:"List hooks - https://developer.github.com/v3/orgs/hooks/#list-hooks"`
+	GetHook                            OrgsGetHookCmd                            `cmd:"" help:"Get single hook - https://developer.github.com/v3/orgs/hooks/#get-single-hook"`
+	PingHook                           OrgsPingHookCmd                           `cmd:"" help:"Ping a hook - https://developer.github.com/v3/orgs/hooks/#ping-a-hook"`
+	DeleteHook                         OrgsDeleteHookCmd                         `cmd:"" help:"Delete a hook - https://developer.github.com/v3/orgs/hooks/#delete-a-hook"`
 }
 
 type OrgsListForCurrentUserCmd struct {

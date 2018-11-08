@@ -5,28 +5,28 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type AppsCmd struct {
-	GetBySlug                                           AppsGetBySlugCmd                                           `cmd:"" help:"Get a single GitHub App"`
-	GetAuthenticated                                    AppsGetAuthenticatedCmd                                    `cmd:"" help:"Get the authenticated GitHub App"`
-	ListInstallations                                   AppsListInstallationsCmd                                   `cmd:"" help:"Find installations"`
-	GetInstallation                                     AppsGetInstallationCmd                                     `cmd:"" help:"Get a single installation"`
-	ListInstallationsForAuthenticatedUser               AppsListInstallationsForAuthenticatedUserCmd               `cmd:"" help:"List installations for user"`
-	CreateInstallationToken                             AppsCreateInstallationTokenCmd                             `cmd:"" help:"Create a new installation token"`
-	FindOrgInstallation                                 AppsFindOrgInstallationCmd                                 `cmd:"" help:"Find organization installation"`
-	FindRepoInstallation                                AppsFindRepoInstallationCmd                                `cmd:"" help:"Find repository installation"`
-	FindUserInstallation                                AppsFindUserInstallationCmd                                `cmd:"" help:"Find user installation"`
-	CreateFromManifest                                  AppsCreateFromManifestCmd                                  `cmd:"" help:"Create a GitHub App from a manifest"`
-	ListRepos                                           AppsListReposCmd                                           `cmd:"" help:"List repositories"`
-	ListInstallationReposForAuthenticatedUser           AppsListInstallationReposForAuthenticatedUserCmd           `cmd:"" help:"List repositories accessible to the user for an installation"`
-	AddRepoToInstallation                               AppsAddRepoToInstallationCmd                               `cmd:"" help:"Add repository to installation"`
-	RemoveRepoFromInstallation                          AppsRemoveRepoFromInstallationCmd                          `cmd:"" help:"Remove repository from installation"`
-	ListPlans                                           AppsListPlansCmd                                           `cmd:"" help:"List all plans for your Marketplace listing"`
-	ListPlansStubbed                                    AppsListPlansStubbedCmd                                    `cmd:"" help:"List all plans for your Marketplace listing (stubbed)"`
-	ListAccountsUserOrOrgOnPlan                         AppsListAccountsUserOrOrgOnPlanCmd                         `cmd:"" help:"List all GitHub accounts (user or organization) on a specific plan"`
-	ListAccountsUserOrOrgOnPlanStubbed                  AppsListAccountsUserOrOrgOnPlanStubbedCmd                  `cmd:"" help:"List all GitHub accounts (user or organization) on a specific plan (stubbed)"`
-	CheckAccountIsAssociatedWithAny                     AppsCheckAccountIsAssociatedWithAnyCmd                     `cmd:"" help:"Check if a GitHub account is associated with any Marketplace listing"`
-	CheckAccountIsAssociatedWithAnyStubbed              AppsCheckAccountIsAssociatedWithAnyStubbedCmd              `cmd:"" help:"Check if a GitHub account is associated with any Marketplace listing (stubbed)"`
-	ListMarketplacePurchasesForAuthenticatedUser        AppsListMarketplacePurchasesForAuthenticatedUserCmd        `cmd:"" help:"Get a user's Marketplace purchases"`
-	ListMarketplacePurchasesForAuthenticatedUserStubbed AppsListMarketplacePurchasesForAuthenticatedUserStubbedCmd `cmd:"" help:"Get a user's Marketplace purchases (stubbed)"`
+	GetBySlug                                           AppsGetBySlugCmd                                           `cmd:"" help:"Get a single GitHub App - https://developer.github.com/v3/apps/#get-a-single-github-app"`
+	GetAuthenticated                                    AppsGetAuthenticatedCmd                                    `cmd:"" help:"Get the authenticated GitHub App - https://developer.github.com/v3/apps/#get-the-authenticated-github-app"`
+	ListInstallations                                   AppsListInstallationsCmd                                   `cmd:"" help:"Find installations - https://developer.github.com/v3/apps/#find-installations"`
+	GetInstallation                                     AppsGetInstallationCmd                                     `cmd:"" help:"Get a single installation - https://developer.github.com/v3/apps/#get-a-single-installation"`
+	ListInstallationsForAuthenticatedUser               AppsListInstallationsForAuthenticatedUserCmd               `cmd:"" help:"List installations for user - https://developer.github.com/v3/apps/#list-installations-for-user"`
+	CreateInstallationToken                             AppsCreateInstallationTokenCmd                             `cmd:"" help:"Create a new installation token - https://developer.github.com/v3/apps/#create-a-new-installation-token"`
+	FindOrgInstallation                                 AppsFindOrgInstallationCmd                                 `cmd:"" help:"Find organization installation - https://developer.github.com/v3/apps/#find-organization-installation"`
+	FindRepoInstallation                                AppsFindRepoInstallationCmd                                `cmd:"" help:"Find repository installation - https://developer.github.com/v3/apps/#find-repository-installation"`
+	FindUserInstallation                                AppsFindUserInstallationCmd                                `cmd:"" help:"Find user installation - https://developer.github.com/v3/apps/#find-user-installation"`
+	CreateFromManifest                                  AppsCreateFromManifestCmd                                  `cmd:"" help:"Create a GitHub App from a manifest - https://developer.github.com/v3/apps/#create-a-github-app-from-a-manifest"`
+	ListRepos                                           AppsListReposCmd                                           `cmd:"" help:"List repositories - https://developer.github.com/v3/apps/installations/#list-repositories"`
+	ListInstallationReposForAuthenticatedUser           AppsListInstallationReposForAuthenticatedUserCmd           `cmd:"" help:"List repositories accessible to the user for an installation - https://developer.github.com/v3/apps/installations/#list-repositories-accessible-to-the-user-for-an-installation"`
+	AddRepoToInstallation                               AppsAddRepoToInstallationCmd                               `cmd:"" help:"Add repository to installation - https://developer.github.com/v3/apps/installations/#add-repository-to-installation"`
+	RemoveRepoFromInstallation                          AppsRemoveRepoFromInstallationCmd                          `cmd:"" help:"Remove repository from installation - https://developer.github.com/v3/apps/installations/#remove-repository-from-installation"`
+	ListPlans                                           AppsListPlansCmd                                           `cmd:"" help:"List all plans for your Marketplace listing - https://developer.github.com/v3/apps/marketplace/#list-all-plans-for-your-marketplace-listing"`
+	ListPlansStubbed                                    AppsListPlansStubbedCmd                                    `cmd:"" help:"List all plans for your Marketplace listing (stubbed) - https://developer.github.com/v3/apps/marketplace/#list-all-plans-for-your-marketplace-listing"`
+	ListAccountsUserOrOrgOnPlan                         AppsListAccountsUserOrOrgOnPlanCmd                         `cmd:"" help:"List all GitHub accounts (user or organization) on a specific plan - https://developer.github.com/v3/apps/marketplace/#list-all-github-accounts-user-or-organization-on-a-specific-plan"`
+	ListAccountsUserOrOrgOnPlanStubbed                  AppsListAccountsUserOrOrgOnPlanStubbedCmd                  `cmd:"" help:"List all GitHub accounts (user or organization) on a specific plan (stubbed) - https://developer.github.com/v3/apps/marketplace/#list-all-github-accounts-user-or-organization-on-a-specific-plan"`
+	CheckAccountIsAssociatedWithAny                     AppsCheckAccountIsAssociatedWithAnyCmd                     `cmd:"" help:"Check if a GitHub account is associated with any Marketplace listing - https://developer.github.com/v3/apps/marketplace/#check-if-a-github-account-is-associated-with-any-marketplace-listing"`
+	CheckAccountIsAssociatedWithAnyStubbed              AppsCheckAccountIsAssociatedWithAnyStubbedCmd              `cmd:"" help:"Check if a GitHub account is associated with any Marketplace listing (stubbed) - https://developer.github.com/v3/apps/marketplace/#check-if-a-github-account-is-associated-with-any-marketplace-listing"`
+	ListMarketplacePurchasesForAuthenticatedUser        AppsListMarketplacePurchasesForAuthenticatedUserCmd        `cmd:"" help:"Get a user's Marketplace purchases - https://developer.github.com/v3/apps/marketplace/#get-a-users-marketplace-purchases"`
+	ListMarketplacePurchasesForAuthenticatedUserStubbed AppsListMarketplacePurchasesForAuthenticatedUserStubbedCmd `cmd:"" help:"Get a user's Marketplace purchases (stubbed) - https://developer.github.com/v3/apps/marketplace/#get-a-users-marketplace-purchases"`
 }
 
 type AppsGetBySlugCmd struct {

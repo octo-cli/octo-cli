@@ -5,19 +5,19 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type ReactionsCmd struct {
-	ListForCommitComment              ReactionsListForCommitCommentCmd              `cmd:"" help:"List reactions for a commit comment"`
-	CreateForCommitComment            ReactionsCreateForCommitCommentCmd            `cmd:"" help:"Create reaction for a commit comment"`
-	ListForIssue                      ReactionsListForIssueCmd                      `cmd:"" help:"List reactions for an issue"`
-	CreateForIssue                    ReactionsCreateForIssueCmd                    `cmd:"" help:"Create reaction for an issue"`
-	ListForIssueComment               ReactionsListForIssueCommentCmd               `cmd:"" help:"List reactions for an issue comment"`
-	CreateForIssueComment             ReactionsCreateForIssueCommentCmd             `cmd:"" help:"Create reaction for an issue comment"`
-	ListForPullRequestReviewComment   ReactionsListForPullRequestReviewCommentCmd   `cmd:"" help:"List reactions for a pull request review comment"`
-	CreateForPullRequestReviewComment ReactionsCreateForPullRequestReviewCommentCmd `cmd:"" help:"Create reaction for a pull request review comment"`
-	ListForTeamDiscussion             ReactionsListForTeamDiscussionCmd             `cmd:"" help:"List reactions for a team discussion"`
-	CreateForTeamDiscussion           ReactionsCreateForTeamDiscussionCmd           `cmd:"" help:"Create reaction for a team discussion"`
-	ListForTeamDiscussionComment      ReactionsListForTeamDiscussionCommentCmd      `cmd:"" help:"List reactions for a team discussion comment"`
-	CreateForTeamDiscussionComment    ReactionsCreateForTeamDiscussionCommentCmd    `cmd:"" help:"Create reaction for a team discussion comment"`
-	Delete                            ReactionsDeleteCmd                            `cmd:"" help:"Delete a reaction"`
+	ListForCommitComment              ReactionsListForCommitCommentCmd              `cmd:"" help:"List reactions for a commit comment - https://developer.github.com/v3/reactions/#list-reactions-for-a-commit-comment"`
+	CreateForCommitComment            ReactionsCreateForCommitCommentCmd            `cmd:"" help:"Create reaction for a commit comment - https://developer.github.com/v3/reactions/#create-reaction-for-a-commit-comment"`
+	ListForIssue                      ReactionsListForIssueCmd                      `cmd:"" help:"List reactions for an issue - https://developer.github.com/v3/reactions/#list-reactions-for-an-issue"`
+	CreateForIssue                    ReactionsCreateForIssueCmd                    `cmd:"" help:"Create reaction for an issue - https://developer.github.com/v3/reactions/#create-reaction-for-an-issue"`
+	ListForIssueComment               ReactionsListForIssueCommentCmd               `cmd:"" help:"List reactions for an issue comment - https://developer.github.com/v3/reactions/#list-reactions-for-an-issue-comment"`
+	CreateForIssueComment             ReactionsCreateForIssueCommentCmd             `cmd:"" help:"Create reaction for an issue comment - https://developer.github.com/v3/reactions/#create-reaction-for-an-issue-comment"`
+	ListForPullRequestReviewComment   ReactionsListForPullRequestReviewCommentCmd   `cmd:"" help:"List reactions for a pull request review comment - https://developer.github.com/v3/reactions/#list-reactions-for-a-pull-request-review-comment"`
+	CreateForPullRequestReviewComment ReactionsCreateForPullRequestReviewCommentCmd `cmd:"" help:"Create reaction for a pull request review comment - https://developer.github.com/v3/reactions/#create-reaction-for-a-pull-request-review-comment"`
+	ListForTeamDiscussion             ReactionsListForTeamDiscussionCmd             `cmd:"" help:"List reactions for a team discussion - https://developer.github.com/v3/reactions/#list-reactions-for-a-team-discussion"`
+	CreateForTeamDiscussion           ReactionsCreateForTeamDiscussionCmd           `cmd:"" help:"Create reaction for a team discussion - https://developer.github.com/v3/reactions/#create-reaction-for-a-team-discussion"`
+	ListForTeamDiscussionComment      ReactionsListForTeamDiscussionCommentCmd      `cmd:"" help:"List reactions for a team discussion comment - https://developer.github.com/v3/reactions/#list-reactions-for-a-team-discussion-comment"`
+	CreateForTeamDiscussionComment    ReactionsCreateForTeamDiscussionCommentCmd    `cmd:"" help:"Create reaction for a team discussion comment - https://developer.github.com/v3/reactions/#create-reaction-for-a-team-discussion-comment"`
+	Delete                            ReactionsDeleteCmd                            `cmd:"" help:"Delete a reaction - https://developer.github.com/v3/reactions/#delete-a-reaction"`
 }
 
 type ReactionsListForCommitCommentCmd struct {

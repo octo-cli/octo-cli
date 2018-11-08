@@ -5,12 +5,12 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type ScimCmd struct {
-	GetProvisionedIdentitiesList   ScimGetProvisionedIdentitiesListCmd   `cmd:"" help:"Get a list of provisioned identities"`
-	GetProvisioningDetailsForUser  ScimGetProvisioningDetailsForUserCmd  `cmd:"" help:"Get provisioning details for a single user"`
-	ProvisionInviteUsers           ScimProvisionInviteUsersCmd           `cmd:"" help:"Provision and invite users"`
-	UpdateProvisionedOrgMembership ScimUpdateProvisionedOrgMembershipCmd `cmd:"" help:"Update a provisioned organization membership"`
-	UpdateUserAttribute            ScimUpdateUserAttributeCmd            `cmd:"" help:"Update a user attribute"`
-	RemoveUserFromOrg              ScimRemoveUserFromOrgCmd              `cmd:"" help:"Remove a user from the organization"`
+	GetProvisionedIdentitiesList   ScimGetProvisionedIdentitiesListCmd   `cmd:"" help:"Get a list of provisioned identities - https://developer.github.com/v3/scim/#get-a-list-of-provisioned-identities"`
+	GetProvisioningDetailsForUser  ScimGetProvisioningDetailsForUserCmd  `cmd:"" help:"Get provisioning details for a single user - https://developer.github.com/v3/scim/#get-provisioning-details-for-a-single-user"`
+	ProvisionInviteUsers           ScimProvisionInviteUsersCmd           `cmd:"" help:"Provision and invite users - https://developer.github.com/v3/scim/#provision-and-invite-users"`
+	UpdateProvisionedOrgMembership ScimUpdateProvisionedOrgMembershipCmd `cmd:"" help:"Update a provisioned organization membership - https://developer.github.com/v3/scim/#update-a-provisioned-organization-membership"`
+	UpdateUserAttribute            ScimUpdateUserAttributeCmd            `cmd:"" help:"Update a user attribute - https://developer.github.com/v3/scim/#update-a-user-attribute"`
+	RemoveUserFromOrg              ScimRemoveUserFromOrgCmd              `cmd:"" help:"Remove a user from the organization - https://developer.github.com/v3/scim/#remove-a-user-from-the-organization"`
 }
 
 type ScimGetProvisionedIdentitiesListCmd struct {

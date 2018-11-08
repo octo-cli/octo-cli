@@ -5,29 +5,29 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type ProjectsCmd struct {
-	ListForRepo               ProjectsListForRepoCmd               `cmd:"" help:"List repository projects"`
-	ListForOrg                ProjectsListForOrgCmd                `cmd:"" help:"List organization projects"`
-	Get                       ProjectsGetCmd                       `cmd:"" help:"Get a project"`
-	CreateForRepo             ProjectsCreateForRepoCmd             `cmd:"" help:"Create a repository project"`
-	CreateForOrg              ProjectsCreateForOrgCmd              `cmd:"" help:"Create an organization project"`
-	Update                    ProjectsUpdateCmd                    `cmd:"" help:"Update a project"`
-	Delete                    ProjectsDeleteCmd                    `cmd:"" help:"Delete a project"`
-	ListCards                 ProjectsListCardsCmd                 `cmd:"" help:"List project cards"`
-	GetCard                   ProjectsGetCardCmd                   `cmd:"" help:"Get a project card"`
-	CreateCard                ProjectsCreateCardCmd                `cmd:"" help:"Create a project card"`
-	UpdateCard                ProjectsUpdateCardCmd                `cmd:"" help:"Update a project card"`
-	DeleteCard                ProjectsDeleteCardCmd                `cmd:"" help:"Delete a project card"`
-	MoveCard                  ProjectsMoveCardCmd                  `cmd:"" help:"Move a project card"`
-	ListCollaborators         ProjectsListCollaboratorsCmd         `cmd:"" help:"List collaborators"`
-	ReviewUserPermissionLevel ProjectsReviewUserPermissionLevelCmd `cmd:"" help:"Review a user's permission level"`
-	AddCollaborator           ProjectsAddCollaboratorCmd           `cmd:"" help:"Add user as a collaborator"`
-	RemoveCollaborator        ProjectsRemoveCollaboratorCmd        `cmd:"" help:"Remove user as a collaborator"`
-	ListColumns               ProjectsListColumnsCmd               `cmd:"" help:"List project columns"`
-	GetColumn                 ProjectsGetColumnCmd                 `cmd:"" help:"Get a project column"`
-	CreateColumn              ProjectsCreateColumnCmd              `cmd:"" help:"Create a project column"`
-	UpdateColumn              ProjectsUpdateColumnCmd              `cmd:"" help:"Update a project column"`
-	DeleteColumn              ProjectsDeleteColumnCmd              `cmd:"" help:"Delete a project column"`
-	MoveColumn                ProjectsMoveColumnCmd                `cmd:"" help:"Move a project column"`
+	ListForRepo               ProjectsListForRepoCmd               `cmd:"" help:"List repository projects - https://developer.github.com/v3/projects/#list-repository-projects"`
+	ListForOrg                ProjectsListForOrgCmd                `cmd:"" help:"List organization projects - https://developer.github.com/v3/projects/#list-organization-projects"`
+	Get                       ProjectsGetCmd                       `cmd:"" help:"Get a project - https://developer.github.com/v3/projects/#get-a-project"`
+	CreateForRepo             ProjectsCreateForRepoCmd             `cmd:"" help:"Create a repository project - https://developer.github.com/v3/projects/#create-a-repository-project"`
+	CreateForOrg              ProjectsCreateForOrgCmd              `cmd:"" help:"Create an organization project - https://developer.github.com/v3/projects/#create-an-organization-project"`
+	Update                    ProjectsUpdateCmd                    `cmd:"" help:"Update a project - https://developer.github.com/v3/projects/#update-a-project"`
+	Delete                    ProjectsDeleteCmd                    `cmd:"" help:"Delete a project - https://developer.github.com/v3/projects/#delete-a-project"`
+	ListCards                 ProjectsListCardsCmd                 `cmd:"" help:"List project cards - https://developer.github.com/v3/projects/cards/#list-project-cards"`
+	GetCard                   ProjectsGetCardCmd                   `cmd:"" help:"Get a project card - https://developer.github.com/v3/projects/cards/#get-a-project-card"`
+	CreateCard                ProjectsCreateCardCmd                `cmd:"" help:"Create a project card - https://developer.github.com/v3/projects/cards/#create-a-project-card"`
+	UpdateCard                ProjectsUpdateCardCmd                `cmd:"" help:"Update a project card - https://developer.github.com/v3/projects/cards/#update-a-project-card"`
+	DeleteCard                ProjectsDeleteCardCmd                `cmd:"" help:"Delete a project card - https://developer.github.com/v3/projects/cards/#delete-a-project-card"`
+	MoveCard                  ProjectsMoveCardCmd                  `cmd:"" help:"Move a project card - https://developer.github.com/v3/projects/cards/#move-a-project-card"`
+	ListCollaborators         ProjectsListCollaboratorsCmd         `cmd:"" help:"List collaborators - https://developer.github.com/v3/projects/collaborators/#list-collaborators"`
+	ReviewUserPermissionLevel ProjectsReviewUserPermissionLevelCmd `cmd:"" help:"Review a user's permission level - https://developer.github.com/v3/projects/collaborators/#review-a-users-permission-level"`
+	AddCollaborator           ProjectsAddCollaboratorCmd           `cmd:"" help:"Add user as a collaborator - https://developer.github.com/v3/projects/collaborators/#add-user-as-a-collaborator"`
+	RemoveCollaborator        ProjectsRemoveCollaboratorCmd        `cmd:"" help:"Remove user as a collaborator - https://developer.github.com/v3/projects/collaborators/#remove-user-as-a-collaborator"`
+	ListColumns               ProjectsListColumnsCmd               `cmd:"" help:"List project columns - https://developer.github.com/v3/projects/columns/#list-project-columns"`
+	GetColumn                 ProjectsGetColumnCmd                 `cmd:"" help:"Get a project column - https://developer.github.com/v3/projects/columns/#get-a-project-column"`
+	CreateColumn              ProjectsCreateColumnCmd              `cmd:"" help:"Create a project column - https://developer.github.com/v3/projects/columns/#create-a-project-column"`
+	UpdateColumn              ProjectsUpdateColumnCmd              `cmd:"" help:"Update a project column - https://developer.github.com/v3/projects/columns/#update-a-project-column"`
+	DeleteColumn              ProjectsDeleteColumnCmd              `cmd:"" help:"Delete a project column - https://developer.github.com/v3/projects/columns/#delete-a-project-column"`
+	MoveColumn                ProjectsMoveColumnCmd                `cmd:"" help:"Move a project column - https://developer.github.com/v3/projects/columns/#move-a-project-column"`
 }
 
 type ProjectsListForRepoCmd struct {
