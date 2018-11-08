@@ -21,15 +21,15 @@ func init() {
 type cli struct {
 	Generate       generator.GenerateCmd `cmd:"" help:"generate production code"`
 	UpdateRoutes   updateRoutesCmd       `cmd:"" help:"update routes.json with the latest"`
-	UpdateTestdata updateTestDataCmd     `cmd:"" help:"updates routes.json and generated in generator/testdata"`
-	UpdateReadme   updateReadmeCmd       `cmd:"" help:"updates the help output section of README.md with whatever you pipe in here."`
-	Build          build                 `cmd:"" help:"build bin/octo"`
-	BuildLint      buildLint             `cmd:"" help:"builds bin/golangci-lint"`
-	Bootstrap      bootstrap             `cmd:"" help:"bootstraps a dev environment"`
-	Lint           lint                  `cmd:"" help:"run lint"`
-	LatestVersion  latestVersionCmd      `cmd:"" help:"get the latest tagged version"`
-	TagRelease     tagReleaseCmd         `cmd:"" help:"create a new version number"`
-	Cibuild        cibuildCmd            `cmd:"" help:"run ci"`
+	UpdateTestdata      updateTestDataCmd      `cmd:"" help:"updates routes.json and generated in generator/testdata"`
+	UpdateReadme        updateReadmeCmd        `cmd:"" help:"updates the help output section of README.md with whatever you pipe in here."`
+	Build               build                  `cmd:"" help:"build bin/octo"`
+	BuildLint           buildLint              `cmd:"" help:"builds bin/golangci-lint"`
+	Bootstrap           bootstrap              `cmd:"" help:"bootstraps a dev environment"`
+	Lint                lint                   `cmd:"" help:"run lint"`
+	LatestTaggedRelease latestTaggedReleaseCmd `cmd:"" help:"get the latest tagged version"`
+	TagRelease          tagReleaseCmd          `cmd:"" help:"create a new version number"`
+	Cibuild             cibuildCmd             `cmd:"" help:"run ci"`
 }
 
 func main() {
@@ -88,12 +88,12 @@ func (l *lint) Run() error {
 	return cmd.Run()
 }
 
-type latestVersionCmd struct {
+type latestTaggedReleaseCmd struct {
 	Nots bool `cmd:"" help:"strip any timestamp from the version"`
 }
 
-func (l *latestVersionCmd) Run() error {
-	version, err := latestVersion(l.Nots)
+func (l *latestTaggedReleaseCmd) Run() error {
+	version, err := latestTaggedRelease(l.Nots)
 	if err != nil {
 		return err
 	}

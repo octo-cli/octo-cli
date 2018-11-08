@@ -101,7 +101,7 @@ func buildGolangciLint(tag string, outputPath string, force bool) error {
 	return errors.Wrap(err, "failed building golangci-linit")
 }
 
-func latestVersion(stripPre bool) (*semver.Version, error) {
+func latestTaggedRelease(stripPre bool) (*semver.Version, error) {
 	tagBytes, err := exec.Command("git", "describe", "--tags", "--match", "v*[0-9].*[0-9].*[0-9]*", "--abbrev=0").Output()
 	if err != nil {
 		return nil, errors.Wrap(err, "could not find tag")
@@ -132,7 +132,7 @@ func tagNewVersion(major, minor, patch bool, prerelease string) (string, error) 
 }
 
 func newVersionTag(major, minor, patch bool, prerelease string) (string, error) {
-	nextVersion, err := latestVersion(true)
+	nextVersion, err := latestTaggedRelease(true)
 	if err != nil {
 		return "", errors.Wrap(err, "failed getting latest version")
 	}
