@@ -116,7 +116,7 @@ func (n *tagReleaseCmd) Run() error {
 	return nil
 }
 
-func (n *tagReleaseCmd) BeforeApply() error {
+func (n *tagReleaseCmd) AfterApply() error {
 	var err error
 	if !n.Major && !n.Minor && !n.Patch && n.Prerelease == "" {
 		err = errors.New("You must set one of --major, --minor, --patch or --prerelease")
