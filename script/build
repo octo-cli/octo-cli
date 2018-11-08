@@ -3,5 +3,5 @@
 set -e
 
 CDPATH= cd -- "$(dirname -- $(dirname -- "$0"))"
-
-go build -o bin/octo -ldflags="-s -w"  github.com/octo-cli/octo-cli
+script/bootstrap
+bin/buildtool build $@

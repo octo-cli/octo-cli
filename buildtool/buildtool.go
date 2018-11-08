@@ -19,16 +19,16 @@ func init() {
 }
 
 type cli struct {
-	Generate       generator.GenerateCmd       `cmd:"" help:"generate production code"`
-	UpdateRoutes   updateRoutesCmd             `cmd:"" help:"update routes.json with the latest"`
-	UpdateTestdata generator.UpdateTestDataCmd `cmd:"" help:"updates routes.json and generated in generator/testdata"`
-	UpdateReadme   updateReadmeCmd             `cmd:"" help:"updates the help output section of README.md with whatever you pipe in here."`
-	Build          build                       `cmd:"" help:"build bin/octo"`
-	BuildLint      buildLint                   `cmd:"" help:"builds bin/golangci-lint"`
-	Bootstrap      bootstrap                   `cmd:"" help:"bootstraps a dev environment"`
-	Lint           lint                        `cmd:"" help:"run lint"`
-	LatestVersion  latestVersionCmd            `cmd:"" help:"get the latest tagged version"`
-	TagRelease     tagReleaseCmd               `cmd:"" help:"create a new version number"`
+	Generate       generator.GenerateCmd `cmd:"" help:"generate production code"`
+	UpdateRoutes   updateRoutesCmd       `cmd:"" help:"update routes.json with the latest"`
+	UpdateTestdata updateTestDataCmd     `cmd:"" help:"updates routes.json and generated in generator/testdata"`
+	UpdateReadme   updateReadmeCmd       `cmd:"" help:"updates the help output section of README.md with whatever you pipe in here."`
+	Build          build                 `cmd:"" help:"build bin/octo"`
+	BuildLint      buildLint             `cmd:"" help:"builds bin/golangci-lint"`
+	Bootstrap      bootstrap             `cmd:"" help:"bootstraps a dev environment"`
+	Lint           lint                  `cmd:"" help:"run lint"`
+	LatestVersion  latestVersionCmd      `cmd:"" help:"get the latest tagged version"`
+	TagRelease     tagReleaseCmd         `cmd:"" help:"create a new version number"`
 }
 
 func main() {
@@ -142,8 +142,8 @@ func (k *updateRoutesCmd) Run() error {
 	return updateRoutes(k.RoutesURL, k.RoutesPath)
 }
 
-type UpdateTestDataCmd struct{}
+type updateTestDataCmd struct{}
 
-func (k *UpdateTestDataCmd) Run() error {
+func (k *updateTestDataCmd) Run() error {
 	return updateTestData()
 }
