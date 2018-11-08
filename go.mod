@@ -1,6 +1,7 @@
 module github.com/octo-cli/octo-cli
 
 require (
+	github.com/Masterminds/semver v1.4.2 // indirect
 	github.com/alecthomas/kong v0.1.9
 	github.com/dnaeon/go-vcr v0.0.0-20180920040454-5637cf3d8a31
 	github.com/fatih/structtag v1.0.0

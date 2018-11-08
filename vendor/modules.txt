@@ -9,6 +9,8 @@ github.com/dnaeon/go-vcr/recorder
 github.com/fatih/structtag
 # github.com/golang/protobuf v1.2.0
 github.com/golang/protobuf/proto
+# github.com/masterminds/semver v1.4.2
+github.com/masterminds/semver
 # github.com/pkg/errors v0.8.0
 github.com/pkg/errors
 # github.com/pmezard/go-difflib v1.0.0
