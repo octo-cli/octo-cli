@@ -20,9 +20,9 @@ func init() {
 
 type cli struct {
 	Generate       generator.GenerateCmd       `cmd:"" help:"generate production code"`
-	UpdateRoutes   generator.UpdateRoutesCmd   `cmd:"" help:"update routes.json with the latest"`
+	UpdateRoutes   UpdateRoutesCmd             `cmd:"" help:"update routes.json with the latest"`
 	UpdateTestdata generator.UpdateTestDataCmd `cmd:"" help:"updates routes.json and generated in generator/testdata"`
-	UpdateReadme   generator.UpdateReadme      `cmd:"" help:"updates the help output section of README.md with whatever you pipe in here."`
+	UpdateReadme   UpdateReadme                `cmd:"" help:"updates the help output section of README.md with whatever you pipe in here."`
 	Build          build                       `cmd:"" help:"build bin/octo"`
 	BuildLint      buildLint                   `cmd:"" help:"builds bin/golangci-lint"`
 	Bootstrap      bootstrap                   `cmd:"" help:"bootstraps a dev environment"`
@@ -122,4 +122,13 @@ func (n *tagReleaseCmd) BeforeApply() error {
 		err = errors.New("You must set one of --major, --minor, --patch or --prerelease")
 	}
 	return err
+}
+
+type UpdateReadme struct {
+	ReadmePath string `type:"existingfile" default:"README.md" help:"path to README.md"`
+	Verify     bool   `help:"don't write anything.  Just verify README.md is current"`
+}
+
+func (k *UpdateReadme) Run() error {
+	return updateReadme(k.ReadmePath, k.Verify)
 }
