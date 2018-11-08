@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/alecthomas/kong"
-	"github.com/octo-cli/octo-cli/generator"
+	"github.com/octo-cli/octo-cli/buildtool/generator"
 	"github.com/pkg/errors"
 	"os"
 	"os/exec"
