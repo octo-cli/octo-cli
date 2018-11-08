@@ -2,12 +2,13 @@ package main
 
 import (
 	"fmt"
-	"github.com/alecthomas/kong"
-	"github.com/octo-cli/octo-cli/buildtool/generator"
-	"github.com/pkg/errors"
 	"os"
 	"os/exec"
 	"path/filepath"
+
+	"github.com/alecthomas/kong"
+	"github.com/octo-cli/octo-cli/buildtool/generator"
+	"github.com/pkg/errors"
 )
 
 var (
@@ -19,8 +20,8 @@ func init() {
 }
 
 type cli struct {
-	Generate       generator.GenerateCmd `cmd:"" help:"generate production code"`
-	UpdateRoutes   updateRoutesCmd       `cmd:"" help:"update routes.json with the latest"`
+	Generate            generator.GenerateCmd  `cmd:"" help:"generate production code"`
+	UpdateRoutes        updateRoutesCmd        `cmd:"" help:"update routes.json with the latest"`
 	UpdateTestdata      updateTestDataCmd      `cmd:"" help:"updates routes.json and generated in generator/testdata"`
 	UpdateReadme        updateReadmeCmd        `cmd:"" help:"updates the help output section of README.md with whatever you pipe in here."`
 	Build               build                  `cmd:"" help:"build bin/octo"`

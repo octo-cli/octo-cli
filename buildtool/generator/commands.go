@@ -2,10 +2,11 @@ package generator
 
 import (
 	"fmt"
-	"github.com/pkg/errors"
 	"io"
 	"net/http"
 	"os"
+
+	"github.com/pkg/errors"
 )
 
 type (

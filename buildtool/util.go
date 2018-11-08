@@ -4,9 +4,6 @@ import (
 	"bufio"
 	"bytes"
 	"fmt"
-	"github.com/masterminds/semver"
-	"github.com/octo-cli/octo-cli/buildtool/generator"
-	"github.com/pkg/errors"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -14,6 +11,10 @@ import (
 	"os/exec"
 	"path/filepath"
 	"strings"
+
+	"github.com/masterminds/semver"
+	"github.com/octo-cli/octo-cli/buildtool/generator"
+	"github.com/pkg/errors"
 )
 
 func buildIfNeeded(bin, src, ldflags string, force bool) error {
@@ -153,7 +154,7 @@ func newVersionTag(major, minor, patch bool, prerelease string) (string, error) 
 	return "v" + version.String(), nil
 }
 
-func  updateTestData()  error  {
+func updateTestData() error {
 	url := "https://octokit.github.io/routes/index.json"
 	routesPath := "buildtool/generator/testdata/routes.json"
 	resp, err := http.Get(url)

@@ -2,14 +2,14 @@ package main
 
 import (
 	"bytes"
-	"github.com/pkg/errors"
 	"io/ioutil"
 	"os/exec"
 	"regexp"
+
+	"github.com/pkg/errors"
 )
 
 var readmeRegexp = regexp.MustCompile(`(?s:<!--- START HELP OUTPUT --->.*<!--- END HELP OUTPUT --->)`)
-
 
 func updateReadme(readmePath string, verify bool) error {
 	helpContent, err := getHelpOutput()
