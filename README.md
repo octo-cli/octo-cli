@@ -52,15 +52,6 @@ Wouldn't it be cool if you could install with scoop or snapcraft?
 I think so, but haven't spent the time to set this up yet. If you have the
 know-how and time to spare, we could [use your help](https://github.com/octo-cli/octo-cli/issues/45).
 
-## Versions
-
-Octo-cli's versions are semver-ish in the format of major.minor.patch-timestamp. The
-major.minor.patch part covers the hand-written code in this repo. The
-timestamp portion is when routes.json was last modified.
-
-There are issues with this versioning scheme, so it is likely to change
-in the near future.
-
 ## Untested commands
 
 Because octo-cli is still a young project and the subcommands are generated,
