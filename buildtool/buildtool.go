@@ -20,17 +20,17 @@ func init() {
 }
 
 type cli struct {
-	Generate            generator.GenerateCmd  `cmd:"" help:"generate production code"`
-	UpdateRoutes        updateRoutesCmd        `cmd:"" help:"update routes.json with the latest"`
-	UpdateTestdata      updateTestDataCmd      `cmd:"" help:"updates routes.json and generated in generator/testdata"`
-	UpdateReadme        updateReadmeCmd        `cmd:"" help:"updates the help output section of README.md with whatever you pipe in here."`
+	Bootstrap           bootstrap              `cmd:"" help:"bootstraps a dev environment"`
 	Build               build                  `cmd:"" help:"build bin/octo"`
 	BuildLint           buildLint              `cmd:"" help:"builds bin/golangci-lint"`
-	Bootstrap           bootstrap              `cmd:"" help:"bootstraps a dev environment"`
-	Lint                lint                   `cmd:"" help:"run lint"`
-	LatestTaggedRelease latestTaggedReleaseCmd `cmd:"" help:"get the latest tagged version"`
-	TagRelease          tagReleaseCmd          `cmd:"" help:"create a new version number"`
 	Cibuild             cibuildCmd             `cmd:"" help:"run ci"`
+	Generate            generator.GenerateCmd  `cmd:"" help:"generate production code"`
+	LatestTaggedRelease latestTaggedReleaseCmd `cmd:"" help:"get the latest tagged version"`
+	Lint                lint                   `cmd:"" help:"run lint"`
+	TagRelease          tagReleaseCmd          `cmd:"" help:"creates a git tag for a new release of octo-cli"`
+	UpdateReadme        updateReadmeCmd        `cmd:"" help:"updates the help output section of README.md"`
+	UpdateRoutes        updateRoutesCmd        `cmd:"" help:"update routes.json with the latest"`
+	UpdateTestdata      updateTestDataCmd      `cmd:"" help:"updates routes.json and generated in internal/generator/testdata"`
 }
 
 func main() {

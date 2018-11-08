@@ -4,21 +4,54 @@
 
 - Go 1.11+
 
+## Buildtool
+
+`./buildtool` contains a cli for most of the tooling you will need for
+developing octo-cli. To build buildtool, run either `script/bootstrap`
+or `go build -o bin/buildtool ./buildtool`.
+
+If you modify code in buildtool itself, You can rebuild it with `script/bootstrap --force`
+or `bin/buildtool bootstrap --force`
+
+```
+  bootstrap
+    bootstraps a dev environment
+
+  build
+    build bin/octo
+
+  build-lint
+    builds bin/golangci-lint
+
+  cibuild
+    run ci
+
+  generate
+    generate production code
+
+  latest-tagged-release
+    get the latest tagged version
+
+  lint
+    run lint
+
+  tag-release
+    creates a git tag for a new release of octo-cli
+
+  update-readme
+    updates the help output section of README.md
+
+  update-routes
+    update routes.json with the latest
+
+  update-testdata
+    updates routes.json and generated in internal/generator/testdata
+```
+
 ## Scripts
 
-Octo-cli is using [Scripts to Rule Them All](https://githubengineering.com/scripts-to-rule-them-all/). Or at least a subset of the idea.
-
-- `script/bootstrap` - installs dependencies. This is currently lacking and only installs golangci-lint.  You are on your own for the rest.
-- `script/build` - builds the main binary and writes it to `bin/octo`
-- `script/cibuild` - This is what ci runs. You can also run it locally so you aren't surprised by a ci failure.  It currently takes about 13 seconds to run on my laptop.
-- `script/generate` - Generates the code in `./internal/generated/`.  We'll get to what that is further down the page.
-- `script/golint` - runs golint on everything that isn't vendor
-- `script/latestversion` - returns the last git tagged version
-- `script/lint` - runs all the default linters from golangci-lint
-- `script/newversion` - tells you what version to use for a new release flag
-- `script/test` - runs tests
-- `script/update-routes` - updates `./routes.json` with the latest from https://octokit.github.io/routes/index.json
-- `script/update-testdata` - copies `./routes.json` to `./generator/testdata/routes.json` and runs generator to regenerate `./generator/testdata/generated`
+For those used to [Scripts to Rule Them All](https://githubengineering.com/scripts-to-rule-them-all/),
+octo-cli has scripts to match most of the buildtool commands.
 
 ## Issues before PRs
 
@@ -50,11 +83,11 @@ Updating routes.json will eventually be automated. Until then, only trusted
 octo-cli developers can update routes.json. PRs with changes to routes.json
 will be politely rejected.
 
-`routes-last-modified.txt` is the Last-Modified header from when routes.json
-was last downloaded.
+### `./buildtool`
+See [#Buildtool]
 
-### `./generator/`
-`generator/` is the code that parses routes.json and creates commands
+### `./buildtool/generator/`
+`buildtool/generator/` is the code that parses routes.json and creates commands
 for each defined endpoint. Most of the action here is in the Generate
 function and `const tmplt`. Generate is currently a bit of an oversized
 mess. Please bear with us until it is broken up into more easily grokked
@@ -63,7 +96,7 @@ pieces.
 Generator is not well tested. Tests consist generating new commands and
 checking whether they match the expected output. Unit tests are needed here.
 
-### `./generator/testdata`
+### `./buildtool/generator/testdata`
 As you probably guessed this is test data for generator's few tests. This
 should only be modified by running `./script/update-testdata`.
 
