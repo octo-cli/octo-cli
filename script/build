@@ -1,9 +1,8 @@
 #!/bin/sh
 
-# Exit if any subcommand fails
 set -e
 
-# Ensure we're always running from the project root
 CDPATH= cd -- "$(dirname -- $(dirname -- "$0"))"
+script/bootstrap
 
-bin/util build
+bin/buildtool build $@

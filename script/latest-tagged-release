@@ -5,4 +5,4 @@ set -e
 CDPATH= cd -- "$(dirname -- $(dirname -- "$0"))"
 script/bootstrap
 
-bin/buildtool update-testdata $@
+bin/buildtool latest-tagged-release $@

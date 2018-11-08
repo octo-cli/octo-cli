@@ -2,22 +2,7 @@
 
 set -e
 
-cd "$(dirname "$0")/.."
+CDPATH= cd -- "$(dirname -- $(dirname -- "$0"))"
+script/bootstrap --force
 
-EXITCODE=0
-fail() {
-  EXITCODE=1
-}
-echo "running script/test"
-script/test -race || fail
-
-echo "running script/lint"
-script/lint || fail
-
-echo "script/generate --verify"
-script/generate --verify  || fail
-
-echo "script/update-readme --verify"
-script/update-readme --verify || fail
-
-exit $EXITCODE
+bin/buildtool cibuild $@

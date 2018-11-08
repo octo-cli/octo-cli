@@ -6,6 +6,6 @@ install: true
 notifications:
   email: false
 before_script:
-  - script/bootstrap
+  - script/bootstrap --force
 script:
   - ./script/cibuild

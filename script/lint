@@ -3,5 +3,6 @@
 set -e
 
 CDPATH= cd -- "$(dirname -- $(dirname -- "$0"))"
-bin/util build-lint
-bin/golangci-lint run --enable=golint
+script/bootstrap
+
+bin/buildtool lint $@
