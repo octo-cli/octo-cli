@@ -5,8 +5,11 @@ import (
 	"bytes"
 	"fmt"
 	"github.com/masterminds/semver"
+	"github.com/octo-cli/octo-cli/buildtool/generator"
 	"github.com/pkg/errors"
+	"io"
 	"io/ioutil"
+	"net/http"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -148,4 +151,33 @@ func newVersionTag(major, minor, patch bool, prerelease string) (string, error) 
 		return "", errors.Wrap(err, "failed setting prerelease")
 	}
 	return "v" + version.String(), nil
+}
+
+func  updateTestData()  error  {
+	url := "https://octokit.github.io/routes/index.json"
+	routesPath := "buildtool/generator/testdata/routes.json"
+	resp, err := http.Get(url)
+	if err != nil {
+		return errors.Wrap(err, "")
+	}
+	outFile, err := os.Create(routesPath)
+	if err != nil {
+		return errors.Wrap(err, "")
+	}
+	_, err = io.Copy(outFile, resp.Body)
+	if err != nil {
+		return errors.Wrap(err, "")
+	}
+	err = resp.Body.Close()
+	if err != nil {
+		return err
+	}
+	err = outFile.Close()
+	if err != nil {
+		return err
+	}
+
+	generator.Generate(routesPath, "buildtool/generator/testdata/generated")
+
+	return errors.Wrap(err, "")
 }

@@ -12,15 +12,6 @@ import (
 
 const routesTimestampFormat = "20060102T150405Z0700"
 
-type UpdateRoutesCmd struct {
-	RoutesPath string `type:"existingfile" default:"routes.json"`
-	RoutesURL  string `default:"https://octokit.github.io/routes/index.json"`
-}
-
-func (k *UpdateRoutesCmd) Run() error {
-	return updateRoutes(k.RoutesURL, k.RoutesPath)
-}
-
 func updateRoutes(routesURL, routesPath string) error {
 	resp, err := http.Get(routesURL)
 	if err != nil {

@@ -35,7 +35,7 @@ func (k *GenerateCmd) Run() error {
 
 func (k *UpdateTestDataCmd) Run() error {
 	url := "https://octokit.github.io/routes/index.json"
-	routesPath := "generator/testdata/routes.json"
+	routesPath := "buildtool/generator/testdata/routes.json"
 	resp, err := http.Get(url)
 	if err != nil {
 		return errors.Wrap(err, "")
@@ -57,7 +57,7 @@ func (k *UpdateTestDataCmd) Run() error {
 		return err
 	}
 
-	Generate(routesPath, "generator/testdata/generated")
+	Generate(routesPath, "buildtool/generator/testdata/generated")
 
 	return errors.Wrap(err, "")
 }

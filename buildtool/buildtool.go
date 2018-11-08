@@ -20,9 +20,9 @@ func init() {
 
 type cli struct {
 	Generate       generator.GenerateCmd       `cmd:"" help:"generate production code"`
-	UpdateRoutes   UpdateRoutesCmd             `cmd:"" help:"update routes.json with the latest"`
+	UpdateRoutes   updateRoutesCmd             `cmd:"" help:"update routes.json with the latest"`
 	UpdateTestdata generator.UpdateTestDataCmd `cmd:"" help:"updates routes.json and generated in generator/testdata"`
-	UpdateReadme   UpdateReadme                `cmd:"" help:"updates the help output section of README.md with whatever you pipe in here."`
+	UpdateReadme   updateReadmeCmd             `cmd:"" help:"updates the help output section of README.md with whatever you pipe in here."`
 	Build          build                       `cmd:"" help:"build bin/octo"`
 	BuildLint      buildLint                   `cmd:"" help:"builds bin/golangci-lint"`
 	Bootstrap      bootstrap                   `cmd:"" help:"bootstraps a dev environment"`
@@ -124,11 +124,26 @@ func (n *tagReleaseCmd) BeforeApply() error {
 	return err
 }
 
-type UpdateReadme struct {
+type updateReadmeCmd struct {
 	ReadmePath string `type:"existingfile" default:"README.md" help:"path to README.md"`
 	Verify     bool   `help:"don't write anything.  Just verify README.md is current"`
 }
 
-func (k *UpdateReadme) Run() error {
+func (k *updateReadmeCmd) Run() error {
 	return updateReadme(k.ReadmePath, k.Verify)
+}
+
+type updateRoutesCmd struct {
+	RoutesPath string `type:"existingfile" default:"routes.json"`
+	RoutesURL  string `default:"https://octokit.github.io/routes/index.json"`
+}
+
+func (k *updateRoutesCmd) Run() error {
+	return updateRoutes(k.RoutesURL, k.RoutesPath)
+}
+
+type UpdateTestDataCmd struct{}
+
+func (k *UpdateTestDataCmd) Run() error {
+	return updateTestData()
 }
