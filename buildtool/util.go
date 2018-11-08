@@ -178,7 +178,7 @@ func updateTestData() error {
 		return err
 	}
 
-	generator.Generate(routesPath, "buildtool/generator/testdata/generated")
+	generator.Generate(routesPath, "buildtool/generator/testdata/generated", nil)
 
 	return errors.Wrap(err, "")
 }

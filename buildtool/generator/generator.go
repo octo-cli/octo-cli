@@ -4,8 +4,6 @@ import (
 	"bytes"
 	"fmt"
 	"go/format"
-	"io/ioutil"
-	"os"
 	"path/filepath"
 	"sort"
 	"strings"
@@ -13,6 +11,7 @@ import (
 
 	"github.com/fatih/structtag"
 	"github.com/pkg/errors"
+	"github.com/spf13/afero"
 	"golang.org/x/tools/imports"
 )
 
@@ -41,9 +40,9 @@ var updateMethodMap = map[string]string{
 	"preview": "UpdatePreview",
 }
 
-func dirFileMap(path string) (map[string][]byte, error) {
+func dirFileMap(path string, fs afero.Fs) (map[string][]byte, error) {
 	output := map[string][]byte{}
-	fileInfos, err := ioutil.ReadDir(path)
+	fileInfos, err := afero.ReadDir(fs, path)
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +51,7 @@ func dirFileMap(path string) (map[string][]byte, error) {
 		if fileInfo.IsDir() {
 			continue
 		}
-		fileBytes, err := ioutil.ReadFile(filepath.Join(path, fileInfo.Name()))
+		fileBytes, err := afero.ReadFile(fs, filepath.Join(path, fileInfo.Name()))
 		if err != nil {
 			return nil, err
 		}
@@ -62,24 +61,19 @@ func dirFileMap(path string) (map[string][]byte, error) {
 }
 
 func verify(routesPath, outputPath string) ([]string, error) {
-	err := os.MkdirAll("./tmp", 0755)
+	realFs := afero.NewOsFs()
+	tmpFs := afero.NewMemMapFs()
+	tempDir, err := afero.TempDir(tmpFs, "", "")
 	if err != nil {
 		return nil, err
 	}
-	tempDir, err := ioutil.TempDir("./tmp", "")
-	if err != nil {
-		return nil, err
-	}
-	defer func() {
-		_ = os.RemoveAll(tempDir)
-	}()
-	Generate(routesPath, tempDir)
+	Generate(routesPath, tempDir, tmpFs)
 
-	wantFiles, err := dirFileMap(tempDir)
+	wantFiles, err := dirFileMap(tempDir, tmpFs)
 	if err != nil {
 		return nil, err
 	}
-	gotFiles, err := dirFileMap(outputPath)
+	gotFiles, err := dirFileMap(outputPath, realFs)
 	if err != nil {
 		return nil, err
 	}
@@ -108,11 +102,11 @@ func verify(routesPath, outputPath string) ([]string, error) {
 	return output, nil
 }
 
-func Generate(routesPath, outputPath string) {
+func Generate(routesPath, outputPath string, fs afero.Fs) {
 	CLITmpl := StructTmplHelper{
 		Name: "CLI",
 	}
-	routesMap, err := ParseRoutesFile(routesPath)
+	routesMap, err := parseRoutesFile(routesPath)
 	if err != nil {
 		panic(err)
 	}
@@ -224,7 +218,7 @@ func Generate(routesPath, outputPath string) {
 		}
 		svcTmpls = append(svcTmpls, svcTmpl)
 	}
-	err = os.MkdirAll(outputPath, 0755)
+	err = fs.MkdirAll(outputPath, 0755)
 	if err != nil {
 		panic(err)
 	}
@@ -242,7 +236,7 @@ func Generate(routesPath, outputPath string) {
 		}
 	}
 	for filename, fileTmpl := range files {
-		err = writeGoFile(filename, "main", fileTmpl, outputPath)
+		err = writeGoFile(filename, "main", fileTmpl, outputPath, fs)
 		if err != nil {
 			panic(err)
 		}
@@ -359,7 +353,7 @@ func setTag(tags *structtag.Tags, tag ...*structtag.Tag) {
 }
 
 //writeGoFile executes the named template and does the equivalent of `go fmt` and `goimports` on the output
-func writeGoFile(filename, templateName string, p interface{}, path string) error {
+func writeGoFile(filename, templateName string, p interface{}, path string, fs afero.Fs) error {
 	var buf bytes.Buffer
 	err := tmpl.ExecuteTemplate(&buf, templateName, p)
 	if err != nil {
@@ -374,7 +368,7 @@ func writeGoFile(filename, templateName string, p interface{}, path string) erro
 		return errors.Wrap(err, "failed running imports.Process")
 	}
 	fl := filepath.Join(path, filename)
-	return ioutil.WriteFile(fl, out, 0644)
+	return afero.WriteFile(fs, fl, out, 0644)
 }
 
 //ToArgName takes input like "foo-bar" and returns "FooBar"

@@ -46,8 +46,8 @@ type (
 	}
 )
 
-//ParseRoutesFile parses the routes.json at a given path and returns a *RoutesFile
-func ParseRoutesFile(file string) (map[string]Routes, error) {
+//parseRoutesFile parses the routes.json at a given path and returns a *RoutesFile
+func parseRoutesFile(file string) (map[string]Routes, error) {
 	var sm map[string]Routes
 	bts, err := ioutil.ReadFile(file)
 	if err != nil {

@@ -8,6 +8,7 @@ require (
 	github.com/kr/pretty v0.1.0 // indirect
 	github.com/masterminds/semver v1.4.2
 	github.com/pkg/errors v0.8.0
+	github.com/spf13/afero v1.1.2
 	github.com/stretchr/testify v1.2.2
 	golang.org/x/net v0.0.0-20181106065722-10aee1819953 // indirect
 	golang.org/x/oauth2 v0.0.0-20181017192945-9dcd33a902f4
