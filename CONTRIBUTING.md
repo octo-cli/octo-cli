@@ -3,10 +3,6 @@
 ## Requirements
 
 - Go 1.11+
-- dep
-- golint
-- golangci-lint (installed by script/bootstrap)
-- bash shell for `./scripts/*`
 
 ## Scripts
 
