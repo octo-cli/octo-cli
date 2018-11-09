@@ -103,6 +103,9 @@ func verify(routesPath, outputPath string) ([]string, error) {
 }
 
 func Generate(routesPath, outputPath string, fs afero.Fs) {
+	if fs == nil {
+		fs = afero.NewOsFs()
+	}
 	CLITmpl := StructTmplHelper{
 		Name: "CLI",
 	}

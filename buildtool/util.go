@@ -4,9 +4,7 @@ import (
 	"bufio"
 	"bytes"
 	"fmt"
-	"io"
 	"io/ioutil"
-	"net/http"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -155,32 +153,22 @@ func newVersionTag(major, minor, patch bool, prerelease string) (string, error) 
 }
 
 func updateTestData() error {
-	url := "https://octokit.github.io/routes/index.json"
-	routesPath := "buildtool/generator/testdata/routes.json"
-	resp, err := http.Get(url)
+	tdRoutesPath := "buildtool/generator/testdata/routes.json"
+	err := copyFile("routes.json", tdRoutesPath)
 	if err != nil {
-		return errors.Wrap(err, "")
+		return errors.Wrap(err, "failed copying routes.json")
 	}
-	outFile, err := os.Create(routesPath)
-	if err != nil {
-		return errors.Wrap(err, "")
-	}
-	_, err = io.Copy(outFile, resp.Body)
-	if err != nil {
-		return errors.Wrap(err, "")
-	}
-	err = resp.Body.Close()
-	if err != nil {
-		return err
-	}
-	err = outFile.Close()
-	if err != nil {
-		return err
-	}
+	generator.Generate(tdRoutesPath, "buildtool/generator/testdata/generated", nil)
+	return nil
+}
 
-	generator.Generate(routesPath, "buildtool/generator/testdata/generated", nil)
-
-	return errors.Wrap(err, "")
+func copyFile(srcRoutesPath string, tdRoutesPath string) error {
+	routes, err := ioutil.ReadFile(srcRoutesPath)
+	if err != nil {
+		return errors.Wrapf(err, "failed reading %q", srcRoutesPath)
+	}
+	err = ioutil.WriteFile(tdRoutesPath, routes, 0644)
+	return errors.Wrapf(err, "failed writing %q", tdRoutesPath)
 }
 
 func cibuild() error {
