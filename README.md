@@ -424,15 +424,15 @@ Commands:
     Rerequest check suite -
     https://developer.github.com/v3/checks/suites/#rerequest-check-suite
 
-  codes-of-conduct list-conduct-codes --token=STRING
+  codes-of-conduct list-conduct-codes --token=STRING --scarlet-witch-preview
     List all codes of conduct -
     https://developer.github.com/v3/codes_of_conduct/#list-all-codes-of-conduct
 
-  codes-of-conduct get-conduct-code --token=STRING --key=STRING
+  codes-of-conduct get-conduct-code --token=STRING --scarlet-witch-preview --key=STRING
     Get an individual code of conduct -
     https://developer.github.com/v3/codes_of_conduct/#get-an-individual-code-of-conduct
 
-  codes-of-conduct get-for-repo --token=STRING --owner=STRING --repo=STRING
+  codes-of-conduct get-for-repo --token=STRING --scarlet-witch-preview --owner=STRING --repo=STRING
     Get the contents of a repository's code of conduct -
     https://developer.github.com/v3/codes_of_conduct/#get-the-contents-of-a-repositorys-code-of-conduct
 
@@ -665,7 +665,7 @@ Commands:
     Remove a label from an issue -
     https://developer.github.com/v3/issues/labels/#remove-a-label-from-an-issue
 
-  issues replace-labels --token=STRING --owner=STRING --repo=STRING --number=INT-64 --labels=LABELS,...
+  issues replace-labels --token=STRING --owner=STRING --repo=STRING --number=INT-64
     Replace all labels for an issue -
     https://developer.github.com/v3/issues/labels/#replace-all-labels-for-an-issue
 
@@ -860,7 +860,7 @@ Commands:
     Revoke a grant for an application -
     https://developer.github.com/v3/oauth_authorizations/#revoke-a-grant-for-an-application
 
-  orgs list-for-current-user --token=STRING
+  orgs list-for-authenticated-user --token=STRING
     List your organizations -
     https://developer.github.com/v3/orgs/#list-your-organizations
 
@@ -950,7 +950,7 @@ Commands:
     List your organization memberships -
     https://developer.github.com/v3/orgs/members/#list-your-organization-memberships
 
-  orgs get-membership --token=STRING --org=STRING
+  orgs get-membership-for-authenticated-user --token=STRING --org=STRING
     Get your organization membership -
     https://developer.github.com/v3/orgs/members/#get-your-organization-membership
 
@@ -1694,27 +1694,27 @@ Commands:
   repos delete-hook --token=STRING --owner=STRING --repo=STRING --hook_id=INT-64
     Delete a hook - https://developer.github.com/v3/repos/hooks/#delete-a-hook
 
-  scim get-provisioned-identities-list --token=STRING --organization_id=INT-64
+  scim list-provisioned-identities --token=STRING --cloud-9-preview --org=STRING
     Get a list of provisioned identities -
     https://developer.github.com/v3/scim/#get-a-list-of-provisioned-identities
 
-  scim get-provisioning-details-for-user --token=STRING --organization_id=INT-64 --external_identity_guid=STRING
+  scim get-provisioning-details-for-user --token=STRING --cloud-9-preview --org=STRING --external_identity_guid=STRING
     Get provisioning details for a single user -
     https://developer.github.com/v3/scim/#get-provisioning-details-for-a-single-user
 
-  scim provision-invite-users --token=STRING --organization_id=INT-64
+  scim provision-invite-users --token=STRING --cloud-9-preview --org=STRING
     Provision and invite users -
     https://developer.github.com/v3/scim/#provision-and-invite-users
 
-  scim update-provisioned-org-membership --token=STRING --organization_id=INT-64 --external_identity_guid=STRING
+  scim update-provisioned-org-membership --token=STRING --cloud-9-preview --org=STRING --external_identity_guid=STRING
     Update a provisioned organization membership -
     https://developer.github.com/v3/scim/#update-a-provisioned-organization-membership
 
-  scim update-user-attribute --token=STRING --organization_id=INT-64 --external_identity_guid=STRING
+  scim update-user-attribute --token=STRING --cloud-9-preview --org=STRING --external_identity_guid=STRING
     Update a user attribute -
     https://developer.github.com/v3/scim/#update-a-user-attribute
 
-  scim remove-user-from-org --token=STRING --organization_id=INT-64 --external_identity_guid=STRING
+  scim remove-user-from-org --token=STRING --cloud-9-preview --org=STRING --external_identity_guid=STRING
     Remove a user from the organization -
     https://developer.github.com/v3/scim/#remove-a-user-from-the-organization
 

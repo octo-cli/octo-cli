@@ -1307,7 +1307,7 @@ type ReposGetContentsCmd struct {
 	internal.BaseCmd
 	Owner string `required:"" name:"owner"`
 	Repo  string `required:"" name:"repo"`
-	Path  string `required:"" name:"path" help:"The content path."`
+	Path  string `required:"" name:"path"`
 	Ref   string `name:"ref" help:"The name of the commit/branch/tag."`
 }
 
@@ -1325,8 +1325,8 @@ type ReposGetArchiveLinkCmd struct {
 	internal.BaseCmd
 	Owner         string `required:"" name:"owner"`
 	Repo          string `required:"" name:"repo"`
-	ArchiveFormat string "required:\"\" name:\"archive_format\" help:\"Can be either `tarball` or `zipball`.\""
-	Ref           string `required:"" name:"ref" help:"A valid Git reference."`
+	ArchiveFormat string `required:"" name:"archive_format"`
+	Ref           string `required:"" name:"ref"`
 }
 
 func (c *ReposGetArchiveLinkCmd) Run(isValueSetMap map[string]bool) error {
@@ -1523,7 +1523,7 @@ type ReposGetDeploymentStatusCmd struct {
 	Owner        string `required:"" name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	DeploymentId int64  `required:"" name:"deployment_id"`
-	StatusId     int64  `required:"" name:"status_id" help:"The deployment status ID."`
+	StatusId     int64  `required:"" name:"status_id"`
 }
 
 func (c *ReposGetDeploymentStatusCmd) Run(isValueSetMap map[string]bool) error {
