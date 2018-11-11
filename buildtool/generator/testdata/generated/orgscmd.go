@@ -5,7 +5,7 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type OrgsCmd struct {
-	ListForCurrentUser                 OrgsListForCurrentUserCmd                 `cmd:"" help:"List your organizations - https://developer.github.com/v3/orgs/#list-your-organizations"`
+	ListForAuthenticatedUser           OrgsListForAuthenticatedUserCmd           `cmd:"" help:"List your organizations - https://developer.github.com/v3/orgs/#list-your-organizations"`
 	List                               OrgsListCmd                               `cmd:"" help:"List all organizations - https://developer.github.com/v3/orgs/#list-all-organizations"`
 	ListForUser                        OrgsListForUserCmd                        `cmd:"" help:"List user organizations - https://developer.github.com/v3/orgs/#list-user-organizations"`
 	Get                                OrgsGetCmd                                `cmd:"" help:"Get an organization - https://developer.github.com/v3/orgs/#get-an-organization"`
@@ -28,7 +28,7 @@ type OrgsCmd struct {
 	ListPendingInvitations             OrgsListPendingInvitationsCmd             `cmd:"" help:"List pending organization invitations - https://developer.github.com/v3/orgs/members/#list-pending-organization-invitations"`
 	CreateInvitation                   OrgsCreateInvitationCmd                   `cmd:"" help:"Create organization invitation - https://developer.github.com/v3/orgs/members/#create-organization-invitation"`
 	ListMemberships                    OrgsListMembershipsCmd                    `cmd:"" help:"List your organization memberships - https://developer.github.com/v3/orgs/members/#list-your-organization-memberships"`
-	GetMembership                      OrgsGetMembershipCmd                      `cmd:"" help:"Get your organization membership - https://developer.github.com/v3/orgs/members/#get-your-organization-membership"`
+	GetMembershipForAuthenticatedUser  OrgsGetMembershipForAuthenticatedUserCmd  `cmd:"" help:"Get your organization membership - https://developer.github.com/v3/orgs/members/#get-your-organization-membership"`
 	EditMembership                     OrgsEditMembershipCmd                     `cmd:"" help:"Edit your organization membership - https://developer.github.com/v3/orgs/members/#edit-your-organization-membership"`
 	ListOutsideCollaborators           OrgsListOutsideCollaboratorsCmd           `cmd:"" help:"List outside collaborators - https://developer.github.com/v3/orgs/outside_collaborators/#list-outside-collaborators"`
 	RemoveOutsideCollaborator          OrgsRemoveOutsideCollaboratorCmd          `cmd:"" help:"Remove outside collaborator - https://developer.github.com/v3/orgs/outside_collaborators/#remove-outside-collaborator"`
@@ -39,13 +39,13 @@ type OrgsCmd struct {
 	DeleteHook                         OrgsDeleteHookCmd                         `cmd:"" help:"Delete a hook - https://developer.github.com/v3/orgs/hooks/#delete-a-hook"`
 }
 
-type OrgsListForCurrentUserCmd struct {
+type OrgsListForAuthenticatedUserCmd struct {
 	internal.BaseCmd
 	PerPage int64 `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64 `name:"page" help:"Page number of the results to fetch."`
 }
 
-func (c *OrgsListForCurrentUserCmd) Run(isValueSetMap map[string]bool) error {
+func (c *OrgsListForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/orgs")
 	c.UpdateURLQuery("per_page", c.PerPage)
@@ -409,12 +409,12 @@ func (c *OrgsListMembershipsCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
-type OrgsGetMembershipCmd struct {
+type OrgsGetMembershipForAuthenticatedUserCmd struct {
 	internal.BaseCmd
 	Org string `required:"" name:"org"`
 }
 
-func (c *OrgsGetMembershipCmd) Run(isValueSetMap map[string]bool) error {
+func (c *OrgsGetMembershipForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/memberships/orgs/:org")
 	c.UpdateURLPath("org", c.Org)

@@ -692,7 +692,7 @@ type IssuesAddLabelsCmd struct {
 	Owner    string   `required:"" name:"owner"`
 	Repo     string   `required:"" name:"repo"`
 	Number   int64    `required:"" name:"number"`
-	Labels   []string `required:"" name:"labels"`
+	Labels   []string "required:\"\" name:\"labels\" help:\"The name of the label to add to the issue. Must contain at least one label. **Note:** Alternatively, you can pass a single label as a `string` or an `array` of labels directly, but GitHub recommends passing an object with the `labels` key.\""
 }
 
 func (c *IssuesAddLabelsCmd) Run(isValueSetMap map[string]bool) error {
@@ -732,7 +732,7 @@ type IssuesReplaceLabelsCmd struct {
 	Owner    string   `required:"" name:"owner"`
 	Repo     string   `required:"" name:"repo"`
 	Number   int64    `required:"" name:"number"`
-	Labels   []string `required:"" name:"labels"`
+	Labels   []string "name:\"labels\" help:\"The names of the labels to add to the issue. You can pass an empty array to remove all labels. **Note:** Alternatively, you can pass a single label as a `string` or an `array` of labels directly, but GitHub recommends passing an object with the `labels` key.\""
 }
 
 func (c *IssuesReplaceLabelsCmd) Run(isValueSetMap map[string]bool) error {

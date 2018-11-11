@@ -12,35 +12,41 @@ type CodesOfConductCmd struct {
 
 type CodesOfConductListConductCodesCmd struct {
 	internal.BaseCmd
+	ScarletWitch bool "name:\"scarlet-witch-preview\" required:\"\" help:\"**Note:** The Codes of Conduct API is currently available for developers to preview.\n\nTo access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.scarlet-witch-preview+json\n\n```\""
 }
 
 func (c *CodesOfConductListConductCodesCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/codes_of_conduct")
+	c.UpdatePreview("scarlet-witch", c.ScarletWitch)
 	return c.DoRequest("GET")
 }
 
 type CodesOfConductGetConductCodeCmd struct {
 	internal.BaseCmd
-	Key string `required:"" name:"key"`
+	ScarletWitch bool   "name:\"scarlet-witch-preview\" required:\"\" help:\"**Note:** The Codes of Conduct API is currently available for developers to preview.\n\nTo access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.scarlet-witch-preview+json\n\n```\""
+	Key          string `required:"" name:"key"`
 }
 
 func (c *CodesOfConductGetConductCodeCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/codes_of_conduct/:key")
+	c.UpdatePreview("scarlet-witch", c.ScarletWitch)
 	c.UpdateURLPath("key", c.Key)
 	return c.DoRequest("GET")
 }
 
 type CodesOfConductGetForRepoCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	ScarletWitch bool   "name:\"scarlet-witch-preview\" required:\"\" help:\"**Note:** The Codes of Conduct API is currently available for developers to preview.\n\nTo access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.scarlet-witch-preview+json\n\n```\""
+	Owner        string `required:"" name:"owner"`
+	Repo         string `required:"" name:"repo"`
 }
 
 func (c *CodesOfConductGetForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/:owner/:repo/community/code_of_conduct")
+	c.UpdatePreview("scarlet-witch", c.ScarletWitch)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
