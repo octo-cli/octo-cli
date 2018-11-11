@@ -692,7 +692,7 @@ type IssuesAddLabelsCmd struct {
 	Owner    string   `required:"" name:"owner"`
 	Repo     string   `required:"" name:"repo"`
 	Number   int64    `required:"" name:"number"`
-	Labels   []string "required:\"\" name:\"labels\" help:\"The name of the label to add to the issue. Must contain at least one label. **Note:** Alternatively, you can pass a single label as a `string` or an `array` of labels directly, but GitHub recommends passing an object with the `labels` key.\""
+	Labels   []string `required:"" name:"labels"`
 }
 
 func (c *IssuesAddLabelsCmd) Run(isValueSetMap map[string]bool) error {
@@ -728,10 +728,11 @@ func (c *IssuesRemoveLabelCmd) Run(isValueSetMap map[string]bool) error {
 
 type IssuesReplaceLabelsCmd struct {
 	internal.BaseCmd
-	Symmetra bool   "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
-	Owner    string `required:"" name:"owner"`
-	Repo     string `required:"" name:"repo"`
-	Number   int64  `required:"" name:"number"`
+	Symmetra bool     "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
+	Owner    string   `required:"" name:"owner"`
+	Repo     string   `required:"" name:"repo"`
+	Number   int64    `required:"" name:"number"`
+	Labels   []string `required:"" name:"labels"`
 }
 
 func (c *IssuesReplaceLabelsCmd) Run(isValueSetMap map[string]bool) error {
@@ -741,6 +742,7 @@ func (c *IssuesReplaceLabelsCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("number", c.Number)
+	c.UpdateBody("labels", c.Labels)
 	return c.DoRequest("PUT")
 }
 
