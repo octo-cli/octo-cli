@@ -34,6 +34,23 @@ func buildIfNeeded(bin, src, ldflags string, force bool) error {
 	return errors.Wrapf(err, "failed building %q", bin)
 }
 
+// buildTmp builds bin/octo-tmp for use by buildtool itself
+func buildTmp() error {
+	if err := mustBeInRoot(); err != nil {
+		return err
+	}
+	return buildIfNeeded(filepath.Join(bindir, "octo-tmp"), ".", "", true)
+}
+
+func runOcto(arguments ...string) (string, error) {
+	if err := buildTmp(); err != nil {
+		return "", err
+	}
+	cmd := exec.Command("bin/octo-tmp", arguments...)
+	out, err := cmd.Output()
+	return strings.TrimSpace(string(out)), err
+}
+
 func mustBeInRoot() error {
 	wantLine := []byte("module github.com/octo-cli/octo-cli")
 	modFile, err := os.Open("./go.mod")

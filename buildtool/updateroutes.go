@@ -1,67 +1,49 @@
 package main
 
 import (
-	"io"
-	"net/http"
+	"encoding/base64"
+	"io/ioutil"
 	"os"
-	"path/filepath"
-	"strings"
-	"time"
 
 	"github.com/pkg/errors"
 )
 
-const routesTimestampFormat = "20060102T150405Z0700"
-
-func updateRoutes(routesURL, routesPath string) error {
-	resp, err := http.Get(routesURL)
+func getRoutesContent(tagName string) (string, error) {
+	fileSha, err := runOcto("git", "get-tree", "--owner", "octokit", "--repo", "routes",
+		"--tree_sha", tagName,
+		"--format", `{{range .tree}}{{if eq .path "index.json"}}{{.sha}}{{end}}{{end}}`)
 	if err != nil {
-		return errors.Wrapf(err, "failed getting %q", routesURL)
+		return "", err
 	}
-
-	err = writeRoutesJSON(routesPath, resp)
+	encoded, err := runOcto("git", "get-blob", "--owner", "octokit", "--repo", "routes",
+		"--file_sha", fileSha, "--format", "{{.content}}")
 	if err != nil {
-		return errors.Wrap(err, "failed writing routesJSON")
+		return "", err
 	}
-
-	err = updateLastModified(routesPath, resp)
-	return errors.Wrap(err, "failed updateing last modified")
+	routesBytes, err := base64.StdEncoding.DecodeString(encoded)
+	routesContent := string(routesBytes)
+	return routesContent, err
 }
 
-func writeRoutesJSON(routesPath string, resp *http.Response) error {
-	outFile, err := os.Create(routesPath)
+func updateRoutes(routesPath, githubToken string) error {
+	err := os.Setenv("GITHUB_TOKEN", githubToken)
 	if err != nil {
-		return errors.Wrapf(err, "failed creating file %q", routesPath)
+		return errors.Wrap(err, "failed setting env GITHUB_TOKEN")
 	}
-	_, err = io.Copy(outFile, resp.Body)
+	tag, err := runOcto("repos", "get-latest-release", "--owner", "octokit", "--repo", "routes",
+		"--format", "{{.tag_name}}")
 	if err != nil {
-		return errors.Wrapf(err, "failed writing to file %q", routesPath)
+		return errors.Wrap(err, "failed getting latest release for octokit/routes")
 	}
-	err = resp.Body.Close()
+	routesJSON, err := getRoutesContent(tag)
 	if err != nil {
-		return errors.Wrap(err, "failed closing response body")
+		return errors.Wrap(err, "failed getting contents of index.json")
 	}
-	return errors.Wrapf(err, "failed closing file %q", outFile.Close())
-}
-
-func updateLastModified(routesPath string, resp *http.Response) error {
-	extension := filepath.Ext(routesPath)
-	if extension == "" {
-		return errors.Errorf("routesPath must have a file extension (preferable .json)")
-	}
-	lmPath := strings.TrimSuffix(routesPath, extension) + "-last-modified.txt"
-	lmHeader := resp.Header.Get("last-modified")
-	lmTime, err := time.Parse(time.RFC1123, lmHeader)
+	err = ioutil.WriteFile(routesPath, []byte(routesJSON), 0644)
 	if err != nil {
-		return errors.Wrapf(err, "couldn't parse last-modified time %q", lmHeader)
+		return errors.Wrapf(err, "failed writing to %q", routesPath)
 	}
-	lmFile, err := os.Create(lmPath)
-	if err != nil {
-		return errors.Wrapf(err, "failed creating file %q", lmPath)
-	}
-	_, err = lmFile.WriteString(lmTime.Format(routesTimestampFormat))
-	if err != nil {
-		return errors.Wrapf(err, "failed writing to file %q", lmPath)
-	}
-	return errors.Wrapf(lmFile.Close(), "failed closing file %q", lmPath)
+	routesTagPath := routesPath + "-tag.txt"
+	err = ioutil.WriteFile(routesTagPath, []byte(tag), 0644)
+	return errors.Wrapf(err, "failed writing to %q", routesTagPath)
 }

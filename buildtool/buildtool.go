@@ -136,12 +136,12 @@ func (k *updateReadmeCmd) Run() error {
 }
 
 type updateRoutesCmd struct {
-	RoutesPath string `type:"existingfile" default:"routes.json"`
-	RoutesURL  string `default:"https://octokit.github.io/routes/index.json"`
+	RoutesPath  string `type:"existingfile" default:"routes.json"`
+	GithubToken string `env:"GITHUB_TOKEN" required:""`
 }
 
 func (k *updateRoutesCmd) Run() error {
-	return updateRoutes(k.RoutesURL, k.RoutesPath)
+	return updateRoutes(k.RoutesPath, k.GithubToken)
 }
 
 type updateTestDataCmd struct{}
