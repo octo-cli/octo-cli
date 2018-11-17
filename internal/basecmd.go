@@ -105,6 +105,7 @@ func (c *BaseCmd) UpdateURLQuery(paramName string, value interface{}) {
 }
 
 func (c *BaseCmd) newRequest(method string) (*http.Request, error) {
+	c.url.Path = strings.Replace(c.url.Path, "//", "/", -1)
 	u := strings.Join([]string{
 		strings.TrimSuffix(c.APIBaseURL, "/"),
 		strings.TrimPrefix(c.url.String(), "/"),
