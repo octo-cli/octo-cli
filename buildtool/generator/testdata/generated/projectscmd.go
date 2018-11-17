@@ -33,7 +33,7 @@ type ProjectsCmd struct {
 type ProjectsListForRepoCmd struct {
 	internal.BaseCmd
 	Inertia bool   "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.inertia-preview+json\n\n```\""
-	Owner   string `required:"" name:"owner"`
+	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	State   string "name:\"state\" help:\"Indicates the state of the projects to return. Can be either `open`, `closed`, or `all`.\""
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
@@ -93,7 +93,7 @@ func (c *ProjectsGetCmd) Run(isValueSetMap map[string]bool) error {
 type ProjectsCreateForRepoCmd struct {
 	internal.BaseCmd
 	Inertia bool   "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.inertia-preview+json\n\n```\""
-	Owner   string `required:"" name:"owner"`
+	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	Name    string `required:"" name:"name" help:"The name of the project."`
 	Body    string `name:"body" help:"The body of the project."`

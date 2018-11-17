@@ -34,7 +34,7 @@ func (c *LicensesGetCmd) Run(isValueSetMap map[string]bool) error {
 
 type LicensesGetForRepoCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 

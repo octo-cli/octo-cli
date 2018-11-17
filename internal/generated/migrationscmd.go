@@ -132,7 +132,7 @@ func (c *MigrationsUnlockRepoForOrgCmd) Run(isValueSetMap map[string]bool) error
 type MigrationsStartImportCmd struct {
 	internal.BaseCmd
 	BarredRock  bool   "name:\"barred-rock-preview\" required:\"\" help:\"The source import APIs are currently in public preview. See the [source import](/v3/previews/#source-import) preview for more details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.barred-rock-preview\n\n```\""
-	Owner       string `required:"" name:"owner"`
+	Owner       string `name:"owner"`
 	Repo        string `required:"" name:"repo"`
 	VcsUrl      string `required:"" name:"vcs_url" help:"The URL of the originating repository."`
 	Vcs         string "name:\"vcs\" help:\"The originating VCS type. Can be one of `subversion`, `git`, `mercurial`, or `tfvc`. Please be aware that without this parameter, the import job will take additional time to detect the VCS type before beginning the import. This detection step will be reflected in the response.\""
@@ -158,7 +158,7 @@ func (c *MigrationsStartImportCmd) Run(isValueSetMap map[string]bool) error {
 type MigrationsGetImportProgressCmd struct {
 	internal.BaseCmd
 	BarredRock bool   "name:\"barred-rock-preview\" required:\"\" help:\"The source import APIs are currently in public preview. See the [source import](/v3/previews/#source-import) preview for more details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.barred-rock-preview\n\n```\""
-	Owner      string `required:"" name:"owner"`
+	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
 }
 
@@ -174,7 +174,7 @@ func (c *MigrationsGetImportProgressCmd) Run(isValueSetMap map[string]bool) erro
 type MigrationsUpdateImportCmd struct {
 	internal.BaseCmd
 	BarredRock  bool   "name:\"barred-rock-preview\" required:\"\" help:\"The source import APIs are currently in public preview. See the [source import](/v3/previews/#source-import) preview for more details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.barred-rock-preview\n\n```\""
-	Owner       string `required:"" name:"owner"`
+	Owner       string `name:"owner"`
 	Repo        string `required:"" name:"repo"`
 	VcsUsername string `name:"vcs_username" help:"The username to provide to the originating repository."`
 	VcsPassword string `name:"vcs_password" help:"The password to provide to the originating repository."`
@@ -194,7 +194,7 @@ func (c *MigrationsUpdateImportCmd) Run(isValueSetMap map[string]bool) error {
 type MigrationsGetCommitAuthorsCmd struct {
 	internal.BaseCmd
 	BarredRock bool   "name:\"barred-rock-preview\" required:\"\" help:\"The source import APIs are currently in public preview. See the [source import](/v3/previews/#source-import) preview for more details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.barred-rock-preview\n\n```\""
-	Owner      string `required:"" name:"owner"`
+	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
 	Since      string "name:\"since\" help:\"Only authors found after this id are returned. Provide the highest author ID you've seen so far. New authors may be added to the list at any point while the importer is performing the `raw` step.\""
 }
@@ -212,7 +212,7 @@ func (c *MigrationsGetCommitAuthorsCmd) Run(isValueSetMap map[string]bool) error
 type MigrationsMapCommitAuthorCmd struct {
 	internal.BaseCmd
 	BarredRock bool   "name:\"barred-rock-preview\" required:\"\" help:\"The source import APIs are currently in public preview. See the [source import](/v3/previews/#source-import) preview for more details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.barred-rock-preview\n\n```\""
-	Owner      string `required:"" name:"owner"`
+	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
 	AuthorId   int64  `required:"" name:"author_id"`
 	Email      string `name:"email" help:"The new Git author email."`
@@ -234,7 +234,7 @@ func (c *MigrationsMapCommitAuthorCmd) Run(isValueSetMap map[string]bool) error 
 type MigrationsSetLfsPreferenceCmd struct {
 	internal.BaseCmd
 	BarredRock bool   "name:\"barred-rock-preview\" required:\"\" help:\"The source import APIs are currently in public preview. See the [source import](/v3/previews/#source-import) preview for more details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.barred-rock-preview\n\n```\""
-	Owner      string `required:"" name:"owner"`
+	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
 	UseLfs     string "required:\"\" name:\"use_lfs\" help:\"Can be one of `opt_in` (large files will be stored using Git LFS) or `opt_out` (large files will be removed during the import).\""
 }
@@ -252,7 +252,7 @@ func (c *MigrationsSetLfsPreferenceCmd) Run(isValueSetMap map[string]bool) error
 type MigrationsGetLargeFilesCmd struct {
 	internal.BaseCmd
 	BarredRock bool   "name:\"barred-rock-preview\" required:\"\" help:\"The source import APIs are currently in public preview. See the [source import](/v3/previews/#source-import) preview for more details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.barred-rock-preview\n\n```\""
-	Owner      string `required:"" name:"owner"`
+	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
 }
 
@@ -268,7 +268,7 @@ func (c *MigrationsGetLargeFilesCmd) Run(isValueSetMap map[string]bool) error {
 type MigrationsCancelImportCmd struct {
 	internal.BaseCmd
 	BarredRock bool   "name:\"barred-rock-preview\" required:\"\" help:\"The source import APIs are currently in public preview. See the [source import](/v3/previews/#source-import) preview for more details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.barred-rock-preview\n\n```\""
-	Owner      string `required:"" name:"owner"`
+	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
 }
 
