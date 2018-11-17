@@ -287,7 +287,7 @@ func (c *ReposCreateInOrgCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
@@ -301,7 +301,7 @@ func (c *ReposGetCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposEditCmd struct {
 	internal.BaseCmd
-	Owner            string `required:"" name:"owner"`
+	Owner            string `name:"owner"`
 	Repo             string `required:"" name:"repo"`
 	Name             string `required:"" name:"name" help:"The name of the repository."`
 	Description      string `name:"description" help:"A short description of the repository."`
@@ -340,7 +340,7 @@ func (c *ReposEditCmd) Run(isValueSetMap map[string]bool) error {
 type ReposListTopicsCmd struct {
 	internal.BaseCmd
 	Mercy bool   "name:\"mercy-preview\" help:\"**Note:** The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.mercy-preview+json\n\n```\""
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
@@ -356,7 +356,7 @@ func (c *ReposListTopicsCmd) Run(isValueSetMap map[string]bool) error {
 type ReposReplaceTopicsCmd struct {
 	internal.BaseCmd
 	Mercy bool     "name:\"mercy-preview\" help:\"**Note:** The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.mercy-preview+json\n\n```\""
-	Owner string   `required:"" name:"owner"`
+	Owner string   `name:"owner"`
 	Repo  string   `required:"" name:"repo"`
 	Names []string "required:\"\" name:\"names\" help:\"An array of topics to add to the repository. Pass one or more topics to _replace_ the set of existing topics. Send an empty array (`[]`) to clear all topics from the repository.\""
 }
@@ -373,7 +373,7 @@ func (c *ReposReplaceTopicsCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposListContributorsCmd struct {
 	internal.BaseCmd
-	Owner   string `required:"" name:"owner"`
+	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	Anon    string "name:\"anon\" help:\"Set to `1` or `true` to include anonymous contributors in results.\""
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
@@ -393,7 +393,7 @@ func (c *ReposListContributorsCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposListLanguagesCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
@@ -407,7 +407,7 @@ func (c *ReposListLanguagesCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposListTeamsCmd struct {
 	internal.BaseCmd
-	Owner   string `required:"" name:"owner"`
+	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64  `name:"page" help:"Page number of the results to fetch."`
@@ -425,7 +425,7 @@ func (c *ReposListTeamsCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposListTagsCmd struct {
 	internal.BaseCmd
-	Owner   string `required:"" name:"owner"`
+	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64  `name:"page" help:"Page number of the results to fetch."`
@@ -443,7 +443,7 @@ func (c *ReposListTagsCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposDeleteCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
@@ -458,7 +458,7 @@ func (c *ReposDeleteCmd) Run(isValueSetMap map[string]bool) error {
 type ReposTransferCmd struct {
 	internal.BaseCmd
 	Nightshade bool    "name:\"nightshade-preview\" required:\"\" help:\"**Note:** The [Repository Transfer API](/changes/2017-11-09-repository-transfer-api-preview) is currently available for developers to preview. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.nightshade-preview+json\n\n```\""
-	Owner      string  `required:"" name:"owner"`
+	Owner      string  `name:"owner"`
 	Repo       string  `required:"" name:"repo"`
 	NewOwner   string  `name:"new_owner" help:"**Required:** The username or organization name the repository will be transferred to."`
 	TeamIds    []int64 `name:"team_ids" help:"ID of the team or teams to add to the repository. Teams can only be added to organization-owned repositories."`
@@ -477,7 +477,7 @@ func (c *ReposTransferCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposListBranchesCmd struct {
 	internal.BaseCmd
-	Owner     string `required:"" name:"owner"`
+	Owner     string `name:"owner"`
 	Repo      string `required:"" name:"repo"`
 	Protected bool   "name:\"protected\" help:\"Setting to `true` returns only protected branches.\""
 	PerPage   int64  `name:"per_page" help:"Results per page (max 100)"`
@@ -497,7 +497,7 @@ func (c *ReposListBranchesCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetBranchCmd struct {
 	internal.BaseCmd
-	Owner  string `required:"" name:"owner"`
+	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Branch string `required:"" name:"branch"`
 }
@@ -514,7 +514,7 @@ func (c *ReposGetBranchCmd) Run(isValueSetMap map[string]bool) error {
 type ReposGetBranchProtectionCmd struct {
 	internal.BaseCmd
 	LukeCage bool   "name:\"luke-cage-preview\" help:\"**Note:** The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.luke-cage-preview+json\n\n```\""
-	Owner    string `required:"" name:"owner"`
+	Owner    string `name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	Branch   string `required:"" name:"branch"`
 }
@@ -531,7 +531,7 @@ func (c *ReposGetBranchProtectionCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposRemoveBranchProtectionCmd struct {
 	internal.BaseCmd
-	Owner  string `required:"" name:"owner"`
+	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Branch string `required:"" name:"branch"`
 }
@@ -547,7 +547,7 @@ func (c *ReposRemoveBranchProtectionCmd) Run(isValueSetMap map[string]bool) erro
 
 type ReposGetProtectedBranchRequiredStatusChecksCmd struct {
 	internal.BaseCmd
-	Owner  string `required:"" name:"owner"`
+	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Branch string `required:"" name:"branch"`
 }
@@ -563,7 +563,7 @@ func (c *ReposGetProtectedBranchRequiredStatusChecksCmd) Run(isValueSetMap map[s
 
 type ReposUpdateProtectedBranchRequiredStatusChecksCmd struct {
 	internal.BaseCmd
-	Owner    string   `required:"" name:"owner"`
+	Owner    string   `name:"owner"`
 	Repo     string   `required:"" name:"repo"`
 	Branch   string   `required:"" name:"branch"`
 	Strict   bool     `name:"strict" help:"Require branches to be up to date before merging."`
@@ -583,7 +583,7 @@ func (c *ReposUpdateProtectedBranchRequiredStatusChecksCmd) Run(isValueSetMap ma
 
 type ReposRemoveProtectedBranchRequiredStatusChecksCmd struct {
 	internal.BaseCmd
-	Owner  string `required:"" name:"owner"`
+	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Branch string `required:"" name:"branch"`
 }
@@ -599,7 +599,7 @@ func (c *ReposRemoveProtectedBranchRequiredStatusChecksCmd) Run(isValueSetMap ma
 
 type ReposListProtectedBranchRequiredStatusChecksContextsCmd struct {
 	internal.BaseCmd
-	Owner  string `required:"" name:"owner"`
+	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Branch string `required:"" name:"branch"`
 }
@@ -615,7 +615,7 @@ func (c *ReposListProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueSet
 
 type ReposReplaceProtectedBranchRequiredStatusChecksContextsCmd struct {
 	internal.BaseCmd
-	Owner    string   `required:"" name:"owner"`
+	Owner    string   `name:"owner"`
 	Repo     string   `required:"" name:"repo"`
 	Branch   string   `required:"" name:"branch"`
 	Contexts []string `required:"" name:"contexts"`
@@ -633,7 +633,7 @@ func (c *ReposReplaceProtectedBranchRequiredStatusChecksContextsCmd) Run(isValue
 
 type ReposAddProtectedBranchRequiredStatusChecksContextsCmd struct {
 	internal.BaseCmd
-	Owner    string   `required:"" name:"owner"`
+	Owner    string   `name:"owner"`
 	Repo     string   `required:"" name:"repo"`
 	Branch   string   `required:"" name:"branch"`
 	Contexts []string `required:"" name:"contexts"`
@@ -651,7 +651,7 @@ func (c *ReposAddProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueSetM
 
 type ReposRemoveProtectedBranchRequiredStatusChecksContextsCmd struct {
 	internal.BaseCmd
-	Owner    string   `required:"" name:"owner"`
+	Owner    string   `name:"owner"`
 	Repo     string   `required:"" name:"repo"`
 	Branch   string   `required:"" name:"branch"`
 	Contexts []string `required:"" name:"contexts"`
@@ -670,7 +670,7 @@ func (c *ReposRemoveProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueS
 type ReposGetProtectedBranchPullRequestReviewEnforcementCmd struct {
 	internal.BaseCmd
 	LukeCage bool   "name:\"luke-cage-preview\" help:\"**Note:** The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.luke-cage-preview+json\n\n```\""
-	Owner    string `required:"" name:"owner"`
+	Owner    string `name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	Branch   string `required:"" name:"branch"`
 }
@@ -687,7 +687,7 @@ func (c *ReposGetProtectedBranchPullRequestReviewEnforcementCmd) Run(isValueSetM
 
 type ReposRemoveProtectedBranchPullRequestReviewEnforcementCmd struct {
 	internal.BaseCmd
-	Owner  string `required:"" name:"owner"`
+	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Branch string `required:"" name:"branch"`
 }
@@ -704,7 +704,7 @@ func (c *ReposRemoveProtectedBranchPullRequestReviewEnforcementCmd) Run(isValueS
 type ReposGetProtectedBranchRequiredSignaturesCmd struct {
 	internal.BaseCmd
 	Zzzax  bool   "name:\"zzzax-preview\" required:\"\" help:\"**Note:** Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.zzzax-preview+json\n\n```\""
-	Owner  string `required:"" name:"owner"`
+	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Branch string `required:"" name:"branch"`
 }
@@ -722,7 +722,7 @@ func (c *ReposGetProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[str
 type ReposAddProtectedBranchRequiredSignaturesCmd struct {
 	internal.BaseCmd
 	Zzzax  bool   "name:\"zzzax-preview\" required:\"\" help:\"**Note:** Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.zzzax-preview+json\n\n```\""
-	Owner  string `required:"" name:"owner"`
+	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Branch string `required:"" name:"branch"`
 }
@@ -740,7 +740,7 @@ func (c *ReposAddProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[str
 type ReposRemoveProtectedBranchRequiredSignaturesCmd struct {
 	internal.BaseCmd
 	Zzzax  bool   "name:\"zzzax-preview\" required:\"\" help:\"**Note:** Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.zzzax-preview+json\n\n```\""
-	Owner  string `required:"" name:"owner"`
+	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Branch string `required:"" name:"branch"`
 }
@@ -757,7 +757,7 @@ func (c *ReposRemoveProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[
 
 type ReposGetProtectedBranchAdminEnforcementCmd struct {
 	internal.BaseCmd
-	Owner  string `required:"" name:"owner"`
+	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Branch string `required:"" name:"branch"`
 }
@@ -773,7 +773,7 @@ func (c *ReposGetProtectedBranchAdminEnforcementCmd) Run(isValueSetMap map[strin
 
 type ReposAddProtectedBranchAdminEnforcementCmd struct {
 	internal.BaseCmd
-	Owner  string `required:"" name:"owner"`
+	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Branch string `required:"" name:"branch"`
 }
@@ -789,7 +789,7 @@ func (c *ReposAddProtectedBranchAdminEnforcementCmd) Run(isValueSetMap map[strin
 
 type ReposRemoveProtectedBranchAdminEnforcementCmd struct {
 	internal.BaseCmd
-	Owner  string `required:"" name:"owner"`
+	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Branch string `required:"" name:"branch"`
 }
@@ -805,7 +805,7 @@ func (c *ReposRemoveProtectedBranchAdminEnforcementCmd) Run(isValueSetMap map[st
 
 type ReposGetProtectedBranchRestrictionsCmd struct {
 	internal.BaseCmd
-	Owner  string `required:"" name:"owner"`
+	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Branch string `required:"" name:"branch"`
 }
@@ -821,7 +821,7 @@ func (c *ReposGetProtectedBranchRestrictionsCmd) Run(isValueSetMap map[string]bo
 
 type ReposRemoveProtectedBranchRestrictionsCmd struct {
 	internal.BaseCmd
-	Owner  string `required:"" name:"owner"`
+	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Branch string `required:"" name:"branch"`
 }
@@ -838,7 +838,7 @@ func (c *ReposRemoveProtectedBranchRestrictionsCmd) Run(isValueSetMap map[string
 type ReposListProtectedBranchTeamRestrictionsCmd struct {
 	internal.BaseCmd
 	Hellcat bool   "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
-	Owner   string `required:"" name:"owner"`
+	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	Branch  string `required:"" name:"branch"`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
@@ -860,7 +860,7 @@ func (c *ReposListProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[stri
 type ReposReplaceProtectedBranchTeamRestrictionsCmd struct {
 	internal.BaseCmd
 	Hellcat bool     "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
-	Owner   string   `required:"" name:"owner"`
+	Owner   string   `name:"owner"`
 	Repo    string   `required:"" name:"repo"`
 	Branch  string   `required:"" name:"branch"`
 	Teams   []string `required:"" name:"teams"`
@@ -880,7 +880,7 @@ func (c *ReposReplaceProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[s
 type ReposAddProtectedBranchTeamRestrictionsCmd struct {
 	internal.BaseCmd
 	Hellcat bool     "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
-	Owner   string   `required:"" name:"owner"`
+	Owner   string   `name:"owner"`
 	Repo    string   `required:"" name:"repo"`
 	Branch  string   `required:"" name:"branch"`
 	Teams   []string `required:"" name:"teams"`
@@ -900,7 +900,7 @@ func (c *ReposAddProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[strin
 type ReposRemoveProtectedBranchTeamRestrictionsCmd struct {
 	internal.BaseCmd
 	Hellcat bool     "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
-	Owner   string   `required:"" name:"owner"`
+	Owner   string   `name:"owner"`
 	Repo    string   `required:"" name:"repo"`
 	Branch  string   `required:"" name:"branch"`
 	Teams   []string `required:"" name:"teams"`
@@ -919,7 +919,7 @@ func (c *ReposRemoveProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[st
 
 type ReposListProtectedBranchUserRestrictionsCmd struct {
 	internal.BaseCmd
-	Owner  string `required:"" name:"owner"`
+	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Branch string `required:"" name:"branch"`
 }
@@ -935,7 +935,7 @@ func (c *ReposListProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[stri
 
 type ReposReplaceProtectedBranchUserRestrictionsCmd struct {
 	internal.BaseCmd
-	Owner  string   `required:"" name:"owner"`
+	Owner  string   `name:"owner"`
 	Repo   string   `required:"" name:"repo"`
 	Branch string   `required:"" name:"branch"`
 	Users  []string `required:"" name:"users"`
@@ -953,7 +953,7 @@ func (c *ReposReplaceProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[s
 
 type ReposAddProtectedBranchUserRestrictionsCmd struct {
 	internal.BaseCmd
-	Owner  string   `required:"" name:"owner"`
+	Owner  string   `name:"owner"`
 	Repo   string   `required:"" name:"repo"`
 	Branch string   `required:"" name:"branch"`
 	Users  []string `required:"" name:"users"`
@@ -971,7 +971,7 @@ func (c *ReposAddProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[strin
 
 type ReposRemoveProtectedBranchUserRestrictionsCmd struct {
 	internal.BaseCmd
-	Owner  string   `required:"" name:"owner"`
+	Owner  string   `name:"owner"`
 	Repo   string   `required:"" name:"repo"`
 	Branch string   `required:"" name:"branch"`
 	Users  []string `required:"" name:"users"`
@@ -990,7 +990,7 @@ func (c *ReposRemoveProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[st
 type ReposListCollaboratorsCmd struct {
 	internal.BaseCmd
 	Hellcat     bool   "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
-	Owner       string `required:"" name:"owner"`
+	Owner       string `name:"owner"`
 	Repo        string `required:"" name:"repo"`
 	Affiliation string "name:\"affiliation\" help:\"Filter collaborators returned by their affiliation. Can be one of:  \n\\* `outside`: All outside collaborators of an organization-owned repository.  \n\\* `direct`: All collaborators with permissions to an organization-owned repository, regardless of organization membership status.  \n\\* `all`: All collaborators the authenticated user can see.\""
 	PerPage     int64  `name:"per_page" help:"Results per page (max 100)"`
@@ -1012,7 +1012,7 @@ func (c *ReposListCollaboratorsCmd) Run(isValueSetMap map[string]bool) error {
 type ReposCheckCollaboratorCmd struct {
 	internal.BaseCmd
 	Hellcat  bool   "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
-	Owner    string `required:"" name:"owner"`
+	Owner    string `name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	Username string `required:"" name:"username"`
 }
@@ -1029,7 +1029,7 @@ func (c *ReposCheckCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetCollaboratorPermissionLevelCmd struct {
 	internal.BaseCmd
-	Owner    string `required:"" name:"owner"`
+	Owner    string `name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	Username string `required:"" name:"username"`
 }
@@ -1045,7 +1045,7 @@ func (c *ReposGetCollaboratorPermissionLevelCmd) Run(isValueSetMap map[string]bo
 
 type ReposAddCollaboratorCmd struct {
 	internal.BaseCmd
-	Owner      string `required:"" name:"owner"`
+	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
 	Username   string `required:"" name:"username"`
 	Permission string "name:\"permission\" help:\"The permission to grant the collaborator. **Only valid on organization-owned repositories.** Can be one of:  \n\\* `pull` - can pull, but not push to or administer this repository.  \n\\* `push` - can pull and push, but not administer this repository.  \n\\* `admin` - can pull, push and administer this repository.\""
@@ -1063,7 +1063,7 @@ func (c *ReposAddCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposRemoveCollaboratorCmd struct {
 	internal.BaseCmd
-	Owner    string `required:"" name:"owner"`
+	Owner    string `name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	Username string `required:"" name:"username"`
 }
@@ -1080,7 +1080,7 @@ func (c *ReposRemoveCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
 type ReposListCommitCommentsCmd struct {
 	internal.BaseCmd
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview\n\n```\n\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.\""
-	Owner        string `required:"" name:"owner"`
+	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	PerPage      int64  `name:"per_page" help:"Results per page (max 100)"`
 	Page         int64  `name:"page" help:"Page number of the results to fetch."`
@@ -1100,7 +1100,7 @@ func (c *ReposListCommitCommentsCmd) Run(isValueSetMap map[string]bool) error {
 type ReposListCommentsForCommitCmd struct {
 	internal.BaseCmd
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview\n\n```\n\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.\""
-	Owner        string `required:"" name:"owner"`
+	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	Ref          string `required:"" name:"ref"`
 	PerPage      int64  `name:"per_page" help:"Results per page (max 100)"`
@@ -1121,7 +1121,7 @@ func (c *ReposListCommentsForCommitCmd) Run(isValueSetMap map[string]bool) error
 
 type ReposCreateCommitCommentCmd struct {
 	internal.BaseCmd
-	Owner    string `required:"" name:"owner"`
+	Owner    string `name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	Sha      string `required:"" name:"sha"`
 	Body     string `required:"" name:"body" help:"The contents of the comment."`
@@ -1146,7 +1146,7 @@ func (c *ReposCreateCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 type ReposGetCommitCommentCmd struct {
 	internal.BaseCmd
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview\n\n```\n\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.\""
-	Owner        string `required:"" name:"owner"`
+	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	CommentId    int64  `required:"" name:"comment_id"`
 }
@@ -1163,7 +1163,7 @@ func (c *ReposGetCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposUpdateCommitCommentCmd struct {
 	internal.BaseCmd
-	Owner     string `required:"" name:"owner"`
+	Owner     string `name:"owner"`
 	Repo      string `required:"" name:"repo"`
 	CommentId int64  `required:"" name:"comment_id"`
 	Body      string `required:"" name:"body" help:"The contents of the comment"`
@@ -1181,7 +1181,7 @@ func (c *ReposUpdateCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposDeleteCommitCommentCmd struct {
 	internal.BaseCmd
-	Owner     string `required:"" name:"owner"`
+	Owner     string `name:"owner"`
 	Repo      string `required:"" name:"repo"`
 	CommentId int64  `required:"" name:"comment_id"`
 }
@@ -1197,7 +1197,7 @@ func (c *ReposDeleteCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposListCommitsCmd struct {
 	internal.BaseCmd
-	Owner   string `required:"" name:"owner"`
+	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	Sha     string `name:"sha" help:"SHA or branch to start listing commits from."`
 	Path    string `name:"path" help:"Only commits containing this file path will be returned."`
@@ -1225,7 +1225,7 @@ func (c *ReposListCommitsCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetCommitCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	Sha   string `required:"" name:"sha"`
 }
@@ -1241,7 +1241,7 @@ func (c *ReposGetCommitCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetCommitRefShaCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	Ref   string `required:"" name:"ref"`
 }
@@ -1257,7 +1257,7 @@ func (c *ReposGetCommitRefShaCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposCompareCommitsCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	Base  string `required:"" name:"base"`
 	Head  string `required:"" name:"head"`
@@ -1275,7 +1275,7 @@ func (c *ReposCompareCommitsCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposRetrieveCommunityProfileMetricsCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
@@ -1289,7 +1289,7 @@ func (c *ReposRetrieveCommunityProfileMetricsCmd) Run(isValueSetMap map[string]b
 
 type ReposGetReadmeCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	Ref   string `name:"ref" help:"The name of the commit/branch/tag."`
 }
@@ -1305,7 +1305,7 @@ func (c *ReposGetReadmeCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetContentsCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	Path  string `required:"" name:"path"`
 	Ref   string `name:"ref" help:"The name of the commit/branch/tag."`
@@ -1323,7 +1323,7 @@ func (c *ReposGetContentsCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetArchiveLinkCmd struct {
 	internal.BaseCmd
-	Owner         string `required:"" name:"owner"`
+	Owner         string `name:"owner"`
 	Repo          string `required:"" name:"repo"`
 	ArchiveFormat string `required:"" name:"archive_format"`
 	Ref           string `required:"" name:"ref"`
@@ -1341,7 +1341,7 @@ func (c *ReposGetArchiveLinkCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposListDeployKeysCmd struct {
 	internal.BaseCmd
-	Owner   string `required:"" name:"owner"`
+	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64  `name:"page" help:"Page number of the results to fetch."`
@@ -1359,7 +1359,7 @@ func (c *ReposListDeployKeysCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetDeployKeyCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	KeyId int64  `required:"" name:"key_id"`
 }
@@ -1375,7 +1375,7 @@ func (c *ReposGetDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposAddDeployKeyCmd struct {
 	internal.BaseCmd
-	Owner    string `required:"" name:"owner"`
+	Owner    string `name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	Title    string `name:"title" help:"A name for the key."`
 	Key      string `required:"" name:"key" help:"The contents of the key."`
@@ -1395,7 +1395,7 @@ func (c *ReposAddDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposRemoveDeployKeyCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	KeyId int64  `required:"" name:"key_id"`
 }
@@ -1412,7 +1412,7 @@ func (c *ReposRemoveDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
 type ReposListDeploymentsCmd struct {
 	internal.BaseCmd
 	AntMan      bool   "name:\"ant-man-preview\" help:\"**Note:** The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.ant-man-preview+json\n\n```\""
-	Owner       string `required:"" name:"owner"`
+	Owner       string `name:"owner"`
 	Repo        string `required:"" name:"repo"`
 	Sha         string `name:"sha" help:"The SHA recorded at creation time."`
 	Ref         string `name:"ref" help:"The name of the ref. This can be a branch, tag, or SHA."`
@@ -1441,7 +1441,7 @@ type ReposGetDeploymentCmd struct {
 	internal.BaseCmd
 	MachineMan   bool   "name:\"machine-man-preview\" help:\"**Note:** If a deployment is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](/changes/2016-09-14-Integrations-Early-Access).\n\nTo receive the `performed_via_github_app` object is the response, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.machine-man-preview\n\n```\""
 	AntMan       bool   "name:\"ant-man-preview\" help:\"**Note:** The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.ant-man-preview+json\n\n```\""
-	Owner        string `required:"" name:"owner"`
+	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	DeploymentId int64  `required:"" name:"deployment_id"`
 }
@@ -1460,7 +1460,7 @@ func (c *ReposGetDeploymentCmd) Run(isValueSetMap map[string]bool) error {
 type ReposCreateDeploymentCmd struct {
 	internal.BaseCmd
 	AntMan                bool     "name:\"ant-man-preview\" help:\"**Note:** The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.ant-man-preview+json\n\n```\""
-	Owner                 string   `required:"" name:"owner"`
+	Owner                 string   `name:"owner"`
 	Repo                  string   `required:"" name:"repo"`
 	Ref                   string   `required:"" name:"ref" help:"The ref to deploy. This can be a branch, tag, or SHA."`
 	Task                  string   "name:\"task\" help:\"Specifies a task to execute (e.g., `deploy` or `deploy:migrations`).\""
@@ -1495,7 +1495,7 @@ type ReposListDeploymentStatusesCmd struct {
 	internal.BaseCmd
 	Flash        bool   "name:\"flash-preview\" help:\"**Note:** New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.\n\nTo access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must provide the following custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.flash-preview+json\n\n```\""
 	AntMan       bool   "name:\"ant-man-preview\" help:\"**Note:** The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.ant-man-preview+json\n\n```\""
-	Owner        string `required:"" name:"owner"`
+	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	DeploymentId int64  `required:"" name:"deployment_id"`
 	PerPage      int64  `name:"per_page" help:"Results per page (max 100)"`
@@ -1520,7 +1520,7 @@ type ReposGetDeploymentStatusCmd struct {
 	MachineMan   bool   "name:\"machine-man-preview\" help:\"**Note:** If a deployment is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](/changes/2016-09-14-Integrations-Early-Access).\n\nTo receive the `performed_via_github_app` object is the response, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.machine-man-preview\n\n```\""
 	Flash        bool   "name:\"flash-preview\" help:\"**Note:** New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.\n\nTo access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must provide the following custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.flash-preview+json\n\n```\""
 	AntMan       bool   "name:\"ant-man-preview\" help:\"**Note:** The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.ant-man-preview+json\n\n```\""
-	Owner        string `required:"" name:"owner"`
+	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	DeploymentId int64  `required:"" name:"deployment_id"`
 	StatusId     int64  `required:"" name:"status_id"`
@@ -1543,7 +1543,7 @@ type ReposCreateDeploymentStatusCmd struct {
 	internal.BaseCmd
 	Flash          bool   "name:\"flash-preview\" help:\"**Note:** New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.\n\nTo access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must provide the following custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.flash-preview+json\n\n```\""
 	AntMan         bool   "name:\"ant-man-preview\" help:\"**Note:** The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.ant-man-preview+json\n\n```\""
-	Owner          string `required:"" name:"owner"`
+	Owner          string `name:"owner"`
 	Repo           string `required:"" name:"repo"`
 	DeploymentId   int64  `required:"" name:"deployment_id"`
 	State          string "required:\"\" name:\"state\" help:\"The state of the status. Can be one of `error`, `failure`, `inactive`, `in_progress`, `queued` `pending`, or `success`. **Note:** To use the `inactive` state, you must provide the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. To use the `in_progress` and `queued` states, you must provide the [`application/vnd.github.flash-preview+json`](https://developer.github.com/v3/previews/#deployment-statuses) custom media type.\""
@@ -1575,7 +1575,7 @@ func (c *ReposCreateDeploymentStatusCmd) Run(isValueSetMap map[string]bool) erro
 
 type ReposListDownloadsCmd struct {
 	internal.BaseCmd
-	Owner   string `required:"" name:"owner"`
+	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64  `name:"page" help:"Page number of the results to fetch."`
@@ -1593,7 +1593,7 @@ func (c *ReposListDownloadsCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetDownloadCmd struct {
 	internal.BaseCmd
-	Owner      string `required:"" name:"owner"`
+	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
 	DownloadId int64  `required:"" name:"download_id"`
 }
@@ -1609,7 +1609,7 @@ func (c *ReposGetDownloadCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposDeleteDownloadCmd struct {
 	internal.BaseCmd
-	Owner      string `required:"" name:"owner"`
+	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
 	DownloadId int64  `required:"" name:"download_id"`
 }
@@ -1625,7 +1625,7 @@ func (c *ReposDeleteDownloadCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposListForksCmd struct {
 	internal.BaseCmd
-	Owner   string `required:"" name:"owner"`
+	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	Sort    string "name:\"sort\" help:\"The sort order. Can be either `newest`, `oldest`, or `stargazers`.\""
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
@@ -1645,7 +1645,7 @@ func (c *ReposListForksCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposCreateForkCmd struct {
 	internal.BaseCmd
-	Owner        string `required:"" name:"owner"`
+	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	Organization string `name:"organization" help:"Optional parameter to specify the organization name if forking into an organization."`
 }
@@ -1661,7 +1661,7 @@ func (c *ReposCreateForkCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposListInvitationsCmd struct {
 	internal.BaseCmd
-	Owner   string `required:"" name:"owner"`
+	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64  `name:"page" help:"Page number of the results to fetch."`
@@ -1679,7 +1679,7 @@ func (c *ReposListInvitationsCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposDeleteInvitationCmd struct {
 	internal.BaseCmd
-	Owner        string `required:"" name:"owner"`
+	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	InvitationId int64  `required:"" name:"invitation_id"`
 }
@@ -1695,7 +1695,7 @@ func (c *ReposDeleteInvitationCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposUpdateInvitationCmd struct {
 	internal.BaseCmd
-	Owner        string `required:"" name:"owner"`
+	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	InvitationId int64  `required:"" name:"invitation_id"`
 	Permissions  string "name:\"permissions\" help:\"The permissions that the associated user will have on the repository. Valid values are `read`, `write`, and `admin`.\""
@@ -1751,7 +1751,7 @@ func (c *ReposDeclineInvitationCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposMergeCmd struct {
 	internal.BaseCmd
-	Owner         string `required:"" name:"owner"`
+	Owner         string `name:"owner"`
 	Repo          string `required:"" name:"repo"`
 	Base          string `required:"" name:"base" help:"The name of the base branch that the head will be merged into."`
 	Head          string `required:"" name:"head" help:"The head to merge. This can be a branch name or a commit SHA1."`
@@ -1772,7 +1772,7 @@ func (c *ReposMergeCmd) Run(isValueSetMap map[string]bool) error {
 type ReposGetPagesCmd struct {
 	internal.BaseCmd
 	MisterFantastic bool   "name:\"mister-fantastic-preview\" required:\"\" help:\"**Note:** The GitHub Pages API on GitHub is currently available for developers to preview. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.mister-fantastic-preview+json\n\n```\""
-	Owner           string `required:"" name:"owner"`
+	Owner           string `name:"owner"`
 	Repo            string `required:"" name:"repo"`
 }
 
@@ -1788,7 +1788,7 @@ func (c *ReposGetPagesCmd) Run(isValueSetMap map[string]bool) error {
 type ReposUpdateInformationAboutPagesSiteCmd struct {
 	internal.BaseCmd
 	MisterFantastic bool   "name:\"mister-fantastic-preview\" required:\"\" help:\"**Note:** The GitHub Pages API on GitHub is currently available for developers to preview. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.mister-fantastic-preview+json\n\n```\""
-	Owner           string `required:"" name:"owner"`
+	Owner           string `name:"owner"`
 	Repo            string `required:"" name:"repo"`
 	Cname           string "name:\"cname\" help:\"Specify a custom domain for the repository. Sending a `null` value will remove the custom domain. For more about custom domains, see '[Using a custom domain with GitHub Pages](https://help.github.com/articles/using-a-custom-domain-with-github-pages/).'\""
 	Source          string "name:\"source\" help:\"Update the source for the repository. Must include the branch name, and may optionally specify the subdirectory `/docs`. Possible values are `'gh-pages'`, `'master'`, and `'master /docs'`.\""
@@ -1808,7 +1808,7 @@ func (c *ReposUpdateInformationAboutPagesSiteCmd) Run(isValueSetMap map[string]b
 type ReposRequestPageBuildCmd struct {
 	internal.BaseCmd
 	MisterFantastic bool   "name:\"mister-fantastic-preview\" required:\"\" help:\"This endpoint is currently available for developers to preview. During the preview period, the API may change without advance notice.\n\nTo access this endpoint during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.mister-fantastic-preview+json\n\n```\""
-	Owner           string `required:"" name:"owner"`
+	Owner           string `name:"owner"`
 	Repo            string `required:"" name:"repo"`
 }
 
@@ -1823,7 +1823,7 @@ func (c *ReposRequestPageBuildCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposListPagesBuildsCmd struct {
 	internal.BaseCmd
-	Owner   string `required:"" name:"owner"`
+	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64  `name:"page" help:"Page number of the results to fetch."`
@@ -1841,7 +1841,7 @@ func (c *ReposListPagesBuildsCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetLatestPagesBuildCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
@@ -1855,7 +1855,7 @@ func (c *ReposGetLatestPagesBuildCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetPagesBuildCmd struct {
 	internal.BaseCmd
-	Owner   string `required:"" name:"owner"`
+	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	BuildId int64  `required:"" name:"build_id"`
 }
@@ -1871,7 +1871,7 @@ func (c *ReposGetPagesBuildCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposListReleasesCmd struct {
 	internal.BaseCmd
-	Owner   string `required:"" name:"owner"`
+	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64  `name:"page" help:"Page number of the results to fetch."`
@@ -1889,7 +1889,7 @@ func (c *ReposListReleasesCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetReleaseCmd struct {
 	internal.BaseCmd
-	Owner     string `required:"" name:"owner"`
+	Owner     string `name:"owner"`
 	Repo      string `required:"" name:"repo"`
 	ReleaseId int64  `required:"" name:"release_id"`
 }
@@ -1905,7 +1905,7 @@ func (c *ReposGetReleaseCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetLatestReleaseCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
@@ -1919,7 +1919,7 @@ func (c *ReposGetLatestReleaseCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetReleaseByTagCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	Tag   string `required:"" name:"tag"`
 }
@@ -1935,7 +1935,7 @@ func (c *ReposGetReleaseByTagCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposCreateReleaseCmd struct {
 	internal.BaseCmd
-	Owner           string `required:"" name:"owner"`
+	Owner           string `name:"owner"`
 	Repo            string `required:"" name:"repo"`
 	TagName         string `required:"" name:"tag_name" help:"The name of the tag."`
 	TargetCommitish string `name:"target_commitish" help:"Specifies the commitish value that determines where the Git tag is created from. Can be any branch or commit SHA. Unused if the Git tag already exists."`
@@ -1961,7 +1961,7 @@ func (c *ReposCreateReleaseCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposEditReleaseCmd struct {
 	internal.BaseCmd
-	Owner           string `required:"" name:"owner"`
+	Owner           string `name:"owner"`
 	Repo            string `required:"" name:"repo"`
 	ReleaseId       int64  `required:"" name:"release_id"`
 	TagName         string `name:"tag_name" help:"The name of the tag."`
@@ -1989,7 +1989,7 @@ func (c *ReposEditReleaseCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposDeleteReleaseCmd struct {
 	internal.BaseCmd
-	Owner     string `required:"" name:"owner"`
+	Owner     string `name:"owner"`
 	Repo      string `required:"" name:"repo"`
 	ReleaseId int64  `required:"" name:"release_id"`
 }
@@ -2005,7 +2005,7 @@ func (c *ReposDeleteReleaseCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposListAssetsForReleaseCmd struct {
 	internal.BaseCmd
-	Owner     string `required:"" name:"owner"`
+	Owner     string `name:"owner"`
 	Repo      string `required:"" name:"repo"`
 	ReleaseId int64  `required:"" name:"release_id"`
 	PerPage   int64  `name:"per_page" help:"Results per page (max 100)"`
@@ -2025,7 +2025,7 @@ func (c *ReposListAssetsForReleaseCmd) Run(isValueSetMap map[string]bool) error 
 
 type ReposGetReleaseAssetCmd struct {
 	internal.BaseCmd
-	Owner   string `required:"" name:"owner"`
+	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	AssetId int64  `required:"" name:"asset_id"`
 }
@@ -2041,7 +2041,7 @@ func (c *ReposGetReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposEditReleaseAssetCmd struct {
 	internal.BaseCmd
-	Owner   string `required:"" name:"owner"`
+	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	AssetId int64  `required:"" name:"asset_id"`
 	Name    string `name:"name" help:"The file name of the asset."`
@@ -2061,7 +2061,7 @@ func (c *ReposEditReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposDeleteReleaseAssetCmd struct {
 	internal.BaseCmd
-	Owner   string `required:"" name:"owner"`
+	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	AssetId int64  `required:"" name:"asset_id"`
 }
@@ -2077,7 +2077,7 @@ func (c *ReposDeleteReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetContributorsStatsCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
@@ -2091,7 +2091,7 @@ func (c *ReposGetContributorsStatsCmd) Run(isValueSetMap map[string]bool) error 
 
 type ReposGetCommitActivityStatsCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
@@ -2105,7 +2105,7 @@ func (c *ReposGetCommitActivityStatsCmd) Run(isValueSetMap map[string]bool) erro
 
 type ReposGetCodeFrequencyStatsCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
@@ -2119,7 +2119,7 @@ func (c *ReposGetCodeFrequencyStatsCmd) Run(isValueSetMap map[string]bool) error
 
 type ReposGetParticipationStatsCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
@@ -2133,7 +2133,7 @@ func (c *ReposGetParticipationStatsCmd) Run(isValueSetMap map[string]bool) error
 
 type ReposGetPunchCardStatsCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
@@ -2147,7 +2147,7 @@ func (c *ReposGetPunchCardStatsCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposCreateStatusCmd struct {
 	internal.BaseCmd
-	Owner       string `required:"" name:"owner"`
+	Owner       string `name:"owner"`
 	Repo        string `required:"" name:"repo"`
 	Sha         string `required:"" name:"sha"`
 	State       string "required:\"\" name:\"state\" help:\"The state of the status. Can be one of `error`, `failure`, `pending`, or `success`.\""
@@ -2171,7 +2171,7 @@ func (c *ReposCreateStatusCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposListStatusesForRefCmd struct {
 	internal.BaseCmd
-	Owner   string `required:"" name:"owner"`
+	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	Ref     string `required:"" name:"ref"`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
@@ -2191,7 +2191,7 @@ func (c *ReposListStatusesForRefCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetCombinedStatusForRefCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	Ref   string `required:"" name:"ref"`
 }
@@ -2207,7 +2207,7 @@ func (c *ReposGetCombinedStatusForRefCmd) Run(isValueSetMap map[string]bool) err
 
 type ReposGetTopReferrersCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
@@ -2221,7 +2221,7 @@ func (c *ReposGetTopReferrersCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetTopPathsCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
@@ -2235,7 +2235,7 @@ func (c *ReposGetTopPathsCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetViewsCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	Per   string "name:\"per\" help:\"Must be one of: `day`, `week`.\""
 }
@@ -2251,7 +2251,7 @@ func (c *ReposGetViewsCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetClonesCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	Per   string "name:\"per\" help:\"Must be one of: `day`, `week`.\""
 }
@@ -2267,7 +2267,7 @@ func (c *ReposGetClonesCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposListHooksCmd struct {
 	internal.BaseCmd
-	Owner   string `required:"" name:"owner"`
+	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64  `name:"page" help:"Page number of the results to fetch."`
@@ -2285,7 +2285,7 @@ func (c *ReposListHooksCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetHookCmd struct {
 	internal.BaseCmd
-	Owner  string `required:"" name:"owner"`
+	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	HookId int64  `required:"" name:"hook_id"`
 }
@@ -2301,7 +2301,7 @@ func (c *ReposGetHookCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposTestPushHookCmd struct {
 	internal.BaseCmd
-	Owner  string `required:"" name:"owner"`
+	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	HookId int64  `required:"" name:"hook_id"`
 }
@@ -2317,7 +2317,7 @@ func (c *ReposTestPushHookCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposPingHookCmd struct {
 	internal.BaseCmd
-	Owner  string `required:"" name:"owner"`
+	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	HookId int64  `required:"" name:"hook_id"`
 }
@@ -2333,7 +2333,7 @@ func (c *ReposPingHookCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposDeleteHookCmd struct {
 	internal.BaseCmd
-	Owner  string `required:"" name:"owner"`
+	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	HookId int64  `required:"" name:"hook_id"`
 }

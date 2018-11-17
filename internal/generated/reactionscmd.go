@@ -23,7 +23,7 @@ type ReactionsCmd struct {
 type ReactionsListForCommitCommentCmd struct {
 	internal.BaseCmd
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"**Note:** APIs for managing reactions are currently available for developers to preview. See the [blog post](/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview+json\n\n```\""
-	Owner        string `required:"" name:"owner"`
+	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	CommentId    int64  `required:"" name:"comment_id"`
 	Content      string `name:"content" help:"Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to a commit comment."`
@@ -47,7 +47,7 @@ func (c *ReactionsListForCommitCommentCmd) Run(isValueSetMap map[string]bool) er
 type ReactionsCreateForCommitCommentCmd struct {
 	internal.BaseCmd
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"**Note:** APIs for managing reactions are currently available for developers to preview. See the [blog post](/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview+json\n\n```\""
-	Owner        string `required:"" name:"owner"`
+	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	CommentId    int64  `required:"" name:"comment_id"`
 	Content      string `required:"" name:"content" help:"The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the commit comment."`
@@ -67,7 +67,7 @@ func (c *ReactionsCreateForCommitCommentCmd) Run(isValueSetMap map[string]bool) 
 type ReactionsListForIssueCmd struct {
 	internal.BaseCmd
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"**Note:** APIs for managing reactions are currently available for developers to preview. See the [blog post](/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview+json\n\n```\""
-	Owner        string `required:"" name:"owner"`
+	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	Number       int64  `required:"" name:"number"`
 	Content      string `name:"content" help:"Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to an issue."`
@@ -91,7 +91,7 @@ func (c *ReactionsListForIssueCmd) Run(isValueSetMap map[string]bool) error {
 type ReactionsCreateForIssueCmd struct {
 	internal.BaseCmd
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"**Note:** APIs for managing reactions are currently available for developers to preview. See the [blog post](/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview+json\n\n```\""
-	Owner        string `required:"" name:"owner"`
+	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	Number       int64  `required:"" name:"number"`
 	Content      string `required:"" name:"content" help:"The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the issue."`
@@ -111,7 +111,7 @@ func (c *ReactionsCreateForIssueCmd) Run(isValueSetMap map[string]bool) error {
 type ReactionsListForIssueCommentCmd struct {
 	internal.BaseCmd
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"**Note:** APIs for managing reactions are currently available for developers to preview. See the [blog post](/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview+json\n\n```\""
-	Owner        string `required:"" name:"owner"`
+	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	CommentId    int64  `required:"" name:"comment_id"`
 	Content      string `name:"content" help:"Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to an issue comment."`
@@ -135,7 +135,7 @@ func (c *ReactionsListForIssueCommentCmd) Run(isValueSetMap map[string]bool) err
 type ReactionsCreateForIssueCommentCmd struct {
 	internal.BaseCmd
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"**Note:** APIs for managing reactions are currently available for developers to preview. See the [blog post](/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview+json\n\n```\""
-	Owner        string `required:"" name:"owner"`
+	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	CommentId    int64  `required:"" name:"comment_id"`
 	Content      string `required:"" name:"content" help:"The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the issue comment."`
@@ -155,7 +155,7 @@ func (c *ReactionsCreateForIssueCommentCmd) Run(isValueSetMap map[string]bool) e
 type ReactionsListForPullRequestReviewCommentCmd struct {
 	internal.BaseCmd
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"**Note:** APIs for managing reactions are currently available for developers to preview. See the [blog post](/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview+json\n\n```\""
-	Owner        string `required:"" name:"owner"`
+	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	CommentId    int64  `required:"" name:"comment_id"`
 	Content      string `name:"content" help:"Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to a pull request review comment."`
@@ -179,7 +179,7 @@ func (c *ReactionsListForPullRequestReviewCommentCmd) Run(isValueSetMap map[stri
 type ReactionsCreateForPullRequestReviewCommentCmd struct {
 	internal.BaseCmd
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"**Note:** APIs for managing reactions are currently available for developers to preview. See the [blog post](/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview+json\n\n```\""
-	Owner        string `required:"" name:"owner"`
+	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	CommentId    int64  `required:"" name:"comment_id"`
 	Content      string `required:"" name:"content" help:"The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the pull request review comment."`

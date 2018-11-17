@@ -57,7 +57,7 @@ func (c *ActivityListPublicEventsCmd) Run(isValueSetMap map[string]bool) error {
 
 type ActivityListRepoEventsCmd struct {
 	internal.BaseCmd
-	Owner   string `required:"" name:"owner"`
+	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64  `name:"page" help:"Page number of the results to fetch."`
@@ -75,7 +75,7 @@ func (c *ActivityListRepoEventsCmd) Run(isValueSetMap map[string]bool) error {
 
 type ActivityListPublicEventsForRepoNetworkCmd struct {
 	internal.BaseCmd
-	Owner   string `required:"" name:"owner"`
+	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64  `name:"page" help:"Page number of the results to fetch."`
@@ -223,7 +223,7 @@ func (c *ActivityListNotificationsCmd) Run(isValueSetMap map[string]bool) error 
 
 type ActivityListNotificationsForRepoCmd struct {
 	internal.BaseCmd
-	Owner         string `required:"" name:"owner"`
+	Owner         string `name:"owner"`
 	Repo          string `required:"" name:"repo"`
 	All           bool   "name:\"all\" help:\"If `true`, show notifications marked as read.\""
 	Participating bool   "name:\"participating\" help:\"If `true`, only shows notifications in which the user is directly participating or mentioned.\""
@@ -261,7 +261,7 @@ func (c *ActivityMarkAsReadCmd) Run(isValueSetMap map[string]bool) error {
 
 type ActivityMarkNotificationsAsReadForRepoCmd struct {
 	internal.BaseCmd
-	Owner      string `required:"" name:"owner"`
+	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
 	LastReadAt string "name:\"last_read_at\" help:\"Describes the last point that notifications were checked. Anything updated since this time will not be updated. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.\""
 }
@@ -339,7 +339,7 @@ func (c *ActivityDeleteThreadSubscriptionCmd) Run(isValueSetMap map[string]bool)
 
 type ActivityListStargazersForRepoCmd struct {
 	internal.BaseCmd
-	Owner   string `required:"" name:"owner"`
+	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64  `name:"page" help:"Page number of the results to fetch."`
@@ -395,7 +395,7 @@ func (c *ActivityListReposStarredByAuthenticatedUserCmd) Run(isValueSetMap map[s
 
 type ActivityCheckStarringRepoCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
@@ -409,7 +409,7 @@ func (c *ActivityCheckStarringRepoCmd) Run(isValueSetMap map[string]bool) error 
 
 type ActivityStarRepoCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
@@ -423,7 +423,7 @@ func (c *ActivityStarRepoCmd) Run(isValueSetMap map[string]bool) error {
 
 type ActivityUnstarRepoCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
@@ -437,7 +437,7 @@ func (c *ActivityUnstarRepoCmd) Run(isValueSetMap map[string]bool) error {
 
 type ActivityListWatchersForRepoCmd struct {
 	internal.BaseCmd
-	Owner   string `required:"" name:"owner"`
+	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
 	Page    int64  `name:"page" help:"Page number of the results to fetch."`
@@ -485,7 +485,7 @@ func (c *ActivityListWatchedReposForAuthenticatedUserCmd) Run(isValueSetMap map[
 
 type ActivityGetRepoSubscriptionCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
@@ -499,7 +499,7 @@ func (c *ActivityGetRepoSubscriptionCmd) Run(isValueSetMap map[string]bool) erro
 
 type ActivitySetRepoSubscriptionCmd struct {
 	internal.BaseCmd
-	Owner      string `required:"" name:"owner"`
+	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
 	Subscribed bool   `name:"subscribed" help:"Determines if notifications should be received from this repository."`
 	Ignored    bool   `name:"ignored" help:"Determines if all notifications should be blocked from this repository."`
@@ -517,7 +517,7 @@ func (c *ActivitySetRepoSubscriptionCmd) Run(isValueSetMap map[string]bool) erro
 
 type ActivityDeleteRepoSubscriptionCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
@@ -531,7 +531,7 @@ func (c *ActivityDeleteRepoSubscriptionCmd) Run(isValueSetMap map[string]bool) e
 
 type ActivityCheckWatchingRepoLegacyCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
@@ -545,7 +545,7 @@ func (c *ActivityCheckWatchingRepoLegacyCmd) Run(isValueSetMap map[string]bool) 
 
 type ActivityWatchRepoLegacyCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
@@ -559,7 +559,7 @@ func (c *ActivityWatchRepoLegacyCmd) Run(isValueSetMap map[string]bool) error {
 
 type ActivityStopWatchingRepoLegacyCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 

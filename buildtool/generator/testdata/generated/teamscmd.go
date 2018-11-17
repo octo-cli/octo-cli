@@ -178,7 +178,7 @@ type TeamsCheckManagesRepoCmd struct {
 	internal.BaseCmd
 	Hellcat bool   "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
 	TeamId  int64  `required:"" name:"team_id"`
-	Owner   string `required:"" name:"owner"`
+	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
 }
 
@@ -196,7 +196,7 @@ type TeamsAddOrUpdateRepoCmd struct {
 	internal.BaseCmd
 	Hellcat    bool   "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
 	TeamId     int64  `required:"" name:"team_id"`
-	Owner      string `required:"" name:"owner"`
+	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
 	Permission string "name:\"permission\" help:\"The permission to grant the team on this repository. Can be one of:  \n\\* `pull` - team members can pull, but not push to or administer this repository.  \n\\* `push` - team members can pull and push, but not administer this repository.  \n\\* `admin` - team members can pull, push and administer this repository.  \n  \nIf no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository.  \n**Note**: If you pass the `hellcat-preview` media type, you can promote—but not demote—a `permission` attribute inherited through a parent team.\""
 }
@@ -215,7 +215,7 @@ func (c *TeamsAddOrUpdateRepoCmd) Run(isValueSetMap map[string]bool) error {
 type TeamsRemoveRepoCmd struct {
 	internal.BaseCmd
 	TeamId int64  `required:"" name:"team_id"`
-	Owner  string `required:"" name:"owner"`
+	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 }
 

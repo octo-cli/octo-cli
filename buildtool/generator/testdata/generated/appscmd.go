@@ -130,7 +130,7 @@ func (c *AppsFindOrgInstallationCmd) Run(isValueSetMap map[string]bool) error {
 type AppsFindRepoInstallationCmd struct {
 	internal.BaseCmd
 	MachineMan bool   "name:\"machine-man-preview\" required:\"\" help:\"**Note:** To access the API with your GitHub App, you must provide a custom [media type](/v3/media) in the `Accept` Header for your requests.\n\n`application/vnd.github.machine-man-preview+json`\""
-	Owner      string `required:"" name:"owner"`
+	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
 }
 

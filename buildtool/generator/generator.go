@@ -172,7 +172,17 @@ func Generate(routesPath, outputPath string, fs afero.Fs) {
 					ValueField:   previewParamName,
 				})
 			}
-			for _, param := range route.Params {
+			for i := 0 ; i < len(route.Params); i++ {
+				param := route.Params[i]
+				// We want owner to be optional so that repo can be set as part of repo like
+				//  --repo=owner/repo
+				if param.Name == "owner" {
+					if len(route.Params) > i {
+						if route.Params[i+1].Name == "repo" {
+							param.Required = false
+						}
+					}
+				}
 				paramName := ToArgName(param.Name)
 				paramType, ok := paramTypes[param.Type]
 				if !ok {

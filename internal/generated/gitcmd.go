@@ -19,7 +19,7 @@ type GitCmd struct {
 
 type GitGetBlobCmd struct {
 	internal.BaseCmd
-	Owner   string `required:"" name:"owner"`
+	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	FileSha string `required:"" name:"file_sha"`
 }
@@ -35,7 +35,7 @@ func (c *GitGetBlobCmd) Run(isValueSetMap map[string]bool) error {
 
 type GitCreateBlobCmd struct {
 	internal.BaseCmd
-	Owner    string `required:"" name:"owner"`
+	Owner    string `name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	Content  string `required:"" name:"content" help:"The new blob's content."`
 	Encoding string "name:\"encoding\" help:\"The encoding used for `content`. Currently, `'utf-8'` and `'base64'` are supported.\""
@@ -53,7 +53,7 @@ func (c *GitCreateBlobCmd) Run(isValueSetMap map[string]bool) error {
 
 type GitGetCommitCmd struct {
 	internal.BaseCmd
-	Owner     string `required:"" name:"owner"`
+	Owner     string `name:"owner"`
 	Repo      string `required:"" name:"repo"`
 	CommitSha string `required:"" name:"commit_sha"`
 }
@@ -69,7 +69,7 @@ func (c *GitGetCommitCmd) Run(isValueSetMap map[string]bool) error {
 
 type GitGetRefCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	Ref   string "required:\"\" name:\"ref\" help:\"Must be formatted as `heads/branch`, not just `branch`\""
 }
@@ -85,7 +85,7 @@ func (c *GitGetRefCmd) Run(isValueSetMap map[string]bool) error {
 
 type GitListRefsCmd struct {
 	internal.BaseCmd
-	Owner     string `required:"" name:"owner"`
+	Owner     string `name:"owner"`
 	Repo      string `required:"" name:"repo"`
 	Namespace string "name:\"namespace\" help:\"Filter by sub-namespace (reference prefix). Most commen examples would be `'heads/'` and `'tags/'` to retrieve branches or tags\""
 	PerPage   int64  `name:"per_page" help:"Results per page (max 100)"`
@@ -105,7 +105,7 @@ func (c *GitListRefsCmd) Run(isValueSetMap map[string]bool) error {
 
 type GitCreateRefCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	Ref   string "required:\"\" name:\"ref\" help:\"The name of the fully qualified reference (ie: `refs/heads/master`). If it doesn't start with 'refs' and have at least two slashes, it will be rejected.\""
 	Sha   string `required:"" name:"sha" help:"The SHA1 value for this reference."`
@@ -123,7 +123,7 @@ func (c *GitCreateRefCmd) Run(isValueSetMap map[string]bool) error {
 
 type GitUpdateRefCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	Ref   string `required:"" name:"ref"`
 	Sha   string `required:"" name:"sha" help:"The SHA1 value to set this reference to"`
@@ -143,7 +143,7 @@ func (c *GitUpdateRefCmd) Run(isValueSetMap map[string]bool) error {
 
 type GitDeleteRefCmd struct {
 	internal.BaseCmd
-	Owner string `required:"" name:"owner"`
+	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	Ref   string `required:"" name:"ref"`
 }
@@ -159,7 +159,7 @@ func (c *GitDeleteRefCmd) Run(isValueSetMap map[string]bool) error {
 
 type GitGetTagCmd struct {
 	internal.BaseCmd
-	Owner  string `required:"" name:"owner"`
+	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	TagSha string `required:"" name:"tag_sha"`
 }
@@ -175,7 +175,7 @@ func (c *GitGetTagCmd) Run(isValueSetMap map[string]bool) error {
 
 type GitGetTreeCmd struct {
 	internal.BaseCmd
-	Owner     string `required:"" name:"owner"`
+	Owner     string `name:"owner"`
 	Repo      string `required:"" name:"repo"`
 	TreeSha   string `required:"" name:"tree_sha"`
 	Recursive int64  `name:"recursive"`
