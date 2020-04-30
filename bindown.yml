@@ -1,0 +1,72 @@
+systems:
+- darwin/amd64
+- linux/amd64
+dependencies:
+  golangci-lint:
+    template: origin#golangci-lint
+    vars:
+      version: 1.25.0
+  shellcheck:
+    template: origin#shellcheck
+    vars:
+      version: 0.7.1
+templates:
+  origin#golangci-lint:
+    url: https://github.com/golangci/golangci-lint/releases/download/v{{.version}}/golangci-lint-{{.version}}-{{.os}}-{{.arch}}{{.urlsuffix}}
+    archive_path: golangci-lint-{{.version}}-{{.os}}-{{.arch}}/golangci-lint{{.archivepathsuffix}}
+    bin: golangci-lint
+    link: true
+    vars:
+      archivepathsuffix: ""
+      urlsuffix: .tar.gz
+    required_vars:
+    - version
+    overrides:
+    - matcher:
+        os:
+        - windows
+      dependency:
+        vars:
+          archivepathsuffix: .exe
+          urlsuffix: .zip
+    systems:
+    - darwin/386
+    - darwin/amd64
+    - linux/386
+    - linux/amd64
+    - linux/arm64
+    - windows/386
+    - windows/amd64
+    - freebsd/386
+    - freebsd/amd64
+    - linux/mips64
+    - linux/mips64le
+    - linux/s390x
+    - linux/ppc64le
+  origin#shellcheck:
+    url: https://github.com/koalaman/shellcheck/releases/download/v{{.version}}/shellcheck-v{{.version}}.{{.os}}.{{.arch}}.tar.xz
+    archive_path: shellcheck-v{{.version}}/shellcheck
+    bin: shellcheck
+    required_vars:
+    - version
+    overrides:
+    - matcher:
+        os:
+        - windows
+      dependency:
+        url: https://github.com/koalaman/shellcheck/releases/download/v{{.version}}/shellcheck-v{{.version}}.zip
+        archive_path: shellcheck-v{{.version}}.exe
+    substitutions:
+      arch:
+        amd64: x86_64
+    systems:
+    - darwin/amd64
+    - linux/amd64
+    - windows/amd64
+template_sources:
+  origin: https://raw.githubusercontent.com/WillAbides/bindown-templates/master/bindown.yml
+url_checksums:
+  https://github.com/golangci/golangci-lint/releases/download/v1.25.0/golangci-lint-1.25.0-darwin-amd64.tar.gz: 02220b8e7f1470ca73acd16b9aefd6ecd3516e70e91728b1563eaf5a083e4125
+  https://github.com/golangci/golangci-lint/releases/download/v1.25.0/golangci-lint-1.25.0-linux-amd64.tar.gz: 2c9b36a140c5493cac46d596d80316645221f338099d74f001b0a4dc84728da8
+  https://github.com/koalaman/shellcheck/releases/download/v0.7.1/shellcheck-v0.7.1.darwin.x86_64.tar.xz: b080c3b659f7286e27004aa33759664d91e15ef2498ac709a452445d47e3ac23
+  https://github.com/koalaman/shellcheck/releases/download/v0.7.1/shellcheck-v0.7.1.linux.x86_64.tar.xz: 64f17152d96d7ec261ad3086ed42d18232fcb65148b44571b564d688269d36c8

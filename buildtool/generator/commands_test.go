@@ -20,7 +20,7 @@ func Test_genCliRun_Run(t *testing.T) {
 		k := &GenerateCmd{
 			RoutesPath: "testdata/routes.json",
 			OutputPath: tempDir,
-			fs: fs,
+			fs:         fs,
 		}
 		err = k.Run()
 		assert.NoError(t, err)
@@ -36,7 +36,7 @@ func Test_genCliRun_Run(t *testing.T) {
 		k := &GenerateCmd{
 			RoutesPath: "testdata/routes.json",
 			OutputPath: tempDir,
-			fs: fs,
+			fs:         fs,
 		}
 		err = k.Run()
 		assert.NoError(t, err)

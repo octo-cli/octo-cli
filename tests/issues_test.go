@@ -3,12 +3,13 @@ package tests
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/octo-cli/octo-cli/internal/generated"
-	"github.com/stretchr/testify/assert"
 	"os"
 	"testing"
 	"text/tabwriter"
 	"text/template"
+
+	"github.com/octo-cli/octo-cli/internal/generated"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestIssues(t *testing.T) {
@@ -37,7 +38,7 @@ func TestIssues(t *testing.T) {
 			`--repo=test-create-issue`,
 			`--number=1`,
 			`--format`, format,
-		).test(t, "test_issues_get",  "open : \"test this\" : \"test this body\"\n", "", false)
+		).test(t, "test_issues_get", "open : \"test this\" : \"test this body\"\n", "", false)
 	})
 
 	t.Run("play with  output", func(t *testing.T) {

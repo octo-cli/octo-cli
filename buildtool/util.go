@@ -7,7 +7,6 @@ import (
 	"io/ioutil"
 	"os"
 	"os/exec"
-	"path/filepath"
 	"strings"
 
 	"github.com/masterminds/semver"
@@ -42,7 +41,7 @@ func mustBeInRoot() error {
 		return errors.New(errMsg)
 	}
 	defer func() {
-		err := modFile.Close()
+		err = modFile.Close()
 		if err != nil {
 			panic(err)
 		}
@@ -64,40 +63,6 @@ func fileExists(filePath string) (bool, error) {
 		return false, nil
 	}
 	return err == nil, err
-}
-
-func buildGolangciLint(tag string, outputPath string, force bool) error {
-	ok, err := fileExists(outputPath)
-	if err != nil {
-		return errors.Wrapf(err, "failed finding %q", outputPath)
-	}
-	if ok && !force {
-		return nil
-	}
-	dir, err := ioutil.TempDir("", "")
-	if err != nil {
-		return err
-	}
-	defer func() {
-		err := os.RemoveAll(dir)
-		if err != nil {
-			panic(err)
-		}
-	}()
-	outputPath, err = filepath.Abs(outputPath)
-	if err != nil {
-		return errors.Wrapf(err, "failed getting absolute path of %q", outputPath)
-	}
-	cloneCmd := exec.Command("git", "clone", "--branch", tag, "https://github.com/golangci/golangci-lint", dir)
-	err = cloneCmd.Run()
-	if err != nil {
-		return errors.Wrap(err, "failed cloning golangci-lint")
-	}
-	buildpath := strings.Join([]string{".", "cmd", "golangci-lint"}, string(os.PathSeparator))
-	buildCmd := exec.Command("go", "build", "-ldflags", "-s -w", "-o", outputPath, buildpath)
-	buildCmd.Dir = dir
-	err = buildCmd.Run()
-	return errors.Wrap(err, "failed building golangci-linit")
 }
 
 func latestTaggedRelease(stripPre bool) (*semver.Version, error) {
@@ -169,30 +134,4 @@ func copyFile(srcRoutesPath string, tdRoutesPath string) error {
 	}
 	err = ioutil.WriteFile(tdRoutesPath, routes, 0644)
 	return errors.Wrapf(err, "failed writing %q", tdRoutesPath)
-}
-
-func cibuild() error {
-	var failures []string
-	for _, script := range [][]string{
-		{"script/test", "-race"},
-		{"script/lint"},
-		{"script/generate", "--verify"},
-		{"script/update-readme", "--verify"},
-	} {
-		fmt.Printf("\nrunning %s\n\n", strings.Join(script, " "))
-		cmd := exec.Command(script[0])
-		if len(script) > 1 {
-			cmd = exec.Command(script[0], script[1:]...)
-		}
-		cmd.Stderr = os.Stderr
-		cmd.Stdout = os.Stdout
-		err := cmd.Run()
-		if err != nil {
-			failures = append(failures, strings.Join(script, " "))
-		}
-	}
-	if len(failures) > 0 {
-		return errors.New("cibuild failed")
-	}
-	return nil
 }

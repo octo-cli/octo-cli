@@ -1,5 +1,7 @@
 module github.com/octo-cli/octo-cli
 
+go 1.14
+
 require (
 	github.com/Masterminds/semver v1.4.2 // indirect
 	github.com/alecthomas/kong v0.1.9

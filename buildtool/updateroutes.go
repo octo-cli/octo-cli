@@ -14,7 +14,7 @@ import (
 const routesTimestampFormat = "20060102T150405Z0700"
 
 func updateRoutes(routesURL, routesPath string) error {
-	resp, err := http.Get(routesURL)
+	resp, err := http.Get(routesURL) //nolint:gosec
 	if err != nil {
 		return errors.Wrapf(err, "failed getting %q", routesURL)
 	}
