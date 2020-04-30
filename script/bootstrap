@@ -1,7 +1,0 @@
-#!/bin/sh
-
-set -e
-
-CDPATH= cd -- "$(dirname -- $(dirname -- "$0"))"
-
-bin/buildtool bootstrap $@ || go run ./buildtool bootstrap $@

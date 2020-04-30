@@ -2,7 +2,8 @@
 
 set -e
 
-CDPATH= cd -- "$(dirname -- $(dirname -- "$0"))"
-script/bootstrap
+CDPATH="" cd -- "$(dirname -- "$(dirname -- "$0")")"
 
-bin/buildtool lint $@
+make -s bin/golangci-lint bin/shellcheck
+bin/golangci-lint run ./...
+bin/shellcheck script/*

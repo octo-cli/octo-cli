@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"os"
-	"os/exec"
 	"path/filepath"
 
 	"github.com/alecthomas/kong"
@@ -20,13 +19,9 @@ func init() {
 }
 
 type cli struct {
-	Bootstrap           bootstrap              `cmd:"" help:"bootstraps a dev environment"`
 	Build               build                  `cmd:"" help:"build bin/octo"`
-	BuildLint           buildLint              `cmd:"" help:"builds bin/golangci-lint"`
-	Cibuild             cibuildCmd             `cmd:"" help:"run ci"`
 	Generate            generator.GenerateCmd  `cmd:"" help:"generate production code"`
 	LatestTaggedRelease latestTaggedReleaseCmd `cmd:"" help:"get the latest tagged version"`
-	Lint                lint                   `cmd:"" help:"run lint"`
 	TagRelease          tagReleaseCmd          `cmd:"" help:"creates a git tag for a new release of octo-cli"`
 	UpdateReadme        updateReadmeCmd        `cmd:"" help:"updates the help output section of README.md"`
 	UpdateRoutes        updateRoutesCmd        `cmd:"" help:"update routes.json with the latest"`
@@ -50,43 +45,6 @@ func (l *build) Run() error {
 		"-s -w",
 		true,
 	)
-}
-
-type bootstrap struct {
-	Force bool
-}
-
-func (l *bootstrap) Run() error {
-	return buildIfNeeded(filepath.Join(bindir, "buildtool"),
-		"./buildtool",
-		"",
-		l.Force)
-}
-
-type buildLint struct {
-	Force     bool
-	Version   string `default:"v1.12" help:"tag of golangci-lint to build"`
-	BinTarget string `default:"./bin/golangci-lint" help:"where to put the golangci-lint binary"`
-}
-
-func (l *buildLint) Run() error {
-	l.BinTarget = filepath.FromSlash(l.BinTarget)
-	return buildGolangciLint(l.Version, l.BinTarget, l.Force)
-}
-
-type lint struct {
-	Version string `default:"v1.12" help:"tag of golangci-lint to use"`
-}
-
-func (l *lint) Run() error {
-	err := buildGolangciLint(l.Version, filepath.FromSlash("./bin/golangci-lint"), false)
-	if err != nil {
-		return errors.Wrap(err, "failed building golangci-lint")
-	}
-	cmd := exec.Command(filepath.FromSlash("./bin/golangci-lint"), "run", "--enable=golint")
-	cmd.Stderr = os.Stderr
-	cmd.Stdout = os.Stdout
-	return cmd.Run()
 }
 
 type latestTaggedReleaseCmd struct {
@@ -148,10 +106,4 @@ type updateTestDataCmd struct{}
 
 func (k *updateTestDataCmd) Run() error {
 	return updateTestData()
-}
-
-type cibuildCmd struct{}
-
-func (c *cibuildCmd) Run() error {
-	return cibuild()
 }

@@ -2,18 +2,19 @@ package tests
 
 import (
 	"bytes"
-	"github.com/alecthomas/kong"
-	"github.com/dnaeon/go-vcr/cassette"
-	"github.com/dnaeon/go-vcr/recorder"
-	"github.com/octo-cli/octo-cli/internal/generated"
-	"github.com/octo-cli/octo-cli/internal"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"path/filepath"
 	"testing"
+
+	"github.com/alecthomas/kong"
+	"github.com/dnaeon/go-vcr/cassette"
+	"github.com/dnaeon/go-vcr/recorder"
+	"github.com/octo-cli/octo-cli/internal"
+	"github.com/octo-cli/octo-cli/internal/generated"
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func init() {
@@ -36,7 +37,7 @@ func startVCR(t *testing.T, recPath string) func() {
 	rec.SetMatcher(func(r *http.Request, i cassette.Request) bool {
 		var b bytes.Buffer
 		if r.Body != nil {
-			if _, err := b.ReadFrom(r.Body); err != nil {
+			if _, err = b.ReadFrom(r.Body); err != nil {
 				return false
 			}
 		}

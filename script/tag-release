@@ -2,7 +2,8 @@
 
 set -e
 
-CDPATH= cd -- "$(dirname -- $(dirname -- "$0"))"
-script/bootstrap
+CDPATH="" cd -- "$(dirname -- "$(dirname -- "$0")")"
 
-bin/buildtool tag-release $@
+make -s bin/buildtool
+
+bin/buildtool tag-release "$@"

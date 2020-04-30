@@ -116,7 +116,7 @@ func Generate(routesPath, outputPath string, fs afero.Fs) {
 	var svcTmpls []SvcTmpl
 	for _, svcName := range sortedRoutesMapKeys(routesMap) {
 		svc := routesMap[svcName]
-		svcName := strings.Title(svcName)
+		svcName = strings.Title(svcName)
 
 		CLITmpl.Fields = append(CLITmpl.Fields, StructField{
 			Name: svcName,
@@ -172,7 +172,7 @@ func Generate(routesPath, outputPath string, fs afero.Fs) {
 					ValueField:   previewParamName,
 				})
 			}
-			for i := 0 ; i < len(route.Params); i++ {
+			for i := 0; i < len(route.Params); i++ {
 				param := route.Params[i]
 				// We want owner to be optional so that repo can be set as part of repo like
 				//  --repo=owner/repo

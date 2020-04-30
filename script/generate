@@ -2,7 +2,8 @@
 
 set -e
 
-CDPATH= cd -- "$(dirname -- $(dirname -- "$0"))"
-script/bootstrap --force
+CDPATH="" cd -- "$(dirname -- "$(dirname -- "$0")")"
 
-bin/buildtool generate $@
+make -s bin/buildtool
+
+bin/buildtool generate "$@"

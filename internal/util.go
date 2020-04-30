@@ -4,11 +4,12 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/pkg/errors"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"text/template"
+
+	"github.com/pkg/errors"
 )
 
 func prettyPrintJSON(jsonBytes []byte) ([]byte, error) {
@@ -27,7 +28,7 @@ func formatOutput(jsonBytes []byte, format string) ([]byte, error) {
 	if err != nil {
 		return nil, errors.Wrap(err, "failed unmarshalling json")
 	}
-	tmpl, err := template.New("").Parse(string(format))
+	tmpl, err := template.New("").Parse(format)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed parsing format template")
 	}
@@ -54,14 +55,13 @@ func OutputResult(resp *http.Response, rawOutput bool, format string, stdout io.
 		if err != nil {
 			return err
 		}
-	} else {
-		if !rawOutput {
-			body, err = prettyPrintJSON(body)
-			if err != nil {
-				return err
-			}
+	} else if !rawOutput {
+		body, err = prettyPrintJSON(body)
+		if err != nil {
+			return err
 		}
 	}
+
 	_, err = fmt.Fprintln(stdout, string(body))
 	return err
 }

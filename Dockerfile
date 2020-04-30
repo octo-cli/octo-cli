@@ -6,7 +6,6 @@ RUN apk add --no-cache git musl-dev gcc bash
 WORKDIR /go/src/github.com/octo-cli/octo-cli
 COPY . .
 
-RUN script/bootstrap
 RUN script/build
 
 # Package
