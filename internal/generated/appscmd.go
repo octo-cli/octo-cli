@@ -5,45 +5,159 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type AppsCmd struct {
-	GetBySlug                                           AppsGetBySlugCmd                                           `cmd:"" help:"Get a single GitHub App - https://developer.github.com/v3/apps/#get-a-single-github-app"`
-	GetAuthenticated                                    AppsGetAuthenticatedCmd                                    `cmd:"" help:"Get the authenticated GitHub App - https://developer.github.com/v3/apps/#get-the-authenticated-github-app"`
-	ListInstallations                                   AppsListInstallationsCmd                                   `cmd:"" help:"Find installations - https://developer.github.com/v3/apps/#find-installations"`
-	GetInstallation                                     AppsGetInstallationCmd                                     `cmd:"" help:"Get a single installation - https://developer.github.com/v3/apps/#get-a-single-installation"`
-	ListInstallationsForAuthenticatedUser               AppsListInstallationsForAuthenticatedUserCmd               `cmd:"" help:"List installations for user - https://developer.github.com/v3/apps/#list-installations-for-user"`
-	CreateInstallationToken                             AppsCreateInstallationTokenCmd                             `cmd:"" help:"Create a new installation token - https://developer.github.com/v3/apps/#create-a-new-installation-token"`
-	FindOrgInstallation                                 AppsFindOrgInstallationCmd                                 `cmd:"" help:"Find organization installation - https://developer.github.com/v3/apps/#find-organization-installation"`
-	FindRepoInstallation                                AppsFindRepoInstallationCmd                                `cmd:"" help:"Find repository installation - https://developer.github.com/v3/apps/#find-repository-installation"`
-	FindUserInstallation                                AppsFindUserInstallationCmd                                `cmd:"" help:"Find user installation - https://developer.github.com/v3/apps/#find-user-installation"`
-	CreateFromManifest                                  AppsCreateFromManifestCmd                                  `cmd:"" help:"Create a GitHub App from a manifest - https://developer.github.com/v3/apps/#create-a-github-app-from-a-manifest"`
-	ListRepos                                           AppsListReposCmd                                           `cmd:"" help:"List repositories - https://developer.github.com/v3/apps/installations/#list-repositories"`
-	ListInstallationReposForAuthenticatedUser           AppsListInstallationReposForAuthenticatedUserCmd           `cmd:"" help:"List repositories accessible to the user for an installation - https://developer.github.com/v3/apps/installations/#list-repositories-accessible-to-the-user-for-an-installation"`
-	AddRepoToInstallation                               AppsAddRepoToInstallationCmd                               `cmd:"" help:"Add repository to installation - https://developer.github.com/v3/apps/installations/#add-repository-to-installation"`
-	RemoveRepoFromInstallation                          AppsRemoveRepoFromInstallationCmd                          `cmd:"" help:"Remove repository from installation - https://developer.github.com/v3/apps/installations/#remove-repository-from-installation"`
-	ListPlans                                           AppsListPlansCmd                                           `cmd:"" help:"List all plans for your Marketplace listing - https://developer.github.com/v3/apps/marketplace/#list-all-plans-for-your-marketplace-listing"`
-	ListPlansStubbed                                    AppsListPlansStubbedCmd                                    `cmd:"" help:"List all plans for your Marketplace listing (stubbed) - https://developer.github.com/v3/apps/marketplace/#list-all-plans-for-your-marketplace-listing"`
-	ListAccountsUserOrOrgOnPlan                         AppsListAccountsUserOrOrgOnPlanCmd                         `cmd:"" help:"List all GitHub accounts (user or organization) on a specific plan - https://developer.github.com/v3/apps/marketplace/#list-all-github-accounts-user-or-organization-on-a-specific-plan"`
-	ListAccountsUserOrOrgOnPlanStubbed                  AppsListAccountsUserOrOrgOnPlanStubbedCmd                  `cmd:"" help:"List all GitHub accounts (user or organization) on a specific plan (stubbed) - https://developer.github.com/v3/apps/marketplace/#list-all-github-accounts-user-or-organization-on-a-specific-plan"`
-	CheckAccountIsAssociatedWithAny                     AppsCheckAccountIsAssociatedWithAnyCmd                     `cmd:"" help:"Check if a GitHub account is associated with any Marketplace listing - https://developer.github.com/v3/apps/marketplace/#check-if-a-github-account-is-associated-with-any-marketplace-listing"`
-	CheckAccountIsAssociatedWithAnyStubbed              AppsCheckAccountIsAssociatedWithAnyStubbedCmd              `cmd:"" help:"Check if a GitHub account is associated with any Marketplace listing (stubbed) - https://developer.github.com/v3/apps/marketplace/#check-if-a-github-account-is-associated-with-any-marketplace-listing"`
-	ListMarketplacePurchasesForAuthenticatedUser        AppsListMarketplacePurchasesForAuthenticatedUserCmd        `cmd:"" help:"Get a user's Marketplace purchases - https://developer.github.com/v3/apps/marketplace/#get-a-users-marketplace-purchases"`
-	ListMarketplacePurchasesForAuthenticatedUserStubbed AppsListMarketplacePurchasesForAuthenticatedUserStubbedCmd `cmd:"" help:"Get a user's Marketplace purchases (stubbed) - https://developer.github.com/v3/apps/marketplace/#get-a-users-marketplace-purchases"`
+	AddRepoToInstallation                        AppsAddRepoToInstallationCmd                        `cmd:""`
+	CheckAuthorization                           AppsCheckAuthorizationCmd                           `cmd:""`
+	CheckToken                                   AppsCheckTokenCmd                                   `cmd:""`
+	CreateContentAttachment                      AppsCreateContentAttachmentCmd                      `cmd:""`
+	CreateFromManifest                           AppsCreateFromManifestCmd                           `cmd:""`
+	DeleteAuthorization                          AppsDeleteAuthorizationCmd                          `cmd:""`
+	DeleteInstallation                           AppsDeleteInstallationCmd                           `cmd:""`
+	DeleteToken                                  AppsDeleteTokenCmd                                  `cmd:""`
+	GetAuthenticated                             AppsGetAuthenticatedCmd                             `cmd:""`
+	GetBySlug                                    AppsGetBySlugCmd                                    `cmd:""`
+	GetInstallation                              AppsGetInstallationCmd                              `cmd:""`
+	GetOrgInstallation                           AppsGetOrgInstallationCmd                           `cmd:""`
+	GetRepoInstallation                          AppsGetRepoInstallationCmd                          `cmd:""`
+	GetSubscriptionPlanForAccount                AppsGetSubscriptionPlanForAccountCmd                `cmd:""`
+	GetSubscriptionPlanForAccountStubbed         AppsGetSubscriptionPlanForAccountStubbedCmd         `cmd:""`
+	GetUserInstallation                          AppsGetUserInstallationCmd                          `cmd:""`
+	ListAccountsForPlan                          AppsListAccountsForPlanCmd                          `cmd:""`
+	ListAccountsForPlanStubbed                   AppsListAccountsForPlanStubbedCmd                   `cmd:""`
+	ListInstallationReposForAuthenticatedUser    AppsListInstallationReposForAuthenticatedUserCmd    `cmd:""`
+	ListInstallations                            AppsListInstallationsCmd                            `cmd:""`
+	ListInstallationsForAuthenticatedUser        AppsListInstallationsForAuthenticatedUserCmd        `cmd:""`
+	ListPlans                                    AppsListPlansCmd                                    `cmd:""`
+	ListPlansStubbed                             AppsListPlansStubbedCmd                             `cmd:""`
+	ListRepos                                    AppsListReposCmd                                    `cmd:""`
+	ListSubscriptionsForAuthenticatedUser        AppsListSubscriptionsForAuthenticatedUserCmd        `cmd:""`
+	ListSubscriptionsForAuthenticatedUserStubbed AppsListSubscriptionsForAuthenticatedUserStubbedCmd `cmd:""`
+	RemoveRepoFromInstallation                   AppsRemoveRepoFromInstallationCmd                   `cmd:""`
+	ResetAuthorization                           AppsResetAuthorizationCmd                           `cmd:""`
+	ResetToken                                   AppsResetTokenCmd                                   `cmd:""`
+	RevokeAuthorizationForApplication            AppsRevokeAuthorizationForApplicationCmd            `cmd:""`
+	RevokeGrantForApplication                    AppsRevokeGrantForApplicationCmd                    `cmd:""`
+	RevokeInstallationToken                      AppsRevokeInstallationTokenCmd                      `cmd:""`
 }
 
-type AppsGetBySlugCmd struct {
+type AppsAddRepoToInstallationCmd struct {
 	internal.BaseCmd
-	AppSlug string `required:"" name:"app_slug"`
+	InstallationId int64 `required:"" name:"installation_id"`
+	MachineMan     bool  "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
+	RepositoryId   int64 `required:"" name:"repository_id"`
 }
 
-func (c *AppsGetBySlugCmd) Run(isValueSetMap map[string]bool) error {
+func (c *AppsAddRepoToInstallationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/apps/:app_slug")
-	c.UpdateURLPath("app_slug", c.AppSlug)
+	c.SetURLPath("/user/installations/:installation_id/repositories/:repository_id")
+	c.UpdateURLPath("installation_id", c.InstallationId)
+	c.UpdatePreview("machine-man", c.MachineMan)
+	c.UpdateURLPath("repository_id", c.RepositoryId)
+	return c.DoRequest("PUT")
+}
+
+type AppsCheckAuthorizationCmd struct {
+	internal.BaseCmd
+	AccessToken string `required:"" name:"access_token"`
+	ClientId    string `required:"" name:"client_id"`
+}
+
+func (c *AppsCheckAuthorizationCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/applications/:client_id/tokens/:access_token")
+	c.UpdateURLPath("access_token", c.AccessToken)
+	c.UpdateURLPath("client_id", c.ClientId)
 	return c.DoRequest("GET")
+}
+
+type AppsCheckTokenCmd struct {
+	internal.BaseCmd
+	AccessToken string `name:"access_token"`
+	ClientId    string `required:"" name:"client_id"`
+}
+
+func (c *AppsCheckTokenCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/applications/:client_id/token")
+	c.UpdateBody("access_token", c.AccessToken)
+	c.UpdateURLPath("client_id", c.ClientId)
+	return c.DoRequest("POST")
+}
+
+type AppsCreateContentAttachmentCmd struct {
+	internal.BaseCmd
+	Body               string `required:"" name:"body"`
+	ContentReferenceId int64  `required:"" name:"content_reference_id"`
+	Corsair            bool   "name:\"corsair-preview\" required:\"\" help:\"To access the Content Attachments API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.corsair-preview+json\n```\""
+	Title              string `required:"" name:"title"`
+}
+
+func (c *AppsCreateContentAttachmentCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/content_references/:content_reference_id/attachments")
+	c.UpdateBody("body", c.Body)
+	c.UpdateURLPath("content_reference_id", c.ContentReferenceId)
+	c.UpdatePreview("corsair", c.Corsair)
+	c.UpdateBody("title", c.Title)
+	return c.DoRequest("POST")
+}
+
+type AppsCreateFromManifestCmd struct {
+	internal.BaseCmd
+	Code string `required:"" name:"code"`
+}
+
+func (c *AppsCreateFromManifestCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/app-manifests/:code/conversions")
+	c.UpdateURLPath("code", c.Code)
+	return c.DoRequest("POST")
+}
+
+type AppsDeleteAuthorizationCmd struct {
+	internal.BaseCmd
+	AccessToken string `name:"access_token"`
+	ClientId    string `required:"" name:"client_id"`
+}
+
+func (c *AppsDeleteAuthorizationCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/applications/:client_id/grant")
+	c.UpdateBody("access_token", c.AccessToken)
+	c.UpdateURLPath("client_id", c.ClientId)
+	return c.DoRequest("DELETE")
+}
+
+type AppsDeleteInstallationCmd struct {
+	internal.BaseCmd
+	InstallationId int64 `required:"" name:"installation_id"`
+	MachineMan     bool  "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
+}
+
+func (c *AppsDeleteInstallationCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/app/installations/:installation_id")
+	c.UpdateURLPath("installation_id", c.InstallationId)
+	c.UpdatePreview("machine-man", c.MachineMan)
+	return c.DoRequest("DELETE")
+}
+
+type AppsDeleteTokenCmd struct {
+	internal.BaseCmd
+	AccessToken string `name:"access_token"`
+	ClientId    string `required:"" name:"client_id"`
+}
+
+func (c *AppsDeleteTokenCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/applications/:client_id/token")
+	c.UpdateBody("access_token", c.AccessToken)
+	c.UpdateURLPath("client_id", c.ClientId)
+	return c.DoRequest("DELETE")
 }
 
 type AppsGetAuthenticatedCmd struct {
 	internal.BaseCmd
-	MachineMan bool "name:\"machine-man-preview\" required:\"\" help:\"**Note:** To access the API with your GitHub App, you must provide a custom [media type](/v3/media) in the `Accept` Header for your requests.\n\n`application/vnd.github.machine-man-preview+json`\""
+	MachineMan bool "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
 }
 
 func (c *AppsGetAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
@@ -53,73 +167,41 @@ func (c *AppsGetAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
-type AppsListInstallationsCmd struct {
+type AppsGetBySlugCmd struct {
 	internal.BaseCmd
-	MachineMan bool  "name:\"machine-man-preview\" required:\"\" help:\"**Note:** To access the API with your GitHub App, you must provide a custom [media type](/v3/media) in the `Accept` Header for your requests.\n\n`application/vnd.github.machine-man-preview+json`\""
-	PerPage    int64 `name:"per_page" help:"Results per page (max 100)"`
-	Page       int64 `name:"page" help:"Page number of the results to fetch."`
+	AppSlug    string `required:"" name:"app_slug"`
+	MachineMan bool   "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
 }
 
-func (c *AppsListInstallationsCmd) Run(isValueSetMap map[string]bool) error {
+func (c *AppsGetBySlugCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/app/installations")
+	c.SetURLPath("/apps/:app_slug")
+	c.UpdateURLPath("app_slug", c.AppSlug)
 	c.UpdatePreview("machine-man", c.MachineMan)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
 type AppsGetInstallationCmd struct {
 	internal.BaseCmd
-	MachineMan     bool  "name:\"machine-man-preview\" required:\"\" help:\"**Note:** To access the API with your GitHub App, you must provide a custom [media type](/v3/media) in the `Accept` Header for your requests.\n\n`application/vnd.github.machine-man-preview+json`\""
 	InstallationId int64 `required:"" name:"installation_id"`
+	MachineMan     bool  "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
 }
 
 func (c *AppsGetInstallationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/app/installations/:installation_id")
-	c.UpdatePreview("machine-man", c.MachineMan)
 	c.UpdateURLPath("installation_id", c.InstallationId)
+	c.UpdatePreview("machine-man", c.MachineMan)
 	return c.DoRequest("GET")
 }
 
-type AppsListInstallationsForAuthenticatedUserCmd struct {
+type AppsGetOrgInstallationCmd struct {
 	internal.BaseCmd
-	MachineMan bool  "name:\"machine-man-preview\" required:\"\" help:\"**Note:** To access the API with your GitHub App, you must provide a custom [media type](/v3/media) in the `Accept` Header for your requests.\n\n`application/vnd.github.machine-man-preview+json`\""
-	PerPage    int64 `name:"per_page" help:"Results per page (max 100)"`
-	Page       int64 `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *AppsListInstallationsForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/installations")
-	c.UpdatePreview("machine-man", c.MachineMan)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type AppsCreateInstallationTokenCmd struct {
-	internal.BaseCmd
-	MachineMan     bool  "name:\"machine-man-preview\" required:\"\" help:\"**Note:** To access the API with your GitHub App, you must provide a custom [media type](/v3/media) in the `Accept` Header for your requests.\n\n`application/vnd.github.machine-man-preview+json`\""
-	InstallationId int64 `required:"" name:"installation_id"`
-}
-
-func (c *AppsCreateInstallationTokenCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/app/installations/:installation_id/access_tokens")
-	c.UpdatePreview("machine-man", c.MachineMan)
-	c.UpdateURLPath("installation_id", c.InstallationId)
-	return c.DoRequest("POST")
-}
-
-type AppsFindOrgInstallationCmd struct {
-	internal.BaseCmd
-	MachineMan bool   "name:\"machine-man-preview\" required:\"\" help:\"**Note:** To access the API with your GitHub App, you must provide a custom [media type](/v3/media) in the `Accept` Header for your requests.\n\n`application/vnd.github.machine-man-preview+json`\""
+	MachineMan bool   "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
 	Org        string `required:"" name:"org"`
 }
 
-func (c *AppsFindOrgInstallationCmd) Run(isValueSetMap map[string]bool) error {
+func (c *AppsGetOrgInstallationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/:org/installation")
 	c.UpdatePreview("machine-man", c.MachineMan)
@@ -127,14 +209,14 @@ func (c *AppsFindOrgInstallationCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
-type AppsFindRepoInstallationCmd struct {
+type AppsGetRepoInstallationCmd struct {
 	internal.BaseCmd
-	MachineMan bool   "name:\"machine-man-preview\" required:\"\" help:\"**Note:** To access the API with your GitHub App, you must provide a custom [media type](/v3/media) in the `Accept` Header for your requests.\n\n`application/vnd.github.machine-man-preview+json`\""
+	MachineMan bool   "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
 	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
 }
 
-func (c *AppsFindRepoInstallationCmd) Run(isValueSetMap map[string]bool) error {
+func (c *AppsGetRepoInstallationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/:owner/:repo/installation")
 	c.UpdatePreview("machine-man", c.MachineMan)
@@ -143,13 +225,37 @@ func (c *AppsFindRepoInstallationCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
-type AppsFindUserInstallationCmd struct {
+type AppsGetSubscriptionPlanForAccountCmd struct {
 	internal.BaseCmd
-	MachineMan bool   "name:\"machine-man-preview\" required:\"\" help:\"**Note:** To access the API with your GitHub App, you must provide a custom [media type](/v3/media) in the `Accept` Header for your requests.\n\n`application/vnd.github.machine-man-preview+json`\""
+	AccountId int64 `required:"" name:"account_id"`
+}
+
+func (c *AppsGetSubscriptionPlanForAccountCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/marketplace_listing/accounts/:account_id")
+	c.UpdateURLPath("account_id", c.AccountId)
+	return c.DoRequest("GET")
+}
+
+type AppsGetSubscriptionPlanForAccountStubbedCmd struct {
+	internal.BaseCmd
+	AccountId int64 `required:"" name:"account_id"`
+}
+
+func (c *AppsGetSubscriptionPlanForAccountStubbedCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/marketplace_listing/stubbed/accounts/:account_id")
+	c.UpdateURLPath("account_id", c.AccountId)
+	return c.DoRequest("GET")
+}
+
+type AppsGetUserInstallationCmd struct {
+	internal.BaseCmd
+	MachineMan bool   "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
 	Username   string `required:"" name:"username"`
 }
 
-func (c *AppsFindUserInstallationCmd) Run(isValueSetMap map[string]bool) error {
+func (c *AppsGetUserInstallationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/users/:username/installation")
 	c.UpdatePreview("machine-man", c.MachineMan)
@@ -157,210 +263,250 @@ func (c *AppsFindUserInstallationCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
-type AppsCreateFromManifestCmd struct {
+type AppsListAccountsForPlanCmd struct {
 	internal.BaseCmd
-	Fury bool   "name:\"fury-preview\" required:\"\" help:\"**Note:** GitHub App Manifests are currently available for developers to preview. To access this API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.fury-preview+json\n\n```\""
-	Code string `required:"" name:"code"`
+	Direction string `name:"direction"`
+	Page      int64  `name:"page"`
+	PerPage   int64  `name:"per_page"`
+	PlanId    int64  `required:"" name:"plan_id"`
+	Sort      string `name:"sort"`
 }
 
-func (c *AppsCreateFromManifestCmd) Run(isValueSetMap map[string]bool) error {
+func (c *AppsListAccountsForPlanCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/app-manifests/:code/conversions")
-	c.UpdatePreview("fury", c.Fury)
-	c.UpdateURLPath("code", c.Code)
-	return c.DoRequest("POST")
-}
-
-type AppsListReposCmd struct {
-	internal.BaseCmd
-	PerPage int64 `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64 `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *AppsListReposCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/installation/repositories")
-	c.UpdateURLQuery("per_page", c.PerPage)
+	c.SetURLPath("/marketplace_listing/plans/:plan_id/accounts")
+	c.UpdateURLQuery("direction", c.Direction)
 	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("plan_id", c.PlanId)
+	c.UpdateURLQuery("sort", c.Sort)
+	return c.DoRequest("GET")
+}
+
+type AppsListAccountsForPlanStubbedCmd struct {
+	internal.BaseCmd
+	Direction string `name:"direction"`
+	Page      int64  `name:"page"`
+	PerPage   int64  `name:"per_page"`
+	PlanId    int64  `required:"" name:"plan_id"`
+	Sort      string `name:"sort"`
+}
+
+func (c *AppsListAccountsForPlanStubbedCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/marketplace_listing/stubbed/plans/:plan_id/accounts")
+	c.UpdateURLQuery("direction", c.Direction)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("plan_id", c.PlanId)
+	c.UpdateURLQuery("sort", c.Sort)
 	return c.DoRequest("GET")
 }
 
 type AppsListInstallationReposForAuthenticatedUserCmd struct {
 	internal.BaseCmd
-	MachineMan     bool  "name:\"machine-man-preview\" required:\"\" help:\"**Note:** To access the API with your GitHub App, you must provide a custom [media type](/v3/media) in the `Accept` Header for your requests.\n\n`application/vnd.github.machine-man-preview+json`\""
-	Mercy          bool  "name:\"mercy-preview\" help:\"**Note:** The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.mercy-preview+json\n\n```\""
 	InstallationId int64 `required:"" name:"installation_id"`
-	PerPage        int64 `name:"per_page" help:"Results per page (max 100)"`
-	Page           int64 `name:"page" help:"Page number of the results to fetch."`
+	MachineMan     bool  "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
+	Mercy          bool  "name:\"mercy-preview\" help:\"The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.mercy-preview+json\n```\""
+	Page           int64 `name:"page"`
+	PerPage        int64 `name:"per_page"`
 }
 
 func (c *AppsListInstallationReposForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/installations/:installation_id/repositories")
+	c.UpdateURLPath("installation_id", c.InstallationId)
 	c.UpdatePreview("machine-man", c.MachineMan)
 	c.UpdatePreview("mercy", c.Mercy)
-	c.UpdateURLPath("installation_id", c.InstallationId)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
 	return c.DoRequest("GET")
 }
 
-type AppsAddRepoToInstallationCmd struct {
+type AppsListInstallationsCmd struct {
 	internal.BaseCmd
-	MachineMan     bool  "name:\"machine-man-preview\" required:\"\" help:\"**Note:** To access the API with your GitHub App, you must provide a custom [media type](/v3/media) in the `Accept` Header for your requests.\n\n`application/vnd.github.machine-man-preview+json`\""
-	InstallationId int64 `required:"" name:"installation_id"`
-	RepositoryId   int64 `required:"" name:"repository_id"`
+	MachineMan bool  "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
+	Page       int64 `name:"page"`
+	PerPage    int64 `name:"per_page"`
 }
 
-func (c *AppsAddRepoToInstallationCmd) Run(isValueSetMap map[string]bool) error {
+func (c *AppsListInstallationsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/installations/:installation_id/repositories/:repository_id")
+	c.SetURLPath("/app/installations")
 	c.UpdatePreview("machine-man", c.MachineMan)
-	c.UpdateURLPath("installation_id", c.InstallationId)
-	c.UpdateURLPath("repository_id", c.RepositoryId)
-	return c.DoRequest("PUT")
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	return c.DoRequest("GET")
+}
+
+type AppsListInstallationsForAuthenticatedUserCmd struct {
+	internal.BaseCmd
+	MachineMan bool  "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
+	Page       int64 `name:"page"`
+	PerPage    int64 `name:"per_page"`
+}
+
+func (c *AppsListInstallationsForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/installations")
+	c.UpdatePreview("machine-man", c.MachineMan)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	return c.DoRequest("GET")
+}
+
+type AppsListPlansCmd struct {
+	internal.BaseCmd
+	Page    int64 `name:"page"`
+	PerPage int64 `name:"per_page"`
+}
+
+func (c *AppsListPlansCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/marketplace_listing/plans")
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	return c.DoRequest("GET")
+}
+
+type AppsListPlansStubbedCmd struct {
+	internal.BaseCmd
+	Page    int64 `name:"page"`
+	PerPage int64 `name:"per_page"`
+}
+
+func (c *AppsListPlansStubbedCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/marketplace_listing/stubbed/plans")
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	return c.DoRequest("GET")
+}
+
+type AppsListReposCmd struct {
+	internal.BaseCmd
+	MachineMan bool  "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
+	Mercy      bool  "name:\"mercy-preview\" help:\"The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.mercy-preview+json\n```\""
+	Page       int64 `name:"page"`
+	PerPage    int64 `name:"per_page"`
+}
+
+func (c *AppsListReposCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/installation/repositories")
+	c.UpdatePreview("machine-man", c.MachineMan)
+	c.UpdatePreview("mercy", c.Mercy)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	return c.DoRequest("GET")
+}
+
+type AppsListSubscriptionsForAuthenticatedUserCmd struct {
+	internal.BaseCmd
+	Page    int64 `name:"page"`
+	PerPage int64 `name:"per_page"`
+}
+
+func (c *AppsListSubscriptionsForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/marketplace_purchases")
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	return c.DoRequest("GET")
+}
+
+type AppsListSubscriptionsForAuthenticatedUserStubbedCmd struct {
+	internal.BaseCmd
+	Page    int64 `name:"page"`
+	PerPage int64 `name:"per_page"`
+}
+
+func (c *AppsListSubscriptionsForAuthenticatedUserStubbedCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/marketplace_purchases/stubbed")
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	return c.DoRequest("GET")
 }
 
 type AppsRemoveRepoFromInstallationCmd struct {
 	internal.BaseCmd
-	MachineMan     bool  "name:\"machine-man-preview\" required:\"\" help:\"**Note:** To access the API with your GitHub App, you must provide a custom [media type](/v3/media) in the `Accept` Header for your requests.\n\n`application/vnd.github.machine-man-preview+json`\""
 	InstallationId int64 `required:"" name:"installation_id"`
+	MachineMan     bool  "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
 	RepositoryId   int64 `required:"" name:"repository_id"`
 }
 
 func (c *AppsRemoveRepoFromInstallationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/installations/:installation_id/repositories/:repository_id")
-	c.UpdatePreview("machine-man", c.MachineMan)
 	c.UpdateURLPath("installation_id", c.InstallationId)
+	c.UpdatePreview("machine-man", c.MachineMan)
 	c.UpdateURLPath("repository_id", c.RepositoryId)
 	return c.DoRequest("DELETE")
 }
 
-type AppsListPlansCmd struct {
+type AppsResetAuthorizationCmd struct {
 	internal.BaseCmd
-	PerPage int64 `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64 `name:"page" help:"Page number of the results to fetch."`
+	AccessToken string `required:"" name:"access_token"`
+	ClientId    string `required:"" name:"client_id"`
 }
 
-func (c *AppsListPlansCmd) Run(isValueSetMap map[string]bool) error {
+func (c *AppsResetAuthorizationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/marketplace_listing/plans")
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
+	c.SetURLPath("/applications/:client_id/tokens/:access_token")
+	c.UpdateURLPath("access_token", c.AccessToken)
+	c.UpdateURLPath("client_id", c.ClientId)
+	return c.DoRequest("POST")
 }
 
-type AppsListPlansStubbedCmd struct {
+type AppsResetTokenCmd struct {
 	internal.BaseCmd
-	PerPage int64 `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64 `name:"page" help:"Page number of the results to fetch."`
+	AccessToken string `name:"access_token"`
+	ClientId    string `required:"" name:"client_id"`
 }
 
-func (c *AppsListPlansStubbedCmd) Run(isValueSetMap map[string]bool) error {
+func (c *AppsResetTokenCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/marketplace_listing/stubbed/plans")
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
+	c.SetURLPath("/applications/:client_id/token")
+	c.UpdateBody("access_token", c.AccessToken)
+	c.UpdateURLPath("client_id", c.ClientId)
+	return c.DoRequest("PATCH")
 }
 
-type AppsListAccountsUserOrOrgOnPlanCmd struct {
+type AppsRevokeAuthorizationForApplicationCmd struct {
 	internal.BaseCmd
-	PlanId    int64  `required:"" name:"plan_id"`
-	Sort      string "name:\"sort\" help:\"Sorts the GitHub accounts by the date they were created or last updated. Can be one of `created` or `updated`.\""
-	Direction string "name:\"direction\" help:\"To return the oldest accounts first, set to `asc`. Can be one of `asc` or `desc`. Ignored without the `sort` parameter.\""
-	PerPage   int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page      int64  `name:"page" help:"Page number of the results to fetch."`
+	AccessToken string `required:"" name:"access_token"`
+	ClientId    string `required:"" name:"client_id"`
 }
 
-func (c *AppsListAccountsUserOrOrgOnPlanCmd) Run(isValueSetMap map[string]bool) error {
+func (c *AppsRevokeAuthorizationForApplicationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/marketplace_listing/plans/:plan_id/accounts")
-	c.UpdateURLPath("plan_id", c.PlanId)
-	c.UpdateURLQuery("sort", c.Sort)
-	c.UpdateURLQuery("direction", c.Direction)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
+	c.SetURLPath("/applications/:client_id/tokens/:access_token")
+	c.UpdateURLPath("access_token", c.AccessToken)
+	c.UpdateURLPath("client_id", c.ClientId)
+	return c.DoRequest("DELETE")
 }
 
-type AppsListAccountsUserOrOrgOnPlanStubbedCmd struct {
+type AppsRevokeGrantForApplicationCmd struct {
 	internal.BaseCmd
-	PlanId    int64  `required:"" name:"plan_id"`
-	Sort      string "name:\"sort\" help:\"Sorts the GitHub accounts by the date they were created or last updated. Can be one of `created` or `updated`.\""
-	Direction string "name:\"direction\" help:\"To return the oldest accounts first, set to `asc`. Can be one of `asc` or `desc`. Ignored without the `sort` parameter.\""
-	PerPage   int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page      int64  `name:"page" help:"Page number of the results to fetch."`
+	AccessToken string `required:"" name:"access_token"`
+	ClientId    string `required:"" name:"client_id"`
 }
 
-func (c *AppsListAccountsUserOrOrgOnPlanStubbedCmd) Run(isValueSetMap map[string]bool) error {
+func (c *AppsRevokeGrantForApplicationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/marketplace_listing/stubbed/plans/:plan_id/accounts")
-	c.UpdateURLPath("plan_id", c.PlanId)
-	c.UpdateURLQuery("sort", c.Sort)
-	c.UpdateURLQuery("direction", c.Direction)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
+	c.SetURLPath("/applications/:client_id/grants/:access_token")
+	c.UpdateURLPath("access_token", c.AccessToken)
+	c.UpdateURLPath("client_id", c.ClientId)
+	return c.DoRequest("DELETE")
 }
 
-type AppsCheckAccountIsAssociatedWithAnyCmd struct {
+type AppsRevokeInstallationTokenCmd struct {
 	internal.BaseCmd
-	AccountId int64 `required:"" name:"account_id"`
-	PerPage   int64 `name:"per_page" help:"Results per page (max 100)"`
-	Page      int64 `name:"page" help:"Page number of the results to fetch."`
 }
 
-func (c *AppsCheckAccountIsAssociatedWithAnyCmd) Run(isValueSetMap map[string]bool) error {
+func (c *AppsRevokeInstallationTokenCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/marketplace_listing/accounts/:account_id")
-	c.UpdateURLPath("account_id", c.AccountId)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type AppsCheckAccountIsAssociatedWithAnyStubbedCmd struct {
-	internal.BaseCmd
-	AccountId int64 `required:"" name:"account_id"`
-	PerPage   int64 `name:"per_page" help:"Results per page (max 100)"`
-	Page      int64 `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *AppsCheckAccountIsAssociatedWithAnyStubbedCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/marketplace_listing/stubbed/accounts/:account_id")
-	c.UpdateURLPath("account_id", c.AccountId)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type AppsListMarketplacePurchasesForAuthenticatedUserCmd struct {
-	internal.BaseCmd
-	PerPage int64 `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64 `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *AppsListMarketplacePurchasesForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/marketplace_purchases")
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type AppsListMarketplacePurchasesForAuthenticatedUserStubbedCmd struct {
-	internal.BaseCmd
-	PerPage int64 `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64 `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *AppsListMarketplacePurchasesForAuthenticatedUserStubbedCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/marketplace_purchases/stubbed")
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
+	c.SetURLPath("/installation/token")
+	return c.DoRequest("DELETE")
 }

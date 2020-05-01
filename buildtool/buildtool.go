@@ -24,8 +24,6 @@ type cli struct {
 	LatestTaggedRelease latestTaggedReleaseCmd `cmd:"" help:"get the latest tagged version"`
 	TagRelease          tagReleaseCmd          `cmd:"" help:"creates a git tag for a new release of octo-cli"`
 	UpdateReadme        updateReadmeCmd        `cmd:"" help:"updates the help output section of README.md"`
-	UpdateRoutes        updateRoutesCmd        `cmd:"" help:"update routes.json with the latest"`
-	UpdateTestdata      updateTestDataCmd      `cmd:"" help:"updates routes.json and generated in internal/generator/testdata"`
 }
 
 func main() {
@@ -91,19 +89,4 @@ type updateReadmeCmd struct {
 
 func (k *updateReadmeCmd) Run() error {
 	return updateReadme(k.ReadmePath, k.Verify)
-}
-
-type updateRoutesCmd struct {
-	RoutesPath string `type:"existingfile" default:"routes.json"`
-	RoutesURL  string `default:"https://octokit.github.io/routes/index.json"`
-}
-
-func (k *updateRoutesCmd) Run() error {
-	return updateRoutes(k.RoutesURL, k.RoutesPath)
-}
-
-type updateTestDataCmd struct{}
-
-func (k *updateTestDataCmd) Run() error {
-	return updateTestData()
 }

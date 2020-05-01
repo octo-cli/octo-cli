@@ -4,13 +4,11 @@ import (
 	"bufio"
 	"bytes"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"os/exec"
 	"strings"
 
 	"github.com/masterminds/semver"
-	"github.com/octo-cli/octo-cli/buildtool/generator"
 	"github.com/pkg/errors"
 )
 
@@ -115,23 +113,4 @@ func newVersionTag(major, minor, patch bool, prerelease string) (string, error) 
 		return "", errors.Wrap(err, "failed setting prerelease")
 	}
 	return "v" + version.String(), nil
-}
-
-func updateTestData() error {
-	tdRoutesPath := "buildtool/generator/testdata/routes.json"
-	err := copyFile("routes.json", tdRoutesPath)
-	if err != nil {
-		return errors.Wrap(err, "failed copying routes.json")
-	}
-	generator.Generate(tdRoutesPath, "buildtool/generator/testdata/generated", nil)
-	return nil
-}
-
-func copyFile(srcRoutesPath string, tdRoutesPath string) error {
-	routes, err := ioutil.ReadFile(srcRoutesPath)
-	if err != nil {
-		return errors.Wrapf(err, "failed reading %q", srcRoutesPath)
-	}
-	err = ioutil.WriteFile(tdRoutesPath, routes, 0644)
-	return errors.Wrapf(err, "failed writing %q", tdRoutesPath)
 }

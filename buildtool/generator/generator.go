@@ -9,6 +9,7 @@ import (
 	"strings"
 	"text/template"
 
+	"github.com/fatih/camelcase"
 	"github.com/fatih/structtag"
 	"github.com/pkg/errors"
 	"github.com/spf13/afero"
@@ -36,7 +37,7 @@ var updateMethodMap = map[string]string{
 	"url":     "UpdateURLPath",
 	"body":    "UpdateBody",
 	"query":   "UpdateURLQuery",
-	"headers": "UpdateHeader",
+	"header":  "AddRequestHeader",
 	"preview": "UpdatePreview",
 }
 
@@ -109,6 +110,8 @@ func Generate(routesPath, outputPath string, fs afero.Fs) {
 	CLITmpl := StructTmplHelper{
 		Name: "CLI",
 	}
+	cmdHelps := map[string]map[string]string{}
+	flagHelps := map[string]map[string]map[string]string{}
 	routesMap, err := parseRoutesFile(routesPath)
 	if err != nil {
 		panic(err)
@@ -117,7 +120,11 @@ func Generate(routesPath, outputPath string, fs afero.Fs) {
 	for _, svcName := range sortedRoutesMapKeys(routesMap) {
 		svc := routesMap[svcName]
 		svcName = strings.Title(svcName)
-
+		svcNodeName := nodeName(svcName)
+		cmdHelps[svcNodeName] = map[string]string{}
+		if flagHelps[svcNodeName] == nil {
+			flagHelps[svcNodeName] = map[string]map[string]string{}
+		}
 		CLITmpl.Fields = append(CLITmpl.Fields, StructField{
 			Name: svcName,
 			Type: svcName + "Cmd",
@@ -138,7 +145,7 @@ func Generate(routesPath, outputPath string, fs afero.Fs) {
 				route.IDName = "get-membership-for-user"
 			}
 
-			structName := svcName + ToArgName(route.IDName) + "Cmd"
+			structName := svcName + toArgName(route.IDName) + "Cmd"
 			tmplHelper := StructTmplHelper{
 				Name:   structName,
 				Fields: []StructField{{Type: "internal.BaseCmd"}},
@@ -158,7 +165,7 @@ func Generate(routesPath, outputPath string, fs afero.Fs) {
 				}
 				setTag(tags, newTag("help", preview.Description))
 
-				previewParamName := ToArgName(preview.Name)
+				previewParamName := toArgName(preview.Name)
 				tmplHelper.Fields = append(tmplHelper.Fields,
 					StructField{
 						Name: previewParamName,
@@ -178,14 +185,19 @@ func Generate(routesPath, outputPath string, fs afero.Fs) {
 				//  --repo=owner/repo
 				if param.Name == "owner" {
 					if len(route.Params) > i {
-						if route.Params[i+1].Name == "repo" {
+						if len(route.Params) > i+1 && route.Params[i+1].Name == "repo" {
 							param.Required = false
 						}
 					}
 				}
-				paramName := ToArgName(param.Name)
+				if flagHelps[svcNodeName][route.IDName] == nil {
+					flagHelps[svcNodeName][route.IDName] = map[string]string{}
+				}
+
+				paramName := toArgName(param.Name)
 				paramType, ok := paramTypes[param.Type]
 				if !ok {
+					delete(flagHelps[svcNodeName], route.IDName)
 					skipThisRoute = true
 					break
 				}
@@ -194,9 +206,8 @@ func Generate(routesPath, outputPath string, fs afero.Fs) {
 					setTag(tags, &structtag.Tag{Key: "required"})
 				}
 				setTag(tags, &structtag.Tag{Key: "name", Name: param.Name})
-				if param.Description != "" {
-					setTag(tags, &structtag.Tag{Key: "help", Name: param.Description})
-				}
+
+				flagHelps[svcNodeName][route.IDName][param.Name] = param.Description
 				sf := StructField{
 					Name: paramName,
 					Type: paramType,
@@ -222,13 +233,15 @@ func Generate(routesPath, outputPath string, fs afero.Fs) {
 			if route.DocumentationURL != "" {
 				helpText = fmt.Sprintf("%v - %v", route.Name, route.DocumentationURL)
 			}
+			cmdHelps[svcNodeName][route.IDName] = helpText
 			svcTmpl.SvcStruct.Fields = append(svcTmpl.SvcStruct.Fields, StructField{
-				Name: ToArgName(route.IDName),
+				Name: toArgName(route.IDName),
 				Type: structName,
-				Tags: newTags(newTag("cmd", ""), newTag("help", helpText)),
+				Tags: newTags(newTag("cmd", "")),
 			})
 
 		}
+		tmplSorting(svcTmpl)
 		svcTmpls = append(svcTmpls, svcTmpl)
 	}
 	err = fs.MkdirAll(outputPath, 0755)
@@ -237,6 +250,8 @@ func Generate(routesPath, outputPath string, fs afero.Fs) {
 	}
 	files := map[string]FileTmpl{
 		"cli.go": {
+			CmdHelps:  cmdHelps,
+			FlagHelps: flagHelps,
 			PrimaryStructs: []StructTmplHelper{
 				CLITmpl,
 			},
@@ -254,6 +269,24 @@ func Generate(routesPath, outputPath string, fs afero.Fs) {
 			panic(err)
 		}
 	}
+}
+
+func tmplSorting(svcTmpl SvcTmpl) {
+	sort.Slice(svcTmpl.SvcStruct.Fields, func(i, j int) bool {
+		return svcTmpl.SvcStruct.Fields[i].Name < svcTmpl.SvcStruct.Fields[j].Name
+	})
+	for _, csm := range svcTmpl.CmdStructAndMethods {
+		sort.Slice(csm.CmdStruct.Fields, func(i, j int) bool {
+			return csm.CmdStruct.Fields[i].Name < csm.CmdStruct.Fields[j].Name
+		})
+
+		sort.Slice(csm.RunMethod.Params, func(i, j int) bool {
+			return csm.RunMethod.Params[i].Name < csm.RunMethod.Params[j].Name
+		})
+	}
+	sort.Slice(svcTmpl.CmdStructAndMethods, func(i, j int) bool {
+		return svcTmpl.CmdStructAndMethods[i].CmdStruct.Name < svcTmpl.CmdStructAndMethods[j].CmdStruct.Name
+	})
 }
 
 type RunMethodParam struct {
@@ -292,6 +325,8 @@ type SvcTmpl struct {
 }
 
 type FileTmpl struct {
+	CmdHelps       map[string]map[string]string
+	FlagHelps      map[string]map[string]map[string]string
 	PrimaryStructs []StructTmplHelper
 	SvcTmpls       []SvcTmpl
 }
@@ -306,6 +341,31 @@ const tmplt = `
 package generated
 
 import "github.com/octo-cli/octo-cli/internal"
+
+{{if .CmdHelps}}
+var CmdHelps = map[string]map[string]string{
+{{range $topCmd, $topCmdVals := .CmdHelps}}"{{$topCmd}}": {
+{{range $cmd, $help := $topCmdVals}}"{{$cmd}}": {{printf "%q" $help}},
+{{end}} 
+},
+{{end}} 
+}
+{{end}}
+
+{{if .FlagHelps}}
+var FlagHelps = map[string]map[string]map[string]string{
+{{range $topCmd, $topCmdVals := .FlagHelps}}"{{$topCmd}}": {
+{{range $cmd, $flagHelps := $topCmdVals}}"{{$cmd}}": {
+{{range $flag, $help := $flagHelps}}"{{$flag}}": {{printf "%q" $help}},
+{{end}}
+}, 
+{{end}}
+}, 
+{{end}}
+} 
+{{end}}
+
+
 {{range .PrimaryStructs}}
 {{template "structtype" .}}
 {{end}}
@@ -374,6 +434,9 @@ func writeGoFile(filename, templateName string, p interface{}, path string, fs a
 	}
 	out, err := format.Source(buf.Bytes())
 	if err != nil {
+		fmt.Println(filename)
+		fmt.Println(templateName)
+		fmt.Println(buf.String())
 		return errors.Wrap(err, "failed running format.Source")
 	}
 	out, err = imports.Process("", out, nil)
@@ -384,8 +447,8 @@ func writeGoFile(filename, templateName string, p interface{}, path string, fs a
 	return afero.WriteFile(fs, fl, out, 0644)
 }
 
-//ToArgName takes input like "foo-bar" and returns "FooBar"
-func ToArgName(in string) string {
+//toArgName takes input like "foo-bar" and returns "FooBar"
+func toArgName(in string) string {
 	out := in
 	for _, separator := range []string{"_", "-"} {
 		words := strings.Split(out, separator)
@@ -395,4 +458,9 @@ func ToArgName(in string) string {
 		out = strings.Join(words, "")
 	}
 	return out
+}
+
+//nodeName returns a string transformed from CamelCase to dash separated lower case.
+func nodeName(s string) string {
+	return strings.ToLower(strings.Join(camelcase.Split(s), "-"))
 }

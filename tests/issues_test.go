@@ -36,7 +36,7 @@ func TestIssues(t *testing.T) {
 			`get`,
 			`--owner=octo-cli-testorg`,
 			`--repo=test-create-issue`,
-			`--number=1`,
+			`--issue_number=1`,
 			`--format`, format,
 		).test(t, "test_issues_get", "open : \"test this\" : \"test this body\"\n", "", false)
 	})

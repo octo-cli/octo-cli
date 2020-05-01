@@ -5,129 +5,175 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type SearchCmd struct {
-	Repos        SearchReposCmd        `cmd:"" help:"Search repositories - https://developer.github.com/v3/search/#search-repositories"`
-	Commits      SearchCommitsCmd      `cmd:"" help:"Search commits - https://developer.github.com/v3/search/#search-commits"`
-	Code         SearchCodeCmd         `cmd:"" help:"Search code - https://developer.github.com/v3/search/#search-code"`
-	Issues       SearchIssuesCmd       `cmd:"" help:"Search issues - https://developer.github.com/v3/search/#search-issues"`
-	Users        SearchUsersCmd        `cmd:"" help:"Search users - https://developer.github.com/v3/search/#search-users"`
-	Topics       SearchTopicsCmd       `cmd:"" help:"Search topics - https://developer.github.com/v3/search/#search-topics"`
-	Labels       SearchLabelsCmd       `cmd:"" help:"Search labels - https://developer.github.com/v3/search/#search-labels"`
-	IssuesLegacy SearchIssuesLegacyCmd `cmd:"" help:"Search issues - https://developer.github.com/v3/search/legacy/#search-issues"`
-	ReposLegacy  SearchReposLegacyCmd  `cmd:"" help:"Search repositories - https://developer.github.com/v3/search/legacy/#search-repositories"`
-	UsersLegacy  SearchUsersLegacyCmd  `cmd:"" help:"Search users - https://developer.github.com/v3/search/legacy/#search-users"`
-	EmailLegacy  SearchEmailLegacyCmd  `cmd:"" help:"Email search - https://developer.github.com/v3/search/legacy/#email-search"`
+	Code                  SearchCodeCmd                  `cmd:""`
+	Commits               SearchCommitsCmd               `cmd:""`
+	EmailLegacy           SearchEmailLegacyCmd           `cmd:""`
+	IssuesAndPullRequests SearchIssuesAndPullRequestsCmd `cmd:""`
+	IssuesLegacy          SearchIssuesLegacyCmd          `cmd:""`
+	Labels                SearchLabelsCmd                `cmd:""`
+	Repos                 SearchReposCmd                 `cmd:""`
+	ReposLegacy           SearchReposLegacyCmd           `cmd:""`
+	Topics                SearchTopicsCmd                `cmd:""`
+	Users                 SearchUsersCmd                 `cmd:""`
+	UsersLegacy           SearchUsersLegacyCmd           `cmd:""`
 }
 
-type SearchReposCmd struct {
+type SearchCodeCmd struct {
 	internal.BaseCmd
-	Mercy   bool   "name:\"mercy-preview\" help:\"**Note:** The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.mercy-preview+json\n\n```\""
-	Q       string `required:"" name:"q" help:"The search keywords, as well as any qualifiers."`
-	Sort    string "name:\"sort\" help:\"The sort field. One of `stars`, `forks`, or `updated`.\""
-	Order   string "name:\"order\" help:\"The sort order if `sort` parameter is provided. One of `asc` or `desc`.\""
-	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64  `name:"page" help:"Page number of the results to fetch."`
+	Order   string `name:"order"`
+	Page    int64  `name:"page"`
+	PerPage int64  `name:"per_page"`
+	Q       string `required:"" name:"q"`
+	Sort    string `name:"sort"`
 }
 
-func (c *SearchReposCmd) Run(isValueSetMap map[string]bool) error {
+func (c *SearchCodeCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/search/repositories")
-	c.UpdatePreview("mercy", c.Mercy)
+	c.SetURLPath("/search/code")
+	c.UpdateURLQuery("order", c.Order)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("q", c.Q)
 	c.UpdateURLQuery("sort", c.Sort)
-	c.UpdateURLQuery("order", c.Order)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
 type SearchCommitsCmd struct {
 	internal.BaseCmd
-	Cloak   bool   "name:\"cloak-preview\" required:\"\" help:\"The Commit Search API is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](/changes/2017-01-05-commit-search-api/) for full details.\n\nTo access the API you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.cloak-preview\n\n```\""
-	Q       string `required:"" name:"q" help:"The search terms."`
-	Sort    string "name:\"sort\" help:\"The sort field. Can be `author-date` or `committer-date`.\""
-	Order   string "name:\"order\" help:\"The sort order if `sort` parameter is provided. One of `asc` or `desc`.\""
-	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64  `name:"page" help:"Page number of the results to fetch."`
+	Cloak   bool   "name:\"cloak-preview\" required:\"\" help:\"The Commit Search API is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2017-01-05-commit-search-api/) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.cloak-preview\n```\""
+	Order   string `name:"order"`
+	Page    int64  `name:"page"`
+	PerPage int64  `name:"per_page"`
+	Q       string `required:"" name:"q"`
+	Sort    string `name:"sort"`
 }
 
 func (c *SearchCommitsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/search/commits")
 	c.UpdatePreview("cloak", c.Cloak)
+	c.UpdateURLQuery("order", c.Order)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("q", c.Q)
 	c.UpdateURLQuery("sort", c.Sort)
-	c.UpdateURLQuery("order", c.Order)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
-type SearchCodeCmd struct {
+type SearchEmailLegacyCmd struct {
 	internal.BaseCmd
-	Q       string `required:"" name:"q" help:"The search terms."`
-	Sort    string "name:\"sort\" help:\"The sort field. Can only be `indexed`, which indicates how recently a file has been indexed by the GitHub search infrastructure.\""
-	Order   string "name:\"order\" help:\"The sort order if `sort` parameter is provided. One of `asc` or `desc`.\""
-	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64  `name:"page" help:"Page number of the results to fetch."`
+	Email string `required:"" name:"email"`
 }
 
-func (c *SearchCodeCmd) Run(isValueSetMap map[string]bool) error {
+func (c *SearchEmailLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/search/code")
-	c.UpdateURLQuery("q", c.Q)
-	c.UpdateURLQuery("sort", c.Sort)
-	c.UpdateURLQuery("order", c.Order)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
+	c.SetURLPath("/legacy/user/email/:email")
+	c.UpdateURLPath("email", c.Email)
 	return c.DoRequest("GET")
 }
 
-type SearchIssuesCmd struct {
+type SearchIssuesAndPullRequestsCmd struct {
 	internal.BaseCmd
-	Symmetra bool   "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
-	Q        string `required:"" name:"q" help:"The search terms."`
-	Sort     string "name:\"sort\" help:\"The sort field. Can be `comments`, `created`, or `updated`.\""
-	Order    string "name:\"order\" help:\"The sort order if `sort` parameter is provided. One of `asc` or `desc`.\""
-	PerPage  int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page     int64  `name:"page" help:"Page number of the results to fetch."`
+	Order   string `name:"order"`
+	Page    int64  `name:"page"`
+	PerPage int64  `name:"per_page"`
+	Q       string `required:"" name:"q"`
+	Sort    string `name:"sort"`
 }
 
-func (c *SearchIssuesCmd) Run(isValueSetMap map[string]bool) error {
+func (c *SearchIssuesAndPullRequestsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/search/issues")
-	c.UpdatePreview("symmetra", c.Symmetra)
+	c.UpdateURLQuery("order", c.Order)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("q", c.Q)
 	c.UpdateURLQuery("sort", c.Sort)
-	c.UpdateURLQuery("order", c.Order)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
-type SearchUsersCmd struct {
+type SearchIssuesLegacyCmd struct {
 	internal.BaseCmd
-	Q       string `required:"" name:"q" help:"The search terms."`
-	Sort    string "name:\"sort\" help:\"The sort field. Can be `followers`, `repositories`, or `joined`.\""
-	Order   string "name:\"order\" help:\"The sort order if `sort` parameter is provided. One of `asc` or `desc`.\""
-	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64  `name:"page" help:"Page number of the results to fetch."`
+	Keyword    string `required:"" name:"keyword"`
+	Owner      string `required:"" name:"owner"`
+	Repository string `required:"" name:"repository"`
+	State      string `required:"" name:"state"`
 }
 
-func (c *SearchUsersCmd) Run(isValueSetMap map[string]bool) error {
+func (c *SearchIssuesLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/search/users")
+	c.SetURLPath("/legacy/issues/search/:owner/:repository/:state/:keyword")
+	c.UpdateURLPath("keyword", c.Keyword)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repository", c.Repository)
+	c.UpdateURLPath("state", c.State)
+	return c.DoRequest("GET")
+}
+
+type SearchLabelsCmd struct {
+	internal.BaseCmd
+	Order        string `name:"order"`
+	Q            string `required:"" name:"q"`
+	RepositoryId int64  `required:"" name:"repository_id"`
+	Sort         string `name:"sort"`
+}
+
+func (c *SearchLabelsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/search/labels")
+	c.UpdateURLQuery("order", c.Order)
+	c.UpdateURLQuery("q", c.Q)
+	c.UpdateURLQuery("repository_id", c.RepositoryId)
+	c.UpdateURLQuery("sort", c.Sort)
+	return c.DoRequest("GET")
+}
+
+type SearchReposCmd struct {
+	internal.BaseCmd
+	Mercy   bool   "name:\"mercy-preview\" help:\"The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.mercy-preview+json\n```\""
+	Order   string `name:"order"`
+	Page    int64  `name:"page"`
+	PerPage int64  `name:"per_page"`
+	Q       string `required:"" name:"q"`
+	Sort    string `name:"sort"`
+}
+
+func (c *SearchReposCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/search/repositories")
+	c.UpdatePreview("mercy", c.Mercy)
+	c.UpdateURLQuery("order", c.Order)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("q", c.Q)
 	c.UpdateURLQuery("sort", c.Sort)
+	return c.DoRequest("GET")
+}
+
+type SearchReposLegacyCmd struct {
+	internal.BaseCmd
+	Keyword   string `required:"" name:"keyword"`
+	Language  string `name:"language"`
+	Order     string `name:"order"`
+	Sort      string `name:"sort"`
+	StartPage string `name:"start_page"`
+}
+
+func (c *SearchReposLegacyCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/legacy/repos/search/:keyword")
+	c.UpdateURLPath("keyword", c.Keyword)
+	c.UpdateURLQuery("language", c.Language)
 	c.UpdateURLQuery("order", c.Order)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("sort", c.Sort)
+	c.UpdateURLQuery("start_page", c.StartPage)
 	return c.DoRequest("GET")
 }
 
 type SearchTopicsCmd struct {
 	internal.BaseCmd
-	Mercy bool   "name:\"mercy-preview\" help:\"**Note:** The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.mercy-preview+json\n\n```\""
-	Q     string `required:"" name:"q" help:"The search terms."`
+	Mercy bool   "name:\"mercy-preview\" help:\"The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.mercy-preview+json\n```\""
+	Q     string `required:"" name:"q"`
 }
 
 func (c *SearchTopicsCmd) Run(isValueSetMap map[string]bool) error {
@@ -138,90 +184,40 @@ func (c *SearchTopicsCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
-type SearchLabelsCmd struct {
+type SearchUsersCmd struct {
 	internal.BaseCmd
-	Symmetra     bool   "name:\"symmetra-preview\" help:\"**Note:** You can now use emoji in label names, add descriptions to labels, and search for labels in a repository. See the [blog post](/changes/2018-02-22-label-description-search-preview) for full details. To access these features and receive payloads with this data during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.symmetra-preview+json\n\n```\""
-	RepositoryId int64  `required:"" name:"repository_id" help:"The id of the repository."`
-	Q            string `required:"" name:"q" help:"The search keywords."`
-	Sort         string "name:\"sort\" help:\"The sort field. Can be one of `created` or `updated`.\""
-	Order        string "name:\"order\" help:\"The sort order if the sort parameter is provided. Can be one of `asc` or `desc`.\""
+	Order   string `name:"order"`
+	Page    int64  `name:"page"`
+	PerPage int64  `name:"per_page"`
+	Q       string `required:"" name:"q"`
+	Sort    string `name:"sort"`
 }
 
-func (c *SearchLabelsCmd) Run(isValueSetMap map[string]bool) error {
+func (c *SearchUsersCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/search/labels")
-	c.UpdatePreview("symmetra", c.Symmetra)
-	c.UpdateURLQuery("repository_id", c.RepositoryId)
+	c.SetURLPath("/search/users")
+	c.UpdateURLQuery("order", c.Order)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("q", c.Q)
 	c.UpdateURLQuery("sort", c.Sort)
-	c.UpdateURLQuery("order", c.Order)
-	return c.DoRequest("GET")
-}
-
-type SearchIssuesLegacyCmd struct {
-	internal.BaseCmd
-	Owner      string `required:"" name:"owner"`
-	Repository string `required:"" name:"repository"`
-	State      string "required:\"\" name:\"state\" help:\"Indicates the state of the issues to return. Can be either `open` or `closed`.\""
-	Keyword    string `required:"" name:"keyword" help:"The search term."`
-}
-
-func (c *SearchIssuesLegacyCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/legacy/issues/search/:owner/:repository/:state/:keyword")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repository", c.Repository)
-	c.UpdateURLPath("state", c.State)
-	c.UpdateURLPath("keyword", c.Keyword)
-	return c.DoRequest("GET")
-}
-
-type SearchReposLegacyCmd struct {
-	internal.BaseCmd
-	Keyword   string `required:"" name:"keyword" help:"The search term."`
-	Language  string `name:"language" help:"Filter results by language."`
-	StartPage string `name:"start_page" help:"The page number to fetch."`
-	Sort      string "name:\"sort\" help:\"The sort field. One of `stars`, `forks`, or `updated`.\""
-	Order     string "name:\"order\" help:\"The sort field. if `sort` param is provided. Can be either `asc` or `desc`.\""
-}
-
-func (c *SearchReposLegacyCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/legacy/repos/search/:keyword")
-	c.UpdateURLPath("keyword", c.Keyword)
-	c.UpdateURLQuery("language", c.Language)
-	c.UpdateURLQuery("start_page", c.StartPage)
-	c.UpdateURLQuery("sort", c.Sort)
-	c.UpdateURLQuery("order", c.Order)
 	return c.DoRequest("GET")
 }
 
 type SearchUsersLegacyCmd struct {
 	internal.BaseCmd
-	Keyword   string `required:"" name:"keyword" help:"The search term."`
-	StartPage string `name:"start_page" help:"The page number to fetch."`
-	Sort      string "name:\"sort\" help:\"The sort field. One of `stars`, `forks`, or `updated`.\""
-	Order     string "name:\"order\" help:\"The sort field. if `sort` param is provided. Can be either `asc` or `desc`.\""
+	Keyword   string `required:"" name:"keyword"`
+	Order     string `name:"order"`
+	Sort      string `name:"sort"`
+	StartPage string `name:"start_page"`
 }
 
 func (c *SearchUsersLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/legacy/user/search/:keyword")
 	c.UpdateURLPath("keyword", c.Keyword)
-	c.UpdateURLQuery("start_page", c.StartPage)
-	c.UpdateURLQuery("sort", c.Sort)
 	c.UpdateURLQuery("order", c.Order)
-	return c.DoRequest("GET")
-}
-
-type SearchEmailLegacyCmd struct {
-	internal.BaseCmd
-	Email string `required:"" name:"email" help:"The email address."`
-}
-
-func (c *SearchEmailLegacyCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/legacy/user/email/:email")
-	c.UpdateURLPath("email", c.Email)
+	c.UpdateURLQuery("sort", c.Sort)
+	c.UpdateURLQuery("start_page", c.StartPage)
 	return c.DoRequest("GET")
 }

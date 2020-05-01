@@ -5,34 +5,34 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type MarkdownCmd struct {
-	Render    MarkdownRenderCmd    `cmd:"" help:"Render an arbitrary Markdown document - https://developer.github.com/v3/markdown/#render-an-arbitrary-markdown-document"`
-	RenderRaw MarkdownRenderRawCmd `cmd:"" help:"Render a Markdown document in raw mode - https://developer.github.com/v3/markdown/#render-a-markdown-document-in-raw-mode"`
+	Render    MarkdownRenderCmd    `cmd:""`
+	RenderRaw MarkdownRenderRawCmd `cmd:""`
 }
 
 type MarkdownRenderCmd struct {
 	internal.BaseCmd
-	Text    string `required:"" name:"text" help:"The Markdown text to render in HTML. Markdown content must be 400 KB or less."`
-	Mode    string "name:\"mode\" help:\"The rendering mode. Can be either:  \n\\* `markdown` to render a document in plain Markdown, just like README.md files are rendered.  \n\\* `gfm` to render a document in [GitHub Flavored Markdown](https://github.github.com/gfm/), which creates links for user mentions as well as references to SHA-1 hashes, issues, and pull requests.\""
-	Context string "name:\"context\" help:\"The repository context to use when creating references in `gfm` mode. Omit this parameter when using `markdown` mode.\""
+	Context string `name:"context"`
+	Mode    string `name:"mode"`
+	Text    string `required:"" name:"text"`
 }
 
 func (c *MarkdownRenderCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/markdown")
-	c.UpdateBody("text", c.Text)
-	c.UpdateBody("mode", c.Mode)
 	c.UpdateBody("context", c.Context)
+	c.UpdateBody("mode", c.Mode)
+	c.UpdateBody("text", c.Text)
 	return c.DoRequest("POST")
 }
 
 type MarkdownRenderRawCmd struct {
 	internal.BaseCmd
-	Data string `required:"" name:"data"`
+	ContentType string `name:"content-type"`
 }
 
 func (c *MarkdownRenderRawCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/markdown/raw")
-	c.UpdateBody("data", c.Data)
+	c.AddRequestHeader("content-type", c.ContentType)
 	return c.DoRequest("POST")
 }

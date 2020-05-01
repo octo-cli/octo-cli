@@ -9,7 +9,7 @@ import (
 
 type (
 	GenerateCmd struct {
-		RoutesPath string `type:"existingfile" default:"routes.json"`
+		RoutesPath string `type:"existingfile" default:"api.github.com.json"`
 		OutputPath string `type:"existingdir" default:"./internal/generated"`
 		Verify     bool   `help:"Verify a new run won't change anything"`
 		fs         afero.Fs

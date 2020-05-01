@@ -5,324 +5,82 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type ActivityCmd struct {
-	ListPublicEvents                     ActivityListPublicEventsCmd                     `cmd:"" help:"List public events - https://developer.github.com/v3/activity/events/#list-public-events"`
-	ListRepoEvents                       ActivityListRepoEventsCmd                       `cmd:"" help:"List repository events - https://developer.github.com/v3/activity/events/#list-repository-events"`
-	ListPublicEventsForRepoNetwork       ActivityListPublicEventsForRepoNetworkCmd       `cmd:"" help:"List public events for a network of repositories - https://developer.github.com/v3/activity/events/#list-public-events-for-a-network-of-repositories"`
-	ListPublicEventsForOrg               ActivityListPublicEventsForOrgCmd               `cmd:"" help:"List public events for an organization - https://developer.github.com/v3/activity/events/#list-public-events-for-an-organization"`
-	ListReceivedEventsForUser            ActivityListReceivedEventsForUserCmd            `cmd:"" help:"List events that a user has received - https://developer.github.com/v3/activity/events/#list-events-that-a-user-has-received"`
-	ListReceivedPublicEventsForUser      ActivityListReceivedPublicEventsForUserCmd      `cmd:"" help:"List public events that a user has received - https://developer.github.com/v3/activity/events/#list-public-events-that-a-user-has-received"`
-	ListEventsForUser                    ActivityListEventsForUserCmd                    `cmd:"" help:"List events performed by a user - https://developer.github.com/v3/activity/events/#list-events-performed-by-a-user"`
-	ListPublicEventsForUser              ActivityListPublicEventsForUserCmd              `cmd:"" help:"List public events performed by a user - https://developer.github.com/v3/activity/events/#list-public-events-performed-by-a-user"`
-	ListEventsForOrg                     ActivityListEventsForOrgCmd                     `cmd:"" help:"List events for an organization - https://developer.github.com/v3/activity/events/#list-events-for-an-organization"`
-	ListFeeds                            ActivityListFeedsCmd                            `cmd:"" help:"List feeds - https://developer.github.com/v3/activity/feeds/#list-feeds"`
-	ListNotifications                    ActivityListNotificationsCmd                    `cmd:"" help:"List your notifications - https://developer.github.com/v3/activity/notifications/#list-your-notifications"`
-	ListNotificationsForRepo             ActivityListNotificationsForRepoCmd             `cmd:"" help:"List your notifications in a repository - https://developer.github.com/v3/activity/notifications/#list-your-notifications-in-a-repository"`
-	MarkAsRead                           ActivityMarkAsReadCmd                           `cmd:"" help:"Mark as read - https://developer.github.com/v3/activity/notifications/#mark-as-read"`
-	MarkNotificationsAsReadForRepo       ActivityMarkNotificationsAsReadForRepoCmd       `cmd:"" help:"Mark notifications as read in a repository - https://developer.github.com/v3/activity/notifications/#mark-notifications-as-read-in-a-repository"`
-	GetThread                            ActivityGetThreadCmd                            `cmd:"" help:"View a single thread - https://developer.github.com/v3/activity/notifications/#view-a-single-thread"`
-	MarkThreadAsRead                     ActivityMarkThreadAsReadCmd                     `cmd:"" help:"Mark a thread as read - https://developer.github.com/v3/activity/notifications/#mark-a-thread-as-read"`
-	GetThreadSubscription                ActivityGetThreadSubscriptionCmd                `cmd:"" help:"Get a thread subscription - https://developer.github.com/v3/activity/notifications/#get-a-thread-subscription"`
-	SetThreadSubscription                ActivitySetThreadSubscriptionCmd                `cmd:"" help:"Set a thread subscription - https://developer.github.com/v3/activity/notifications/#set-a-thread-subscription"`
-	DeleteThreadSubscription             ActivityDeleteThreadSubscriptionCmd             `cmd:"" help:"Delete a thread subscription - https://developer.github.com/v3/activity/notifications/#delete-a-thread-subscription"`
-	ListStargazersForRepo                ActivityListStargazersForRepoCmd                `cmd:"" help:"List Stargazers - https://developer.github.com/v3/activity/starring/#list-stargazers"`
-	ListReposStarredByUser               ActivityListReposStarredByUserCmd               `cmd:"" help:"List repositories being starred by a user - https://developer.github.com/v3/activity/starring/#list-repositories-being-starred"`
-	ListReposStarredByAuthenticatedUser  ActivityListReposStarredByAuthenticatedUserCmd  `cmd:"" help:"List repositories being starred by the authenticated user - https://developer.github.com/v3/activity/starring/#list-repositories-being-starred"`
-	CheckStarringRepo                    ActivityCheckStarringRepoCmd                    `cmd:"" help:"Check if you are starring a repository - https://developer.github.com/v3/activity/starring/#check-if-you-are-starring-a-repository"`
-	StarRepo                             ActivityStarRepoCmd                             `cmd:"" help:"Star a repository - https://developer.github.com/v3/activity/starring/#star-a-repository"`
-	UnstarRepo                           ActivityUnstarRepoCmd                           `cmd:"" help:"Unstar a repository - https://developer.github.com/v3/activity/starring/#unstar-a-repository"`
-	ListWatchersForRepo                  ActivityListWatchersForRepoCmd                  `cmd:"" help:"List watchers - https://developer.github.com/v3/activity/watching/#list-watchers"`
-	ListReposWatchedByUser               ActivityListReposWatchedByUserCmd               `cmd:"" help:"List repositories being watched by a user - https://developer.github.com/v3/activity/watching/#list-repositories-being-watched"`
-	ListWatchedReposForAuthenticatedUser ActivityListWatchedReposForAuthenticatedUserCmd `cmd:"" help:"List repositories being watched by the authenticated user - https://developer.github.com/v3/activity/watching/#list-repositories-being-watched"`
-	GetRepoSubscription                  ActivityGetRepoSubscriptionCmd                  `cmd:"" help:"Get a Repository Subscription - https://developer.github.com/v3/activity/watching/#get-a-repository-subscription"`
-	SetRepoSubscription                  ActivitySetRepoSubscriptionCmd                  `cmd:"" help:"Set a Repository Subscription - https://developer.github.com/v3/activity/watching/#set-a-repository-subscription"`
-	DeleteRepoSubscription               ActivityDeleteRepoSubscriptionCmd               `cmd:"" help:"Delete a Repository Subscription - https://developer.github.com/v3/activity/watching/#delete-a-repository-subscription"`
-	CheckWatchingRepoLegacy              ActivityCheckWatchingRepoLegacyCmd              `cmd:"" help:"Check if you are watching a repository (LEGACY) - https://developer.github.com/v3/activity/watching/#check-if-you-are-watching-a-repository-legacy"`
-	WatchRepoLegacy                      ActivityWatchRepoLegacyCmd                      `cmd:"" help:"Watch a repository (LEGACY) - https://developer.github.com/v3/activity/watching/#watch-a-repository-legacy"`
-	StopWatchingRepoLegacy               ActivityStopWatchingRepoLegacyCmd               `cmd:"" help:"Stop watching a repository (LEGACY) - https://developer.github.com/v3/activity/watching/#stop-watching-a-repository-legacy"`
+	CheckRepoIsStarredByAuthenticatedUser     ActivityCheckRepoIsStarredByAuthenticatedUserCmd     `cmd:""`
+	CheckWatchingRepoLegacy                   ActivityCheckWatchingRepoLegacyCmd                   `cmd:""`
+	DeleteRepoSubscription                    ActivityDeleteRepoSubscriptionCmd                    `cmd:""`
+	DeleteThreadSubscription                  ActivityDeleteThreadSubscriptionCmd                  `cmd:""`
+	GetFeeds                                  ActivityGetFeedsCmd                                  `cmd:""`
+	GetRepoSubscription                       ActivityGetRepoSubscriptionCmd                       `cmd:""`
+	GetThread                                 ActivityGetThreadCmd                                 `cmd:""`
+	GetThreadSubscriptionForAuthenticatedUser ActivityGetThreadSubscriptionForAuthenticatedUserCmd `cmd:""`
+	ListEventsForAuthenticatedUser            ActivityListEventsForAuthenticatedUserCmd            `cmd:""`
+	ListNotificationsForAuthenticatedUser     ActivityListNotificationsForAuthenticatedUserCmd     `cmd:""`
+	ListOrgEventsForAuthenticatedUser         ActivityListOrgEventsForAuthenticatedUserCmd         `cmd:""`
+	ListPublicEvents                          ActivityListPublicEventsCmd                          `cmd:""`
+	ListPublicEventsForRepoNetwork            ActivityListPublicEventsForRepoNetworkCmd            `cmd:""`
+	ListPublicEventsForUser                   ActivityListPublicEventsForUserCmd                   `cmd:""`
+	ListPublicOrgEvents                       ActivityListPublicOrgEventsCmd                       `cmd:""`
+	ListReceivedEventsForUser                 ActivityListReceivedEventsForUserCmd                 `cmd:""`
+	ListReceivedPublicEventsForUser           ActivityListReceivedPublicEventsForUserCmd           `cmd:""`
+	ListRepoEvents                            ActivityListRepoEventsCmd                            `cmd:""`
+	ListRepoNotificationsForAuthenticatedUser ActivityListRepoNotificationsForAuthenticatedUserCmd `cmd:""`
+	ListReposStarredByAuthenticatedUser       ActivityListReposStarredByAuthenticatedUserCmd       `cmd:""`
+	ListReposStarredByUser                    ActivityListReposStarredByUserCmd                    `cmd:""`
+	ListReposWatchedByUser                    ActivityListReposWatchedByUserCmd                    `cmd:""`
+	ListStargazersForRepo                     ActivityListStargazersForRepoCmd                     `cmd:""`
+	ListWatchedReposForAuthenticatedUser      ActivityListWatchedReposForAuthenticatedUserCmd      `cmd:""`
+	ListWatchersForRepo                       ActivityListWatchersForRepoCmd                       `cmd:""`
+	MarkNotificationsAsRead                   ActivityMarkNotificationsAsReadCmd                   `cmd:""`
+	MarkRepoNotificationsAsRead               ActivityMarkRepoNotificationsAsReadCmd               `cmd:""`
+	MarkThreadAsRead                          ActivityMarkThreadAsReadCmd                          `cmd:""`
+	SetRepoSubscription                       ActivitySetRepoSubscriptionCmd                       `cmd:""`
+	SetThreadSubscription                     ActivitySetThreadSubscriptionCmd                     `cmd:""`
+	StarRepoForAuthenticatedUser              ActivityStarRepoForAuthenticatedUserCmd              `cmd:""`
+	StopWatchingRepoLegacy                    ActivityStopWatchingRepoLegacyCmd                    `cmd:""`
+	UnstarRepoForAuthenticatedUser            ActivityUnstarRepoForAuthenticatedUserCmd            `cmd:""`
+	WatchRepoLegacy                           ActivityWatchRepoLegacyCmd                           `cmd:""`
 }
 
-type ActivityListPublicEventsCmd struct {
+type ActivityCheckRepoIsStarredByAuthenticatedUserCmd struct {
 	internal.BaseCmd
-	PerPage int64 `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64 `name:"page" help:"Page number of the results to fetch."`
+	Owner string `name:"owner"`
+	Repo  string `required:"" name:"repo"`
 }
 
-func (c *ActivityListPublicEventsCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ActivityCheckRepoIsStarredByAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/events")
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type ActivityListRepoEventsCmd struct {
-	internal.BaseCmd
-	Owner   string `name:"owner"`
-	Repo    string `required:"" name:"repo"`
-	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ActivityListRepoEventsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/events")
+	c.SetURLPath("/user/starred/:owner/:repo")
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
-type ActivityListPublicEventsForRepoNetworkCmd struct {
+type ActivityCheckWatchingRepoLegacyCmd struct {
 	internal.BaseCmd
-	Owner   string `name:"owner"`
-	Repo    string `required:"" name:"repo"`
-	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64  `name:"page" help:"Page number of the results to fetch."`
+	Owner string `name:"owner"`
+	Repo  string `required:"" name:"repo"`
 }
 
-func (c *ActivityListPublicEventsForRepoNetworkCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ActivityCheckWatchingRepoLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/networks/:owner/:repo/events")
+	c.SetURLPath("/user/subscriptions/:owner/:repo")
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
-type ActivityListPublicEventsForOrgCmd struct {
+type ActivityDeleteRepoSubscriptionCmd struct {
 	internal.BaseCmd
-	Org     string `required:"" name:"org"`
-	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64  `name:"page" help:"Page number of the results to fetch."`
+	Owner string `name:"owner"`
+	Repo  string `required:"" name:"repo"`
 }
 
-func (c *ActivityListPublicEventsForOrgCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ActivityDeleteRepoSubscriptionCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/events")
-	c.UpdateURLPath("org", c.Org)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type ActivityListReceivedEventsForUserCmd struct {
-	internal.BaseCmd
-	Username string `required:"" name:"username"`
-	PerPage  int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page     int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ActivityListReceivedEventsForUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/users/:username/received_events")
-	c.UpdateURLPath("username", c.Username)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type ActivityListReceivedPublicEventsForUserCmd struct {
-	internal.BaseCmd
-	Username string `required:"" name:"username"`
-	PerPage  int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page     int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ActivityListReceivedPublicEventsForUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/users/:username/received_events/public")
-	c.UpdateURLPath("username", c.Username)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type ActivityListEventsForUserCmd struct {
-	internal.BaseCmd
-	Username string `required:"" name:"username"`
-	PerPage  int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page     int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ActivityListEventsForUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/users/:username/events")
-	c.UpdateURLPath("username", c.Username)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type ActivityListPublicEventsForUserCmd struct {
-	internal.BaseCmd
-	Username string `required:"" name:"username"`
-	PerPage  int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page     int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ActivityListPublicEventsForUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/users/:username/events/public")
-	c.UpdateURLPath("username", c.Username)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type ActivityListEventsForOrgCmd struct {
-	internal.BaseCmd
-	Username string `required:"" name:"username"`
-	Org      string `required:"" name:"org"`
-	PerPage  int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page     int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ActivityListEventsForOrgCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/users/:username/events/orgs/:org")
-	c.UpdateURLPath("username", c.Username)
-	c.UpdateURLPath("org", c.Org)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type ActivityListFeedsCmd struct {
-	internal.BaseCmd
-}
-
-func (c *ActivityListFeedsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/feeds")
-	return c.DoRequest("GET")
-}
-
-type ActivityListNotificationsCmd struct {
-	internal.BaseCmd
-	All           bool   "name:\"all\" help:\"If `true`, show notifications marked as read.\""
-	Participating bool   "name:\"participating\" help:\"If `true`, only shows notifications in which the user is directly participating or mentioned.\""
-	Since         string "name:\"since\" help:\"Only show notifications updated after the given time. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.\""
-	Before        string "name:\"before\" help:\"Only show notifications updated before the given time. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.\""
-	PerPage       int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page          int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ActivityListNotificationsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/notifications")
-	c.UpdateURLQuery("all", c.All)
-	c.UpdateURLQuery("participating", c.Participating)
-	c.UpdateURLQuery("since", c.Since)
-	c.UpdateURLQuery("before", c.Before)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type ActivityListNotificationsForRepoCmd struct {
-	internal.BaseCmd
-	Owner         string `name:"owner"`
-	Repo          string `required:"" name:"repo"`
-	All           bool   "name:\"all\" help:\"If `true`, show notifications marked as read.\""
-	Participating bool   "name:\"participating\" help:\"If `true`, only shows notifications in which the user is directly participating or mentioned.\""
-	Since         string "name:\"since\" help:\"Only show notifications updated after the given time. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.\""
-	Before        string "name:\"before\" help:\"Only show notifications updated before the given time. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.\""
-	PerPage       int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page          int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ActivityListNotificationsForRepoCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/notifications")
+	c.SetURLPath("/repos/:owner/:repo/subscription")
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLQuery("all", c.All)
-	c.UpdateURLQuery("participating", c.Participating)
-	c.UpdateURLQuery("since", c.Since)
-	c.UpdateURLQuery("before", c.Before)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type ActivityMarkAsReadCmd struct {
-	internal.BaseCmd
-	LastReadAt string "name:\"last_read_at\" help:\"Describes the last point that notifications were checked. Anything updated since this time will not be updated. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.\""
-}
-
-func (c *ActivityMarkAsReadCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/notifications")
-	c.UpdateBody("last_read_at", c.LastReadAt)
-	return c.DoRequest("PUT")
-}
-
-type ActivityMarkNotificationsAsReadForRepoCmd struct {
-	internal.BaseCmd
-	Owner      string `name:"owner"`
-	Repo       string `required:"" name:"repo"`
-	LastReadAt string "name:\"last_read_at\" help:\"Describes the last point that notifications were checked. Anything updated since this time will not be updated. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.\""
-}
-
-func (c *ActivityMarkNotificationsAsReadForRepoCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/notifications")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateBody("last_read_at", c.LastReadAt)
-	return c.DoRequest("PUT")
-}
-
-type ActivityGetThreadCmd struct {
-	internal.BaseCmd
-	ThreadId int64 `required:"" name:"thread_id"`
-}
-
-func (c *ActivityGetThreadCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/notifications/threads/:thread_id")
-	c.UpdateURLPath("thread_id", c.ThreadId)
-	return c.DoRequest("GET")
-}
-
-type ActivityMarkThreadAsReadCmd struct {
-	internal.BaseCmd
-	ThreadId int64 `required:"" name:"thread_id"`
-}
-
-func (c *ActivityMarkThreadAsReadCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/notifications/threads/:thread_id")
-	c.UpdateURLPath("thread_id", c.ThreadId)
-	return c.DoRequest("PATCH")
-}
-
-type ActivityGetThreadSubscriptionCmd struct {
-	internal.BaseCmd
-	ThreadId int64 `required:"" name:"thread_id"`
-}
-
-func (c *ActivityGetThreadSubscriptionCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/notifications/threads/:thread_id/subscription")
-	c.UpdateURLPath("thread_id", c.ThreadId)
-	return c.DoRequest("GET")
-}
-
-type ActivitySetThreadSubscriptionCmd struct {
-	internal.BaseCmd
-	ThreadId int64 `required:"" name:"thread_id"`
-	Ignored  bool  "name:\"ignored\" help:\"Unsubscribes and subscribes you to a conversation. Set `ignored` to `true` to block all notifications from this thread.\""
-}
-
-func (c *ActivitySetThreadSubscriptionCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/notifications/threads/:thread_id/subscription")
-	c.UpdateURLPath("thread_id", c.ThreadId)
-	c.UpdateBody("ignored", c.Ignored)
-	return c.DoRequest("PUT")
+	return c.DoRequest("DELETE")
 }
 
 type ActivityDeleteThreadSubscriptionCmd struct {
@@ -337,149 +95,13 @@ func (c *ActivityDeleteThreadSubscriptionCmd) Run(isValueSetMap map[string]bool)
 	return c.DoRequest("DELETE")
 }
 
-type ActivityListStargazersForRepoCmd struct {
+type ActivityGetFeedsCmd struct {
 	internal.BaseCmd
-	Owner   string `name:"owner"`
-	Repo    string `required:"" name:"repo"`
-	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64  `name:"page" help:"Page number of the results to fetch."`
 }
 
-func (c *ActivityListStargazersForRepoCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ActivityGetFeedsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/stargazers")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type ActivityListReposStarredByUserCmd struct {
-	internal.BaseCmd
-	Username  string `required:"" name:"username"`
-	Sort      string "name:\"sort\" help:\"One of `created` (when the repository was starred) or `updated` (when it was last pushed to).\""
-	Direction string "name:\"direction\" help:\"One of `asc` (ascending) or `desc` (descending).\""
-	PerPage   int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page      int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ActivityListReposStarredByUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/users/:username/starred")
-	c.UpdateURLPath("username", c.Username)
-	c.UpdateURLQuery("sort", c.Sort)
-	c.UpdateURLQuery("direction", c.Direction)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type ActivityListReposStarredByAuthenticatedUserCmd struct {
-	internal.BaseCmd
-	Sort      string "name:\"sort\" help:\"One of `created` (when the repository was starred) or `updated` (when it was last pushed to).\""
-	Direction string "name:\"direction\" help:\"One of `asc` (ascending) or `desc` (descending).\""
-	PerPage   int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page      int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ActivityListReposStarredByAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/starred")
-	c.UpdateURLQuery("sort", c.Sort)
-	c.UpdateURLQuery("direction", c.Direction)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type ActivityCheckStarringRepoCmd struct {
-	internal.BaseCmd
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
-}
-
-func (c *ActivityCheckStarringRepoCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/starred/:owner/:repo")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	return c.DoRequest("GET")
-}
-
-type ActivityStarRepoCmd struct {
-	internal.BaseCmd
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
-}
-
-func (c *ActivityStarRepoCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/starred/:owner/:repo")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	return c.DoRequest("PUT")
-}
-
-type ActivityUnstarRepoCmd struct {
-	internal.BaseCmd
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
-}
-
-func (c *ActivityUnstarRepoCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/starred/:owner/:repo")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	return c.DoRequest("DELETE")
-}
-
-type ActivityListWatchersForRepoCmd struct {
-	internal.BaseCmd
-	Owner   string `name:"owner"`
-	Repo    string `required:"" name:"repo"`
-	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ActivityListWatchersForRepoCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/subscribers")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type ActivityListReposWatchedByUserCmd struct {
-	internal.BaseCmd
-	Username string `required:"" name:"username"`
-	PerPage  int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page     int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ActivityListReposWatchedByUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/users/:username/subscriptions")
-	c.UpdateURLPath("username", c.Username)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type ActivityListWatchedReposForAuthenticatedUserCmd struct {
-	internal.BaseCmd
-	PerPage int64 `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64 `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ActivityListWatchedReposForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/subscriptions")
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
+	c.SetURLPath("/feeds")
 	return c.DoRequest("GET")
 }
 
@@ -497,61 +119,411 @@ func (c *ActivityGetRepoSubscriptionCmd) Run(isValueSetMap map[string]bool) erro
 	return c.DoRequest("GET")
 }
 
-type ActivitySetRepoSubscriptionCmd struct {
+type ActivityGetThreadCmd struct {
 	internal.BaseCmd
+	ThreadId int64 `required:"" name:"thread_id"`
+}
+
+func (c *ActivityGetThreadCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/notifications/threads/:thread_id")
+	c.UpdateURLPath("thread_id", c.ThreadId)
+	return c.DoRequest("GET")
+}
+
+type ActivityGetThreadSubscriptionForAuthenticatedUserCmd struct {
+	internal.BaseCmd
+	ThreadId int64 `required:"" name:"thread_id"`
+}
+
+func (c *ActivityGetThreadSubscriptionForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/notifications/threads/:thread_id/subscription")
+	c.UpdateURLPath("thread_id", c.ThreadId)
+	return c.DoRequest("GET")
+}
+
+type ActivityListEventsForAuthenticatedUserCmd struct {
+	internal.BaseCmd
+	Page     int64  `name:"page"`
+	PerPage  int64  `name:"per_page"`
+	Username string `required:"" name:"username"`
+}
+
+func (c *ActivityListEventsForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/users/:username/events")
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("GET")
+}
+
+type ActivityListNotificationsForAuthenticatedUserCmd struct {
+	internal.BaseCmd
+	All           bool   `name:"all"`
+	Before        string `name:"before"`
+	Page          int64  `name:"page"`
+	Participating bool   `name:"participating"`
+	PerPage       int64  `name:"per_page"`
+	Since         string `name:"since"`
+}
+
+func (c *ActivityListNotificationsForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/notifications")
+	c.UpdateURLQuery("all", c.All)
+	c.UpdateURLQuery("before", c.Before)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("participating", c.Participating)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("since", c.Since)
+	return c.DoRequest("GET")
+}
+
+type ActivityListOrgEventsForAuthenticatedUserCmd struct {
+	internal.BaseCmd
+	Org      string `required:"" name:"org"`
+	Page     int64  `name:"page"`
+	PerPage  int64  `name:"per_page"`
+	Username string `required:"" name:"username"`
+}
+
+func (c *ActivityListOrgEventsForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/users/:username/events/orgs/:org")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("GET")
+}
+
+type ActivityListPublicEventsCmd struct {
+	internal.BaseCmd
+	Page    int64 `name:"page"`
+	PerPage int64 `name:"per_page"`
+}
+
+func (c *ActivityListPublicEventsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/events")
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	return c.DoRequest("GET")
+}
+
+type ActivityListPublicEventsForRepoNetworkCmd struct {
+	internal.BaseCmd
+	Owner   string `name:"owner"`
+	Page    int64  `name:"page"`
+	PerPage int64  `name:"per_page"`
+	Repo    string `required:"" name:"repo"`
+}
+
+func (c *ActivityListPublicEventsForRepoNetworkCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/networks/:owner/:repo/events")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ActivityListPublicEventsForUserCmd struct {
+	internal.BaseCmd
+	Page     int64  `name:"page"`
+	PerPage  int64  `name:"per_page"`
+	Username string `required:"" name:"username"`
+}
+
+func (c *ActivityListPublicEventsForUserCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/users/:username/events/public")
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("GET")
+}
+
+type ActivityListPublicOrgEventsCmd struct {
+	internal.BaseCmd
+	Org     string `required:"" name:"org"`
+	Page    int64  `name:"page"`
+	PerPage int64  `name:"per_page"`
+}
+
+func (c *ActivityListPublicOrgEventsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/events")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	return c.DoRequest("GET")
+}
+
+type ActivityListReceivedEventsForUserCmd struct {
+	internal.BaseCmd
+	Page     int64  `name:"page"`
+	PerPage  int64  `name:"per_page"`
+	Username string `required:"" name:"username"`
+}
+
+func (c *ActivityListReceivedEventsForUserCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/users/:username/received_events")
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("GET")
+}
+
+type ActivityListReceivedPublicEventsForUserCmd struct {
+	internal.BaseCmd
+	Page     int64  `name:"page"`
+	PerPage  int64  `name:"per_page"`
+	Username string `required:"" name:"username"`
+}
+
+func (c *ActivityListReceivedPublicEventsForUserCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/users/:username/received_events/public")
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("GET")
+}
+
+type ActivityListRepoEventsCmd struct {
+	internal.BaseCmd
+	Owner   string `name:"owner"`
+	Page    int64  `name:"page"`
+	PerPage int64  `name:"per_page"`
+	Repo    string `required:"" name:"repo"`
+}
+
+func (c *ActivityListRepoEventsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/events")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ActivityListRepoNotificationsForAuthenticatedUserCmd struct {
+	internal.BaseCmd
+	All           bool   `name:"all"`
+	Before        string `name:"before"`
+	Owner         string `name:"owner"`
+	Page          int64  `name:"page"`
+	Participating bool   `name:"participating"`
+	PerPage       int64  `name:"per_page"`
+	Repo          string `required:"" name:"repo"`
+	Since         string `name:"since"`
+}
+
+func (c *ActivityListRepoNotificationsForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/notifications")
+	c.UpdateURLQuery("all", c.All)
+	c.UpdateURLQuery("before", c.Before)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("participating", c.Participating)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("since", c.Since)
+	return c.DoRequest("GET")
+}
+
+type ActivityListReposStarredByAuthenticatedUserCmd struct {
+	internal.BaseCmd
+	Direction string `name:"direction"`
+	Page      int64  `name:"page"`
+	PerPage   int64  `name:"per_page"`
+	Sort      string `name:"sort"`
+}
+
+func (c *ActivityListReposStarredByAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/starred")
+	c.UpdateURLQuery("direction", c.Direction)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("sort", c.Sort)
+	return c.DoRequest("GET")
+}
+
+type ActivityListReposStarredByUserCmd struct {
+	internal.BaseCmd
+	Direction string `name:"direction"`
+	Page      int64  `name:"page"`
+	PerPage   int64  `name:"per_page"`
+	Sort      string `name:"sort"`
+	Username  string `required:"" name:"username"`
+}
+
+func (c *ActivityListReposStarredByUserCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/users/:username/starred")
+	c.UpdateURLQuery("direction", c.Direction)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("sort", c.Sort)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("GET")
+}
+
+type ActivityListReposWatchedByUserCmd struct {
+	internal.BaseCmd
+	Page     int64  `name:"page"`
+	PerPage  int64  `name:"per_page"`
+	Username string `required:"" name:"username"`
+}
+
+func (c *ActivityListReposWatchedByUserCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/users/:username/subscriptions")
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("GET")
+}
+
+type ActivityListStargazersForRepoCmd struct {
+	internal.BaseCmd
+	Owner   string `name:"owner"`
+	Page    int64  `name:"page"`
+	PerPage int64  `name:"per_page"`
+	Repo    string `required:"" name:"repo"`
+}
+
+func (c *ActivityListStargazersForRepoCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/stargazers")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ActivityListWatchedReposForAuthenticatedUserCmd struct {
+	internal.BaseCmd
+	Page    int64 `name:"page"`
+	PerPage int64 `name:"per_page"`
+}
+
+func (c *ActivityListWatchedReposForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/subscriptions")
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	return c.DoRequest("GET")
+}
+
+type ActivityListWatchersForRepoCmd struct {
+	internal.BaseCmd
+	Owner   string `name:"owner"`
+	Page    int64  `name:"page"`
+	PerPage int64  `name:"per_page"`
+	Repo    string `required:"" name:"repo"`
+}
+
+func (c *ActivityListWatchersForRepoCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/subscribers")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ActivityMarkNotificationsAsReadCmd struct {
+	internal.BaseCmd
+	LastReadAt string `name:"last_read_at"`
+}
+
+func (c *ActivityMarkNotificationsAsReadCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/notifications")
+	c.UpdateBody("last_read_at", c.LastReadAt)
+	return c.DoRequest("PUT")
+}
+
+type ActivityMarkRepoNotificationsAsReadCmd struct {
+	internal.BaseCmd
+	LastReadAt string `name:"last_read_at"`
 	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
-	Subscribed bool   `name:"subscribed" help:"Determines if notifications should be received from this repository."`
-	Ignored    bool   `name:"ignored" help:"Determines if all notifications should be blocked from this repository."`
+}
+
+func (c *ActivityMarkRepoNotificationsAsReadCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/notifications")
+	c.UpdateBody("last_read_at", c.LastReadAt)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("PUT")
+}
+
+type ActivityMarkThreadAsReadCmd struct {
+	internal.BaseCmd
+	ThreadId int64 `required:"" name:"thread_id"`
+}
+
+func (c *ActivityMarkThreadAsReadCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/notifications/threads/:thread_id")
+	c.UpdateURLPath("thread_id", c.ThreadId)
+	return c.DoRequest("PATCH")
+}
+
+type ActivitySetRepoSubscriptionCmd struct {
+	internal.BaseCmd
+	Ignored    bool   `name:"ignored"`
+	Owner      string `name:"owner"`
+	Repo       string `required:"" name:"repo"`
+	Subscribed bool   `name:"subscribed"`
 }
 
 func (c *ActivitySetRepoSubscriptionCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/:owner/:repo/subscription")
+	c.UpdateBody("ignored", c.Ignored)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateBody("subscribed", c.Subscribed)
-	c.UpdateBody("ignored", c.Ignored)
 	return c.DoRequest("PUT")
 }
 
-type ActivityDeleteRepoSubscriptionCmd struct {
+type ActivitySetThreadSubscriptionCmd struct {
+	internal.BaseCmd
+	Ignored  bool  `name:"ignored"`
+	ThreadId int64 `required:"" name:"thread_id"`
+}
+
+func (c *ActivitySetThreadSubscriptionCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/notifications/threads/:thread_id/subscription")
+	c.UpdateBody("ignored", c.Ignored)
+	c.UpdateURLPath("thread_id", c.ThreadId)
+	return c.DoRequest("PUT")
+}
+
+type ActivityStarRepoForAuthenticatedUserCmd struct {
 	internal.BaseCmd
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 }
 
-func (c *ActivityDeleteRepoSubscriptionCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ActivityStarRepoForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/subscription")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	return c.DoRequest("DELETE")
-}
-
-type ActivityCheckWatchingRepoLegacyCmd struct {
-	internal.BaseCmd
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
-}
-
-func (c *ActivityCheckWatchingRepoLegacyCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/subscriptions/:owner/:repo")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	return c.DoRequest("GET")
-}
-
-type ActivityWatchRepoLegacyCmd struct {
-	internal.BaseCmd
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
-}
-
-func (c *ActivityWatchRepoLegacyCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/subscriptions/:owner/:repo")
+	c.SetURLPath("/user/starred/:owner/:repo")
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("PUT")
@@ -569,4 +541,32 @@ func (c *ActivityStopWatchingRepoLegacyCmd) Run(isValueSetMap map[string]bool) e
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("DELETE")
+}
+
+type ActivityUnstarRepoForAuthenticatedUserCmd struct {
+	internal.BaseCmd
+	Owner string `name:"owner"`
+	Repo  string `required:"" name:"repo"`
+}
+
+func (c *ActivityUnstarRepoForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/starred/:owner/:repo")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("DELETE")
+}
+
+type ActivityWatchRepoLegacyCmd struct {
+	internal.BaseCmd
+	Owner string `name:"owner"`
+	Repo  string `required:"" name:"repo"`
+}
+
+func (c *ActivityWatchRepoLegacyCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/subscriptions/:owner/:repo")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("PUT")
 }
