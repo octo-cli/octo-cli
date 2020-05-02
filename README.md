@@ -167,173 +167,173 @@ Flags:
   --version
 
 Commands:
-  actions cancel-workflow-run --token=STRING --repo=STRING --run_id=INT-64
+  actions cancel-workflow-run --repo=STRING --run_id=INT-64 --token=STRING
     Cancel a workflow run -
     https://developer.github.com/v3/actions/workflow-runs/#cancel-a-workflow-run
 
-  actions create-or-update-secret-for-repo --token=STRING --name=STRING --repo=STRING
+  actions create-or-update-secret-for-repo --name=STRING --repo=STRING --token=STRING
     Create or update a secret for a repository -
     https://developer.github.com/v3/actions/secrets/#create-or-update-a-secret-for-a-repository
 
-  actions create-registration-token-for-org --token=STRING --org=STRING
+  actions create-registration-token-for-org --org=STRING --token=STRING
     Create a registration token for an organization -
     https://developer.github.com/v3/actions/self-hosted-runners/#create-a-registration-token-for-an-organization
 
-  actions create-registration-token-for-repo --token=STRING --repo=STRING
+  actions create-registration-token-for-repo --repo=STRING --token=STRING
     Create a registration token for a repository -
     https://developer.github.com/v3/actions/self-hosted-runners/#create-a-registration-token-for-a-repository
 
-  actions create-remove-token-for-org --token=STRING --org=STRING
+  actions create-remove-token-for-org --org=STRING --token=STRING
     Create a remove token for an organization -
     https://developer.github.com/v3/actions/self-hosted-runners/#create-a-remove-token-for-an-organization
 
-  actions create-remove-token-for-repo --token=STRING --repo=STRING
+  actions create-remove-token-for-repo --repo=STRING --token=STRING
     Create a remove token for a repository -
     https://developer.github.com/v3/actions/self-hosted-runners/#create-a-remove-token-for-a-repository
 
-  actions delete-artifact --token=STRING --artifact_id=INT-64 --repo=STRING
+  actions delete-artifact --artifact_id=INT-64 --repo=STRING --token=STRING
     Delete an artifact -
     https://developer.github.com/v3/actions/artifacts/#delete-an-artifact
 
-  actions delete-secret-from-repo --token=STRING --name=STRING --repo=STRING
+  actions delete-secret-from-repo --name=STRING --repo=STRING --token=STRING
     Delete a secret from a repository -
     https://developer.github.com/v3/actions/secrets/#delete-a-secret-from-a-repository
 
-  actions delete-self-hosted-runner-from-org --token=STRING --org=STRING --runner_id=INT-64
+  actions delete-self-hosted-runner-from-org --org=STRING --runner_id=INT-64 --token=STRING
     Delete a self-hosted runner from an organization -
     https://developer.github.com/v3/actions/self-hosted-runners/#delete-a-self-hosted-runner-from-an-organization
 
-  actions delete-self-hosted-runner-from-repo --token=STRING --repo=STRING --runner_id=INT-64
+  actions delete-self-hosted-runner-from-repo --repo=STRING --runner_id=INT-64 --token=STRING
     Delete a self-hosted runner from a repository -
     https://developer.github.com/v3/actions/self-hosted-runners/#delete-a-self-hosted-runner-from-a-repository
 
-  actions delete-workflow-run-logs --token=STRING --repo=STRING --run_id=INT-64
+  actions delete-workflow-run-logs --repo=STRING --run_id=INT-64 --token=STRING
     Delete workflow run logs -
     https://developer.github.com/v3/actions/workflow-runs/#delete-workflow-run-logs
 
-  actions download-artifact --token=STRING --archive_format=STRING --artifact_id=INT-64 --repo=STRING
+  actions download-artifact --archive_format=STRING --artifact_id=INT-64 --repo=STRING --token=STRING
     Download an artifact -
     https://developer.github.com/v3/actions/artifacts/#download-an-artifact
 
-  actions get-artifact --token=STRING --artifact_id=INT-64 --repo=STRING
+  actions get-artifact --artifact_id=INT-64 --repo=STRING --token=STRING
     Get an artifact -
     https://developer.github.com/v3/actions/artifacts/#get-an-artifact
 
-  actions get-public-key --token=STRING --repo=STRING
+  actions get-public-key --repo=STRING --token=STRING
     Get your public key -
     https://developer.github.com/v3/actions/secrets/#get-your-public-key
 
-  actions get-secret --token=STRING --name=STRING --repo=STRING
+  actions get-secret --name=STRING --repo=STRING --token=STRING
     Get a secret - https://developer.github.com/v3/actions/secrets/#get-a-secret
 
-  actions get-self-hosted-runner-for-org --token=STRING --org=STRING --runner_id=INT-64
+  actions get-self-hosted-runner-for-org --org=STRING --runner_id=INT-64 --token=STRING
     Get a self-hosted runner for an organization -
     https://developer.github.com/v3/actions/self-hosted-runners/#get-a-self-hosted-runner-for-an-organization
 
-  actions get-self-hosted-runner-for-repo --token=STRING --repo=STRING --runner_id=INT-64
+  actions get-self-hosted-runner-for-repo --repo=STRING --runner_id=INT-64 --token=STRING
     Get a self-hosted runner for a repository -
     https://developer.github.com/v3/actions/self-hosted-runners/#get-a-self-hosted-runner-for-a-repository
 
-  actions get-workflow --token=STRING --repo=STRING --workflow_id=INT-64
+  actions get-workflow --repo=STRING --workflow_id=INT-64 --token=STRING
     Get a workflow -
     https://developer.github.com/v3/actions/workflows/#get-a-workflow
 
-  actions get-workflow-job --token=STRING --job_id=INT-64 --repo=STRING
+  actions get-workflow-job --job_id=INT-64 --repo=STRING --token=STRING
     Get a workflow job -
     https://developer.github.com/v3/actions/workflow-jobs/#get-a-workflow-job
 
-  actions get-workflow-run --token=STRING --repo=STRING --run_id=INT-64
+  actions get-workflow-run --repo=STRING --run_id=INT-64 --token=STRING
     Get a workflow run -
     https://developer.github.com/v3/actions/workflow-runs/#get-a-workflow-run
 
-  actions list-artifacts-for-repo --token=STRING --repo=STRING
+  actions list-artifacts-for-repo --repo=STRING --token=STRING
     List artifacts for a repository -
     https://developer.github.com/v3/actions/artifacts/#list-artifacts-for-a-repository
 
-  actions list-jobs-for-workflow-run --token=STRING --repo=STRING --run_id=INT-64
+  actions list-jobs-for-workflow-run --repo=STRING --run_id=INT-64 --token=STRING
     List jobs for a workflow run -
     https://developer.github.com/v3/actions/workflow-jobs/#list-jobs-for-a-workflow-run
 
-  actions list-repo-workflow-runs --token=STRING --repo=STRING
+  actions list-repo-workflow-runs --repo=STRING --token=STRING
     List repository workflow runs -
     https://developer.github.com/v3/actions/workflow-runs/#list-repository-workflow-runs
 
-  actions list-repo-workflows --token=STRING --repo=STRING
+  actions list-repo-workflows --repo=STRING --token=STRING
     List repository workflows -
     https://developer.github.com/v3/actions/workflows/#list-repository-workflows
 
-  actions list-runner-applications-for-org --token=STRING --org=STRING
+  actions list-runner-applications-for-org --org=STRING --token=STRING
     List runner applications for an organization -
     https://developer.github.com/v3/actions/self-hosted-runners/#list-runner-applications-for-an-organization
 
-  actions list-runner-applications-for-repo --token=STRING --repo=STRING
+  actions list-runner-applications-for-repo --repo=STRING --token=STRING
     List runner applications for a repository -
     https://developer.github.com/v3/actions/self-hosted-runners/#list-runner-applications-for-a-repository
 
-  actions list-secrets-for-repo --token=STRING --repo=STRING
+  actions list-secrets-for-repo --repo=STRING --token=STRING
     List secrets for a repository -
     https://developer.github.com/v3/actions/secrets/#list-secrets-for-a-repository
 
-  actions list-self-hosted-runners-for-org --token=STRING --org=STRING
+  actions list-self-hosted-runners-for-org --org=STRING --token=STRING
     List self-hosted runners for an organization -
     https://developer.github.com/v3/actions/self-hosted-runners/#list-self-hosted-runners-for-an-organization
 
-  actions list-self-hosted-runners-for-repo --token=STRING --repo=STRING
+  actions list-self-hosted-runners-for-repo --repo=STRING --token=STRING
     List self-hosted runners for a repository -
     https://developer.github.com/v3/actions/self-hosted-runners/#list-self-hosted-runners-for-a-repository
 
-  actions list-workflow-job-logs --token=STRING --job_id=INT-64 --repo=STRING
+  actions list-workflow-job-logs --job_id=INT-64 --repo=STRING --token=STRING
     List workflow job logs -
     https://developer.github.com/v3/actions/workflow-jobs/#list-workflow-job-logs
 
-  actions list-workflow-run-artifacts --token=STRING --repo=STRING --run_id=INT-64
+  actions list-workflow-run-artifacts --repo=STRING --run_id=INT-64 --token=STRING
     List workflow run artifacts -
     https://developer.github.com/v3/actions/artifacts/#list-workflow-run-artifacts
 
-  actions list-workflow-run-logs --token=STRING --repo=STRING --run_id=INT-64
+  actions list-workflow-run-logs --repo=STRING --run_id=INT-64 --token=STRING
     List workflow run logs -
     https://developer.github.com/v3/actions/workflow-runs/#list-workflow-run-logs
 
-  actions list-workflow-runs --token=STRING --repo=STRING --workflow_id=INT-64
+  actions list-workflow-runs --repo=STRING --workflow_id=INT-64 --token=STRING
     List workflow runs -
     https://developer.github.com/v3/actions/workflow-runs/#list-workflow-runs
 
-  actions re-run-workflow --token=STRING --repo=STRING --run_id=INT-64
+  actions re-run-workflow --repo=STRING --run_id=INT-64 --token=STRING
     Re-run a workflow -
     https://developer.github.com/v3/actions/workflow-runs/#re-run-a-workflow
 
-  activity check-repo-is-starred-by-authenticated-user --token=STRING --repo=STRING
+  activity check-repo-is-starred-by-authenticated-user --repo=STRING --token=STRING
     Check if a repository is starred by the authenticated user -
     https://developer.github.com/v3/activity/starring/#check-if-a-repository-is-starred-by-the-authenticated-user
 
-  activity check-watching-repo-legacy --token=STRING --repo=STRING
+  activity check-watching-repo-legacy --repo=STRING --token=STRING
     Check if you are watching a repository (LEGACY) -
     https://developer.github.com/v3/activity/watching/#check-if-you-are-watching-a-repository-legacy
 
-  activity delete-repo-subscription --token=STRING --repo=STRING
+  activity delete-repo-subscription --repo=STRING --token=STRING
     Delete a repository subscription -
     https://developer.github.com/v3/activity/watching/#delete-a-repository-subscription
 
-  activity delete-thread-subscription --token=STRING --thread_id=INT-64
+  activity delete-thread-subscription --thread_id=INT-64 --token=STRING
     Delete a thread subscription -
     https://developer.github.com/v3/activity/notifications/#delete-a-thread-subscription
 
   activity get-feeds --token=STRING
     Get feeds - https://developer.github.com/v3/activity/feeds/#get-feeds
 
-  activity get-repo-subscription --token=STRING --repo=STRING
+  activity get-repo-subscription --repo=STRING --token=STRING
     Get a repository subscription -
     https://developer.github.com/v3/activity/watching/#get-a-repository-subscription
 
-  activity get-thread --token=STRING --thread_id=INT-64
+  activity get-thread --thread_id=INT-64 --token=STRING
     Get a thread -
     https://developer.github.com/v3/activity/notifications/#get-a-thread
 
-  activity get-thread-subscription-for-authenticated-user --token=STRING --thread_id=INT-64
+  activity get-thread-subscription-for-authenticated-user --thread_id=INT-64 --token=STRING
     Get a thread subscription for the authenticated user -
     https://developer.github.com/v3/activity/notifications/#get-a-thread-subscription-for-the-authenticated-user
 
-  activity list-events-for-authenticated-user --token=STRING --username=STRING
+  activity list-events-for-authenticated-user --username=STRING --token=STRING
     List events for the authenticated user -
     https://developer.github.com/v3/activity/events/#list-events-for-the-authenticated-user
 
@@ -341,7 +341,7 @@ Commands:
     List notifications for the authenticated user -
     https://developer.github.com/v3/activity/notifications/#list-notifications-for-the-authenticated-user
 
-  activity list-org-events-for-authenticated-user --token=STRING --org=STRING --username=STRING
+  activity list-org-events-for-authenticated-user --org=STRING --username=STRING --token=STRING
     List organization events for the authenticated user -
     https://developer.github.com/v3/activity/events/#list-organization-events-for-the-authenticated-user
 
@@ -349,31 +349,31 @@ Commands:
     List public events -
     https://developer.github.com/v3/activity/events/#list-public-events
 
-  activity list-public-events-for-repo-network --token=STRING --repo=STRING
+  activity list-public-events-for-repo-network --repo=STRING --token=STRING
     List public events for a network of repositories -
     https://developer.github.com/v3/activity/events/#list-public-events-for-a-network-of-repositories
 
-  activity list-public-events-for-user --token=STRING --username=STRING
+  activity list-public-events-for-user --username=STRING --token=STRING
     List public events for a user -
     https://developer.github.com/v3/activity/events/#list-public-events-for-a-user
 
-  activity list-public-org-events --token=STRING --org=STRING
+  activity list-public-org-events --org=STRING --token=STRING
     List public organization events -
     https://developer.github.com/v3/activity/events/#list-public-organization-events
 
-  activity list-received-events-for-user --token=STRING --username=STRING
+  activity list-received-events-for-user --username=STRING --token=STRING
     List events received by the authenticated user -
     https://developer.github.com/v3/activity/events/#list-events-received-by-the-authenticated-user
 
-  activity list-received-public-events-for-user --token=STRING --username=STRING
+  activity list-received-public-events-for-user --username=STRING --token=STRING
     List public events received by a user -
     https://developer.github.com/v3/activity/events/#list-public-events-received-by-a-user
 
-  activity list-repo-events --token=STRING --repo=STRING
+  activity list-repo-events --repo=STRING --token=STRING
     List repository events -
     https://developer.github.com/v3/activity/events/#list-repository-events
 
-  activity list-repo-notifications-for-authenticated-user --token=STRING --repo=STRING
+  activity list-repo-notifications-for-authenticated-user --repo=STRING --token=STRING
     List repository notifications for the authenticated user -
     https://developer.github.com/v3/activity/notifications/#list-repository-notifications-for-the-authenticated-user
 
@@ -381,15 +381,15 @@ Commands:
     List repositories starred by the authenticated user -
     https://developer.github.com/v3/activity/starring/#list-repositories-starred-by-the-authenticated-user
 
-  activity list-repos-starred-by-user --token=STRING --username=STRING
+  activity list-repos-starred-by-user --username=STRING --token=STRING
     List repositories starred by a user -
     https://developer.github.com/v3/activity/starring/#list-repositories-starred-by-a-user
 
-  activity list-repos-watched-by-user --token=STRING --username=STRING
+  activity list-repos-watched-by-user --username=STRING --token=STRING
     List repositories watched by a user -
     https://developer.github.com/v3/activity/watching/#list-repositories-watched-by-a-user
 
-  activity list-stargazers-for-repo --token=STRING --repo=STRING
+  activity list-stargazers-for-repo --repo=STRING --token=STRING
     List stargazers -
     https://developer.github.com/v3/activity/starring/#list-stargazers
 
@@ -397,7 +397,7 @@ Commands:
     List repositories watched by the authenticated user -
     https://developer.github.com/v3/activity/watching/#list-repositories-watched-by-the-authenticated-user
 
-  activity list-watchers-for-repo --token=STRING --repo=STRING
+  activity list-watchers-for-repo --repo=STRING --token=STRING
     List watchers -
     https://developer.github.com/v3/activity/watching/#list-watchers
 
@@ -405,119 +405,119 @@ Commands:
     Mark notifications as read -
     https://developer.github.com/v3/activity/notifications/#mark-notifications-as-read
 
-  activity mark-repo-notifications-as-read --token=STRING --repo=STRING
+  activity mark-repo-notifications-as-read --repo=STRING --token=STRING
     Mark repository notifications as read -
     https://developer.github.com/v3/activity/notifications/#mark-repository-notifications-as-read
 
-  activity mark-thread-as-read --token=STRING --thread_id=INT-64
+  activity mark-thread-as-read --thread_id=INT-64 --token=STRING
     Mark a thread as read -
     https://developer.github.com/v3/activity/notifications/#mark-a-thread-as-read
 
-  activity set-repo-subscription --token=STRING --repo=STRING
+  activity set-repo-subscription --repo=STRING --token=STRING
     Set a repository subscription -
     https://developer.github.com/v3/activity/watching/#set-a-repository-subscription
 
-  activity set-thread-subscription --token=STRING --thread_id=INT-64
+  activity set-thread-subscription --thread_id=INT-64 --token=STRING
     Set a thread subscription -
     https://developer.github.com/v3/activity/notifications/#set-a-thread-subscription
 
-  activity star-repo-for-authenticated-user --token=STRING --repo=STRING
+  activity star-repo-for-authenticated-user --repo=STRING --token=STRING
     Star a repository for the authenticated user -
     https://developer.github.com/v3/activity/starring/#star-a-repository-for-the-authenticated-user
 
-  activity stop-watching-repo-legacy --token=STRING --repo=STRING
+  activity stop-watching-repo-legacy --repo=STRING --token=STRING
     Stop watching a repository (LEGACY) -
     https://developer.github.com/v3/activity/watching/#stop-watching-a-repository-legacy
 
-  activity unstar-repo-for-authenticated-user --token=STRING --repo=STRING
+  activity unstar-repo-for-authenticated-user --repo=STRING --token=STRING
     Unstar a repository for the authenticated user -
     https://developer.github.com/v3/activity/starring/#unstar-a-repository-for-the-authenticated-user
 
-  activity watch-repo-legacy --token=STRING --repo=STRING
+  activity watch-repo-legacy --repo=STRING --token=STRING
     Watch a repository (LEGACY) -
     https://developer.github.com/v3/activity/watching/#watch-a-repository-legacy
 
-  apps add-repo-to-installation --token=STRING --installation_id=INT-64 --machine-man-preview --repository_id=INT-64
+  apps add-repo-to-installation --installation_id=INT-64 --machine-man-preview --repository_id=INT-64 --token=STRING
     Add repository to installation -
     https://developer.github.com/v3/apps/installations/#add-repository-to-installation
 
-  apps check-authorization --token=STRING --access_token=STRING --client_id=STRING
+  apps check-authorization --access_token=STRING --client_id=STRING --token=STRING
     Check an authorization -
     https://developer.github.com/v3/apps/oauth_applications/#check-an-authorization
 
-  apps check-token --token=STRING --client_id=STRING
+  apps check-token --client_id=STRING --token=STRING
     Check a token -
     https://developer.github.com/v3/apps/oauth_applications/#check-a-token
 
-  apps create-content-attachment --token=STRING --body=STRING --content_reference_id=INT-64 --corsair-preview --title=STRING
+  apps create-content-attachment --body=STRING --content_reference_id=INT-64 --corsair-preview --title=STRING --token=STRING
     Create a content attachment -
     https://developer.github.com/v3/apps/installations/#create-a-content-attachment
 
-  apps create-from-manifest --token=STRING --code=STRING
+  apps create-from-manifest --code=STRING --token=STRING
     Create a GitHub App from a manifest -
     https://developer.github.com/v3/apps/#create-a-github-app-from-a-manifest
 
-  apps delete-authorization --token=STRING --client_id=STRING
+  apps delete-authorization --client_id=STRING --token=STRING
     Delete an app authorization -
     https://developer.github.com/v3/apps/oauth_applications/#delete-an-app-authorization
 
-  apps delete-installation --token=STRING --installation_id=INT-64 --machine-man-preview
+  apps delete-installation --installation_id=INT-64 --machine-man-preview --token=STRING
     Delete an installation -
     https://developer.github.com/v3/apps/#delete-an-installation
 
-  apps delete-token --token=STRING --client_id=STRING
+  apps delete-token --client_id=STRING --token=STRING
     Delete an app token -
     https://developer.github.com/v3/apps/oauth_applications/#delete-an-app-token
 
-  apps get-authenticated --token=STRING --machine-man-preview
+  apps get-authenticated --machine-man-preview --token=STRING
     Get the authenticated GitHub App -
     https://developer.github.com/v3/apps/#get-the-authenticated-github-app
 
-  apps get-by-slug --token=STRING --app_slug=STRING --machine-man-preview
+  apps get-by-slug --app_slug=STRING --machine-man-preview --token=STRING
     Get a single GitHub App -
     https://developer.github.com/v3/apps/#get-a-single-github-app
 
-  apps get-installation --token=STRING --installation_id=INT-64 --machine-man-preview
+  apps get-installation --installation_id=INT-64 --machine-man-preview --token=STRING
     Get an installation -
     https://developer.github.com/v3/apps/#get-an-installation
 
-  apps get-org-installation --token=STRING --machine-man-preview --org=STRING
+  apps get-org-installation --machine-man-preview --org=STRING --token=STRING
     Get an organization installation -
     https://developer.github.com/v3/apps/#get-an-organization-installation
 
-  apps get-repo-installation --token=STRING --machine-man-preview --repo=STRING
+  apps get-repo-installation --machine-man-preview --repo=STRING --token=STRING
     Get a repository installation -
     https://developer.github.com/v3/apps/#get-a-repository-installation
 
-  apps get-subscription-plan-for-account --token=STRING --account_id=INT-64
+  apps get-subscription-plan-for-account --account_id=INT-64 --token=STRING
     Get a subscription plan for an account -
     https://developer.github.com/v3/apps/marketplace/#get-a-subscription-plan-for-an-account
 
-  apps get-subscription-plan-for-account-stubbed --token=STRING --account_id=INT-64
+  apps get-subscription-plan-for-account-stubbed --account_id=INT-64 --token=STRING
     Get a subscription plan for an account (stubbed) -
     https://developer.github.com/v3/apps/marketplace/#get-a-subscription-plan-for-an-account-stubbed
 
-  apps get-user-installation --token=STRING --machine-man-preview --username=STRING
+  apps get-user-installation --machine-man-preview --username=STRING --token=STRING
     Get a user installation -
     https://developer.github.com/v3/apps/#get-a-user-installation
 
-  apps list-accounts-for-plan --token=STRING --plan_id=INT-64
+  apps list-accounts-for-plan --plan_id=INT-64 --token=STRING
     List accounts for a plan -
     https://developer.github.com/v3/apps/marketplace/#list-accounts-for-a-plan
 
-  apps list-accounts-for-plan-stubbed --token=STRING --plan_id=INT-64
+  apps list-accounts-for-plan-stubbed --plan_id=INT-64 --token=STRING
     List accounts for a plan (stubbed) -
     https://developer.github.com/v3/apps/marketplace/#list-accounts-for-a-plan-stubbed
 
-  apps list-installation-repos-for-authenticated-user --token=STRING --installation_id=INT-64 --machine-man-preview
+  apps list-installation-repos-for-authenticated-user --installation_id=INT-64 --machine-man-preview --token=STRING
     List repositories accessible to the user for an installation -
     https://developer.github.com/v3/apps/installations/#list-repositories-accessible-to-the-user-for-an-installation
 
-  apps list-installations --token=STRING --machine-man-preview
+  apps list-installations --machine-man-preview --token=STRING
     List installations -
     https://developer.github.com/v3/apps/#list-installations
 
-  apps list-installations-for-authenticated-user --token=STRING --machine-man-preview
+  apps list-installations-for-authenticated-user --machine-man-preview --token=STRING
     List installations for a user -
     https://developer.github.com/v3/apps/installations/#list-installations-for-a-user
 
@@ -528,7 +528,7 @@ Commands:
     List plans (stubbed) -
     https://developer.github.com/v3/apps/marketplace/#list-plans-stubbed
 
-  apps list-repos --token=STRING --machine-man-preview
+  apps list-repos --machine-man-preview --token=STRING
     List repositories -
     https://developer.github.com/v3/apps/installations/#list-repositories
 
@@ -540,23 +540,23 @@ Commands:
     List subscriptions for the authenticated user (stubbed) -
     https://developer.github.com/v3/apps/marketplace/#list-subscriptions-for-the-authenticated-user-stubbed
 
-  apps remove-repo-from-installation --token=STRING --installation_id=INT-64 --machine-man-preview --repository_id=INT-64
+  apps remove-repo-from-installation --installation_id=INT-64 --machine-man-preview --repository_id=INT-64 --token=STRING
     Remove repository from installation -
     https://developer.github.com/v3/apps/installations/#remove-repository-from-installation
 
-  apps reset-authorization --token=STRING --access_token=STRING --client_id=STRING
+  apps reset-authorization --access_token=STRING --client_id=STRING --token=STRING
     Reset an authorization -
     https://developer.github.com/v3/apps/oauth_applications/#reset-an-authorization
 
-  apps reset-token --token=STRING --client_id=STRING
+  apps reset-token --client_id=STRING --token=STRING
     Reset a token -
     https://developer.github.com/v3/apps/oauth_applications/#reset-a-token
 
-  apps revoke-authorization-for-application --token=STRING --access_token=STRING --client_id=STRING
+  apps revoke-authorization-for-application --access_token=STRING --client_id=STRING --token=STRING
     Revoke an authorization for an application -
     https://developer.github.com/v3/apps/oauth_applications/#revoke-an-authorization-for-an-application
 
-  apps revoke-grant-for-application --token=STRING --access_token=STRING --client_id=STRING
+  apps revoke-grant-for-application --access_token=STRING --client_id=STRING --token=STRING
     Revoke a grant for an application -
     https://developer.github.com/v3/apps/oauth_applications/#revoke-a-grant-for-an-application
 
@@ -564,79 +564,79 @@ Commands:
     Revoke an installation token -
     https://developer.github.com/v3/apps/installations/#revoke-an-installation-token
 
-  checks create-suite --token=STRING --antiope-preview --head_sha=STRING --repo=STRING
+  checks create-suite --antiope-preview --head_sha=STRING --repo=STRING --token=STRING
     Create a check suite -
     https://developer.github.com/v3/checks/suites/#create-a-check-suite
 
-  checks get --token=STRING --antiope-preview --check_run_id=INT-64 --repo=STRING
+  checks get --antiope-preview --check_run_id=INT-64 --repo=STRING --token=STRING
     Get a check run -
     https://developer.github.com/v3/checks/runs/#get-a-check-run
 
-  checks get-suite --token=STRING --antiope-preview --check_suite_id=INT-64 --repo=STRING
+  checks get-suite --antiope-preview --check_suite_id=INT-64 --repo=STRING --token=STRING
     Get a check suite -
     https://developer.github.com/v3/checks/suites/#get-a-check-suite
 
-  checks list-annotations --token=STRING --antiope-preview --check_run_id=INT-64 --repo=STRING
+  checks list-annotations --antiope-preview --check_run_id=INT-64 --repo=STRING --token=STRING
     List check run annotations -
     https://developer.github.com/v3/checks/runs/#list-check-run-annotations
 
-  checks list-for-ref --token=STRING --antiope-preview --ref=STRING --repo=STRING
+  checks list-for-ref --antiope-preview --ref=STRING --repo=STRING --token=STRING
     List check runs for a Git reference -
     https://developer.github.com/v3/checks/runs/#list-check-runs-for-a-git-reference
 
-  checks list-for-suite --token=STRING --antiope-preview --check_suite_id=INT-64 --repo=STRING
+  checks list-for-suite --antiope-preview --check_suite_id=INT-64 --repo=STRING --token=STRING
     List check runs in a check suite -
     https://developer.github.com/v3/checks/runs/#list-check-runs-in-a-check-suite
 
-  checks list-suites-for-ref --token=STRING --antiope-preview --ref=STRING --repo=STRING
+  checks list-suites-for-ref --antiope-preview --ref=STRING --repo=STRING --token=STRING
     List check suites for a Git reference -
     https://developer.github.com/v3/checks/suites/#list-check-suites-for-a-git-reference
 
-  checks rerequest-suite --token=STRING --antiope-preview --check_suite_id=INT-64 --repo=STRING
+  checks rerequest-suite --antiope-preview --check_suite_id=INT-64 --repo=STRING --token=STRING
     Rerequest a check suite -
     https://developer.github.com/v3/checks/suites/#rerequest-a-check-suite
 
-  codes-of-conduct get-all-codes-of-conduct --token=STRING --scarlet-witch-preview
+  codes-of-conduct get-all-codes-of-conduct --scarlet-witch-preview --token=STRING
     List all codes of conduct -
     https://developer.github.com/v3/codes_of_conduct/#list-all-codes-of-conduct
 
-  codes-of-conduct get-conduct-code --token=STRING --key=STRING --scarlet-witch-preview
+  codes-of-conduct get-conduct-code --key=STRING --scarlet-witch-preview --token=STRING
     Get an individual code of conduct -
     https://developer.github.com/v3/codes_of_conduct/#get-an-individual-code-of-conduct
 
-  codes-of-conduct get-for-repo --token=STRING --repo=STRING --scarlet-witch-preview
+  codes-of-conduct get-for-repo --repo=STRING --scarlet-witch-preview --token=STRING
     Get the contents of a repository's code of conduct -
     https://developer.github.com/v3/codes_of_conduct/#get-the-contents-of-a-repositorys-code-of-conduct
 
   emojis get --token=STRING
     Get - https://developer.github.com/v3/emojis/#emojis
 
-  gists check-is-starred --token=STRING --gist_id=STRING
+  gists check-is-starred --gist_id=STRING --token=STRING
     Check if a gist is starred -
     https://developer.github.com/v3/gists/#check-if-a-gist-is-starred
 
-  gists create-comment --token=STRING --body=STRING --gist_id=STRING
+  gists create-comment --body=STRING --gist_id=STRING --token=STRING
     Create a comment -
     https://developer.github.com/v3/gists/comments/#create-a-comment
 
-  gists delete --token=STRING --gist_id=STRING
+  gists delete --gist_id=STRING --token=STRING
     Delete a gist - https://developer.github.com/v3/gists/#delete-a-gist
 
-  gists delete-comment --token=STRING --comment_id=INT-64 --gist_id=STRING
+  gists delete-comment --comment_id=INT-64 --gist_id=STRING --token=STRING
     Delete a comment -
     https://developer.github.com/v3/gists/comments/#delete-a-comment
 
-  gists fork --token=STRING --gist_id=STRING
+  gists fork --gist_id=STRING --token=STRING
     Fork a gist - https://developer.github.com/v3/gists/#fork-a-gist
 
-  gists get --token=STRING --gist_id=STRING
+  gists get --gist_id=STRING --token=STRING
     Get a gist - https://developer.github.com/v3/gists/#get-a-gist
 
-  gists get-comment --token=STRING --comment_id=INT-64 --gist_id=STRING
+  gists get-comment --comment_id=INT-64 --gist_id=STRING --token=STRING
     Get a single comment -
     https://developer.github.com/v3/gists/comments/#get-a-single-comment
 
-  gists get-revision --token=STRING --gist_id=STRING --sha=STRING
+  gists get-revision --gist_id=STRING --sha=STRING --token=STRING
     Get a specific revision of a gist -
     https://developer.github.com/v3/gists/#get-a-specific-revision-of-a-gist
 
@@ -644,18 +644,18 @@ Commands:
     List gists for the authenticated user -
     https://developer.github.com/v3/gists/#list-gists-for-the-authenticated-user
 
-  gists list-comments --token=STRING --gist_id=STRING
+  gists list-comments --gist_id=STRING --token=STRING
     List comments on a gist -
     https://developer.github.com/v3/gists/comments/#list-comments-on-a-gist
 
-  gists list-commits --token=STRING --gist_id=STRING
+  gists list-commits --gist_id=STRING --token=STRING
     List gist commits - https://developer.github.com/v3/gists/#list-gist-commits
 
-  gists list-for-user --token=STRING --username=STRING
+  gists list-for-user --username=STRING --token=STRING
     List gists for a user -
     https://developer.github.com/v3/gists/#list-gists-for-a-user
 
-  gists list-forks --token=STRING --gist_id=STRING
+  gists list-forks --gist_id=STRING --token=STRING
     List gist forks - https://developer.github.com/v3/gists/#list-gist-forks
 
   gists list-public --token=STRING
@@ -665,52 +665,52 @@ Commands:
     List starred gists -
     https://developer.github.com/v3/gists/#list-starred-gists
 
-  gists star --token=STRING --gist_id=STRING
+  gists star --gist_id=STRING --token=STRING
     Star a gist - https://developer.github.com/v3/gists/#star-a-gist
 
-  gists unstar --token=STRING --gist_id=STRING
+  gists unstar --gist_id=STRING --token=STRING
     Unstar a gist - https://developer.github.com/v3/gists/#unstar-a-gist
 
-  gists update-comment --token=STRING --body=STRING --comment_id=INT-64 --gist_id=STRING
+  gists update-comment --body=STRING --comment_id=INT-64 --gist_id=STRING --token=STRING
     Edit a comment -
     https://developer.github.com/v3/gists/comments/#edit-a-comment
 
-  git create-blob --token=STRING --content=STRING --repo=STRING
+  git create-blob --content=STRING --repo=STRING --token=STRING
     Create a blob - https://developer.github.com/v3/git/blobs/#create-a-blob
 
-  git create-ref --token=STRING --ref=STRING --repo=STRING --sha=STRING
+  git create-ref --ref=STRING --repo=STRING --sha=STRING --token=STRING
     Create a reference -
     https://developer.github.com/v3/git/refs/#create-a-reference
 
-  git delete-ref --token=STRING --ref=STRING --repo=STRING
+  git delete-ref --ref=STRING --repo=STRING --token=STRING
     Delete a reference -
     https://developer.github.com/v3/git/refs/#delete-a-reference
 
-  git get-blob --token=STRING --file_sha=STRING --repo=STRING
+  git get-blob --file_sha=STRING --repo=STRING --token=STRING
     Get a blob - https://developer.github.com/v3/git/blobs/#get-a-blob
 
-  git get-commit --token=STRING --commit_sha=STRING --repo=STRING
+  git get-commit --commit_sha=STRING --repo=STRING --token=STRING
     Get a commit - https://developer.github.com/v3/git/commits/#get-a-commit
 
-  git get-ref --token=STRING --ref=STRING --repo=STRING
+  git get-ref --ref=STRING --repo=STRING --token=STRING
     Get a single reference -
     https://developer.github.com/v3/git/refs/#get-a-single-reference
 
-  git get-tag --token=STRING --repo=STRING --tag_sha=STRING
+  git get-tag --repo=STRING --tag_sha=STRING --token=STRING
     Get a tag - https://developer.github.com/v3/git/tags/#get-a-tag
 
-  git get-tree --token=STRING --repo=STRING --tree_sha=STRING
+  git get-tree --repo=STRING --tree_sha=STRING --token=STRING
     Get a tree - https://developer.github.com/v3/git/trees/#get-a-tree
 
-  git list-matching-refs --token=STRING --ref=STRING --repo=STRING
+  git list-matching-refs --ref=STRING --repo=STRING --token=STRING
     List matching references -
     https://developer.github.com/v3/git/refs/#list-matching-references
 
-  git update-ref --token=STRING --ref=STRING --repo=STRING --sha=STRING
+  git update-ref --ref=STRING --repo=STRING --sha=STRING --token=STRING
     Update a reference -
     https://developer.github.com/v3/git/refs/#update-a-reference
 
-  gitignore get-template --token=STRING --name=STRING
+  gitignore get-template --name=STRING --token=STRING
     Get a single template -
     https://developer.github.com/v3/gitignore/#get-a-single-template
 
@@ -718,85 +718,85 @@ Commands:
     Listing available templates -
     https://developer.github.com/v3/gitignore/#listing-available-templates
 
-  interactions add-or-update-restrictions-for-org --token=STRING --limit=STRING --org=STRING --sombra-preview
+  interactions add-or-update-restrictions-for-org --limit=STRING --org=STRING --sombra-preview --token=STRING
     Add or update interaction restrictions for an organization -
     https://developer.github.com/v3/interactions/orgs/#add-or-update-interaction-restrictions-for-an-organization
 
-  interactions add-or-update-restrictions-for-repo --token=STRING --limit=STRING --repo=STRING --sombra-preview
+  interactions add-or-update-restrictions-for-repo --limit=STRING --repo=STRING --sombra-preview --token=STRING
     Add or update interaction restrictions for a repository -
     https://developer.github.com/v3/interactions/repos/#add-or-update-interaction-restrictions-for-a-repository
 
-  interactions get-restrictions-for-org --token=STRING --org=STRING --sombra-preview
+  interactions get-restrictions-for-org --org=STRING --sombra-preview --token=STRING
     Get interaction restrictions for an organization -
     https://developer.github.com/v3/interactions/orgs/#get-interaction-restrictions-for-an-organization
 
-  interactions get-restrictions-for-repo --token=STRING --repo=STRING --sombra-preview
+  interactions get-restrictions-for-repo --repo=STRING --sombra-preview --token=STRING
     Get interaction restrictions for a repository -
     https://developer.github.com/v3/interactions/repos/#get-interaction-restrictions-for-a-repository
 
-  interactions remove-restrictions-for-org --token=STRING --org=STRING --sombra-preview
+  interactions remove-restrictions-for-org --org=STRING --sombra-preview --token=STRING
     Remove interaction restrictions for an organization -
     https://developer.github.com/v3/interactions/orgs/#remove-interaction-restrictions-for-an-organization
 
-  interactions remove-restrictions-for-repo --token=STRING --repo=STRING --sombra-preview
+  interactions remove-restrictions-for-repo --repo=STRING --sombra-preview --token=STRING
     Remove interaction restrictions for a repository -
     https://developer.github.com/v3/interactions/repos/#remove-interaction-restrictions-for-a-repository
 
-  issues add-assignees --token=STRING --issue_number=INT-64 --repo=STRING
+  issues add-assignees --issue_number=INT-64 --repo=STRING --token=STRING
     Add assignees to an issue -
     https://developer.github.com/v3/issues/assignees/#add-assignees-to-an-issue
 
-  issues add-labels --token=STRING --issue_number=INT-64 --labels=LABELS,... --repo=STRING
+  issues add-labels --issue_number=INT-64 --labels=LABELS,... --repo=STRING --token=STRING
     Add labels to an issue -
     https://developer.github.com/v3/issues/labels/#add-labels-to-an-issue
 
-  issues check-assignee --token=STRING --assignee=STRING --repo=STRING
+  issues check-assignee --assignee=STRING --repo=STRING --token=STRING
     Check assignee -
     https://developer.github.com/v3/issues/assignees/#check-assignee
 
-  issues create --token=STRING --repo=STRING --title=STRING
+  issues create --repo=STRING --title=STRING --token=STRING
     Create an issue - https://developer.github.com/v3/issues/#create-an-issue
 
-  issues create-comment --token=STRING --body=STRING --issue_number=INT-64 --repo=STRING
+  issues create-comment --body=STRING --issue_number=INT-64 --repo=STRING --token=STRING
     Create a comment -
     https://developer.github.com/v3/issues/comments/#create-a-comment
 
-  issues create-label --token=STRING --color=STRING --name=STRING --repo=STRING
+  issues create-label --color=STRING --name=STRING --repo=STRING --token=STRING
     Create a label -
     https://developer.github.com/v3/issues/labels/#create-a-label
 
-  issues create-milestone --token=STRING --repo=STRING --title=STRING
+  issues create-milestone --repo=STRING --title=STRING --token=STRING
     Create a milestone -
     https://developer.github.com/v3/issues/milestones/#create-a-milestone
 
-  issues delete-comment --token=STRING --comment_id=INT-64 --repo=STRING
+  issues delete-comment --comment_id=INT-64 --repo=STRING --token=STRING
     Delete a comment -
     https://developer.github.com/v3/issues/comments/#delete-a-comment
 
-  issues delete-label --token=STRING --name=STRING --repo=STRING
+  issues delete-label --name=STRING --repo=STRING --token=STRING
     Delete a label -
     https://developer.github.com/v3/issues/labels/#delete-a-label
 
-  issues delete-milestone --token=STRING --milestone_number=INT-64 --repo=STRING
+  issues delete-milestone --milestone_number=INT-64 --repo=STRING --token=STRING
     Delete a milestone -
     https://developer.github.com/v3/issues/milestones/#delete-a-milestone
 
-  issues get --token=STRING --issue_number=INT-64 --repo=STRING
+  issues get --issue_number=INT-64 --repo=STRING --token=STRING
     Get an issue - https://developer.github.com/v3/issues/#get-an-issue
 
-  issues get-comment --token=STRING --comment_id=INT-64 --repo=STRING
+  issues get-comment --comment_id=INT-64 --repo=STRING --token=STRING
     Get a single comment -
     https://developer.github.com/v3/issues/comments/#get-a-single-comment
 
-  issues get-event --token=STRING --event_id=INT-64 --repo=STRING
+  issues get-event --event_id=INT-64 --repo=STRING --token=STRING
     Get a single event -
     https://developer.github.com/v3/issues/events/#get-a-single-event
 
-  issues get-label --token=STRING --name=STRING --repo=STRING
+  issues get-label --name=STRING --repo=STRING --token=STRING
     Get a single label -
     https://developer.github.com/v3/issues/labels/#get-a-single-label
 
-  issues get-milestone --token=STRING --milestone_number=INT-64 --repo=STRING
+  issues get-milestone --milestone_number=INT-64 --repo=STRING --token=STRING
     Get a single milestone -
     https://developer.github.com/v3/issues/milestones/#get-a-single-milestone
 
@@ -804,27 +804,27 @@ Commands:
     List issues assigned to the authenticated user -
     https://developer.github.com/v3/issues/#list-issues-assigned-to-the-authenticated-user
 
-  issues list-assignees --token=STRING --repo=STRING
+  issues list-assignees --repo=STRING --token=STRING
     List assignees -
     https://developer.github.com/v3/issues/assignees/#list-assignees
 
-  issues list-comments --token=STRING --issue_number=INT-64 --repo=STRING
+  issues list-comments --issue_number=INT-64 --repo=STRING --token=STRING
     List comments on an issue -
     https://developer.github.com/v3/issues/comments/#list-comments-on-an-issue
 
-  issues list-comments-for-repo --token=STRING --repo=STRING
+  issues list-comments-for-repo --repo=STRING --token=STRING
     List comments in a repository -
     https://developer.github.com/v3/issues/comments/#list-comments-in-a-repository
 
-  issues list-events --token=STRING --issue_number=INT-64 --repo=STRING
+  issues list-events --issue_number=INT-64 --repo=STRING --token=STRING
     List events for an issue -
     https://developer.github.com/v3/issues/events/#list-events-for-an-issue
 
-  issues list-events-for-repo --token=STRING --repo=STRING
+  issues list-events-for-repo --repo=STRING --token=STRING
     List events for a repository -
     https://developer.github.com/v3/issues/events/#list-events-for-a-repository
 
-  issues list-events-for-timeline --token=STRING --issue_number=INT-64 --mockingbird-preview --repo=STRING
+  issues list-events-for-timeline --issue_number=INT-64 --mockingbird-preview --repo=STRING --token=STRING
     List events for an issue -
     https://developer.github.com/v3/issues/timeline/#list-events-for-an-issue
 
@@ -832,72 +832,72 @@ Commands:
     List user account issues assigned to the authenticated user -
     https://developer.github.com/v3/issues/#list-user-account-issues-assigned-to-the-authenticated-user
 
-  issues list-for-org --token=STRING --org=STRING
+  issues list-for-org --org=STRING --token=STRING
     List organization issues assigned to the authenticated user -
     https://developer.github.com/v3/issues/#list-organization-issues-assigned-to-the-authenticated-user
 
-  issues list-for-repo --token=STRING --repo=STRING
+  issues list-for-repo --repo=STRING --token=STRING
     List repository issues -
     https://developer.github.com/v3/issues/#list-repository-issues
 
-  issues list-labels-for-milestone --token=STRING --milestone_number=INT-64 --repo=STRING
+  issues list-labels-for-milestone --milestone_number=INT-64 --repo=STRING --token=STRING
     Get labels for every issue in a milestone -
     https://developer.github.com/v3/issues/labels/#get-labels-for-every-issue-in-a-milestone
 
-  issues list-labels-for-repo --token=STRING --repo=STRING
+  issues list-labels-for-repo --repo=STRING --token=STRING
     List all labels for this repository -
     https://developer.github.com/v3/issues/labels/#list-all-labels-for-this-repository
 
-  issues list-labels-on-issue --token=STRING --issue_number=INT-64 --repo=STRING
+  issues list-labels-on-issue --issue_number=INT-64 --repo=STRING --token=STRING
     List labels on an issue -
     https://developer.github.com/v3/issues/labels/#list-labels-on-an-issue
 
-  issues list-milestones-for-repo --token=STRING --repo=STRING
+  issues list-milestones-for-repo --repo=STRING --token=STRING
     List milestones for a repository -
     https://developer.github.com/v3/issues/milestones/#list-milestones-for-a-repository
 
-  issues lock --token=STRING --issue_number=INT-64 --repo=STRING
+  issues lock --issue_number=INT-64 --repo=STRING --token=STRING
     Lock an issue - https://developer.github.com/v3/issues/#lock-an-issue
 
-  issues remove-all-labels --token=STRING --issue_number=INT-64 --repo=STRING
+  issues remove-all-labels --issue_number=INT-64 --repo=STRING --token=STRING
     Remove all labels from an issue -
     https://developer.github.com/v3/issues/labels/#remove-all-labels-from-an-issue
 
-  issues remove-assignees --token=STRING --issue_number=INT-64 --repo=STRING
+  issues remove-assignees --issue_number=INT-64 --repo=STRING --token=STRING
     Remove assignees from an issue -
     https://developer.github.com/v3/issues/assignees/#remove-assignees-from-an-issue
 
-  issues remove-label --token=STRING --issue_number=INT-64 --name=STRING --repo=STRING
+  issues remove-label --issue_number=INT-64 --name=STRING --repo=STRING --token=STRING
     Remove a label from an issue -
     https://developer.github.com/v3/issues/labels/#remove-a-label-from-an-issue
 
-  issues replace-all-labels --token=STRING --issue_number=INT-64 --repo=STRING
+  issues replace-all-labels --issue_number=INT-64 --repo=STRING --token=STRING
     Replace all labels for an issue -
     https://developer.github.com/v3/issues/labels/#replace-all-labels-for-an-issue
 
-  issues unlock --token=STRING --issue_number=INT-64 --repo=STRING
+  issues unlock --issue_number=INT-64 --repo=STRING --token=STRING
     Unlock an issue - https://developer.github.com/v3/issues/#unlock-an-issue
 
-  issues update --token=STRING --issue_number=INT-64 --repo=STRING
+  issues update --issue_number=INT-64 --repo=STRING --token=STRING
     Update an issue - https://developer.github.com/v3/issues/#update-an-issue
 
-  issues update-comment --token=STRING --body=STRING --comment_id=INT-64 --repo=STRING
+  issues update-comment --body=STRING --comment_id=INT-64 --repo=STRING --token=STRING
     Edit a comment -
     https://developer.github.com/v3/issues/comments/#edit-a-comment
 
-  issues update-label --token=STRING --name=STRING --repo=STRING
+  issues update-label --name=STRING --repo=STRING --token=STRING
     Update a label -
     https://developer.github.com/v3/issues/labels/#update-a-label
 
-  issues update-milestone --token=STRING --milestone_number=INT-64 --repo=STRING
+  issues update-milestone --milestone_number=INT-64 --repo=STRING --token=STRING
     Update a milestone -
     https://developer.github.com/v3/issues/milestones/#update-a-milestone
 
-  licenses get --token=STRING --license=STRING
+  licenses get --license=STRING --token=STRING
     Get an individual license -
     https://developer.github.com/v3/licenses/#get-an-individual-license
 
-  licenses get-for-repo --token=STRING --repo=STRING
+  licenses get-for-repo --repo=STRING --token=STRING
     Get the contents of a repository's license -
     https://developer.github.com/v3/licenses/#get-the-contents-of-a-repositorys-license
 
@@ -905,7 +905,7 @@ Commands:
     List commonly used licenses -
     https://developer.github.com/v3/licenses/#list-commonly-used-licenses
 
-  markdown render --token=STRING --text=STRING
+  markdown render --text=STRING --token=STRING
     Render an arbitrary Markdown document -
     https://developer.github.com/v3/markdown/#render-an-arbitrary-markdown-document
 
@@ -916,119 +916,119 @@ Commands:
   meta get --token=STRING
     Get - https://developer.github.com/v3/meta/#meta
 
-  migrations cancel-import --token=STRING --repo=STRING
+  migrations cancel-import --repo=STRING --token=STRING
     Cancel an import -
     https://developer.github.com/v3/migrations/source_imports/#cancel-an-import
 
-  migrations delete-archive-for-authenticated-user --token=STRING --migration_id=INT-64 --wyandotte-preview
+  migrations delete-archive-for-authenticated-user --migration_id=INT-64 --wyandotte-preview --token=STRING
     Delete a user migration archive -
     https://developer.github.com/v3/migrations/users/#delete-a-user-migration-archive
 
-  migrations delete-archive-for-org --token=STRING --migration_id=INT-64 --org=STRING --wyandotte-preview
+  migrations delete-archive-for-org --migration_id=INT-64 --org=STRING --wyandotte-preview --token=STRING
     Delete an organization migration archive -
     https://developer.github.com/v3/migrations/orgs/#delete-an-organization-migration-archive
 
-  migrations download-archive-for-org --token=STRING --migration_id=INT-64 --org=STRING --wyandotte-preview
+  migrations download-archive-for-org --migration_id=INT-64 --org=STRING --wyandotte-preview --token=STRING
     Download an organization migration archive -
     https://developer.github.com/v3/migrations/orgs/#download-an-organization-migration-archive
 
-  migrations get-archive-for-authenticated-user --token=STRING --migration_id=INT-64 --wyandotte-preview
+  migrations get-archive-for-authenticated-user --migration_id=INT-64 --wyandotte-preview --token=STRING
     Download a user migration archive -
     https://developer.github.com/v3/migrations/users/#download-a-user-migration-archive
 
-  migrations get-commit-authors --token=STRING --repo=STRING
+  migrations get-commit-authors --repo=STRING --token=STRING
     Get commit authors -
     https://developer.github.com/v3/migrations/source_imports/#get-commit-authors
 
-  migrations get-import-progress --token=STRING --repo=STRING
+  migrations get-import-progress --repo=STRING --token=STRING
     Get import progress -
     https://developer.github.com/v3/migrations/source_imports/#get-import-progress
 
-  migrations get-large-files --token=STRING --repo=STRING
+  migrations get-large-files --repo=STRING --token=STRING
     Get large files -
     https://developer.github.com/v3/migrations/source_imports/#get-large-files
 
-  migrations get-status-for-authenticated-user --token=STRING --migration_id=INT-64 --wyandotte-preview
+  migrations get-status-for-authenticated-user --migration_id=INT-64 --wyandotte-preview --token=STRING
     Get the status of a user migration -
     https://developer.github.com/v3/migrations/users/#get-the-status-of-a-user-migration
 
-  migrations get-status-for-org --token=STRING --migration_id=INT-64 --org=STRING --wyandotte-preview
+  migrations get-status-for-org --migration_id=INT-64 --org=STRING --wyandotte-preview --token=STRING
     Get the status of an organization migration -
     https://developer.github.com/v3/migrations/orgs/#get-the-status-of-an-organization-migration
 
-  migrations list-for-authenticated-user --token=STRING --wyandotte-preview
+  migrations list-for-authenticated-user --wyandotte-preview --token=STRING
     List user migrations -
     https://developer.github.com/v3/migrations/users/#list-user-migrations
 
-  migrations list-for-org --token=STRING --org=STRING --wyandotte-preview
+  migrations list-for-org --org=STRING --wyandotte-preview --token=STRING
     List organization migrations -
     https://developer.github.com/v3/migrations/orgs/#list-organization-migrations
 
-  migrations list-repos-for-org --token=STRING --migration_id=INT-64 --org=STRING --wyandotte-preview
+  migrations list-repos-for-org --migration_id=INT-64 --org=STRING --wyandotte-preview --token=STRING
     List repositories in an organization migration -
     https://developer.github.com/v3/migrations/orgs/#list-repositories-in-an-organization-migration
 
-  migrations list-repos-for-user --token=STRING --migration_id=INT-64 --wyandotte-preview
+  migrations list-repos-for-user --migration_id=INT-64 --wyandotte-preview --token=STRING
     List repositories for a user migration -
     https://developer.github.com/v3/migrations/users/#list-repositories-for-a-user-migration
 
-  migrations map-commit-author --token=STRING --author_id=INT-64 --repo=STRING
+  migrations map-commit-author --author_id=INT-64 --repo=STRING --token=STRING
     Map a commit author -
     https://developer.github.com/v3/migrations/source_imports/#map-a-commit-author
 
-  migrations set-lfs-preference --token=STRING --repo=STRING --use_lfs=STRING
+  migrations set-lfs-preference --repo=STRING --use_lfs=STRING --token=STRING
     Set Git LFS preference -
     https://developer.github.com/v3/migrations/source_imports/#set-git-lfs-preference
 
-  migrations start-for-authenticated-user --token=STRING --repositories=REPOSITORIES,...
+  migrations start-for-authenticated-user --repositories=REPOSITORIES,... --token=STRING
     Start a user migration -
     https://developer.github.com/v3/migrations/users/#start-a-user-migration
 
-  migrations start-for-org --token=STRING --org=STRING --repositories=REPOSITORIES,...
+  migrations start-for-org --org=STRING --repositories=REPOSITORIES,... --token=STRING
     Start an organization migration -
     https://developer.github.com/v3/migrations/orgs/#start-an-organization-migration
 
-  migrations start-import --token=STRING --repo=STRING --vcs_url=STRING
+  migrations start-import --repo=STRING --vcs_url=STRING --token=STRING
     Start an import -
     https://developer.github.com/v3/migrations/source_imports/#start-an-import
 
-  migrations unlock-repo-for-authenticated-user --token=STRING --migration_id=INT-64 --repo_name=STRING --wyandotte-preview
+  migrations unlock-repo-for-authenticated-user --migration_id=INT-64 --repo_name=STRING --wyandotte-preview --token=STRING
     Unlock a user repository -
     https://developer.github.com/v3/migrations/users/#unlock-a-user-repository
 
-  migrations unlock-repo-for-org --token=STRING --migration_id=INT-64 --org=STRING --repo_name=STRING --wyandotte-preview
+  migrations unlock-repo-for-org --migration_id=INT-64 --org=STRING --repo_name=STRING --wyandotte-preview --token=STRING
     Unlock an organization repository -
     https://developer.github.com/v3/migrations/orgs/#unlock-an-organization-repository
 
-  migrations update-import --token=STRING --repo=STRING
+  migrations update-import --repo=STRING --token=STRING
     Update existing import -
     https://developer.github.com/v3/migrations/source_imports/#update-existing-import
 
-  oauth-authorizations create-authorization --token=STRING --note=STRING
+  oauth-authorizations create-authorization --note=STRING --token=STRING
     Create a new authorization -
     https://developer.github.com/v3/oauth_authorizations/#create-a-new-authorization
 
-  oauth-authorizations delete-authorization --token=STRING --authorization_id=INT-64
+  oauth-authorizations delete-authorization --authorization_id=INT-64 --token=STRING
     Delete an authorization -
     https://developer.github.com/v3/oauth_authorizations/#delete-an-authorization
 
-  oauth-authorizations delete-grant --token=STRING --grant_id=INT-64
+  oauth-authorizations delete-grant --grant_id=INT-64 --token=STRING
     Delete a grant -
     https://developer.github.com/v3/oauth_authorizations/#delete-a-grant
 
-  oauth-authorizations get-authorization --token=STRING --authorization_id=INT-64
+  oauth-authorizations get-authorization --authorization_id=INT-64 --token=STRING
     Get a single authorization -
     https://developer.github.com/v3/oauth_authorizations/#get-a-single-authorization
 
-  oauth-authorizations get-grant --token=STRING --grant_id=INT-64
+  oauth-authorizations get-grant --grant_id=INT-64 --token=STRING
     Get a single grant -
     https://developer.github.com/v3/oauth_authorizations/#get-a-single-grant
 
-  oauth-authorizations get-or-create-authorization-for-app --token=STRING --client_id=STRING --client_secret=STRING
+  oauth-authorizations get-or-create-authorization-for-app --client_id=STRING --client_secret=STRING --token=STRING
     Get-or-create an authorization for a specific app -
     https://developer.github.com/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app
 
-  oauth-authorizations get-or-create-authorization-for-app-and-fingerprint --token=STRING --client_id=STRING --client_secret=STRING --fingerprint=STRING
+  oauth-authorizations get-or-create-authorization-for-app-and-fingerprint --client_id=STRING --client_secret=STRING --fingerprint=STRING --token=STRING
     Get-or-create an authorization for a specific app and fingerprint -
     https://developer.github.com/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint
 
@@ -1040,57 +1040,57 @@ Commands:
     List your grants -
     https://developer.github.com/v3/oauth_authorizations/#list-your-grants
 
-  oauth-authorizations update-authorization --token=STRING --authorization_id=INT-64
+  oauth-authorizations update-authorization --authorization_id=INT-64 --token=STRING
     Update an existing authorization -
     https://developer.github.com/v3/oauth_authorizations/#update-an-existing-authorization
 
-  orgs add-or-update-membership --token=STRING --org=STRING --username=STRING
+  orgs add-or-update-membership --org=STRING --username=STRING --token=STRING
     Add or update organization membership -
     https://developer.github.com/v3/orgs/members/#add-or-update-organization-membership
 
-  orgs block-user --token=STRING --org=STRING --username=STRING
+  orgs block-user --org=STRING --username=STRING --token=STRING
     Block a user - https://developer.github.com/v3/orgs/blocking/#block-a-user
 
-  orgs check-blocked-user --token=STRING --org=STRING --username=STRING
+  orgs check-blocked-user --org=STRING --username=STRING --token=STRING
     Check whether a user is blocked from an organization -
     https://developer.github.com/v3/orgs/blocking/#check-whether-a-user-is-blocked-from-an-organization
 
-  orgs check-membership --token=STRING --org=STRING --username=STRING
+  orgs check-membership --org=STRING --username=STRING --token=STRING
     Check membership -
     https://developer.github.com/v3/orgs/members/#check-membership
 
-  orgs check-public-membership --token=STRING --org=STRING --username=STRING
+  orgs check-public-membership --org=STRING --username=STRING --token=STRING
     Check public membership -
     https://developer.github.com/v3/orgs/members/#check-public-membership
 
-  orgs conceal-membership --token=STRING --org=STRING --username=STRING
+  orgs conceal-membership --org=STRING --username=STRING --token=STRING
     Conceal a user's membership -
     https://developer.github.com/v3/orgs/members/#conceal-a-users-membership
 
-  orgs convert-member-to-outside-collaborator --token=STRING --org=STRING --username=STRING
+  orgs convert-member-to-outside-collaborator --org=STRING --username=STRING --token=STRING
     Convert member to outside collaborator -
     https://developer.github.com/v3/orgs/outside_collaborators/#convert-member-to-outside-collaborator
 
-  orgs create-invitation --token=STRING --org=STRING
+  orgs create-invitation --org=STRING --token=STRING
     Create organization invitation -
     https://developer.github.com/v3/orgs/members/#create-organization-invitation
 
-  orgs delete-hook --token=STRING --hook_id=INT-64 --org=STRING
+  orgs delete-hook --hook_id=INT-64 --org=STRING --token=STRING
     Delete a hook - https://developer.github.com/v3/orgs/hooks/#delete-a-hook
 
-  orgs get --token=STRING --org=STRING
+  orgs get --org=STRING --token=STRING
     Get an organization -
     https://developer.github.com/v3/orgs/#get-an-organization
 
-  orgs get-hook --token=STRING --hook_id=INT-64 --org=STRING
+  orgs get-hook --hook_id=INT-64 --org=STRING --token=STRING
     Get single hook -
     https://developer.github.com/v3/orgs/hooks/#get-single-hook
 
-  orgs get-membership-for-authenticated-user --token=STRING --org=STRING
+  orgs get-membership-for-authenticated-user --org=STRING --token=STRING
     Get your organization membership -
     https://developer.github.com/v3/orgs/members/#get-your-organization-membership
 
-  orgs get-membership-for-user --token=STRING --org=STRING --username=STRING
+  orgs get-membership-for-user --org=STRING --username=STRING --token=STRING
     Get organization membership -
     https://developer.github.com/v3/orgs/members/#get-organization-membership
 
@@ -1098,11 +1098,11 @@ Commands:
     List all organizations -
     https://developer.github.com/v3/orgs/#list-all-organizations
 
-  orgs list-blocked-users --token=STRING --org=STRING
+  orgs list-blocked-users --org=STRING --token=STRING
     List blocked users -
     https://developer.github.com/v3/orgs/blocking/#list-blocked-users
 
-  orgs list-credential-authorizations --token=STRING --org=STRING
+  orgs list-credential-authorizations --org=STRING --token=STRING
     List credential authorizations for an organization -
     https://developer.github.com/v3/orgs/#list-credential-authorizations-for-an-organization
 
@@ -1110,275 +1110,275 @@ Commands:
     List your organizations -
     https://developer.github.com/v3/orgs/#list-your-organizations
 
-  orgs list-for-user --token=STRING --username=STRING
+  orgs list-for-user --username=STRING --token=STRING
     List user organizations -
     https://developer.github.com/v3/orgs/#list-user-organizations
 
-  orgs list-hooks --token=STRING --org=STRING
+  orgs list-hooks --org=STRING --token=STRING
     List hooks - https://developer.github.com/v3/orgs/hooks/#list-hooks
 
-  orgs list-installations --token=STRING --machine-man-preview --org=STRING
+  orgs list-installations --machine-man-preview --org=STRING --token=STRING
     List installations for an organization -
     https://developer.github.com/v3/orgs/#list-installations-for-an-organization
 
-  orgs list-invitation-teams --token=STRING --invitation_id=INT-64 --org=STRING
+  orgs list-invitation-teams --invitation_id=INT-64 --org=STRING --token=STRING
     List organization invitation teams -
     https://developer.github.com/v3/orgs/members/#list-organization-invitation-teams
 
-  orgs list-members --token=STRING --org=STRING
+  orgs list-members --org=STRING --token=STRING
     Members list - https://developer.github.com/v3/orgs/members/#members-list
 
   orgs list-memberships --token=STRING
     List your organization memberships -
     https://developer.github.com/v3/orgs/members/#list-your-organization-memberships
 
-  orgs list-outside-collaborators --token=STRING --org=STRING
+  orgs list-outside-collaborators --org=STRING --token=STRING
     List outside collaborators -
     https://developer.github.com/v3/orgs/outside_collaborators/#list-outside-collaborators
 
-  orgs list-pending-invitations --token=STRING --org=STRING
+  orgs list-pending-invitations --org=STRING --token=STRING
     List pending organization invitations -
     https://developer.github.com/v3/orgs/members/#list-pending-organization-invitations
 
-  orgs list-public-members --token=STRING --org=STRING
+  orgs list-public-members --org=STRING --token=STRING
     Public members list -
     https://developer.github.com/v3/orgs/members/#public-members-list
 
-  orgs ping-hook --token=STRING --hook_id=INT-64 --org=STRING
+  orgs ping-hook --hook_id=INT-64 --org=STRING --token=STRING
     Ping a hook - https://developer.github.com/v3/orgs/hooks/#ping-a-hook
 
-  orgs publicize-membership --token=STRING --org=STRING --username=STRING
+  orgs publicize-membership --org=STRING --username=STRING --token=STRING
     Publicize a user's membership -
     https://developer.github.com/v3/orgs/members/#publicize-a-users-membership
 
-  orgs remove-credential-authorization --token=STRING --credential_id=INT-64 --org=STRING
+  orgs remove-credential-authorization --credential_id=INT-64 --org=STRING --token=STRING
     Remove a credential authorization for an organization -
     https://developer.github.com/v3/orgs/#remove-a-credential-authorization-for-an-organization
 
-  orgs remove-member --token=STRING --org=STRING --username=STRING
+  orgs remove-member --org=STRING --username=STRING --token=STRING
     Remove a member -
     https://developer.github.com/v3/orgs/members/#remove-a-member
 
-  orgs remove-membership --token=STRING --org=STRING --username=STRING
+  orgs remove-membership --org=STRING --username=STRING --token=STRING
     Remove organization membership -
     https://developer.github.com/v3/orgs/members/#remove-organization-membership
 
-  orgs remove-outside-collaborator --token=STRING --org=STRING --username=STRING
+  orgs remove-outside-collaborator --org=STRING --username=STRING --token=STRING
     Remove outside collaborator -
     https://developer.github.com/v3/orgs/outside_collaborators/#remove-outside-collaborator
 
-  orgs unblock-user --token=STRING --org=STRING --username=STRING
+  orgs unblock-user --org=STRING --username=STRING --token=STRING
     Unblock a user -
     https://developer.github.com/v3/orgs/blocking/#unblock-a-user
 
-  orgs update --token=STRING --org=STRING
+  orgs update --org=STRING --token=STRING
     Edit an organization -
     https://developer.github.com/v3/orgs/#edit-an-organization
 
-  orgs update-membership --token=STRING --org=STRING --state=STRING
+  orgs update-membership --org=STRING --state=STRING --token=STRING
     Edit your organization membership -
     https://developer.github.com/v3/orgs/members/#edit-your-organization-membership
 
-  projects add-collaborator --token=STRING --inertia-preview --project_id=INT-64 --username=STRING
+  projects add-collaborator --inertia-preview --project_id=INT-64 --username=STRING --token=STRING
     Add user as a collaborator -
     https://developer.github.com/v3/projects/collaborators/#add-user-as-a-collaborator
 
-  projects create-card --token=STRING --column_id=INT-64 --inertia-preview
+  projects create-card --column_id=INT-64 --inertia-preview --token=STRING
     Create a project card -
     https://developer.github.com/v3/projects/cards/#create-a-project-card
 
-  projects create-column --token=STRING --inertia-preview --name=STRING --project_id=INT-64
+  projects create-column --inertia-preview --name=STRING --project_id=INT-64 --token=STRING
     Create a project column -
     https://developer.github.com/v3/projects/columns/#create-a-project-column
 
-  projects create-for-authenticated-user --token=STRING --inertia-preview --name=STRING
+  projects create-for-authenticated-user --inertia-preview --name=STRING --token=STRING
     Create a user project -
     https://developer.github.com/v3/projects/#create-a-user-project
 
-  projects create-for-org --token=STRING --inertia-preview --name=STRING --org=STRING
+  projects create-for-org --inertia-preview --name=STRING --org=STRING --token=STRING
     Create an organization project -
     https://developer.github.com/v3/projects/#create-an-organization-project
 
-  projects create-for-repo --token=STRING --inertia-preview --name=STRING --repo=STRING
+  projects create-for-repo --inertia-preview --name=STRING --repo=STRING --token=STRING
     Create a repository project -
     https://developer.github.com/v3/projects/#create-a-repository-project
 
-  projects delete --token=STRING --inertia-preview --project_id=INT-64
+  projects delete --inertia-preview --project_id=INT-64 --token=STRING
     Delete a project -
     https://developer.github.com/v3/projects/#delete-a-project
 
-  projects delete-card --token=STRING --card_id=INT-64 --inertia-preview
+  projects delete-card --card_id=INT-64 --inertia-preview --token=STRING
     Delete a project card -
     https://developer.github.com/v3/projects/cards/#delete-a-project-card
 
-  projects delete-column --token=STRING --column_id=INT-64 --inertia-preview
+  projects delete-column --column_id=INT-64 --inertia-preview --token=STRING
     Delete a project column -
     https://developer.github.com/v3/projects/columns/#delete-a-project-column
 
-  projects get --token=STRING --inertia-preview --project_id=INT-64
+  projects get --inertia-preview --project_id=INT-64 --token=STRING
     Get a project - https://developer.github.com/v3/projects/#get-a-project
 
-  projects get-card --token=STRING --card_id=INT-64 --inertia-preview
+  projects get-card --card_id=INT-64 --inertia-preview --token=STRING
     Get a project card -
     https://developer.github.com/v3/projects/cards/#get-a-project-card
 
-  projects get-column --token=STRING --column_id=INT-64 --inertia-preview
+  projects get-column --column_id=INT-64 --inertia-preview --token=STRING
     Get a project column -
     https://developer.github.com/v3/projects/columns/#get-a-project-column
 
-  projects list-cards --token=STRING --column_id=INT-64 --inertia-preview
+  projects list-cards --column_id=INT-64 --inertia-preview --token=STRING
     List project cards -
     https://developer.github.com/v3/projects/cards/#list-project-cards
 
-  projects list-collaborators --token=STRING --inertia-preview --project_id=INT-64
+  projects list-collaborators --inertia-preview --project_id=INT-64 --token=STRING
     List collaborators -
     https://developer.github.com/v3/projects/collaborators/#list-collaborators
 
-  projects list-columns --token=STRING --inertia-preview --project_id=INT-64
+  projects list-columns --inertia-preview --project_id=INT-64 --token=STRING
     List project columns -
     https://developer.github.com/v3/projects/columns/#list-project-columns
 
-  projects list-for-org --token=STRING --inertia-preview --org=STRING
+  projects list-for-org --inertia-preview --org=STRING --token=STRING
     List organization projects -
     https://developer.github.com/v3/projects/#list-organization-projects
 
-  projects list-for-repo --token=STRING --inertia-preview --repo=STRING
+  projects list-for-repo --inertia-preview --repo=STRING --token=STRING
     List repository projects -
     https://developer.github.com/v3/projects/#list-repository-projects
 
-  projects list-for-user --token=STRING --inertia-preview --username=STRING
+  projects list-for-user --inertia-preview --username=STRING --token=STRING
     List user projects -
     https://developer.github.com/v3/projects/#list-user-projects
 
-  projects move-card --token=STRING --card_id=INT-64 --inertia-preview --position=STRING
+  projects move-card --card_id=INT-64 --inertia-preview --position=STRING --token=STRING
     Move a project card -
     https://developer.github.com/v3/projects/cards/#move-a-project-card
 
-  projects move-column --token=STRING --column_id=INT-64 --inertia-preview --position=STRING
+  projects move-column --column_id=INT-64 --inertia-preview --position=STRING --token=STRING
     Move a project column -
     https://developer.github.com/v3/projects/columns/#move-a-project-column
 
-  projects remove-collaborator --token=STRING --inertia-preview --project_id=INT-64 --username=STRING
+  projects remove-collaborator --inertia-preview --project_id=INT-64 --username=STRING --token=STRING
     Remove user as a collaborator -
     https://developer.github.com/v3/projects/collaborators/#remove-user-as-a-collaborator
 
-  projects review-user-permission-level --token=STRING --inertia-preview --project_id=INT-64 --username=STRING
+  projects review-user-permission-level --inertia-preview --project_id=INT-64 --username=STRING --token=STRING
     Review a user's permission level -
     https://developer.github.com/v3/projects/collaborators/#review-a-users-permission-level
 
-  projects update --token=STRING --inertia-preview --project_id=INT-64
+  projects update --inertia-preview --project_id=INT-64 --token=STRING
     Update a project -
     https://developer.github.com/v3/projects/#update-a-project
 
-  projects update-card --token=STRING --card_id=INT-64 --inertia-preview
+  projects update-card --card_id=INT-64 --inertia-preview --token=STRING
     Update a project card -
     https://developer.github.com/v3/projects/cards/#update-a-project-card
 
-  projects update-column --token=STRING --column_id=INT-64 --inertia-preview --name=STRING
+  projects update-column --column_id=INT-64 --inertia-preview --name=STRING --token=STRING
     Update a project column -
     https://developer.github.com/v3/projects/columns/#update-a-project-column
 
-  pulls check-if-merged --token=STRING --pull_number=INT-64 --repo=STRING
+  pulls check-if-merged --pull_number=INT-64 --repo=STRING --token=STRING
     Get if a pull request has been merged -
     https://developer.github.com/v3/pulls/#get-if-a-pull-request-has-been-merged
 
-  pulls create --token=STRING --base=STRING --head=STRING --repo=STRING --title=STRING
+  pulls create --base=STRING --head=STRING --repo=STRING --title=STRING --token=STRING
     Create a pull request -
     https://developer.github.com/v3/pulls/#create-a-pull-request
 
-  pulls create-comment --token=STRING --body=STRING --commit_id=STRING --path=STRING --pull_number=INT-64 --repo=STRING
+  pulls create-comment --body=STRING --commit_id=STRING --path=STRING --pull_number=INT-64 --repo=STRING --token=STRING
     Create a comment -
     https://developer.github.com/v3/pulls/comments/#create-a-comment
 
-  pulls create-review-comment-reply --token=STRING --body=STRING --comment_id=INT-64 --pull_number=INT-64 --repo=STRING
+  pulls create-review-comment-reply --body=STRING --comment_id=INT-64 --pull_number=INT-64 --repo=STRING --token=STRING
     Create a review comment reply -
     https://developer.github.com/v3/pulls/comments/#create-a-review-comment-reply
 
-  pulls create-review-request --token=STRING --pull_number=INT-64 --repo=STRING
+  pulls create-review-request --pull_number=INT-64 --repo=STRING --token=STRING
     Create a review request -
     https://developer.github.com/v3/pulls/review_requests/#create-a-review-request
 
-  pulls delete-comment --token=STRING --comment_id=INT-64 --repo=STRING
+  pulls delete-comment --comment_id=INT-64 --repo=STRING --token=STRING
     Delete a comment -
     https://developer.github.com/v3/pulls/comments/#delete-a-comment
 
-  pulls delete-pending-review --token=STRING --pull_number=INT-64 --repo=STRING --review_id=INT-64
+  pulls delete-pending-review --pull_number=INT-64 --repo=STRING --review_id=INT-64 --token=STRING
     Delete a pending review -
     https://developer.github.com/v3/pulls/reviews/#delete-a-pending-review
 
-  pulls delete-review-request --token=STRING --pull_number=INT-64 --repo=STRING
+  pulls delete-review-request --pull_number=INT-64 --repo=STRING --token=STRING
     Delete a review request -
     https://developer.github.com/v3/pulls/review_requests/#delete-a-review-request
 
-  pulls dismiss-review --token=STRING --message=STRING --pull_number=INT-64 --repo=STRING --review_id=INT-64
+  pulls dismiss-review --message=STRING --pull_number=INT-64 --repo=STRING --review_id=INT-64 --token=STRING
     Dismiss a pull request review -
     https://developer.github.com/v3/pulls/reviews/#dismiss-a-pull-request-review
 
-  pulls get --token=STRING --pull_number=INT-64 --repo=STRING
+  pulls get --pull_number=INT-64 --repo=STRING --token=STRING
     Get a single pull request -
     https://developer.github.com/v3/pulls/#get-a-single-pull-request
 
-  pulls get-comment --token=STRING --comment_id=INT-64 --repo=STRING
+  pulls get-comment --comment_id=INT-64 --repo=STRING --token=STRING
     Get a single comment -
     https://developer.github.com/v3/pulls/comments/#get-a-single-comment
 
-  pulls get-comments-for-review --token=STRING --pull_number=INT-64 --repo=STRING --review_id=INT-64
+  pulls get-comments-for-review --pull_number=INT-64 --repo=STRING --review_id=INT-64 --token=STRING
     Get comments for a single review -
     https://developer.github.com/v3/pulls/reviews/#get-comments-for-a-single-review
 
-  pulls get-review --token=STRING --pull_number=INT-64 --repo=STRING --review_id=INT-64
+  pulls get-review --pull_number=INT-64 --repo=STRING --review_id=INT-64 --token=STRING
     Get a single review -
     https://developer.github.com/v3/pulls/reviews/#get-a-single-review
 
-  pulls list --token=STRING --repo=STRING
+  pulls list --repo=STRING --token=STRING
     List pull requests -
     https://developer.github.com/v3/pulls/#list-pull-requests
 
-  pulls list-comments --token=STRING --pull_number=INT-64 --repo=STRING
+  pulls list-comments --pull_number=INT-64 --repo=STRING --token=STRING
     List comments on a pull request -
     https://developer.github.com/v3/pulls/comments/#list-comments-on-a-pull-request
 
-  pulls list-comments-for-repo --token=STRING --repo=STRING
+  pulls list-comments-for-repo --repo=STRING --token=STRING
     List comments in a repository -
     https://developer.github.com/v3/pulls/comments/#list-comments-in-a-repository
 
-  pulls list-commits --token=STRING --pull_number=INT-64 --repo=STRING
+  pulls list-commits --pull_number=INT-64 --repo=STRING --token=STRING
     List commits on a pull request -
     https://developer.github.com/v3/pulls/#list-commits-on-a-pull-request
 
-  pulls list-files --token=STRING --pull_number=INT-64 --repo=STRING
+  pulls list-files --pull_number=INT-64 --repo=STRING --token=STRING
     List pull requests files -
     https://developer.github.com/v3/pulls/#list-pull-requests-files
 
-  pulls list-review-requests --token=STRING --pull_number=INT-64 --repo=STRING
+  pulls list-review-requests --pull_number=INT-64 --repo=STRING --token=STRING
     List review requests -
     https://developer.github.com/v3/pulls/review_requests/#list-review-requests
 
-  pulls list-reviews --token=STRING --pull_number=INT-64 --repo=STRING
+  pulls list-reviews --pull_number=INT-64 --repo=STRING --token=STRING
     List reviews on a pull request -
     https://developer.github.com/v3/pulls/reviews/#list-reviews-on-a-pull-request
 
-  pulls merge --token=STRING --pull_number=INT-64 --repo=STRING
+  pulls merge --pull_number=INT-64 --repo=STRING --token=STRING
     Merge a pull request (Merge Button) -
     https://developer.github.com/v3/pulls/#merge-a-pull-request-merge-button
 
-  pulls submit-review --token=STRING --event=STRING --pull_number=INT-64 --repo=STRING --review_id=INT-64
+  pulls submit-review --event=STRING --pull_number=INT-64 --repo=STRING --review_id=INT-64 --token=STRING
     Submit a pull request review -
     https://developer.github.com/v3/pulls/reviews/#submit-a-pull-request-review
 
-  pulls update --token=STRING --pull_number=INT-64 --repo=STRING
+  pulls update --pull_number=INT-64 --repo=STRING --token=STRING
     Update a pull request -
     https://developer.github.com/v3/pulls/#update-a-pull-request
 
-  pulls update-branch --token=STRING --lydian-preview --pull_number=INT-64 --repo=STRING
+  pulls update-branch --lydian-preview --pull_number=INT-64 --repo=STRING --token=STRING
     Update a pull request branch -
     https://developer.github.com/v3/pulls/#update-a-pull-request-branch
 
-  pulls update-comment --token=STRING --body=STRING --comment_id=INT-64 --repo=STRING
+  pulls update-comment --body=STRING --comment_id=INT-64 --repo=STRING --token=STRING
     Edit a comment -
     https://developer.github.com/v3/pulls/comments/#edit-a-comment
 
-  pulls update-review --token=STRING --body=STRING --pull_number=INT-64 --repo=STRING --review_id=INT-64
+  pulls update-review --body=STRING --pull_number=INT-64 --repo=STRING --review_id=INT-64 --token=STRING
     Update a pull request review -
     https://developer.github.com/v3/pulls/reviews/#update-a-pull-request-review
 
@@ -1386,434 +1386,434 @@ Commands:
     Get your current rate limit status -
     https://developer.github.com/v3/rate_limit/#get-your-current-rate-limit-status
 
-  reactions create-for-commit-comment --token=STRING --comment_id=INT-64 --content=STRING --repo=STRING --squirrel-girl-preview
+  reactions create-for-commit-comment --comment_id=INT-64 --content=STRING --repo=STRING --squirrel-girl-preview --token=STRING
     Create reaction for a commit comment -
     https://developer.github.com/v3/reactions/#create-reaction-for-a-commit-comment
 
-  reactions create-for-issue --token=STRING --content=STRING --issue_number=INT-64 --repo=STRING --squirrel-girl-preview
+  reactions create-for-issue --content=STRING --issue_number=INT-64 --repo=STRING --squirrel-girl-preview --token=STRING
     Create reaction for an issue -
     https://developer.github.com/v3/reactions/#create-reaction-for-an-issue
 
-  reactions create-for-issue-comment --token=STRING --comment_id=INT-64 --content=STRING --repo=STRING --squirrel-girl-preview
+  reactions create-for-issue-comment --comment_id=INT-64 --content=STRING --repo=STRING --squirrel-girl-preview --token=STRING
     Create reaction for an issue comment -
     https://developer.github.com/v3/reactions/#create-reaction-for-an-issue-comment
 
-  reactions create-for-pull-request-review-comment --token=STRING --comment_id=INT-64 --content=STRING --repo=STRING --squirrel-girl-preview
+  reactions create-for-pull-request-review-comment --comment_id=INT-64 --content=STRING --repo=STRING --squirrel-girl-preview --token=STRING
     Create reaction for a pull request review comment -
     https://developer.github.com/v3/reactions/#create-reaction-for-a-pull-request-review-comment
 
-  reactions create-for-team-discussion-comment-in-org --token=STRING --comment_number=INT-64 --content=STRING --discussion_number=INT-64 --org=STRING --squirrel-girl-preview --team_slug=STRING
+  reactions create-for-team-discussion-comment-in-org --comment_number=INT-64 --content=STRING --discussion_number=INT-64 --org=STRING --squirrel-girl-preview --team_slug=STRING --token=STRING
     Create reaction for a team discussion comment -
     https://developer.github.com/v3/reactions/#create-reaction-for-a-team-discussion-comment
 
-  reactions create-for-team-discussion-comment-legacy --token=STRING --comment_number=INT-64 --content=STRING --discussion_number=INT-64 --squirrel-girl-preview --team_id=INT-64
+  reactions create-for-team-discussion-comment-legacy --comment_number=INT-64 --content=STRING --discussion_number=INT-64 --squirrel-girl-preview --team_id=INT-64 --token=STRING
     Create reaction for a team discussion comment (Legacy) -
     https://developer.github.com/v3/reactions/#create-reaction-for-a-team-discussion-comment-legacy
 
-  reactions create-for-team-discussion-in-org --token=STRING --content=STRING --discussion_number=INT-64 --org=STRING --squirrel-girl-preview --team_slug=STRING
+  reactions create-for-team-discussion-in-org --content=STRING --discussion_number=INT-64 --org=STRING --squirrel-girl-preview --team_slug=STRING --token=STRING
     Create reaction for a team discussion -
     https://developer.github.com/v3/reactions/#create-reaction-for-a-team-discussion
 
-  reactions create-for-team-discussion-legacy --token=STRING --content=STRING --discussion_number=INT-64 --squirrel-girl-preview --team_id=INT-64
+  reactions create-for-team-discussion-legacy --content=STRING --discussion_number=INT-64 --squirrel-girl-preview --team_id=INT-64 --token=STRING
     Create reaction for a team discussion (Legacy) -
     https://developer.github.com/v3/reactions/#create-reaction-for-a-team-discussion-legacy
 
-  reactions delete-for-commit-comment --token=STRING --comment_id=INT-64 --reaction_id=INT-64 --repo=STRING --squirrel-girl-preview
+  reactions delete-for-commit-comment --comment_id=INT-64 --reaction_id=INT-64 --repo=STRING --squirrel-girl-preview --token=STRING
     Delete a commit comment reaction -
     https://developer.github.com/v3/reactions/#delete-a-commit-comment-reaction
 
-  reactions delete-for-issue --token=STRING --issue_number=INT-64 --reaction_id=INT-64 --repo=STRING --squirrel-girl-preview
+  reactions delete-for-issue --issue_number=INT-64 --reaction_id=INT-64 --repo=STRING --squirrel-girl-preview --token=STRING
     Delete an issue reaction -
     https://developer.github.com/v3/reactions/#delete-an-issue-reaction
 
-  reactions delete-for-issue-comment --token=STRING --comment_id=INT-64 --reaction_id=INT-64 --repo=STRING --squirrel-girl-preview
+  reactions delete-for-issue-comment --comment_id=INT-64 --reaction_id=INT-64 --repo=STRING --squirrel-girl-preview --token=STRING
     Delete an issue comment reaction -
     https://developer.github.com/v3/reactions/#delete-an-issue-comment-reaction
 
-  reactions delete-for-pull-request-comment --token=STRING --comment_id=INT-64 --reaction_id=INT-64 --repo=STRING --squirrel-girl-preview
+  reactions delete-for-pull-request-comment --comment_id=INT-64 --reaction_id=INT-64 --repo=STRING --squirrel-girl-preview --token=STRING
     Delete a pull request comment reaction -
     https://developer.github.com/v3/reactions/#delete-a-pull-request-comment-reaction
 
-  reactions delete-for-team-discussion --token=STRING --discussion_number=INT-64 --org=STRING --reaction_id=INT-64 --squirrel-girl-preview --team_slug=STRING
+  reactions delete-for-team-discussion --discussion_number=INT-64 --org=STRING --reaction_id=INT-64 --squirrel-girl-preview --team_slug=STRING --token=STRING
     Delete team discussion reaction -
     https://developer.github.com/v3/reactions/#delete-team-discussion-reaction
 
-  reactions delete-for-team-discussion-comment --token=STRING --comment_number=INT-64 --discussion_number=INT-64 --org=STRING --reaction_id=INT-64 --squirrel-girl-preview --team_slug=STRING
+  reactions delete-for-team-discussion-comment --comment_number=INT-64 --discussion_number=INT-64 --org=STRING --reaction_id=INT-64 --squirrel-girl-preview --team_slug=STRING --token=STRING
     Delete team discussion comment reaction -
     https://developer.github.com/v3/reactions/#delete-team-discussion-comment-reaction
 
-  reactions delete-legacy --token=STRING --reaction_id=INT-64 --squirrel-girl-preview
+  reactions delete-legacy --reaction_id=INT-64 --squirrel-girl-preview --token=STRING
     Delete a reaction (Legacy) -
     https://developer.github.com/v3/reactions/#delete-a-reaction-legacy
 
-  reactions list-for-commit-comment --token=STRING --comment_id=INT-64 --repo=STRING --squirrel-girl-preview
+  reactions list-for-commit-comment --comment_id=INT-64 --repo=STRING --squirrel-girl-preview --token=STRING
     List reactions for a commit comment -
     https://developer.github.com/v3/reactions/#list-reactions-for-a-commit-comment
 
-  reactions list-for-issue --token=STRING --issue_number=INT-64 --repo=STRING --squirrel-girl-preview
+  reactions list-for-issue --issue_number=INT-64 --repo=STRING --squirrel-girl-preview --token=STRING
     List reactions for an issue -
     https://developer.github.com/v3/reactions/#list-reactions-for-an-issue
 
-  reactions list-for-issue-comment --token=STRING --comment_id=INT-64 --repo=STRING --squirrel-girl-preview
+  reactions list-for-issue-comment --comment_id=INT-64 --repo=STRING --squirrel-girl-preview --token=STRING
     List reactions for an issue comment -
     https://developer.github.com/v3/reactions/#list-reactions-for-an-issue-comment
 
-  reactions list-for-pull-request-review-comment --token=STRING --comment_id=INT-64 --repo=STRING --squirrel-girl-preview
+  reactions list-for-pull-request-review-comment --comment_id=INT-64 --repo=STRING --squirrel-girl-preview --token=STRING
     List reactions for a pull request review comment -
     https://developer.github.com/v3/reactions/#list-reactions-for-a-pull-request-review-comment
 
-  reactions list-for-team-discussion-comment-in-org --token=STRING --comment_number=INT-64 --discussion_number=INT-64 --org=STRING --squirrel-girl-preview --team_slug=STRING
+  reactions list-for-team-discussion-comment-in-org --comment_number=INT-64 --discussion_number=INT-64 --org=STRING --squirrel-girl-preview --team_slug=STRING --token=STRING
     List reactions for a team discussion comment -
     https://developer.github.com/v3/reactions/#list-reactions-for-a-team-discussion-comment
 
-  reactions list-for-team-discussion-comment-legacy --token=STRING --comment_number=INT-64 --discussion_number=INT-64 --squirrel-girl-preview --team_id=INT-64
+  reactions list-for-team-discussion-comment-legacy --comment_number=INT-64 --discussion_number=INT-64 --squirrel-girl-preview --team_id=INT-64 --token=STRING
     List reactions for a team discussion comment (Legacy) -
     https://developer.github.com/v3/reactions/#list-reactions-for-a-team-discussion-comment-legacy
 
-  reactions list-for-team-discussion-in-org --token=STRING --discussion_number=INT-64 --org=STRING --squirrel-girl-preview --team_slug=STRING
+  reactions list-for-team-discussion-in-org --discussion_number=INT-64 --org=STRING --squirrel-girl-preview --team_slug=STRING --token=STRING
     List reactions for a team discussion -
     https://developer.github.com/v3/reactions/#list-reactions-for-a-team-discussion
 
-  reactions list-for-team-discussion-legacy --token=STRING --discussion_number=INT-64 --squirrel-girl-preview --team_id=INT-64
+  reactions list-for-team-discussion-legacy --discussion_number=INT-64 --squirrel-girl-preview --team_id=INT-64 --token=STRING
     List reactions for a team discussion (Legacy) -
     https://developer.github.com/v3/reactions/#list-reactions-for-a-team-discussion-legacy
 
-  repos accept-invitation --token=STRING --invitation_id=INT-64
+  repos accept-invitation --invitation_id=INT-64 --token=STRING
     Accept a repository invitation -
     https://developer.github.com/v3/repos/invitations/#accept-a-repository-invitation
 
-  repos add-collaborator --token=STRING --repo=STRING --username=STRING
+  repos add-collaborator --repo=STRING --username=STRING --token=STRING
     Add user as a collaborator -
     https://developer.github.com/v3/repos/collaborators/#add-user-as-a-collaborator
 
-  repos add-deploy-key --token=STRING --key=STRING --repo=STRING
+  repos add-deploy-key --key=STRING --repo=STRING --token=STRING
     Add a new deploy key -
     https://developer.github.com/v3/repos/keys/#add-a-new-deploy-key
 
-  repos add-protected-branch-admin-enforcement --token=STRING --branch=STRING --repo=STRING
+  repos add-protected-branch-admin-enforcement --branch=STRING --repo=STRING --token=STRING
     Add admin enforcement of protected branch -
     https://developer.github.com/v3/repos/branches/#add-admin-enforcement-of-protected-branch
 
-  repos add-protected-branch-app-restrictions --token=STRING --branch=STRING --repo=STRING
+  repos add-protected-branch-app-restrictions --branch=STRING --repo=STRING --token=STRING
     Add app restrictions of protected branch -
     https://developer.github.com/v3/repos/branches/#add-app-restrictions-of-protected-branch
 
-  repos add-protected-branch-required-signatures --token=STRING --branch=STRING --repo=STRING --zzzax-preview
+  repos add-protected-branch-required-signatures --branch=STRING --repo=STRING --zzzax-preview --token=STRING
     Add required signatures of protected branch -
     https://developer.github.com/v3/repos/branches/#add-required-signatures-of-protected-branch
 
-  repos add-protected-branch-required-status-checks-contexts --token=STRING --branch=STRING --repo=STRING
+  repos add-protected-branch-required-status-checks-contexts --branch=STRING --repo=STRING --token=STRING
     Add required status checks contexts of protected branch -
     https://developer.github.com/v3/repos/branches/#add-required-status-checks-contexts-of-protected-branch
 
-  repos add-protected-branch-team-restrictions --token=STRING --branch=STRING --repo=STRING
+  repos add-protected-branch-team-restrictions --branch=STRING --repo=STRING --token=STRING
     Add team restrictions of protected branch -
     https://developer.github.com/v3/repos/branches/#add-team-restrictions-of-protected-branch
 
-  repos add-protected-branch-user-restrictions --token=STRING --branch=STRING --repo=STRING
+  repos add-protected-branch-user-restrictions --branch=STRING --repo=STRING --token=STRING
     Add user restrictions of protected branch -
     https://developer.github.com/v3/repos/branches/#add-user-restrictions-of-protected-branch
 
-  repos check-collaborator --token=STRING --repo=STRING --username=STRING
+  repos check-collaborator --repo=STRING --username=STRING --token=STRING
     Check if a user is a collaborator -
     https://developer.github.com/v3/repos/collaborators/#check-if-a-user-is-a-collaborator
 
-  repos check-vulnerability-alerts --token=STRING --dorian-preview --repo=STRING
+  repos check-vulnerability-alerts --dorian-preview --repo=STRING --token=STRING
     Check if vulnerability alerts are enabled for a repository -
     https://developer.github.com/v3/repos/#check-if-vulnerability-alerts-are-enabled-for-a-repository
 
-  repos compare-commits --token=STRING --base=STRING --head=STRING --repo=STRING
+  repos compare-commits --base=STRING --head=STRING --repo=STRING --token=STRING
     Compare two commits -
     https://developer.github.com/v3/repos/commits/#compare-two-commits
 
-  repos create-commit-comment --token=STRING --body=STRING --commit_sha=STRING --repo=STRING
+  repos create-commit-comment --body=STRING --commit_sha=STRING --repo=STRING --token=STRING
     Create a commit comment -
     https://developer.github.com/v3/repos/comments/#create-a-commit-comment
 
-  repos create-deployment --token=STRING --ref=STRING --repo=STRING
+  repos create-deployment --ref=STRING --repo=STRING --token=STRING
     Create a deployment -
     https://developer.github.com/v3/repos/deployments/#create-a-deployment
 
-  repos create-deployment-status --token=STRING --deployment_id=INT-64 --repo=STRING --state=STRING
+  repos create-deployment-status --deployment_id=INT-64 --repo=STRING --state=STRING --token=STRING
     Create a deployment status -
     https://developer.github.com/v3/repos/deployments/#create-a-deployment-status
 
-  repos create-for-authenticated-user --token=STRING --name=STRING
+  repos create-for-authenticated-user --name=STRING --token=STRING
     Create a repository for the authenticated user -
     https://developer.github.com/v3/repos/#create-a-repository-for-the-authenticated-user
 
-  repos create-fork --token=STRING --repo=STRING
+  repos create-fork --repo=STRING --token=STRING
     Create a fork - https://developer.github.com/v3/repos/forks/#create-a-fork
 
-  repos create-in-org --token=STRING --name=STRING --org=STRING
+  repos create-in-org --name=STRING --org=STRING --token=STRING
     Create an organization repository -
     https://developer.github.com/v3/repos/#create-an-organization-repository
 
-  repos create-release --token=STRING --repo=STRING --tag_name=STRING
+  repos create-release --repo=STRING --tag_name=STRING --token=STRING
     Create a release -
     https://developer.github.com/v3/repos/releases/#create-a-release
 
-  repos create-status --token=STRING --repo=STRING --sha=STRING --state=STRING
+  repos create-status --repo=STRING --sha=STRING --state=STRING --token=STRING
     Create a status -
     https://developer.github.com/v3/repos/statuses/#create-a-status
 
-  repos create-using-template --token=STRING --baptiste-preview --name=STRING --template_owner=STRING --template_repo=STRING
+  repos create-using-template --baptiste-preview --name=STRING --template_owner=STRING --template_repo=STRING --token=STRING
     Create a repository using a template -
     https://developer.github.com/v3/repos/#create-a-repository-using-a-template
 
-  repos decline-invitation --token=STRING --invitation_id=INT-64
+  repos decline-invitation --invitation_id=INT-64 --token=STRING
     Decline a repository invitation -
     https://developer.github.com/v3/repos/invitations/#decline-a-repository-invitation
 
-  repos delete --token=STRING --repo=STRING
+  repos delete --repo=STRING --token=STRING
     Delete a repository -
     https://developer.github.com/v3/repos/#delete-a-repository
 
-  repos delete-commit-comment --token=STRING --comment_id=INT-64 --repo=STRING
+  repos delete-commit-comment --comment_id=INT-64 --repo=STRING --token=STRING
     Delete a commit comment -
     https://developer.github.com/v3/repos/comments/#delete-a-commit-comment
 
-  repos delete-deployment --token=STRING --deployment_id=INT-64 --repo=STRING
+  repos delete-deployment --deployment_id=INT-64 --repo=STRING --token=STRING
     Delete a deployment -
     https://developer.github.com/v3/repos/deployments/#delete-a-deployment
 
-  repos delete-download --token=STRING --download_id=INT-64 --repo=STRING
+  repos delete-download --download_id=INT-64 --repo=STRING --token=STRING
     Delete a download -
     https://developer.github.com/v3/repos/downloads/#delete-a-download
 
-  repos delete-hook --token=STRING --hook_id=INT-64 --repo=STRING
+  repos delete-hook --hook_id=INT-64 --repo=STRING --token=STRING
     Delete a hook - https://developer.github.com/v3/repos/hooks/#delete-a-hook
 
-  repos delete-invitation --token=STRING --invitation_id=INT-64 --repo=STRING
+  repos delete-invitation --invitation_id=INT-64 --repo=STRING --token=STRING
     Delete a repository invitation -
     https://developer.github.com/v3/repos/invitations/#delete-a-repository-invitation
 
-  repos delete-release --token=STRING --release_id=INT-64 --repo=STRING
+  repos delete-release --release_id=INT-64 --repo=STRING --token=STRING
     Delete a release -
     https://developer.github.com/v3/repos/releases/#delete-a-release
 
-  repos delete-release-asset --token=STRING --asset_id=INT-64 --repo=STRING
+  repos delete-release-asset --asset_id=INT-64 --repo=STRING --token=STRING
     Delete a release asset -
     https://developer.github.com/v3/repos/releases/#delete-a-release-asset
 
-  repos disable-automated-security-fixes --token=STRING --london-preview --repo=STRING
+  repos disable-automated-security-fixes --london-preview --repo=STRING --token=STRING
     Disable automated security fixes -
     https://developer.github.com/v3/repos/#disable-automated-security-fixes
 
-  repos disable-pages-site --token=STRING --repo=STRING --switcheroo-preview
+  repos disable-pages-site --repo=STRING --switcheroo-preview --token=STRING
     Disable a Pages site -
     https://developer.github.com/v3/repos/pages/#disable-a-pages-site
 
-  repos disable-vulnerability-alerts --token=STRING --dorian-preview --repo=STRING
+  repos disable-vulnerability-alerts --dorian-preview --repo=STRING --token=STRING
     Disable vulnerability alerts -
     https://developer.github.com/v3/repos/#disable-vulnerability-alerts
 
-  repos enable-automated-security-fixes --token=STRING --london-preview --repo=STRING
+  repos enable-automated-security-fixes --london-preview --repo=STRING --token=STRING
     Enable automated security fixes -
     https://developer.github.com/v3/repos/#enable-automated-security-fixes
 
-  repos enable-vulnerability-alerts --token=STRING --dorian-preview --repo=STRING
+  repos enable-vulnerability-alerts --dorian-preview --repo=STRING --token=STRING
     Enable vulnerability alerts -
     https://developer.github.com/v3/repos/#enable-vulnerability-alerts
 
-  repos get --token=STRING --repo=STRING
+  repos get --repo=STRING --token=STRING
     Get a repository - https://developer.github.com/v3/repos/#get-a-repository
 
-  repos get-all-topics --token=STRING --mercy-preview --repo=STRING
+  repos get-all-topics --mercy-preview --repo=STRING --token=STRING
     Get all repository topics -
     https://developer.github.com/v3/repos/#get-all-repository-topics
 
-  repos get-apps-with-access-to-protected-branch --token=STRING --branch=STRING --repo=STRING
+  repos get-apps-with-access-to-protected-branch --branch=STRING --repo=STRING --token=STRING
     Get apps with access to protected branch -
     https://developer.github.com/v3/repos/branches/#list-apps-with-access-to-protected-branch
 
-  repos get-archive-link --token=STRING --archive_format=STRING --ref=STRING --repo=STRING
+  repos get-archive-link --archive_format=STRING --ref=STRING --repo=STRING --token=STRING
     Get archive link -
     https://developer.github.com/v3/repos/contents/#get-archive-link
 
-  repos get-branch --token=STRING --branch=STRING --repo=STRING
+  repos get-branch --branch=STRING --repo=STRING --token=STRING
     Get branch - https://developer.github.com/v3/repos/branches/#get-branch
 
-  repos get-branch-protection --token=STRING --branch=STRING --repo=STRING
+  repos get-branch-protection --branch=STRING --repo=STRING --token=STRING
     Get branch protection -
     https://developer.github.com/v3/repos/branches/#get-branch-protection
 
-  repos get-clones --token=STRING --repo=STRING
+  repos get-clones --repo=STRING --token=STRING
     Clones - https://developer.github.com/v3/repos/traffic/#clones
 
-  repos get-code-frequency-stats --token=STRING --repo=STRING
+  repos get-code-frequency-stats --repo=STRING --token=STRING
     Get the number of additions and deletions per week -
     https://developer.github.com/v3/repos/statistics/#get-the-number-of-additions-and-deletions-per-week
 
-  repos get-collaborator-permission-level --token=STRING --repo=STRING --username=STRING
+  repos get-collaborator-permission-level --repo=STRING --username=STRING --token=STRING
     Review a user's permission level -
     https://developer.github.com/v3/repos/collaborators/#review-a-users-permission-level
 
-  repos get-combined-status-for-ref --token=STRING --ref=STRING --repo=STRING
+  repos get-combined-status-for-ref --ref=STRING --repo=STRING --token=STRING
     Get the combined status for a specific ref -
     https://developer.github.com/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref
 
-  repos get-commit --token=STRING --ref=STRING --repo=STRING
+  repos get-commit --ref=STRING --repo=STRING --token=STRING
     Get a single commit -
     https://developer.github.com/v3/repos/commits/#get-a-single-commit
 
-  repos get-commit-activity-stats --token=STRING --repo=STRING
+  repos get-commit-activity-stats --repo=STRING --token=STRING
     Get the last year of commit activity data -
     https://developer.github.com/v3/repos/statistics/#get-the-last-year-of-commit-activity-data
 
-  repos get-commit-comment --token=STRING --comment_id=INT-64 --repo=STRING
+  repos get-commit-comment --comment_id=INT-64 --repo=STRING --token=STRING
     Get a single commit comment -
     https://developer.github.com/v3/repos/comments/#get-a-single-commit-comment
 
-  repos get-contents --token=STRING --path=STRING --repo=STRING
+  repos get-contents --path=STRING --repo=STRING --token=STRING
     Get contents - https://developer.github.com/v3/repos/contents/#get-contents
 
-  repos get-contributors-stats --token=STRING --repo=STRING
+  repos get-contributors-stats --repo=STRING --token=STRING
     Get contributors list with additions, deletions, and commit counts -
     https://developer.github.com/v3/repos/statistics/#get-contributors-list-with-additions-deletions-and-commit-counts
 
-  repos get-deploy-key --token=STRING --key_id=INT-64 --repo=STRING
+  repos get-deploy-key --key_id=INT-64 --repo=STRING --token=STRING
     Get a deploy key -
     https://developer.github.com/v3/repos/keys/#get-a-deploy-key
 
-  repos get-deployment --token=STRING --deployment_id=INT-64 --repo=STRING
+  repos get-deployment --deployment_id=INT-64 --repo=STRING --token=STRING
     Get a single deployment -
     https://developer.github.com/v3/repos/deployments/#get-a-single-deployment
 
-  repos get-deployment-status --token=STRING --deployment_id=INT-64 --repo=STRING --status_id=INT-64
+  repos get-deployment-status --deployment_id=INT-64 --repo=STRING --status_id=INT-64 --token=STRING
     Get a single deployment status -
     https://developer.github.com/v3/repos/deployments/#get-a-single-deployment-status
 
-  repos get-download --token=STRING --download_id=INT-64 --repo=STRING
+  repos get-download --download_id=INT-64 --repo=STRING --token=STRING
     Get a single download -
     https://developer.github.com/v3/repos/downloads/#get-a-single-download
 
-  repos get-hook --token=STRING --hook_id=INT-64 --repo=STRING
+  repos get-hook --hook_id=INT-64 --repo=STRING --token=STRING
     Get single hook -
     https://developer.github.com/v3/repos/hooks/#get-single-hook
 
-  repos get-latest-pages-build --token=STRING --repo=STRING
+  repos get-latest-pages-build --repo=STRING --token=STRING
     Get latest Pages build -
     https://developer.github.com/v3/repos/pages/#get-latest-pages-build
 
-  repos get-latest-release --token=STRING --repo=STRING
+  repos get-latest-release --repo=STRING --token=STRING
     Get the latest release -
     https://developer.github.com/v3/repos/releases/#get-the-latest-release
 
-  repos get-pages --token=STRING --repo=STRING
+  repos get-pages --repo=STRING --token=STRING
     Get information about a Pages site -
     https://developer.github.com/v3/repos/pages/#get-information-about-a-pages-site
 
-  repos get-pages-build --token=STRING --build_id=INT-64 --repo=STRING
+  repos get-pages-build --build_id=INT-64 --repo=STRING --token=STRING
     Get a specific Pages build -
     https://developer.github.com/v3/repos/pages/#get-a-specific-pages-build
 
-  repos get-participation-stats --token=STRING --repo=STRING
+  repos get-participation-stats --repo=STRING --token=STRING
     Get the weekly commit count for the repository owner and everyone else -
     https://developer.github.com/v3/repos/statistics/#get-the-weekly-commit-count-for-the-repository-owner-and-everyone-else
 
-  repos get-protected-branch-admin-enforcement --token=STRING --branch=STRING --repo=STRING
+  repos get-protected-branch-admin-enforcement --branch=STRING --repo=STRING --token=STRING
     Get admin enforcement of protected branch -
     https://developer.github.com/v3/repos/branches/#get-admin-enforcement-of-protected-branch
 
-  repos get-protected-branch-pull-request-review-enforcement --token=STRING --branch=STRING --repo=STRING
+  repos get-protected-branch-pull-request-review-enforcement --branch=STRING --repo=STRING --token=STRING
     Get pull request review enforcement of protected branch -
     https://developer.github.com/v3/repos/branches/#get-pull-request-review-enforcement-of-protected-branch
 
-  repos get-protected-branch-required-signatures --token=STRING --branch=STRING --repo=STRING --zzzax-preview
+  repos get-protected-branch-required-signatures --branch=STRING --repo=STRING --zzzax-preview --token=STRING
     Get required signatures of protected branch -
     https://developer.github.com/v3/repos/branches/#get-required-signatures-of-protected-branch
 
-  repos get-protected-branch-required-status-checks --token=STRING --branch=STRING --repo=STRING
+  repos get-protected-branch-required-status-checks --branch=STRING --repo=STRING --token=STRING
     Get required status checks of protected branch -
     https://developer.github.com/v3/repos/branches/#get-required-status-checks-of-protected-branch
 
-  repos get-protected-branch-restrictions --token=STRING --branch=STRING --repo=STRING
+  repos get-protected-branch-restrictions --branch=STRING --repo=STRING --token=STRING
     Get restrictions of protected branch -
     https://developer.github.com/v3/repos/branches/#get-restrictions-of-protected-branch
 
-  repos get-punch-card-stats --token=STRING --repo=STRING
+  repos get-punch-card-stats --repo=STRING --token=STRING
     Get the number of commits per hour in each day -
     https://developer.github.com/v3/repos/statistics/#get-the-number-of-commits-per-hour-in-each-day
 
-  repos get-readme --token=STRING --repo=STRING
+  repos get-readme --repo=STRING --token=STRING
     Get the README -
     https://developer.github.com/v3/repos/contents/#get-the-readme
 
-  repos get-release --token=STRING --release_id=INT-64 --repo=STRING
+  repos get-release --release_id=INT-64 --repo=STRING --token=STRING
     Get a single release -
     https://developer.github.com/v3/repos/releases/#get-a-single-release
 
-  repos get-release-asset --token=STRING --asset_id=INT-64 --repo=STRING
+  repos get-release-asset --asset_id=INT-64 --repo=STRING --token=STRING
     Get a single release asset -
     https://developer.github.com/v3/repos/releases/#get-a-single-release-asset
 
-  repos get-release-by-tag --token=STRING --repo=STRING --tag=STRING
+  repos get-release-by-tag --repo=STRING --tag=STRING --token=STRING
     Get a release by tag name -
     https://developer.github.com/v3/repos/releases/#get-a-release-by-tag-name
 
-  repos get-teams-with-access-to-protected-branch --token=STRING --branch=STRING --repo=STRING
+  repos get-teams-with-access-to-protected-branch --branch=STRING --repo=STRING --token=STRING
     Get teams with access to protected branch -
     https://developer.github.com/v3/repos/branches/#list-teams-with-access-to-protected-branch
 
-  repos get-top-paths --token=STRING --repo=STRING
+  repos get-top-paths --repo=STRING --token=STRING
     List paths - https://developer.github.com/v3/repos/traffic/#list-paths
 
-  repos get-top-referrers --token=STRING --repo=STRING
+  repos get-top-referrers --repo=STRING --token=STRING
     List referrers -
     https://developer.github.com/v3/repos/traffic/#list-referrers
 
-  repos get-users-with-access-to-protected-branch --token=STRING --branch=STRING --repo=STRING
+  repos get-users-with-access-to-protected-branch --branch=STRING --repo=STRING --token=STRING
     Get users with access to protected branch -
     https://developer.github.com/v3/repos/branches/#list-users-with-access-to-protected-branch
 
-  repos get-views --token=STRING --repo=STRING
+  repos get-views --repo=STRING --token=STRING
     Views - https://developer.github.com/v3/repos/traffic/#views
 
-  repos list-assets-for-release --token=STRING --release_id=INT-64 --repo=STRING
+  repos list-assets-for-release --release_id=INT-64 --repo=STRING --token=STRING
     List assets for a release -
     https://developer.github.com/v3/repos/releases/#list-assets-for-a-release
 
-  repos list-branches --token=STRING --repo=STRING
+  repos list-branches --repo=STRING --token=STRING
     List branches -
     https://developer.github.com/v3/repos/branches/#list-branches
 
-  repos list-branches-for-head-commit --token=STRING --commit_sha=STRING --groot-preview --repo=STRING
+  repos list-branches-for-head-commit --commit_sha=STRING --groot-preview --repo=STRING --token=STRING
     List branches for HEAD commit -
     https://developer.github.com/v3/repos/commits/#list-branches-for-head-commit
 
-  repos list-collaborators --token=STRING --repo=STRING
+  repos list-collaborators --repo=STRING --token=STRING
     List collaborators -
     https://developer.github.com/v3/repos/collaborators/#list-collaborators
 
-  repos list-comments-for-commit --token=STRING --commit_sha=STRING --repo=STRING
+  repos list-comments-for-commit --commit_sha=STRING --repo=STRING --token=STRING
     List comments for a single commit -
     https://developer.github.com/v3/repos/comments/#list-comments-for-a-single-commit
 
-  repos list-commit-comments --token=STRING --repo=STRING
+  repos list-commit-comments --repo=STRING --token=STRING
     List commit comments for a repository -
     https://developer.github.com/v3/repos/comments/#list-commit-comments-for-a-repository
 
-  repos list-commits --token=STRING --repo=STRING
+  repos list-commits --repo=STRING --token=STRING
     List commits on a repository -
     https://developer.github.com/v3/repos/commits/#list-commits-on-a-repository
 
-  repos list-contributors --token=STRING --repo=STRING
+  repos list-contributors --repo=STRING --token=STRING
     List contributors - https://developer.github.com/v3/repos/#list-contributors
 
-  repos list-deploy-keys --token=STRING --repo=STRING
+  repos list-deploy-keys --repo=STRING --token=STRING
     List deploy keys -
     https://developer.github.com/v3/repos/keys/#list-deploy-keys
 
-  repos list-deployment-statuses --token=STRING --deployment_id=INT-64 --repo=STRING
+  repos list-deployment-statuses --deployment_id=INT-64 --repo=STRING --token=STRING
     List deployment statuses -
     https://developer.github.com/v3/repos/deployments/#list-deployment-statuses
 
-  repos list-deployments --token=STRING --repo=STRING
+  repos list-deployments --repo=STRING --token=STRING
     List deployments -
     https://developer.github.com/v3/repos/deployments/#list-deployments
 
-  repos list-downloads --token=STRING --repo=STRING
+  repos list-downloads --repo=STRING --token=STRING
     List downloads for a repository -
     https://developer.github.com/v3/repos/downloads/#list-downloads-for-a-repository
 
@@ -1821,21 +1821,21 @@ Commands:
     List repositories for the authenticated user -
     https://developer.github.com/v3/repos/#list-repositories-for-the-authenticated-user
 
-  repos list-for-org --token=STRING --org=STRING
+  repos list-for-org --org=STRING --token=STRING
     List organization repositories -
     https://developer.github.com/v3/repos/#list-organization-repositories
 
-  repos list-for-user --token=STRING --username=STRING
+  repos list-for-user --username=STRING --token=STRING
     List repositories for a user -
     https://developer.github.com/v3/repos/#list-repositories-for-a-user
 
-  repos list-forks --token=STRING --repo=STRING
+  repos list-forks --repo=STRING --token=STRING
     List forks - https://developer.github.com/v3/repos/forks/#list-forks
 
-  repos list-hooks --token=STRING --repo=STRING
+  repos list-hooks --repo=STRING --token=STRING
     List hooks - https://developer.github.com/v3/repos/hooks/#list-hooks
 
-  repos list-invitations --token=STRING --repo=STRING
+  repos list-invitations --repo=STRING --token=STRING
     List invitations for a repository -
     https://developer.github.com/v3/repos/invitations/#list-invitations-for-a-repository
 
@@ -1843,14 +1843,14 @@ Commands:
     List a user's repository invitations -
     https://developer.github.com/v3/repos/invitations/#list-a-users-repository-invitations
 
-  repos list-languages --token=STRING --repo=STRING
+  repos list-languages --repo=STRING --token=STRING
     List languages - https://developer.github.com/v3/repos/#list-languages
 
-  repos list-pages-builds --token=STRING --repo=STRING
+  repos list-pages-builds --repo=STRING --token=STRING
     List Pages builds -
     https://developer.github.com/v3/repos/pages/#list-pages-builds
 
-  repos list-protected-branch-required-status-checks-contexts --token=STRING --branch=STRING --repo=STRING
+  repos list-protected-branch-required-status-checks-contexts --branch=STRING --repo=STRING --token=STRING
     List required status checks contexts of protected branch -
     https://developer.github.com/v3/repos/branches/#list-required-status-checks-contexts-of-protected-branch
 
@@ -1858,465 +1858,465 @@ Commands:
     List public repositories -
     https://developer.github.com/v3/repos/#list-public-repositories
 
-  repos list-pull-requests-associated-with-commit --token=STRING --commit_sha=STRING --groot-preview --repo=STRING
+  repos list-pull-requests-associated-with-commit --commit_sha=STRING --groot-preview --repo=STRING --token=STRING
     List pull requests associated with commit -
     https://developer.github.com/v3/repos/commits/#list-pull-requests-associated-with-commit
 
-  repos list-releases --token=STRING --repo=STRING
+  repos list-releases --repo=STRING --token=STRING
     List releases for a repository -
     https://developer.github.com/v3/repos/releases/#list-releases-for-a-repository
 
-  repos list-statuses-for-ref --token=STRING --ref=STRING --repo=STRING
+  repos list-statuses-for-ref --ref=STRING --repo=STRING --token=STRING
     List statuses for a specific ref -
     https://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref
 
-  repos list-tags --token=STRING --repo=STRING
+  repos list-tags --repo=STRING --token=STRING
     List tags - https://developer.github.com/v3/repos/#list-tags
 
-  repos list-teams --token=STRING --repo=STRING
+  repos list-teams --repo=STRING --token=STRING
     List teams - https://developer.github.com/v3/repos/#list-teams
 
-  repos merge --token=STRING --base=STRING --head=STRING --repo=STRING
+  repos merge --base=STRING --head=STRING --repo=STRING --token=STRING
     Perform a merge -
     https://developer.github.com/v3/repos/merging/#perform-a-merge
 
-  repos ping-hook --token=STRING --hook_id=INT-64 --repo=STRING
+  repos ping-hook --hook_id=INT-64 --repo=STRING --token=STRING
     Ping a hook - https://developer.github.com/v3/repos/hooks/#ping-a-hook
 
-  repos remove-branch-protection --token=STRING --branch=STRING --repo=STRING
+  repos remove-branch-protection --branch=STRING --repo=STRING --token=STRING
     Remove branch protection -
     https://developer.github.com/v3/repos/branches/#remove-branch-protection
 
-  repos remove-collaborator --token=STRING --repo=STRING --username=STRING
+  repos remove-collaborator --repo=STRING --username=STRING --token=STRING
     Remove user as a collaborator -
     https://developer.github.com/v3/repos/collaborators/#remove-user-as-a-collaborator
 
-  repos remove-deploy-key --token=STRING --key_id=INT-64 --repo=STRING
+  repos remove-deploy-key --key_id=INT-64 --repo=STRING --token=STRING
     Remove a deploy key -
     https://developer.github.com/v3/repos/keys/#remove-a-deploy-key
 
-  repos remove-protected-branch-admin-enforcement --token=STRING --branch=STRING --repo=STRING
+  repos remove-protected-branch-admin-enforcement --branch=STRING --repo=STRING --token=STRING
     Remove admin enforcement of protected branch -
     https://developer.github.com/v3/repos/branches/#remove-admin-enforcement-of-protected-branch
 
-  repos remove-protected-branch-app-restrictions --token=STRING --branch=STRING --repo=STRING
+  repos remove-protected-branch-app-restrictions --branch=STRING --repo=STRING --token=STRING
     Remove app restrictions of protected branch -
     https://developer.github.com/v3/repos/branches/#remove-app-restrictions-of-protected-branch
 
-  repos remove-protected-branch-pull-request-review-enforcement --token=STRING --branch=STRING --repo=STRING
+  repos remove-protected-branch-pull-request-review-enforcement --branch=STRING --repo=STRING --token=STRING
     Remove pull request review enforcement of protected branch -
     https://developer.github.com/v3/repos/branches/#remove-pull-request-review-enforcement-of-protected-branch
 
-  repos remove-protected-branch-required-signatures --token=STRING --branch=STRING --repo=STRING --zzzax-preview
+  repos remove-protected-branch-required-signatures --branch=STRING --repo=STRING --zzzax-preview --token=STRING
     Remove required signatures of protected branch -
     https://developer.github.com/v3/repos/branches/#remove-required-signatures-of-protected-branch
 
-  repos remove-protected-branch-required-status-checks --token=STRING --branch=STRING --repo=STRING
+  repos remove-protected-branch-required-status-checks --branch=STRING --repo=STRING --token=STRING
     Remove required status checks of protected branch -
     https://developer.github.com/v3/repos/branches/#remove-required-status-checks-of-protected-branch
 
-  repos remove-protected-branch-required-status-checks-contexts --token=STRING --branch=STRING --repo=STRING
+  repos remove-protected-branch-required-status-checks-contexts --branch=STRING --repo=STRING --token=STRING
     Remove required status checks contexts of protected branch -
     https://developer.github.com/v3/repos/branches/#remove-required-status-checks-contexts-of-protected-branch
 
-  repos remove-protected-branch-restrictions --token=STRING --branch=STRING --repo=STRING
+  repos remove-protected-branch-restrictions --branch=STRING --repo=STRING --token=STRING
     Remove restrictions of protected branch -
     https://developer.github.com/v3/repos/branches/#remove-restrictions-of-protected-branch
 
-  repos remove-protected-branch-team-restrictions --token=STRING --branch=STRING --repo=STRING
+  repos remove-protected-branch-team-restrictions --branch=STRING --repo=STRING --token=STRING
     Remove team restrictions of protected branch -
     https://developer.github.com/v3/repos/branches/#remove-team-restrictions-of-protected-branch
 
-  repos remove-protected-branch-user-restrictions --token=STRING --branch=STRING --repo=STRING
+  repos remove-protected-branch-user-restrictions --branch=STRING --repo=STRING --token=STRING
     Remove user restrictions of protected branch -
     https://developer.github.com/v3/repos/branches/#remove-user-restrictions-of-protected-branch
 
-  repos replace-all-topics --token=STRING --mercy-preview --names=NAMES,... --repo=STRING
+  repos replace-all-topics --mercy-preview --names=NAMES,... --repo=STRING --token=STRING
     Replace all repository topics -
     https://developer.github.com/v3/repos/#replace-all-repository-topics
 
-  repos replace-protected-branch-app-restrictions --token=STRING --branch=STRING --repo=STRING
+  repos replace-protected-branch-app-restrictions --branch=STRING --repo=STRING --token=STRING
     Replace app restrictions of protected branch -
     https://developer.github.com/v3/repos/branches/#replace-app-restrictions-of-protected-branch
 
-  repos replace-protected-branch-required-status-checks-contexts --token=STRING --branch=STRING --repo=STRING
+  repos replace-protected-branch-required-status-checks-contexts --branch=STRING --repo=STRING --token=STRING
     Replace required status checks contexts of protected branch -
     https://developer.github.com/v3/repos/branches/#replace-required-status-checks-contexts-of-protected-branch
 
-  repos replace-protected-branch-team-restrictions --token=STRING --branch=STRING --repo=STRING
+  repos replace-protected-branch-team-restrictions --branch=STRING --repo=STRING --token=STRING
     Replace team restrictions of protected branch -
     https://developer.github.com/v3/repos/branches/#replace-team-restrictions-of-protected-branch
 
-  repos replace-protected-branch-user-restrictions --token=STRING --branch=STRING --repo=STRING
+  repos replace-protected-branch-user-restrictions --branch=STRING --repo=STRING --token=STRING
     Replace user restrictions of protected branch -
     https://developer.github.com/v3/repos/branches/#replace-user-restrictions-of-protected-branch
 
-  repos request-page-build --token=STRING --repo=STRING
+  repos request-page-build --repo=STRING --token=STRING
     Request a page build -
     https://developer.github.com/v3/repos/pages/#request-a-page-build
 
-  repos retrieve-community-profile-metrics --token=STRING --repo=STRING
+  repos retrieve-community-profile-metrics --repo=STRING --token=STRING
     Retrieve community profile metrics -
     https://developer.github.com/v3/repos/community/#retrieve-community-profile-metrics
 
-  repos test-push-hook --token=STRING --hook_id=INT-64 --repo=STRING
+  repos test-push-hook --hook_id=INT-64 --repo=STRING --token=STRING
     Test a push hook -
     https://developer.github.com/v3/repos/hooks/#test-a-push-hook
 
-  repos transfer --token=STRING --repo=STRING
+  repos transfer --repo=STRING --token=STRING
     Transfer a repository -
     https://developer.github.com/v3/repos/#transfer-a-repository
 
-  repos update --token=STRING --repo=STRING
+  repos update --repo=STRING --token=STRING
     Update a repository -
     https://developer.github.com/v3/repos/#update-a-repository
 
-  repos update-commit-comment --token=STRING --body=STRING --comment_id=INT-64 --repo=STRING
+  repos update-commit-comment --body=STRING --comment_id=INT-64 --repo=STRING --token=STRING
     Update a commit comment -
     https://developer.github.com/v3/repos/comments/#update-a-commit-comment
 
-  repos update-information-about-pages-site --token=STRING --repo=STRING
+  repos update-information-about-pages-site --repo=STRING --token=STRING
     Update information about a Pages site -
     https://developer.github.com/v3/repos/pages/#update-information-about-a-pages-site
 
-  repos update-invitation --token=STRING --invitation_id=INT-64 --repo=STRING
+  repos update-invitation --invitation_id=INT-64 --repo=STRING --token=STRING
     Update a repository invitation -
     https://developer.github.com/v3/repos/invitations/#update-a-repository-invitation
 
-  repos update-protected-branch-required-status-checks --token=STRING --branch=STRING --repo=STRING
+  repos update-protected-branch-required-status-checks --branch=STRING --repo=STRING --token=STRING
     Update required status checks of protected branch -
     https://developer.github.com/v3/repos/branches/#update-required-status-checks-of-protected-branch
 
-  repos update-release --token=STRING --release_id=INT-64 --repo=STRING
+  repos update-release --release_id=INT-64 --repo=STRING --token=STRING
     Edit a release -
     https://developer.github.com/v3/repos/releases/#edit-a-release
 
-  repos update-release-asset --token=STRING --asset_id=INT-64 --repo=STRING
+  repos update-release-asset --asset_id=INT-64 --repo=STRING --token=STRING
     Edit a release asset -
     https://developer.github.com/v3/repos/releases/#edit-a-release-asset
 
-  repos upload-release-asset --token=STRING --content-length=STRING --content-type=STRING --release_id=INT-64 --repo=STRING
+  repos upload-release-asset --content-length=STRING --content-type=STRING --release_id=INT-64 --repo=STRING --token=STRING
     Upload a release asset -
     https://developer.github.com/v3/repos/releases/#upload-a-release-asset
 
-  scim get-provisioning-details-for-user --token=STRING --org=STRING --scim_user_id=INT-64
+  scim get-provisioning-details-for-user --org=STRING --scim_user_id=INT-64 --token=STRING
     Get provisioning details for a single user -
     https://developer.github.com/v3/scim/#get-provisioning-details-for-a-single-user
 
-  scim list-provisioned-identities --token=STRING --org=STRING
+  scim list-provisioned-identities --org=STRING --token=STRING
     Get a list of provisioned identities -
     https://developer.github.com/v3/scim/#get-a-list-of-provisioned-identities
 
-  scim provision-and-invite-users --token=STRING --org=STRING
+  scim provision-and-invite-users --org=STRING --token=STRING
     Provision and invite users -
     https://developer.github.com/v3/scim/#provision-and-invite-users
 
-  scim remove-user-from-org --token=STRING --org=STRING --scim_user_id=INT-64
+  scim remove-user-from-org --org=STRING --scim_user_id=INT-64 --token=STRING
     Remove a user from the organization -
     https://developer.github.com/v3/scim/#remove-a-user-from-the-organization
 
-  scim replace-provisioned-user-information --token=STRING --org=STRING --scim_user_id=INT-64
+  scim replace-provisioned-user-information --org=STRING --scim_user_id=INT-64 --token=STRING
     Replace a provisioned user's information -
     https://developer.github.com/v3/scim/#replace-a-provisioned-users-information
 
-  scim update-user-attribute --token=STRING --org=STRING --scim_user_id=INT-64
+  scim update-user-attribute --org=STRING --scim_user_id=INT-64 --token=STRING
     Update a user attribute -
     https://developer.github.com/v3/scim/#update-a-user-attribute
 
-  search code --token=STRING --q=STRING
+  search code --q=STRING --token=STRING
     Search code - https://developer.github.com/v3/search/#search-code
 
-  search commits --token=STRING --cloak-preview --q=STRING
+  search commits --cloak-preview --q=STRING --token=STRING
     Search commits - https://developer.github.com/v3/search/#search-commits
 
-  search email-legacy --token=STRING --email=STRING
+  search email-legacy --email=STRING --token=STRING
     Email search - https://developer.github.com/v3/search/legacy/#email-search
 
-  search issues-and-pull-requests --token=STRING --q=STRING
+  search issues-and-pull-requests --q=STRING --token=STRING
     Search issues and pull requests -
     https://developer.github.com/v3/search/#search-issues-and-pull-requests
 
-  search issues-legacy --token=STRING --keyword=STRING --owner=STRING --repository=STRING --state=STRING
+  search issues-legacy --keyword=STRING --owner=STRING --repository=STRING --state=STRING --token=STRING
     Search issues - https://developer.github.com/v3/search/legacy/#search-issues
 
-  search labels --token=STRING --q=STRING --repository_id=INT-64
+  search labels --q=STRING --repository_id=INT-64 --token=STRING
     Search labels - https://developer.github.com/v3/search/#search-labels
 
-  search repos --token=STRING --q=STRING
+  search repos --q=STRING --token=STRING
     Search repositories -
     https://developer.github.com/v3/search/#search-repositories
 
-  search repos-legacy --token=STRING --keyword=STRING
+  search repos-legacy --keyword=STRING --token=STRING
     Search repositories -
     https://developer.github.com/v3/search/legacy/#search-repositories
 
-  search topics --token=STRING --q=STRING
+  search topics --q=STRING --token=STRING
     Search topics - https://developer.github.com/v3/search/#search-topics
 
-  search users --token=STRING --q=STRING
+  search users --q=STRING --token=STRING
     Search users - https://developer.github.com/v3/search/#search-users
 
-  search users-legacy --token=STRING --keyword=STRING
+  search users-legacy --keyword=STRING --token=STRING
     Search users - https://developer.github.com/v3/search/legacy/#search-users
 
-  teams add-member-legacy --token=STRING --team_id=INT-64 --username=STRING
+  teams add-member-legacy --team_id=INT-64 --username=STRING --token=STRING
     Add team member (Legacy) -
     https://developer.github.com/v3/teams/members/#add-team-member-legacy
 
-  teams add-or-update-membership-in-org --token=STRING --org=STRING --team_slug=STRING --username=STRING
+  teams add-or-update-membership-in-org --org=STRING --team_slug=STRING --username=STRING --token=STRING
     Add or update team membership -
     https://developer.github.com/v3/teams/members/#add-or-update-team-membership
 
-  teams add-or-update-membership-legacy --token=STRING --team_id=INT-64 --username=STRING
+  teams add-or-update-membership-legacy --team_id=INT-64 --username=STRING --token=STRING
     Add or update team membership (Legacy) -
     https://developer.github.com/v3/teams/members/#add-or-update-team-membership-legacy
 
-  teams add-or-update-project-in-org --token=STRING --inertia-preview --org=STRING --project_id=INT-64 --team_slug=STRING
+  teams add-or-update-project-in-org --inertia-preview --org=STRING --project_id=INT-64 --team_slug=STRING --token=STRING
     Add or update team project -
     https://developer.github.com/v3/teams/#add-or-update-team-project
 
-  teams add-or-update-project-legacy --token=STRING --inertia-preview --project_id=INT-64 --team_id=INT-64
+  teams add-or-update-project-legacy --inertia-preview --project_id=INT-64 --team_id=INT-64 --token=STRING
     Add or update team project (Legacy) -
     https://developer.github.com/v3/teams/#add-or-update-team-project-legacy
 
-  teams add-or-update-repo-in-org --token=STRING --org=STRING --repo=STRING --team_slug=STRING
+  teams add-or-update-repo-in-org --org=STRING --repo=STRING --team_slug=STRING --token=STRING
     Add or update team repository -
     https://developer.github.com/v3/teams/#add-or-update-team-repository
 
-  teams add-or-update-repo-legacy --token=STRING --repo=STRING --team_id=INT-64
+  teams add-or-update-repo-legacy --repo=STRING --team_id=INT-64 --token=STRING
     Add or update team repository (Legacy) -
     https://developer.github.com/v3/teams/#add-or-update-team-repository-legacy
 
-  teams check-manages-repo-in-org --token=STRING --org=STRING --repo=STRING --team_slug=STRING
+  teams check-manages-repo-in-org --org=STRING --repo=STRING --team_slug=STRING --token=STRING
     Check if a team manages a repository -
     https://developer.github.com/v3/teams/#check-if-a-team-manages-a-repository
 
-  teams check-manages-repo-legacy --token=STRING --repo=STRING --team_id=INT-64
+  teams check-manages-repo-legacy --repo=STRING --team_id=INT-64 --token=STRING
     Check if a team manages a repository (Legacy) -
     https://developer.github.com/v3/teams/#check-if-a-team-manages-a-repository-legacy
 
-  teams create --token=STRING --name=STRING --org=STRING
+  teams create --name=STRING --org=STRING --token=STRING
     Create team - https://developer.github.com/v3/teams/#create-team
 
-  teams create-discussion-comment-in-org --token=STRING --body=STRING --discussion_number=INT-64 --org=STRING --team_slug=STRING
+  teams create-discussion-comment-in-org --body=STRING --discussion_number=INT-64 --org=STRING --team_slug=STRING --token=STRING
     Create a comment -
     https://developer.github.com/v3/teams/discussion_comments/#create-a-comment
 
-  teams create-discussion-comment-legacy --token=STRING --body=STRING --discussion_number=INT-64 --team_id=INT-64
+  teams create-discussion-comment-legacy --body=STRING --discussion_number=INT-64 --team_id=INT-64 --token=STRING
     Create a comment (Legacy) -
     https://developer.github.com/v3/teams/discussion_comments/#create-a-comment-legacy
 
-  teams create-discussion-in-org --token=STRING --body=STRING --org=STRING --team_slug=STRING --title=STRING
+  teams create-discussion-in-org --body=STRING --org=STRING --team_slug=STRING --title=STRING --token=STRING
     Create a discussion -
     https://developer.github.com/v3/teams/discussions/#create-a-discussion
 
-  teams create-discussion-legacy --token=STRING --body=STRING --team_id=INT-64 --title=STRING
+  teams create-discussion-legacy --body=STRING --team_id=INT-64 --title=STRING --token=STRING
     Create a discussion (Legacy) -
     https://developer.github.com/v3/teams/discussions/#create-a-discussion-legacy
 
-  teams delete-discussion-comment-in-org --token=STRING --comment_number=INT-64 --discussion_number=INT-64 --org=STRING --team_slug=STRING
+  teams delete-discussion-comment-in-org --comment_number=INT-64 --discussion_number=INT-64 --org=STRING --team_slug=STRING --token=STRING
     Delete a comment -
     https://developer.github.com/v3/teams/discussion_comments/#delete-a-comment
 
-  teams delete-discussion-comment-legacy --token=STRING --comment_number=INT-64 --discussion_number=INT-64 --team_id=INT-64
+  teams delete-discussion-comment-legacy --comment_number=INT-64 --discussion_number=INT-64 --team_id=INT-64 --token=STRING
     Delete a comment (Legacy) -
     https://developer.github.com/v3/teams/discussion_comments/#delete-a-comment-legacy
 
-  teams delete-discussion-in-org --token=STRING --discussion_number=INT-64 --org=STRING --team_slug=STRING
+  teams delete-discussion-in-org --discussion_number=INT-64 --org=STRING --team_slug=STRING --token=STRING
     Delete a discussion -
     https://developer.github.com/v3/teams/discussions/#delete-a-discussion
 
-  teams delete-discussion-legacy --token=STRING --discussion_number=INT-64 --team_id=INT-64
+  teams delete-discussion-legacy --discussion_number=INT-64 --team_id=INT-64 --token=STRING
     Delete a discussion (Legacy) -
     https://developer.github.com/v3/teams/discussions/#delete-a-discussion-legacy
 
-  teams delete-in-org --token=STRING --org=STRING --team_slug=STRING
+  teams delete-in-org --org=STRING --team_slug=STRING --token=STRING
     Delete team - https://developer.github.com/v3/teams/#delete-team
 
-  teams delete-legacy --token=STRING --team_id=INT-64
+  teams delete-legacy --team_id=INT-64 --token=STRING
     Delete team (Legacy) -
     https://developer.github.com/v3/teams/#delete-team-legacy
 
-  teams get-by-name --token=STRING --org=STRING --team_slug=STRING
+  teams get-by-name --org=STRING --team_slug=STRING --token=STRING
     Get team by name - https://developer.github.com/v3/teams/#get-team-by-name
 
-  teams get-discussion-comment-in-org --token=STRING --comment_number=INT-64 --discussion_number=INT-64 --org=STRING --team_slug=STRING
+  teams get-discussion-comment-in-org --comment_number=INT-64 --discussion_number=INT-64 --org=STRING --team_slug=STRING --token=STRING
     Get a single comment -
     https://developer.github.com/v3/teams/discussion_comments/#get-a-single-comment
 
-  teams get-discussion-comment-legacy --token=STRING --comment_number=INT-64 --discussion_number=INT-64 --team_id=INT-64
+  teams get-discussion-comment-legacy --comment_number=INT-64 --discussion_number=INT-64 --team_id=INT-64 --token=STRING
     Get a single comment (Legacy) -
     https://developer.github.com/v3/teams/discussion_comments/#get-a-single-comment-legacy
 
-  teams get-discussion-in-org --token=STRING --discussion_number=INT-64 --org=STRING --team_slug=STRING
+  teams get-discussion-in-org --discussion_number=INT-64 --org=STRING --team_slug=STRING --token=STRING
     Get a single discussion -
     https://developer.github.com/v3/teams/discussions/#get-a-single-discussion
 
-  teams get-discussion-legacy --token=STRING --discussion_number=INT-64 --team_id=INT-64
+  teams get-discussion-legacy --discussion_number=INT-64 --team_id=INT-64 --token=STRING
     Get a single discussion (Legacy) -
     https://developer.github.com/v3/teams/discussions/#get-a-single-discussion-legacy
 
-  teams get-legacy --token=STRING --team_id=INT-64
+  teams get-legacy --team_id=INT-64 --token=STRING
     Get team (Legacy) - https://developer.github.com/v3/teams/#get-team-legacy
 
-  teams get-member-legacy --token=STRING --team_id=INT-64 --username=STRING
+  teams get-member-legacy --team_id=INT-64 --username=STRING --token=STRING
     Get team member (Legacy) -
     https://developer.github.com/v3/teams/members/#get-team-member-legacy
 
-  teams get-membership-in-org --token=STRING --org=STRING --team_slug=STRING --username=STRING
+  teams get-membership-in-org --org=STRING --team_slug=STRING --username=STRING --token=STRING
     Get team membership -
     https://developer.github.com/v3/teams/members/#get-team-membership
 
-  teams get-membership-legacy --token=STRING --team_id=INT-64 --username=STRING
+  teams get-membership-legacy --team_id=INT-64 --username=STRING --token=STRING
     Get team membership (Legacy) -
     https://developer.github.com/v3/teams/members/#get-team-membership-legacy
 
-  teams list --token=STRING --org=STRING
+  teams list --org=STRING --token=STRING
     List teams - https://developer.github.com/v3/teams/#list-teams
 
-  teams list-child-in-org --token=STRING --org=STRING --team_slug=STRING
+  teams list-child-in-org --org=STRING --team_slug=STRING --token=STRING
     List child teams - https://developer.github.com/v3/teams/#list-child-teams
 
-  teams list-child-legacy --token=STRING --team_id=INT-64
+  teams list-child-legacy --team_id=INT-64 --token=STRING
     List child teams (Legacy) -
     https://developer.github.com/v3/teams/#list-child-teams-legacy
 
-  teams list-discussion-comments-in-org --token=STRING --discussion_number=INT-64 --org=STRING --team_slug=STRING
+  teams list-discussion-comments-in-org --discussion_number=INT-64 --org=STRING --team_slug=STRING --token=STRING
     List comments -
     https://developer.github.com/v3/teams/discussion_comments/#list-comments
 
-  teams list-discussion-comments-legacy --token=STRING --discussion_number=INT-64 --team_id=INT-64
+  teams list-discussion-comments-legacy --discussion_number=INT-64 --team_id=INT-64 --token=STRING
     List comments (Legacy) -
     https://developer.github.com/v3/teams/discussion_comments/#list-comments-legacy
 
-  teams list-discussions-in-org --token=STRING --org=STRING --team_slug=STRING
+  teams list-discussions-in-org --org=STRING --team_slug=STRING --token=STRING
     List discussions -
     https://developer.github.com/v3/teams/discussions/#list-discussions
 
-  teams list-discussions-legacy --token=STRING --team_id=INT-64
+  teams list-discussions-legacy --team_id=INT-64 --token=STRING
     List discussions (Legacy) -
     https://developer.github.com/v3/teams/discussions/#list-discussions-legacy
 
   teams list-for-authenticated-user --token=STRING
     List user teams - https://developer.github.com/v3/teams/#list-user-teams
 
-  teams list-id-p-groups-for-legacy --token=STRING --team_id=INT-64
+  teams list-id-p-groups-for-legacy --team_id=INT-64 --token=STRING
     List IdP groups for a team (Legacy) -
     https://developer.github.com/v3/teams/team_sync/#list-idp-groups-for-a-team-legacy
 
-  teams list-id-p-groups-for-org --token=STRING --org=STRING
+  teams list-id-p-groups-for-org --org=STRING --token=STRING
     List IdP groups in an organization -
     https://developer.github.com/v3/teams/team_sync/#list-idp-groups-in-an-organization
 
-  teams list-id-p-groups-in-org --token=STRING --org=STRING --team_slug=STRING
+  teams list-id-p-groups-in-org --org=STRING --team_slug=STRING --token=STRING
     List IdP groups for a team -
     https://developer.github.com/v3/teams/team_sync/#list-idp-groups-for-a-team
 
-  teams list-members-in-org --token=STRING --org=STRING --team_slug=STRING
+  teams list-members-in-org --org=STRING --team_slug=STRING --token=STRING
     List team members -
     https://developer.github.com/v3/teams/members/#list-team-members
 
-  teams list-members-legacy --token=STRING --team_id=INT-64
+  teams list-members-legacy --team_id=INT-64 --token=STRING
     List team members (Legacy) -
     https://developer.github.com/v3/teams/members/#list-team-members-legacy
 
-  teams list-pending-invitations-in-org --token=STRING --org=STRING --team_slug=STRING
+  teams list-pending-invitations-in-org --org=STRING --team_slug=STRING --token=STRING
     List pending team invitations -
     https://developer.github.com/v3/teams/members/#list-pending-team-invitations
 
-  teams list-pending-invitations-legacy --token=STRING --team_id=INT-64
+  teams list-pending-invitations-legacy --team_id=INT-64 --token=STRING
     List pending team invitations (Legacy) -
     https://developer.github.com/v3/teams/members/#list-pending-team-invitations-legacy
 
-  teams list-projects-in-org --token=STRING --inertia-preview --org=STRING --team_slug=STRING
+  teams list-projects-in-org --inertia-preview --org=STRING --team_slug=STRING --token=STRING
     List team projects -
     https://developer.github.com/v3/teams/#list-team-projects
 
-  teams list-projects-legacy --token=STRING --inertia-preview --team_id=INT-64
+  teams list-projects-legacy --inertia-preview --team_id=INT-64 --token=STRING
     List team projects (Legacy) -
     https://developer.github.com/v3/teams/#list-team-projects-legacy
 
-  teams list-repos-in-org --token=STRING --org=STRING --team_slug=STRING
+  teams list-repos-in-org --org=STRING --team_slug=STRING --token=STRING
     List team repos - https://developer.github.com/v3/teams/#list-team-repos
 
-  teams list-repos-legacy --token=STRING --team_id=INT-64
+  teams list-repos-legacy --team_id=INT-64 --token=STRING
     List team repos (Legacy) -
     https://developer.github.com/v3/teams/#list-team-repos-legacy
 
-  teams remove-member-legacy --token=STRING --team_id=INT-64 --username=STRING
+  teams remove-member-legacy --team_id=INT-64 --username=STRING --token=STRING
     Remove team member (Legacy) -
     https://developer.github.com/v3/teams/members/#remove-team-member-legacy
 
-  teams remove-membership-in-org --token=STRING --org=STRING --team_slug=STRING --username=STRING
+  teams remove-membership-in-org --org=STRING --team_slug=STRING --username=STRING --token=STRING
     Remove team membership -
     https://developer.github.com/v3/teams/members/#remove-team-membership
 
-  teams remove-membership-legacy --token=STRING --team_id=INT-64 --username=STRING
+  teams remove-membership-legacy --team_id=INT-64 --username=STRING --token=STRING
     Remove team membership (Legacy) -
     https://developer.github.com/v3/teams/members/#remove-team-membership-legacy
 
-  teams remove-project-in-org --token=STRING --org=STRING --project_id=INT-64 --team_slug=STRING
+  teams remove-project-in-org --org=STRING --project_id=INT-64 --team_slug=STRING --token=STRING
     Remove team project -
     https://developer.github.com/v3/teams/#remove-team-project
 
-  teams remove-project-legacy --token=STRING --project_id=INT-64 --team_id=INT-64
+  teams remove-project-legacy --project_id=INT-64 --team_id=INT-64 --token=STRING
     Remove team project (Legacy) -
     https://developer.github.com/v3/teams/#remove-team-project-legacy
 
-  teams remove-repo-in-org --token=STRING --org=STRING --repo=STRING --team_slug=STRING
+  teams remove-repo-in-org --org=STRING --repo=STRING --team_slug=STRING --token=STRING
     Remove team repository -
     https://developer.github.com/v3/teams/#remove-team-repository
 
-  teams remove-repo-legacy --token=STRING --repo=STRING --team_id=INT-64
+  teams remove-repo-legacy --repo=STRING --team_id=INT-64 --token=STRING
     Remove team repository (Legacy) -
     https://developer.github.com/v3/teams/#remove-team-repository-legacy
 
-  teams review-project-in-org --token=STRING --inertia-preview --org=STRING --project_id=INT-64 --team_slug=STRING
+  teams review-project-in-org --inertia-preview --org=STRING --project_id=INT-64 --team_slug=STRING --token=STRING
     Review a team project -
     https://developer.github.com/v3/teams/#review-a-team-project
 
-  teams review-project-legacy --token=STRING --inertia-preview --project_id=INT-64 --team_id=INT-64
+  teams review-project-legacy --inertia-preview --project_id=INT-64 --team_id=INT-64 --token=STRING
     Review a team project (Legacy) -
     https://developer.github.com/v3/teams/#review-a-team-project-legacy
 
-  teams update-discussion-comment-in-org --token=STRING --body=STRING --comment_number=INT-64 --discussion_number=INT-64 --org=STRING --team_slug=STRING
+  teams update-discussion-comment-in-org --body=STRING --comment_number=INT-64 --discussion_number=INT-64 --org=STRING --team_slug=STRING --token=STRING
     Edit a comment -
     https://developer.github.com/v3/teams/discussion_comments/#edit-a-comment
 
-  teams update-discussion-comment-legacy --token=STRING --body=STRING --comment_number=INT-64 --discussion_number=INT-64 --team_id=INT-64
+  teams update-discussion-comment-legacy --body=STRING --comment_number=INT-64 --discussion_number=INT-64 --team_id=INT-64 --token=STRING
     Edit a comment (Legacy) -
     https://developer.github.com/v3/teams/discussion_comments/#edit-a-comment-legacy
 
-  teams update-discussion-in-org --token=STRING --discussion_number=INT-64 --org=STRING --team_slug=STRING
+  teams update-discussion-in-org --discussion_number=INT-64 --org=STRING --team_slug=STRING --token=STRING
     Edit a discussion -
     https://developer.github.com/v3/teams/discussions/#edit-a-discussion
 
-  teams update-discussion-legacy --token=STRING --discussion_number=INT-64 --team_id=INT-64
+  teams update-discussion-legacy --discussion_number=INT-64 --team_id=INT-64 --token=STRING
     Edit a discussion (Legacy) -
     https://developer.github.com/v3/teams/discussions/#edit-a-discussion-legacy
 
-  teams update-in-org --token=STRING --name=STRING --org=STRING --team_slug=STRING
+  teams update-in-org --name=STRING --org=STRING --team_slug=STRING --token=STRING
     Edit team - https://developer.github.com/v3/teams/#edit-team
 
-  teams update-legacy --token=STRING --name=STRING --team_id=INT-64
+  teams update-legacy --name=STRING --team_id=INT-64 --token=STRING
     Edit team (Legacy) - https://developer.github.com/v3/teams/#edit-team-legacy
 
-  users add-emails --token=STRING --emails=EMAILS,...
+  users add-emails --emails=EMAILS,... --token=STRING
     Add email address(es) -
     https://developer.github.com/v3/users/emails/#add-email-addresses
 
-  users block --token=STRING --username=STRING
+  users block --username=STRING --token=STRING
     Block a user - https://developer.github.com/v3/users/blocking/#block-a-user
 
-  users check-blocked --token=STRING --username=STRING
+  users check-blocked --username=STRING --token=STRING
     Check whether you've blocked a user -
     https://developer.github.com/v3/users/blocking/#check-whether-youve-blocked-a-user
 
-  users check-following --token=STRING --username=STRING
+  users check-following --username=STRING --token=STRING
     Check if you are following a user -
     https://developer.github.com/v3/users/followers/#check-if-you-are-following-a-user
 
-  users check-following-for-user --token=STRING --target_user=STRING --username=STRING
+  users check-following-for-user --target_user=STRING --username=STRING --token=STRING
     Check if one user follows another -
     https://developer.github.com/v3/users/followers/#check-if-one-user-follows-another
 
@@ -2328,19 +2328,19 @@ Commands:
     Create a public key -
     https://developer.github.com/v3/users/keys/#create-a-public-key
 
-  users delete-emails --token=STRING --emails=EMAILS,...
+  users delete-emails --emails=EMAILS,... --token=STRING
     Delete email address(es) -
     https://developer.github.com/v3/users/emails/#delete-email-addresses
 
-  users delete-gpg-key --token=STRING --gpg_key_id=INT-64
+  users delete-gpg-key --gpg_key_id=INT-64 --token=STRING
     Delete a GPG key -
     https://developer.github.com/v3/users/gpg_keys/#delete-a-gpg-key
 
-  users delete-public-key --token=STRING --key_id=INT-64
+  users delete-public-key --key_id=INT-64 --token=STRING
     Delete a public key -
     https://developer.github.com/v3/users/keys/#delete-a-public-key
 
-  users follow --token=STRING --username=STRING
+  users follow --username=STRING --token=STRING
     Follow a user -
     https://developer.github.com/v3/users/followers/#follow-a-user
 
@@ -2348,18 +2348,18 @@ Commands:
     Get the authenticated user -
     https://developer.github.com/v3/users/#get-the-authenticated-user
 
-  users get-by-username --token=STRING --username=STRING
+  users get-by-username --username=STRING --token=STRING
     Get a single user - https://developer.github.com/v3/users/#get-a-single-user
 
-  users get-context-for-user --token=STRING --username=STRING
+  users get-context-for-user --username=STRING --token=STRING
     Get contextual information about a user -
     https://developer.github.com/v3/users/#get-contextual-information-about-a-user
 
-  users get-gpg-key --token=STRING --gpg_key_id=INT-64
+  users get-gpg-key --gpg_key_id=INT-64 --token=STRING
     Get a single GPG key -
     https://developer.github.com/v3/users/gpg_keys/#get-a-single-gpg-key
 
-  users get-public-key --token=STRING --key_id=INT-64
+  users get-public-key --key_id=INT-64 --token=STRING
     Get a single public key -
     https://developer.github.com/v3/users/keys/#get-a-single-public-key
 
@@ -2382,11 +2382,11 @@ Commands:
     List followers of the authenticated user -
     https://developer.github.com/v3/users/followers/#list-followers-of-the-authenticated-user
 
-  users list-followers-for-user --token=STRING --username=STRING
+  users list-followers-for-user --username=STRING --token=STRING
     List followers of a user -
     https://developer.github.com/v3/users/followers/#list-followers-of-a-user
 
-  users list-following-for-user --token=STRING --username=STRING
+  users list-following-for-user --username=STRING --token=STRING
     List users followed by another user -
     https://developer.github.com/v3/users/followers/#list-users-followed-by-another-user
 
@@ -2394,7 +2394,7 @@ Commands:
     List your GPG keys -
     https://developer.github.com/v3/users/gpg_keys/#list-your-gpg-keys
 
-  users list-gpg-keys-for-user --token=STRING --username=STRING
+  users list-gpg-keys-for-user --username=STRING --token=STRING
     List GPG keys for a user -
     https://developer.github.com/v3/users/gpg_keys/#list-gpg-keys-for-a-user
 
@@ -2406,19 +2406,19 @@ Commands:
     List your public keys -
     https://developer.github.com/v3/users/keys/#list-your-public-keys
 
-  users list-public-keys-for-user --token=STRING --username=STRING
+  users list-public-keys-for-user --username=STRING --token=STRING
     List public keys for a user -
     https://developer.github.com/v3/users/keys/#list-public-keys-for-a-user
 
-  users toggle-primary-email-visibility --token=STRING --email=STRING --visibility=STRING
+  users toggle-primary-email-visibility --email=STRING --visibility=STRING --token=STRING
     Toggle primary email visibility -
     https://developer.github.com/v3/users/emails/#toggle-primary-email-visibility
 
-  users unblock --token=STRING --username=STRING
+  users unblock --username=STRING --token=STRING
     Unblock a user -
     https://developer.github.com/v3/users/blocking/#unblock-a-user
 
-  users unfollow --token=STRING --username=STRING
+  users unfollow --username=STRING --token=STRING
     Unfollow a user -
     https://developer.github.com/v3/users/followers/#unfollow-a-user
 

@@ -10,8 +10,8 @@ type GitignoreCmd struct {
 }
 
 type GitignoreGetTemplateCmd struct {
-	internal.BaseCmd
 	Name string `required:"" name:"name"`
+	internal.BaseCmd
 }
 
 func (c *GitignoreGetTemplateCmd) Run(isValueSetMap map[string]bool) error {

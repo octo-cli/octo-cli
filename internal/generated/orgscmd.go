@@ -43,10 +43,10 @@ type OrgsCmd struct {
 }
 
 type OrgsAddOrUpdateMembershipCmd struct {
-	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Role     string `name:"role"`
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *OrgsAddOrUpdateMembershipCmd) Run(isValueSetMap map[string]bool) error {
@@ -59,9 +59,9 @@ func (c *OrgsAddOrUpdateMembershipCmd) Run(isValueSetMap map[string]bool) error 
 }
 
 type OrgsBlockUserCmd struct {
-	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *OrgsBlockUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -73,9 +73,9 @@ func (c *OrgsBlockUserCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsCheckBlockedUserCmd struct {
-	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *OrgsCheckBlockedUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -87,9 +87,9 @@ func (c *OrgsCheckBlockedUserCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsCheckMembershipCmd struct {
-	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *OrgsCheckMembershipCmd) Run(isValueSetMap map[string]bool) error {
@@ -101,9 +101,9 @@ func (c *OrgsCheckMembershipCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsCheckPublicMembershipCmd struct {
-	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *OrgsCheckPublicMembershipCmd) Run(isValueSetMap map[string]bool) error {
@@ -115,9 +115,9 @@ func (c *OrgsCheckPublicMembershipCmd) Run(isValueSetMap map[string]bool) error 
 }
 
 type OrgsConcealMembershipCmd struct {
-	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *OrgsConcealMembershipCmd) Run(isValueSetMap map[string]bool) error {
@@ -129,9 +129,9 @@ func (c *OrgsConcealMembershipCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsConvertMemberToOutsideCollaboratorCmd struct {
-	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *OrgsConvertMemberToOutsideCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
@@ -143,12 +143,12 @@ func (c *OrgsConvertMemberToOutsideCollaboratorCmd) Run(isValueSetMap map[string
 }
 
 type OrgsCreateInvitationCmd struct {
-	internal.BaseCmd
 	Email     string  `name:"email"`
 	InviteeId int64   `name:"invitee_id"`
 	Org       string  `required:"" name:"org"`
 	Role      string  `name:"role"`
 	TeamIds   []int64 `name:"team_ids"`
+	internal.BaseCmd
 }
 
 func (c *OrgsCreateInvitationCmd) Run(isValueSetMap map[string]bool) error {
@@ -163,9 +163,9 @@ func (c *OrgsCreateInvitationCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsDeleteHookCmd struct {
-	internal.BaseCmd
 	HookId int64  `required:"" name:"hook_id"`
 	Org    string `required:"" name:"org"`
+	internal.BaseCmd
 }
 
 func (c *OrgsDeleteHookCmd) Run(isValueSetMap map[string]bool) error {
@@ -177,9 +177,9 @@ func (c *OrgsDeleteHookCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsGetCmd struct {
-	internal.BaseCmd
 	Org    string `required:"" name:"org"`
 	Surtur bool   "name:\"surtur-preview\" help:\"New repository creation permissions are available to preview. You can now use `members_can_create_public_repositories`, `members_can_create_private_repositories`, and `members_can_create_internal_repositories`. You can only allow members to create internal repositories if your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+. These parameters provide more granular permissions to configure the type of repositories organization members can create.\n\nTo access these new parameters during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.surtur-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *OrgsGetCmd) Run(isValueSetMap map[string]bool) error {
@@ -191,9 +191,9 @@ func (c *OrgsGetCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsGetHookCmd struct {
-	internal.BaseCmd
 	HookId int64  `required:"" name:"hook_id"`
 	Org    string `required:"" name:"org"`
+	internal.BaseCmd
 }
 
 func (c *OrgsGetHookCmd) Run(isValueSetMap map[string]bool) error {
@@ -205,8 +205,8 @@ func (c *OrgsGetHookCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsGetMembershipForAuthenticatedUserCmd struct {
-	internal.BaseCmd
 	Org string `required:"" name:"org"`
+	internal.BaseCmd
 }
 
 func (c *OrgsGetMembershipForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -217,9 +217,9 @@ func (c *OrgsGetMembershipForAuthenticatedUserCmd) Run(isValueSetMap map[string]
 }
 
 type OrgsGetMembershipForUserCmd struct {
-	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *OrgsGetMembershipForUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -231,8 +231,8 @@ func (c *OrgsGetMembershipForUserCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsListBlockedUsersCmd struct {
-	internal.BaseCmd
 	Org string `required:"" name:"org"`
+	internal.BaseCmd
 }
 
 func (c *OrgsListBlockedUsersCmd) Run(isValueSetMap map[string]bool) error {
@@ -243,8 +243,8 @@ func (c *OrgsListBlockedUsersCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsListCmd struct {
-	internal.BaseCmd
 	Since int64 `name:"since"`
+	internal.BaseCmd
 }
 
 func (c *OrgsListCmd) Run(isValueSetMap map[string]bool) error {
@@ -255,8 +255,8 @@ func (c *OrgsListCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsListCredentialAuthorizationsCmd struct {
-	internal.BaseCmd
 	Org string `required:"" name:"org"`
+	internal.BaseCmd
 }
 
 func (c *OrgsListCredentialAuthorizationsCmd) Run(isValueSetMap map[string]bool) error {
@@ -267,9 +267,9 @@ func (c *OrgsListCredentialAuthorizationsCmd) Run(isValueSetMap map[string]bool)
 }
 
 type OrgsListForAuthenticatedUserCmd struct {
-	internal.BaseCmd
 	Page    int64 `name:"page"`
 	PerPage int64 `name:"per_page"`
+	internal.BaseCmd
 }
 
 func (c *OrgsListForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -281,10 +281,10 @@ func (c *OrgsListForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) err
 }
 
 type OrgsListForUserCmd struct {
-	internal.BaseCmd
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *OrgsListForUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -297,10 +297,10 @@ func (c *OrgsListForUserCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsListHooksCmd struct {
-	internal.BaseCmd
 	Org     string `required:"" name:"org"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
+	internal.BaseCmd
 }
 
 func (c *OrgsListHooksCmd) Run(isValueSetMap map[string]bool) error {
@@ -313,11 +313,11 @@ func (c *OrgsListHooksCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsListInstallationsCmd struct {
-	internal.BaseCmd
 	MachineMan bool   "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
 	Org        string `required:"" name:"org"`
 	Page       int64  `name:"page"`
 	PerPage    int64  `name:"per_page"`
+	internal.BaseCmd
 }
 
 func (c *OrgsListInstallationsCmd) Run(isValueSetMap map[string]bool) error {
@@ -331,11 +331,11 @@ func (c *OrgsListInstallationsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsListInvitationTeamsCmd struct {
-	internal.BaseCmd
 	InvitationId int64  `required:"" name:"invitation_id"`
 	Org          string `required:"" name:"org"`
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
+	internal.BaseCmd
 }
 
 func (c *OrgsListInvitationTeamsCmd) Run(isValueSetMap map[string]bool) error {
@@ -349,12 +349,12 @@ func (c *OrgsListInvitationTeamsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsListMembersCmd struct {
-	internal.BaseCmd
 	Filter  string `name:"filter"`
 	Org     string `required:"" name:"org"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Role    string `name:"role"`
+	internal.BaseCmd
 }
 
 func (c *OrgsListMembersCmd) Run(isValueSetMap map[string]bool) error {
@@ -369,10 +369,10 @@ func (c *OrgsListMembersCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsListMembershipsCmd struct {
-	internal.BaseCmd
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	State   string `name:"state"`
+	internal.BaseCmd
 }
 
 func (c *OrgsListMembershipsCmd) Run(isValueSetMap map[string]bool) error {
@@ -385,11 +385,11 @@ func (c *OrgsListMembershipsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsListOutsideCollaboratorsCmd struct {
-	internal.BaseCmd
 	Filter  string `name:"filter"`
 	Org     string `required:"" name:"org"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
+	internal.BaseCmd
 }
 
 func (c *OrgsListOutsideCollaboratorsCmd) Run(isValueSetMap map[string]bool) error {
@@ -403,10 +403,10 @@ func (c *OrgsListOutsideCollaboratorsCmd) Run(isValueSetMap map[string]bool) err
 }
 
 type OrgsListPendingInvitationsCmd struct {
-	internal.BaseCmd
 	Org     string `required:"" name:"org"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
+	internal.BaseCmd
 }
 
 func (c *OrgsListPendingInvitationsCmd) Run(isValueSetMap map[string]bool) error {
@@ -419,10 +419,10 @@ func (c *OrgsListPendingInvitationsCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type OrgsListPublicMembersCmd struct {
-	internal.BaseCmd
 	Org     string `required:"" name:"org"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
+	internal.BaseCmd
 }
 
 func (c *OrgsListPublicMembersCmd) Run(isValueSetMap map[string]bool) error {
@@ -435,9 +435,9 @@ func (c *OrgsListPublicMembersCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsPingHookCmd struct {
-	internal.BaseCmd
 	HookId int64  `required:"" name:"hook_id"`
 	Org    string `required:"" name:"org"`
+	internal.BaseCmd
 }
 
 func (c *OrgsPingHookCmd) Run(isValueSetMap map[string]bool) error {
@@ -449,9 +449,9 @@ func (c *OrgsPingHookCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsPublicizeMembershipCmd struct {
-	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *OrgsPublicizeMembershipCmd) Run(isValueSetMap map[string]bool) error {
@@ -463,9 +463,9 @@ func (c *OrgsPublicizeMembershipCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsRemoveCredentialAuthorizationCmd struct {
-	internal.BaseCmd
 	CredentialId int64  `required:"" name:"credential_id"`
 	Org          string `required:"" name:"org"`
+	internal.BaseCmd
 }
 
 func (c *OrgsRemoveCredentialAuthorizationCmd) Run(isValueSetMap map[string]bool) error {
@@ -477,9 +477,9 @@ func (c *OrgsRemoveCredentialAuthorizationCmd) Run(isValueSetMap map[string]bool
 }
 
 type OrgsRemoveMemberCmd struct {
-	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *OrgsRemoveMemberCmd) Run(isValueSetMap map[string]bool) error {
@@ -491,9 +491,9 @@ func (c *OrgsRemoveMemberCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsRemoveMembershipCmd struct {
-	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *OrgsRemoveMembershipCmd) Run(isValueSetMap map[string]bool) error {
@@ -505,9 +505,9 @@ func (c *OrgsRemoveMembershipCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsRemoveOutsideCollaboratorCmd struct {
-	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *OrgsRemoveOutsideCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
@@ -519,9 +519,9 @@ func (c *OrgsRemoveOutsideCollaboratorCmd) Run(isValueSetMap map[string]bool) er
 }
 
 type OrgsUnblockUserCmd struct {
-	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *OrgsUnblockUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -533,7 +533,6 @@ func (c *OrgsUnblockUserCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsUpdateCmd struct {
-	internal.BaseCmd
 	BillingEmail                         string `name:"billing_email"`
 	Company                              string `name:"company"`
 	DefaultRepositoryPermission          string `name:"default_repository_permission"`
@@ -550,6 +549,7 @@ type OrgsUpdateCmd struct {
 	Name                                 string `name:"name"`
 	Org                                  string `required:"" name:"org"`
 	Surtur                               bool   "name:\"surtur-preview\" help:\"New repository creation permissions are available to preview. You can now use `members_can_create_public_repositories`, `members_can_create_private_repositories`, and `members_can_create_internal_repositories`. You can only allow members to create internal repositories if your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+. These parameters provide more granular permissions to configure the type of repositories organization members can create.\n\nTo access these new parameters during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.surtur-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *OrgsUpdateCmd) Run(isValueSetMap map[string]bool) error {
@@ -575,9 +575,9 @@ func (c *OrgsUpdateCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsUpdateMembershipCmd struct {
-	internal.BaseCmd
 	Org   string `required:"" name:"org"`
 	State string `required:"" name:"state"`
+	internal.BaseCmd
 }
 
 func (c *OrgsUpdateMembershipCmd) Run(isValueSetMap map[string]bool) error {

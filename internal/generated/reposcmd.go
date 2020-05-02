@@ -142,8 +142,8 @@ type ReposCmd struct {
 }
 
 type ReposAcceptInvitationCmd struct {
-	internal.BaseCmd
 	InvitationId int64 `required:"" name:"invitation_id"`
+	internal.BaseCmd
 }
 
 func (c *ReposAcceptInvitationCmd) Run(isValueSetMap map[string]bool) error {
@@ -154,11 +154,11 @@ func (c *ReposAcceptInvitationCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposAddCollaboratorCmd struct {
-	internal.BaseCmd
 	Owner      string `name:"owner"`
 	Permission string `name:"permission"`
 	Repo       string `required:"" name:"repo"`
 	Username   string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *ReposAddCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
@@ -172,12 +172,12 @@ func (c *ReposAddCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposAddDeployKeyCmd struct {
-	internal.BaseCmd
 	Key      string `required:"" name:"key"`
 	Owner    string `name:"owner"`
 	ReadOnly bool   `name:"read_only"`
 	Repo     string `required:"" name:"repo"`
 	Title    string `name:"title"`
+	internal.BaseCmd
 }
 
 func (c *ReposAddDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
@@ -192,10 +192,10 @@ func (c *ReposAddDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposAddProtectedBranchAdminEnforcementCmd struct {
-	internal.BaseCmd
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposAddProtectedBranchAdminEnforcementCmd) Run(isValueSetMap map[string]bool) error {
@@ -208,10 +208,10 @@ func (c *ReposAddProtectedBranchAdminEnforcementCmd) Run(isValueSetMap map[strin
 }
 
 type ReposAddProtectedBranchAppRestrictionsCmd struct {
-	internal.BaseCmd
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposAddProtectedBranchAppRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
@@ -224,11 +224,11 @@ func (c *ReposAddProtectedBranchAppRestrictionsCmd) Run(isValueSetMap map[string
 }
 
 type ReposAddProtectedBranchRequiredSignaturesCmd struct {
-	internal.BaseCmd
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Zzzax  bool   "name:\"zzzax-preview\" required:\"\" help:\"Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.zzzax-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *ReposAddProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[string]bool) error {
@@ -242,10 +242,10 @@ func (c *ReposAddProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[str
 }
 
 type ReposAddProtectedBranchRequiredStatusChecksContextsCmd struct {
-	internal.BaseCmd
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposAddProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueSetMap map[string]bool) error {
@@ -258,10 +258,10 @@ func (c *ReposAddProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueSetM
 }
 
 type ReposAddProtectedBranchTeamRestrictionsCmd struct {
-	internal.BaseCmd
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposAddProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
@@ -274,10 +274,10 @@ func (c *ReposAddProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[strin
 }
 
 type ReposAddProtectedBranchUserRestrictionsCmd struct {
-	internal.BaseCmd
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposAddProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
@@ -290,10 +290,10 @@ func (c *ReposAddProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[strin
 }
 
 type ReposCheckCollaboratorCmd struct {
-	internal.BaseCmd
 	Owner    string `name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *ReposCheckCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
@@ -306,10 +306,10 @@ func (c *ReposCheckCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposCheckVulnerabilityAlertsCmd struct {
-	internal.BaseCmd
 	Dorian bool   "name:\"dorian-preview\" required:\"\" help:\"Enabling and disabling vulnerability alerts for a repository using the REST API is currently available for developers to preview. To access these new endpoints during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.dorian-preview+json\n```\""
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposCheckVulnerabilityAlertsCmd) Run(isValueSetMap map[string]bool) error {
@@ -322,11 +322,11 @@ func (c *ReposCheckVulnerabilityAlertsCmd) Run(isValueSetMap map[string]bool) er
 }
 
 type ReposCompareCommitsCmd struct {
-	internal.BaseCmd
 	Base  string `required:"" name:"base"`
 	Head  string `required:"" name:"head"`
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposCompareCommitsCmd) Run(isValueSetMap map[string]bool) error {
@@ -340,7 +340,6 @@ func (c *ReposCompareCommitsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposCreateCommitCommentCmd struct {
-	internal.BaseCmd
 	Body      string `required:"" name:"body"`
 	CommitSha string `required:"" name:"commit_sha"`
 	Line      int64  `name:"line"`
@@ -348,6 +347,7 @@ type ReposCreateCommitCommentCmd struct {
 	Path      string `name:"path"`
 	Position  int64  `name:"position"`
 	Repo      string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposCreateCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
@@ -364,7 +364,6 @@ func (c *ReposCreateCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposCreateDeploymentCmd struct {
-	internal.BaseCmd
 	AntMan                bool     "name:\"ant-man-preview\" help:\"The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.ant-man-preview+json\n```\""
 	AutoMerge             bool     `name:"auto_merge"`
 	Description           string   `name:"description"`
@@ -377,6 +376,7 @@ type ReposCreateDeploymentCmd struct {
 	RequiredContexts      []string `name:"required_contexts"`
 	Task                  string   `name:"task"`
 	TransientEnvironment  bool     `name:"transient_environment"`
+	internal.BaseCmd
 }
 
 func (c *ReposCreateDeploymentCmd) Run(isValueSetMap map[string]bool) error {
@@ -398,7 +398,6 @@ func (c *ReposCreateDeploymentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposCreateDeploymentStatusCmd struct {
-	internal.BaseCmd
 	AntMan         bool   "name:\"ant-man-preview\" help:\"The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.ant-man-preview+json\n```\""
 	AutoInactive   bool   `name:"auto_inactive"`
 	DeploymentId   int64  `required:"" name:"deployment_id"`
@@ -411,6 +410,7 @@ type ReposCreateDeploymentStatusCmd struct {
 	Repo           string `required:"" name:"repo"`
 	State          string `required:"" name:"state"`
 	TargetUrl      string `name:"target_url"`
+	internal.BaseCmd
 }
 
 func (c *ReposCreateDeploymentStatusCmd) Run(isValueSetMap map[string]bool) error {
@@ -432,7 +432,6 @@ func (c *ReposCreateDeploymentStatusCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type ReposCreateForAuthenticatedUserCmd struct {
-	internal.BaseCmd
 	AllowMergeCommit    bool   `name:"allow_merge_commit"`
 	AllowRebaseMerge    bool   `name:"allow_rebase_merge"`
 	AllowSquashMerge    bool   `name:"allow_squash_merge"`
@@ -452,6 +451,7 @@ type ReposCreateForAuthenticatedUserCmd struct {
 	Private             bool   `name:"private"`
 	TeamId              int64  `name:"team_id"`
 	Visibility          string `name:"visibility"`
+	internal.BaseCmd
 }
 
 func (c *ReposCreateForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -480,10 +480,10 @@ func (c *ReposCreateForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) 
 }
 
 type ReposCreateForkCmd struct {
-	internal.BaseCmd
 	Organization string `name:"organization"`
 	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposCreateForkCmd) Run(isValueSetMap map[string]bool) error {
@@ -496,7 +496,6 @@ func (c *ReposCreateForkCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposCreateInOrgCmd struct {
-	internal.BaseCmd
 	AllowMergeCommit    bool   `name:"allow_merge_commit"`
 	AllowRebaseMerge    bool   `name:"allow_rebase_merge"`
 	AllowSquashMerge    bool   `name:"allow_squash_merge"`
@@ -517,6 +516,7 @@ type ReposCreateInOrgCmd struct {
 	Private             bool   `name:"private"`
 	TeamId              int64  `name:"team_id"`
 	Visibility          string `name:"visibility"`
+	internal.BaseCmd
 }
 
 func (c *ReposCreateInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -546,7 +546,6 @@ func (c *ReposCreateInOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposCreateReleaseCmd struct {
-	internal.BaseCmd
 	Body            string `name:"body"`
 	Draft           bool   `name:"draft"`
 	Name            string `name:"name"`
@@ -555,6 +554,7 @@ type ReposCreateReleaseCmd struct {
 	Repo            string `required:"" name:"repo"`
 	TagName         string `required:"" name:"tag_name"`
 	TargetCommitish string `name:"target_commitish"`
+	internal.BaseCmd
 }
 
 func (c *ReposCreateReleaseCmd) Run(isValueSetMap map[string]bool) error {
@@ -572,7 +572,6 @@ func (c *ReposCreateReleaseCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposCreateStatusCmd struct {
-	internal.BaseCmd
 	Context     string `name:"context"`
 	Description string `name:"description"`
 	Owner       string `name:"owner"`
@@ -580,6 +579,7 @@ type ReposCreateStatusCmd struct {
 	Sha         string `required:"" name:"sha"`
 	State       string `required:"" name:"state"`
 	TargetUrl   string `name:"target_url"`
+	internal.BaseCmd
 }
 
 func (c *ReposCreateStatusCmd) Run(isValueSetMap map[string]bool) error {
@@ -596,7 +596,6 @@ func (c *ReposCreateStatusCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposCreateUsingTemplateCmd struct {
-	internal.BaseCmd
 	Baptiste      bool   "name:\"baptiste-preview\" required:\"\" help:\"Creating and using repository templates is currently available for developers to preview. To access this new endpoint during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.baptiste-preview+json\n```\""
 	Description   string `name:"description"`
 	Name          string `required:"" name:"name"`
@@ -604,6 +603,7 @@ type ReposCreateUsingTemplateCmd struct {
 	Private       bool   `name:"private"`
 	TemplateOwner string `required:"" name:"template_owner"`
 	TemplateRepo  string `required:"" name:"template_repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposCreateUsingTemplateCmd) Run(isValueSetMap map[string]bool) error {
@@ -620,8 +620,8 @@ func (c *ReposCreateUsingTemplateCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposDeclineInvitationCmd struct {
-	internal.BaseCmd
 	InvitationId int64 `required:"" name:"invitation_id"`
+	internal.BaseCmd
 }
 
 func (c *ReposDeclineInvitationCmd) Run(isValueSetMap map[string]bool) error {
@@ -632,9 +632,9 @@ func (c *ReposDeclineInvitationCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposDeleteCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposDeleteCmd) Run(isValueSetMap map[string]bool) error {
@@ -646,10 +646,10 @@ func (c *ReposDeleteCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposDeleteCommitCommentCmd struct {
-	internal.BaseCmd
 	CommentId int64  `required:"" name:"comment_id"`
 	Owner     string `name:"owner"`
 	Repo      string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposDeleteCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
@@ -662,10 +662,10 @@ func (c *ReposDeleteCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposDeleteDeploymentCmd struct {
-	internal.BaseCmd
 	DeploymentId int64  `required:"" name:"deployment_id"`
 	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposDeleteDeploymentCmd) Run(isValueSetMap map[string]bool) error {
@@ -678,10 +678,10 @@ func (c *ReposDeleteDeploymentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposDeleteDownloadCmd struct {
-	internal.BaseCmd
 	DownloadId int64  `required:"" name:"download_id"`
 	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposDeleteDownloadCmd) Run(isValueSetMap map[string]bool) error {
@@ -694,10 +694,10 @@ func (c *ReposDeleteDownloadCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposDeleteHookCmd struct {
-	internal.BaseCmd
 	HookId int64  `required:"" name:"hook_id"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposDeleteHookCmd) Run(isValueSetMap map[string]bool) error {
@@ -710,10 +710,10 @@ func (c *ReposDeleteHookCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposDeleteInvitationCmd struct {
-	internal.BaseCmd
 	InvitationId int64  `required:"" name:"invitation_id"`
 	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposDeleteInvitationCmd) Run(isValueSetMap map[string]bool) error {
@@ -726,10 +726,10 @@ func (c *ReposDeleteInvitationCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposDeleteReleaseAssetCmd struct {
-	internal.BaseCmd
 	AssetId int64  `required:"" name:"asset_id"`
 	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposDeleteReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {
@@ -742,10 +742,10 @@ func (c *ReposDeleteReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposDeleteReleaseCmd struct {
-	internal.BaseCmd
 	Owner     string `name:"owner"`
 	ReleaseId int64  `required:"" name:"release_id"`
 	Repo      string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposDeleteReleaseCmd) Run(isValueSetMap map[string]bool) error {
@@ -758,10 +758,10 @@ func (c *ReposDeleteReleaseCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposDisableAutomatedSecurityFixesCmd struct {
-	internal.BaseCmd
 	London bool   "name:\"london-preview\" required:\"\" help:\"Enabling or disabling automated security fixes is currently available for developers to preview. To access this new endpoint during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.london-preview+json\n```\""
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposDisableAutomatedSecurityFixesCmd) Run(isValueSetMap map[string]bool) error {
@@ -774,10 +774,10 @@ func (c *ReposDisableAutomatedSecurityFixesCmd) Run(isValueSetMap map[string]boo
 }
 
 type ReposDisablePagesSiteCmd struct {
-	internal.BaseCmd
 	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
 	Switcheroo bool   "name:\"switcheroo-preview\" required:\"\" help:\"Enabling and disabling Pages in the Pages API is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2019-03-14-enabling-disabling-pages/) preview for more details. To access the new endpoints during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.switcheroo-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *ReposDisablePagesSiteCmd) Run(isValueSetMap map[string]bool) error {
@@ -790,10 +790,10 @@ func (c *ReposDisablePagesSiteCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposDisableVulnerabilityAlertsCmd struct {
-	internal.BaseCmd
 	Dorian bool   "name:\"dorian-preview\" required:\"\" help:\"Enabling and disabling vulnerability alerts for a repository using the REST API is currently available for developers to preview. To access these new endpoints during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.dorian-preview+json\n```\""
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposDisableVulnerabilityAlertsCmd) Run(isValueSetMap map[string]bool) error {
@@ -806,10 +806,10 @@ func (c *ReposDisableVulnerabilityAlertsCmd) Run(isValueSetMap map[string]bool) 
 }
 
 type ReposEnableAutomatedSecurityFixesCmd struct {
-	internal.BaseCmd
 	London bool   "name:\"london-preview\" required:\"\" help:\"Enabling or disabling automated security fixes is currently available for developers to preview. To access this new endpoint during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.london-preview+json\n```\""
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposEnableAutomatedSecurityFixesCmd) Run(isValueSetMap map[string]bool) error {
@@ -822,10 +822,10 @@ func (c *ReposEnableAutomatedSecurityFixesCmd) Run(isValueSetMap map[string]bool
 }
 
 type ReposEnableVulnerabilityAlertsCmd struct {
-	internal.BaseCmd
 	Dorian bool   "name:\"dorian-preview\" required:\"\" help:\"Enabling and disabling vulnerability alerts for a repository using the REST API is currently available for developers to preview. To access these new endpoints during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.dorian-preview+json\n```\""
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposEnableVulnerabilityAlertsCmd) Run(isValueSetMap map[string]bool) error {
@@ -838,10 +838,10 @@ func (c *ReposEnableVulnerabilityAlertsCmd) Run(isValueSetMap map[string]bool) e
 }
 
 type ReposGetAllTopicsCmd struct {
-	internal.BaseCmd
 	Mercy bool   "name:\"mercy-preview\" required:\"\" help:\"The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.mercy-preview+json\n```\""
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetAllTopicsCmd) Run(isValueSetMap map[string]bool) error {
@@ -854,10 +854,10 @@ func (c *ReposGetAllTopicsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetAppsWithAccessToProtectedBranchCmd struct {
-	internal.BaseCmd
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetAppsWithAccessToProtectedBranchCmd) Run(isValueSetMap map[string]bool) error {
@@ -870,11 +870,11 @@ func (c *ReposGetAppsWithAccessToProtectedBranchCmd) Run(isValueSetMap map[strin
 }
 
 type ReposGetArchiveLinkCmd struct {
-	internal.BaseCmd
 	ArchiveFormat string `required:"" name:"archive_format"`
 	Owner         string `name:"owner"`
 	Ref           string `required:"" name:"ref"`
 	Repo          string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetArchiveLinkCmd) Run(isValueSetMap map[string]bool) error {
@@ -888,10 +888,10 @@ func (c *ReposGetArchiveLinkCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetBranchCmd struct {
-	internal.BaseCmd
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetBranchCmd) Run(isValueSetMap map[string]bool) error {
@@ -904,11 +904,11 @@ func (c *ReposGetBranchCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetBranchProtectionCmd struct {
-	internal.BaseCmd
 	Branch   string `required:"" name:"branch"`
 	LukeCage bool   "name:\"luke-cage-preview\" help:\"The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.luke-cage-preview+json\n```\""
 	Owner    string `name:"owner"`
 	Repo     string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetBranchProtectionCmd) Run(isValueSetMap map[string]bool) error {
@@ -922,10 +922,10 @@ func (c *ReposGetBranchProtectionCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetClonesCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Per   string `name:"per"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetClonesCmd) Run(isValueSetMap map[string]bool) error {
@@ -938,11 +938,11 @@ func (c *ReposGetClonesCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetCmd struct {
-	internal.BaseCmd
 	Nebula       bool   "name:\"nebula-preview\" help:\"You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).\n\nTo access repository visibility during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.nebula-preview+json\n```\""
 	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	ScarletWitch bool   "name:\"scarlet-witch-preview\" help:\"Developers can preview a new `code_of_conduct` key in responses. For more information, see [Codes of Conduct API](https://developer.github.com/v3/codes_of_conduct/).\n\nTo access this new response key during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.scarlet-witch-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *ReposGetCmd) Run(isValueSetMap map[string]bool) error {
@@ -956,9 +956,9 @@ func (c *ReposGetCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetCodeFrequencyStatsCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetCodeFrequencyStatsCmd) Run(isValueSetMap map[string]bool) error {
@@ -970,10 +970,10 @@ func (c *ReposGetCodeFrequencyStatsCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type ReposGetCollaboratorPermissionLevelCmd struct {
-	internal.BaseCmd
 	Owner    string `name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetCollaboratorPermissionLevelCmd) Run(isValueSetMap map[string]bool) error {
@@ -986,10 +986,10 @@ func (c *ReposGetCollaboratorPermissionLevelCmd) Run(isValueSetMap map[string]bo
 }
 
 type ReposGetCombinedStatusForRefCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Ref   string `required:"" name:"ref"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetCombinedStatusForRefCmd) Run(isValueSetMap map[string]bool) error {
@@ -1002,9 +1002,9 @@ func (c *ReposGetCombinedStatusForRefCmd) Run(isValueSetMap map[string]bool) err
 }
 
 type ReposGetCommitActivityStatsCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetCommitActivityStatsCmd) Run(isValueSetMap map[string]bool) error {
@@ -1016,10 +1016,10 @@ func (c *ReposGetCommitActivityStatsCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type ReposGetCommitCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Ref   string `required:"" name:"ref"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetCommitCmd) Run(isValueSetMap map[string]bool) error {
@@ -1032,11 +1032,11 @@ func (c *ReposGetCommitCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetCommitCommentCmd struct {
-	internal.BaseCmd
 	CommentId    int64  `required:"" name:"comment_id"`
 	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.\""
+	internal.BaseCmd
 }
 
 func (c *ReposGetCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
@@ -1050,11 +1050,11 @@ func (c *ReposGetCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetContentsCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Path  string `required:"" name:"path"`
 	Ref   string `name:"ref"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetContentsCmd) Run(isValueSetMap map[string]bool) error {
@@ -1068,9 +1068,9 @@ func (c *ReposGetContentsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetContributorsStatsCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetContributorsStatsCmd) Run(isValueSetMap map[string]bool) error {
@@ -1082,10 +1082,10 @@ func (c *ReposGetContributorsStatsCmd) Run(isValueSetMap map[string]bool) error 
 }
 
 type ReposGetDeployKeyCmd struct {
-	internal.BaseCmd
 	KeyId int64  `required:"" name:"key_id"`
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
@@ -1098,12 +1098,12 @@ func (c *ReposGetDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetDeploymentCmd struct {
-	internal.BaseCmd
 	AntMan       bool   "name:\"ant-man-preview\" help:\"The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.ant-man-preview+json\n```\""
 	DeploymentId int64  `required:"" name:"deployment_id"`
 	MachineMan   bool   "name:\"machine-man-preview\" help:\"If a deployment is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).\n\nTo receive the `performed_via_github_app` object in the response, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.machine-man-preview\n```\""
 	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetDeploymentCmd) Run(isValueSetMap map[string]bool) error {
@@ -1118,7 +1118,6 @@ func (c *ReposGetDeploymentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetDeploymentStatusCmd struct {
-	internal.BaseCmd
 	AntMan       bool   "name:\"ant-man-preview\" help:\"The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.ant-man-preview+json\n```\""
 	DeploymentId int64  `required:"" name:"deployment_id"`
 	Flash        bool   "name:\"flash-preview\" help:\"New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](https://developer.github.com/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.\n\nTo access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must provide the following custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.flash-preview+json\n```\""
@@ -1126,6 +1125,7 @@ type ReposGetDeploymentStatusCmd struct {
 	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	StatusId     int64  `required:"" name:"status_id"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetDeploymentStatusCmd) Run(isValueSetMap map[string]bool) error {
@@ -1142,10 +1142,10 @@ func (c *ReposGetDeploymentStatusCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetDownloadCmd struct {
-	internal.BaseCmd
 	DownloadId int64  `required:"" name:"download_id"`
 	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetDownloadCmd) Run(isValueSetMap map[string]bool) error {
@@ -1158,10 +1158,10 @@ func (c *ReposGetDownloadCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetHookCmd struct {
-	internal.BaseCmd
 	HookId int64  `required:"" name:"hook_id"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetHookCmd) Run(isValueSetMap map[string]bool) error {
@@ -1174,9 +1174,9 @@ func (c *ReposGetHookCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetLatestPagesBuildCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetLatestPagesBuildCmd) Run(isValueSetMap map[string]bool) error {
@@ -1188,9 +1188,9 @@ func (c *ReposGetLatestPagesBuildCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetLatestReleaseCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetLatestReleaseCmd) Run(isValueSetMap map[string]bool) error {
@@ -1202,10 +1202,10 @@ func (c *ReposGetLatestReleaseCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetPagesBuildCmd struct {
-	internal.BaseCmd
 	BuildId int64  `required:"" name:"build_id"`
 	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetPagesBuildCmd) Run(isValueSetMap map[string]bool) error {
@@ -1218,9 +1218,9 @@ func (c *ReposGetPagesBuildCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetPagesCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetPagesCmd) Run(isValueSetMap map[string]bool) error {
@@ -1232,9 +1232,9 @@ func (c *ReposGetPagesCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetParticipationStatsCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetParticipationStatsCmd) Run(isValueSetMap map[string]bool) error {
@@ -1246,10 +1246,10 @@ func (c *ReposGetParticipationStatsCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type ReposGetProtectedBranchAdminEnforcementCmd struct {
-	internal.BaseCmd
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetProtectedBranchAdminEnforcementCmd) Run(isValueSetMap map[string]bool) error {
@@ -1262,11 +1262,11 @@ func (c *ReposGetProtectedBranchAdminEnforcementCmd) Run(isValueSetMap map[strin
 }
 
 type ReposGetProtectedBranchPullRequestReviewEnforcementCmd struct {
-	internal.BaseCmd
 	Branch   string `required:"" name:"branch"`
 	LukeCage bool   "name:\"luke-cage-preview\" help:\"The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.luke-cage-preview+json\n```\""
 	Owner    string `name:"owner"`
 	Repo     string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetProtectedBranchPullRequestReviewEnforcementCmd) Run(isValueSetMap map[string]bool) error {
@@ -1280,11 +1280,11 @@ func (c *ReposGetProtectedBranchPullRequestReviewEnforcementCmd) Run(isValueSetM
 }
 
 type ReposGetProtectedBranchRequiredSignaturesCmd struct {
-	internal.BaseCmd
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Zzzax  bool   "name:\"zzzax-preview\" required:\"\" help:\"Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.zzzax-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *ReposGetProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[string]bool) error {
@@ -1298,10 +1298,10 @@ func (c *ReposGetProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[str
 }
 
 type ReposGetProtectedBranchRequiredStatusChecksCmd struct {
-	internal.BaseCmd
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetProtectedBranchRequiredStatusChecksCmd) Run(isValueSetMap map[string]bool) error {
@@ -1314,10 +1314,10 @@ func (c *ReposGetProtectedBranchRequiredStatusChecksCmd) Run(isValueSetMap map[s
 }
 
 type ReposGetProtectedBranchRestrictionsCmd struct {
-	internal.BaseCmd
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetProtectedBranchRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
@@ -1330,9 +1330,9 @@ func (c *ReposGetProtectedBranchRestrictionsCmd) Run(isValueSetMap map[string]bo
 }
 
 type ReposGetPunchCardStatsCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetPunchCardStatsCmd) Run(isValueSetMap map[string]bool) error {
@@ -1344,10 +1344,10 @@ func (c *ReposGetPunchCardStatsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetReadmeCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Ref   string `name:"ref"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetReadmeCmd) Run(isValueSetMap map[string]bool) error {
@@ -1360,10 +1360,10 @@ func (c *ReposGetReadmeCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetReleaseAssetCmd struct {
-	internal.BaseCmd
 	AssetId int64  `required:"" name:"asset_id"`
 	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {
@@ -1376,10 +1376,10 @@ func (c *ReposGetReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetReleaseByTagCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	Tag   string `required:"" name:"tag"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetReleaseByTagCmd) Run(isValueSetMap map[string]bool) error {
@@ -1392,10 +1392,10 @@ func (c *ReposGetReleaseByTagCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetReleaseCmd struct {
-	internal.BaseCmd
 	Owner     string `name:"owner"`
 	ReleaseId int64  `required:"" name:"release_id"`
 	Repo      string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetReleaseCmd) Run(isValueSetMap map[string]bool) error {
@@ -1408,10 +1408,10 @@ func (c *ReposGetReleaseCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetTeamsWithAccessToProtectedBranchCmd struct {
-	internal.BaseCmd
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetTeamsWithAccessToProtectedBranchCmd) Run(isValueSetMap map[string]bool) error {
@@ -1424,9 +1424,9 @@ func (c *ReposGetTeamsWithAccessToProtectedBranchCmd) Run(isValueSetMap map[stri
 }
 
 type ReposGetTopPathsCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetTopPathsCmd) Run(isValueSetMap map[string]bool) error {
@@ -1438,9 +1438,9 @@ func (c *ReposGetTopPathsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetTopReferrersCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetTopReferrersCmd) Run(isValueSetMap map[string]bool) error {
@@ -1452,10 +1452,10 @@ func (c *ReposGetTopReferrersCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetUsersWithAccessToProtectedBranchCmd struct {
-	internal.BaseCmd
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetUsersWithAccessToProtectedBranchCmd) Run(isValueSetMap map[string]bool) error {
@@ -1468,10 +1468,10 @@ func (c *ReposGetUsersWithAccessToProtectedBranchCmd) Run(isValueSetMap map[stri
 }
 
 type ReposGetViewsCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Per   string `name:"per"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposGetViewsCmd) Run(isValueSetMap map[string]bool) error {
@@ -1484,12 +1484,12 @@ func (c *ReposGetViewsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListAssetsForReleaseCmd struct {
-	internal.BaseCmd
 	Owner     string `name:"owner"`
 	Page      int64  `name:"page"`
 	PerPage   int64  `name:"per_page"`
 	ReleaseId int64  `required:"" name:"release_id"`
 	Repo      string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposListAssetsForReleaseCmd) Run(isValueSetMap map[string]bool) error {
@@ -1504,12 +1504,12 @@ func (c *ReposListAssetsForReleaseCmd) Run(isValueSetMap map[string]bool) error 
 }
 
 type ReposListBranchesCmd struct {
-	internal.BaseCmd
 	Owner     string `name:"owner"`
 	Page      int64  `name:"page"`
 	PerPage   int64  `name:"per_page"`
 	Protected bool   `name:"protected"`
 	Repo      string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposListBranchesCmd) Run(isValueSetMap map[string]bool) error {
@@ -1524,11 +1524,11 @@ func (c *ReposListBranchesCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListBranchesForHeadCommitCmd struct {
-	internal.BaseCmd
 	CommitSha string `required:"" name:"commit_sha"`
 	Groot     bool   "name:\"groot-preview\" required:\"\" help:\"Listing branches or pull requests for a commit in the Commits API is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2019-04-11-pulls-branches-for-commit/) for more details. To access the new endpoints during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.groot-preview+json\n```\""
 	Owner     string `name:"owner"`
 	Repo      string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposListBranchesForHeadCommitCmd) Run(isValueSetMap map[string]bool) error {
@@ -1542,12 +1542,12 @@ func (c *ReposListBranchesForHeadCommitCmd) Run(isValueSetMap map[string]bool) e
 }
 
 type ReposListCollaboratorsCmd struct {
-	internal.BaseCmd
 	Affiliation string `name:"affiliation"`
 	Owner       string `name:"owner"`
 	Page        int64  `name:"page"`
 	PerPage     int64  `name:"per_page"`
 	Repo        string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposListCollaboratorsCmd) Run(isValueSetMap map[string]bool) error {
@@ -1562,13 +1562,13 @@ func (c *ReposListCollaboratorsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListCommentsForCommitCmd struct {
-	internal.BaseCmd
 	CommitSha    string `required:"" name:"commit_sha"`
 	Owner        string `name:"owner"`
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
 	Repo         string `required:"" name:"repo"`
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.\""
+	internal.BaseCmd
 }
 
 func (c *ReposListCommentsForCommitCmd) Run(isValueSetMap map[string]bool) error {
@@ -1584,12 +1584,12 @@ func (c *ReposListCommentsForCommitCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type ReposListCommitCommentsCmd struct {
-	internal.BaseCmd
 	Owner        string `name:"owner"`
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
 	Repo         string `required:"" name:"repo"`
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.\""
+	internal.BaseCmd
 }
 
 func (c *ReposListCommitCommentsCmd) Run(isValueSetMap map[string]bool) error {
@@ -1604,7 +1604,6 @@ func (c *ReposListCommitCommentsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListCommitsCmd struct {
-	internal.BaseCmd
 	Author  string `name:"author"`
 	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
@@ -1614,6 +1613,7 @@ type ReposListCommitsCmd struct {
 	Sha     string `name:"sha"`
 	Since   string `name:"since"`
 	Until   string `name:"until"`
+	internal.BaseCmd
 }
 
 func (c *ReposListCommitsCmd) Run(isValueSetMap map[string]bool) error {
@@ -1632,12 +1632,12 @@ func (c *ReposListCommitsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListContributorsCmd struct {
-	internal.BaseCmd
 	Anon    string `name:"anon"`
 	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposListContributorsCmd) Run(isValueSetMap map[string]bool) error {
@@ -1652,11 +1652,11 @@ func (c *ReposListContributorsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListDeployKeysCmd struct {
-	internal.BaseCmd
 	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposListDeployKeysCmd) Run(isValueSetMap map[string]bool) error {
@@ -1670,7 +1670,6 @@ func (c *ReposListDeployKeysCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListDeploymentStatusesCmd struct {
-	internal.BaseCmd
 	AntMan       bool   "name:\"ant-man-preview\" help:\"The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.ant-man-preview+json\n```\""
 	DeploymentId int64  `required:"" name:"deployment_id"`
 	Flash        bool   "name:\"flash-preview\" help:\"New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](https://developer.github.com/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.\n\nTo access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must provide the following custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.flash-preview+json\n```\""
@@ -1678,6 +1677,7 @@ type ReposListDeploymentStatusesCmd struct {
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
 	Repo         string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposListDeploymentStatusesCmd) Run(isValueSetMap map[string]bool) error {
@@ -1694,7 +1694,6 @@ func (c *ReposListDeploymentStatusesCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type ReposListDeploymentsCmd struct {
-	internal.BaseCmd
 	AntMan      bool   "name:\"ant-man-preview\" help:\"The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.ant-man-preview+json\n```\""
 	Environment string `name:"environment"`
 	Owner       string `name:"owner"`
@@ -1704,6 +1703,7 @@ type ReposListDeploymentsCmd struct {
 	Repo        string `required:"" name:"repo"`
 	Sha         string `name:"sha"`
 	Task        string `name:"task"`
+	internal.BaseCmd
 }
 
 func (c *ReposListDeploymentsCmd) Run(isValueSetMap map[string]bool) error {
@@ -1722,11 +1722,11 @@ func (c *ReposListDeploymentsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListDownloadsCmd struct {
-	internal.BaseCmd
 	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposListDownloadsCmd) Run(isValueSetMap map[string]bool) error {
@@ -1740,7 +1740,6 @@ func (c *ReposListDownloadsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListForAuthenticatedUserCmd struct {
-	internal.BaseCmd
 	Affiliation string `name:"affiliation"`
 	Direction   string `name:"direction"`
 	Page        int64  `name:"page"`
@@ -1748,6 +1747,7 @@ type ReposListForAuthenticatedUserCmd struct {
 	Sort        string `name:"sort"`
 	Type        string `name:"type"`
 	Visibility  string `name:"visibility"`
+	internal.BaseCmd
 }
 
 func (c *ReposListForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -1764,7 +1764,6 @@ func (c *ReposListForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) er
 }
 
 type ReposListForOrgCmd struct {
-	internal.BaseCmd
 	Baptiste  bool   "name:\"baptiste-preview\" help:\"The `is_template` and `template_repository` keys are currently available for developer to preview. See [Create a repository using a template](https://developer.github.com/v3/repos/#create-a-repository-using-a-template) to learn how to create template repositories. To access these new response keys during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.baptiste-preview+json\n```\""
 	Direction string `name:"direction"`
 	Nebula    bool   "name:\"nebula-preview\" help:\"You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).\n\nTo access repository visibility during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.nebula-preview+json\n```\""
@@ -1773,6 +1772,7 @@ type ReposListForOrgCmd struct {
 	PerPage   int64  `name:"per_page"`
 	Sort      string `name:"sort"`
 	Type      string `name:"type"`
+	internal.BaseCmd
 }
 
 func (c *ReposListForOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -1790,7 +1790,6 @@ func (c *ReposListForOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListForUserCmd struct {
-	internal.BaseCmd
 	Direction string `name:"direction"`
 	Nebula    bool   "name:\"nebula-preview\" help:\"You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).\n\nTo access repository visibility during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.nebula-preview+json\n```\""
 	Page      int64  `name:"page"`
@@ -1798,6 +1797,7 @@ type ReposListForUserCmd struct {
 	Sort      string `name:"sort"`
 	Type      string `name:"type"`
 	Username  string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *ReposListForUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -1814,12 +1814,12 @@ func (c *ReposListForUserCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListForksCmd struct {
-	internal.BaseCmd
 	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
 	Sort    string `name:"sort"`
+	internal.BaseCmd
 }
 
 func (c *ReposListForksCmd) Run(isValueSetMap map[string]bool) error {
@@ -1834,11 +1834,11 @@ func (c *ReposListForksCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListHooksCmd struct {
-	internal.BaseCmd
 	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposListHooksCmd) Run(isValueSetMap map[string]bool) error {
@@ -1852,11 +1852,11 @@ func (c *ReposListHooksCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListInvitationsCmd struct {
-	internal.BaseCmd
 	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposListInvitationsCmd) Run(isValueSetMap map[string]bool) error {
@@ -1870,9 +1870,9 @@ func (c *ReposListInvitationsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListInvitationsForAuthenticatedUserCmd struct {
-	internal.BaseCmd
 	Page    int64 `name:"page"`
 	PerPage int64 `name:"per_page"`
+	internal.BaseCmd
 }
 
 func (c *ReposListInvitationsForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -1884,9 +1884,9 @@ func (c *ReposListInvitationsForAuthenticatedUserCmd) Run(isValueSetMap map[stri
 }
 
 type ReposListLanguagesCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposListLanguagesCmd) Run(isValueSetMap map[string]bool) error {
@@ -1898,11 +1898,11 @@ func (c *ReposListLanguagesCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListPagesBuildsCmd struct {
-	internal.BaseCmd
 	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposListPagesBuildsCmd) Run(isValueSetMap map[string]bool) error {
@@ -1916,10 +1916,10 @@ func (c *ReposListPagesBuildsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListProtectedBranchRequiredStatusChecksContextsCmd struct {
-	internal.BaseCmd
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposListProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueSetMap map[string]bool) error {
@@ -1932,8 +1932,8 @@ func (c *ReposListProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueSet
 }
 
 type ReposListPublicCmd struct {
-	internal.BaseCmd
 	Since int64 `name:"since"`
+	internal.BaseCmd
 }
 
 func (c *ReposListPublicCmd) Run(isValueSetMap map[string]bool) error {
@@ -1944,13 +1944,13 @@ func (c *ReposListPublicCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListPullRequestsAssociatedWithCommitCmd struct {
-	internal.BaseCmd
 	CommitSha string `required:"" name:"commit_sha"`
 	Groot     bool   "name:\"groot-preview\" required:\"\" help:\"Listing branches or pull requests for a commit in the Commits API is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2019-04-11-pulls-branches-for-commit/) for more details. To access the new endpoints during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.groot-preview+json\n```\""
 	Owner     string `name:"owner"`
 	Page      int64  `name:"page"`
 	PerPage   int64  `name:"per_page"`
 	Repo      string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposListPullRequestsAssociatedWithCommitCmd) Run(isValueSetMap map[string]bool) error {
@@ -1966,11 +1966,11 @@ func (c *ReposListPullRequestsAssociatedWithCommitCmd) Run(isValueSetMap map[str
 }
 
 type ReposListReleasesCmd struct {
-	internal.BaseCmd
 	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposListReleasesCmd) Run(isValueSetMap map[string]bool) error {
@@ -1984,12 +1984,12 @@ func (c *ReposListReleasesCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListStatusesForRefCmd struct {
-	internal.BaseCmd
 	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Ref     string `required:"" name:"ref"`
 	Repo    string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposListStatusesForRefCmd) Run(isValueSetMap map[string]bool) error {
@@ -2004,11 +2004,11 @@ func (c *ReposListStatusesForRefCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListTagsCmd struct {
-	internal.BaseCmd
 	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposListTagsCmd) Run(isValueSetMap map[string]bool) error {
@@ -2022,11 +2022,11 @@ func (c *ReposListTagsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListTeamsCmd struct {
-	internal.BaseCmd
 	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposListTeamsCmd) Run(isValueSetMap map[string]bool) error {
@@ -2040,12 +2040,12 @@ func (c *ReposListTeamsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposMergeCmd struct {
-	internal.BaseCmd
 	Base          string `required:"" name:"base"`
 	CommitMessage string `name:"commit_message"`
 	Head          string `required:"" name:"head"`
 	Owner         string `name:"owner"`
 	Repo          string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposMergeCmd) Run(isValueSetMap map[string]bool) error {
@@ -2060,10 +2060,10 @@ func (c *ReposMergeCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposPingHookCmd struct {
-	internal.BaseCmd
 	HookId int64  `required:"" name:"hook_id"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposPingHookCmd) Run(isValueSetMap map[string]bool) error {
@@ -2076,10 +2076,10 @@ func (c *ReposPingHookCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposRemoveBranchProtectionCmd struct {
-	internal.BaseCmd
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposRemoveBranchProtectionCmd) Run(isValueSetMap map[string]bool) error {
@@ -2092,10 +2092,10 @@ func (c *ReposRemoveBranchProtectionCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type ReposRemoveCollaboratorCmd struct {
-	internal.BaseCmd
 	Owner    string `name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *ReposRemoveCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
@@ -2108,10 +2108,10 @@ func (c *ReposRemoveCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposRemoveDeployKeyCmd struct {
-	internal.BaseCmd
 	KeyId int64  `required:"" name:"key_id"`
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposRemoveDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
@@ -2124,10 +2124,10 @@ func (c *ReposRemoveDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposRemoveProtectedBranchAdminEnforcementCmd struct {
-	internal.BaseCmd
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposRemoveProtectedBranchAdminEnforcementCmd) Run(isValueSetMap map[string]bool) error {
@@ -2140,10 +2140,10 @@ func (c *ReposRemoveProtectedBranchAdminEnforcementCmd) Run(isValueSetMap map[st
 }
 
 type ReposRemoveProtectedBranchAppRestrictionsCmd struct {
-	internal.BaseCmd
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposRemoveProtectedBranchAppRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
@@ -2156,10 +2156,10 @@ func (c *ReposRemoveProtectedBranchAppRestrictionsCmd) Run(isValueSetMap map[str
 }
 
 type ReposRemoveProtectedBranchPullRequestReviewEnforcementCmd struct {
-	internal.BaseCmd
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposRemoveProtectedBranchPullRequestReviewEnforcementCmd) Run(isValueSetMap map[string]bool) error {
@@ -2172,11 +2172,11 @@ func (c *ReposRemoveProtectedBranchPullRequestReviewEnforcementCmd) Run(isValueS
 }
 
 type ReposRemoveProtectedBranchRequiredSignaturesCmd struct {
-	internal.BaseCmd
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Zzzax  bool   "name:\"zzzax-preview\" required:\"\" help:\"Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.zzzax-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *ReposRemoveProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[string]bool) error {
@@ -2190,10 +2190,10 @@ func (c *ReposRemoveProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[
 }
 
 type ReposRemoveProtectedBranchRequiredStatusChecksCmd struct {
-	internal.BaseCmd
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposRemoveProtectedBranchRequiredStatusChecksCmd) Run(isValueSetMap map[string]bool) error {
@@ -2206,10 +2206,10 @@ func (c *ReposRemoveProtectedBranchRequiredStatusChecksCmd) Run(isValueSetMap ma
 }
 
 type ReposRemoveProtectedBranchRequiredStatusChecksContextsCmd struct {
-	internal.BaseCmd
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposRemoveProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueSetMap map[string]bool) error {
@@ -2222,10 +2222,10 @@ func (c *ReposRemoveProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueS
 }
 
 type ReposRemoveProtectedBranchRestrictionsCmd struct {
-	internal.BaseCmd
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposRemoveProtectedBranchRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
@@ -2238,10 +2238,10 @@ func (c *ReposRemoveProtectedBranchRestrictionsCmd) Run(isValueSetMap map[string
 }
 
 type ReposRemoveProtectedBranchTeamRestrictionsCmd struct {
-	internal.BaseCmd
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposRemoveProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
@@ -2254,10 +2254,10 @@ func (c *ReposRemoveProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[st
 }
 
 type ReposRemoveProtectedBranchUserRestrictionsCmd struct {
-	internal.BaseCmd
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposRemoveProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
@@ -2270,11 +2270,11 @@ func (c *ReposRemoveProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[st
 }
 
 type ReposReplaceAllTopicsCmd struct {
-	internal.BaseCmd
 	Mercy bool     "name:\"mercy-preview\" required:\"\" help:\"Repository topics on GitHub are currently available for developers to preview. To use this endpoint, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.mercy-preview+json\n```\""
 	Names []string `required:"" name:"names"`
 	Owner string   `name:"owner"`
 	Repo  string   `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposReplaceAllTopicsCmd) Run(isValueSetMap map[string]bool) error {
@@ -2288,10 +2288,10 @@ func (c *ReposReplaceAllTopicsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposReplaceProtectedBranchAppRestrictionsCmd struct {
-	internal.BaseCmd
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposReplaceProtectedBranchAppRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
@@ -2304,10 +2304,10 @@ func (c *ReposReplaceProtectedBranchAppRestrictionsCmd) Run(isValueSetMap map[st
 }
 
 type ReposReplaceProtectedBranchRequiredStatusChecksContextsCmd struct {
-	internal.BaseCmd
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposReplaceProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueSetMap map[string]bool) error {
@@ -2320,10 +2320,10 @@ func (c *ReposReplaceProtectedBranchRequiredStatusChecksContextsCmd) Run(isValue
 }
 
 type ReposReplaceProtectedBranchTeamRestrictionsCmd struct {
-	internal.BaseCmd
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposReplaceProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
@@ -2336,10 +2336,10 @@ func (c *ReposReplaceProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[s
 }
 
 type ReposReplaceProtectedBranchUserRestrictionsCmd struct {
-	internal.BaseCmd
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposReplaceProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
@@ -2352,9 +2352,9 @@ func (c *ReposReplaceProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[s
 }
 
 type ReposRequestPageBuildCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposRequestPageBuildCmd) Run(isValueSetMap map[string]bool) error {
@@ -2366,9 +2366,9 @@ func (c *ReposRequestPageBuildCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposRetrieveCommunityProfileMetricsCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposRetrieveCommunityProfileMetricsCmd) Run(isValueSetMap map[string]bool) error {
@@ -2380,10 +2380,10 @@ func (c *ReposRetrieveCommunityProfileMetricsCmd) Run(isValueSetMap map[string]b
 }
 
 type ReposTestPushHookCmd struct {
-	internal.BaseCmd
 	HookId int64  `required:"" name:"hook_id"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposTestPushHookCmd) Run(isValueSetMap map[string]bool) error {
@@ -2396,11 +2396,11 @@ func (c *ReposTestPushHookCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposTransferCmd struct {
-	internal.BaseCmd
 	NewOwner string  `name:"new_owner"`
 	Owner    string  `name:"owner"`
 	Repo     string  `required:"" name:"repo"`
 	TeamIds  []int64 `name:"team_ids"`
+	internal.BaseCmd
 }
 
 func (c *ReposTransferCmd) Run(isValueSetMap map[string]bool) error {
@@ -2414,7 +2414,6 @@ func (c *ReposTransferCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposUpdateCmd struct {
-	internal.BaseCmd
 	AllowMergeCommit    bool   `name:"allow_merge_commit"`
 	AllowRebaseMerge    bool   `name:"allow_rebase_merge"`
 	AllowSquashMerge    bool   `name:"allow_squash_merge"`
@@ -2434,6 +2433,7 @@ type ReposUpdateCmd struct {
 	Private             bool   `name:"private"`
 	Repo                string `required:"" name:"repo"`
 	Visibility          string `name:"visibility"`
+	internal.BaseCmd
 }
 
 func (c *ReposUpdateCmd) Run(isValueSetMap map[string]bool) error {
@@ -2462,11 +2462,11 @@ func (c *ReposUpdateCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposUpdateCommitCommentCmd struct {
-	internal.BaseCmd
 	Body      string `required:"" name:"body"`
 	CommentId int64  `required:"" name:"comment_id"`
 	Owner     string `name:"owner"`
 	Repo      string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposUpdateCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
@@ -2480,11 +2480,11 @@ func (c *ReposUpdateCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposUpdateInformationAboutPagesSiteCmd struct {
-	internal.BaseCmd
 	Cname  string `name:"cname"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Source string `name:"source"`
+	internal.BaseCmd
 }
 
 func (c *ReposUpdateInformationAboutPagesSiteCmd) Run(isValueSetMap map[string]bool) error {
@@ -2498,11 +2498,11 @@ func (c *ReposUpdateInformationAboutPagesSiteCmd) Run(isValueSetMap map[string]b
 }
 
 type ReposUpdateInvitationCmd struct {
-	internal.BaseCmd
 	InvitationId int64  `required:"" name:"invitation_id"`
 	Owner        string `name:"owner"`
 	Permissions  string `name:"permissions"`
 	Repo         string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposUpdateInvitationCmd) Run(isValueSetMap map[string]bool) error {
@@ -2516,12 +2516,12 @@ func (c *ReposUpdateInvitationCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposUpdateProtectedBranchRequiredStatusChecksCmd struct {
-	internal.BaseCmd
 	Branch   string   `required:"" name:"branch"`
 	Contexts []string `name:"contexts"`
 	Owner    string   `name:"owner"`
 	Repo     string   `required:"" name:"repo"`
 	Strict   bool     `name:"strict"`
+	internal.BaseCmd
 }
 
 func (c *ReposUpdateProtectedBranchRequiredStatusChecksCmd) Run(isValueSetMap map[string]bool) error {
@@ -2536,12 +2536,12 @@ func (c *ReposUpdateProtectedBranchRequiredStatusChecksCmd) Run(isValueSetMap ma
 }
 
 type ReposUpdateReleaseAssetCmd struct {
-	internal.BaseCmd
 	AssetId int64  `required:"" name:"asset_id"`
 	Label   string `name:"label"`
 	Name    string `name:"name"`
 	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposUpdateReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {
@@ -2556,7 +2556,6 @@ func (c *ReposUpdateReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposUpdateReleaseCmd struct {
-	internal.BaseCmd
 	Body            string `name:"body"`
 	Draft           bool   `name:"draft"`
 	Name            string `name:"name"`
@@ -2566,6 +2565,7 @@ type ReposUpdateReleaseCmd struct {
 	Repo            string `required:"" name:"repo"`
 	TagName         string `name:"tag_name"`
 	TargetCommitish string `name:"target_commitish"`
+	internal.BaseCmd
 }
 
 func (c *ReposUpdateReleaseCmd) Run(isValueSetMap map[string]bool) error {
@@ -2584,7 +2584,6 @@ func (c *ReposUpdateReleaseCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposUploadReleaseAssetCmd struct {
-	internal.BaseCmd
 	ContentLength string `required:"" name:"content-length"`
 	ContentType   string `required:"" name:"content-type"`
 	Label         string `name:"label"`
@@ -2592,6 +2591,7 @@ type ReposUploadReleaseAssetCmd struct {
 	Owner         string `name:"owner"`
 	ReleaseId     int64  `required:"" name:"release_id"`
 	Repo          string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ReposUploadReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {

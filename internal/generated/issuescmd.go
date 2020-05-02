@@ -47,11 +47,11 @@ type IssuesCmd struct {
 }
 
 type IssuesAddAssigneesCmd struct {
-	internal.BaseCmd
 	Assignees   []string `name:"assignees"`
 	IssueNumber int64    `required:"" name:"issue_number"`
 	Owner       string   `name:"owner"`
 	Repo        string   `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *IssuesAddAssigneesCmd) Run(isValueSetMap map[string]bool) error {
@@ -65,11 +65,11 @@ func (c *IssuesAddAssigneesCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesAddLabelsCmd struct {
-	internal.BaseCmd
 	IssueNumber int64    `required:"" name:"issue_number"`
 	Labels      []string `required:"" name:"labels"`
 	Owner       string   `name:"owner"`
 	Repo        string   `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *IssuesAddLabelsCmd) Run(isValueSetMap map[string]bool) error {
@@ -83,10 +83,10 @@ func (c *IssuesAddLabelsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesCheckAssigneeCmd struct {
-	internal.BaseCmd
 	Assignee string `required:"" name:"assignee"`
 	Owner    string `name:"owner"`
 	Repo     string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *IssuesCheckAssigneeCmd) Run(isValueSetMap map[string]bool) error {
@@ -99,7 +99,6 @@ func (c *IssuesCheckAssigneeCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesCreateCmd struct {
-	internal.BaseCmd
 	Assignee  string   `name:"assignee"`
 	Assignees []string `name:"assignees"`
 	Body      string   `name:"body"`
@@ -108,6 +107,7 @@ type IssuesCreateCmd struct {
 	Owner     string   `name:"owner"`
 	Repo      string   `required:"" name:"repo"`
 	Title     string   `required:"" name:"title"`
+	internal.BaseCmd
 }
 
 func (c *IssuesCreateCmd) Run(isValueSetMap map[string]bool) error {
@@ -125,11 +125,11 @@ func (c *IssuesCreateCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesCreateCommentCmd struct {
-	internal.BaseCmd
 	Body        string `required:"" name:"body"`
 	IssueNumber int64  `required:"" name:"issue_number"`
 	Owner       string `name:"owner"`
 	Repo        string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *IssuesCreateCommentCmd) Run(isValueSetMap map[string]bool) error {
@@ -143,12 +143,12 @@ func (c *IssuesCreateCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesCreateLabelCmd struct {
-	internal.BaseCmd
 	Color       string `required:"" name:"color"`
 	Description string `name:"description"`
 	Name        string `required:"" name:"name"`
 	Owner       string `name:"owner"`
 	Repo        string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *IssuesCreateLabelCmd) Run(isValueSetMap map[string]bool) error {
@@ -163,13 +163,13 @@ func (c *IssuesCreateLabelCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesCreateMilestoneCmd struct {
-	internal.BaseCmd
 	Description string `name:"description"`
 	DueOn       string `name:"due_on"`
 	Owner       string `name:"owner"`
 	Repo        string `required:"" name:"repo"`
 	State       string `name:"state"`
 	Title       string `required:"" name:"title"`
+	internal.BaseCmd
 }
 
 func (c *IssuesCreateMilestoneCmd) Run(isValueSetMap map[string]bool) error {
@@ -185,10 +185,10 @@ func (c *IssuesCreateMilestoneCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesDeleteCommentCmd struct {
-	internal.BaseCmd
 	CommentId int64  `required:"" name:"comment_id"`
 	Owner     string `name:"owner"`
 	Repo      string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *IssuesDeleteCommentCmd) Run(isValueSetMap map[string]bool) error {
@@ -201,10 +201,10 @@ func (c *IssuesDeleteCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesDeleteLabelCmd struct {
-	internal.BaseCmd
 	Name  string `required:"" name:"name"`
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *IssuesDeleteLabelCmd) Run(isValueSetMap map[string]bool) error {
@@ -217,10 +217,10 @@ func (c *IssuesDeleteLabelCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesDeleteMilestoneCmd struct {
-	internal.BaseCmd
 	MilestoneNumber int64  `required:"" name:"milestone_number"`
 	Owner           string `name:"owner"`
 	Repo            string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *IssuesDeleteMilestoneCmd) Run(isValueSetMap map[string]bool) error {
@@ -233,11 +233,11 @@ func (c *IssuesDeleteMilestoneCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesGetCmd struct {
-	internal.BaseCmd
 	IssueNumber  int64  `required:"" name:"issue_number"`
 	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.\""
+	internal.BaseCmd
 }
 
 func (c *IssuesGetCmd) Run(isValueSetMap map[string]bool) error {
@@ -251,12 +251,12 @@ func (c *IssuesGetCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesGetCommentCmd struct {
-	internal.BaseCmd
 	CommentId    int64  `required:"" name:"comment_id"`
 	MachineMan   bool   "name:\"machine-man-preview\" help:\"If an issue comment is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).\n\nTo receive the `performed_via_github_app` object in the response, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.machine-man-preview\n```\""
 	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.\""
+	internal.BaseCmd
 }
 
 func (c *IssuesGetCommentCmd) Run(isValueSetMap map[string]bool) error {
@@ -271,13 +271,13 @@ func (c *IssuesGetCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesGetEventCmd struct {
-	internal.BaseCmd
 	EventId    int64  `required:"" name:"event_id"`
 	MachineMan bool   "name:\"machine-man-preview\" help:\"If an issue event is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).\n\nTo receive the `performed_via_github_app` object in the response, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.machine-man-preview\n```\""
 	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
 	SailorV    bool   "name:\"sailor-v-preview\" help:\"You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.sailor-v-preview+json\n```\""
 	Starfox    bool   "name:\"starfox-preview\" help:\"Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](https://developer.github.com/changes/2018-09-05-project-card-events).\n\nTo receive the `project_card` attribute, project boards must be [enabled](https://help.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.starfox-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *IssuesGetEventCmd) Run(isValueSetMap map[string]bool) error {
@@ -293,10 +293,10 @@ func (c *IssuesGetEventCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesGetLabelCmd struct {
-	internal.BaseCmd
 	Name  string `required:"" name:"name"`
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *IssuesGetLabelCmd) Run(isValueSetMap map[string]bool) error {
@@ -309,10 +309,10 @@ func (c *IssuesGetLabelCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesGetMilestoneCmd struct {
-	internal.BaseCmd
 	MilestoneNumber int64  `required:"" name:"milestone_number"`
 	Owner           string `name:"owner"`
 	Repo            string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *IssuesGetMilestoneCmd) Run(isValueSetMap map[string]bool) error {
@@ -325,11 +325,11 @@ func (c *IssuesGetMilestoneCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesListAssigneesCmd struct {
-	internal.BaseCmd
 	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *IssuesListAssigneesCmd) Run(isValueSetMap map[string]bool) error {
@@ -343,7 +343,6 @@ func (c *IssuesListAssigneesCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesListCmd struct {
-	internal.BaseCmd
 	Direction    string `name:"direction"`
 	Filter       string `name:"filter"`
 	Labels       string `name:"labels"`
@@ -354,6 +353,7 @@ type IssuesListCmd struct {
 	Sort         string `name:"sort"`
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.\""
 	State        string `name:"state"`
+	internal.BaseCmd
 }
 
 func (c *IssuesListCmd) Run(isValueSetMap map[string]bool) error {
@@ -373,7 +373,6 @@ func (c *IssuesListCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesListCommentsCmd struct {
-	internal.BaseCmd
 	IssueNumber  int64  `required:"" name:"issue_number"`
 	Owner        string `name:"owner"`
 	Page         int64  `name:"page"`
@@ -381,6 +380,7 @@ type IssuesListCommentsCmd struct {
 	Repo         string `required:"" name:"repo"`
 	Since        string `name:"since"`
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.\""
+	internal.BaseCmd
 }
 
 func (c *IssuesListCommentsCmd) Run(isValueSetMap map[string]bool) error {
@@ -397,7 +397,6 @@ func (c *IssuesListCommentsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesListCommentsForRepoCmd struct {
-	internal.BaseCmd
 	Direction    string `name:"direction"`
 	Owner        string `name:"owner"`
 	Page         int64  `name:"page"`
@@ -406,6 +405,7 @@ type IssuesListCommentsForRepoCmd struct {
 	Since        string `name:"since"`
 	Sort         string `name:"sort"`
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.\""
+	internal.BaseCmd
 }
 
 func (c *IssuesListCommentsForRepoCmd) Run(isValueSetMap map[string]bool) error {
@@ -423,7 +423,6 @@ func (c *IssuesListCommentsForRepoCmd) Run(isValueSetMap map[string]bool) error 
 }
 
 type IssuesListEventsCmd struct {
-	internal.BaseCmd
 	IssueNumber int64  `required:"" name:"issue_number"`
 	Owner       string `name:"owner"`
 	Page        int64  `name:"page"`
@@ -431,6 +430,7 @@ type IssuesListEventsCmd struct {
 	Repo        string `required:"" name:"repo"`
 	SailorV     bool   "name:\"sailor-v-preview\" help:\"You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.sailor-v-preview+json\n```\""
 	Starfox     bool   "name:\"starfox-preview\" help:\"Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](https://developer.github.com/changes/2018-09-05-project-card-events).\n\nTo receive the `project_card` attribute, project boards must be [enabled](https://help.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.starfox-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *IssuesListEventsCmd) Run(isValueSetMap map[string]bool) error {
@@ -447,13 +447,13 @@ func (c *IssuesListEventsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesListEventsForRepoCmd struct {
-	internal.BaseCmd
 	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
 	SailorV bool   "name:\"sailor-v-preview\" help:\"You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.sailor-v-preview+json\n```\""
 	Starfox bool   "name:\"starfox-preview\" help:\"Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](https://developer.github.com/changes/2018-09-05-project-card-events).\n\nTo receive the `project_card` attribute, project boards must be [enabled](https://help.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.starfox-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *IssuesListEventsForRepoCmd) Run(isValueSetMap map[string]bool) error {
@@ -469,7 +469,6 @@ func (c *IssuesListEventsForRepoCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesListEventsForTimelineCmd struct {
-	internal.BaseCmd
 	IssueNumber int64  `required:"" name:"issue_number"`
 	Mockingbird bool   "name:\"mockingbird-preview\" required:\"\" help:\"The API to get issue timeline events is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-23-timeline-preview-api/) for full details. To access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.mockingbird-preview\n```\""
 	Owner       string `name:"owner"`
@@ -477,6 +476,7 @@ type IssuesListEventsForTimelineCmd struct {
 	PerPage     int64  `name:"per_page"`
 	Repo        string `required:"" name:"repo"`
 	Starfox     bool   "name:\"starfox-preview\" help:\"Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](https://developer.github.com/changes/2018-09-05-project-card-events).\n\nTo receive the `project_card` attribute, project boards must be [enabled](https://help.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.starfox-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *IssuesListEventsForTimelineCmd) Run(isValueSetMap map[string]bool) error {
@@ -493,7 +493,6 @@ func (c *IssuesListEventsForTimelineCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type IssuesListForAuthenticatedUserCmd struct {
-	internal.BaseCmd
 	Direction    string `name:"direction"`
 	Filter       string `name:"filter"`
 	Labels       string `name:"labels"`
@@ -504,6 +503,7 @@ type IssuesListForAuthenticatedUserCmd struct {
 	Sort         string `name:"sort"`
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.\""
 	State        string `name:"state"`
+	internal.BaseCmd
 }
 
 func (c *IssuesListForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -523,7 +523,6 @@ func (c *IssuesListForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) e
 }
 
 type IssuesListForOrgCmd struct {
-	internal.BaseCmd
 	Direction    string `name:"direction"`
 	Filter       string `name:"filter"`
 	Labels       string `name:"labels"`
@@ -535,6 +534,7 @@ type IssuesListForOrgCmd struct {
 	Sort         string `name:"sort"`
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.\""
 	State        string `name:"state"`
+	internal.BaseCmd
 }
 
 func (c *IssuesListForOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -555,7 +555,6 @@ func (c *IssuesListForOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesListForRepoCmd struct {
-	internal.BaseCmd
 	Assignee     string `name:"assignee"`
 	Creator      string `name:"creator"`
 	Direction    string `name:"direction"`
@@ -571,6 +570,7 @@ type IssuesListForRepoCmd struct {
 	Sort         string `name:"sort"`
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.\""
 	State        string `name:"state"`
+	internal.BaseCmd
 }
 
 func (c *IssuesListForRepoCmd) Run(isValueSetMap map[string]bool) error {
@@ -595,12 +595,12 @@ func (c *IssuesListForRepoCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesListLabelsForMilestoneCmd struct {
-	internal.BaseCmd
 	MilestoneNumber int64  `required:"" name:"milestone_number"`
 	Owner           string `name:"owner"`
 	Page            int64  `name:"page"`
 	PerPage         int64  `name:"per_page"`
 	Repo            string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *IssuesListLabelsForMilestoneCmd) Run(isValueSetMap map[string]bool) error {
@@ -615,11 +615,11 @@ func (c *IssuesListLabelsForMilestoneCmd) Run(isValueSetMap map[string]bool) err
 }
 
 type IssuesListLabelsForRepoCmd struct {
-	internal.BaseCmd
 	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *IssuesListLabelsForRepoCmd) Run(isValueSetMap map[string]bool) error {
@@ -633,12 +633,12 @@ func (c *IssuesListLabelsForRepoCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesListLabelsOnIssueCmd struct {
-	internal.BaseCmd
 	IssueNumber int64  `required:"" name:"issue_number"`
 	Owner       string `name:"owner"`
 	Page        int64  `name:"page"`
 	PerPage     int64  `name:"per_page"`
 	Repo        string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *IssuesListLabelsOnIssueCmd) Run(isValueSetMap map[string]bool) error {
@@ -653,7 +653,6 @@ func (c *IssuesListLabelsOnIssueCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesListMilestonesForRepoCmd struct {
-	internal.BaseCmd
 	Direction string `name:"direction"`
 	Owner     string `name:"owner"`
 	Page      int64  `name:"page"`
@@ -661,6 +660,7 @@ type IssuesListMilestonesForRepoCmd struct {
 	Repo      string `required:"" name:"repo"`
 	Sort      string `name:"sort"`
 	State     string `name:"state"`
+	internal.BaseCmd
 }
 
 func (c *IssuesListMilestonesForRepoCmd) Run(isValueSetMap map[string]bool) error {
@@ -677,12 +677,12 @@ func (c *IssuesListMilestonesForRepoCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type IssuesLockCmd struct {
-	internal.BaseCmd
 	IssueNumber int64  `required:"" name:"issue_number"`
 	LockReason  string `name:"lock_reason"`
 	Owner       string `name:"owner"`
 	Repo        string `required:"" name:"repo"`
 	SailorV     bool   "name:\"sailor-v-preview\" help:\"You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.sailor-v-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *IssuesLockCmd) Run(isValueSetMap map[string]bool) error {
@@ -697,10 +697,10 @@ func (c *IssuesLockCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesRemoveAllLabelsCmd struct {
-	internal.BaseCmd
 	IssueNumber int64  `required:"" name:"issue_number"`
 	Owner       string `name:"owner"`
 	Repo        string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *IssuesRemoveAllLabelsCmd) Run(isValueSetMap map[string]bool) error {
@@ -713,11 +713,11 @@ func (c *IssuesRemoveAllLabelsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesRemoveAssigneesCmd struct {
-	internal.BaseCmd
 	Assignees   []string `name:"assignees"`
 	IssueNumber int64    `required:"" name:"issue_number"`
 	Owner       string   `name:"owner"`
 	Repo        string   `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *IssuesRemoveAssigneesCmd) Run(isValueSetMap map[string]bool) error {
@@ -731,11 +731,11 @@ func (c *IssuesRemoveAssigneesCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesRemoveLabelCmd struct {
-	internal.BaseCmd
 	IssueNumber int64  `required:"" name:"issue_number"`
 	Name        string `required:"" name:"name"`
 	Owner       string `name:"owner"`
 	Repo        string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *IssuesRemoveLabelCmd) Run(isValueSetMap map[string]bool) error {
@@ -749,11 +749,11 @@ func (c *IssuesRemoveLabelCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesReplaceAllLabelsCmd struct {
-	internal.BaseCmd
 	IssueNumber int64    `required:"" name:"issue_number"`
 	Labels      []string `name:"labels"`
 	Owner       string   `name:"owner"`
 	Repo        string   `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *IssuesReplaceAllLabelsCmd) Run(isValueSetMap map[string]bool) error {
@@ -767,10 +767,10 @@ func (c *IssuesReplaceAllLabelsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesUnlockCmd struct {
-	internal.BaseCmd
 	IssueNumber int64  `required:"" name:"issue_number"`
 	Owner       string `name:"owner"`
 	Repo        string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *IssuesUnlockCmd) Run(isValueSetMap map[string]bool) error {
@@ -783,7 +783,6 @@ func (c *IssuesUnlockCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesUpdateCmd struct {
-	internal.BaseCmd
 	Assignee    string   `name:"assignee"`
 	Assignees   []string `name:"assignees"`
 	Body        string   `name:"body"`
@@ -794,6 +793,7 @@ type IssuesUpdateCmd struct {
 	Repo        string   `required:"" name:"repo"`
 	State       string   `name:"state"`
 	Title       string   `name:"title"`
+	internal.BaseCmd
 }
 
 func (c *IssuesUpdateCmd) Run(isValueSetMap map[string]bool) error {
@@ -813,11 +813,11 @@ func (c *IssuesUpdateCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesUpdateCommentCmd struct {
-	internal.BaseCmd
 	Body      string `required:"" name:"body"`
 	CommentId int64  `required:"" name:"comment_id"`
 	Owner     string `name:"owner"`
 	Repo      string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *IssuesUpdateCommentCmd) Run(isValueSetMap map[string]bool) error {
@@ -831,13 +831,13 @@ func (c *IssuesUpdateCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesUpdateLabelCmd struct {
-	internal.BaseCmd
 	Color       string `name:"color"`
 	Description string `name:"description"`
 	Name        string `required:"" name:"name"`
 	NewName     string `name:"new_name"`
 	Owner       string `name:"owner"`
 	Repo        string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *IssuesUpdateLabelCmd) Run(isValueSetMap map[string]bool) error {
@@ -853,7 +853,6 @@ func (c *IssuesUpdateLabelCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesUpdateMilestoneCmd struct {
-	internal.BaseCmd
 	Description     string `name:"description"`
 	DueOn           string `name:"due_on"`
 	MilestoneNumber int64  `required:"" name:"milestone_number"`
@@ -861,6 +860,7 @@ type IssuesUpdateMilestoneCmd struct {
 	Repo            string `required:"" name:"repo"`
 	State           string `name:"state"`
 	Title           string `name:"title"`
+	internal.BaseCmd
 }
 
 func (c *IssuesUpdateMilestoneCmd) Run(isValueSetMap map[string]bool) error {

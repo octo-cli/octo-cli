@@ -71,9 +71,9 @@ type TeamsCmd struct {
 }
 
 type TeamsAddMemberLegacyCmd struct {
-	internal.BaseCmd
 	TeamId   int64  `required:"" name:"team_id"`
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *TeamsAddMemberLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -85,11 +85,11 @@ func (c *TeamsAddMemberLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsAddOrUpdateMembershipInOrgCmd struct {
-	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Role     string `name:"role"`
 	TeamSlug string `required:"" name:"team_slug"`
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *TeamsAddOrUpdateMembershipInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -103,10 +103,10 @@ func (c *TeamsAddOrUpdateMembershipInOrgCmd) Run(isValueSetMap map[string]bool) 
 }
 
 type TeamsAddOrUpdateMembershipLegacyCmd struct {
-	internal.BaseCmd
 	Role     string `name:"role"`
 	TeamId   int64  `required:"" name:"team_id"`
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *TeamsAddOrUpdateMembershipLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -119,12 +119,12 @@ func (c *TeamsAddOrUpdateMembershipLegacyCmd) Run(isValueSetMap map[string]bool)
 }
 
 type TeamsAddOrUpdateProjectInOrgCmd struct {
-	internal.BaseCmd
 	Inertia    bool   "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.inertia-preview+json\n```\""
 	Org        string `required:"" name:"org"`
 	Permission string `name:"permission"`
 	ProjectId  int64  `required:"" name:"project_id"`
 	TeamSlug   string `required:"" name:"team_slug"`
+	internal.BaseCmd
 }
 
 func (c *TeamsAddOrUpdateProjectInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -139,11 +139,11 @@ func (c *TeamsAddOrUpdateProjectInOrgCmd) Run(isValueSetMap map[string]bool) err
 }
 
 type TeamsAddOrUpdateProjectLegacyCmd struct {
-	internal.BaseCmd
 	Inertia    bool   "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.inertia-preview+json\n```\""
 	Permission string `name:"permission"`
 	ProjectId  int64  `required:"" name:"project_id"`
 	TeamId     int64  `required:"" name:"team_id"`
+	internal.BaseCmd
 }
 
 func (c *TeamsAddOrUpdateProjectLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -157,12 +157,12 @@ func (c *TeamsAddOrUpdateProjectLegacyCmd) Run(isValueSetMap map[string]bool) er
 }
 
 type TeamsAddOrUpdateRepoInOrgCmd struct {
-	internal.BaseCmd
 	Org        string `required:"" name:"org"`
 	Owner      string `name:"owner"`
 	Permission string `name:"permission"`
 	Repo       string `required:"" name:"repo"`
 	TeamSlug   string `required:"" name:"team_slug"`
+	internal.BaseCmd
 }
 
 func (c *TeamsAddOrUpdateRepoInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -177,11 +177,11 @@ func (c *TeamsAddOrUpdateRepoInOrgCmd) Run(isValueSetMap map[string]bool) error 
 }
 
 type TeamsAddOrUpdateRepoLegacyCmd struct {
-	internal.BaseCmd
 	Owner      string `name:"owner"`
 	Permission string `name:"permission"`
 	Repo       string `required:"" name:"repo"`
 	TeamId     int64  `required:"" name:"team_id"`
+	internal.BaseCmd
 }
 
 func (c *TeamsAddOrUpdateRepoLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -195,11 +195,11 @@ func (c *TeamsAddOrUpdateRepoLegacyCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type TeamsCheckManagesRepoInOrgCmd struct {
-	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Owner    string `name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	TeamSlug string `required:"" name:"team_slug"`
+	internal.BaseCmd
 }
 
 func (c *TeamsCheckManagesRepoInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -213,10 +213,10 @@ func (c *TeamsCheckManagesRepoInOrgCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type TeamsCheckManagesRepoLegacyCmd struct {
-	internal.BaseCmd
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	TeamId int64  `required:"" name:"team_id"`
+	internal.BaseCmd
 }
 
 func (c *TeamsCheckManagesRepoLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -229,7 +229,6 @@ func (c *TeamsCheckManagesRepoLegacyCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type TeamsCreateCmd struct {
-	internal.BaseCmd
 	Description  string   `name:"description"`
 	Maintainers  []string `name:"maintainers"`
 	Name         string   `required:"" name:"name"`
@@ -238,6 +237,7 @@ type TeamsCreateCmd struct {
 	Permission   string   `name:"permission"`
 	Privacy      string   `name:"privacy"`
 	RepoNames    []string `name:"repo_names"`
+	internal.BaseCmd
 }
 
 func (c *TeamsCreateCmd) Run(isValueSetMap map[string]bool) error {
@@ -255,12 +255,12 @@ func (c *TeamsCreateCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsCreateDiscussionCommentInOrgCmd struct {
-	internal.BaseCmd
 	Body             string `required:"" name:"body"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	Org              string `required:"" name:"org"`
 	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
 	TeamSlug         string `required:"" name:"team_slug"`
+	internal.BaseCmd
 }
 
 func (c *TeamsCreateDiscussionCommentInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -275,11 +275,11 @@ func (c *TeamsCreateDiscussionCommentInOrgCmd) Run(isValueSetMap map[string]bool
 }
 
 type TeamsCreateDiscussionCommentLegacyCmd struct {
-	internal.BaseCmd
 	Body             string `required:"" name:"body"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
 	TeamId           int64  `required:"" name:"team_id"`
+	internal.BaseCmd
 }
 
 func (c *TeamsCreateDiscussionCommentLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -293,13 +293,13 @@ func (c *TeamsCreateDiscussionCommentLegacyCmd) Run(isValueSetMap map[string]boo
 }
 
 type TeamsCreateDiscussionInOrgCmd struct {
-	internal.BaseCmd
 	Body         string `required:"" name:"body"`
 	Org          string `required:"" name:"org"`
 	Private      bool   `name:"private"`
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
 	TeamSlug     string `required:"" name:"team_slug"`
 	Title        string `required:"" name:"title"`
+	internal.BaseCmd
 }
 
 func (c *TeamsCreateDiscussionInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -315,12 +315,12 @@ func (c *TeamsCreateDiscussionInOrgCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type TeamsCreateDiscussionLegacyCmd struct {
-	internal.BaseCmd
 	Body         string `required:"" name:"body"`
 	Private      bool   `name:"private"`
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
 	TeamId       int64  `required:"" name:"team_id"`
 	Title        string `required:"" name:"title"`
+	internal.BaseCmd
 }
 
 func (c *TeamsCreateDiscussionLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -335,11 +335,11 @@ func (c *TeamsCreateDiscussionLegacyCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type TeamsDeleteDiscussionCommentInOrgCmd struct {
-	internal.BaseCmd
 	CommentNumber    int64  `required:"" name:"comment_number"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	Org              string `required:"" name:"org"`
 	TeamSlug         string `required:"" name:"team_slug"`
+	internal.BaseCmd
 }
 
 func (c *TeamsDeleteDiscussionCommentInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -353,10 +353,10 @@ func (c *TeamsDeleteDiscussionCommentInOrgCmd) Run(isValueSetMap map[string]bool
 }
 
 type TeamsDeleteDiscussionCommentLegacyCmd struct {
-	internal.BaseCmd
 	CommentNumber    int64 `required:"" name:"comment_number"`
 	DiscussionNumber int64 `required:"" name:"discussion_number"`
 	TeamId           int64 `required:"" name:"team_id"`
+	internal.BaseCmd
 }
 
 func (c *TeamsDeleteDiscussionCommentLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -369,10 +369,10 @@ func (c *TeamsDeleteDiscussionCommentLegacyCmd) Run(isValueSetMap map[string]boo
 }
 
 type TeamsDeleteDiscussionInOrgCmd struct {
-	internal.BaseCmd
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	Org              string `required:"" name:"org"`
 	TeamSlug         string `required:"" name:"team_slug"`
+	internal.BaseCmd
 }
 
 func (c *TeamsDeleteDiscussionInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -385,9 +385,9 @@ func (c *TeamsDeleteDiscussionInOrgCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type TeamsDeleteDiscussionLegacyCmd struct {
-	internal.BaseCmd
 	DiscussionNumber int64 `required:"" name:"discussion_number"`
 	TeamId           int64 `required:"" name:"team_id"`
+	internal.BaseCmd
 }
 
 func (c *TeamsDeleteDiscussionLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -399,9 +399,9 @@ func (c *TeamsDeleteDiscussionLegacyCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type TeamsDeleteInOrgCmd struct {
-	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	TeamSlug string `required:"" name:"team_slug"`
+	internal.BaseCmd
 }
 
 func (c *TeamsDeleteInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -413,8 +413,8 @@ func (c *TeamsDeleteInOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsDeleteLegacyCmd struct {
-	internal.BaseCmd
 	TeamId int64 `required:"" name:"team_id"`
+	internal.BaseCmd
 }
 
 func (c *TeamsDeleteLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -425,9 +425,9 @@ func (c *TeamsDeleteLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsGetByNameCmd struct {
-	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	TeamSlug string `required:"" name:"team_slug"`
+	internal.BaseCmd
 }
 
 func (c *TeamsGetByNameCmd) Run(isValueSetMap map[string]bool) error {
@@ -439,12 +439,12 @@ func (c *TeamsGetByNameCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsGetDiscussionCommentInOrgCmd struct {
-	internal.BaseCmd
 	CommentNumber    int64  `required:"" name:"comment_number"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	Org              string `required:"" name:"org"`
 	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
 	TeamSlug         string `required:"" name:"team_slug"`
+	internal.BaseCmd
 }
 
 func (c *TeamsGetDiscussionCommentInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -459,11 +459,11 @@ func (c *TeamsGetDiscussionCommentInOrgCmd) Run(isValueSetMap map[string]bool) e
 }
 
 type TeamsGetDiscussionCommentLegacyCmd struct {
-	internal.BaseCmd
 	CommentNumber    int64 `required:"" name:"comment_number"`
 	DiscussionNumber int64 `required:"" name:"discussion_number"`
 	SquirrelGirl     bool  "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
 	TeamId           int64 `required:"" name:"team_id"`
+	internal.BaseCmd
 }
 
 func (c *TeamsGetDiscussionCommentLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -477,11 +477,11 @@ func (c *TeamsGetDiscussionCommentLegacyCmd) Run(isValueSetMap map[string]bool) 
 }
 
 type TeamsGetDiscussionInOrgCmd struct {
-	internal.BaseCmd
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	Org              string `required:"" name:"org"`
 	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
 	TeamSlug         string `required:"" name:"team_slug"`
+	internal.BaseCmd
 }
 
 func (c *TeamsGetDiscussionInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -495,10 +495,10 @@ func (c *TeamsGetDiscussionInOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsGetDiscussionLegacyCmd struct {
-	internal.BaseCmd
 	DiscussionNumber int64 `required:"" name:"discussion_number"`
 	SquirrelGirl     bool  "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
 	TeamId           int64 `required:"" name:"team_id"`
+	internal.BaseCmd
 }
 
 func (c *TeamsGetDiscussionLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -511,8 +511,8 @@ func (c *TeamsGetDiscussionLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsGetLegacyCmd struct {
-	internal.BaseCmd
 	TeamId int64 `required:"" name:"team_id"`
+	internal.BaseCmd
 }
 
 func (c *TeamsGetLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -523,9 +523,9 @@ func (c *TeamsGetLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsGetMemberLegacyCmd struct {
-	internal.BaseCmd
 	TeamId   int64  `required:"" name:"team_id"`
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *TeamsGetMemberLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -537,10 +537,10 @@ func (c *TeamsGetMemberLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsGetMembershipInOrgCmd struct {
-	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	TeamSlug string `required:"" name:"team_slug"`
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *TeamsGetMembershipInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -553,9 +553,9 @@ func (c *TeamsGetMembershipInOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsGetMembershipLegacyCmd struct {
-	internal.BaseCmd
 	TeamId   int64  `required:"" name:"team_id"`
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *TeamsGetMembershipLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -567,11 +567,11 @@ func (c *TeamsGetMembershipLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsListChildInOrgCmd struct {
-	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
 	TeamSlug string `required:"" name:"team_slug"`
+	internal.BaseCmd
 }
 
 func (c *TeamsListChildInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -585,10 +585,10 @@ func (c *TeamsListChildInOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsListChildLegacyCmd struct {
-	internal.BaseCmd
 	Page    int64 `name:"page"`
 	PerPage int64 `name:"per_page"`
 	TeamId  int64 `required:"" name:"team_id"`
+	internal.BaseCmd
 }
 
 func (c *TeamsListChildLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -601,10 +601,10 @@ func (c *TeamsListChildLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsListCmd struct {
-	internal.BaseCmd
 	Org     string `required:"" name:"org"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
+	internal.BaseCmd
 }
 
 func (c *TeamsListCmd) Run(isValueSetMap map[string]bool) error {
@@ -617,7 +617,6 @@ func (c *TeamsListCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsListDiscussionCommentsInOrgCmd struct {
-	internal.BaseCmd
 	Direction        string `name:"direction"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	Org              string `required:"" name:"org"`
@@ -625,6 +624,7 @@ type TeamsListDiscussionCommentsInOrgCmd struct {
 	PerPage          int64  `name:"per_page"`
 	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
 	TeamSlug         string `required:"" name:"team_slug"`
+	internal.BaseCmd
 }
 
 func (c *TeamsListDiscussionCommentsInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -641,13 +641,13 @@ func (c *TeamsListDiscussionCommentsInOrgCmd) Run(isValueSetMap map[string]bool)
 }
 
 type TeamsListDiscussionCommentsLegacyCmd struct {
-	internal.BaseCmd
 	Direction        string `name:"direction"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	Page             int64  `name:"page"`
 	PerPage          int64  `name:"per_page"`
 	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
 	TeamId           int64  `required:"" name:"team_id"`
+	internal.BaseCmd
 }
 
 func (c *TeamsListDiscussionCommentsLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -663,13 +663,13 @@ func (c *TeamsListDiscussionCommentsLegacyCmd) Run(isValueSetMap map[string]bool
 }
 
 type TeamsListDiscussionsInOrgCmd struct {
-	internal.BaseCmd
 	Direction    string `name:"direction"`
 	Org          string `required:"" name:"org"`
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
 	TeamSlug     string `required:"" name:"team_slug"`
+	internal.BaseCmd
 }
 
 func (c *TeamsListDiscussionsInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -685,12 +685,12 @@ func (c *TeamsListDiscussionsInOrgCmd) Run(isValueSetMap map[string]bool) error 
 }
 
 type TeamsListDiscussionsLegacyCmd struct {
-	internal.BaseCmd
 	Direction    string `name:"direction"`
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
 	TeamId       int64  `required:"" name:"team_id"`
+	internal.BaseCmd
 }
 
 func (c *TeamsListDiscussionsLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -705,9 +705,9 @@ func (c *TeamsListDiscussionsLegacyCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type TeamsListForAuthenticatedUserCmd struct {
-	internal.BaseCmd
 	Page    int64 `name:"page"`
 	PerPage int64 `name:"per_page"`
+	internal.BaseCmd
 }
 
 func (c *TeamsListForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -719,8 +719,8 @@ func (c *TeamsListForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) er
 }
 
 type TeamsListIdPGroupsForLegacyCmd struct {
-	internal.BaseCmd
 	TeamId int64 `required:"" name:"team_id"`
+	internal.BaseCmd
 }
 
 func (c *TeamsListIdPGroupsForLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -731,10 +731,10 @@ func (c *TeamsListIdPGroupsForLegacyCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type TeamsListIdPGroupsForOrgCmd struct {
-	internal.BaseCmd
 	Org     string `required:"" name:"org"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
+	internal.BaseCmd
 }
 
 func (c *TeamsListIdPGroupsForOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -747,9 +747,9 @@ func (c *TeamsListIdPGroupsForOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsListIdPGroupsInOrgCmd struct {
-	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	TeamSlug string `required:"" name:"team_slug"`
+	internal.BaseCmd
 }
 
 func (c *TeamsListIdPGroupsInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -761,12 +761,12 @@ func (c *TeamsListIdPGroupsInOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsListMembersInOrgCmd struct {
-	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
 	Role     string `name:"role"`
 	TeamSlug string `required:"" name:"team_slug"`
+	internal.BaseCmd
 }
 
 func (c *TeamsListMembersInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -781,11 +781,11 @@ func (c *TeamsListMembersInOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsListMembersLegacyCmd struct {
-	internal.BaseCmd
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Role    string `name:"role"`
 	TeamId  int64  `required:"" name:"team_id"`
+	internal.BaseCmd
 }
 
 func (c *TeamsListMembersLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -799,11 +799,11 @@ func (c *TeamsListMembersLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsListPendingInvitationsInOrgCmd struct {
-	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
 	TeamSlug string `required:"" name:"team_slug"`
+	internal.BaseCmd
 }
 
 func (c *TeamsListPendingInvitationsInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -817,10 +817,10 @@ func (c *TeamsListPendingInvitationsInOrgCmd) Run(isValueSetMap map[string]bool)
 }
 
 type TeamsListPendingInvitationsLegacyCmd struct {
-	internal.BaseCmd
 	Page    int64 `name:"page"`
 	PerPage int64 `name:"per_page"`
 	TeamId  int64 `required:"" name:"team_id"`
+	internal.BaseCmd
 }
 
 func (c *TeamsListPendingInvitationsLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -833,12 +833,12 @@ func (c *TeamsListPendingInvitationsLegacyCmd) Run(isValueSetMap map[string]bool
 }
 
 type TeamsListProjectsInOrgCmd struct {
-	internal.BaseCmd
 	Inertia  bool   "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.inertia-preview+json\n```\""
 	Org      string `required:"" name:"org"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
 	TeamSlug string `required:"" name:"team_slug"`
+	internal.BaseCmd
 }
 
 func (c *TeamsListProjectsInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -853,11 +853,11 @@ func (c *TeamsListProjectsInOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsListProjectsLegacyCmd struct {
-	internal.BaseCmd
 	Inertia bool  "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.inertia-preview+json\n```\""
 	Page    int64 `name:"page"`
 	PerPage int64 `name:"per_page"`
 	TeamId  int64 `required:"" name:"team_id"`
+	internal.BaseCmd
 }
 
 func (c *TeamsListProjectsLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -871,11 +871,11 @@ func (c *TeamsListProjectsLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsListReposInOrgCmd struct {
-	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
 	TeamSlug string `required:"" name:"team_slug"`
+	internal.BaseCmd
 }
 
 func (c *TeamsListReposInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -889,10 +889,10 @@ func (c *TeamsListReposInOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsListReposLegacyCmd struct {
-	internal.BaseCmd
 	Page    int64 `name:"page"`
 	PerPage int64 `name:"per_page"`
 	TeamId  int64 `required:"" name:"team_id"`
+	internal.BaseCmd
 }
 
 func (c *TeamsListReposLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -905,9 +905,9 @@ func (c *TeamsListReposLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsRemoveMemberLegacyCmd struct {
-	internal.BaseCmd
 	TeamId   int64  `required:"" name:"team_id"`
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *TeamsRemoveMemberLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -919,10 +919,10 @@ func (c *TeamsRemoveMemberLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsRemoveMembershipInOrgCmd struct {
-	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	TeamSlug string `required:"" name:"team_slug"`
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *TeamsRemoveMembershipInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -935,9 +935,9 @@ func (c *TeamsRemoveMembershipInOrgCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type TeamsRemoveMembershipLegacyCmd struct {
-	internal.BaseCmd
 	TeamId   int64  `required:"" name:"team_id"`
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *TeamsRemoveMembershipLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -949,10 +949,10 @@ func (c *TeamsRemoveMembershipLegacyCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type TeamsRemoveProjectInOrgCmd struct {
-	internal.BaseCmd
 	Org       string `required:"" name:"org"`
 	ProjectId int64  `required:"" name:"project_id"`
 	TeamSlug  string `required:"" name:"team_slug"`
+	internal.BaseCmd
 }
 
 func (c *TeamsRemoveProjectInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -965,9 +965,9 @@ func (c *TeamsRemoveProjectInOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsRemoveProjectLegacyCmd struct {
-	internal.BaseCmd
 	ProjectId int64 `required:"" name:"project_id"`
 	TeamId    int64 `required:"" name:"team_id"`
+	internal.BaseCmd
 }
 
 func (c *TeamsRemoveProjectLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -979,11 +979,11 @@ func (c *TeamsRemoveProjectLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsRemoveRepoInOrgCmd struct {
-	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	Owner    string `name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	TeamSlug string `required:"" name:"team_slug"`
+	internal.BaseCmd
 }
 
 func (c *TeamsRemoveRepoInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -997,10 +997,10 @@ func (c *TeamsRemoveRepoInOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsRemoveRepoLegacyCmd struct {
-	internal.BaseCmd
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	TeamId int64  `required:"" name:"team_id"`
+	internal.BaseCmd
 }
 
 func (c *TeamsRemoveRepoLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -1013,11 +1013,11 @@ func (c *TeamsRemoveRepoLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsReviewProjectInOrgCmd struct {
-	internal.BaseCmd
 	Inertia   bool   "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.inertia-preview+json\n```\""
 	Org       string `required:"" name:"org"`
 	ProjectId int64  `required:"" name:"project_id"`
 	TeamSlug  string `required:"" name:"team_slug"`
+	internal.BaseCmd
 }
 
 func (c *TeamsReviewProjectInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -1031,10 +1031,10 @@ func (c *TeamsReviewProjectInOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsReviewProjectLegacyCmd struct {
-	internal.BaseCmd
 	Inertia   bool  "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.inertia-preview+json\n```\""
 	ProjectId int64 `required:"" name:"project_id"`
 	TeamId    int64 `required:"" name:"team_id"`
+	internal.BaseCmd
 }
 
 func (c *TeamsReviewProjectLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -1047,13 +1047,13 @@ func (c *TeamsReviewProjectLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsUpdateDiscussionCommentInOrgCmd struct {
-	internal.BaseCmd
 	Body             string `required:"" name:"body"`
 	CommentNumber    int64  `required:"" name:"comment_number"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	Org              string `required:"" name:"org"`
 	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
 	TeamSlug         string `required:"" name:"team_slug"`
+	internal.BaseCmd
 }
 
 func (c *TeamsUpdateDiscussionCommentInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -1069,12 +1069,12 @@ func (c *TeamsUpdateDiscussionCommentInOrgCmd) Run(isValueSetMap map[string]bool
 }
 
 type TeamsUpdateDiscussionCommentLegacyCmd struct {
-	internal.BaseCmd
 	Body             string `required:"" name:"body"`
 	CommentNumber    int64  `required:"" name:"comment_number"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
 	TeamId           int64  `required:"" name:"team_id"`
+	internal.BaseCmd
 }
 
 func (c *TeamsUpdateDiscussionCommentLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -1089,13 +1089,13 @@ func (c *TeamsUpdateDiscussionCommentLegacyCmd) Run(isValueSetMap map[string]boo
 }
 
 type TeamsUpdateDiscussionInOrgCmd struct {
-	internal.BaseCmd
 	Body             string `name:"body"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	Org              string `required:"" name:"org"`
 	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
 	TeamSlug         string `required:"" name:"team_slug"`
 	Title            string `name:"title"`
+	internal.BaseCmd
 }
 
 func (c *TeamsUpdateDiscussionInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -1111,12 +1111,12 @@ func (c *TeamsUpdateDiscussionInOrgCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type TeamsUpdateDiscussionLegacyCmd struct {
-	internal.BaseCmd
 	Body             string `name:"body"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
 	TeamId           int64  `required:"" name:"team_id"`
 	Title            string `name:"title"`
+	internal.BaseCmd
 }
 
 func (c *TeamsUpdateDiscussionLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -1131,7 +1131,6 @@ func (c *TeamsUpdateDiscussionLegacyCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type TeamsUpdateInOrgCmd struct {
-	internal.BaseCmd
 	Description  string `name:"description"`
 	Name         string `required:"" name:"name"`
 	Org          string `required:"" name:"org"`
@@ -1139,6 +1138,7 @@ type TeamsUpdateInOrgCmd struct {
 	Permission   string `name:"permission"`
 	Privacy      string `name:"privacy"`
 	TeamSlug     string `required:"" name:"team_slug"`
+	internal.BaseCmd
 }
 
 func (c *TeamsUpdateInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -1155,13 +1155,13 @@ func (c *TeamsUpdateInOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsUpdateLegacyCmd struct {
-	internal.BaseCmd
 	Description  string `name:"description"`
 	Name         string `required:"" name:"name"`
 	ParentTeamId int64  `name:"parent_team_id"`
 	Permission   string `name:"permission"`
 	Privacy      string `name:"privacy"`
 	TeamId       int64  `required:"" name:"team_id"`
+	internal.BaseCmd
 }
 
 func (c *TeamsUpdateLegacyCmd) Run(isValueSetMap map[string]bool) error {

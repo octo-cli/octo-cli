@@ -11,8 +11,8 @@ type LicensesCmd struct {
 }
 
 type LicensesGetCmd struct {
-	internal.BaseCmd
 	License string `required:"" name:"license"`
+	internal.BaseCmd
 }
 
 func (c *LicensesGetCmd) Run(isValueSetMap map[string]bool) error {
@@ -23,9 +23,9 @@ func (c *LicensesGetCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type LicensesGetForRepoCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *LicensesGetForRepoCmd) Run(isValueSetMap map[string]bool) error {

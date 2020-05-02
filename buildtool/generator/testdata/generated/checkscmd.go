@@ -16,11 +16,11 @@ type ChecksCmd struct {
 }
 
 type ChecksCreateSuiteCmd struct {
-	internal.BaseCmd
 	Antiope bool   "name:\"antiope-preview\" required:\"\" help:\"The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.antiope-preview+json\n```\""
 	HeadSha string `required:"" name:"head_sha"`
 	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ChecksCreateSuiteCmd) Run(isValueSetMap map[string]bool) error {
@@ -34,11 +34,11 @@ func (c *ChecksCreateSuiteCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ChecksGetCmd struct {
-	internal.BaseCmd
 	Antiope    bool   "name:\"antiope-preview\" required:\"\" help:\"The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.antiope-preview+json\n```\""
 	CheckRunId int64  `required:"" name:"check_run_id"`
 	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ChecksGetCmd) Run(isValueSetMap map[string]bool) error {
@@ -52,11 +52,11 @@ func (c *ChecksGetCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ChecksGetSuiteCmd struct {
-	internal.BaseCmd
 	Antiope      bool   "name:\"antiope-preview\" required:\"\" help:\"The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.antiope-preview+json\n```\""
 	CheckSuiteId int64  `required:"" name:"check_suite_id"`
 	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ChecksGetSuiteCmd) Run(isValueSetMap map[string]bool) error {
@@ -70,13 +70,13 @@ func (c *ChecksGetSuiteCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ChecksListAnnotationsCmd struct {
-	internal.BaseCmd
 	Antiope    bool   "name:\"antiope-preview\" required:\"\" help:\"The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.antiope-preview+json\n```\""
 	CheckRunId int64  `required:"" name:"check_run_id"`
 	Owner      string `name:"owner"`
 	Page       int64  `name:"page"`
 	PerPage    int64  `name:"per_page"`
 	Repo       string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ChecksListAnnotationsCmd) Run(isValueSetMap map[string]bool) error {
@@ -92,7 +92,6 @@ func (c *ChecksListAnnotationsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ChecksListForRefCmd struct {
-	internal.BaseCmd
 	Antiope   bool   "name:\"antiope-preview\" required:\"\" help:\"The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.antiope-preview+json\n```\""
 	CheckName string `name:"check_name"`
 	Filter    string `name:"filter"`
@@ -102,6 +101,7 @@ type ChecksListForRefCmd struct {
 	Ref       string `required:"" name:"ref"`
 	Repo      string `required:"" name:"repo"`
 	Status    string `name:"status"`
+	internal.BaseCmd
 }
 
 func (c *ChecksListForRefCmd) Run(isValueSetMap map[string]bool) error {
@@ -120,7 +120,6 @@ func (c *ChecksListForRefCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ChecksListForSuiteCmd struct {
-	internal.BaseCmd
 	Antiope      bool   "name:\"antiope-preview\" required:\"\" help:\"The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.antiope-preview+json\n```\""
 	CheckName    string `name:"check_name"`
 	CheckSuiteId int64  `required:"" name:"check_suite_id"`
@@ -130,6 +129,7 @@ type ChecksListForSuiteCmd struct {
 	PerPage      int64  `name:"per_page"`
 	Repo         string `required:"" name:"repo"`
 	Status       string `name:"status"`
+	internal.BaseCmd
 }
 
 func (c *ChecksListForSuiteCmd) Run(isValueSetMap map[string]bool) error {
@@ -148,7 +148,6 @@ func (c *ChecksListForSuiteCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ChecksListSuitesForRefCmd struct {
-	internal.BaseCmd
 	Antiope   bool   "name:\"antiope-preview\" required:\"\" help:\"The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.antiope-preview+json\n```\""
 	AppId     int64  `name:"app_id"`
 	CheckName string `name:"check_name"`
@@ -157,6 +156,7 @@ type ChecksListSuitesForRefCmd struct {
 	PerPage   int64  `name:"per_page"`
 	Ref       string `required:"" name:"ref"`
 	Repo      string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ChecksListSuitesForRefCmd) Run(isValueSetMap map[string]bool) error {
@@ -174,11 +174,11 @@ func (c *ChecksListSuitesForRefCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ChecksRerequestSuiteCmd struct {
-	internal.BaseCmd
 	Antiope      bool   "name:\"antiope-preview\" required:\"\" help:\"The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.antiope-preview+json\n```\""
 	CheckSuiteId int64  `required:"" name:"check_suite_id"`
 	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ChecksRerequestSuiteCmd) Run(isValueSetMap map[string]bool) error {

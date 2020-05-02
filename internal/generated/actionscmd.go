@@ -42,10 +42,10 @@ type ActionsCmd struct {
 }
 
 type ActionsCancelWorkflowRunCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	RunId int64  `required:"" name:"run_id"`
+	internal.BaseCmd
 }
 
 func (c *ActionsCancelWorkflowRunCmd) Run(isValueSetMap map[string]bool) error {
@@ -58,12 +58,12 @@ func (c *ActionsCancelWorkflowRunCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsCreateOrUpdateSecretForRepoCmd struct {
-	internal.BaseCmd
 	EncryptedValue string `name:"encrypted_value"`
 	KeyId          string `name:"key_id"`
 	Name           string `required:"" name:"name"`
 	Owner          string `name:"owner"`
 	Repo           string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ActionsCreateOrUpdateSecretForRepoCmd) Run(isValueSetMap map[string]bool) error {
@@ -78,8 +78,8 @@ func (c *ActionsCreateOrUpdateSecretForRepoCmd) Run(isValueSetMap map[string]boo
 }
 
 type ActionsCreateRegistrationTokenForOrgCmd struct {
-	internal.BaseCmd
 	Org string `required:"" name:"org"`
+	internal.BaseCmd
 }
 
 func (c *ActionsCreateRegistrationTokenForOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -90,9 +90,9 @@ func (c *ActionsCreateRegistrationTokenForOrgCmd) Run(isValueSetMap map[string]b
 }
 
 type ActionsCreateRegistrationTokenForRepoCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ActionsCreateRegistrationTokenForRepoCmd) Run(isValueSetMap map[string]bool) error {
@@ -104,8 +104,8 @@ func (c *ActionsCreateRegistrationTokenForRepoCmd) Run(isValueSetMap map[string]
 }
 
 type ActionsCreateRemoveTokenForOrgCmd struct {
-	internal.BaseCmd
 	Org string `required:"" name:"org"`
+	internal.BaseCmd
 }
 
 func (c *ActionsCreateRemoveTokenForOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -116,9 +116,9 @@ func (c *ActionsCreateRemoveTokenForOrgCmd) Run(isValueSetMap map[string]bool) e
 }
 
 type ActionsCreateRemoveTokenForRepoCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ActionsCreateRemoveTokenForRepoCmd) Run(isValueSetMap map[string]bool) error {
@@ -130,10 +130,10 @@ func (c *ActionsCreateRemoveTokenForRepoCmd) Run(isValueSetMap map[string]bool) 
 }
 
 type ActionsDeleteArtifactCmd struct {
-	internal.BaseCmd
 	ArtifactId int64  `required:"" name:"artifact_id"`
 	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ActionsDeleteArtifactCmd) Run(isValueSetMap map[string]bool) error {
@@ -146,10 +146,10 @@ func (c *ActionsDeleteArtifactCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsDeleteSecretFromRepoCmd struct {
-	internal.BaseCmd
 	Name  string `required:"" name:"name"`
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ActionsDeleteSecretFromRepoCmd) Run(isValueSetMap map[string]bool) error {
@@ -162,9 +162,9 @@ func (c *ActionsDeleteSecretFromRepoCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type ActionsDeleteSelfHostedRunnerFromOrgCmd struct {
-	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	RunnerId int64  `required:"" name:"runner_id"`
+	internal.BaseCmd
 }
 
 func (c *ActionsDeleteSelfHostedRunnerFromOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -176,10 +176,10 @@ func (c *ActionsDeleteSelfHostedRunnerFromOrgCmd) Run(isValueSetMap map[string]b
 }
 
 type ActionsDeleteSelfHostedRunnerFromRepoCmd struct {
-	internal.BaseCmd
 	Owner    string `name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	RunnerId int64  `required:"" name:"runner_id"`
+	internal.BaseCmd
 }
 
 func (c *ActionsDeleteSelfHostedRunnerFromRepoCmd) Run(isValueSetMap map[string]bool) error {
@@ -192,10 +192,10 @@ func (c *ActionsDeleteSelfHostedRunnerFromRepoCmd) Run(isValueSetMap map[string]
 }
 
 type ActionsDeleteWorkflowRunLogsCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	RunId int64  `required:"" name:"run_id"`
+	internal.BaseCmd
 }
 
 func (c *ActionsDeleteWorkflowRunLogsCmd) Run(isValueSetMap map[string]bool) error {
@@ -208,11 +208,11 @@ func (c *ActionsDeleteWorkflowRunLogsCmd) Run(isValueSetMap map[string]bool) err
 }
 
 type ActionsDownloadArtifactCmd struct {
-	internal.BaseCmd
 	ArchiveFormat string `required:"" name:"archive_format"`
 	ArtifactId    int64  `required:"" name:"artifact_id"`
 	Owner         string `name:"owner"`
 	Repo          string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ActionsDownloadArtifactCmd) Run(isValueSetMap map[string]bool) error {
@@ -226,10 +226,10 @@ func (c *ActionsDownloadArtifactCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsGetArtifactCmd struct {
-	internal.BaseCmd
 	ArtifactId int64  `required:"" name:"artifact_id"`
 	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ActionsGetArtifactCmd) Run(isValueSetMap map[string]bool) error {
@@ -242,9 +242,9 @@ func (c *ActionsGetArtifactCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsGetPublicKeyCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ActionsGetPublicKeyCmd) Run(isValueSetMap map[string]bool) error {
@@ -256,10 +256,10 @@ func (c *ActionsGetPublicKeyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsGetSecretCmd struct {
-	internal.BaseCmd
 	Name  string `required:"" name:"name"`
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ActionsGetSecretCmd) Run(isValueSetMap map[string]bool) error {
@@ -272,9 +272,9 @@ func (c *ActionsGetSecretCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsGetSelfHostedRunnerForOrgCmd struct {
-	internal.BaseCmd
 	Org      string `required:"" name:"org"`
 	RunnerId int64  `required:"" name:"runner_id"`
+	internal.BaseCmd
 }
 
 func (c *ActionsGetSelfHostedRunnerForOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -286,10 +286,10 @@ func (c *ActionsGetSelfHostedRunnerForOrgCmd) Run(isValueSetMap map[string]bool)
 }
 
 type ActionsGetSelfHostedRunnerForRepoCmd struct {
-	internal.BaseCmd
 	Owner    string `name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	RunnerId int64  `required:"" name:"runner_id"`
+	internal.BaseCmd
 }
 
 func (c *ActionsGetSelfHostedRunnerForRepoCmd) Run(isValueSetMap map[string]bool) error {
@@ -302,10 +302,10 @@ func (c *ActionsGetSelfHostedRunnerForRepoCmd) Run(isValueSetMap map[string]bool
 }
 
 type ActionsGetWorkflowCmd struct {
-	internal.BaseCmd
 	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
 	WorkflowId int64  `required:"" name:"workflow_id"`
+	internal.BaseCmd
 }
 
 func (c *ActionsGetWorkflowCmd) Run(isValueSetMap map[string]bool) error {
@@ -318,10 +318,10 @@ func (c *ActionsGetWorkflowCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsGetWorkflowJobCmd struct {
-	internal.BaseCmd
 	JobId int64  `required:"" name:"job_id"`
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ActionsGetWorkflowJobCmd) Run(isValueSetMap map[string]bool) error {
@@ -334,10 +334,10 @@ func (c *ActionsGetWorkflowJobCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsGetWorkflowRunCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	RunId int64  `required:"" name:"run_id"`
+	internal.BaseCmd
 }
 
 func (c *ActionsGetWorkflowRunCmd) Run(isValueSetMap map[string]bool) error {
@@ -350,11 +350,11 @@ func (c *ActionsGetWorkflowRunCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsListArtifactsForRepoCmd struct {
-	internal.BaseCmd
 	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ActionsListArtifactsForRepoCmd) Run(isValueSetMap map[string]bool) error {
@@ -368,13 +368,13 @@ func (c *ActionsListArtifactsForRepoCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type ActionsListJobsForWorkflowRunCmd struct {
-	internal.BaseCmd
 	Filter  string `name:"filter"`
 	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
 	RunId   int64  `required:"" name:"run_id"`
+	internal.BaseCmd
 }
 
 func (c *ActionsListJobsForWorkflowRunCmd) Run(isValueSetMap map[string]bool) error {
@@ -390,7 +390,6 @@ func (c *ActionsListJobsForWorkflowRunCmd) Run(isValueSetMap map[string]bool) er
 }
 
 type ActionsListRepoWorkflowRunsCmd struct {
-	internal.BaseCmd
 	Actor   string `name:"actor"`
 	Branch  string `name:"branch"`
 	Event   string `name:"event"`
@@ -399,6 +398,7 @@ type ActionsListRepoWorkflowRunsCmd struct {
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
 	Status  string `name:"status"`
+	internal.BaseCmd
 }
 
 func (c *ActionsListRepoWorkflowRunsCmd) Run(isValueSetMap map[string]bool) error {
@@ -416,11 +416,11 @@ func (c *ActionsListRepoWorkflowRunsCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type ActionsListRepoWorkflowsCmd struct {
-	internal.BaseCmd
 	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ActionsListRepoWorkflowsCmd) Run(isValueSetMap map[string]bool) error {
@@ -434,8 +434,8 @@ func (c *ActionsListRepoWorkflowsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsListRunnerApplicationsForOrgCmd struct {
-	internal.BaseCmd
 	Org string `required:"" name:"org"`
+	internal.BaseCmd
 }
 
 func (c *ActionsListRunnerApplicationsForOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -446,9 +446,9 @@ func (c *ActionsListRunnerApplicationsForOrgCmd) Run(isValueSetMap map[string]bo
 }
 
 type ActionsListRunnerApplicationsForRepoCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ActionsListRunnerApplicationsForRepoCmd) Run(isValueSetMap map[string]bool) error {
@@ -460,11 +460,11 @@ func (c *ActionsListRunnerApplicationsForRepoCmd) Run(isValueSetMap map[string]b
 }
 
 type ActionsListSecretsForRepoCmd struct {
-	internal.BaseCmd
 	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ActionsListSecretsForRepoCmd) Run(isValueSetMap map[string]bool) error {
@@ -478,10 +478,10 @@ func (c *ActionsListSecretsForRepoCmd) Run(isValueSetMap map[string]bool) error 
 }
 
 type ActionsListSelfHostedRunnersForOrgCmd struct {
-	internal.BaseCmd
 	Org     string `required:"" name:"org"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
+	internal.BaseCmd
 }
 
 func (c *ActionsListSelfHostedRunnersForOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -494,11 +494,11 @@ func (c *ActionsListSelfHostedRunnersForOrgCmd) Run(isValueSetMap map[string]boo
 }
 
 type ActionsListSelfHostedRunnersForRepoCmd struct {
-	internal.BaseCmd
 	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ActionsListSelfHostedRunnersForRepoCmd) Run(isValueSetMap map[string]bool) error {
@@ -512,12 +512,12 @@ func (c *ActionsListSelfHostedRunnersForRepoCmd) Run(isValueSetMap map[string]bo
 }
 
 type ActionsListWorkflowJobLogsCmd struct {
-	internal.BaseCmd
 	JobId   int64  `required:"" name:"job_id"`
 	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *ActionsListWorkflowJobLogsCmd) Run(isValueSetMap map[string]bool) error {
@@ -532,12 +532,12 @@ func (c *ActionsListWorkflowJobLogsCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type ActionsListWorkflowRunArtifactsCmd struct {
-	internal.BaseCmd
 	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
 	RunId   int64  `required:"" name:"run_id"`
+	internal.BaseCmd
 }
 
 func (c *ActionsListWorkflowRunArtifactsCmd) Run(isValueSetMap map[string]bool) error {
@@ -552,12 +552,12 @@ func (c *ActionsListWorkflowRunArtifactsCmd) Run(isValueSetMap map[string]bool) 
 }
 
 type ActionsListWorkflowRunLogsCmd struct {
-	internal.BaseCmd
 	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
 	RunId   int64  `required:"" name:"run_id"`
+	internal.BaseCmd
 }
 
 func (c *ActionsListWorkflowRunLogsCmd) Run(isValueSetMap map[string]bool) error {
@@ -572,7 +572,6 @@ func (c *ActionsListWorkflowRunLogsCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type ActionsListWorkflowRunsCmd struct {
-	internal.BaseCmd
 	Actor      string `name:"actor"`
 	Branch     string `name:"branch"`
 	Event      string `name:"event"`
@@ -582,6 +581,7 @@ type ActionsListWorkflowRunsCmd struct {
 	Repo       string `required:"" name:"repo"`
 	Status     string `name:"status"`
 	WorkflowId int64  `required:"" name:"workflow_id"`
+	internal.BaseCmd
 }
 
 func (c *ActionsListWorkflowRunsCmd) Run(isValueSetMap map[string]bool) error {
@@ -600,10 +600,10 @@ func (c *ActionsListWorkflowRunsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsReRunWorkflowCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	RunId int64  `required:"" name:"run_id"`
+	internal.BaseCmd
 }
 
 func (c *ActionsReRunWorkflowCmd) Run(isValueSetMap map[string]bool) error {

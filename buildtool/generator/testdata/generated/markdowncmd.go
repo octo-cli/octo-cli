@@ -10,10 +10,10 @@ type MarkdownCmd struct {
 }
 
 type MarkdownRenderCmd struct {
-	internal.BaseCmd
 	Context string `name:"context"`
 	Mode    string `name:"mode"`
 	Text    string `required:"" name:"text"`
+	internal.BaseCmd
 }
 
 func (c *MarkdownRenderCmd) Run(isValueSetMap map[string]bool) error {
@@ -26,8 +26,8 @@ func (c *MarkdownRenderCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type MarkdownRenderRawCmd struct {
-	internal.BaseCmd
 	ContentType string `name:"content-type"`
+	internal.BaseCmd
 }
 
 func (c *MarkdownRenderRawCmd) Run(isValueSetMap map[string]bool) error {

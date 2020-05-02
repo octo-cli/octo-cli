@@ -31,12 +31,12 @@ type ReactionsCmd struct {
 }
 
 type ReactionsCreateForCommitCommentCmd struct {
-	internal.BaseCmd
 	CommentId    int64  `required:"" name:"comment_id"`
 	Content      string `required:"" name:"content"`
 	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *ReactionsCreateForCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
@@ -51,12 +51,12 @@ func (c *ReactionsCreateForCommitCommentCmd) Run(isValueSetMap map[string]bool) 
 }
 
 type ReactionsCreateForIssueCmd struct {
-	internal.BaseCmd
 	Content      string `required:"" name:"content"`
 	IssueNumber  int64  `required:"" name:"issue_number"`
 	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *ReactionsCreateForIssueCmd) Run(isValueSetMap map[string]bool) error {
@@ -71,12 +71,12 @@ func (c *ReactionsCreateForIssueCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReactionsCreateForIssueCommentCmd struct {
-	internal.BaseCmd
 	CommentId    int64  `required:"" name:"comment_id"`
 	Content      string `required:"" name:"content"`
 	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *ReactionsCreateForIssueCommentCmd) Run(isValueSetMap map[string]bool) error {
@@ -91,12 +91,12 @@ func (c *ReactionsCreateForIssueCommentCmd) Run(isValueSetMap map[string]bool) e
 }
 
 type ReactionsCreateForPullRequestReviewCommentCmd struct {
-	internal.BaseCmd
 	CommentId    int64  `required:"" name:"comment_id"`
 	Content      string `required:"" name:"content"`
 	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *ReactionsCreateForPullRequestReviewCommentCmd) Run(isValueSetMap map[string]bool) error {
@@ -111,13 +111,13 @@ func (c *ReactionsCreateForPullRequestReviewCommentCmd) Run(isValueSetMap map[st
 }
 
 type ReactionsCreateForTeamDiscussionCommentInOrgCmd struct {
-	internal.BaseCmd
 	CommentNumber    int64  `required:"" name:"comment_number"`
 	Content          string `required:"" name:"content"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	Org              string `required:"" name:"org"`
 	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
 	TeamSlug         string `required:"" name:"team_slug"`
+	internal.BaseCmd
 }
 
 func (c *ReactionsCreateForTeamDiscussionCommentInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -133,12 +133,12 @@ func (c *ReactionsCreateForTeamDiscussionCommentInOrgCmd) Run(isValueSetMap map[
 }
 
 type ReactionsCreateForTeamDiscussionCommentLegacyCmd struct {
-	internal.BaseCmd
 	CommentNumber    int64  `required:"" name:"comment_number"`
 	Content          string `required:"" name:"content"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
 	TeamId           int64  `required:"" name:"team_id"`
+	internal.BaseCmd
 }
 
 func (c *ReactionsCreateForTeamDiscussionCommentLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -153,12 +153,12 @@ func (c *ReactionsCreateForTeamDiscussionCommentLegacyCmd) Run(isValueSetMap map
 }
 
 type ReactionsCreateForTeamDiscussionInOrgCmd struct {
-	internal.BaseCmd
 	Content          string `required:"" name:"content"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	Org              string `required:"" name:"org"`
 	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
 	TeamSlug         string `required:"" name:"team_slug"`
+	internal.BaseCmd
 }
 
 func (c *ReactionsCreateForTeamDiscussionInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -173,11 +173,11 @@ func (c *ReactionsCreateForTeamDiscussionInOrgCmd) Run(isValueSetMap map[string]
 }
 
 type ReactionsCreateForTeamDiscussionLegacyCmd struct {
-	internal.BaseCmd
 	Content          string `required:"" name:"content"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
 	TeamId           int64  `required:"" name:"team_id"`
+	internal.BaseCmd
 }
 
 func (c *ReactionsCreateForTeamDiscussionLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -191,12 +191,12 @@ func (c *ReactionsCreateForTeamDiscussionLegacyCmd) Run(isValueSetMap map[string
 }
 
 type ReactionsDeleteForCommitCommentCmd struct {
-	internal.BaseCmd
 	CommentId    int64  `required:"" name:"comment_id"`
 	Owner        string `name:"owner"`
 	ReactionId   int64  `required:"" name:"reaction_id"`
 	Repo         string `required:"" name:"repo"`
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *ReactionsDeleteForCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
@@ -211,12 +211,12 @@ func (c *ReactionsDeleteForCommitCommentCmd) Run(isValueSetMap map[string]bool) 
 }
 
 type ReactionsDeleteForIssueCmd struct {
-	internal.BaseCmd
 	IssueNumber  int64  `required:"" name:"issue_number"`
 	Owner        string `name:"owner"`
 	ReactionId   int64  `required:"" name:"reaction_id"`
 	Repo         string `required:"" name:"repo"`
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *ReactionsDeleteForIssueCmd) Run(isValueSetMap map[string]bool) error {
@@ -231,12 +231,12 @@ func (c *ReactionsDeleteForIssueCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReactionsDeleteForIssueCommentCmd struct {
-	internal.BaseCmd
 	CommentId    int64  `required:"" name:"comment_id"`
 	Owner        string `name:"owner"`
 	ReactionId   int64  `required:"" name:"reaction_id"`
 	Repo         string `required:"" name:"repo"`
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *ReactionsDeleteForIssueCommentCmd) Run(isValueSetMap map[string]bool) error {
@@ -251,12 +251,12 @@ func (c *ReactionsDeleteForIssueCommentCmd) Run(isValueSetMap map[string]bool) e
 }
 
 type ReactionsDeleteForPullRequestCommentCmd struct {
-	internal.BaseCmd
 	CommentId    int64  `required:"" name:"comment_id"`
 	Owner        string `name:"owner"`
 	ReactionId   int64  `required:"" name:"reaction_id"`
 	Repo         string `required:"" name:"repo"`
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *ReactionsDeleteForPullRequestCommentCmd) Run(isValueSetMap map[string]bool) error {
@@ -271,12 +271,12 @@ func (c *ReactionsDeleteForPullRequestCommentCmd) Run(isValueSetMap map[string]b
 }
 
 type ReactionsDeleteForTeamDiscussionCmd struct {
-	internal.BaseCmd
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	Org              string `required:"" name:"org"`
 	ReactionId       int64  `required:"" name:"reaction_id"`
 	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
 	TeamSlug         string `required:"" name:"team_slug"`
+	internal.BaseCmd
 }
 
 func (c *ReactionsDeleteForTeamDiscussionCmd) Run(isValueSetMap map[string]bool) error {
@@ -291,13 +291,13 @@ func (c *ReactionsDeleteForTeamDiscussionCmd) Run(isValueSetMap map[string]bool)
 }
 
 type ReactionsDeleteForTeamDiscussionCommentCmd struct {
-	internal.BaseCmd
 	CommentNumber    int64  `required:"" name:"comment_number"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	Org              string `required:"" name:"org"`
 	ReactionId       int64  `required:"" name:"reaction_id"`
 	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
 	TeamSlug         string `required:"" name:"team_slug"`
+	internal.BaseCmd
 }
 
 func (c *ReactionsDeleteForTeamDiscussionCommentCmd) Run(isValueSetMap map[string]bool) error {
@@ -313,9 +313,9 @@ func (c *ReactionsDeleteForTeamDiscussionCommentCmd) Run(isValueSetMap map[strin
 }
 
 type ReactionsDeleteLegacyCmd struct {
-	internal.BaseCmd
 	ReactionId   int64 `required:"" name:"reaction_id"`
 	SquirrelGirl bool  "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *ReactionsDeleteLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -327,7 +327,6 @@ func (c *ReactionsDeleteLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReactionsListForCommitCommentCmd struct {
-	internal.BaseCmd
 	CommentId    int64  `required:"" name:"comment_id"`
 	Content      string `name:"content"`
 	Owner        string `name:"owner"`
@@ -335,6 +334,7 @@ type ReactionsListForCommitCommentCmd struct {
 	PerPage      int64  `name:"per_page"`
 	Repo         string `required:"" name:"repo"`
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *ReactionsListForCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
@@ -351,7 +351,6 @@ func (c *ReactionsListForCommitCommentCmd) Run(isValueSetMap map[string]bool) er
 }
 
 type ReactionsListForIssueCmd struct {
-	internal.BaseCmd
 	Content      string `name:"content"`
 	IssueNumber  int64  `required:"" name:"issue_number"`
 	Owner        string `name:"owner"`
@@ -359,6 +358,7 @@ type ReactionsListForIssueCmd struct {
 	PerPage      int64  `name:"per_page"`
 	Repo         string `required:"" name:"repo"`
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *ReactionsListForIssueCmd) Run(isValueSetMap map[string]bool) error {
@@ -375,7 +375,6 @@ func (c *ReactionsListForIssueCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReactionsListForIssueCommentCmd struct {
-	internal.BaseCmd
 	CommentId    int64  `required:"" name:"comment_id"`
 	Content      string `name:"content"`
 	Owner        string `name:"owner"`
@@ -383,6 +382,7 @@ type ReactionsListForIssueCommentCmd struct {
 	PerPage      int64  `name:"per_page"`
 	Repo         string `required:"" name:"repo"`
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *ReactionsListForIssueCommentCmd) Run(isValueSetMap map[string]bool) error {
@@ -399,7 +399,6 @@ func (c *ReactionsListForIssueCommentCmd) Run(isValueSetMap map[string]bool) err
 }
 
 type ReactionsListForPullRequestReviewCommentCmd struct {
-	internal.BaseCmd
 	CommentId    int64  `required:"" name:"comment_id"`
 	Content      string `name:"content"`
 	Owner        string `name:"owner"`
@@ -407,6 +406,7 @@ type ReactionsListForPullRequestReviewCommentCmd struct {
 	PerPage      int64  `name:"per_page"`
 	Repo         string `required:"" name:"repo"`
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *ReactionsListForPullRequestReviewCommentCmd) Run(isValueSetMap map[string]bool) error {
@@ -423,7 +423,6 @@ func (c *ReactionsListForPullRequestReviewCommentCmd) Run(isValueSetMap map[stri
 }
 
 type ReactionsListForTeamDiscussionCommentInOrgCmd struct {
-	internal.BaseCmd
 	CommentNumber    int64  `required:"" name:"comment_number"`
 	Content          string `name:"content"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
@@ -432,6 +431,7 @@ type ReactionsListForTeamDiscussionCommentInOrgCmd struct {
 	PerPage          int64  `name:"per_page"`
 	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
 	TeamSlug         string `required:"" name:"team_slug"`
+	internal.BaseCmd
 }
 
 func (c *ReactionsListForTeamDiscussionCommentInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -449,7 +449,6 @@ func (c *ReactionsListForTeamDiscussionCommentInOrgCmd) Run(isValueSetMap map[st
 }
 
 type ReactionsListForTeamDiscussionCommentLegacyCmd struct {
-	internal.BaseCmd
 	CommentNumber    int64  `required:"" name:"comment_number"`
 	Content          string `name:"content"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
@@ -457,6 +456,7 @@ type ReactionsListForTeamDiscussionCommentLegacyCmd struct {
 	PerPage          int64  `name:"per_page"`
 	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
 	TeamId           int64  `required:"" name:"team_id"`
+	internal.BaseCmd
 }
 
 func (c *ReactionsListForTeamDiscussionCommentLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -473,7 +473,6 @@ func (c *ReactionsListForTeamDiscussionCommentLegacyCmd) Run(isValueSetMap map[s
 }
 
 type ReactionsListForTeamDiscussionInOrgCmd struct {
-	internal.BaseCmd
 	Content          string `name:"content"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	Org              string `required:"" name:"org"`
@@ -481,6 +480,7 @@ type ReactionsListForTeamDiscussionInOrgCmd struct {
 	PerPage          int64  `name:"per_page"`
 	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
 	TeamSlug         string `required:"" name:"team_slug"`
+	internal.BaseCmd
 }
 
 func (c *ReactionsListForTeamDiscussionInOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -497,13 +497,13 @@ func (c *ReactionsListForTeamDiscussionInOrgCmd) Run(isValueSetMap map[string]bo
 }
 
 type ReactionsListForTeamDiscussionLegacyCmd struct {
-	internal.BaseCmd
 	Content          string `name:"content"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	Page             int64  `name:"page"`
 	PerPage          int64  `name:"per_page"`
 	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
 	TeamId           int64  `required:"" name:"team_id"`
+	internal.BaseCmd
 }
 
 func (c *ReactionsListForTeamDiscussionLegacyCmd) Run(isValueSetMap map[string]bool) error {

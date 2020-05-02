@@ -18,13 +18,13 @@ type OauthAuthorizationsCmd struct {
 }
 
 type OauthAuthorizationsCreateAuthorizationCmd struct {
-	internal.BaseCmd
 	ClientId     string   `name:"client_id"`
 	ClientSecret string   `name:"client_secret"`
 	Fingerprint  string   `name:"fingerprint"`
 	Note         string   `required:"" name:"note"`
 	NoteUrl      string   `name:"note_url"`
 	Scopes       []string `name:"scopes"`
+	internal.BaseCmd
 }
 
 func (c *OauthAuthorizationsCreateAuthorizationCmd) Run(isValueSetMap map[string]bool) error {
@@ -40,8 +40,8 @@ func (c *OauthAuthorizationsCreateAuthorizationCmd) Run(isValueSetMap map[string
 }
 
 type OauthAuthorizationsDeleteAuthorizationCmd struct {
-	internal.BaseCmd
 	AuthorizationId int64 `required:"" name:"authorization_id"`
+	internal.BaseCmd
 }
 
 func (c *OauthAuthorizationsDeleteAuthorizationCmd) Run(isValueSetMap map[string]bool) error {
@@ -52,8 +52,8 @@ func (c *OauthAuthorizationsDeleteAuthorizationCmd) Run(isValueSetMap map[string
 }
 
 type OauthAuthorizationsDeleteGrantCmd struct {
-	internal.BaseCmd
 	GrantId int64 `required:"" name:"grant_id"`
+	internal.BaseCmd
 }
 
 func (c *OauthAuthorizationsDeleteGrantCmd) Run(isValueSetMap map[string]bool) error {
@@ -64,8 +64,8 @@ func (c *OauthAuthorizationsDeleteGrantCmd) Run(isValueSetMap map[string]bool) e
 }
 
 type OauthAuthorizationsGetAuthorizationCmd struct {
-	internal.BaseCmd
 	AuthorizationId int64 `required:"" name:"authorization_id"`
+	internal.BaseCmd
 }
 
 func (c *OauthAuthorizationsGetAuthorizationCmd) Run(isValueSetMap map[string]bool) error {
@@ -76,8 +76,8 @@ func (c *OauthAuthorizationsGetAuthorizationCmd) Run(isValueSetMap map[string]bo
 }
 
 type OauthAuthorizationsGetGrantCmd struct {
-	internal.BaseCmd
 	GrantId int64 `required:"" name:"grant_id"`
+	internal.BaseCmd
 }
 
 func (c *OauthAuthorizationsGetGrantCmd) Run(isValueSetMap map[string]bool) error {
@@ -88,13 +88,13 @@ func (c *OauthAuthorizationsGetGrantCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type OauthAuthorizationsGetOrCreateAuthorizationForAppAndFingerprintCmd struct {
-	internal.BaseCmd
 	ClientId     string   `required:"" name:"client_id"`
 	ClientSecret string   `required:"" name:"client_secret"`
 	Fingerprint  string   `required:"" name:"fingerprint"`
 	Note         string   `name:"note"`
 	NoteUrl      string   `name:"note_url"`
 	Scopes       []string `name:"scopes"`
+	internal.BaseCmd
 }
 
 func (c *OauthAuthorizationsGetOrCreateAuthorizationForAppAndFingerprintCmd) Run(isValueSetMap map[string]bool) error {
@@ -110,13 +110,13 @@ func (c *OauthAuthorizationsGetOrCreateAuthorizationForAppAndFingerprintCmd) Run
 }
 
 type OauthAuthorizationsGetOrCreateAuthorizationForAppCmd struct {
-	internal.BaseCmd
 	ClientId     string   `required:"" name:"client_id"`
 	ClientSecret string   `required:"" name:"client_secret"`
 	Fingerprint  string   `name:"fingerprint"`
 	Note         string   `name:"note"`
 	NoteUrl      string   `name:"note_url"`
 	Scopes       []string `name:"scopes"`
+	internal.BaseCmd
 }
 
 func (c *OauthAuthorizationsGetOrCreateAuthorizationForAppCmd) Run(isValueSetMap map[string]bool) error {
@@ -132,9 +132,9 @@ func (c *OauthAuthorizationsGetOrCreateAuthorizationForAppCmd) Run(isValueSetMap
 }
 
 type OauthAuthorizationsListAuthorizationsCmd struct {
-	internal.BaseCmd
 	Page    int64 `name:"page"`
 	PerPage int64 `name:"per_page"`
+	internal.BaseCmd
 }
 
 func (c *OauthAuthorizationsListAuthorizationsCmd) Run(isValueSetMap map[string]bool) error {
@@ -146,9 +146,9 @@ func (c *OauthAuthorizationsListAuthorizationsCmd) Run(isValueSetMap map[string]
 }
 
 type OauthAuthorizationsListGrantsCmd struct {
-	internal.BaseCmd
 	Page    int64 `name:"page"`
 	PerPage int64 `name:"per_page"`
+	internal.BaseCmd
 }
 
 func (c *OauthAuthorizationsListGrantsCmd) Run(isValueSetMap map[string]bool) error {
@@ -160,7 +160,6 @@ func (c *OauthAuthorizationsListGrantsCmd) Run(isValueSetMap map[string]bool) er
 }
 
 type OauthAuthorizationsUpdateAuthorizationCmd struct {
-	internal.BaseCmd
 	AddScopes       []string `name:"add_scopes"`
 	AuthorizationId int64    `required:"" name:"authorization_id"`
 	Fingerprint     string   `name:"fingerprint"`
@@ -168,6 +167,7 @@ type OauthAuthorizationsUpdateAuthorizationCmd struct {
 	NoteUrl         string   `name:"note_url"`
 	RemoveScopes    []string `name:"remove_scopes"`
 	Scopes          []string `name:"scopes"`
+	internal.BaseCmd
 }
 
 func (c *OauthAuthorizationsUpdateAuthorizationCmd) Run(isValueSetMap map[string]bool) error {

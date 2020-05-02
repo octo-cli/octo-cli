@@ -272,14 +272,35 @@ func Generate(routesPath, outputPath string, fs afero.Fs) {
 	}
 }
 
+func sortCmdStructFields(fields []StructField) {
+	if len(fields) == 0 {
+		return
+	}
+	newFields := make([]StructField, 0, len(fields))
+	holdouts := make([]StructField, 0, len(fields))
+	for _, field := range fields {
+		if field.Name == "" {
+			holdouts = append(holdouts, field)
+			continue
+		}
+		newFields = append(newFields, field)
+	}
+	sort.Slice(newFields, func(i, j int) bool {
+		return newFields[i].Name < newFields[j].Name
+	})
+	sort.Slice(holdouts, func(i, j int) bool {
+		return holdouts[i].Type < holdouts[j].Type
+	})
+	newFields = append(newFields, holdouts...)
+	copy(fields, newFields)
+}
+
 func tmplSorting(svcTmpl SvcTmpl) {
 	sort.Slice(svcTmpl.SvcStruct.Fields, func(i, j int) bool {
 		return svcTmpl.SvcStruct.Fields[i].Name < svcTmpl.SvcStruct.Fields[j].Name
 	})
 	for _, csm := range svcTmpl.CmdStructAndMethods {
-		sort.Slice(csm.CmdStruct.Fields, func(i, j int) bool {
-			return csm.CmdStruct.Fields[i].Name < csm.CmdStruct.Fields[j].Name
-		})
+		sortCmdStructFields(csm.CmdStruct.Fields)
 
 		sort.Slice(csm.RunMethod.Params, func(i, j int) bool {
 			return csm.RunMethod.Params[i].Name < csm.RunMethod.Params[j].Name
