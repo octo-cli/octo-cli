@@ -20,6 +20,18 @@ func main() {
 		kong.Name("octo"),
 	)
 
+	addHelp(parser)
+	k, err := parser.Parse(os.Args[1:])
+	parser.FatalIfErrorf(err)
+
+	valueIsSetMap := map[string]bool{}
+	for _, flag := range k.Flags() {
+		valueIsSetMap[flag.Name] = flag.Set
+	}
+	k.FatalIfErrorf(k.Run(valueIsSetMap))
+}
+
+func addHelp(parser *kong.Kong) {
 	for _, topLevelCmd := range parser.Model.Children {
 		if topLevelCmd.Type != kong.CommandNode {
 			continue
@@ -50,12 +62,4 @@ func main() {
 			}
 		}
 	}
-	k, err := parser.Parse(os.Args[1:])
-	parser.FatalIfErrorf(err)
-
-	valueIsSetMap := map[string]bool{}
-	for _, flag := range k.Flags() {
-		valueIsSetMap[flag.Name] = flag.Set
-	}
-	k.FatalIfErrorf(k.Run(valueIsSetMap))
 }
