@@ -163,8 +163,9 @@ flags with the full command plus --help (e.g. `octo orgs edit --help` )
 Usage: octo <command>
 
 Flags:
-  --help       Show context-sensitive help.
+  --help                   Show context-sensitive help.
   --version
+  --install-completions
 
 Commands:
   actions cancel-workflow-run --repo=STRING --run_id=INT-64 --token=STRING

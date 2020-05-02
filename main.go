@@ -11,7 +11,8 @@ var version = "development"
 
 type cli struct {
 	generated.CLI
-	Version kong.VersionFlag
+	Version            kong.VersionFlag
+	InstallCompletions kong.InstallCompletionFlag
 }
 
 func main() {
