@@ -5,4 +5,9 @@ set -e
 CDPATH="" cd -- "$(dirname -- "$(dirname -- "$0")")"
 make -s bin/buildtool
 
-bin/buildtool update-testdata "$@"
+mkdir -p ./buildtool/generator/testdata/generated
+
+cp ./api.github.com.json ./buildtool/generator/testdata/routes.json
+script/generate \
+  --routes-path ./buildtool/generator/testdata/routes.json \
+  --output-path ./buildtool/generator/testdata/generated

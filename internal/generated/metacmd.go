@@ -5,7 +5,7 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type MetaCmd struct {
-	Get MetaGetCmd `cmd:"" help:"Get - https://developer.github.com/v3/meta/#meta"`
+	Get MetaGetCmd `cmd:""`
 }
 
 type MetaGetCmd struct {

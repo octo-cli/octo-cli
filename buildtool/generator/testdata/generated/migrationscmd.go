@@ -5,368 +5,392 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type MigrationsCmd struct {
-	StartForOrg                       MigrationsStartForOrgCmd                       `cmd:"" help:"Start an organization migration - https://developer.github.com/v3/migrations/orgs/#start-an-organization-migration"`
-	ListForOrg                        MigrationsListForOrgCmd                        `cmd:"" help:"Get a list of organization migrations - https://developer.github.com/v3/migrations/orgs/#get-a-list-of-organization-migrations"`
-	GetStatusForOrg                   MigrationsGetStatusForOrgCmd                   `cmd:"" help:"Get the status of an organization migration - https://developer.github.com/v3/migrations/orgs/#get-the-status-of-an-organization-migration"`
-	GetArchiveForOrg                  MigrationsGetArchiveForOrgCmd                  `cmd:"" help:"Download an organization migration archive - https://developer.github.com/v3/migrations/orgs/#download-an-organization-migration-archive"`
-	DeleteArchiveForOrg               MigrationsDeleteArchiveForOrgCmd               `cmd:"" help:"Delete an organization migration archive - https://developer.github.com/v3/migrations/orgs/#delete-an-organization-migration-archive"`
-	UnlockRepoForOrg                  MigrationsUnlockRepoForOrgCmd                  `cmd:"" help:"Unlock an organization repository - https://developer.github.com/v3/migrations/orgs/#unlock-an-organization-repository"`
-	StartImport                       MigrationsStartImportCmd                       `cmd:"" help:"Start an import - https://developer.github.com/v3/migrations/source_imports/#start-an-import"`
-	GetImportProgress                 MigrationsGetImportProgressCmd                 `cmd:"" help:"Get import progress - https://developer.github.com/v3/migrations/source_imports/#get-import-progress"`
-	UpdateImport                      MigrationsUpdateImportCmd                      `cmd:"" help:"Update existing import - https://developer.github.com/v3/migrations/source_imports/#update-existing-import"`
-	GetCommitAuthors                  MigrationsGetCommitAuthorsCmd                  `cmd:"" help:"Get commit authors - https://developer.github.com/v3/migrations/source_imports/#get-commit-authors"`
-	MapCommitAuthor                   MigrationsMapCommitAuthorCmd                   `cmd:"" help:"Map a commit author - https://developer.github.com/v3/migrations/source_imports/#map-a-commit-author"`
-	SetLfsPreference                  MigrationsSetLfsPreferenceCmd                  `cmd:"" help:"Set Git LFS preference - https://developer.github.com/v3/migrations/source_imports/#set-git-lfs-preference"`
-	GetLargeFiles                     MigrationsGetLargeFilesCmd                     `cmd:"" help:"Get large files - https://developer.github.com/v3/migrations/source_imports/#get-large-files"`
-	CancelImport                      MigrationsCancelImportCmd                      `cmd:"" help:"Cancel an import - https://developer.github.com/v3/migrations/source_imports/#cancel-an-import"`
-	StartForAuthenticatedUser         MigrationsStartForAuthenticatedUserCmd         `cmd:"" help:"Start a user migration - https://developer.github.com/v3/migrations/users/#start-a-user-migration"`
-	ListForAuthenticatedUser          MigrationsListForAuthenticatedUserCmd          `cmd:"" help:"Get a list of user migrations - https://developer.github.com/v3/migrations/users/#get-a-list-of-user-migrations"`
-	GetStatusForAuthenticatedUser     MigrationsGetStatusForAuthenticatedUserCmd     `cmd:"" help:"Get the status of a user migration - https://developer.github.com/v3/migrations/users/#get-the-status-of-a-user-migration"`
-	GetArchiveForAuthenticatedUser    MigrationsGetArchiveForAuthenticatedUserCmd    `cmd:"" help:"Download a user migration archive - https://developer.github.com/v3/migrations/users/#download-a-user-migration-archive"`
-	DeleteArchiveForAuthenticatedUser MigrationsDeleteArchiveForAuthenticatedUserCmd `cmd:"" help:"Delete a user migration archive - https://developer.github.com/v3/migrations/users/#delete-a-user-migration-archive"`
-	UnlockRepoForAuthenticatedUser    MigrationsUnlockRepoForAuthenticatedUserCmd    `cmd:"" help:"Unlock a user repository - https://developer.github.com/v3/migrations/users/#unlock-a-user-repository"`
+	CancelImport                      MigrationsCancelImportCmd                      `cmd:""`
+	DeleteArchiveForAuthenticatedUser MigrationsDeleteArchiveForAuthenticatedUserCmd `cmd:""`
+	DeleteArchiveForOrg               MigrationsDeleteArchiveForOrgCmd               `cmd:""`
+	DownloadArchiveForOrg             MigrationsDownloadArchiveForOrgCmd             `cmd:""`
+	GetArchiveForAuthenticatedUser    MigrationsGetArchiveForAuthenticatedUserCmd    `cmd:""`
+	GetCommitAuthors                  MigrationsGetCommitAuthorsCmd                  `cmd:""`
+	GetImportProgress                 MigrationsGetImportProgressCmd                 `cmd:""`
+	GetLargeFiles                     MigrationsGetLargeFilesCmd                     `cmd:""`
+	GetStatusForAuthenticatedUser     MigrationsGetStatusForAuthenticatedUserCmd     `cmd:""`
+	GetStatusForOrg                   MigrationsGetStatusForOrgCmd                   `cmd:""`
+	ListForAuthenticatedUser          MigrationsListForAuthenticatedUserCmd          `cmd:""`
+	ListForOrg                        MigrationsListForOrgCmd                        `cmd:""`
+	ListReposForOrg                   MigrationsListReposForOrgCmd                   `cmd:""`
+	ListReposForUser                  MigrationsListReposForUserCmd                  `cmd:""`
+	MapCommitAuthor                   MigrationsMapCommitAuthorCmd                   `cmd:""`
+	SetLfsPreference                  MigrationsSetLfsPreferenceCmd                  `cmd:""`
+	StartForAuthenticatedUser         MigrationsStartForAuthenticatedUserCmd         `cmd:""`
+	StartForOrg                       MigrationsStartForOrgCmd                       `cmd:""`
+	StartImport                       MigrationsStartImportCmd                       `cmd:""`
+	UnlockRepoForAuthenticatedUser    MigrationsUnlockRepoForAuthenticatedUserCmd    `cmd:""`
+	UnlockRepoForOrg                  MigrationsUnlockRepoForOrgCmd                  `cmd:""`
+	UpdateImport                      MigrationsUpdateImportCmd                      `cmd:""`
 }
 
-type MigrationsStartForOrgCmd struct {
+type MigrationsCancelImportCmd struct {
 	internal.BaseCmd
-	Org                string   `required:"" name:"org"`
-	Repositories       []string `required:"" name:"repositories" help:"A list of arrays indicating which repositories should be migrated."`
-	LockRepositories   bool     `name:"lock_repositories" help:"Indicates whether repositories should be locked (to prevent manipulation) while migrating data."`
-	ExcludeAttachments bool     `name:"exclude_attachments" help:"Indicates whether attachments should be excluded from the migration (to reduce migration archive file size)."`
+	Owner string `name:"owner"`
+	Repo  string `required:"" name:"repo"`
 }
 
-func (c *MigrationsStartForOrgCmd) Run(isValueSetMap map[string]bool) error {
+func (c *MigrationsCancelImportCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/migrations")
-	c.UpdateURLPath("org", c.Org)
-	c.UpdateBody("repositories", c.Repositories)
-	c.UpdateBody("lock_repositories", c.LockRepositories)
-	c.UpdateBody("exclude_attachments", c.ExcludeAttachments)
-	return c.DoRequest("POST")
+	c.SetURLPath("/repos/:owner/:repo/import")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("DELETE")
 }
 
-type MigrationsListForOrgCmd struct {
+type MigrationsDeleteArchiveForAuthenticatedUserCmd struct {
 	internal.BaseCmd
-	Wyandotte bool   "name:\"wyandotte-preview\" help:\"To access the Migrations API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.wyandotte-preview+json\n\n```\""
-	Org       string `required:"" name:"org"`
-	PerPage   int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page      int64  `name:"page" help:"Page number of the results to fetch."`
+	MigrationId int64 `required:"" name:"migration_id"`
+	Wyandotte   bool  "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
 }
 
-func (c *MigrationsListForOrgCmd) Run(isValueSetMap map[string]bool) error {
+func (c *MigrationsDeleteArchiveForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/migrations")
-	c.UpdatePreview("wyandotte", c.Wyandotte)
-	c.UpdateURLPath("org", c.Org)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type MigrationsGetStatusForOrgCmd struct {
-	internal.BaseCmd
-	Wyandotte   bool   "name:\"wyandotte-preview\" help:\"To access the Migrations API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.wyandotte-preview+json\n\n```\""
-	Org         string `required:"" name:"org"`
-	MigrationId int64  `required:"" name:"migration_id"`
-}
-
-func (c *MigrationsGetStatusForOrgCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/migrations/:migration_id")
-	c.UpdatePreview("wyandotte", c.Wyandotte)
-	c.UpdateURLPath("org", c.Org)
+	c.SetURLPath("/user/migrations/:migration_id/archive")
 	c.UpdateURLPath("migration_id", c.MigrationId)
-	return c.DoRequest("GET")
-}
-
-type MigrationsGetArchiveForOrgCmd struct {
-	internal.BaseCmd
-	Wyandotte   bool   "name:\"wyandotte-preview\" help:\"To access the Migrations API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.wyandotte-preview+json\n\n```\""
-	Org         string `required:"" name:"org"`
-	MigrationId int64  `required:"" name:"migration_id"`
-}
-
-func (c *MigrationsGetArchiveForOrgCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/migrations/:migration_id/archive")
 	c.UpdatePreview("wyandotte", c.Wyandotte)
-	c.UpdateURLPath("org", c.Org)
-	c.UpdateURLPath("migration_id", c.MigrationId)
-	return c.DoRequest("GET")
+	return c.DoRequest("DELETE")
 }
 
 type MigrationsDeleteArchiveForOrgCmd struct {
 	internal.BaseCmd
-	Wyandotte   bool   "name:\"wyandotte-preview\" help:\"To access the Migrations API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.wyandotte-preview+json\n\n```\""
-	Org         string `required:"" name:"org"`
 	MigrationId int64  `required:"" name:"migration_id"`
+	Org         string `required:"" name:"org"`
+	Wyandotte   bool   "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
 }
 
 func (c *MigrationsDeleteArchiveForOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/:org/migrations/:migration_id/archive")
-	c.UpdatePreview("wyandotte", c.Wyandotte)
-	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLPath("migration_id", c.MigrationId)
+	c.UpdateURLPath("org", c.Org)
+	c.UpdatePreview("wyandotte", c.Wyandotte)
 	return c.DoRequest("DELETE")
 }
 
-type MigrationsUnlockRepoForOrgCmd struct {
+type MigrationsDownloadArchiveForOrgCmd struct {
 	internal.BaseCmd
-	Wyandotte   bool   "name:\"wyandotte-preview\" help:\"To access the Migrations API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.wyandotte-preview+json\n\n```\""
-	Org         string `required:"" name:"org"`
 	MigrationId int64  `required:"" name:"migration_id"`
-	RepoName    string `required:"" name:"repo_name"`
+	Org         string `required:"" name:"org"`
+	Wyandotte   bool   "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
 }
 
-func (c *MigrationsUnlockRepoForOrgCmd) Run(isValueSetMap map[string]bool) error {
+func (c *MigrationsDownloadArchiveForOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/migrations/:migration_id/repos/:repo_name/lock")
-	c.UpdatePreview("wyandotte", c.Wyandotte)
-	c.UpdateURLPath("org", c.Org)
+	c.SetURLPath("/orgs/:org/migrations/:migration_id/archive")
 	c.UpdateURLPath("migration_id", c.MigrationId)
-	c.UpdateURLPath("repo_name", c.RepoName)
-	return c.DoRequest("DELETE")
-}
-
-type MigrationsStartImportCmd struct {
-	internal.BaseCmd
-	BarredRock  bool   "name:\"barred-rock-preview\" required:\"\" help:\"The source import APIs are currently in public preview. See the [source import](/v3/previews/#source-import) preview for more details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.barred-rock-preview\n\n```\""
-	Owner       string `name:"owner"`
-	Repo        string `required:"" name:"repo"`
-	VcsUrl      string `required:"" name:"vcs_url" help:"The URL of the originating repository."`
-	Vcs         string "name:\"vcs\" help:\"The originating VCS type. Can be one of `subversion`, `git`, `mercurial`, or `tfvc`. Please be aware that without this parameter, the import job will take additional time to detect the VCS type before beginning the import. This detection step will be reflected in the response.\""
-	VcsUsername string "name:\"vcs_username\" help:\"If authentication is required, the username to provide to `vcs_url`.\""
-	VcsPassword string "name:\"vcs_password\" help:\"If authentication is required, the password to provide to `vcs_url`.\""
-	TfvcProject string `name:"tfvc_project" help:"For a tfvc import, the name of the project that is being imported."`
-}
-
-func (c *MigrationsStartImportCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/import")
-	c.UpdatePreview("barred-rock", c.BarredRock)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateBody("vcs_url", c.VcsUrl)
-	c.UpdateBody("vcs", c.Vcs)
-	c.UpdateBody("vcs_username", c.VcsUsername)
-	c.UpdateBody("vcs_password", c.VcsPassword)
-	c.UpdateBody("tfvc_project", c.TfvcProject)
-	return c.DoRequest("PUT")
-}
-
-type MigrationsGetImportProgressCmd struct {
-	internal.BaseCmd
-	BarredRock bool   "name:\"barred-rock-preview\" required:\"\" help:\"The source import APIs are currently in public preview. See the [source import](/v3/previews/#source-import) preview for more details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.barred-rock-preview\n\n```\""
-	Owner      string `name:"owner"`
-	Repo       string `required:"" name:"repo"`
-}
-
-func (c *MigrationsGetImportProgressCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/import")
-	c.UpdatePreview("barred-rock", c.BarredRock)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("org", c.Org)
+	c.UpdatePreview("wyandotte", c.Wyandotte)
 	return c.DoRequest("GET")
 }
 
-type MigrationsUpdateImportCmd struct {
+type MigrationsGetArchiveForAuthenticatedUserCmd struct {
 	internal.BaseCmd
-	BarredRock  bool   "name:\"barred-rock-preview\" required:\"\" help:\"The source import APIs are currently in public preview. See the [source import](/v3/previews/#source-import) preview for more details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.barred-rock-preview\n\n```\""
-	Owner       string `name:"owner"`
-	Repo        string `required:"" name:"repo"`
-	VcsUsername string `name:"vcs_username" help:"The username to provide to the originating repository."`
-	VcsPassword string `name:"vcs_password" help:"The password to provide to the originating repository."`
+	MigrationId int64 `required:"" name:"migration_id"`
+	Wyandotte   bool  "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
 }
 
-func (c *MigrationsUpdateImportCmd) Run(isValueSetMap map[string]bool) error {
+func (c *MigrationsGetArchiveForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/import")
-	c.UpdatePreview("barred-rock", c.BarredRock)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateBody("vcs_username", c.VcsUsername)
-	c.UpdateBody("vcs_password", c.VcsPassword)
-	return c.DoRequest("PATCH")
+	c.SetURLPath("/user/migrations/:migration_id/archive")
+	c.UpdateURLPath("migration_id", c.MigrationId)
+	c.UpdatePreview("wyandotte", c.Wyandotte)
+	return c.DoRequest("GET")
 }
 
 type MigrationsGetCommitAuthorsCmd struct {
 	internal.BaseCmd
-	BarredRock bool   "name:\"barred-rock-preview\" required:\"\" help:\"The source import APIs are currently in public preview. See the [source import](/v3/previews/#source-import) preview for more details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.barred-rock-preview\n\n```\""
-	Owner      string `name:"owner"`
-	Repo       string `required:"" name:"repo"`
-	Since      string "name:\"since\" help:\"Only authors found after this id are returned. Provide the highest author ID you've seen so far. New authors may be added to the list at any point while the importer is performing the `raw` step.\""
+	Owner string `name:"owner"`
+	Repo  string `required:"" name:"repo"`
+	Since string `name:"since"`
 }
 
 func (c *MigrationsGetCommitAuthorsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/:owner/:repo/import/authors")
-	c.UpdatePreview("barred-rock", c.BarredRock)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("since", c.Since)
 	return c.DoRequest("GET")
 }
 
+type MigrationsGetImportProgressCmd struct {
+	internal.BaseCmd
+	Owner string `name:"owner"`
+	Repo  string `required:"" name:"repo"`
+}
+
+func (c *MigrationsGetImportProgressCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/import")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type MigrationsGetLargeFilesCmd struct {
+	internal.BaseCmd
+	Owner string `name:"owner"`
+	Repo  string `required:"" name:"repo"`
+}
+
+func (c *MigrationsGetLargeFilesCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/import/large_files")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type MigrationsGetStatusForAuthenticatedUserCmd struct {
+	internal.BaseCmd
+	MigrationId int64 `required:"" name:"migration_id"`
+	Wyandotte   bool  "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
+}
+
+func (c *MigrationsGetStatusForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/migrations/:migration_id")
+	c.UpdateURLPath("migration_id", c.MigrationId)
+	c.UpdatePreview("wyandotte", c.Wyandotte)
+	return c.DoRequest("GET")
+}
+
+type MigrationsGetStatusForOrgCmd struct {
+	internal.BaseCmd
+	MigrationId int64  `required:"" name:"migration_id"`
+	Org         string `required:"" name:"org"`
+	Wyandotte   bool   "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
+}
+
+func (c *MigrationsGetStatusForOrgCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/migrations/:migration_id")
+	c.UpdateURLPath("migration_id", c.MigrationId)
+	c.UpdateURLPath("org", c.Org)
+	c.UpdatePreview("wyandotte", c.Wyandotte)
+	return c.DoRequest("GET")
+}
+
+type MigrationsListForAuthenticatedUserCmd struct {
+	internal.BaseCmd
+	Page      int64 `name:"page"`
+	PerPage   int64 `name:"per_page"`
+	Wyandotte bool  "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
+}
+
+func (c *MigrationsListForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/migrations")
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdatePreview("wyandotte", c.Wyandotte)
+	return c.DoRequest("GET")
+}
+
+type MigrationsListForOrgCmd struct {
+	internal.BaseCmd
+	Org       string `required:"" name:"org"`
+	Page      int64  `name:"page"`
+	PerPage   int64  `name:"per_page"`
+	Wyandotte bool   "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
+}
+
+func (c *MigrationsListForOrgCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/migrations")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdatePreview("wyandotte", c.Wyandotte)
+	return c.DoRequest("GET")
+}
+
+type MigrationsListReposForOrgCmd struct {
+	internal.BaseCmd
+	MigrationId int64  `required:"" name:"migration_id"`
+	Org         string `required:"" name:"org"`
+	Page        int64  `name:"page"`
+	PerPage     int64  `name:"per_page"`
+	Wyandotte   bool   "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
+}
+
+func (c *MigrationsListReposForOrgCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/migrations/:migration_id/repositories")
+	c.UpdateURLPath("migration_id", c.MigrationId)
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdatePreview("wyandotte", c.Wyandotte)
+	return c.DoRequest("GET")
+}
+
+type MigrationsListReposForUserCmd struct {
+	internal.BaseCmd
+	MigrationId int64 `required:"" name:"migration_id"`
+	Page        int64 `name:"page"`
+	PerPage     int64 `name:"per_page"`
+	Wyandotte   bool  "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
+}
+
+func (c *MigrationsListReposForUserCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/:migration_id/repositories")
+	c.UpdateURLPath("migration_id", c.MigrationId)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdatePreview("wyandotte", c.Wyandotte)
+	return c.DoRequest("GET")
+}
+
 type MigrationsMapCommitAuthorCmd struct {
 	internal.BaseCmd
-	BarredRock bool   "name:\"barred-rock-preview\" required:\"\" help:\"The source import APIs are currently in public preview. See the [source import](/v3/previews/#source-import) preview for more details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.barred-rock-preview\n\n```\""
-	Owner      string `name:"owner"`
-	Repo       string `required:"" name:"repo"`
-	AuthorId   int64  `required:"" name:"author_id"`
-	Email      string `name:"email" help:"The new Git author email."`
-	Name       string `name:"name" help:"The new Git author name."`
+	AuthorId int64  `required:"" name:"author_id"`
+	Email    string `name:"email"`
+	Name     string `name:"name"`
+	Owner    string `name:"owner"`
+	Repo     string `required:"" name:"repo"`
 }
 
 func (c *MigrationsMapCommitAuthorCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/:owner/:repo/import/authors/:author_id")
-	c.UpdatePreview("barred-rock", c.BarredRock)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("author_id", c.AuthorId)
 	c.UpdateBody("email", c.Email)
 	c.UpdateBody("name", c.Name)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("PATCH")
 }
 
 type MigrationsSetLfsPreferenceCmd struct {
 	internal.BaseCmd
-	BarredRock bool   "name:\"barred-rock-preview\" required:\"\" help:\"The source import APIs are currently in public preview. See the [source import](/v3/previews/#source-import) preview for more details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.barred-rock-preview\n\n```\""
-	Owner      string `name:"owner"`
-	Repo       string `required:"" name:"repo"`
-	UseLfs     string "required:\"\" name:\"use_lfs\" help:\"Can be one of `opt_in` (large files will be stored using Git LFS) or `opt_out` (large files will be removed during the import).\""
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+	UseLfs string `required:"" name:"use_lfs"`
 }
 
 func (c *MigrationsSetLfsPreferenceCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/:owner/:repo/import/lfs")
-	c.UpdatePreview("barred-rock", c.BarredRock)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateBody("use_lfs", c.UseLfs)
 	return c.DoRequest("PATCH")
 }
 
-type MigrationsGetLargeFilesCmd struct {
-	internal.BaseCmd
-	BarredRock bool   "name:\"barred-rock-preview\" required:\"\" help:\"The source import APIs are currently in public preview. See the [source import](/v3/previews/#source-import) preview for more details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.barred-rock-preview\n\n```\""
-	Owner      string `name:"owner"`
-	Repo       string `required:"" name:"repo"`
-}
-
-func (c *MigrationsGetLargeFilesCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/import/large_files")
-	c.UpdatePreview("barred-rock", c.BarredRock)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	return c.DoRequest("GET")
-}
-
-type MigrationsCancelImportCmd struct {
-	internal.BaseCmd
-	BarredRock bool   "name:\"barred-rock-preview\" required:\"\" help:\"The source import APIs are currently in public preview. See the [source import](/v3/previews/#source-import) preview for more details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.barred-rock-preview\n\n```\""
-	Owner      string `name:"owner"`
-	Repo       string `required:"" name:"repo"`
-}
-
-func (c *MigrationsCancelImportCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/import")
-	c.UpdatePreview("barred-rock", c.BarredRock)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	return c.DoRequest("DELETE")
-}
-
 type MigrationsStartForAuthenticatedUserCmd struct {
 	internal.BaseCmd
-	Repositories       []string `required:"" name:"repositories" help:"An array of repositories to include in the migration."`
-	LockRepositories   bool     "name:\"lock_repositories\" help:\"Locks the `repositories` to prevent changes during the migration when set to `true`.\""
-	ExcludeAttachments bool     "name:\"exclude_attachments\" help:\"Does not include attachments uploaded to GitHub.com in the migration data when set to `true`. Excluding attachments will reduce the migration archive file size.\""
+	ExcludeAttachments bool     `name:"exclude_attachments"`
+	LockRepositories   bool     `name:"lock_repositories"`
+	Repositories       []string `required:"" name:"repositories"`
 }
 
 func (c *MigrationsStartForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/migrations")
-	c.UpdateBody("repositories", c.Repositories)
-	c.UpdateBody("lock_repositories", c.LockRepositories)
 	c.UpdateBody("exclude_attachments", c.ExcludeAttachments)
+	c.UpdateBody("lock_repositories", c.LockRepositories)
+	c.UpdateBody("repositories", c.Repositories)
 	return c.DoRequest("POST")
 }
 
-type MigrationsListForAuthenticatedUserCmd struct {
+type MigrationsStartForOrgCmd struct {
 	internal.BaseCmd
-	Wyandotte bool  "name:\"wyandotte-preview\" help:\"To access the Migrations API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.wyandotte-preview+json\n\n```\""
-	PerPage   int64 `name:"per_page" help:"Results per page (max 100)"`
-	Page      int64 `name:"page" help:"Page number of the results to fetch."`
+	ExcludeAttachments bool     `name:"exclude_attachments"`
+	LockRepositories   bool     `name:"lock_repositories"`
+	Org                string   `required:"" name:"org"`
+	Repositories       []string `required:"" name:"repositories"`
 }
 
-func (c *MigrationsListForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
+func (c *MigrationsStartForOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/migrations")
-	c.UpdatePreview("wyandotte", c.Wyandotte)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
+	c.SetURLPath("/orgs/:org/migrations")
+	c.UpdateBody("exclude_attachments", c.ExcludeAttachments)
+	c.UpdateBody("lock_repositories", c.LockRepositories)
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateBody("repositories", c.Repositories)
+	return c.DoRequest("POST")
 }
 
-type MigrationsGetStatusForAuthenticatedUserCmd struct {
+type MigrationsStartImportCmd struct {
 	internal.BaseCmd
-	Wyandotte   bool  "name:\"wyandotte-preview\" help:\"To access the Migrations API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.wyandotte-preview+json\n\n```\""
-	MigrationId int64 `required:"" name:"migration_id"`
+	Owner       string `name:"owner"`
+	Repo        string `required:"" name:"repo"`
+	TfvcProject string `name:"tfvc_project"`
+	Vcs         string `name:"vcs"`
+	VcsPassword string `name:"vcs_password"`
+	VcsUrl      string `required:"" name:"vcs_url"`
+	VcsUsername string `name:"vcs_username"`
 }
 
-func (c *MigrationsGetStatusForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
+func (c *MigrationsStartImportCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/migrations/:migration_id")
-	c.UpdatePreview("wyandotte", c.Wyandotte)
-	c.UpdateURLPath("migration_id", c.MigrationId)
-	return c.DoRequest("GET")
-}
-
-type MigrationsGetArchiveForAuthenticatedUserCmd struct {
-	internal.BaseCmd
-	Wyandotte   bool  "name:\"wyandotte-preview\" help:\"To access the Migrations API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.wyandotte-preview+json\n\n```\""
-	MigrationId int64 `required:"" name:"migration_id"`
-}
-
-func (c *MigrationsGetArchiveForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/migrations/:migration_id/archive")
-	c.UpdatePreview("wyandotte", c.Wyandotte)
-	c.UpdateURLPath("migration_id", c.MigrationId)
-	return c.DoRequest("GET")
-}
-
-type MigrationsDeleteArchiveForAuthenticatedUserCmd struct {
-	internal.BaseCmd
-	Wyandotte   bool  "name:\"wyandotte-preview\" help:\"To access the Migrations API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.wyandotte-preview+json\n\n```\""
-	MigrationId int64 `required:"" name:"migration_id"`
-}
-
-func (c *MigrationsDeleteArchiveForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/migrations/:migration_id/archive")
-	c.UpdatePreview("wyandotte", c.Wyandotte)
-	c.UpdateURLPath("migration_id", c.MigrationId)
-	return c.DoRequest("DELETE")
+	c.SetURLPath("/repos/:owner/:repo/import")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("tfvc_project", c.TfvcProject)
+	c.UpdateBody("vcs", c.Vcs)
+	c.UpdateBody("vcs_password", c.VcsPassword)
+	c.UpdateBody("vcs_url", c.VcsUrl)
+	c.UpdateBody("vcs_username", c.VcsUsername)
+	return c.DoRequest("PUT")
 }
 
 type MigrationsUnlockRepoForAuthenticatedUserCmd struct {
 	internal.BaseCmd
-	Wyandotte   bool   "name:\"wyandotte-preview\" help:\"To access the Migrations API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.wyandotte-preview+json\n\n```\""
 	MigrationId int64  `required:"" name:"migration_id"`
 	RepoName    string `required:"" name:"repo_name"`
+	Wyandotte   bool   "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
 }
 
 func (c *MigrationsUnlockRepoForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/migrations/:migration_id/repos/:repo_name/lock")
-	c.UpdatePreview("wyandotte", c.Wyandotte)
 	c.UpdateURLPath("migration_id", c.MigrationId)
 	c.UpdateURLPath("repo_name", c.RepoName)
+	c.UpdatePreview("wyandotte", c.Wyandotte)
 	return c.DoRequest("DELETE")
+}
+
+type MigrationsUnlockRepoForOrgCmd struct {
+	internal.BaseCmd
+	MigrationId int64  `required:"" name:"migration_id"`
+	Org         string `required:"" name:"org"`
+	RepoName    string `required:"" name:"repo_name"`
+	Wyandotte   bool   "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
+}
+
+func (c *MigrationsUnlockRepoForOrgCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/migrations/:migration_id/repos/:repo_name/lock")
+	c.UpdateURLPath("migration_id", c.MigrationId)
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("repo_name", c.RepoName)
+	c.UpdatePreview("wyandotte", c.Wyandotte)
+	return c.DoRequest("DELETE")
+}
+
+type MigrationsUpdateImportCmd struct {
+	internal.BaseCmd
+	Owner       string `name:"owner"`
+	Repo        string `required:"" name:"repo"`
+	VcsPassword string `name:"vcs_password"`
+	VcsUsername string `name:"vcs_username"`
+}
+
+func (c *MigrationsUpdateImportCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/import")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("vcs_password", c.VcsPassword)
+	c.UpdateBody("vcs_username", c.VcsUsername)
+	return c.DoRequest("PATCH")
 }

@@ -5,440 +5,630 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type ReposCmd struct {
-	List                                               ReposListCmd                                               `cmd:"" help:"List your repositories - https://developer.github.com/v3/repos/#list-your-repositories"`
-	ListForUser                                        ReposListForUserCmd                                        `cmd:"" help:"List user repositories - https://developer.github.com/v3/repos/#list-user-repositories"`
-	ListForOrg                                         ReposListForOrgCmd                                         `cmd:"" help:"List organization repositories - https://developer.github.com/v3/repos/#list-organization-repositories"`
-	ListPublic                                         ReposListPublicCmd                                         `cmd:"" help:"List all public repositories - https://developer.github.com/v3/repos/#list-all-public-repositories"`
-	CreateForAuthenticatedUser                         ReposCreateForAuthenticatedUserCmd                         `cmd:"" help:"Create a new repository for the authenticated user - https://developer.github.com/v3/repos/#create"`
-	CreateInOrg                                        ReposCreateInOrgCmd                                        `cmd:"" help:"Create a new repository in this organization - https://developer.github.com/v3/repos/#create"`
-	Get                                                ReposGetCmd                                                `cmd:"" help:"Get - https://developer.github.com/v3/repos/#get"`
-	Edit                                               ReposEditCmd                                               `cmd:"" help:"Edit - https://developer.github.com/v3/repos/#edit"`
-	ListTopics                                         ReposListTopicsCmd                                         `cmd:"" help:"List all topics for a repository - https://developer.github.com/v3/repos/#list-all-topics-for-a-repository"`
-	ReplaceTopics                                      ReposReplaceTopicsCmd                                      `cmd:"" help:"Replace all topics for a repository - https://developer.github.com/v3/repos/#replace-all-topics-for-a-repository"`
-	ListContributors                                   ReposListContributorsCmd                                   `cmd:"" help:"List contributors - https://developer.github.com/v3/repos/#list-contributors"`
-	ListLanguages                                      ReposListLanguagesCmd                                      `cmd:"" help:"List languages - https://developer.github.com/v3/repos/#list-languages"`
-	ListTeams                                          ReposListTeamsCmd                                          `cmd:"" help:"List teams - https://developer.github.com/v3/repos/#list-teams"`
-	ListTags                                           ReposListTagsCmd                                           `cmd:"" help:"List tags - https://developer.github.com/v3/repos/#list-tags"`
-	Delete                                             ReposDeleteCmd                                             `cmd:"" help:"Delete a repository - https://developer.github.com/v3/repos/#delete-a-repository"`
-	Transfer                                           ReposTransferCmd                                           `cmd:"" help:"Transfer a repository - https://developer.github.com/v3/repos/#transfer-a-repository"`
-	ListBranches                                       ReposListBranchesCmd                                       `cmd:"" help:"List branches - https://developer.github.com/v3/repos/branches/#list-branches"`
-	GetBranch                                          ReposGetBranchCmd                                          `cmd:"" help:"Get branch - https://developer.github.com/v3/repos/branches/#get-branch"`
-	GetBranchProtection                                ReposGetBranchProtectionCmd                                `cmd:"" help:"Get branch protection - https://developer.github.com/v3/repos/branches/#get-branch-protection"`
-	RemoveBranchProtection                             ReposRemoveBranchProtectionCmd                             `cmd:"" help:"Remove branch protection - https://developer.github.com/v3/repos/branches/#remove-branch-protection"`
-	GetProtectedBranchRequiredStatusChecks             ReposGetProtectedBranchRequiredStatusChecksCmd             `cmd:"" help:"Get required status checks of protected branch - https://developer.github.com/v3/repos/branches/#get-required-status-checks-of-protected-branch"`
-	UpdateProtectedBranchRequiredStatusChecks          ReposUpdateProtectedBranchRequiredStatusChecksCmd          `cmd:"" help:"Update required status checks of protected branch - https://developer.github.com/v3/repos/branches/#update-required-status-checks-of-protected-branch"`
-	RemoveProtectedBranchRequiredStatusChecks          ReposRemoveProtectedBranchRequiredStatusChecksCmd          `cmd:"" help:"Remove required status checks of protected branch - https://developer.github.com/v3/repos/branches/#remove-required-status-checks-of-protected-branch"`
-	ListProtectedBranchRequiredStatusChecksContexts    ReposListProtectedBranchRequiredStatusChecksContextsCmd    `cmd:"" help:"List required status checks contexts of protected branch - https://developer.github.com/v3/repos/branches/#list-required-status-checks-contexts-of-protected-branch"`
-	ReplaceProtectedBranchRequiredStatusChecksContexts ReposReplaceProtectedBranchRequiredStatusChecksContextsCmd `cmd:"" help:"Replace required status checks contexts of protected branch - https://developer.github.com/v3/repos/branches/#replace-required-status-checks-contexts-of-protected-branch"`
-	AddProtectedBranchRequiredStatusChecksContexts     ReposAddProtectedBranchRequiredStatusChecksContextsCmd     `cmd:"" help:"Add required status checks contexts of protected branch - https://developer.github.com/v3/repos/branches/#add-required-status-checks-contexts-of-protected-branch"`
-	RemoveProtectedBranchRequiredStatusChecksContexts  ReposRemoveProtectedBranchRequiredStatusChecksContextsCmd  `cmd:"" help:"Remove required status checks contexts of protected branch - https://developer.github.com/v3/repos/branches/#remove-required-status-checks-contexts-of-protected-branch"`
-	GetProtectedBranchPullRequestReviewEnforcement     ReposGetProtectedBranchPullRequestReviewEnforcementCmd     `cmd:"" help:"Get pull request review enforcement of protected branch - https://developer.github.com/v3/repos/branches/#get-pull-request-review-enforcement-of-protected-branch"`
-	RemoveProtectedBranchPullRequestReviewEnforcement  ReposRemoveProtectedBranchPullRequestReviewEnforcementCmd  `cmd:"" help:"Remove pull request review enforcement of protected branch - https://developer.github.com/v3/repos/branches/#remove-pull-request-review-enforcement-of-protected-branch"`
-	GetProtectedBranchRequiredSignatures               ReposGetProtectedBranchRequiredSignaturesCmd               `cmd:"" help:"Get required signatures of protected branch - https://developer.github.com/v3/repos/branches/#get-required-signatures-of-protected-branch"`
-	AddProtectedBranchRequiredSignatures               ReposAddProtectedBranchRequiredSignaturesCmd               `cmd:"" help:"Add required signatures of protected branch - https://developer.github.com/v3/repos/branches/#add-required-signatures-of-protected-branch"`
-	RemoveProtectedBranchRequiredSignatures            ReposRemoveProtectedBranchRequiredSignaturesCmd            `cmd:"" help:"Remove required signatures of protected branch - https://developer.github.com/v3/repos/branches/#remove-required-signatures-of-protected-branch"`
-	GetProtectedBranchAdminEnforcement                 ReposGetProtectedBranchAdminEnforcementCmd                 `cmd:"" help:"Get admin enforcement of protected branch - https://developer.github.com/v3/repos/branches/#get-admin-enforcement-of-protected-branch"`
-	AddProtectedBranchAdminEnforcement                 ReposAddProtectedBranchAdminEnforcementCmd                 `cmd:"" help:"Add admin enforcement of protected branch - https://developer.github.com/v3/repos/branches/#add-admin-enforcement-of-protected-branch"`
-	RemoveProtectedBranchAdminEnforcement              ReposRemoveProtectedBranchAdminEnforcementCmd              `cmd:"" help:"Remove admin enforcement of protected branch - https://developer.github.com/v3/repos/branches/#remove-admin-enforcement-of-protected-branch"`
-	GetProtectedBranchRestrictions                     ReposGetProtectedBranchRestrictionsCmd                     `cmd:"" help:"Get restrictions of protected branch - https://developer.github.com/v3/repos/branches/#get-restrictions-of-protected-branch"`
-	RemoveProtectedBranchRestrictions                  ReposRemoveProtectedBranchRestrictionsCmd                  `cmd:"" help:"Remove restrictions of protected branch - https://developer.github.com/v3/repos/branches/#remove-restrictions-of-protected-branch"`
-	ListProtectedBranchTeamRestrictions                ReposListProtectedBranchTeamRestrictionsCmd                `cmd:"" help:"List team restrictions of protected branch - https://developer.github.com/v3/repos/branches/#list-team-restrictions-of-protected-branch"`
-	ReplaceProtectedBranchTeamRestrictions             ReposReplaceProtectedBranchTeamRestrictionsCmd             `cmd:"" help:"Replace team restrictions of protected branch - https://developer.github.com/v3/repos/branches/#replace-team-restrictions-of-protected-branch"`
-	AddProtectedBranchTeamRestrictions                 ReposAddProtectedBranchTeamRestrictionsCmd                 `cmd:"" help:"Add team restrictions of protected branch - https://developer.github.com/v3/repos/branches/#add-team-restrictions-of-protected-branch"`
-	RemoveProtectedBranchTeamRestrictions              ReposRemoveProtectedBranchTeamRestrictionsCmd              `cmd:"" help:"Remove team restrictions of protected branch - https://developer.github.com/v3/repos/branches/#remove-team-restrictions-of-protected-branch"`
-	ListProtectedBranchUserRestrictions                ReposListProtectedBranchUserRestrictionsCmd                `cmd:"" help:"List user restrictions of protected branch - https://developer.github.com/v3/repos/branches/#list-user-restrictions-of-protected-branch"`
-	ReplaceProtectedBranchUserRestrictions             ReposReplaceProtectedBranchUserRestrictionsCmd             `cmd:"" help:"Replace user restrictions of protected branch - https://developer.github.com/v3/repos/branches/#replace-user-restrictions-of-protected-branch"`
-	AddProtectedBranchUserRestrictions                 ReposAddProtectedBranchUserRestrictionsCmd                 `cmd:"" help:"Add user restrictions of protected branch - https://developer.github.com/v3/repos/branches/#add-user-restrictions-of-protected-branch"`
-	RemoveProtectedBranchUserRestrictions              ReposRemoveProtectedBranchUserRestrictionsCmd              `cmd:"" help:"Remove user restrictions of protected branch - https://developer.github.com/v3/repos/branches/#remove-user-restrictions-of-protected-branch"`
-	ListCollaborators                                  ReposListCollaboratorsCmd                                  `cmd:"" help:"List collaborators - https://developer.github.com/v3/repos/collaborators/#list-collaborators"`
-	CheckCollaborator                                  ReposCheckCollaboratorCmd                                  `cmd:"" help:"Check if a user is a collaborator - https://developer.github.com/v3/repos/collaborators/#check-if-a-user-is-a-collaborator"`
-	GetCollaboratorPermissionLevel                     ReposGetCollaboratorPermissionLevelCmd                     `cmd:"" help:"Review a user's permission level - https://developer.github.com/v3/repos/collaborators/#review-a-users-permission-level"`
-	AddCollaborator                                    ReposAddCollaboratorCmd                                    `cmd:"" help:"Add user as a collaborator - https://developer.github.com/v3/repos/collaborators/#add-user-as-a-collaborator"`
-	RemoveCollaborator                                 ReposRemoveCollaboratorCmd                                 `cmd:"" help:"Remove user as a collaborator - https://developer.github.com/v3/repos/collaborators/#remove-user-as-a-collaborator"`
-	ListCommitComments                                 ReposListCommitCommentsCmd                                 `cmd:"" help:"List commit comments for a repository - https://developer.github.com/v3/repos/comments/#list-commit-comments-for-a-repository"`
-	ListCommentsForCommit                              ReposListCommentsForCommitCmd                              `cmd:"" help:"List comments for a single commit - https://developer.github.com/v3/repos/comments/#list-comments-for-a-single-commit"`
-	CreateCommitComment                                ReposCreateCommitCommentCmd                                `cmd:"" help:"Create a commit comment - https://developer.github.com/v3/repos/comments/#create-a-commit-comment"`
-	GetCommitComment                                   ReposGetCommitCommentCmd                                   `cmd:"" help:"Get a single commit comment - https://developer.github.com/v3/repos/comments/#get-a-single-commit-comment"`
-	UpdateCommitComment                                ReposUpdateCommitCommentCmd                                `cmd:"" help:"Update a commit comment - https://developer.github.com/v3/repos/comments/#update-a-commit-comment"`
-	DeleteCommitComment                                ReposDeleteCommitCommentCmd                                `cmd:"" help:"Delete a commit comment - https://developer.github.com/v3/repos/comments/#delete-a-commit-comment"`
-	ListCommits                                        ReposListCommitsCmd                                        `cmd:"" help:"List commits on a repository - https://developer.github.com/v3/repos/commits/#list-commits-on-a-repository"`
-	GetCommit                                          ReposGetCommitCmd                                          `cmd:"" help:"Get a single commit - https://developer.github.com/v3/repos/commits/#get-a-single-commit"`
-	GetCommitRefSha                                    ReposGetCommitRefShaCmd                                    `cmd:"" help:"Get the SHA-1 of a commit reference - https://developer.github.com/v3/repos/commits/#get-the-sha-1-of-a-commit-reference"`
-	CompareCommits                                     ReposCompareCommitsCmd                                     `cmd:"" help:"Compare two commits - https://developer.github.com/v3/repos/commits/#compare-two-commits"`
-	RetrieveCommunityProfileMetrics                    ReposRetrieveCommunityProfileMetricsCmd                    `cmd:"" help:"Retrieve community profile metrics - https://developer.github.com/v3/repos/community/#retrieve-community-profile-metrics"`
-	GetReadme                                          ReposGetReadmeCmd                                          `cmd:"" help:"Get the README - https://developer.github.com/v3/repos/contents/#get-the-readme"`
-	GetContents                                        ReposGetContentsCmd                                        `cmd:"" help:"Get contents - https://developer.github.com/v3/repos/contents/#get-contents"`
-	GetArchiveLink                                     ReposGetArchiveLinkCmd                                     `cmd:"" help:"Get archive link - https://developer.github.com/v3/repos/contents/#get-archive-link"`
-	ListDeployKeys                                     ReposListDeployKeysCmd                                     `cmd:"" help:"List deploy keys - https://developer.github.com/v3/repos/keys/#list-deploy-keys"`
-	GetDeployKey                                       ReposGetDeployKeyCmd                                       `cmd:"" help:"Get a deploy key - https://developer.github.com/v3/repos/keys/#get-a-deploy-key"`
-	AddDeployKey                                       ReposAddDeployKeyCmd                                       `cmd:"" help:"Add a new deploy key - https://developer.github.com/v3/repos/keys/#add-a-new-deploy-key"`
-	RemoveDeployKey                                    ReposRemoveDeployKeyCmd                                    `cmd:"" help:"Remove a deploy key - https://developer.github.com/v3/repos/keys/#remove-a-deploy-key"`
-	ListDeployments                                    ReposListDeploymentsCmd                                    `cmd:"" help:"List deployments - https://developer.github.com/v3/repos/deployments/#list-deployments"`
-	GetDeployment                                      ReposGetDeploymentCmd                                      `cmd:"" help:"Get a single deployment - https://developer.github.com/v3/repos/deployments/#get-a-single-deployment"`
-	CreateDeployment                                   ReposCreateDeploymentCmd                                   `cmd:"" help:"Create a deployment - https://developer.github.com/v3/repos/deployments/#create-a-deployment"`
-	ListDeploymentStatuses                             ReposListDeploymentStatusesCmd                             `cmd:"" help:"List deployment statuses - https://developer.github.com/v3/repos/deployments/#list-deployment-statuses"`
-	GetDeploymentStatus                                ReposGetDeploymentStatusCmd                                `cmd:"" help:"Get a single deployment status - https://developer.github.com/v3/repos/deployments/#get-a-single-deployment-status"`
-	CreateDeploymentStatus                             ReposCreateDeploymentStatusCmd                             `cmd:"" help:"Create a deployment status - https://developer.github.com/v3/repos/deployments/#create-a-deployment-status"`
-	ListDownloads                                      ReposListDownloadsCmd                                      `cmd:"" help:"List downloads for a repository - https://developer.github.com/v3/repos/downloads/#list-downloads-for-a-repository"`
-	GetDownload                                        ReposGetDownloadCmd                                        `cmd:"" help:"Get a single download - https://developer.github.com/v3/repos/downloads/#get-a-single-download"`
-	DeleteDownload                                     ReposDeleteDownloadCmd                                     `cmd:"" help:"Delete a download - https://developer.github.com/v3/repos/downloads/#delete-a-download"`
-	ListForks                                          ReposListForksCmd                                          `cmd:"" help:"List forks - https://developer.github.com/v3/repos/forks/#list-forks"`
-	CreateFork                                         ReposCreateForkCmd                                         `cmd:"" help:"Create a fork - https://developer.github.com/v3/repos/forks/#create-a-fork"`
-	ListInvitations                                    ReposListInvitationsCmd                                    `cmd:"" help:"List invitations for a repository - https://developer.github.com/v3/repos/invitations/#list-invitations-for-a-repository"`
-	DeleteInvitation                                   ReposDeleteInvitationCmd                                   `cmd:"" help:"Delete a repository invitation - https://developer.github.com/v3/repos/invitations/#delete-a-repository-invitation"`
-	UpdateInvitation                                   ReposUpdateInvitationCmd                                   `cmd:"" help:"Update a repository invitation - https://developer.github.com/v3/repos/invitations/#update-a-repository-invitation"`
-	ListInvitationsForAuthenticatedUser                ReposListInvitationsForAuthenticatedUserCmd                `cmd:"" help:"List a user's repository invitations - https://developer.github.com/v3/repos/invitations/#list-a-users-repository-invitations"`
-	AcceptInvitation                                   ReposAcceptInvitationCmd                                   `cmd:"" help:"Accept a repository invitation - https://developer.github.com/v3/repos/invitations/#accept-a-repository-invitation"`
-	DeclineInvitation                                  ReposDeclineInvitationCmd                                  `cmd:"" help:"Decline a repository invitation - https://developer.github.com/v3/repos/invitations/#decline-a-repository-invitation"`
-	Merge                                              ReposMergeCmd                                              `cmd:"" help:"Perform a merge - https://developer.github.com/v3/repos/merging/#perform-a-merge"`
-	GetPages                                           ReposGetPagesCmd                                           `cmd:"" help:"Get information about a Pages site - https://developer.github.com/v3/repos/pages/#get-information-about-a-pages-site"`
-	UpdateInformationAboutPagesSite                    ReposUpdateInformationAboutPagesSiteCmd                    `cmd:"" help:"Update information about a Pages site - https://developer.github.com/v3/repos/pages/#update-information-about-a-pages-site"`
-	RequestPageBuild                                   ReposRequestPageBuildCmd                                   `cmd:"" help:"Request a page build - https://developer.github.com/v3/repos/pages/#request-a-page-build"`
-	ListPagesBuilds                                    ReposListPagesBuildsCmd                                    `cmd:"" help:"List Pages builds - https://developer.github.com/v3/repos/pages/#list-pages-builds"`
-	GetLatestPagesBuild                                ReposGetLatestPagesBuildCmd                                `cmd:"" help:"Get latest Pages build - https://developer.github.com/v3/repos/pages/#get-latest-pages-build"`
-	GetPagesBuild                                      ReposGetPagesBuildCmd                                      `cmd:"" help:"Get a specific Pages build - https://developer.github.com/v3/repos/pages/#get-a-specific-pages-build"`
-	ListReleases                                       ReposListReleasesCmd                                       `cmd:"" help:"List releases for a repository - https://developer.github.com/v3/repos/releases/#list-releases-for-a-repository"`
-	GetRelease                                         ReposGetReleaseCmd                                         `cmd:"" help:"Get a single release - https://developer.github.com/v3/repos/releases/#get-a-single-release"`
-	GetLatestRelease                                   ReposGetLatestReleaseCmd                                   `cmd:"" help:"Get the latest release - https://developer.github.com/v3/repos/releases/#get-the-latest-release"`
-	GetReleaseByTag                                    ReposGetReleaseByTagCmd                                    `cmd:"" help:"Get a release by tag name - https://developer.github.com/v3/repos/releases/#get-a-release-by-tag-name"`
-	CreateRelease                                      ReposCreateReleaseCmd                                      `cmd:"" help:"Create a release - https://developer.github.com/v3/repos/releases/#create-a-release"`
-	EditRelease                                        ReposEditReleaseCmd                                        `cmd:"" help:"Edit a release - https://developer.github.com/v3/repos/releases/#edit-a-release"`
-	DeleteRelease                                      ReposDeleteReleaseCmd                                      `cmd:"" help:"Delete a release - https://developer.github.com/v3/repos/releases/#delete-a-release"`
-	ListAssetsForRelease                               ReposListAssetsForReleaseCmd                               `cmd:"" help:"List assets for a release - https://developer.github.com/v3/repos/releases/#list-assets-for-a-release"`
-	GetReleaseAsset                                    ReposGetReleaseAssetCmd                                    `cmd:"" help:"Get a single release asset - https://developer.github.com/v3/repos/releases/#get-a-single-release-asset"`
-	EditReleaseAsset                                   ReposEditReleaseAssetCmd                                   `cmd:"" help:"Edit a release asset - https://developer.github.com/v3/repos/releases/#edit-a-release-asset"`
-	DeleteReleaseAsset                                 ReposDeleteReleaseAssetCmd                                 `cmd:"" help:"Delete a release asset - https://developer.github.com/v3/repos/releases/#delete-a-release-asset"`
-	GetContributorsStats                               ReposGetContributorsStatsCmd                               `cmd:"" help:"Get contributors list with additions, deletions, and commit counts - https://developer.github.com/v3/repos/statistics/#get-contributors-list-with-additions-deletions-and-commit-counts"`
-	GetCommitActivityStats                             ReposGetCommitActivityStatsCmd                             `cmd:"" help:"Get the last year of commit activity data - https://developer.github.com/v3/repos/statistics/#get-the-last-year-of-commit-activity-data"`
-	GetCodeFrequencyStats                              ReposGetCodeFrequencyStatsCmd                              `cmd:"" help:"Get the number of additions and deletions per week - https://developer.github.com/v3/repos/statistics/#get-the-number-of-additions-and-deletions-per-week"`
-	GetParticipationStats                              ReposGetParticipationStatsCmd                              `cmd:"" help:"Get the weekly commit count for the repository owner and everyone else - https://developer.github.com/v3/repos/statistics/#get-the-weekly-commit-count-for-the-repository-owner-and-everyone-else"`
-	GetPunchCardStats                                  ReposGetPunchCardStatsCmd                                  `cmd:"" help:"Get the number of commits per hour in each day - https://developer.github.com/v3/repos/statistics/#get-the-number-of-commits-per-hour-in-each-day"`
-	CreateStatus                                       ReposCreateStatusCmd                                       `cmd:"" help:"Create a status - https://developer.github.com/v3/repos/statuses/#create-a-status"`
-	ListStatusesForRef                                 ReposListStatusesForRefCmd                                 `cmd:"" help:"List statuses for a specific ref - https://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref"`
-	GetCombinedStatusForRef                            ReposGetCombinedStatusForRefCmd                            `cmd:"" help:"Get the combined status for a specific ref - https://developer.github.com/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref"`
-	GetTopReferrers                                    ReposGetTopReferrersCmd                                    `cmd:"" help:"List referrers - https://developer.github.com/v3/repos/traffic/#list-referrers"`
-	GetTopPaths                                        ReposGetTopPathsCmd                                        `cmd:"" help:"List paths - https://developer.github.com/v3/repos/traffic/#list-paths"`
-	GetViews                                           ReposGetViewsCmd                                           `cmd:"" help:"Views - https://developer.github.com/v3/repos/traffic/#views"`
-	GetClones                                          ReposGetClonesCmd                                          `cmd:"" help:"Clones - https://developer.github.com/v3/repos/traffic/#clones"`
-	ListHooks                                          ReposListHooksCmd                                          `cmd:"" help:"List hooks - https://developer.github.com/v3/repos/hooks/#list-hooks"`
-	GetHook                                            ReposGetHookCmd                                            `cmd:"" help:"Get single hook - https://developer.github.com/v3/repos/hooks/#get-single-hook"`
-	TestPushHook                                       ReposTestPushHookCmd                                       `cmd:"" help:"Test a push hook - https://developer.github.com/v3/repos/hooks/#test-a-push-hook"`
-	PingHook                                           ReposPingHookCmd                                           `cmd:"" help:"Ping a hook - https://developer.github.com/v3/repos/hooks/#ping-a-hook"`
-	DeleteHook                                         ReposDeleteHookCmd                                         `cmd:"" help:"Delete a hook - https://developer.github.com/v3/repos/hooks/#delete-a-hook"`
+	AcceptInvitation                                   ReposAcceptInvitationCmd                                   `cmd:""`
+	AddCollaborator                                    ReposAddCollaboratorCmd                                    `cmd:""`
+	AddDeployKey                                       ReposAddDeployKeyCmd                                       `cmd:""`
+	AddProtectedBranchAdminEnforcement                 ReposAddProtectedBranchAdminEnforcementCmd                 `cmd:""`
+	AddProtectedBranchAppRestrictions                  ReposAddProtectedBranchAppRestrictionsCmd                  `cmd:""`
+	AddProtectedBranchRequiredSignatures               ReposAddProtectedBranchRequiredSignaturesCmd               `cmd:""`
+	AddProtectedBranchRequiredStatusChecksContexts     ReposAddProtectedBranchRequiredStatusChecksContextsCmd     `cmd:""`
+	AddProtectedBranchTeamRestrictions                 ReposAddProtectedBranchTeamRestrictionsCmd                 `cmd:""`
+	AddProtectedBranchUserRestrictions                 ReposAddProtectedBranchUserRestrictionsCmd                 `cmd:""`
+	CheckCollaborator                                  ReposCheckCollaboratorCmd                                  `cmd:""`
+	CheckVulnerabilityAlerts                           ReposCheckVulnerabilityAlertsCmd                           `cmd:""`
+	CompareCommits                                     ReposCompareCommitsCmd                                     `cmd:""`
+	CreateCommitComment                                ReposCreateCommitCommentCmd                                `cmd:""`
+	CreateDeployment                                   ReposCreateDeploymentCmd                                   `cmd:""`
+	CreateDeploymentStatus                             ReposCreateDeploymentStatusCmd                             `cmd:""`
+	CreateForAuthenticatedUser                         ReposCreateForAuthenticatedUserCmd                         `cmd:""`
+	CreateFork                                         ReposCreateForkCmd                                         `cmd:""`
+	CreateInOrg                                        ReposCreateInOrgCmd                                        `cmd:""`
+	CreateRelease                                      ReposCreateReleaseCmd                                      `cmd:""`
+	CreateStatus                                       ReposCreateStatusCmd                                       `cmd:""`
+	CreateUsingTemplate                                ReposCreateUsingTemplateCmd                                `cmd:""`
+	DeclineInvitation                                  ReposDeclineInvitationCmd                                  `cmd:""`
+	Delete                                             ReposDeleteCmd                                             `cmd:""`
+	DeleteCommitComment                                ReposDeleteCommitCommentCmd                                `cmd:""`
+	DeleteDeployment                                   ReposDeleteDeploymentCmd                                   `cmd:""`
+	DeleteDownload                                     ReposDeleteDownloadCmd                                     `cmd:""`
+	DeleteHook                                         ReposDeleteHookCmd                                         `cmd:""`
+	DeleteInvitation                                   ReposDeleteInvitationCmd                                   `cmd:""`
+	DeleteRelease                                      ReposDeleteReleaseCmd                                      `cmd:""`
+	DeleteReleaseAsset                                 ReposDeleteReleaseAssetCmd                                 `cmd:""`
+	DisableAutomatedSecurityFixes                      ReposDisableAutomatedSecurityFixesCmd                      `cmd:""`
+	DisablePagesSite                                   ReposDisablePagesSiteCmd                                   `cmd:""`
+	DisableVulnerabilityAlerts                         ReposDisableVulnerabilityAlertsCmd                         `cmd:""`
+	EnableAutomatedSecurityFixes                       ReposEnableAutomatedSecurityFixesCmd                       `cmd:""`
+	EnableVulnerabilityAlerts                          ReposEnableVulnerabilityAlertsCmd                          `cmd:""`
+	Get                                                ReposGetCmd                                                `cmd:""`
+	GetAllTopics                                       ReposGetAllTopicsCmd                                       `cmd:""`
+	GetAppsWithAccessToProtectedBranch                 ReposGetAppsWithAccessToProtectedBranchCmd                 `cmd:""`
+	GetArchiveLink                                     ReposGetArchiveLinkCmd                                     `cmd:""`
+	GetBranch                                          ReposGetBranchCmd                                          `cmd:""`
+	GetBranchProtection                                ReposGetBranchProtectionCmd                                `cmd:""`
+	GetClones                                          ReposGetClonesCmd                                          `cmd:""`
+	GetCodeFrequencyStats                              ReposGetCodeFrequencyStatsCmd                              `cmd:""`
+	GetCollaboratorPermissionLevel                     ReposGetCollaboratorPermissionLevelCmd                     `cmd:""`
+	GetCombinedStatusForRef                            ReposGetCombinedStatusForRefCmd                            `cmd:""`
+	GetCommit                                          ReposGetCommitCmd                                          `cmd:""`
+	GetCommitActivityStats                             ReposGetCommitActivityStatsCmd                             `cmd:""`
+	GetCommitComment                                   ReposGetCommitCommentCmd                                   `cmd:""`
+	GetContents                                        ReposGetContentsCmd                                        `cmd:""`
+	GetContributorsStats                               ReposGetContributorsStatsCmd                               `cmd:""`
+	GetDeployKey                                       ReposGetDeployKeyCmd                                       `cmd:""`
+	GetDeployment                                      ReposGetDeploymentCmd                                      `cmd:""`
+	GetDeploymentStatus                                ReposGetDeploymentStatusCmd                                `cmd:""`
+	GetDownload                                        ReposGetDownloadCmd                                        `cmd:""`
+	GetHook                                            ReposGetHookCmd                                            `cmd:""`
+	GetLatestPagesBuild                                ReposGetLatestPagesBuildCmd                                `cmd:""`
+	GetLatestRelease                                   ReposGetLatestReleaseCmd                                   `cmd:""`
+	GetPages                                           ReposGetPagesCmd                                           `cmd:""`
+	GetPagesBuild                                      ReposGetPagesBuildCmd                                      `cmd:""`
+	GetParticipationStats                              ReposGetParticipationStatsCmd                              `cmd:""`
+	GetProtectedBranchAdminEnforcement                 ReposGetProtectedBranchAdminEnforcementCmd                 `cmd:""`
+	GetProtectedBranchPullRequestReviewEnforcement     ReposGetProtectedBranchPullRequestReviewEnforcementCmd     `cmd:""`
+	GetProtectedBranchRequiredSignatures               ReposGetProtectedBranchRequiredSignaturesCmd               `cmd:""`
+	GetProtectedBranchRequiredStatusChecks             ReposGetProtectedBranchRequiredStatusChecksCmd             `cmd:""`
+	GetProtectedBranchRestrictions                     ReposGetProtectedBranchRestrictionsCmd                     `cmd:""`
+	GetPunchCardStats                                  ReposGetPunchCardStatsCmd                                  `cmd:""`
+	GetReadme                                          ReposGetReadmeCmd                                          `cmd:""`
+	GetRelease                                         ReposGetReleaseCmd                                         `cmd:""`
+	GetReleaseAsset                                    ReposGetReleaseAssetCmd                                    `cmd:""`
+	GetReleaseByTag                                    ReposGetReleaseByTagCmd                                    `cmd:""`
+	GetTeamsWithAccessToProtectedBranch                ReposGetTeamsWithAccessToProtectedBranchCmd                `cmd:""`
+	GetTopPaths                                        ReposGetTopPathsCmd                                        `cmd:""`
+	GetTopReferrers                                    ReposGetTopReferrersCmd                                    `cmd:""`
+	GetUsersWithAccessToProtectedBranch                ReposGetUsersWithAccessToProtectedBranchCmd                `cmd:""`
+	GetViews                                           ReposGetViewsCmd                                           `cmd:""`
+	ListAssetsForRelease                               ReposListAssetsForReleaseCmd                               `cmd:""`
+	ListBranches                                       ReposListBranchesCmd                                       `cmd:""`
+	ListBranchesForHeadCommit                          ReposListBranchesForHeadCommitCmd                          `cmd:""`
+	ListCollaborators                                  ReposListCollaboratorsCmd                                  `cmd:""`
+	ListCommentsForCommit                              ReposListCommentsForCommitCmd                              `cmd:""`
+	ListCommitComments                                 ReposListCommitCommentsCmd                                 `cmd:""`
+	ListCommits                                        ReposListCommitsCmd                                        `cmd:""`
+	ListContributors                                   ReposListContributorsCmd                                   `cmd:""`
+	ListDeployKeys                                     ReposListDeployKeysCmd                                     `cmd:""`
+	ListDeploymentStatuses                             ReposListDeploymentStatusesCmd                             `cmd:""`
+	ListDeployments                                    ReposListDeploymentsCmd                                    `cmd:""`
+	ListDownloads                                      ReposListDownloadsCmd                                      `cmd:""`
+	ListForAuthenticatedUser                           ReposListForAuthenticatedUserCmd                           `cmd:""`
+	ListForOrg                                         ReposListForOrgCmd                                         `cmd:""`
+	ListForUser                                        ReposListForUserCmd                                        `cmd:""`
+	ListForks                                          ReposListForksCmd                                          `cmd:""`
+	ListHooks                                          ReposListHooksCmd                                          `cmd:""`
+	ListInvitations                                    ReposListInvitationsCmd                                    `cmd:""`
+	ListInvitationsForAuthenticatedUser                ReposListInvitationsForAuthenticatedUserCmd                `cmd:""`
+	ListLanguages                                      ReposListLanguagesCmd                                      `cmd:""`
+	ListPagesBuilds                                    ReposListPagesBuildsCmd                                    `cmd:""`
+	ListProtectedBranchRequiredStatusChecksContexts    ReposListProtectedBranchRequiredStatusChecksContextsCmd    `cmd:""`
+	ListPublic                                         ReposListPublicCmd                                         `cmd:""`
+	ListPullRequestsAssociatedWithCommit               ReposListPullRequestsAssociatedWithCommitCmd               `cmd:""`
+	ListReleases                                       ReposListReleasesCmd                                       `cmd:""`
+	ListStatusesForRef                                 ReposListStatusesForRefCmd                                 `cmd:""`
+	ListTags                                           ReposListTagsCmd                                           `cmd:""`
+	ListTeams                                          ReposListTeamsCmd                                          `cmd:""`
+	Merge                                              ReposMergeCmd                                              `cmd:""`
+	PingHook                                           ReposPingHookCmd                                           `cmd:""`
+	RemoveBranchProtection                             ReposRemoveBranchProtectionCmd                             `cmd:""`
+	RemoveCollaborator                                 ReposRemoveCollaboratorCmd                                 `cmd:""`
+	RemoveDeployKey                                    ReposRemoveDeployKeyCmd                                    `cmd:""`
+	RemoveProtectedBranchAdminEnforcement              ReposRemoveProtectedBranchAdminEnforcementCmd              `cmd:""`
+	RemoveProtectedBranchAppRestrictions               ReposRemoveProtectedBranchAppRestrictionsCmd               `cmd:""`
+	RemoveProtectedBranchPullRequestReviewEnforcement  ReposRemoveProtectedBranchPullRequestReviewEnforcementCmd  `cmd:""`
+	RemoveProtectedBranchRequiredSignatures            ReposRemoveProtectedBranchRequiredSignaturesCmd            `cmd:""`
+	RemoveProtectedBranchRequiredStatusChecks          ReposRemoveProtectedBranchRequiredStatusChecksCmd          `cmd:""`
+	RemoveProtectedBranchRequiredStatusChecksContexts  ReposRemoveProtectedBranchRequiredStatusChecksContextsCmd  `cmd:""`
+	RemoveProtectedBranchRestrictions                  ReposRemoveProtectedBranchRestrictionsCmd                  `cmd:""`
+	RemoveProtectedBranchTeamRestrictions              ReposRemoveProtectedBranchTeamRestrictionsCmd              `cmd:""`
+	RemoveProtectedBranchUserRestrictions              ReposRemoveProtectedBranchUserRestrictionsCmd              `cmd:""`
+	ReplaceAllTopics                                   ReposReplaceAllTopicsCmd                                   `cmd:""`
+	ReplaceProtectedBranchAppRestrictions              ReposReplaceProtectedBranchAppRestrictionsCmd              `cmd:""`
+	ReplaceProtectedBranchRequiredStatusChecksContexts ReposReplaceProtectedBranchRequiredStatusChecksContextsCmd `cmd:""`
+	ReplaceProtectedBranchTeamRestrictions             ReposReplaceProtectedBranchTeamRestrictionsCmd             `cmd:""`
+	ReplaceProtectedBranchUserRestrictions             ReposReplaceProtectedBranchUserRestrictionsCmd             `cmd:""`
+	RequestPageBuild                                   ReposRequestPageBuildCmd                                   `cmd:""`
+	RetrieveCommunityProfileMetrics                    ReposRetrieveCommunityProfileMetricsCmd                    `cmd:""`
+	TestPushHook                                       ReposTestPushHookCmd                                       `cmd:""`
+	Transfer                                           ReposTransferCmd                                           `cmd:""`
+	Update                                             ReposUpdateCmd                                             `cmd:""`
+	UpdateCommitComment                                ReposUpdateCommitCommentCmd                                `cmd:""`
+	UpdateInformationAboutPagesSite                    ReposUpdateInformationAboutPagesSiteCmd                    `cmd:""`
+	UpdateInvitation                                   ReposUpdateInvitationCmd                                   `cmd:""`
+	UpdateProtectedBranchRequiredStatusChecks          ReposUpdateProtectedBranchRequiredStatusChecksCmd          `cmd:""`
+	UpdateRelease                                      ReposUpdateReleaseCmd                                      `cmd:""`
+	UpdateReleaseAsset                                 ReposUpdateReleaseAssetCmd                                 `cmd:""`
+	UploadReleaseAsset                                 ReposUploadReleaseAssetCmd                                 `cmd:""`
 }
 
-type ReposListCmd struct {
+type ReposAcceptInvitationCmd struct {
 	internal.BaseCmd
-	Visibility  string "name:\"visibility\" help:\"Can be one of `all`, `public`, or `private`.\""
-	Affiliation string "name:\"affiliation\" help:\"Comma-separated list of values. Can include:  \n\\* `owner`: Repositories that are owned by the authenticated user.  \n\\* `collaborator`: Repositories that the user has been added to as a collaborator.  \n\\* `organization_member`: Repositories that the user has access to through being a member of an organization. This includes every repository on every team that the user is on.\""
-	Type        string "name:\"type\" help:\"Can be one of `all`, `owner`, `public`, `private`, `member`. Default: `all`  \n  \nWill cause a `422` error if used in the same request as **visibility** or **affiliation**. Will cause a `422` error if used in the same request as **visibility** or **affiliation**.\""
-	Sort        string "name:\"sort\" help:\"Can be one of `created`, `updated`, `pushed`, `full_name`.\""
-	Direction   string "name:\"direction\" help:\"Can be one of `asc` or `desc`.\""
-	PerPage     int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page        int64  `name:"page" help:"Page number of the results to fetch."`
+	InvitationId int64 `required:"" name:"invitation_id"`
 }
 
-func (c *ReposListCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposAcceptInvitationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/repos")
-	c.UpdateURLQuery("visibility", c.Visibility)
-	c.UpdateURLQuery("affiliation", c.Affiliation)
-	c.UpdateURLQuery("type", c.Type)
-	c.UpdateURLQuery("sort", c.Sort)
-	c.UpdateURLQuery("direction", c.Direction)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
+	c.SetURLPath("/user/repository_invitations/:invitation_id")
+	c.UpdateURLPath("invitation_id", c.InvitationId)
+	return c.DoRequest("PATCH")
 }
 
-type ReposListForUserCmd struct {
+type ReposAddCollaboratorCmd struct {
 	internal.BaseCmd
-	Username  string `required:"" name:"username"`
-	Type      string "name:\"type\" help:\"Can be one of `all`, `owner`, `member`.\""
-	Sort      string "name:\"sort\" help:\"Can be one of `created`, `updated`, `pushed`, `full_name`.\""
-	Direction string "name:\"direction\" help:\"Can be one of `asc` or `desc`.\""
-	PerPage   int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page      int64  `name:"page" help:"Page number of the results to fetch."`
+	Owner      string `name:"owner"`
+	Permission string `name:"permission"`
+	Repo       string `required:"" name:"repo"`
+	Username   string `required:"" name:"username"`
 }
 
-func (c *ReposListForUserCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposAddCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/users/:username/repos")
+	c.SetURLPath("/repos/:owner/:repo/collaborators/:username")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateBody("permission", c.Permission)
+	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("username", c.Username)
-	c.UpdateURLQuery("type", c.Type)
-	c.UpdateURLQuery("sort", c.Sort)
-	c.UpdateURLQuery("direction", c.Direction)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
+	return c.DoRequest("PUT")
 }
 
-type ReposListForOrgCmd struct {
+type ReposAddDeployKeyCmd struct {
 	internal.BaseCmd
-	Org     string `required:"" name:"org"`
-	Type    string "name:\"type\" help:\"Can be one of `all`, `public`, `private`, `forks`, `sources`, `member`.\""
-	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64  `name:"page" help:"Page number of the results to fetch."`
+	Key      string `required:"" name:"key"`
+	Owner    string `name:"owner"`
+	ReadOnly bool   `name:"read_only"`
+	Repo     string `required:"" name:"repo"`
+	Title    string `name:"title"`
 }
 
-func (c *ReposListForOrgCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposAddDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/repos")
-	c.UpdateURLPath("org", c.Org)
-	c.UpdateURLQuery("type", c.Type)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
+	c.SetURLPath("/repos/:owner/:repo/keys")
+	c.UpdateBody("key", c.Key)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateBody("read_only", c.ReadOnly)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("title", c.Title)
+	return c.DoRequest("POST")
 }
 
-type ReposListPublicCmd struct {
+type ReposAddProtectedBranchAdminEnforcementCmd struct {
 	internal.BaseCmd
-	Since   string `name:"since" help:"The integer ID of the last Repository that you've seen."`
-	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64  `name:"page" help:"Page number of the results to fetch."`
+	Branch string `required:"" name:"branch"`
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
 }
 
-func (c *ReposListPublicCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposAddProtectedBranchAdminEnforcementCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repositories")
-	c.UpdateURLQuery("since", c.Since)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/enforce_admins")
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("POST")
+}
+
+type ReposAddProtectedBranchAppRestrictionsCmd struct {
+	internal.BaseCmd
+	Branch string `required:"" name:"branch"`
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+}
+
+func (c *ReposAddProtectedBranchAppRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions/apps")
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("POST")
+}
+
+type ReposAddProtectedBranchRequiredSignaturesCmd struct {
+	internal.BaseCmd
+	Branch string `required:"" name:"branch"`
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+	Zzzax  bool   "name:\"zzzax-preview\" required:\"\" help:\"Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.zzzax-preview+json\n```\""
+}
+
+func (c *ReposAddProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_signatures")
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdatePreview("zzzax", c.Zzzax)
+	return c.DoRequest("POST")
+}
+
+type ReposAddProtectedBranchRequiredStatusChecksContextsCmd struct {
+	internal.BaseCmd
+	Branch string `required:"" name:"branch"`
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+}
+
+func (c *ReposAddProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts")
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("POST")
+}
+
+type ReposAddProtectedBranchTeamRestrictionsCmd struct {
+	internal.BaseCmd
+	Branch string `required:"" name:"branch"`
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+}
+
+func (c *ReposAddProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions/teams")
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("POST")
+}
+
+type ReposAddProtectedBranchUserRestrictionsCmd struct {
+	internal.BaseCmd
+	Branch string `required:"" name:"branch"`
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+}
+
+func (c *ReposAddProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions/users")
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("POST")
+}
+
+type ReposCheckCollaboratorCmd struct {
+	internal.BaseCmd
+	Owner    string `name:"owner"`
+	Repo     string `required:"" name:"repo"`
+	Username string `required:"" name:"username"`
+}
+
+func (c *ReposCheckCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/collaborators/:username")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("username", c.Username)
 	return c.DoRequest("GET")
+}
+
+type ReposCheckVulnerabilityAlertsCmd struct {
+	internal.BaseCmd
+	Dorian bool   "name:\"dorian-preview\" required:\"\" help:\"Enabling and disabling vulnerability alerts for a repository using the REST API is currently available for developers to preview. To access these new endpoints during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.dorian-preview+json\n```\""
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+}
+
+func (c *ReposCheckVulnerabilityAlertsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/vulnerability-alerts")
+	c.UpdatePreview("dorian", c.Dorian)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ReposCompareCommitsCmd struct {
+	internal.BaseCmd
+	Base  string `required:"" name:"base"`
+	Head  string `required:"" name:"head"`
+	Owner string `name:"owner"`
+	Repo  string `required:"" name:"repo"`
+}
+
+func (c *ReposCompareCommitsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/compare/:base...:head")
+	c.UpdateURLPath("base", c.Base)
+	c.UpdateURLPath("head", c.Head)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ReposCreateCommitCommentCmd struct {
+	internal.BaseCmd
+	Body      string `required:"" name:"body"`
+	CommitSha string `required:"" name:"commit_sha"`
+	Line      int64  `name:"line"`
+	Owner     string `name:"owner"`
+	Path      string `name:"path"`
+	Position  int64  `name:"position"`
+	Repo      string `required:"" name:"repo"`
+}
+
+func (c *ReposCreateCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/commits/:commit_sha/comments")
+	c.UpdateBody("body", c.Body)
+	c.UpdateURLPath("commit_sha", c.CommitSha)
+	c.UpdateBody("line", c.Line)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateBody("path", c.Path)
+	c.UpdateBody("position", c.Position)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("POST")
+}
+
+type ReposCreateDeploymentCmd struct {
+	internal.BaseCmd
+	AntMan                bool     "name:\"ant-man-preview\" help:\"The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.ant-man-preview+json\n```\""
+	AutoMerge             bool     `name:"auto_merge"`
+	Description           string   `name:"description"`
+	Environment           string   `name:"environment"`
+	Owner                 string   `name:"owner"`
+	Payload               string   `name:"payload"`
+	ProductionEnvironment bool     `name:"production_environment"`
+	Ref                   string   `required:"" name:"ref"`
+	Repo                  string   `required:"" name:"repo"`
+	RequiredContexts      []string `name:"required_contexts"`
+	Task                  string   `name:"task"`
+	TransientEnvironment  bool     `name:"transient_environment"`
+}
+
+func (c *ReposCreateDeploymentCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/deployments")
+	c.UpdatePreview("ant-man", c.AntMan)
+	c.UpdateBody("auto_merge", c.AutoMerge)
+	c.UpdateBody("description", c.Description)
+	c.UpdateBody("environment", c.Environment)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateBody("payload", c.Payload)
+	c.UpdateBody("production_environment", c.ProductionEnvironment)
+	c.UpdateBody("ref", c.Ref)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("required_contexts", c.RequiredContexts)
+	c.UpdateBody("task", c.Task)
+	c.UpdateBody("transient_environment", c.TransientEnvironment)
+	return c.DoRequest("POST")
+}
+
+type ReposCreateDeploymentStatusCmd struct {
+	internal.BaseCmd
+	AntMan         bool   "name:\"ant-man-preview\" help:\"The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.ant-man-preview+json\n```\""
+	AutoInactive   bool   `name:"auto_inactive"`
+	DeploymentId   int64  `required:"" name:"deployment_id"`
+	Description    string `name:"description"`
+	Environment    string `name:"environment"`
+	EnvironmentUrl string `name:"environment_url"`
+	Flash          bool   "name:\"flash-preview\" help:\"New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](https://developer.github.com/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.\n\nTo access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must provide the following custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.flash-preview+json\n```\""
+	LogUrl         string `name:"log_url"`
+	Owner          string `name:"owner"`
+	Repo           string `required:"" name:"repo"`
+	State          string `required:"" name:"state"`
+	TargetUrl      string `name:"target_url"`
+}
+
+func (c *ReposCreateDeploymentStatusCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/deployments/:deployment_id/statuses")
+	c.UpdatePreview("ant-man", c.AntMan)
+	c.UpdateBody("auto_inactive", c.AutoInactive)
+	c.UpdateURLPath("deployment_id", c.DeploymentId)
+	c.UpdateBody("description", c.Description)
+	c.UpdateBody("environment", c.Environment)
+	c.UpdateBody("environment_url", c.EnvironmentUrl)
+	c.UpdatePreview("flash", c.Flash)
+	c.UpdateBody("log_url", c.LogUrl)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("state", c.State)
+	c.UpdateBody("target_url", c.TargetUrl)
+	return c.DoRequest("POST")
 }
 
 type ReposCreateForAuthenticatedUserCmd struct {
 	internal.BaseCmd
-	Name              string `required:"" name:"name" help:"The name of the repository."`
-	Description       string `name:"description" help:"A short description of the repository."`
-	Homepage          string `name:"homepage" help:"A URL with more information about the repository."`
-	Private           bool   "name:\"private\" help:\"Either `true` to create a private repository or `false` to create a public one. Creating private repositories requires a paid GitHub account.\""
-	HasIssues         bool   "name:\"has_issues\" help:\"Either `true` to enable issues for this repository or `false` to disable them.\""
-	HasProjects       bool   "name:\"has_projects\" help:\"Either `true` to enable projects for this repository or `false` to disable them. **Note:** If you're creating a repository in an organization that has disabled repository projects, the default is `false`, and if you pass `true`, the API returns an error.\""
-	HasWiki           bool   "name:\"has_wiki\" help:\"Either `true` to enable the wiki for this repository or `false` to disable it.\""
-	TeamId            int64  `name:"team_id" help:"The id of the team that will be granted access to this repository. This is only valid when creating a repository in an organization."`
-	AutoInit          bool   "name:\"auto_init\" help:\"Pass `true` to create an initial commit with empty README.\""
-	GitignoreTemplate string `name:"gitignore_template" help:"Desired language or platform [.gitignore template](https://github.com/github/gitignore) to apply. Use the name of the template without the extension. For example, 'Haskell'."`
-	LicenseTemplate   string "name:\"license_template\" help:\"Choose an [open source license template](https://choosealicense.com/) that best suits your needs, and then use the [license keyword](https://help.github.com/articles/licensing-a-repository/#searching-github-by-license-type) as the `license_template` string. For example, 'mit' or 'mpl-2.0'.\""
-	AllowSquashMerge  bool   "name:\"allow_squash_merge\" help:\"Either `true` to allow squash-merging pull requests, or `false` to prevent squash-merging.\""
-	AllowMergeCommit  bool   "name:\"allow_merge_commit\" help:\"Either `true` to allow merging pull requests with a merge commit, or `false` to prevent merging pull requests with merge commits.\""
-	AllowRebaseMerge  bool   "name:\"allow_rebase_merge\" help:\"Either `true` to allow rebase-merging pull requests, or `false` to prevent rebase-merging.\""
+	AllowMergeCommit    bool   `name:"allow_merge_commit"`
+	AllowRebaseMerge    bool   `name:"allow_rebase_merge"`
+	AllowSquashMerge    bool   `name:"allow_squash_merge"`
+	AutoInit            bool   `name:"auto_init"`
+	Baptiste            bool   "name:\"baptiste-preview\" help:\"The `is_template` and `template_repository` keys are currently available for developer to preview. See [Create a repository using a template](https://developer.github.com/v3/repos/#create-a-repository-using-a-template) to learn how to create template repositories. To access these new response keys during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.baptiste-preview+json\n```\""
+	DeleteBranchOnMerge bool   `name:"delete_branch_on_merge"`
+	Description         string `name:"description"`
+	GitignoreTemplate   string `name:"gitignore_template"`
+	HasIssues           bool   `name:"has_issues"`
+	HasProjects         bool   `name:"has_projects"`
+	HasWiki             bool   `name:"has_wiki"`
+	Homepage            string `name:"homepage"`
+	IsTemplate          bool   `name:"is_template"`
+	LicenseTemplate     string `name:"license_template"`
+	Name                string `required:"" name:"name"`
+	Nebula              bool   "name:\"nebula-preview\" help:\"You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).\n\nTo access repository visibility during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.nebula-preview+json\n```\""
+	Private             bool   `name:"private"`
+	TeamId              int64  `name:"team_id"`
+	Visibility          string `name:"visibility"`
 }
 
 func (c *ReposCreateForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/repos")
-	c.UpdateBody("name", c.Name)
+	c.UpdateBody("allow_merge_commit", c.AllowMergeCommit)
+	c.UpdateBody("allow_rebase_merge", c.AllowRebaseMerge)
+	c.UpdateBody("allow_squash_merge", c.AllowSquashMerge)
+	c.UpdateBody("auto_init", c.AutoInit)
+	c.UpdatePreview("baptiste", c.Baptiste)
+	c.UpdateBody("delete_branch_on_merge", c.DeleteBranchOnMerge)
 	c.UpdateBody("description", c.Description)
-	c.UpdateBody("homepage", c.Homepage)
-	c.UpdateBody("private", c.Private)
+	c.UpdateBody("gitignore_template", c.GitignoreTemplate)
 	c.UpdateBody("has_issues", c.HasIssues)
 	c.UpdateBody("has_projects", c.HasProjects)
 	c.UpdateBody("has_wiki", c.HasWiki)
-	c.UpdateBody("team_id", c.TeamId)
-	c.UpdateBody("auto_init", c.AutoInit)
-	c.UpdateBody("gitignore_template", c.GitignoreTemplate)
+	c.UpdateBody("homepage", c.Homepage)
+	c.UpdateBody("is_template", c.IsTemplate)
 	c.UpdateBody("license_template", c.LicenseTemplate)
-	c.UpdateBody("allow_squash_merge", c.AllowSquashMerge)
-	c.UpdateBody("allow_merge_commit", c.AllowMergeCommit)
-	c.UpdateBody("allow_rebase_merge", c.AllowRebaseMerge)
+	c.UpdateBody("name", c.Name)
+	c.UpdatePreview("nebula", c.Nebula)
+	c.UpdateBody("private", c.Private)
+	c.UpdateBody("team_id", c.TeamId)
+	c.UpdateBody("visibility", c.Visibility)
+	return c.DoRequest("POST")
+}
+
+type ReposCreateForkCmd struct {
+	internal.BaseCmd
+	Organization string `name:"organization"`
+	Owner        string `name:"owner"`
+	Repo         string `required:"" name:"repo"`
+}
+
+func (c *ReposCreateForkCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/forks")
+	c.UpdateBody("organization", c.Organization)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("POST")
 }
 
 type ReposCreateInOrgCmd struct {
 	internal.BaseCmd
-	Org               string `required:"" name:"org"`
-	Name              string `required:"" name:"name" help:"The name of the repository."`
-	Description       string `name:"description" help:"A short description of the repository."`
-	Homepage          string `name:"homepage" help:"A URL with more information about the repository."`
-	Private           bool   "name:\"private\" help:\"Either `true` to create a private repository or `false` to create a public one. Creating private repositories requires a paid GitHub account.\""
-	HasIssues         bool   "name:\"has_issues\" help:\"Either `true` to enable issues for this repository or `false` to disable them.\""
-	HasProjects       bool   "name:\"has_projects\" help:\"Either `true` to enable projects for this repository or `false` to disable them. **Note:** If you're creating a repository in an organization that has disabled repository projects, the default is `false`, and if you pass `true`, the API returns an error.\""
-	HasWiki           bool   "name:\"has_wiki\" help:\"Either `true` to enable the wiki for this repository or `false` to disable it.\""
-	TeamId            int64  `name:"team_id" help:"The id of the team that will be granted access to this repository. This is only valid when creating a repository in an organization."`
-	AutoInit          bool   "name:\"auto_init\" help:\"Pass `true` to create an initial commit with empty README.\""
-	GitignoreTemplate string `name:"gitignore_template" help:"Desired language or platform [.gitignore template](https://github.com/github/gitignore) to apply. Use the name of the template without the extension. For example, 'Haskell'."`
-	LicenseTemplate   string "name:\"license_template\" help:\"Choose an [open source license template](https://choosealicense.com/) that best suits your needs, and then use the [license keyword](https://help.github.com/articles/licensing-a-repository/#searching-github-by-license-type) as the `license_template` string. For example, 'mit' or 'mpl-2.0'.\""
-	AllowSquashMerge  bool   "name:\"allow_squash_merge\" help:\"Either `true` to allow squash-merging pull requests, or `false` to prevent squash-merging.\""
-	AllowMergeCommit  bool   "name:\"allow_merge_commit\" help:\"Either `true` to allow merging pull requests with a merge commit, or `false` to prevent merging pull requests with merge commits.\""
-	AllowRebaseMerge  bool   "name:\"allow_rebase_merge\" help:\"Either `true` to allow rebase-merging pull requests, or `false` to prevent rebase-merging.\""
+	AllowMergeCommit    bool   `name:"allow_merge_commit"`
+	AllowRebaseMerge    bool   `name:"allow_rebase_merge"`
+	AllowSquashMerge    bool   `name:"allow_squash_merge"`
+	AutoInit            bool   `name:"auto_init"`
+	Baptiste            bool   "name:\"baptiste-preview\" help:\"The `is_template` and `template_repository` keys are currently available for developer to preview. See [Create a repository using a template](https://developer.github.com/v3/repos/#create-a-repository-using-a-template) to learn how to create template repositories. To access these new response keys during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.baptiste-preview+json\n```\""
+	DeleteBranchOnMerge bool   `name:"delete_branch_on_merge"`
+	Description         string `name:"description"`
+	GitignoreTemplate   string `name:"gitignore_template"`
+	HasIssues           bool   `name:"has_issues"`
+	HasProjects         bool   `name:"has_projects"`
+	HasWiki             bool   `name:"has_wiki"`
+	Homepage            string `name:"homepage"`
+	IsTemplate          bool   `name:"is_template"`
+	LicenseTemplate     string `name:"license_template"`
+	Name                string `required:"" name:"name"`
+	Nebula              bool   "name:\"nebula-preview\" help:\"You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).\n\nTo access repository visibility during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.nebula-preview+json\n```\""
+	Org                 string `required:"" name:"org"`
+	Private             bool   `name:"private"`
+	TeamId              int64  `name:"team_id"`
+	Visibility          string `name:"visibility"`
 }
 
 func (c *ReposCreateInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/:org/repos")
-	c.UpdateURLPath("org", c.Org)
-	c.UpdateBody("name", c.Name)
+	c.UpdateBody("allow_merge_commit", c.AllowMergeCommit)
+	c.UpdateBody("allow_rebase_merge", c.AllowRebaseMerge)
+	c.UpdateBody("allow_squash_merge", c.AllowSquashMerge)
+	c.UpdateBody("auto_init", c.AutoInit)
+	c.UpdatePreview("baptiste", c.Baptiste)
+	c.UpdateBody("delete_branch_on_merge", c.DeleteBranchOnMerge)
 	c.UpdateBody("description", c.Description)
-	c.UpdateBody("homepage", c.Homepage)
-	c.UpdateBody("private", c.Private)
+	c.UpdateBody("gitignore_template", c.GitignoreTemplate)
 	c.UpdateBody("has_issues", c.HasIssues)
 	c.UpdateBody("has_projects", c.HasProjects)
 	c.UpdateBody("has_wiki", c.HasWiki)
-	c.UpdateBody("team_id", c.TeamId)
-	c.UpdateBody("auto_init", c.AutoInit)
-	c.UpdateBody("gitignore_template", c.GitignoreTemplate)
+	c.UpdateBody("homepage", c.Homepage)
+	c.UpdateBody("is_template", c.IsTemplate)
 	c.UpdateBody("license_template", c.LicenseTemplate)
-	c.UpdateBody("allow_squash_merge", c.AllowSquashMerge)
-	c.UpdateBody("allow_merge_commit", c.AllowMergeCommit)
-	c.UpdateBody("allow_rebase_merge", c.AllowRebaseMerge)
+	c.UpdateBody("name", c.Name)
+	c.UpdatePreview("nebula", c.Nebula)
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateBody("private", c.Private)
+	c.UpdateBody("team_id", c.TeamId)
+	c.UpdateBody("visibility", c.Visibility)
 	return c.DoRequest("POST")
 }
 
-type ReposGetCmd struct {
+type ReposCreateReleaseCmd struct {
 	internal.BaseCmd
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	Body            string `name:"body"`
+	Draft           bool   `name:"draft"`
+	Name            string `name:"name"`
+	Owner           string `name:"owner"`
+	Prerelease      bool   `name:"prerelease"`
+	Repo            string `required:"" name:"repo"`
+	TagName         string `required:"" name:"tag_name"`
+	TargetCommitish string `name:"target_commitish"`
 }
 
-func (c *ReposGetCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposCreateReleaseCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	return c.DoRequest("GET")
-}
-
-type ReposEditCmd struct {
-	internal.BaseCmd
-	Owner            string `name:"owner"`
-	Repo             string `required:"" name:"repo"`
-	Name             string `required:"" name:"name" help:"The name of the repository."`
-	Description      string `name:"description" help:"A short description of the repository."`
-	Homepage         string `name:"homepage" help:"A URL with more information about the repository."`
-	Private          bool   "name:\"private\" help:\"Either `true` to make the repository private or `false` to make it public. Creating private repositories requires a paid GitHub account. Default: `false`.  \n**Note**: You will get a `422` error if the organization restricts [changing repository visibility](https://help.github.com/articles/repository-permission-levels-for-an-organization#changing-the-visibility-of-repositories) to organization owners and a non-owner tries to change the value of private. **Note**: You will get a `422` error if the organization restricts [changing repository visibility](https://help.github.com/articles/repository-permission-levels-for-an-organization#changing-the-visibility-of-repositories) to organization owners and a non-owner tries to change the value of private.\""
-	HasIssues        bool   "name:\"has_issues\" help:\"Either `true` to enable issues for this repository or `false` to disable them.\""
-	HasProjects      bool   "name:\"has_projects\" help:\"Either `true` to enable projects for this repository or `false` to disable them. **Note:** If you're creating a repository in an organization that has disabled repository projects, the default is `false`, and if you pass `true`, the API returns an error.\""
-	HasWiki          bool   "name:\"has_wiki\" help:\"Either `true` to enable the wiki for this repository or `false` to disable it.\""
-	DefaultBranch    string `name:"default_branch" help:"Updates the default branch for this repository."`
-	AllowSquashMerge bool   "name:\"allow_squash_merge\" help:\"Either `true` to allow squash-merging pull requests, or `false` to prevent squash-merging.\""
-	AllowMergeCommit bool   "name:\"allow_merge_commit\" help:\"Either `true` to allow merging pull requests with a merge commit, or `false` to prevent merging pull requests with merge commits.\""
-	AllowRebaseMerge bool   "name:\"allow_rebase_merge\" help:\"Either `true` to allow rebase-merging pull requests, or `false` to prevent rebase-merging.\""
-	Archived         bool   "name:\"archived\" help:\"`true` to archive this repository. **Note**: You cannot unarchive repositories through the API.\""
-}
-
-func (c *ReposEditCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
+	c.SetURLPath("/repos/:owner/:repo/releases")
+	c.UpdateBody("body", c.Body)
+	c.UpdateBody("draft", c.Draft)
 	c.UpdateBody("name", c.Name)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateBody("prerelease", c.Prerelease)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("tag_name", c.TagName)
+	c.UpdateBody("target_commitish", c.TargetCommitish)
+	return c.DoRequest("POST")
+}
+
+type ReposCreateStatusCmd struct {
+	internal.BaseCmd
+	Context     string `name:"context"`
+	Description string `name:"description"`
+	Owner       string `name:"owner"`
+	Repo        string `required:"" name:"repo"`
+	Sha         string `required:"" name:"sha"`
+	State       string `required:"" name:"state"`
+	TargetUrl   string `name:"target_url"`
+}
+
+func (c *ReposCreateStatusCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/statuses/:sha")
+	c.UpdateBody("context", c.Context)
 	c.UpdateBody("description", c.Description)
-	c.UpdateBody("homepage", c.Homepage)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("sha", c.Sha)
+	c.UpdateBody("state", c.State)
+	c.UpdateBody("target_url", c.TargetUrl)
+	return c.DoRequest("POST")
+}
+
+type ReposCreateUsingTemplateCmd struct {
+	internal.BaseCmd
+	Baptiste      bool   "name:\"baptiste-preview\" required:\"\" help:\"Creating and using repository templates is currently available for developers to preview. To access this new endpoint during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.baptiste-preview+json\n```\""
+	Description   string `name:"description"`
+	Name          string `required:"" name:"name"`
+	Owner         string `name:"owner"`
+	Private       bool   `name:"private"`
+	TemplateOwner string `required:"" name:"template_owner"`
+	TemplateRepo  string `required:"" name:"template_repo"`
+}
+
+func (c *ReposCreateUsingTemplateCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:template_owner/:template_repo/generate")
+	c.UpdatePreview("baptiste", c.Baptiste)
+	c.UpdateBody("description", c.Description)
+	c.UpdateBody("name", c.Name)
+	c.UpdateBody("owner", c.Owner)
 	c.UpdateBody("private", c.Private)
-	c.UpdateBody("has_issues", c.HasIssues)
-	c.UpdateBody("has_projects", c.HasProjects)
-	c.UpdateBody("has_wiki", c.HasWiki)
-	c.UpdateBody("default_branch", c.DefaultBranch)
-	c.UpdateBody("allow_squash_merge", c.AllowSquashMerge)
-	c.UpdateBody("allow_merge_commit", c.AllowMergeCommit)
-	c.UpdateBody("allow_rebase_merge", c.AllowRebaseMerge)
-	c.UpdateBody("archived", c.Archived)
-	return c.DoRequest("PATCH")
+	c.UpdateURLPath("template_owner", c.TemplateOwner)
+	c.UpdateURLPath("template_repo", c.TemplateRepo)
+	return c.DoRequest("POST")
 }
 
-type ReposListTopicsCmd struct {
+type ReposDeclineInvitationCmd struct {
 	internal.BaseCmd
-	Mercy bool   "name:\"mercy-preview\" help:\"**Note:** The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.mercy-preview+json\n\n```\""
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	InvitationId int64 `required:"" name:"invitation_id"`
 }
 
-func (c *ReposListTopicsCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposDeclineInvitationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/topics")
-	c.UpdatePreview("mercy", c.Mercy)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	return c.DoRequest("GET")
-}
-
-type ReposReplaceTopicsCmd struct {
-	internal.BaseCmd
-	Mercy bool     "name:\"mercy-preview\" help:\"**Note:** The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.mercy-preview+json\n\n```\""
-	Owner string   `name:"owner"`
-	Repo  string   `required:"" name:"repo"`
-	Names []string "required:\"\" name:\"names\" help:\"An array of topics to add to the repository. Pass one or more topics to _replace_ the set of existing topics. Send an empty array (`[]`) to clear all topics from the repository.\""
-}
-
-func (c *ReposReplaceTopicsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/topics")
-	c.UpdatePreview("mercy", c.Mercy)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateBody("names", c.Names)
-	return c.DoRequest("PUT")
-}
-
-type ReposListContributorsCmd struct {
-	internal.BaseCmd
-	Owner   string `name:"owner"`
-	Repo    string `required:"" name:"repo"`
-	Anon    string "name:\"anon\" help:\"Set to `1` or `true` to include anonymous contributors in results.\""
-	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ReposListContributorsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/contributors")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLQuery("anon", c.Anon)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type ReposListLanguagesCmd struct {
-	internal.BaseCmd
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
-}
-
-func (c *ReposListLanguagesCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/languages")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	return c.DoRequest("GET")
-}
-
-type ReposListTeamsCmd struct {
-	internal.BaseCmd
-	Owner   string `name:"owner"`
-	Repo    string `required:"" name:"repo"`
-	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ReposListTeamsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/teams")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type ReposListTagsCmd struct {
-	internal.BaseCmd
-	Owner   string `name:"owner"`
-	Repo    string `required:"" name:"repo"`
-	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ReposListTagsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/tags")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
+	c.SetURLPath("/user/repository_invitations/:invitation_id")
+	c.UpdateURLPath("invitation_id", c.InvitationId)
+	return c.DoRequest("DELETE")
 }
 
 type ReposDeleteCmd struct {
@@ -455,575 +645,327 @@ func (c *ReposDeleteCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("DELETE")
 }
 
-type ReposTransferCmd struct {
+type ReposDeleteCommitCommentCmd struct {
 	internal.BaseCmd
-	Nightshade bool    "name:\"nightshade-preview\" required:\"\" help:\"**Note:** The [Repository Transfer API](/changes/2017-11-09-repository-transfer-api-preview) is currently available for developers to preview. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.nightshade-preview+json\n\n```\""
-	Owner      string  `name:"owner"`
-	Repo       string  `required:"" name:"repo"`
-	NewOwner   string  `name:"new_owner" help:"**Required:** The username or organization name the repository will be transferred to."`
-	TeamIds    []int64 `name:"team_ids" help:"ID of the team or teams to add to the repository. Teams can only be added to organization-owned repositories."`
-}
-
-func (c *ReposTransferCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/transfer")
-	c.UpdatePreview("nightshade", c.Nightshade)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateBody("new_owner", c.NewOwner)
-	c.UpdateBody("team_ids", c.TeamIds)
-	return c.DoRequest("POST")
-}
-
-type ReposListBranchesCmd struct {
-	internal.BaseCmd
+	CommentId int64  `required:"" name:"comment_id"`
 	Owner     string `name:"owner"`
 	Repo      string `required:"" name:"repo"`
-	Protected bool   "name:\"protected\" help:\"Setting to `true` returns only protected branches.\""
-	PerPage   int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page      int64  `name:"page" help:"Page number of the results to fetch."`
 }
 
-func (c *ReposListBranchesCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposDeleteCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/branches")
+	c.SetURLPath("/repos/:owner/:repo/comments/:comment_id")
+	c.UpdateURLPath("comment_id", c.CommentId)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLQuery("protected", c.Protected)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("DELETE")
+}
+
+type ReposDeleteDeploymentCmd struct {
+	internal.BaseCmd
+	DeploymentId int64  `required:"" name:"deployment_id"`
+	Owner        string `name:"owner"`
+	Repo         string `required:"" name:"repo"`
+}
+
+func (c *ReposDeleteDeploymentCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/deployments/:deployment_id")
+	c.UpdateURLPath("deployment_id", c.DeploymentId)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("DELETE")
+}
+
+type ReposDeleteDownloadCmd struct {
+	internal.BaseCmd
+	DownloadId int64  `required:"" name:"download_id"`
+	Owner      string `name:"owner"`
+	Repo       string `required:"" name:"repo"`
+}
+
+func (c *ReposDeleteDownloadCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/downloads/:download_id")
+	c.UpdateURLPath("download_id", c.DownloadId)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("DELETE")
+}
+
+type ReposDeleteHookCmd struct {
+	internal.BaseCmd
+	HookId int64  `required:"" name:"hook_id"`
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+}
+
+func (c *ReposDeleteHookCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/hooks/:hook_id")
+	c.UpdateURLPath("hook_id", c.HookId)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("DELETE")
+}
+
+type ReposDeleteInvitationCmd struct {
+	internal.BaseCmd
+	InvitationId int64  `required:"" name:"invitation_id"`
+	Owner        string `name:"owner"`
+	Repo         string `required:"" name:"repo"`
+}
+
+func (c *ReposDeleteInvitationCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/invitations/:invitation_id")
+	c.UpdateURLPath("invitation_id", c.InvitationId)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("DELETE")
+}
+
+type ReposDeleteReleaseAssetCmd struct {
+	internal.BaseCmd
+	AssetId int64  `required:"" name:"asset_id"`
+	Owner   string `name:"owner"`
+	Repo    string `required:"" name:"repo"`
+}
+
+func (c *ReposDeleteReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/releases/assets/:asset_id")
+	c.UpdateURLPath("asset_id", c.AssetId)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("DELETE")
+}
+
+type ReposDeleteReleaseCmd struct {
+	internal.BaseCmd
+	Owner     string `name:"owner"`
+	ReleaseId int64  `required:"" name:"release_id"`
+	Repo      string `required:"" name:"repo"`
+}
+
+func (c *ReposDeleteReleaseCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/releases/:release_id")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("release_id", c.ReleaseId)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("DELETE")
+}
+
+type ReposDisableAutomatedSecurityFixesCmd struct {
+	internal.BaseCmd
+	London bool   "name:\"london-preview\" required:\"\" help:\"Enabling or disabling automated security fixes is currently available for developers to preview. To access this new endpoint during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.london-preview+json\n```\""
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+}
+
+func (c *ReposDisableAutomatedSecurityFixesCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/automated-security-fixes")
+	c.UpdatePreview("london", c.London)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("DELETE")
+}
+
+type ReposDisablePagesSiteCmd struct {
+	internal.BaseCmd
+	Owner      string `name:"owner"`
+	Repo       string `required:"" name:"repo"`
+	Switcheroo bool   "name:\"switcheroo-preview\" required:\"\" help:\"Enabling and disabling Pages in the Pages API is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2019-03-14-enabling-disabling-pages/) preview for more details. To access the new endpoints during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.switcheroo-preview+json\n```\""
+}
+
+func (c *ReposDisablePagesSiteCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pages")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdatePreview("switcheroo", c.Switcheroo)
+	return c.DoRequest("DELETE")
+}
+
+type ReposDisableVulnerabilityAlertsCmd struct {
+	internal.BaseCmd
+	Dorian bool   "name:\"dorian-preview\" required:\"\" help:\"Enabling and disabling vulnerability alerts for a repository using the REST API is currently available for developers to preview. To access these new endpoints during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.dorian-preview+json\n```\""
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+}
+
+func (c *ReposDisableVulnerabilityAlertsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/vulnerability-alerts")
+	c.UpdatePreview("dorian", c.Dorian)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("DELETE")
+}
+
+type ReposEnableAutomatedSecurityFixesCmd struct {
+	internal.BaseCmd
+	London bool   "name:\"london-preview\" required:\"\" help:\"Enabling or disabling automated security fixes is currently available for developers to preview. To access this new endpoint during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.london-preview+json\n```\""
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+}
+
+func (c *ReposEnableAutomatedSecurityFixesCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/automated-security-fixes")
+	c.UpdatePreview("london", c.London)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("PUT")
+}
+
+type ReposEnableVulnerabilityAlertsCmd struct {
+	internal.BaseCmd
+	Dorian bool   "name:\"dorian-preview\" required:\"\" help:\"Enabling and disabling vulnerability alerts for a repository using the REST API is currently available for developers to preview. To access these new endpoints during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.dorian-preview+json\n```\""
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+}
+
+func (c *ReposEnableVulnerabilityAlertsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/vulnerability-alerts")
+	c.UpdatePreview("dorian", c.Dorian)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("PUT")
+}
+
+type ReposGetAllTopicsCmd struct {
+	internal.BaseCmd
+	Mercy bool   "name:\"mercy-preview\" required:\"\" help:\"The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.mercy-preview+json\n```\""
+	Owner string `name:"owner"`
+	Repo  string `required:"" name:"repo"`
+}
+
+func (c *ReposGetAllTopicsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/topics")
+	c.UpdatePreview("mercy", c.Mercy)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ReposGetAppsWithAccessToProtectedBranchCmd struct {
+	internal.BaseCmd
+	Branch string `required:"" name:"branch"`
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+}
+
+func (c *ReposGetAppsWithAccessToProtectedBranchCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions/apps")
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ReposGetArchiveLinkCmd struct {
+	internal.BaseCmd
+	ArchiveFormat string `required:"" name:"archive_format"`
+	Owner         string `name:"owner"`
+	Ref           string `required:"" name:"ref"`
+	Repo          string `required:"" name:"repo"`
+}
+
+func (c *ReposGetArchiveLinkCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/:archive_format/:ref")
+	c.UpdateURLPath("archive_format", c.ArchiveFormat)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("ref", c.Ref)
+	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
 }
 
 type ReposGetBranchCmd struct {
 	internal.BaseCmd
+	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
-	Branch string `required:"" name:"branch"`
 }
 
 func (c *ReposGetBranchCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/:owner/:repo/branches/:branch")
+	c.UpdateURLPath("branch", c.Branch)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("GET")
 }
 
 type ReposGetBranchProtectionCmd struct {
 	internal.BaseCmd
-	LukeCage bool   "name:\"luke-cage-preview\" help:\"**Note:** The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.luke-cage-preview+json\n\n```\""
+	Branch   string `required:"" name:"branch"`
+	LukeCage bool   "name:\"luke-cage-preview\" help:\"The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.luke-cage-preview+json\n```\""
 	Owner    string `name:"owner"`
 	Repo     string `required:"" name:"repo"`
-	Branch   string `required:"" name:"branch"`
 }
 
 func (c *ReposGetBranchProtectionCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection")
+	c.UpdateURLPath("branch", c.Branch)
 	c.UpdatePreview("luke-cage", c.LukeCage)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("GET")
 }
 
-type ReposRemoveBranchProtectionCmd struct {
+type ReposGetClonesCmd struct {
 	internal.BaseCmd
-	Owner  string `name:"owner"`
-	Repo   string `required:"" name:"repo"`
-	Branch string `required:"" name:"branch"`
+	Owner string `name:"owner"`
+	Per   string `name:"per"`
+	Repo  string `required:"" name:"repo"`
 }
 
-func (c *ReposRemoveBranchProtectionCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposGetClonesCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection")
+	c.SetURLPath("/repos/:owner/:repo/traffic/clones")
 	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLQuery("per", c.Per)
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	return c.DoRequest("DELETE")
-}
-
-type ReposGetProtectedBranchRequiredStatusChecksCmd struct {
-	internal.BaseCmd
-	Owner  string `name:"owner"`
-	Repo   string `required:"" name:"repo"`
-	Branch string `required:"" name:"branch"`
-}
-
-func (c *ReposGetProtectedBranchRequiredStatusChecksCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_status_checks")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("GET")
 }
 
-type ReposUpdateProtectedBranchRequiredStatusChecksCmd struct {
+type ReposGetCmd struct {
 	internal.BaseCmd
-	Owner    string   `name:"owner"`
-	Repo     string   `required:"" name:"repo"`
-	Branch   string   `required:"" name:"branch"`
-	Strict   bool     `name:"strict" help:"Require branches to be up to date before merging."`
-	Contexts []string `name:"contexts" help:"The list of status checks to require in order to merge into this branch"`
+	Nebula       bool   "name:\"nebula-preview\" help:\"You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).\n\nTo access repository visibility during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.nebula-preview+json\n```\""
+	Owner        string `name:"owner"`
+	Repo         string `required:"" name:"repo"`
+	ScarletWitch bool   "name:\"scarlet-witch-preview\" help:\"Developers can preview a new `code_of_conduct` key in responses. For more information, see [Codes of Conduct API](https://developer.github.com/v3/codes_of_conduct/).\n\nTo access this new response key during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.scarlet-witch-preview+json\n```\""
 }
 
-func (c *ReposUpdateProtectedBranchRequiredStatusChecksCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposGetCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_status_checks")
+	c.SetURLPath("/repos/:owner/:repo")
+	c.UpdatePreview("nebula", c.Nebula)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	c.UpdateBody("strict", c.Strict)
-	c.UpdateBody("contexts", c.Contexts)
-	return c.DoRequest("PATCH")
-}
-
-type ReposRemoveProtectedBranchRequiredStatusChecksCmd struct {
-	internal.BaseCmd
-	Owner  string `name:"owner"`
-	Repo   string `required:"" name:"repo"`
-	Branch string `required:"" name:"branch"`
-}
-
-func (c *ReposRemoveProtectedBranchRequiredStatusChecksCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_status_checks")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	return c.DoRequest("DELETE")
-}
-
-type ReposListProtectedBranchRequiredStatusChecksContextsCmd struct {
-	internal.BaseCmd
-	Owner  string `name:"owner"`
-	Repo   string `required:"" name:"repo"`
-	Branch string `required:"" name:"branch"`
-}
-
-func (c *ReposListProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
+	c.UpdatePreview("scarlet-witch", c.ScarletWitch)
 	return c.DoRequest("GET")
 }
 
-type ReposReplaceProtectedBranchRequiredStatusChecksContextsCmd struct {
+type ReposGetCodeFrequencyStatsCmd struct {
 	internal.BaseCmd
-	Owner    string   `name:"owner"`
-	Repo     string   `required:"" name:"repo"`
-	Branch   string   `required:"" name:"branch"`
-	Contexts []string `required:"" name:"contexts"`
+	Owner string `name:"owner"`
+	Repo  string `required:"" name:"repo"`
 }
 
-func (c *ReposReplaceProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposGetCodeFrequencyStatsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts")
+	c.SetURLPath("/repos/:owner/:repo/stats/code_frequency")
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	c.UpdateBody("contexts", c.Contexts)
-	return c.DoRequest("PUT")
-}
-
-type ReposAddProtectedBranchRequiredStatusChecksContextsCmd struct {
-	internal.BaseCmd
-	Owner    string   `name:"owner"`
-	Repo     string   `required:"" name:"repo"`
-	Branch   string   `required:"" name:"branch"`
-	Contexts []string `required:"" name:"contexts"`
-}
-
-func (c *ReposAddProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	c.UpdateBody("contexts", c.Contexts)
-	return c.DoRequest("POST")
-}
-
-type ReposRemoveProtectedBranchRequiredStatusChecksContextsCmd struct {
-	internal.BaseCmd
-	Owner    string   `name:"owner"`
-	Repo     string   `required:"" name:"repo"`
-	Branch   string   `required:"" name:"branch"`
-	Contexts []string `required:"" name:"contexts"`
-}
-
-func (c *ReposRemoveProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	c.UpdateBody("contexts", c.Contexts)
-	return c.DoRequest("DELETE")
-}
-
-type ReposGetProtectedBranchPullRequestReviewEnforcementCmd struct {
-	internal.BaseCmd
-	LukeCage bool   "name:\"luke-cage-preview\" help:\"**Note:** The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.luke-cage-preview+json\n\n```\""
-	Owner    string `name:"owner"`
-	Repo     string `required:"" name:"repo"`
-	Branch   string `required:"" name:"branch"`
-}
-
-func (c *ReposGetProtectedBranchPullRequestReviewEnforcementCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_pull_request_reviews")
-	c.UpdatePreview("luke-cage", c.LukeCage)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	return c.DoRequest("GET")
-}
-
-type ReposRemoveProtectedBranchPullRequestReviewEnforcementCmd struct {
-	internal.BaseCmd
-	Owner  string `name:"owner"`
-	Repo   string `required:"" name:"repo"`
-	Branch string `required:"" name:"branch"`
-}
-
-func (c *ReposRemoveProtectedBranchPullRequestReviewEnforcementCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_pull_request_reviews")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	return c.DoRequest("DELETE")
-}
-
-type ReposGetProtectedBranchRequiredSignaturesCmd struct {
-	internal.BaseCmd
-	Zzzax  bool   "name:\"zzzax-preview\" required:\"\" help:\"**Note:** Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.zzzax-preview+json\n\n```\""
-	Owner  string `name:"owner"`
-	Repo   string `required:"" name:"repo"`
-	Branch string `required:"" name:"branch"`
-}
-
-func (c *ReposGetProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_signatures")
-	c.UpdatePreview("zzzax", c.Zzzax)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	return c.DoRequest("GET")
-}
-
-type ReposAddProtectedBranchRequiredSignaturesCmd struct {
-	internal.BaseCmd
-	Zzzax  bool   "name:\"zzzax-preview\" required:\"\" help:\"**Note:** Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.zzzax-preview+json\n\n```\""
-	Owner  string `name:"owner"`
-	Repo   string `required:"" name:"repo"`
-	Branch string `required:"" name:"branch"`
-}
-
-func (c *ReposAddProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_signatures")
-	c.UpdatePreview("zzzax", c.Zzzax)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	return c.DoRequest("POST")
-}
-
-type ReposRemoveProtectedBranchRequiredSignaturesCmd struct {
-	internal.BaseCmd
-	Zzzax  bool   "name:\"zzzax-preview\" required:\"\" help:\"**Note:** Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.zzzax-preview+json\n\n```\""
-	Owner  string `name:"owner"`
-	Repo   string `required:"" name:"repo"`
-	Branch string `required:"" name:"branch"`
-}
-
-func (c *ReposRemoveProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_signatures")
-	c.UpdatePreview("zzzax", c.Zzzax)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	return c.DoRequest("DELETE")
-}
-
-type ReposGetProtectedBranchAdminEnforcementCmd struct {
-	internal.BaseCmd
-	Owner  string `name:"owner"`
-	Repo   string `required:"" name:"repo"`
-	Branch string `required:"" name:"branch"`
-}
-
-func (c *ReposGetProtectedBranchAdminEnforcementCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/enforce_admins")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	return c.DoRequest("GET")
-}
-
-type ReposAddProtectedBranchAdminEnforcementCmd struct {
-	internal.BaseCmd
-	Owner  string `name:"owner"`
-	Repo   string `required:"" name:"repo"`
-	Branch string `required:"" name:"branch"`
-}
-
-func (c *ReposAddProtectedBranchAdminEnforcementCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/enforce_admins")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	return c.DoRequest("POST")
-}
-
-type ReposRemoveProtectedBranchAdminEnforcementCmd struct {
-	internal.BaseCmd
-	Owner  string `name:"owner"`
-	Repo   string `required:"" name:"repo"`
-	Branch string `required:"" name:"branch"`
-}
-
-func (c *ReposRemoveProtectedBranchAdminEnforcementCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/enforce_admins")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	return c.DoRequest("DELETE")
-}
-
-type ReposGetProtectedBranchRestrictionsCmd struct {
-	internal.BaseCmd
-	Owner  string `name:"owner"`
-	Repo   string `required:"" name:"repo"`
-	Branch string `required:"" name:"branch"`
-}
-
-func (c *ReposGetProtectedBranchRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	return c.DoRequest("GET")
-}
-
-type ReposRemoveProtectedBranchRestrictionsCmd struct {
-	internal.BaseCmd
-	Owner  string `name:"owner"`
-	Repo   string `required:"" name:"repo"`
-	Branch string `required:"" name:"branch"`
-}
-
-func (c *ReposRemoveProtectedBranchRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	return c.DoRequest("DELETE")
-}
-
-type ReposListProtectedBranchTeamRestrictionsCmd struct {
-	internal.BaseCmd
-	Hellcat bool   "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
-	Owner   string `name:"owner"`
-	Repo    string `required:"" name:"repo"`
-	Branch  string `required:"" name:"branch"`
-	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ReposListProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions/teams")
-	c.UpdatePreview("hellcat", c.Hellcat)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type ReposReplaceProtectedBranchTeamRestrictionsCmd struct {
-	internal.BaseCmd
-	Hellcat bool     "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
-	Owner   string   `name:"owner"`
-	Repo    string   `required:"" name:"repo"`
-	Branch  string   `required:"" name:"branch"`
-	Teams   []string `required:"" name:"teams"`
-}
-
-func (c *ReposReplaceProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions/teams")
-	c.UpdatePreview("hellcat", c.Hellcat)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	c.UpdateBody("teams", c.Teams)
-	return c.DoRequest("PUT")
-}
-
-type ReposAddProtectedBranchTeamRestrictionsCmd struct {
-	internal.BaseCmd
-	Hellcat bool     "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
-	Owner   string   `name:"owner"`
-	Repo    string   `required:"" name:"repo"`
-	Branch  string   `required:"" name:"branch"`
-	Teams   []string `required:"" name:"teams"`
-}
-
-func (c *ReposAddProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions/teams")
-	c.UpdatePreview("hellcat", c.Hellcat)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	c.UpdateBody("teams", c.Teams)
-	return c.DoRequest("POST")
-}
-
-type ReposRemoveProtectedBranchTeamRestrictionsCmd struct {
-	internal.BaseCmd
-	Hellcat bool     "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
-	Owner   string   `name:"owner"`
-	Repo    string   `required:"" name:"repo"`
-	Branch  string   `required:"" name:"branch"`
-	Teams   []string `required:"" name:"teams"`
-}
-
-func (c *ReposRemoveProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions/teams")
-	c.UpdatePreview("hellcat", c.Hellcat)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	c.UpdateBody("teams", c.Teams)
-	return c.DoRequest("DELETE")
-}
-
-type ReposListProtectedBranchUserRestrictionsCmd struct {
-	internal.BaseCmd
-	Owner  string `name:"owner"`
-	Repo   string `required:"" name:"repo"`
-	Branch string `required:"" name:"branch"`
-}
-
-func (c *ReposListProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions/users")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	return c.DoRequest("GET")
-}
-
-type ReposReplaceProtectedBranchUserRestrictionsCmd struct {
-	internal.BaseCmd
-	Owner  string   `name:"owner"`
-	Repo   string   `required:"" name:"repo"`
-	Branch string   `required:"" name:"branch"`
-	Users  []string `required:"" name:"users"`
-}
-
-func (c *ReposReplaceProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions/users")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	c.UpdateBody("users", c.Users)
-	return c.DoRequest("PUT")
-}
-
-type ReposAddProtectedBranchUserRestrictionsCmd struct {
-	internal.BaseCmd
-	Owner  string   `name:"owner"`
-	Repo   string   `required:"" name:"repo"`
-	Branch string   `required:"" name:"branch"`
-	Users  []string `required:"" name:"users"`
-}
-
-func (c *ReposAddProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions/users")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	c.UpdateBody("users", c.Users)
-	return c.DoRequest("POST")
-}
-
-type ReposRemoveProtectedBranchUserRestrictionsCmd struct {
-	internal.BaseCmd
-	Owner  string   `name:"owner"`
-	Repo   string   `required:"" name:"repo"`
-	Branch string   `required:"" name:"branch"`
-	Users  []string `required:"" name:"users"`
-}
-
-func (c *ReposRemoveProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions/users")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	c.UpdateBody("users", c.Users)
-	return c.DoRequest("DELETE")
-}
-
-type ReposListCollaboratorsCmd struct {
-	internal.BaseCmd
-	Hellcat     bool   "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
-	Owner       string `name:"owner"`
-	Repo        string `required:"" name:"repo"`
-	Affiliation string "name:\"affiliation\" help:\"Filter collaborators returned by their affiliation. Can be one of:  \n\\* `outside`: All outside collaborators of an organization-owned repository.  \n\\* `direct`: All collaborators with permissions to an organization-owned repository, regardless of organization membership status.  \n\\* `all`: All collaborators the authenticated user can see.\""
-	PerPage     int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page        int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ReposListCollaboratorsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/collaborators")
-	c.UpdatePreview("hellcat", c.Hellcat)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLQuery("affiliation", c.Affiliation)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type ReposCheckCollaboratorCmd struct {
-	internal.BaseCmd
-	Hellcat  bool   "name:\"hellcat-preview\" help:\"**Note:** The Nested Teams API is currently available for developers to preview. See the [blog post](/changes/2017-08-30-preview-nested-teams) for full details. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.hellcat-preview+json\n\n```\""
-	Owner    string `name:"owner"`
-	Repo     string `required:"" name:"repo"`
-	Username string `required:"" name:"username"`
-}
-
-func (c *ReposCheckCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/collaborators/:username")
-	c.UpdatePreview("hellcat", c.Hellcat)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("username", c.Username)
 	return c.DoRequest("GET")
 }
 
@@ -1043,799 +985,191 @@ func (c *ReposGetCollaboratorPermissionLevelCmd) Run(isValueSetMap map[string]bo
 	return c.DoRequest("GET")
 }
 
-type ReposAddCollaboratorCmd struct {
+type ReposGetCombinedStatusForRefCmd struct {
 	internal.BaseCmd
-	Owner      string `name:"owner"`
-	Repo       string `required:"" name:"repo"`
-	Username   string `required:"" name:"username"`
-	Permission string "name:\"permission\" help:\"The permission to grant the collaborator. **Only valid on organization-owned repositories.** Can be one of:  \n\\* `pull` - can pull, but not push to or administer this repository.  \n\\* `push` - can pull and push, but not administer this repository.  \n\\* `admin` - can pull, push and administer this repository.\""
+	Owner string `name:"owner"`
+	Ref   string `required:"" name:"ref"`
+	Repo  string `required:"" name:"repo"`
 }
 
-func (c *ReposAddCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposGetCombinedStatusForRefCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/collaborators/:username")
+	c.SetURLPath("/repos/:owner/:repo/commits/:ref/status")
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("username", c.Username)
-	c.UpdateBody("permission", c.Permission)
-	return c.DoRequest("PUT")
-}
-
-type ReposRemoveCollaboratorCmd struct {
-	internal.BaseCmd
-	Owner    string `name:"owner"`
-	Repo     string `required:"" name:"repo"`
-	Username string `required:"" name:"username"`
-}
-
-func (c *ReposRemoveCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/collaborators/:username")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("username", c.Username)
-	return c.DoRequest("DELETE")
-}
-
-type ReposListCommitCommentsCmd struct {
-	internal.BaseCmd
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview\n\n```\n\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.\""
-	Owner        string `name:"owner"`
-	Repo         string `required:"" name:"repo"`
-	PerPage      int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page         int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ReposListCommitCommentsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/comments")
-	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type ReposListCommentsForCommitCmd struct {
-	internal.BaseCmd
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview\n\n```\n\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.\""
-	Owner        string `name:"owner"`
-	Repo         string `required:"" name:"repo"`
-	Ref          string `required:"" name:"ref"`
-	PerPage      int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page         int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ReposListCommentsForCommitCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/commits/:ref/comments")
-	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("ref", c.Ref)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
 }
 
-type ReposCreateCommitCommentCmd struct {
+type ReposGetCommitActivityStatsCmd struct {
 	internal.BaseCmd
-	Owner    string `name:"owner"`
-	Repo     string `required:"" name:"repo"`
-	Sha      string `required:"" name:"sha"`
-	Body     string `required:"" name:"body" help:"The contents of the comment."`
-	Path     string `name:"path" help:"Relative path of the file to comment on."`
-	Position int64  `name:"position" help:"Line index in the diff to comment on."`
-	Line     int64  `name:"line" help:"**Deprecated**. Use **position** parameter instead. Line number in the file to comment on."`
+	Owner string `name:"owner"`
+	Repo  string `required:"" name:"repo"`
 }
 
-func (c *ReposCreateCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposGetCommitActivityStatsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/commits/:sha/comments")
+	c.SetURLPath("/repos/:owner/:repo/stats/commit_activity")
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("sha", c.Sha)
-	c.UpdateBody("body", c.Body)
-	c.UpdateBody("path", c.Path)
-	c.UpdateBody("position", c.Position)
-	c.UpdateBody("line", c.Line)
-	return c.DoRequest("POST")
-}
-
-type ReposGetCommitCommentCmd struct {
-	internal.BaseCmd
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.squirrel-girl-preview\n\n```\n\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](/v3/reactions) reactions.\""
-	Owner        string `name:"owner"`
-	Repo         string `required:"" name:"repo"`
-	CommentId    int64  `required:"" name:"comment_id"`
-}
-
-func (c *ReposGetCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/comments/:comment_id")
-	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("comment_id", c.CommentId)
-	return c.DoRequest("GET")
-}
-
-type ReposUpdateCommitCommentCmd struct {
-	internal.BaseCmd
-	Owner     string `name:"owner"`
-	Repo      string `required:"" name:"repo"`
-	CommentId int64  `required:"" name:"comment_id"`
-	Body      string `required:"" name:"body" help:"The contents of the comment"`
-}
-
-func (c *ReposUpdateCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/comments/:comment_id")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("comment_id", c.CommentId)
-	c.UpdateBody("body", c.Body)
-	return c.DoRequest("PATCH")
-}
-
-type ReposDeleteCommitCommentCmd struct {
-	internal.BaseCmd
-	Owner     string `name:"owner"`
-	Repo      string `required:"" name:"repo"`
-	CommentId int64  `required:"" name:"comment_id"`
-}
-
-func (c *ReposDeleteCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/comments/:comment_id")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("comment_id", c.CommentId)
-	return c.DoRequest("DELETE")
-}
-
-type ReposListCommitsCmd struct {
-	internal.BaseCmd
-	Owner   string `name:"owner"`
-	Repo    string `required:"" name:"repo"`
-	Sha     string `name:"sha" help:"SHA or branch to start listing commits from."`
-	Path    string `name:"path" help:"Only commits containing this file path will be returned."`
-	Author  string `name:"author" help:"GitHub login or email address by which to filter by commit author."`
-	Since   string "name:\"since\" help:\"Only commits after this date will be returned. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.\""
-	Until   string "name:\"until\" help:\"Only commits before this date will be returned. This is a timestamp in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.\""
-	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ReposListCommitsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/commits")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLQuery("sha", c.Sha)
-	c.UpdateURLQuery("path", c.Path)
-	c.UpdateURLQuery("author", c.Author)
-	c.UpdateURLQuery("since", c.Since)
-	c.UpdateURLQuery("until", c.Until)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
 type ReposGetCommitCmd struct {
 	internal.BaseCmd
 	Owner string `name:"owner"`
+	Ref   string `required:"" name:"ref"`
 	Repo  string `required:"" name:"repo"`
-	Sha   string `required:"" name:"sha"`
 }
 
 func (c *ReposGetCommitCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/commits/:sha")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("sha", c.Sha)
-	return c.DoRequest("GET")
-}
-
-type ReposGetCommitRefShaCmd struct {
-	internal.BaseCmd
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
-	Ref   string `required:"" name:"ref"`
-}
-
-func (c *ReposGetCommitRefShaCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/:owner/:repo/commits/:ref")
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("ref", c.Ref)
-	return c.DoRequest("GET")
-}
-
-type ReposCompareCommitsCmd struct {
-	internal.BaseCmd
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
-	Base  string `required:"" name:"base"`
-	Head  string `required:"" name:"head"`
-}
-
-func (c *ReposCompareCommitsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/compare/:base...:head")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("base", c.Base)
-	c.UpdateURLPath("head", c.Head)
-	return c.DoRequest("GET")
-}
-
-type ReposRetrieveCommunityProfileMetricsCmd struct {
-	internal.BaseCmd
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
-}
-
-func (c *ReposRetrieveCommunityProfileMetricsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/community/profile")
-	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
 }
 
-type ReposGetReadmeCmd struct {
+type ReposGetCommitCommentCmd struct {
 	internal.BaseCmd
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
-	Ref   string `name:"ref" help:"The name of the commit/branch/tag."`
+	CommentId    int64  `required:"" name:"comment_id"`
+	Owner        string `name:"owner"`
+	Repo         string `required:"" name:"repo"`
+	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.\""
 }
 
-func (c *ReposGetReadmeCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposGetCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/readme")
+	c.SetURLPath("/repos/:owner/:repo/comments/:comment_id")
+	c.UpdateURLPath("comment_id", c.CommentId)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLQuery("ref", c.Ref)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	return c.DoRequest("GET")
 }
 
 type ReposGetContentsCmd struct {
 	internal.BaseCmd
 	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
 	Path  string `required:"" name:"path"`
-	Ref   string `name:"ref" help:"The name of the commit/branch/tag."`
+	Ref   string `name:"ref"`
+	Repo  string `required:"" name:"repo"`
 }
 
 func (c *ReposGetContentsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/:owner/:repo/contents/:path")
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("path", c.Path)
 	c.UpdateURLQuery("ref", c.Ref)
+	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
 }
 
-type ReposGetArchiveLinkCmd struct {
+type ReposGetContributorsStatsCmd struct {
 	internal.BaseCmd
-	Owner         string `name:"owner"`
-	Repo          string `required:"" name:"repo"`
-	ArchiveFormat string `required:"" name:"archive_format"`
-	Ref           string `required:"" name:"ref"`
+	Owner string `name:"owner"`
+	Repo  string `required:"" name:"repo"`
 }
 
-func (c *ReposGetArchiveLinkCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposGetContributorsStatsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/:archive_format/:ref")
+	c.SetURLPath("/repos/:owner/:repo/stats/contributors")
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("archive_format", c.ArchiveFormat)
-	c.UpdateURLPath("ref", c.Ref)
-	return c.DoRequest("GET")
-}
-
-type ReposListDeployKeysCmd struct {
-	internal.BaseCmd
-	Owner   string `name:"owner"`
-	Repo    string `required:"" name:"repo"`
-	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ReposListDeployKeysCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/keys")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
 type ReposGetDeployKeyCmd struct {
 	internal.BaseCmd
+	KeyId int64  `required:"" name:"key_id"`
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
-	KeyId int64  `required:"" name:"key_id"`
 }
 
 func (c *ReposGetDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/:owner/:repo/keys/:key_id")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("key_id", c.KeyId)
-	return c.DoRequest("GET")
-}
-
-type ReposAddDeployKeyCmd struct {
-	internal.BaseCmd
-	Owner    string `name:"owner"`
-	Repo     string `required:"" name:"repo"`
-	Title    string `name:"title" help:"A name for the key."`
-	Key      string `required:"" name:"key" help:"The contents of the key."`
-	ReadOnly bool   "name:\"read_only\" help:\"If `true`, the key will only be able to read repository contents. Otherwise, the key will be able to read and write.  \n  \nDeploy keys with write access can perform the same actions as an organization member with admin access, or a collaborator on a personal repository. For more information, see '[Repository permission levels for an organization](https://help.github.com/articles/repository-permission-levels-for-an-organization/)' and '[Permission levels for a user account repository](https://help.github.com/articles/permission-levels-for-a-user-account-repository/).'\""
-}
-
-func (c *ReposAddDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/keys")
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateBody("title", c.Title)
-	c.UpdateBody("key", c.Key)
-	c.UpdateBody("read_only", c.ReadOnly)
-	return c.DoRequest("POST")
-}
-
-type ReposRemoveDeployKeyCmd struct {
-	internal.BaseCmd
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
-	KeyId int64  `required:"" name:"key_id"`
-}
-
-func (c *ReposRemoveDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/keys/:key_id")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("key_id", c.KeyId)
-	return c.DoRequest("DELETE")
-}
-
-type ReposListDeploymentsCmd struct {
-	internal.BaseCmd
-	AntMan      bool   "name:\"ant-man-preview\" help:\"**Note:** The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.ant-man-preview+json\n\n```\""
-	Owner       string `name:"owner"`
-	Repo        string `required:"" name:"repo"`
-	Sha         string `name:"sha" help:"The SHA recorded at creation time."`
-	Ref         string `name:"ref" help:"The name of the ref. This can be a branch, tag, or SHA."`
-	Task        string "name:\"task\" help:\"The name of the task for the deployment (e.g., `deploy` or `deploy:migrations`).\""
-	Environment string "name:\"environment\" help:\"The name of the environment that was deployed to (e.g., `staging` or `production`).\""
-	PerPage     int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page        int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ReposListDeploymentsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/deployments")
-	c.UpdatePreview("ant-man", c.AntMan)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLQuery("sha", c.Sha)
-	c.UpdateURLQuery("ref", c.Ref)
-	c.UpdateURLQuery("task", c.Task)
-	c.UpdateURLQuery("environment", c.Environment)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
 type ReposGetDeploymentCmd struct {
 	internal.BaseCmd
-	MachineMan   bool   "name:\"machine-man-preview\" help:\"**Note:** If a deployment is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](/changes/2016-09-14-Integrations-Early-Access).\n\nTo receive the `performed_via_github_app` object is the response, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.machine-man-preview\n\n```\""
-	AntMan       bool   "name:\"ant-man-preview\" help:\"**Note:** The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.ant-man-preview+json\n\n```\""
+	AntMan       bool   "name:\"ant-man-preview\" help:\"The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.ant-man-preview+json\n```\""
+	DeploymentId int64  `required:"" name:"deployment_id"`
+	MachineMan   bool   "name:\"machine-man-preview\" help:\"If a deployment is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).\n\nTo receive the `performed_via_github_app` object in the response, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.machine-man-preview\n```\""
 	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
-	DeploymentId int64  `required:"" name:"deployment_id"`
 }
 
 func (c *ReposGetDeploymentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/:owner/:repo/deployments/:deployment_id")
+	c.UpdatePreview("ant-man", c.AntMan)
+	c.UpdateURLPath("deployment_id", c.DeploymentId)
 	c.UpdatePreview("machine-man", c.MachineMan)
-	c.UpdatePreview("ant-man", c.AntMan)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("deployment_id", c.DeploymentId)
-	return c.DoRequest("GET")
-}
-
-type ReposCreateDeploymentCmd struct {
-	internal.BaseCmd
-	AntMan                bool     "name:\"ant-man-preview\" help:\"**Note:** The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.ant-man-preview+json\n\n```\""
-	Owner                 string   `name:"owner"`
-	Repo                  string   `required:"" name:"repo"`
-	Ref                   string   `required:"" name:"ref" help:"The ref to deploy. This can be a branch, tag, or SHA."`
-	Task                  string   "name:\"task\" help:\"Specifies a task to execute (e.g., `deploy` or `deploy:migrations`).\""
-	AutoMerge             bool     `name:"auto_merge" help:"Attempts to automatically merge the default branch into the requested ref, if it's behind the default branch."`
-	RequiredContexts      []string `name:"required_contexts" help:"The [status](https://developer.github.com/v3/repos/statuses/) contexts to verify against commit status checks. If you omit this parameter, GitHub verifies all unique contexts before creating a deployment. To bypass checking entirely, pass an empty array. Defaults to all unique contexts."`
-	Payload               string   `name:"payload" help:"JSON payload with extra information about the deployment."`
-	Environment           string   "name:\"environment\" help:\"Name for the target deployment environment (e.g., `production`, `staging`, `qa`).\""
-	Description           string   `name:"description" help:"Short description of the deployment."`
-	TransientEnvironment  bool     "name:\"transient_environment\" help:\"Specifies if the given environment is specific to the deployment and will no longer exist at some point in the future. Default: `false`  \n**Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. **Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type.\""
-	ProductionEnvironment bool     "name:\"production_environment\" help:\"Specifies if the given environment is one that end-users directly interact with. Default: `true` when `environment` is `production` and `false` otherwise.  \n**Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type.  \""
-}
-
-func (c *ReposCreateDeploymentCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/deployments")
-	c.UpdatePreview("ant-man", c.AntMan)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateBody("ref", c.Ref)
-	c.UpdateBody("task", c.Task)
-	c.UpdateBody("auto_merge", c.AutoMerge)
-	c.UpdateBody("required_contexts", c.RequiredContexts)
-	c.UpdateBody("payload", c.Payload)
-	c.UpdateBody("environment", c.Environment)
-	c.UpdateBody("description", c.Description)
-	c.UpdateBody("transient_environment", c.TransientEnvironment)
-	c.UpdateBody("production_environment", c.ProductionEnvironment)
-	return c.DoRequest("POST")
-}
-
-type ReposListDeploymentStatusesCmd struct {
-	internal.BaseCmd
-	Flash        bool   "name:\"flash-preview\" help:\"**Note:** New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.\n\nTo access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must provide the following custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.flash-preview+json\n\n```\""
-	AntMan       bool   "name:\"ant-man-preview\" help:\"**Note:** The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.ant-man-preview+json\n\n```\""
-	Owner        string `name:"owner"`
-	Repo         string `required:"" name:"repo"`
-	DeploymentId int64  `required:"" name:"deployment_id"`
-	PerPage      int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page         int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ReposListDeploymentStatusesCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/deployments/:deployment_id/statuses")
-	c.UpdatePreview("flash", c.Flash)
-	c.UpdatePreview("ant-man", c.AntMan)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("deployment_id", c.DeploymentId)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
 type ReposGetDeploymentStatusCmd struct {
 	internal.BaseCmd
-	MachineMan   bool   "name:\"machine-man-preview\" help:\"**Note:** If a deployment is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](/changes/2016-09-14-Integrations-Early-Access).\n\nTo receive the `performed_via_github_app` object is the response, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.machine-man-preview\n\n```\""
-	Flash        bool   "name:\"flash-preview\" help:\"**Note:** New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.\n\nTo access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must provide the following custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.flash-preview+json\n\n```\""
-	AntMan       bool   "name:\"ant-man-preview\" help:\"**Note:** The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.ant-man-preview+json\n\n```\""
+	AntMan       bool   "name:\"ant-man-preview\" help:\"The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.ant-man-preview+json\n```\""
+	DeploymentId int64  `required:"" name:"deployment_id"`
+	Flash        bool   "name:\"flash-preview\" help:\"New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](https://developer.github.com/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.\n\nTo access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must provide the following custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.flash-preview+json\n```\""
+	MachineMan   bool   "name:\"machine-man-preview\" help:\"If a deployment is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).\n\nTo receive the `performed_via_github_app` object in the response, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.machine-man-preview\n```\""
 	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
-	DeploymentId int64  `required:"" name:"deployment_id"`
 	StatusId     int64  `required:"" name:"status_id"`
 }
 
 func (c *ReposGetDeploymentStatusCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/:owner/:repo/deployments/:deployment_id/statuses/:status_id")
+	c.UpdatePreview("ant-man", c.AntMan)
+	c.UpdateURLPath("deployment_id", c.DeploymentId)
+	c.UpdatePreview("flash", c.Flash)
 	c.UpdatePreview("machine-man", c.MachineMan)
-	c.UpdatePreview("flash", c.Flash)
-	c.UpdatePreview("ant-man", c.AntMan)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("deployment_id", c.DeploymentId)
 	c.UpdateURLPath("status_id", c.StatusId)
-	return c.DoRequest("GET")
-}
-
-type ReposCreateDeploymentStatusCmd struct {
-	internal.BaseCmd
-	Flash          bool   "name:\"flash-preview\" help:\"**Note:** New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.\n\nTo access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must provide the following custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.flash-preview+json\n\n```\""
-	AntMan         bool   "name:\"ant-man-preview\" help:\"**Note:** The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.ant-man-preview+json\n\n```\""
-	Owner          string `name:"owner"`
-	Repo           string `required:"" name:"repo"`
-	DeploymentId   int64  `required:"" name:"deployment_id"`
-	State          string "required:\"\" name:\"state\" help:\"The state of the status. Can be one of `error`, `failure`, `inactive`, `in_progress`, `queued` `pending`, or `success`. **Note:** To use the `inactive` state, you must provide the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. To use the `in_progress` and `queued` states, you must provide the [`application/vnd.github.flash-preview+json`](https://developer.github.com/v3/previews/#deployment-statuses) custom media type.\""
-	TargetUrl      string "name:\"target_url\" help:\"The target URL to associate with this status. This URL should contain output to keep the user updated while the task is running or serve as historical information for what happened in the deployment. **Note:** It's recommended to use the `log_url` parameter, which replaces `target_url`.\""
-	LogUrl         string "name:\"log_url\" help:\"The full URL of the deployment's output. This parameter replaces `target_url`. We will continue to accept `target_url` to support legacy uses, but we recommend replacing `target_url` with `log_url`. Setting `log_url` will automatically set `target_url` to the same value. Default: `''`  \n**Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. **Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type.\""
-	Description    string `name:"description" help:"A short description of the status. The maximum description length is 140 characters."`
-	Environment    string "name:\"environment\" help:\"Name for the target deployment environment, which can be changed when setting a deploy status. For example, `production`, `staging`, or `qa`. **Note:** This parameter requires you to use the [`application/vnd.github.flash-preview+json`](https://developer.github.com/v3/previews/#deployment-statuses) custom media type.\""
-	EnvironmentUrl string "name:\"environment_url\" help:\"Sets the URL for accessing your environment. Default: `''`  \n**Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. **Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type.\""
-	AutoInactive   bool   "name:\"auto_inactive\" help:\"Adds a new `inactive` status to all prior non-transient, non-production environment deployments with the same repository and `environment` name as the created status's deployment. An `inactive` status is only added to deployments that had a `success` state. Default: `true`  \n**Note:** To add an `inactive` status to `production` environments, you must use the [`application/vnd.github.flash-preview+json`](https://developer.github.com/v3/previews/#deployment-statuses) custom media type.  \n**Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. **Note:** To add an `inactive` status to `production` environments, you must use the [`application/vnd.github.flash-preview+json`](https://developer.github.com/v3/previews/#deployment-statuses) custom media type.  \""
-}
-
-func (c *ReposCreateDeploymentStatusCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/deployments/:deployment_id/statuses")
-	c.UpdatePreview("flash", c.Flash)
-	c.UpdatePreview("ant-man", c.AntMan)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("deployment_id", c.DeploymentId)
-	c.UpdateBody("state", c.State)
-	c.UpdateBody("target_url", c.TargetUrl)
-	c.UpdateBody("log_url", c.LogUrl)
-	c.UpdateBody("description", c.Description)
-	c.UpdateBody("environment", c.Environment)
-	c.UpdateBody("environment_url", c.EnvironmentUrl)
-	c.UpdateBody("auto_inactive", c.AutoInactive)
-	return c.DoRequest("POST")
-}
-
-type ReposListDownloadsCmd struct {
-	internal.BaseCmd
-	Owner   string `name:"owner"`
-	Repo    string `required:"" name:"repo"`
-	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ReposListDownloadsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/downloads")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
 type ReposGetDownloadCmd struct {
 	internal.BaseCmd
+	DownloadId int64  `required:"" name:"download_id"`
 	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
-	DownloadId int64  `required:"" name:"download_id"`
 }
 
 func (c *ReposGetDownloadCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/:owner/:repo/downloads/:download_id")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("download_id", c.DownloadId)
-	return c.DoRequest("GET")
-}
-
-type ReposDeleteDownloadCmd struct {
-	internal.BaseCmd
-	Owner      string `name:"owner"`
-	Repo       string `required:"" name:"repo"`
-	DownloadId int64  `required:"" name:"download_id"`
-}
-
-func (c *ReposDeleteDownloadCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/downloads/:download_id")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("download_id", c.DownloadId)
-	return c.DoRequest("DELETE")
-}
-
-type ReposListForksCmd struct {
-	internal.BaseCmd
-	Owner   string `name:"owner"`
-	Repo    string `required:"" name:"repo"`
-	Sort    string "name:\"sort\" help:\"The sort order. Can be either `newest`, `oldest`, or `stargazers`.\""
-	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ReposListForksCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/forks")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLQuery("sort", c.Sort)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type ReposCreateForkCmd struct {
-	internal.BaseCmd
-	Owner        string `name:"owner"`
-	Repo         string `required:"" name:"repo"`
-	Organization string `name:"organization" help:"Optional parameter to specify the organization name if forking into an organization."`
-}
-
-func (c *ReposCreateForkCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/forks")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateBody("organization", c.Organization)
-	return c.DoRequest("POST")
-}
-
-type ReposListInvitationsCmd struct {
-	internal.BaseCmd
-	Owner   string `name:"owner"`
-	Repo    string `required:"" name:"repo"`
-	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ReposListInvitationsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/invitations")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type ReposDeleteInvitationCmd struct {
-	internal.BaseCmd
-	Owner        string `name:"owner"`
-	Repo         string `required:"" name:"repo"`
-	InvitationId int64  `required:"" name:"invitation_id"`
-}
-
-func (c *ReposDeleteInvitationCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/invitations/:invitation_id")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("invitation_id", c.InvitationId)
-	return c.DoRequest("DELETE")
-}
-
-type ReposUpdateInvitationCmd struct {
-	internal.BaseCmd
-	Owner        string `name:"owner"`
-	Repo         string `required:"" name:"repo"`
-	InvitationId int64  `required:"" name:"invitation_id"`
-	Permissions  string "name:\"permissions\" help:\"The permissions that the associated user will have on the repository. Valid values are `read`, `write`, and `admin`.\""
-}
-
-func (c *ReposUpdateInvitationCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/invitations/:invitation_id")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("invitation_id", c.InvitationId)
-	c.UpdateBody("permissions", c.Permissions)
-	return c.DoRequest("PATCH")
-}
-
-type ReposListInvitationsForAuthenticatedUserCmd struct {
-	internal.BaseCmd
-	PerPage int64 `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64 `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ReposListInvitationsForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/repository_invitations")
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type ReposAcceptInvitationCmd struct {
-	internal.BaseCmd
-	InvitationId int64 `required:"" name:"invitation_id"`
-}
-
-func (c *ReposAcceptInvitationCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/repository_invitations/:invitation_id")
-	c.UpdateURLPath("invitation_id", c.InvitationId)
-	return c.DoRequest("PATCH")
-}
-
-type ReposDeclineInvitationCmd struct {
-	internal.BaseCmd
-	InvitationId int64 `required:"" name:"invitation_id"`
-}
-
-func (c *ReposDeclineInvitationCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/repository_invitations/:invitation_id")
-	c.UpdateURLPath("invitation_id", c.InvitationId)
-	return c.DoRequest("DELETE")
-}
-
-type ReposMergeCmd struct {
-	internal.BaseCmd
-	Owner         string `name:"owner"`
-	Repo          string `required:"" name:"repo"`
-	Base          string `required:"" name:"base" help:"The name of the base branch that the head will be merged into."`
-	Head          string `required:"" name:"head" help:"The head to merge. This can be a branch name or a commit SHA1."`
-	CommitMessage string `name:"commit_message" help:"Commit message to use for the merge commit. If omitted, a default message will be used."`
-}
-
-func (c *ReposMergeCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/merges")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateBody("base", c.Base)
-	c.UpdateBody("head", c.Head)
-	c.UpdateBody("commit_message", c.CommitMessage)
-	return c.DoRequest("POST")
-}
-
-type ReposGetPagesCmd struct {
-	internal.BaseCmd
-	MisterFantastic bool   "name:\"mister-fantastic-preview\" required:\"\" help:\"**Note:** The GitHub Pages API on GitHub is currently available for developers to preview. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.mister-fantastic-preview+json\n\n```\""
-	Owner           string `name:"owner"`
-	Repo            string `required:"" name:"repo"`
-}
-
-func (c *ReposGetPagesCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/pages")
-	c.UpdatePreview("mister-fantastic", c.MisterFantastic)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
 }
 
-type ReposUpdateInformationAboutPagesSiteCmd struct {
+type ReposGetHookCmd struct {
 	internal.BaseCmd
-	MisterFantastic bool   "name:\"mister-fantastic-preview\" required:\"\" help:\"**Note:** The GitHub Pages API on GitHub is currently available for developers to preview. To access the API, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\napplication/vnd.github.mister-fantastic-preview+json\n\n```\""
-	Owner           string `name:"owner"`
-	Repo            string `required:"" name:"repo"`
-	Cname           string "name:\"cname\" help:\"Specify a custom domain for the repository. Sending a `null` value will remove the custom domain. For more about custom domains, see '[Using a custom domain with GitHub Pages](https://help.github.com/articles/using-a-custom-domain-with-github-pages/).'\""
-	Source          string "name:\"source\" help:\"Update the source for the repository. Must include the branch name, and may optionally specify the subdirectory `/docs`. Possible values are `'gh-pages'`, `'master'`, and `'master /docs'`.\""
+	HookId int64  `required:"" name:"hook_id"`
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
 }
 
-func (c *ReposUpdateInformationAboutPagesSiteCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposGetHookCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/pages")
-	c.UpdatePreview("mister-fantastic", c.MisterFantastic)
+	c.SetURLPath("/repos/:owner/:repo/hooks/:hook_id")
+	c.UpdateURLPath("hook_id", c.HookId)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateBody("cname", c.Cname)
-	c.UpdateBody("source", c.Source)
-	return c.DoRequest("PUT")
-}
-
-type ReposRequestPageBuildCmd struct {
-	internal.BaseCmd
-	MisterFantastic bool   "name:\"mister-fantastic-preview\" required:\"\" help:\"This endpoint is currently available for developers to preview. During the preview period, the API may change without advance notice.\n\nTo access this endpoint during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.mister-fantastic-preview+json\n\n```\""
-	Owner           string `name:"owner"`
-	Repo            string `required:"" name:"repo"`
-}
-
-func (c *ReposRequestPageBuildCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/pages/builds")
-	c.UpdatePreview("mister-fantastic", c.MisterFantastic)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	return c.DoRequest("POST")
-}
-
-type ReposListPagesBuildsCmd struct {
-	internal.BaseCmd
-	Owner   string `name:"owner"`
-	Repo    string `required:"" name:"repo"`
-	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ReposListPagesBuildsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/pages/builds")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -1853,56 +1187,6 @@ func (c *ReposGetLatestPagesBuildCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
-type ReposGetPagesBuildCmd struct {
-	internal.BaseCmd
-	Owner   string `name:"owner"`
-	Repo    string `required:"" name:"repo"`
-	BuildId int64  `required:"" name:"build_id"`
-}
-
-func (c *ReposGetPagesBuildCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/pages/builds/:build_id")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("build_id", c.BuildId)
-	return c.DoRequest("GET")
-}
-
-type ReposListReleasesCmd struct {
-	internal.BaseCmd
-	Owner   string `name:"owner"`
-	Repo    string `required:"" name:"repo"`
-	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ReposListReleasesCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/releases")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type ReposGetReleaseCmd struct {
-	internal.BaseCmd
-	Owner     string `name:"owner"`
-	Repo      string `required:"" name:"repo"`
-	ReleaseId int64  `required:"" name:"release_id"`
-}
-
-func (c *ReposGetReleaseCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/releases/:release_id")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("release_id", c.ReleaseId)
-	return c.DoRequest("GET")
-}
-
 type ReposGetLatestReleaseCmd struct {
 	internal.BaseCmd
 	Owner string `name:"owner"`
@@ -1912,6 +1196,180 @@ type ReposGetLatestReleaseCmd struct {
 func (c *ReposGetLatestReleaseCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/:owner/:repo/releases/latest")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ReposGetPagesBuildCmd struct {
+	internal.BaseCmd
+	BuildId int64  `required:"" name:"build_id"`
+	Owner   string `name:"owner"`
+	Repo    string `required:"" name:"repo"`
+}
+
+func (c *ReposGetPagesBuildCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pages/builds/:build_id")
+	c.UpdateURLPath("build_id", c.BuildId)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ReposGetPagesCmd struct {
+	internal.BaseCmd
+	Owner string `name:"owner"`
+	Repo  string `required:"" name:"repo"`
+}
+
+func (c *ReposGetPagesCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pages")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ReposGetParticipationStatsCmd struct {
+	internal.BaseCmd
+	Owner string `name:"owner"`
+	Repo  string `required:"" name:"repo"`
+}
+
+func (c *ReposGetParticipationStatsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/stats/participation")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ReposGetProtectedBranchAdminEnforcementCmd struct {
+	internal.BaseCmd
+	Branch string `required:"" name:"branch"`
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+}
+
+func (c *ReposGetProtectedBranchAdminEnforcementCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/enforce_admins")
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ReposGetProtectedBranchPullRequestReviewEnforcementCmd struct {
+	internal.BaseCmd
+	Branch   string `required:"" name:"branch"`
+	LukeCage bool   "name:\"luke-cage-preview\" help:\"The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.luke-cage-preview+json\n```\""
+	Owner    string `name:"owner"`
+	Repo     string `required:"" name:"repo"`
+}
+
+func (c *ReposGetProtectedBranchPullRequestReviewEnforcementCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_pull_request_reviews")
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdatePreview("luke-cage", c.LukeCage)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ReposGetProtectedBranchRequiredSignaturesCmd struct {
+	internal.BaseCmd
+	Branch string `required:"" name:"branch"`
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+	Zzzax  bool   "name:\"zzzax-preview\" required:\"\" help:\"Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.zzzax-preview+json\n```\""
+}
+
+func (c *ReposGetProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_signatures")
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdatePreview("zzzax", c.Zzzax)
+	return c.DoRequest("GET")
+}
+
+type ReposGetProtectedBranchRequiredStatusChecksCmd struct {
+	internal.BaseCmd
+	Branch string `required:"" name:"branch"`
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+}
+
+func (c *ReposGetProtectedBranchRequiredStatusChecksCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_status_checks")
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ReposGetProtectedBranchRestrictionsCmd struct {
+	internal.BaseCmd
+	Branch string `required:"" name:"branch"`
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+}
+
+func (c *ReposGetProtectedBranchRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions")
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ReposGetPunchCardStatsCmd struct {
+	internal.BaseCmd
+	Owner string `name:"owner"`
+	Repo  string `required:"" name:"repo"`
+}
+
+func (c *ReposGetPunchCardStatsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/stats/punch_card")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ReposGetReadmeCmd struct {
+	internal.BaseCmd
+	Owner string `name:"owner"`
+	Ref   string `name:"ref"`
+	Repo  string `required:"" name:"repo"`
+}
+
+func (c *ReposGetReadmeCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/readme")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLQuery("ref", c.Ref)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ReposGetReleaseAssetCmd struct {
+	internal.BaseCmd
+	AssetId int64  `required:"" name:"asset_id"`
+	Owner   string `name:"owner"`
+	Repo    string `required:"" name:"repo"`
+}
+
+func (c *ReposGetReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/releases/assets/:asset_id")
+	c.UpdateURLPath("asset_id", c.AssetId)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
@@ -1933,287 +1391,33 @@ func (c *ReposGetReleaseByTagCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
-type ReposCreateReleaseCmd struct {
+type ReposGetReleaseCmd struct {
 	internal.BaseCmd
-	Owner           string `name:"owner"`
-	Repo            string `required:"" name:"repo"`
-	TagName         string `required:"" name:"tag_name" help:"The name of the tag."`
-	TargetCommitish string `name:"target_commitish" help:"Specifies the commitish value that determines where the Git tag is created from. Can be any branch or commit SHA. Unused if the Git tag already exists."`
-	Name            string `name:"name" help:"The name of the release."`
-	Body            string `name:"body" help:"Text describing the contents of the tag."`
-	Draft           bool   "name:\"draft\" help:\"`true` to create a draft (unpublished) release, `false` to create a published one.\""
-	Prerelease      bool   "name:\"prerelease\" help:\"`true` to identify the release as a prerelease. `false` to identify the release as a full release.\""
+	Owner     string `name:"owner"`
+	ReleaseId int64  `required:"" name:"release_id"`
+	Repo      string `required:"" name:"repo"`
 }
 
-func (c *ReposCreateReleaseCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/releases")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateBody("tag_name", c.TagName)
-	c.UpdateBody("target_commitish", c.TargetCommitish)
-	c.UpdateBody("name", c.Name)
-	c.UpdateBody("body", c.Body)
-	c.UpdateBody("draft", c.Draft)
-	c.UpdateBody("prerelease", c.Prerelease)
-	return c.DoRequest("POST")
-}
-
-type ReposEditReleaseCmd struct {
-	internal.BaseCmd
-	Owner           string `name:"owner"`
-	Repo            string `required:"" name:"repo"`
-	ReleaseId       int64  `required:"" name:"release_id"`
-	TagName         string `name:"tag_name" help:"The name of the tag."`
-	TargetCommitish string `name:"target_commitish" help:"Specifies the commitish value that determines where the Git tag is created from. Can be any branch or commit SHA. Unused if the Git tag already exists."`
-	Name            string `name:"name" help:"The name of the release."`
-	Body            string `name:"body" help:"Text describing the contents of the tag."`
-	Draft           bool   "name:\"draft\" help:\"`true` makes the release a draft, and `false` publishes the release.\""
-	Prerelease      bool   "name:\"prerelease\" help:\"`true` to identify the release as a prerelease, `false` to identify the release as a full release.\""
-}
-
-func (c *ReposEditReleaseCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposGetReleaseCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/:owner/:repo/releases/:release_id")
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("release_id", c.ReleaseId)
-	c.UpdateBody("tag_name", c.TagName)
-	c.UpdateBody("target_commitish", c.TargetCommitish)
-	c.UpdateBody("name", c.Name)
-	c.UpdateBody("body", c.Body)
-	c.UpdateBody("draft", c.Draft)
-	c.UpdateBody("prerelease", c.Prerelease)
-	return c.DoRequest("PATCH")
-}
-
-type ReposDeleteReleaseCmd struct {
-	internal.BaseCmd
-	Owner     string `name:"owner"`
-	Repo      string `required:"" name:"repo"`
-	ReleaseId int64  `required:"" name:"release_id"`
-}
-
-func (c *ReposDeleteReleaseCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/releases/:release_id")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("release_id", c.ReleaseId)
-	return c.DoRequest("DELETE")
-}
-
-type ReposListAssetsForReleaseCmd struct {
-	internal.BaseCmd
-	Owner     string `name:"owner"`
-	Repo      string `required:"" name:"repo"`
-	ReleaseId int64  `required:"" name:"release_id"`
-	PerPage   int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page      int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ReposListAssetsForReleaseCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/releases/:release_id/assets")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("release_id", c.ReleaseId)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type ReposGetReleaseAssetCmd struct {
-	internal.BaseCmd
-	Owner   string `name:"owner"`
-	Repo    string `required:"" name:"repo"`
-	AssetId int64  `required:"" name:"asset_id"`
-}
-
-func (c *ReposGetReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/releases/assets/:asset_id")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("asset_id", c.AssetId)
-	return c.DoRequest("GET")
-}
-
-type ReposEditReleaseAssetCmd struct {
-	internal.BaseCmd
-	Owner   string `name:"owner"`
-	Repo    string `required:"" name:"repo"`
-	AssetId int64  `required:"" name:"asset_id"`
-	Name    string `name:"name" help:"The file name of the asset."`
-	Label   string `name:"label" help:"An alternate short description of the asset. Used in place of the filename."`
-}
-
-func (c *ReposEditReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/releases/assets/:asset_id")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("asset_id", c.AssetId)
-	c.UpdateBody("name", c.Name)
-	c.UpdateBody("label", c.Label)
-	return c.DoRequest("PATCH")
-}
-
-type ReposDeleteReleaseAssetCmd struct {
-	internal.BaseCmd
-	Owner   string `name:"owner"`
-	Repo    string `required:"" name:"repo"`
-	AssetId int64  `required:"" name:"asset_id"`
-}
-
-func (c *ReposDeleteReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/releases/assets/:asset_id")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("asset_id", c.AssetId)
-	return c.DoRequest("DELETE")
-}
-
-type ReposGetContributorsStatsCmd struct {
-	internal.BaseCmd
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
-}
-
-func (c *ReposGetContributorsStatsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/stats/contributors")
-	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
 }
 
-type ReposGetCommitActivityStatsCmd struct {
+type ReposGetTeamsWithAccessToProtectedBranchCmd struct {
 	internal.BaseCmd
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	Branch string `required:"" name:"branch"`
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
 }
 
-func (c *ReposGetCommitActivityStatsCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposGetTeamsWithAccessToProtectedBranchCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/stats/commit_activity")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	return c.DoRequest("GET")
-}
-
-type ReposGetCodeFrequencyStatsCmd struct {
-	internal.BaseCmd
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
-}
-
-func (c *ReposGetCodeFrequencyStatsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/stats/code_frequency")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	return c.DoRequest("GET")
-}
-
-type ReposGetParticipationStatsCmd struct {
-	internal.BaseCmd
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
-}
-
-func (c *ReposGetParticipationStatsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/stats/participation")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	return c.DoRequest("GET")
-}
-
-type ReposGetPunchCardStatsCmd struct {
-	internal.BaseCmd
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
-}
-
-func (c *ReposGetPunchCardStatsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/stats/punch_card")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	return c.DoRequest("GET")
-}
-
-type ReposCreateStatusCmd struct {
-	internal.BaseCmd
-	Owner       string `name:"owner"`
-	Repo        string `required:"" name:"repo"`
-	Sha         string `required:"" name:"sha"`
-	State       string "required:\"\" name:\"state\" help:\"The state of the status. Can be one of `error`, `failure`, `pending`, or `success`.\""
-	TargetUrl   string "name:\"target_url\" help:\"The target URL to associate with this status. This URL will be linked from the GitHub UI to allow users to easily see the source of the status.  \nFor example, if your continuous integration system is posting build status, you would want to provide the deep link for the build output for this specific SHA:  \n`http://ci.example.com/user/repo/build/sha`\""
-	Description string `name:"description" help:"A short description of the status."`
-	Context     string `name:"context" help:"A string label to differentiate this status from the status of other systems."`
-}
-
-func (c *ReposCreateStatusCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/statuses/:sha")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("sha", c.Sha)
-	c.UpdateBody("state", c.State)
-	c.UpdateBody("target_url", c.TargetUrl)
-	c.UpdateBody("description", c.Description)
-	c.UpdateBody("context", c.Context)
-	return c.DoRequest("POST")
-}
-
-type ReposListStatusesForRefCmd struct {
-	internal.BaseCmd
-	Owner   string `name:"owner"`
-	Repo    string `required:"" name:"repo"`
-	Ref     string `required:"" name:"ref"`
-	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *ReposListStatusesForRefCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/commits/:ref/statuses")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("ref", c.Ref)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type ReposGetCombinedStatusForRefCmd struct {
-	internal.BaseCmd
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
-	Ref   string `required:"" name:"ref"`
-}
-
-func (c *ReposGetCombinedStatusForRefCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/commits/:ref/status")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("ref", c.Ref)
-	return c.DoRequest("GET")
-}
-
-type ReposGetTopReferrersCmd struct {
-	internal.BaseCmd
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
-}
-
-func (c *ReposGetTopReferrersCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/traffic/popular/referrers")
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions/teams")
+	c.UpdateURLPath("branch", c.Branch)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
@@ -2233,116 +1437,1172 @@ func (c *ReposGetTopPathsCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
-type ReposGetViewsCmd struct {
+type ReposGetTopReferrersCmd struct {
 	internal.BaseCmd
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
-	Per   string "name:\"per\" help:\"Must be one of: `day`, `week`.\""
+}
+
+func (c *ReposGetTopReferrersCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/traffic/popular/referrers")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ReposGetUsersWithAccessToProtectedBranchCmd struct {
+	internal.BaseCmd
+	Branch string `required:"" name:"branch"`
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+}
+
+func (c *ReposGetUsersWithAccessToProtectedBranchCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions/users")
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ReposGetViewsCmd struct {
+	internal.BaseCmd
+	Owner string `name:"owner"`
+	Per   string `name:"per"`
+	Repo  string `required:"" name:"repo"`
 }
 
 func (c *ReposGetViewsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/:owner/:repo/traffic/views")
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("per", c.Per)
+	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
 }
 
-type ReposGetClonesCmd struct {
+type ReposListAssetsForReleaseCmd struct {
 	internal.BaseCmd
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
-	Per   string "name:\"per\" help:\"Must be one of: `day`, `week`.\""
+	Owner     string `name:"owner"`
+	Page      int64  `name:"page"`
+	PerPage   int64  `name:"per_page"`
+	ReleaseId int64  `required:"" name:"release_id"`
+	Repo      string `required:"" name:"repo"`
 }
 
-func (c *ReposGetClonesCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposListAssetsForReleaseCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/traffic/clones")
+	c.SetURLPath("/repos/:owner/:repo/releases/:release_id/assets")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("release_id", c.ReleaseId)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ReposListBranchesCmd struct {
+	internal.BaseCmd
+	Owner     string `name:"owner"`
+	Page      int64  `name:"page"`
+	PerPage   int64  `name:"per_page"`
+	Protected bool   `name:"protected"`
+	Repo      string `required:"" name:"repo"`
+}
+
+func (c *ReposListBranchesCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("protected", c.Protected)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ReposListBranchesForHeadCommitCmd struct {
+	internal.BaseCmd
+	CommitSha string `required:"" name:"commit_sha"`
+	Groot     bool   "name:\"groot-preview\" required:\"\" help:\"Listing branches or pull requests for a commit in the Commits API is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2019-04-11-pulls-branches-for-commit/) for more details. To access the new endpoints during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.groot-preview+json\n```\""
+	Owner     string `name:"owner"`
+	Repo      string `required:"" name:"repo"`
+}
+
+func (c *ReposListBranchesForHeadCommitCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/commits/:commit_sha/branches-where-head")
+	c.UpdateURLPath("commit_sha", c.CommitSha)
+	c.UpdatePreview("groot", c.Groot)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLQuery("per", c.Per)
+	return c.DoRequest("GET")
+}
+
+type ReposListCollaboratorsCmd struct {
+	internal.BaseCmd
+	Affiliation string `name:"affiliation"`
+	Owner       string `name:"owner"`
+	Page        int64  `name:"page"`
+	PerPage     int64  `name:"per_page"`
+	Repo        string `required:"" name:"repo"`
+}
+
+func (c *ReposListCollaboratorsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/collaborators")
+	c.UpdateURLQuery("affiliation", c.Affiliation)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ReposListCommentsForCommitCmd struct {
+	internal.BaseCmd
+	CommitSha    string `required:"" name:"commit_sha"`
+	Owner        string `name:"owner"`
+	Page         int64  `name:"page"`
+	PerPage      int64  `name:"per_page"`
+	Repo         string `required:"" name:"repo"`
+	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.\""
+}
+
+func (c *ReposListCommentsForCommitCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/commits/:commit_sha/comments")
+	c.UpdateURLPath("commit_sha", c.CommitSha)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	return c.DoRequest("GET")
+}
+
+type ReposListCommitCommentsCmd struct {
+	internal.BaseCmd
+	Owner        string `name:"owner"`
+	Page         int64  `name:"page"`
+	PerPage      int64  `name:"per_page"`
+	Repo         string `required:"" name:"repo"`
+	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.\""
+}
+
+func (c *ReposListCommitCommentsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/comments")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	return c.DoRequest("GET")
+}
+
+type ReposListCommitsCmd struct {
+	internal.BaseCmd
+	Author  string `name:"author"`
+	Owner   string `name:"owner"`
+	Page    int64  `name:"page"`
+	Path    string `name:"path"`
+	PerPage int64  `name:"per_page"`
+	Repo    string `required:"" name:"repo"`
+	Sha     string `name:"sha"`
+	Since   string `name:"since"`
+	Until   string `name:"until"`
+}
+
+func (c *ReposListCommitsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/commits")
+	c.UpdateURLQuery("author", c.Author)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("path", c.Path)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("sha", c.Sha)
+	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("until", c.Until)
+	return c.DoRequest("GET")
+}
+
+type ReposListContributorsCmd struct {
+	internal.BaseCmd
+	Anon    string `name:"anon"`
+	Owner   string `name:"owner"`
+	Page    int64  `name:"page"`
+	PerPage int64  `name:"per_page"`
+	Repo    string `required:"" name:"repo"`
+}
+
+func (c *ReposListContributorsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/contributors")
+	c.UpdateURLQuery("anon", c.Anon)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ReposListDeployKeysCmd struct {
+	internal.BaseCmd
+	Owner   string `name:"owner"`
+	Page    int64  `name:"page"`
+	PerPage int64  `name:"per_page"`
+	Repo    string `required:"" name:"repo"`
+}
+
+func (c *ReposListDeployKeysCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/keys")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ReposListDeploymentStatusesCmd struct {
+	internal.BaseCmd
+	AntMan       bool   "name:\"ant-man-preview\" help:\"The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.ant-man-preview+json\n```\""
+	DeploymentId int64  `required:"" name:"deployment_id"`
+	Flash        bool   "name:\"flash-preview\" help:\"New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](https://developer.github.com/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.\n\nTo access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must provide the following custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.flash-preview+json\n```\""
+	Owner        string `name:"owner"`
+	Page         int64  `name:"page"`
+	PerPage      int64  `name:"per_page"`
+	Repo         string `required:"" name:"repo"`
+}
+
+func (c *ReposListDeploymentStatusesCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/deployments/:deployment_id/statuses")
+	c.UpdatePreview("ant-man", c.AntMan)
+	c.UpdateURLPath("deployment_id", c.DeploymentId)
+	c.UpdatePreview("flash", c.Flash)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ReposListDeploymentsCmd struct {
+	internal.BaseCmd
+	AntMan      bool   "name:\"ant-man-preview\" help:\"The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.ant-man-preview+json\n```\""
+	Environment string `name:"environment"`
+	Owner       string `name:"owner"`
+	Page        int64  `name:"page"`
+	PerPage     int64  `name:"per_page"`
+	Ref         string `name:"ref"`
+	Repo        string `required:"" name:"repo"`
+	Sha         string `name:"sha"`
+	Task        string `name:"task"`
+}
+
+func (c *ReposListDeploymentsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/deployments")
+	c.UpdatePreview("ant-man", c.AntMan)
+	c.UpdateURLQuery("environment", c.Environment)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("ref", c.Ref)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("sha", c.Sha)
+	c.UpdateURLQuery("task", c.Task)
+	return c.DoRequest("GET")
+}
+
+type ReposListDownloadsCmd struct {
+	internal.BaseCmd
+	Owner   string `name:"owner"`
+	Page    int64  `name:"page"`
+	PerPage int64  `name:"per_page"`
+	Repo    string `required:"" name:"repo"`
+}
+
+func (c *ReposListDownloadsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/downloads")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ReposListForAuthenticatedUserCmd struct {
+	internal.BaseCmd
+	Affiliation string `name:"affiliation"`
+	Direction   string `name:"direction"`
+	Page        int64  `name:"page"`
+	PerPage     int64  `name:"per_page"`
+	Sort        string `name:"sort"`
+	Type        string `name:"type"`
+	Visibility  string `name:"visibility"`
+}
+
+func (c *ReposListForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/repos")
+	c.UpdateURLQuery("affiliation", c.Affiliation)
+	c.UpdateURLQuery("direction", c.Direction)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("sort", c.Sort)
+	c.UpdateURLQuery("type", c.Type)
+	c.UpdateURLQuery("visibility", c.Visibility)
+	return c.DoRequest("GET")
+}
+
+type ReposListForOrgCmd struct {
+	internal.BaseCmd
+	Baptiste  bool   "name:\"baptiste-preview\" help:\"The `is_template` and `template_repository` keys are currently available for developer to preview. See [Create a repository using a template](https://developer.github.com/v3/repos/#create-a-repository-using-a-template) to learn how to create template repositories. To access these new response keys during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.baptiste-preview+json\n```\""
+	Direction string `name:"direction"`
+	Nebula    bool   "name:\"nebula-preview\" help:\"You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).\n\nTo access repository visibility during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.nebula-preview+json\n```\""
+	Org       string `required:"" name:"org"`
+	Page      int64  `name:"page"`
+	PerPage   int64  `name:"per_page"`
+	Sort      string `name:"sort"`
+	Type      string `name:"type"`
+}
+
+func (c *ReposListForOrgCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/:org/repos")
+	c.UpdatePreview("baptiste", c.Baptiste)
+	c.UpdateURLQuery("direction", c.Direction)
+	c.UpdatePreview("nebula", c.Nebula)
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("sort", c.Sort)
+	c.UpdateURLQuery("type", c.Type)
+	return c.DoRequest("GET")
+}
+
+type ReposListForUserCmd struct {
+	internal.BaseCmd
+	Direction string `name:"direction"`
+	Nebula    bool   "name:\"nebula-preview\" help:\"You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).\n\nTo access repository visibility during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.nebula-preview+json\n```\""
+	Page      int64  `name:"page"`
+	PerPage   int64  `name:"per_page"`
+	Sort      string `name:"sort"`
+	Type      string `name:"type"`
+	Username  string `required:"" name:"username"`
+}
+
+func (c *ReposListForUserCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/users/:username/repos")
+	c.UpdateURLQuery("direction", c.Direction)
+	c.UpdatePreview("nebula", c.Nebula)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("sort", c.Sort)
+	c.UpdateURLQuery("type", c.Type)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("GET")
+}
+
+type ReposListForksCmd struct {
+	internal.BaseCmd
+	Owner   string `name:"owner"`
+	Page    int64  `name:"page"`
+	PerPage int64  `name:"per_page"`
+	Repo    string `required:"" name:"repo"`
+	Sort    string `name:"sort"`
+}
+
+func (c *ReposListForksCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/forks")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("sort", c.Sort)
 	return c.DoRequest("GET")
 }
 
 type ReposListHooksCmd struct {
 	internal.BaseCmd
 	Owner   string `name:"owner"`
+	Page    int64  `name:"page"`
+	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
-	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64  `name:"page" help:"Page number of the results to fetch."`
 }
 
 func (c *ReposListHooksCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/:owner/:repo/hooks")
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
 }
 
-type ReposGetHookCmd struct {
+type ReposListInvitationsCmd struct {
 	internal.BaseCmd
-	Owner  string `name:"owner"`
-	Repo   string `required:"" name:"repo"`
-	HookId int64  `required:"" name:"hook_id"`
+	Owner   string `name:"owner"`
+	Page    int64  `name:"page"`
+	PerPage int64  `name:"per_page"`
+	Repo    string `required:"" name:"repo"`
 }
 
-func (c *ReposGetHookCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposListInvitationsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/hooks/:hook_id")
+	c.SetURLPath("/repos/:owner/:repo/invitations")
 	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("hook_id", c.HookId)
 	return c.DoRequest("GET")
 }
 
-type ReposTestPushHookCmd struct {
+type ReposListInvitationsForAuthenticatedUserCmd struct {
 	internal.BaseCmd
-	Owner  string `name:"owner"`
-	Repo   string `required:"" name:"repo"`
-	HookId int64  `required:"" name:"hook_id"`
+	Page    int64 `name:"page"`
+	PerPage int64 `name:"per_page"`
 }
 
-func (c *ReposTestPushHookCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposListInvitationsForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/hooks/:hook_id/tests")
+	c.SetURLPath("/user/repository_invitations")
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	return c.DoRequest("GET")
+}
+
+type ReposListLanguagesCmd struct {
+	internal.BaseCmd
+	Owner string `name:"owner"`
+	Repo  string `required:"" name:"repo"`
+}
+
+func (c *ReposListLanguagesCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/languages")
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("hook_id", c.HookId)
+	return c.DoRequest("GET")
+}
+
+type ReposListPagesBuildsCmd struct {
+	internal.BaseCmd
+	Owner   string `name:"owner"`
+	Page    int64  `name:"page"`
+	PerPage int64  `name:"per_page"`
+	Repo    string `required:"" name:"repo"`
+}
+
+func (c *ReposListPagesBuildsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pages/builds")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ReposListProtectedBranchRequiredStatusChecksContextsCmd struct {
+	internal.BaseCmd
+	Branch string `required:"" name:"branch"`
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+}
+
+func (c *ReposListProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts")
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ReposListPublicCmd struct {
+	internal.BaseCmd
+	Since int64 `name:"since"`
+}
+
+func (c *ReposListPublicCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repositories")
+	c.UpdateURLQuery("since", c.Since)
+	return c.DoRequest("GET")
+}
+
+type ReposListPullRequestsAssociatedWithCommitCmd struct {
+	internal.BaseCmd
+	CommitSha string `required:"" name:"commit_sha"`
+	Groot     bool   "name:\"groot-preview\" required:\"\" help:\"Listing branches or pull requests for a commit in the Commits API is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2019-04-11-pulls-branches-for-commit/) for more details. To access the new endpoints during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.groot-preview+json\n```\""
+	Owner     string `name:"owner"`
+	Page      int64  `name:"page"`
+	PerPage   int64  `name:"per_page"`
+	Repo      string `required:"" name:"repo"`
+}
+
+func (c *ReposListPullRequestsAssociatedWithCommitCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/commits/:commit_sha/pulls")
+	c.UpdateURLPath("commit_sha", c.CommitSha)
+	c.UpdatePreview("groot", c.Groot)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ReposListReleasesCmd struct {
+	internal.BaseCmd
+	Owner   string `name:"owner"`
+	Page    int64  `name:"page"`
+	PerPage int64  `name:"per_page"`
+	Repo    string `required:"" name:"repo"`
+}
+
+func (c *ReposListReleasesCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/releases")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ReposListStatusesForRefCmd struct {
+	internal.BaseCmd
+	Owner   string `name:"owner"`
+	Page    int64  `name:"page"`
+	PerPage int64  `name:"per_page"`
+	Ref     string `required:"" name:"ref"`
+	Repo    string `required:"" name:"repo"`
+}
+
+func (c *ReposListStatusesForRefCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/commits/:ref/statuses")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("ref", c.Ref)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ReposListTagsCmd struct {
+	internal.BaseCmd
+	Owner   string `name:"owner"`
+	Page    int64  `name:"page"`
+	PerPage int64  `name:"per_page"`
+	Repo    string `required:"" name:"repo"`
+}
+
+func (c *ReposListTagsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/tags")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ReposListTeamsCmd struct {
+	internal.BaseCmd
+	Owner   string `name:"owner"`
+	Page    int64  `name:"page"`
+	PerPage int64  `name:"per_page"`
+	Repo    string `required:"" name:"repo"`
+}
+
+func (c *ReposListTeamsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/teams")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ReposMergeCmd struct {
+	internal.BaseCmd
+	Base          string `required:"" name:"base"`
+	CommitMessage string `name:"commit_message"`
+	Head          string `required:"" name:"head"`
+	Owner         string `name:"owner"`
+	Repo          string `required:"" name:"repo"`
+}
+
+func (c *ReposMergeCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/merges")
+	c.UpdateBody("base", c.Base)
+	c.UpdateBody("commit_message", c.CommitMessage)
+	c.UpdateBody("head", c.Head)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("POST")
 }
 
 type ReposPingHookCmd struct {
 	internal.BaseCmd
+	HookId int64  `required:"" name:"hook_id"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
-	HookId int64  `required:"" name:"hook_id"`
 }
 
 func (c *ReposPingHookCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/:owner/:repo/hooks/:hook_id/pings")
+	c.UpdateURLPath("hook_id", c.HookId)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("hook_id", c.HookId)
 	return c.DoRequest("POST")
 }
 
-type ReposDeleteHookCmd struct {
+type ReposRemoveBranchProtectionCmd struct {
 	internal.BaseCmd
+	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
-	HookId int64  `required:"" name:"hook_id"`
 }
 
-func (c *ReposDeleteHookCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposRemoveBranchProtectionCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/hooks/:hook_id")
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection")
+	c.UpdateURLPath("branch", c.Branch)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("hook_id", c.HookId)
 	return c.DoRequest("DELETE")
+}
+
+type ReposRemoveCollaboratorCmd struct {
+	internal.BaseCmd
+	Owner    string `name:"owner"`
+	Repo     string `required:"" name:"repo"`
+	Username string `required:"" name:"username"`
+}
+
+func (c *ReposRemoveCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/collaborators/:username")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("DELETE")
+}
+
+type ReposRemoveDeployKeyCmd struct {
+	internal.BaseCmd
+	KeyId int64  `required:"" name:"key_id"`
+	Owner string `name:"owner"`
+	Repo  string `required:"" name:"repo"`
+}
+
+func (c *ReposRemoveDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/keys/:key_id")
+	c.UpdateURLPath("key_id", c.KeyId)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("DELETE")
+}
+
+type ReposRemoveProtectedBranchAdminEnforcementCmd struct {
+	internal.BaseCmd
+	Branch string `required:"" name:"branch"`
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+}
+
+func (c *ReposRemoveProtectedBranchAdminEnforcementCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/enforce_admins")
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("DELETE")
+}
+
+type ReposRemoveProtectedBranchAppRestrictionsCmd struct {
+	internal.BaseCmd
+	Branch string `required:"" name:"branch"`
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+}
+
+func (c *ReposRemoveProtectedBranchAppRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions/apps")
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("DELETE")
+}
+
+type ReposRemoveProtectedBranchPullRequestReviewEnforcementCmd struct {
+	internal.BaseCmd
+	Branch string `required:"" name:"branch"`
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+}
+
+func (c *ReposRemoveProtectedBranchPullRequestReviewEnforcementCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_pull_request_reviews")
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("DELETE")
+}
+
+type ReposRemoveProtectedBranchRequiredSignaturesCmd struct {
+	internal.BaseCmd
+	Branch string `required:"" name:"branch"`
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+	Zzzax  bool   "name:\"zzzax-preview\" required:\"\" help:\"Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.zzzax-preview+json\n```\""
+}
+
+func (c *ReposRemoveProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_signatures")
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdatePreview("zzzax", c.Zzzax)
+	return c.DoRequest("DELETE")
+}
+
+type ReposRemoveProtectedBranchRequiredStatusChecksCmd struct {
+	internal.BaseCmd
+	Branch string `required:"" name:"branch"`
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+}
+
+func (c *ReposRemoveProtectedBranchRequiredStatusChecksCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_status_checks")
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("DELETE")
+}
+
+type ReposRemoveProtectedBranchRequiredStatusChecksContextsCmd struct {
+	internal.BaseCmd
+	Branch string `required:"" name:"branch"`
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+}
+
+func (c *ReposRemoveProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts")
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("DELETE")
+}
+
+type ReposRemoveProtectedBranchRestrictionsCmd struct {
+	internal.BaseCmd
+	Branch string `required:"" name:"branch"`
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+}
+
+func (c *ReposRemoveProtectedBranchRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions")
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("DELETE")
+}
+
+type ReposRemoveProtectedBranchTeamRestrictionsCmd struct {
+	internal.BaseCmd
+	Branch string `required:"" name:"branch"`
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+}
+
+func (c *ReposRemoveProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions/teams")
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("DELETE")
+}
+
+type ReposRemoveProtectedBranchUserRestrictionsCmd struct {
+	internal.BaseCmd
+	Branch string `required:"" name:"branch"`
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+}
+
+func (c *ReposRemoveProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions/users")
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("DELETE")
+}
+
+type ReposReplaceAllTopicsCmd struct {
+	internal.BaseCmd
+	Mercy bool     "name:\"mercy-preview\" required:\"\" help:\"Repository topics on GitHub are currently available for developers to preview. To use this endpoint, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.mercy-preview+json\n```\""
+	Names []string `required:"" name:"names"`
+	Owner string   `name:"owner"`
+	Repo  string   `required:"" name:"repo"`
+}
+
+func (c *ReposReplaceAllTopicsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/topics")
+	c.UpdatePreview("mercy", c.Mercy)
+	c.UpdateBody("names", c.Names)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("PUT")
+}
+
+type ReposReplaceProtectedBranchAppRestrictionsCmd struct {
+	internal.BaseCmd
+	Branch string `required:"" name:"branch"`
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+}
+
+func (c *ReposReplaceProtectedBranchAppRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions/apps")
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("PUT")
+}
+
+type ReposReplaceProtectedBranchRequiredStatusChecksContextsCmd struct {
+	internal.BaseCmd
+	Branch string `required:"" name:"branch"`
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+}
+
+func (c *ReposReplaceProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts")
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("PUT")
+}
+
+type ReposReplaceProtectedBranchTeamRestrictionsCmd struct {
+	internal.BaseCmd
+	Branch string `required:"" name:"branch"`
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+}
+
+func (c *ReposReplaceProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions/teams")
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("PUT")
+}
+
+type ReposReplaceProtectedBranchUserRestrictionsCmd struct {
+	internal.BaseCmd
+	Branch string `required:"" name:"branch"`
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+}
+
+func (c *ReposReplaceProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/restrictions/users")
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("PUT")
+}
+
+type ReposRequestPageBuildCmd struct {
+	internal.BaseCmd
+	Owner string `name:"owner"`
+	Repo  string `required:"" name:"repo"`
+}
+
+func (c *ReposRequestPageBuildCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pages/builds")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("POST")
+}
+
+type ReposRetrieveCommunityProfileMetricsCmd struct {
+	internal.BaseCmd
+	Owner string `name:"owner"`
+	Repo  string `required:"" name:"repo"`
+}
+
+func (c *ReposRetrieveCommunityProfileMetricsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/community/profile")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ReposTestPushHookCmd struct {
+	internal.BaseCmd
+	HookId int64  `required:"" name:"hook_id"`
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+}
+
+func (c *ReposTestPushHookCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/hooks/:hook_id/tests")
+	c.UpdateURLPath("hook_id", c.HookId)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("POST")
+}
+
+type ReposTransferCmd struct {
+	internal.BaseCmd
+	NewOwner string  `name:"new_owner"`
+	Owner    string  `name:"owner"`
+	Repo     string  `required:"" name:"repo"`
+	TeamIds  []int64 `name:"team_ids"`
+}
+
+func (c *ReposTransferCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/transfer")
+	c.UpdateBody("new_owner", c.NewOwner)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("team_ids", c.TeamIds)
+	return c.DoRequest("POST")
+}
+
+type ReposUpdateCmd struct {
+	internal.BaseCmd
+	AllowMergeCommit    bool   `name:"allow_merge_commit"`
+	AllowRebaseMerge    bool   `name:"allow_rebase_merge"`
+	AllowSquashMerge    bool   `name:"allow_squash_merge"`
+	Archived            bool   `name:"archived"`
+	Baptiste            bool   "name:\"baptiste-preview\" help:\"The `is_template` and `template_repository` keys are currently available for developer to preview. See [Create a repository using a template](https://developer.github.com/v3/repos/#create-a-repository-using-a-template) to learn how to create template repositories. To access these new response keys during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.baptiste-preview+json\n```\""
+	DefaultBranch       string `name:"default_branch"`
+	DeleteBranchOnMerge bool   `name:"delete_branch_on_merge"`
+	Description         string `name:"description"`
+	HasIssues           bool   `name:"has_issues"`
+	HasProjects         bool   `name:"has_projects"`
+	HasWiki             bool   `name:"has_wiki"`
+	Homepage            string `name:"homepage"`
+	IsTemplate          bool   `name:"is_template"`
+	Name                string `name:"name"`
+	Nebula              bool   "name:\"nebula-preview\" help:\"You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).\n\nTo access repository visibility during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.nebula-preview+json\n```\""
+	Owner               string `name:"owner"`
+	Private             bool   `name:"private"`
+	Repo                string `required:"" name:"repo"`
+	Visibility          string `name:"visibility"`
+}
+
+func (c *ReposUpdateCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo")
+	c.UpdateBody("allow_merge_commit", c.AllowMergeCommit)
+	c.UpdateBody("allow_rebase_merge", c.AllowRebaseMerge)
+	c.UpdateBody("allow_squash_merge", c.AllowSquashMerge)
+	c.UpdateBody("archived", c.Archived)
+	c.UpdatePreview("baptiste", c.Baptiste)
+	c.UpdateBody("default_branch", c.DefaultBranch)
+	c.UpdateBody("delete_branch_on_merge", c.DeleteBranchOnMerge)
+	c.UpdateBody("description", c.Description)
+	c.UpdateBody("has_issues", c.HasIssues)
+	c.UpdateBody("has_projects", c.HasProjects)
+	c.UpdateBody("has_wiki", c.HasWiki)
+	c.UpdateBody("homepage", c.Homepage)
+	c.UpdateBody("is_template", c.IsTemplate)
+	c.UpdateBody("name", c.Name)
+	c.UpdatePreview("nebula", c.Nebula)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateBody("private", c.Private)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("visibility", c.Visibility)
+	return c.DoRequest("PATCH")
+}
+
+type ReposUpdateCommitCommentCmd struct {
+	internal.BaseCmd
+	Body      string `required:"" name:"body"`
+	CommentId int64  `required:"" name:"comment_id"`
+	Owner     string `name:"owner"`
+	Repo      string `required:"" name:"repo"`
+}
+
+func (c *ReposUpdateCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/comments/:comment_id")
+	c.UpdateBody("body", c.Body)
+	c.UpdateURLPath("comment_id", c.CommentId)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("PATCH")
+}
+
+type ReposUpdateInformationAboutPagesSiteCmd struct {
+	internal.BaseCmd
+	Cname  string `name:"cname"`
+	Owner  string `name:"owner"`
+	Repo   string `required:"" name:"repo"`
+	Source string `name:"source"`
+}
+
+func (c *ReposUpdateInformationAboutPagesSiteCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/pages")
+	c.UpdateBody("cname", c.Cname)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("source", c.Source)
+	return c.DoRequest("PUT")
+}
+
+type ReposUpdateInvitationCmd struct {
+	internal.BaseCmd
+	InvitationId int64  `required:"" name:"invitation_id"`
+	Owner        string `name:"owner"`
+	Permissions  string `name:"permissions"`
+	Repo         string `required:"" name:"repo"`
+}
+
+func (c *ReposUpdateInvitationCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/invitations/:invitation_id")
+	c.UpdateURLPath("invitation_id", c.InvitationId)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateBody("permissions", c.Permissions)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("PATCH")
+}
+
+type ReposUpdateProtectedBranchRequiredStatusChecksCmd struct {
+	internal.BaseCmd
+	Branch   string   `required:"" name:"branch"`
+	Contexts []string `name:"contexts"`
+	Owner    string   `name:"owner"`
+	Repo     string   `required:"" name:"repo"`
+	Strict   bool     `name:"strict"`
+}
+
+func (c *ReposUpdateProtectedBranchRequiredStatusChecksCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/branches/:branch/protection/required_status_checks")
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateBody("contexts", c.Contexts)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("strict", c.Strict)
+	return c.DoRequest("PATCH")
+}
+
+type ReposUpdateReleaseAssetCmd struct {
+	internal.BaseCmd
+	AssetId int64  `required:"" name:"asset_id"`
+	Label   string `name:"label"`
+	Name    string `name:"name"`
+	Owner   string `name:"owner"`
+	Repo    string `required:"" name:"repo"`
+}
+
+func (c *ReposUpdateReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/releases/assets/:asset_id")
+	c.UpdateURLPath("asset_id", c.AssetId)
+	c.UpdateBody("label", c.Label)
+	c.UpdateBody("name", c.Name)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("PATCH")
+}
+
+type ReposUpdateReleaseCmd struct {
+	internal.BaseCmd
+	Body            string `name:"body"`
+	Draft           bool   `name:"draft"`
+	Name            string `name:"name"`
+	Owner           string `name:"owner"`
+	Prerelease      bool   `name:"prerelease"`
+	ReleaseId       int64  `required:"" name:"release_id"`
+	Repo            string `required:"" name:"repo"`
+	TagName         string `name:"tag_name"`
+	TargetCommitish string `name:"target_commitish"`
+}
+
+func (c *ReposUpdateReleaseCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/releases/:release_id")
+	c.UpdateBody("body", c.Body)
+	c.UpdateBody("draft", c.Draft)
+	c.UpdateBody("name", c.Name)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateBody("prerelease", c.Prerelease)
+	c.UpdateURLPath("release_id", c.ReleaseId)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("tag_name", c.TagName)
+	c.UpdateBody("target_commitish", c.TargetCommitish)
+	return c.DoRequest("PATCH")
+}
+
+type ReposUploadReleaseAssetCmd struct {
+	internal.BaseCmd
+	ContentLength string `required:"" name:"content-length"`
+	ContentType   string `required:"" name:"content-type"`
+	Label         string `name:"label"`
+	Name          string `name:"name"`
+	Owner         string `name:"owner"`
+	ReleaseId     int64  `required:"" name:"release_id"`
+	Repo          string `required:"" name:"repo"`
+}
+
+func (c *ReposUploadReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/:owner/:repo/releases/:release_id/assets")
+	c.AddRequestHeader("content-length", c.ContentLength)
+	c.AddRequestHeader("content-type", c.ContentType)
+	c.UpdateURLQuery("label", c.Label)
+	c.UpdateURLQuery("name", c.Name)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("release_id", c.ReleaseId)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("POST")
 }

@@ -12,3 +12,6 @@ bin/shellcheck:
 
 bin/buildtool: gobuildcache
 	${GOBUILD} -o $@ ./buildtool
+
+bin/octo: gobuildcache
+	${GOBUILD} -o $@ -ldflags "-s -w" ./

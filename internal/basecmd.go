@@ -35,6 +35,7 @@ type BaseCmd struct {
 	url           url.URL
 	reqBody       *map[string]interface{}
 	acceptHeaders []string
+	reqHeader     http.Header
 	Token         string `env:"GITHUB_TOKEN" required:""`
 	APIBaseURL    string `env:"GITHUB_API_BASE_URL" default:"https://api.github.com"`
 	RawOutput     bool   `help:"don't format json output."`
@@ -53,6 +54,10 @@ func (c *BaseCmd) SetIsValueSetMap(isValueSetMap map[string]bool) {
 
 func (c *BaseCmd) isValueSet(valueName string) bool {
 	return c.isValueSetMap[valueName]
+}
+
+func (c *BaseCmd) AddRequestHeader(headerName, value string) {
+	c.reqHeader.Add(headerName, value)
 }
 
 //UpdateBody adds a flag's value a request body
@@ -131,6 +136,10 @@ func (c *BaseCmd) newRequest(method string) (*http.Request, error) {
 	acceptHeaders := []string{"application/vnd.github.v3+json"}
 	acceptHeaders = append(acceptHeaders, c.acceptHeaders...)
 	req.Header.Set("Accept", strings.Join(acceptHeaders, ", "))
+	reqHeader := c.reqHeader.Clone()
+	for k, v := range reqHeader {
+		req.Header[k] = v
+	}
 	return req, nil
 }
 

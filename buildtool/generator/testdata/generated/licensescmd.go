@@ -5,19 +5,9 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type LicensesCmd struct {
-	List       LicensesListCmd       `cmd:"" help:"List all licenses - https://developer.github.com/v3/licenses/#list-all-licenses"`
-	Get        LicensesGetCmd        `cmd:"" help:"Get an individual license - https://developer.github.com/v3/licenses/#get-an-individual-license"`
-	GetForRepo LicensesGetForRepoCmd `cmd:"" help:"Get the contents of a repository's license - https://developer.github.com/v3/licenses/#get-the-contents-of-a-repositorys-license"`
-}
-
-type LicensesListCmd struct {
-	internal.BaseCmd
-}
-
-func (c *LicensesListCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/licenses")
-	return c.DoRequest("GET")
+	Get              LicensesGetCmd              `cmd:""`
+	GetForRepo       LicensesGetForRepoCmd       `cmd:""`
+	ListCommonlyUsed LicensesListCommonlyUsedCmd `cmd:""`
 }
 
 type LicensesGetCmd struct {
@@ -43,5 +33,15 @@ func (c *LicensesGetForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetURLPath("/repos/:owner/:repo/license")
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type LicensesListCommonlyUsedCmd struct {
+	internal.BaseCmd
+}
+
+func (c *LicensesListCommonlyUsedCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/licenses")
 	return c.DoRequest("GET")
 }

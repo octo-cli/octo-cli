@@ -1,8 +1,0 @@
-#!/bin/sh
-
-set -e
-
-CDPATH="" cd -- "$(dirname -- "$(dirname -- "$0")")"
-make -s bin/buildtool
-
-bin/buildtool latest-tagged-release "$@"

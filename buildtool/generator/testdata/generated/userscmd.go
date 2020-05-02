@@ -5,140 +5,50 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type UsersCmd struct {
-	GetByUsername                     UsersGetByUsernameCmd                     `cmd:"" help:"Get a single user - https://developer.github.com/v3/users/#get-a-single-user"`
-	GetAuthenticated                  UsersGetAuthenticatedCmd                  `cmd:"" help:"Get the authenticated user - https://developer.github.com/v3/users/#get-the-authenticated-user"`
-	UpdateAuthenticated               UsersUpdateAuthenticatedCmd               `cmd:"" help:"Update the authenticated user - https://developer.github.com/v3/users/#update-the-authenticated-user"`
-	GetContextForUser                 UsersGetContextForUserCmd                 `cmd:"" help:"Get contextual information about a user - https://developer.github.com/v3/users/#get-contextual-information-about-a-user"`
-	List                              UsersListCmd                              `cmd:"" help:"Get all users - https://developer.github.com/v3/users/#get-all-users"`
-	ListBlocked                       UsersListBlockedCmd                       `cmd:"" help:"List blocked users - https://developer.github.com/v3/users/blocking/#list-blocked-users"`
-	CheckBlocked                      UsersCheckBlockedCmd                      `cmd:"" help:"Check whether you've blocked a user - https://developer.github.com/v3/users/blocking/#check-whether-youve-blocked-a-user"`
-	Block                             UsersBlockCmd                             `cmd:"" help:"Block a user - https://developer.github.com/v3/users/blocking/#block-a-user"`
-	Unblock                           UsersUnblockCmd                           `cmd:"" help:"Unblock a user - https://developer.github.com/v3/users/blocking/#unblock-a-user"`
-	ListEmails                        UsersListEmailsCmd                        `cmd:"" help:"List email addresses for a user - https://developer.github.com/v3/users/emails/#list-email-addresses-for-a-user"`
-	ListPublicEmails                  UsersListPublicEmailsCmd                  `cmd:"" help:"List public email addresses for a user - https://developer.github.com/v3/users/emails/#list-public-email-addresses-for-a-user"`
-	AddEmails                         UsersAddEmailsCmd                         `cmd:"" help:"Add email address(es) - https://developer.github.com/v3/users/emails/#add-email-addresses"`
-	DeleteEmails                      UsersDeleteEmailsCmd                      `cmd:"" help:"Delete email address(es) - https://developer.github.com/v3/users/emails/#delete-email-addresses"`
-	TogglePrimaryEmailVisibility      UsersTogglePrimaryEmailVisibilityCmd      `cmd:"" help:"Toggle primary email visibility - https://developer.github.com/v3/users/emails/#toggle-primary-email-visibility"`
-	ListFollowersForUser              UsersListFollowersForUserCmd              `cmd:"" help:"List a user's followers - https://developer.github.com/v3/users/followers/#list-followers-of-a-user"`
-	ListFollowersForAuthenticatedUser UsersListFollowersForAuthenticatedUserCmd `cmd:"" help:"List the authenticated user's followers - https://developer.github.com/v3/users/followers/#list-followers-of-a-user"`
-	ListFollowingForUser              UsersListFollowingForUserCmd              `cmd:"" help:"List who a user is following - https://developer.github.com/v3/users/followers/#list-users-followed-by-another-user"`
-	ListFollowingForAuthenticatedUser UsersListFollowingForAuthenticatedUserCmd `cmd:"" help:"List who the authenticated user is following - https://developer.github.com/v3/users/followers/#list-users-followed-by-another-user"`
-	CheckFollowing                    UsersCheckFollowingCmd                    `cmd:"" help:"Check if you are following a user - https://developer.github.com/v3/users/followers/#check-if-you-are-following-a-user"`
-	CheckFollowingForUser             UsersCheckFollowingForUserCmd             `cmd:"" help:"Check if one user follows another - https://developer.github.com/v3/users/followers/#check-if-one-user-follows-another"`
-	Follow                            UsersFollowCmd                            `cmd:"" help:"Follow a user - https://developer.github.com/v3/users/followers/#follow-a-user"`
-	Unfollow                          UsersUnfollowCmd                          `cmd:"" help:"Unfollow a user - https://developer.github.com/v3/users/followers/#unfollow-a-user"`
-	ListPublicKeysForUser             UsersListPublicKeysForUserCmd             `cmd:"" help:"List public keys for a user - https://developer.github.com/v3/users/keys/#list-public-keys-for-a-user"`
-	ListPublicKeys                    UsersListPublicKeysCmd                    `cmd:"" help:"List your public keys - https://developer.github.com/v3/users/keys/#list-your-public-keys"`
-	GetPublicKey                      UsersGetPublicKeyCmd                      `cmd:"" help:"Get a single public key - https://developer.github.com/v3/users/keys/#get-a-single-public-key"`
-	CreatePublicKey                   UsersCreatePublicKeyCmd                   `cmd:"" help:"Create a public key - https://developer.github.com/v3/users/keys/#create-a-public-key"`
-	DeletePublicKey                   UsersDeletePublicKeyCmd                   `cmd:"" help:"Delete a public key - https://developer.github.com/v3/users/keys/#delete-a-public-key"`
-	ListGpgKeysForUser                UsersListGpgKeysForUserCmd                `cmd:"" help:"List GPG keys for a user - https://developer.github.com/v3/users/gpg_keys/#list-gpg-keys-for-a-user"`
-	ListGpgKeys                       UsersListGpgKeysCmd                       `cmd:"" help:"List your GPG keys - https://developer.github.com/v3/users/gpg_keys/#list-your-gpg-keys"`
-	GetGpgKey                         UsersGetGpgKeyCmd                         `cmd:"" help:"Get a single GPG key - https://developer.github.com/v3/users/gpg_keys/#get-a-single-gpg-key"`
-	CreateGpgKey                      UsersCreateGpgKeyCmd                      `cmd:"" help:"Create a GPG key - https://developer.github.com/v3/users/gpg_keys/#create-a-gpg-key"`
-	DeleteGpgKey                      UsersDeleteGpgKeyCmd                      `cmd:"" help:"Delete a GPG key - https://developer.github.com/v3/users/gpg_keys/#delete-a-gpg-key"`
+	AddEmails                         UsersAddEmailsCmd                         `cmd:""`
+	Block                             UsersBlockCmd                             `cmd:""`
+	CheckBlocked                      UsersCheckBlockedCmd                      `cmd:""`
+	CheckFollowing                    UsersCheckFollowingCmd                    `cmd:""`
+	CheckFollowingForUser             UsersCheckFollowingForUserCmd             `cmd:""`
+	CreateGpgKey                      UsersCreateGpgKeyCmd                      `cmd:""`
+	CreatePublicKey                   UsersCreatePublicKeyCmd                   `cmd:""`
+	DeleteEmails                      UsersDeleteEmailsCmd                      `cmd:""`
+	DeleteGpgKey                      UsersDeleteGpgKeyCmd                      `cmd:""`
+	DeletePublicKey                   UsersDeletePublicKeyCmd                   `cmd:""`
+	Follow                            UsersFollowCmd                            `cmd:""`
+	GetAuthenticated                  UsersGetAuthenticatedCmd                  `cmd:""`
+	GetByUsername                     UsersGetByUsernameCmd                     `cmd:""`
+	GetContextForUser                 UsersGetContextForUserCmd                 `cmd:""`
+	GetGpgKey                         UsersGetGpgKeyCmd                         `cmd:""`
+	GetPublicKey                      UsersGetPublicKeyCmd                      `cmd:""`
+	List                              UsersListCmd                              `cmd:""`
+	ListBlocked                       UsersListBlockedCmd                       `cmd:""`
+	ListEmails                        UsersListEmailsCmd                        `cmd:""`
+	ListFollowedByAuthenticated       UsersListFollowedByAuthenticatedCmd       `cmd:""`
+	ListFollowersForAuthenticatedUser UsersListFollowersForAuthenticatedUserCmd `cmd:""`
+	ListFollowersForUser              UsersListFollowersForUserCmd              `cmd:""`
+	ListFollowingForUser              UsersListFollowingForUserCmd              `cmd:""`
+	ListGpgKeys                       UsersListGpgKeysCmd                       `cmd:""`
+	ListGpgKeysForUser                UsersListGpgKeysForUserCmd                `cmd:""`
+	ListPublicEmails                  UsersListPublicEmailsCmd                  `cmd:""`
+	ListPublicKeys                    UsersListPublicKeysCmd                    `cmd:""`
+	ListPublicKeysForUser             UsersListPublicKeysForUserCmd             `cmd:""`
+	TogglePrimaryEmailVisibility      UsersTogglePrimaryEmailVisibilityCmd      `cmd:""`
+	Unblock                           UsersUnblockCmd                           `cmd:""`
+	Unfollow                          UsersUnfollowCmd                          `cmd:""`
+	UpdateAuthenticated               UsersUpdateAuthenticatedCmd               `cmd:""`
 }
 
-type UsersGetByUsernameCmd struct {
+type UsersAddEmailsCmd struct {
 	internal.BaseCmd
-	Username string `required:"" name:"username"`
+	Emails []string `required:"" name:"emails"`
 }
 
-func (c *UsersGetByUsernameCmd) Run(isValueSetMap map[string]bool) error {
+func (c *UsersAddEmailsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/users/:username")
-	c.UpdateURLPath("username", c.Username)
-	return c.DoRequest("GET")
-}
-
-type UsersGetAuthenticatedCmd struct {
-	internal.BaseCmd
-}
-
-func (c *UsersGetAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user")
-	return c.DoRequest("GET")
-}
-
-type UsersUpdateAuthenticatedCmd struct {
-	internal.BaseCmd
-	Name     string `name:"name" help:"The new name of the user."`
-	Email    string `name:"email" help:"The publicly visible email address of the user."`
-	Blog     string `name:"blog" help:"The new blog URL of the user."`
-	Company  string `name:"company" help:"The new company of the user."`
-	Location string `name:"location" help:"The new location of the user."`
-	Hireable bool   `name:"hireable" help:"The new hiring availability of the user."`
-	Bio      string `name:"bio" help:"The new short biography of the user."`
-}
-
-func (c *UsersUpdateAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user")
-	c.UpdateBody("name", c.Name)
-	c.UpdateBody("email", c.Email)
-	c.UpdateBody("blog", c.Blog)
-	c.UpdateBody("company", c.Company)
-	c.UpdateBody("location", c.Location)
-	c.UpdateBody("hireable", c.Hireable)
-	c.UpdateBody("bio", c.Bio)
-	return c.DoRequest("PATCH")
-}
-
-type UsersGetContextForUserCmd struct {
-	internal.BaseCmd
-	Hagar       bool   "name:\"hagar-preview\" required:\"\" help:\"**Note:** You can now retrieve someone's hovercard information in different contexts using the Hovercard API. This feature is currently available for developers to preview. See the [blog post](/changes/2018-03-21-hovercard-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](/v3/media) in the `Accept` header:\n\n```\n  application/vnd.github.hagar-preview+json\n\n```\""
-	Username    string `required:"" name:"username"`
-	SubjectType string "name:\"subject_type\" help:\"Identifies which additional information you'd like to receive about the person's hovercard. Can be `organization`, `repository`, `issue`, `pull_request`. **Required** when using `subject_id`.\""
-	SubjectId   string "name:\"subject_id\" help:\"Uses the ID for the `subject_type` you specified. **Required** when using `subject_type`.\""
-}
-
-func (c *UsersGetContextForUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/users/:username/hovercard")
-	c.UpdatePreview("hagar", c.Hagar)
-	c.UpdateURLPath("username", c.Username)
-	c.UpdateURLQuery("subject_type", c.SubjectType)
-	c.UpdateURLQuery("subject_id", c.SubjectId)
-	return c.DoRequest("GET")
-}
-
-type UsersListCmd struct {
-	internal.BaseCmd
-	Since   string `name:"since" help:"The integer ID of the last User that you've seen."`
-	PerPage int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *UsersListCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/users")
-	c.UpdateURLQuery("since", c.Since)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type UsersListBlockedCmd struct {
-	internal.BaseCmd
-}
-
-func (c *UsersListBlockedCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/blocks")
-	return c.DoRequest("GET")
-}
-
-type UsersCheckBlockedCmd struct {
-	internal.BaseCmd
-	Username string `required:"" name:"username"`
-}
-
-func (c *UsersCheckBlockedCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/blocks/:username")
-	c.UpdateURLPath("username", c.Username)
-	return c.DoRequest("GET")
+	c.SetURLPath("/user/emails")
+	c.UpdateBody("emails", c.Emails)
+	return c.DoRequest("POST")
 }
 
 type UsersBlockCmd struct {
@@ -153,141 +63,15 @@ func (c *UsersBlockCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("PUT")
 }
 
-type UsersUnblockCmd struct {
+type UsersCheckBlockedCmd struct {
 	internal.BaseCmd
 	Username string `required:"" name:"username"`
 }
 
-func (c *UsersUnblockCmd) Run(isValueSetMap map[string]bool) error {
+func (c *UsersCheckBlockedCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/blocks/:username")
 	c.UpdateURLPath("username", c.Username)
-	return c.DoRequest("DELETE")
-}
-
-type UsersListEmailsCmd struct {
-	internal.BaseCmd
-	PerPage int64 `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64 `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *UsersListEmailsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/emails")
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type UsersListPublicEmailsCmd struct {
-	internal.BaseCmd
-	PerPage int64 `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64 `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *UsersListPublicEmailsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/public_emails")
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type UsersAddEmailsCmd struct {
-	internal.BaseCmd
-	Emails []string "required:\"\" name:\"emails\" help:\"Adds one or more email addresses to your GitHub account. Must contain at least one email address. **Note:** Alternatively, you can pass a single email address or an `array` of emails addresses directly, but we recommend that you pass an object using the `emails` key.\""
-}
-
-func (c *UsersAddEmailsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/emails")
-	c.UpdateBody("emails", c.Emails)
-	return c.DoRequest("POST")
-}
-
-type UsersDeleteEmailsCmd struct {
-	internal.BaseCmd
-	Emails []string "required:\"\" name:\"emails\" help:\"Deletes one or more email addresses from your GitHub account. Must contain at least one email address. **Note:** Alternatively, you can pass a single email address or an `array` of emails addresses directly, but we recommend that you pass an object using the `emails` key.\""
-}
-
-func (c *UsersDeleteEmailsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/emails")
-	c.UpdateBody("emails", c.Emails)
-	return c.DoRequest("DELETE")
-}
-
-type UsersTogglePrimaryEmailVisibilityCmd struct {
-	internal.BaseCmd
-	Email      string `required:"" name:"email" help:"Specify the _primary_ email address that needs a visibility change."`
-	Visibility string "required:\"\" name:\"visibility\" help:\"Use `public` to enable an authenticated user to view the specified email address, or use `private` so this primary email address cannot be seen publicly.\""
-}
-
-func (c *UsersTogglePrimaryEmailVisibilityCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/email/visibility")
-	c.UpdateBody("email", c.Email)
-	c.UpdateBody("visibility", c.Visibility)
-	return c.DoRequest("PATCH")
-}
-
-type UsersListFollowersForUserCmd struct {
-	internal.BaseCmd
-	Username string `required:"" name:"username"`
-	PerPage  int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page     int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *UsersListFollowersForUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/users/:username/followers")
-	c.UpdateURLPath("username", c.Username)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type UsersListFollowersForAuthenticatedUserCmd struct {
-	internal.BaseCmd
-	PerPage int64 `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64 `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *UsersListFollowersForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/followers")
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type UsersListFollowingForUserCmd struct {
-	internal.BaseCmd
-	Username string `required:"" name:"username"`
-	PerPage  int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page     int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *UsersListFollowingForUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/users/:username/following")
-	c.UpdateURLPath("username", c.Username)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type UsersListFollowingForAuthenticatedUserCmd struct {
-	internal.BaseCmd
-	PerPage int64 `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64 `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *UsersListFollowingForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/following")
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -305,96 +89,66 @@ func (c *UsersCheckFollowingCmd) Run(isValueSetMap map[string]bool) error {
 
 type UsersCheckFollowingForUserCmd struct {
 	internal.BaseCmd
-	Username   string `required:"" name:"username"`
 	TargetUser string `required:"" name:"target_user"`
+	Username   string `required:"" name:"username"`
 }
 
 func (c *UsersCheckFollowingForUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/users/:username/following/:target_user")
-	c.UpdateURLPath("username", c.Username)
 	c.UpdateURLPath("target_user", c.TargetUser)
-	return c.DoRequest("GET")
-}
-
-type UsersFollowCmd struct {
-	internal.BaseCmd
-	Username string `required:"" name:"username"`
-}
-
-func (c *UsersFollowCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/following/:username")
 	c.UpdateURLPath("username", c.Username)
-	return c.DoRequest("PUT")
-}
-
-type UsersUnfollowCmd struct {
-	internal.BaseCmd
-	Username string `required:"" name:"username"`
-}
-
-func (c *UsersUnfollowCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/following/:username")
-	c.UpdateURLPath("username", c.Username)
-	return c.DoRequest("DELETE")
-}
-
-type UsersListPublicKeysForUserCmd struct {
-	internal.BaseCmd
-	Username string `required:"" name:"username"`
-	PerPage  int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page     int64  `name:"page" help:"Page number of the results to fetch."`
-}
-
-func (c *UsersListPublicKeysForUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/users/:username/keys")
-	c.UpdateURLPath("username", c.Username)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
-type UsersListPublicKeysCmd struct {
+type UsersCreateGpgKeyCmd struct {
 	internal.BaseCmd
-	PerPage int64 `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64 `name:"page" help:"Page number of the results to fetch."`
+	ArmoredPublicKey string `name:"armored_public_key"`
 }
 
-func (c *UsersListPublicKeysCmd) Run(isValueSetMap map[string]bool) error {
+func (c *UsersCreateGpgKeyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/keys")
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type UsersGetPublicKeyCmd struct {
-	internal.BaseCmd
-	KeyId int64 `required:"" name:"key_id"`
-}
-
-func (c *UsersGetPublicKeyCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/keys/:key_id")
-	c.UpdateURLPath("key_id", c.KeyId)
-	return c.DoRequest("GET")
+	c.SetURLPath("/user/gpg_keys")
+	c.UpdateBody("armored_public_key", c.ArmoredPublicKey)
+	return c.DoRequest("POST")
 }
 
 type UsersCreatePublicKeyCmd struct {
 	internal.BaseCmd
-	Title string `name:"title" help:"A descriptive name for the new key. Use a name that will help you recognize this key in your GitHub account. For example, if you're using a personal Mac, you might call this key 'Personal MacBook Air'."`
-	Key   string `name:"key" help:"The public SSH key to add to your GitHub account. See '[Generating a new SSH key](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)' for guidance on how to create a public SSH key."`
+	Key   string `name:"key"`
+	Title string `name:"title"`
 }
 
 func (c *UsersCreatePublicKeyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/keys")
-	c.UpdateBody("title", c.Title)
 	c.UpdateBody("key", c.Key)
+	c.UpdateBody("title", c.Title)
 	return c.DoRequest("POST")
+}
+
+type UsersDeleteEmailsCmd struct {
+	internal.BaseCmd
+	Emails []string `required:"" name:"emails"`
+}
+
+func (c *UsersDeleteEmailsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/emails")
+	c.UpdateBody("emails", c.Emails)
+	return c.DoRequest("DELETE")
+}
+
+type UsersDeleteGpgKeyCmd struct {
+	internal.BaseCmd
+	GpgKeyId int64 `required:"" name:"gpg_key_id"`
+}
+
+func (c *UsersDeleteGpgKeyCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/gpg_keys/:gpg_key_id")
+	c.UpdateURLPath("gpg_key_id", c.GpgKeyId)
+	return c.DoRequest("DELETE")
 }
 
 type UsersDeletePublicKeyCmd struct {
@@ -409,33 +163,53 @@ func (c *UsersDeletePublicKeyCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("DELETE")
 }
 
-type UsersListGpgKeysForUserCmd struct {
+type UsersFollowCmd struct {
 	internal.BaseCmd
 	Username string `required:"" name:"username"`
-	PerPage  int64  `name:"per_page" help:"Results per page (max 100)"`
-	Page     int64  `name:"page" help:"Page number of the results to fetch."`
 }
 
-func (c *UsersListGpgKeysForUserCmd) Run(isValueSetMap map[string]bool) error {
+func (c *UsersFollowCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/users/:username/gpg_keys")
+	c.SetURLPath("/user/following/:username")
 	c.UpdateURLPath("username", c.Username)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("PUT")
+}
+
+type UsersGetAuthenticatedCmd struct {
+	internal.BaseCmd
+}
+
+func (c *UsersGetAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user")
 	return c.DoRequest("GET")
 }
 
-type UsersListGpgKeysCmd struct {
+type UsersGetByUsernameCmd struct {
 	internal.BaseCmd
-	PerPage int64 `name:"per_page" help:"Results per page (max 100)"`
-	Page    int64 `name:"page" help:"Page number of the results to fetch."`
+	Username string `required:"" name:"username"`
 }
 
-func (c *UsersListGpgKeysCmd) Run(isValueSetMap map[string]bool) error {
+func (c *UsersGetByUsernameCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/gpg_keys")
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
+	c.SetURLPath("/users/:username")
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("GET")
+}
+
+type UsersGetContextForUserCmd struct {
+	internal.BaseCmd
+	SubjectId   string `name:"subject_id"`
+	SubjectType string `name:"subject_type"`
+	Username    string `required:"" name:"username"`
+}
+
+func (c *UsersGetContextForUserCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/users/:username/hovercard")
+	c.UpdateURLQuery("subject_id", c.SubjectId)
+	c.UpdateURLQuery("subject_type", c.SubjectType)
+	c.UpdateURLPath("username", c.Username)
 	return c.DoRequest("GET")
 }
 
@@ -451,26 +225,246 @@ func (c *UsersGetGpgKeyCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
-type UsersCreateGpgKeyCmd struct {
+type UsersGetPublicKeyCmd struct {
 	internal.BaseCmd
-	ArmoredPublicKey string `name:"armored_public_key" help:"Your GPG key, generated in ASCII-armored format. See '[Generating a new GPG key](https://help.github.com/articles/generating-a-new-gpg-key/)' for help creating a GPG key."`
+	KeyId int64 `required:"" name:"key_id"`
 }
 
-func (c *UsersCreateGpgKeyCmd) Run(isValueSetMap map[string]bool) error {
+func (c *UsersGetPublicKeyCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/keys/:key_id")
+	c.UpdateURLPath("key_id", c.KeyId)
+	return c.DoRequest("GET")
+}
+
+type UsersListBlockedCmd struct {
+	internal.BaseCmd
+}
+
+func (c *UsersListBlockedCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/blocks")
+	return c.DoRequest("GET")
+}
+
+type UsersListCmd struct {
+	internal.BaseCmd
+	Since string `name:"since"`
+}
+
+func (c *UsersListCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/users")
+	c.UpdateURLQuery("since", c.Since)
+	return c.DoRequest("GET")
+}
+
+type UsersListEmailsCmd struct {
+	internal.BaseCmd
+	Page    int64 `name:"page"`
+	PerPage int64 `name:"per_page"`
+}
+
+func (c *UsersListEmailsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/emails")
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	return c.DoRequest("GET")
+}
+
+type UsersListFollowedByAuthenticatedCmd struct {
+	internal.BaseCmd
+	Page    int64 `name:"page"`
+	PerPage int64 `name:"per_page"`
+}
+
+func (c *UsersListFollowedByAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/following")
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	return c.DoRequest("GET")
+}
+
+type UsersListFollowersForAuthenticatedUserCmd struct {
+	internal.BaseCmd
+	Page    int64 `name:"page"`
+	PerPage int64 `name:"per_page"`
+}
+
+func (c *UsersListFollowersForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/followers")
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	return c.DoRequest("GET")
+}
+
+type UsersListFollowersForUserCmd struct {
+	internal.BaseCmd
+	Page     int64  `name:"page"`
+	PerPage  int64  `name:"per_page"`
+	Username string `required:"" name:"username"`
+}
+
+func (c *UsersListFollowersForUserCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/users/:username/followers")
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("GET")
+}
+
+type UsersListFollowingForUserCmd struct {
+	internal.BaseCmd
+	Page     int64  `name:"page"`
+	PerPage  int64  `name:"per_page"`
+	Username string `required:"" name:"username"`
+}
+
+func (c *UsersListFollowingForUserCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/users/:username/following")
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("GET")
+}
+
+type UsersListGpgKeysCmd struct {
+	internal.BaseCmd
+	Page    int64 `name:"page"`
+	PerPage int64 `name:"per_page"`
+}
+
+func (c *UsersListGpgKeysCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/gpg_keys")
-	c.UpdateBody("armored_public_key", c.ArmoredPublicKey)
-	return c.DoRequest("POST")
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	return c.DoRequest("GET")
 }
 
-type UsersDeleteGpgKeyCmd struct {
+type UsersListGpgKeysForUserCmd struct {
 	internal.BaseCmd
-	GpgKeyId int64 `required:"" name:"gpg_key_id"`
+	Page     int64  `name:"page"`
+	PerPage  int64  `name:"per_page"`
+	Username string `required:"" name:"username"`
 }
 
-func (c *UsersDeleteGpgKeyCmd) Run(isValueSetMap map[string]bool) error {
+func (c *UsersListGpgKeysForUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/gpg_keys/:gpg_key_id")
-	c.UpdateURLPath("gpg_key_id", c.GpgKeyId)
+	c.SetURLPath("/users/:username/gpg_keys")
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("GET")
+}
+
+type UsersListPublicEmailsCmd struct {
+	internal.BaseCmd
+	Page    int64 `name:"page"`
+	PerPage int64 `name:"per_page"`
+}
+
+func (c *UsersListPublicEmailsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/public_emails")
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	return c.DoRequest("GET")
+}
+
+type UsersListPublicKeysCmd struct {
+	internal.BaseCmd
+	Page    int64 `name:"page"`
+	PerPage int64 `name:"per_page"`
+}
+
+func (c *UsersListPublicKeysCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/keys")
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	return c.DoRequest("GET")
+}
+
+type UsersListPublicKeysForUserCmd struct {
+	internal.BaseCmd
+	Page     int64  `name:"page"`
+	PerPage  int64  `name:"per_page"`
+	Username string `required:"" name:"username"`
+}
+
+func (c *UsersListPublicKeysForUserCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/users/:username/keys")
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("GET")
+}
+
+type UsersTogglePrimaryEmailVisibilityCmd struct {
+	internal.BaseCmd
+	Email      string `required:"" name:"email"`
+	Visibility string `required:"" name:"visibility"`
+}
+
+func (c *UsersTogglePrimaryEmailVisibilityCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/email/visibility")
+	c.UpdateBody("email", c.Email)
+	c.UpdateBody("visibility", c.Visibility)
+	return c.DoRequest("PATCH")
+}
+
+type UsersUnblockCmd struct {
+	internal.BaseCmd
+	Username string `required:"" name:"username"`
+}
+
+func (c *UsersUnblockCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/blocks/:username")
+	c.UpdateURLPath("username", c.Username)
 	return c.DoRequest("DELETE")
+}
+
+type UsersUnfollowCmd struct {
+	internal.BaseCmd
+	Username string `required:"" name:"username"`
+}
+
+func (c *UsersUnfollowCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/following/:username")
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("DELETE")
+}
+
+type UsersUpdateAuthenticatedCmd struct {
+	internal.BaseCmd
+	Bio      string `name:"bio"`
+	Blog     string `name:"blog"`
+	Company  string `name:"company"`
+	Email    string `name:"email"`
+	Hireable bool   `name:"hireable"`
+	Location string `name:"location"`
+	Name     string `name:"name"`
+}
+
+func (c *UsersUpdateAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user")
+	c.UpdateBody("bio", c.Bio)
+	c.UpdateBody("blog", c.Blog)
+	c.UpdateBody("company", c.Company)
+	c.UpdateBody("email", c.Email)
+	c.UpdateBody("hireable", c.Hireable)
+	c.UpdateBody("location", c.Location)
+	c.UpdateBody("name", c.Name)
+	return c.DoRequest("PATCH")
 }
