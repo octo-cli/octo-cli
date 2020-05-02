@@ -40,10 +40,10 @@ type AppsCmd struct {
 }
 
 type AppsAddRepoToInstallationCmd struct {
-	internal.BaseCmd
 	InstallationId int64 `required:"" name:"installation_id"`
 	MachineMan     bool  "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
 	RepositoryId   int64 `required:"" name:"repository_id"`
+	internal.BaseCmd
 }
 
 func (c *AppsAddRepoToInstallationCmd) Run(isValueSetMap map[string]bool) error {
@@ -56,9 +56,9 @@ func (c *AppsAddRepoToInstallationCmd) Run(isValueSetMap map[string]bool) error 
 }
 
 type AppsCheckAuthorizationCmd struct {
-	internal.BaseCmd
 	AccessToken string `required:"" name:"access_token"`
 	ClientId    string `required:"" name:"client_id"`
+	internal.BaseCmd
 }
 
 func (c *AppsCheckAuthorizationCmd) Run(isValueSetMap map[string]bool) error {
@@ -70,9 +70,9 @@ func (c *AppsCheckAuthorizationCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsCheckTokenCmd struct {
-	internal.BaseCmd
 	AccessToken string `name:"access_token"`
 	ClientId    string `required:"" name:"client_id"`
+	internal.BaseCmd
 }
 
 func (c *AppsCheckTokenCmd) Run(isValueSetMap map[string]bool) error {
@@ -84,11 +84,11 @@ func (c *AppsCheckTokenCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsCreateContentAttachmentCmd struct {
-	internal.BaseCmd
 	Body               string `required:"" name:"body"`
 	ContentReferenceId int64  `required:"" name:"content_reference_id"`
 	Corsair            bool   "name:\"corsair-preview\" required:\"\" help:\"To access the Content Attachments API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.corsair-preview+json\n```\""
 	Title              string `required:"" name:"title"`
+	internal.BaseCmd
 }
 
 func (c *AppsCreateContentAttachmentCmd) Run(isValueSetMap map[string]bool) error {
@@ -102,8 +102,8 @@ func (c *AppsCreateContentAttachmentCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type AppsCreateFromManifestCmd struct {
-	internal.BaseCmd
 	Code string `required:"" name:"code"`
+	internal.BaseCmd
 }
 
 func (c *AppsCreateFromManifestCmd) Run(isValueSetMap map[string]bool) error {
@@ -114,9 +114,9 @@ func (c *AppsCreateFromManifestCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsDeleteAuthorizationCmd struct {
-	internal.BaseCmd
 	AccessToken string `name:"access_token"`
 	ClientId    string `required:"" name:"client_id"`
+	internal.BaseCmd
 }
 
 func (c *AppsDeleteAuthorizationCmd) Run(isValueSetMap map[string]bool) error {
@@ -128,9 +128,9 @@ func (c *AppsDeleteAuthorizationCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsDeleteInstallationCmd struct {
-	internal.BaseCmd
 	InstallationId int64 `required:"" name:"installation_id"`
 	MachineMan     bool  "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *AppsDeleteInstallationCmd) Run(isValueSetMap map[string]bool) error {
@@ -142,9 +142,9 @@ func (c *AppsDeleteInstallationCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsDeleteTokenCmd struct {
-	internal.BaseCmd
 	AccessToken string `name:"access_token"`
 	ClientId    string `required:"" name:"client_id"`
+	internal.BaseCmd
 }
 
 func (c *AppsDeleteTokenCmd) Run(isValueSetMap map[string]bool) error {
@@ -156,8 +156,8 @@ func (c *AppsDeleteTokenCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsGetAuthenticatedCmd struct {
-	internal.BaseCmd
 	MachineMan bool "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *AppsGetAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
@@ -168,9 +168,9 @@ func (c *AppsGetAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsGetBySlugCmd struct {
-	internal.BaseCmd
 	AppSlug    string `required:"" name:"app_slug"`
 	MachineMan bool   "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *AppsGetBySlugCmd) Run(isValueSetMap map[string]bool) error {
@@ -182,9 +182,9 @@ func (c *AppsGetBySlugCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsGetInstallationCmd struct {
-	internal.BaseCmd
 	InstallationId int64 `required:"" name:"installation_id"`
 	MachineMan     bool  "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *AppsGetInstallationCmd) Run(isValueSetMap map[string]bool) error {
@@ -196,9 +196,9 @@ func (c *AppsGetInstallationCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsGetOrgInstallationCmd struct {
-	internal.BaseCmd
 	MachineMan bool   "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
 	Org        string `required:"" name:"org"`
+	internal.BaseCmd
 }
 
 func (c *AppsGetOrgInstallationCmd) Run(isValueSetMap map[string]bool) error {
@@ -210,10 +210,10 @@ func (c *AppsGetOrgInstallationCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsGetRepoInstallationCmd struct {
-	internal.BaseCmd
 	MachineMan bool   "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
 	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *AppsGetRepoInstallationCmd) Run(isValueSetMap map[string]bool) error {
@@ -226,8 +226,8 @@ func (c *AppsGetRepoInstallationCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsGetSubscriptionPlanForAccountCmd struct {
-	internal.BaseCmd
 	AccountId int64 `required:"" name:"account_id"`
+	internal.BaseCmd
 }
 
 func (c *AppsGetSubscriptionPlanForAccountCmd) Run(isValueSetMap map[string]bool) error {
@@ -238,8 +238,8 @@ func (c *AppsGetSubscriptionPlanForAccountCmd) Run(isValueSetMap map[string]bool
 }
 
 type AppsGetSubscriptionPlanForAccountStubbedCmd struct {
-	internal.BaseCmd
 	AccountId int64 `required:"" name:"account_id"`
+	internal.BaseCmd
 }
 
 func (c *AppsGetSubscriptionPlanForAccountStubbedCmd) Run(isValueSetMap map[string]bool) error {
@@ -250,9 +250,9 @@ func (c *AppsGetSubscriptionPlanForAccountStubbedCmd) Run(isValueSetMap map[stri
 }
 
 type AppsGetUserInstallationCmd struct {
-	internal.BaseCmd
 	MachineMan bool   "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
 	Username   string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *AppsGetUserInstallationCmd) Run(isValueSetMap map[string]bool) error {
@@ -264,12 +264,12 @@ func (c *AppsGetUserInstallationCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsListAccountsForPlanCmd struct {
-	internal.BaseCmd
 	Direction string `name:"direction"`
 	Page      int64  `name:"page"`
 	PerPage   int64  `name:"per_page"`
 	PlanId    int64  `required:"" name:"plan_id"`
 	Sort      string `name:"sort"`
+	internal.BaseCmd
 }
 
 func (c *AppsListAccountsForPlanCmd) Run(isValueSetMap map[string]bool) error {
@@ -284,12 +284,12 @@ func (c *AppsListAccountsForPlanCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsListAccountsForPlanStubbedCmd struct {
-	internal.BaseCmd
 	Direction string `name:"direction"`
 	Page      int64  `name:"page"`
 	PerPage   int64  `name:"per_page"`
 	PlanId    int64  `required:"" name:"plan_id"`
 	Sort      string `name:"sort"`
+	internal.BaseCmd
 }
 
 func (c *AppsListAccountsForPlanStubbedCmd) Run(isValueSetMap map[string]bool) error {
@@ -304,12 +304,12 @@ func (c *AppsListAccountsForPlanStubbedCmd) Run(isValueSetMap map[string]bool) e
 }
 
 type AppsListInstallationReposForAuthenticatedUserCmd struct {
-	internal.BaseCmd
 	InstallationId int64 `required:"" name:"installation_id"`
 	MachineMan     bool  "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
 	Mercy          bool  "name:\"mercy-preview\" help:\"The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.mercy-preview+json\n```\""
 	Page           int64 `name:"page"`
 	PerPage        int64 `name:"per_page"`
+	internal.BaseCmd
 }
 
 func (c *AppsListInstallationReposForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -324,10 +324,10 @@ func (c *AppsListInstallationReposForAuthenticatedUserCmd) Run(isValueSetMap map
 }
 
 type AppsListInstallationsCmd struct {
-	internal.BaseCmd
 	MachineMan bool  "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
 	Page       int64 `name:"page"`
 	PerPage    int64 `name:"per_page"`
+	internal.BaseCmd
 }
 
 func (c *AppsListInstallationsCmd) Run(isValueSetMap map[string]bool) error {
@@ -340,10 +340,10 @@ func (c *AppsListInstallationsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsListInstallationsForAuthenticatedUserCmd struct {
-	internal.BaseCmd
 	MachineMan bool  "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
 	Page       int64 `name:"page"`
 	PerPage    int64 `name:"per_page"`
+	internal.BaseCmd
 }
 
 func (c *AppsListInstallationsForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -356,9 +356,9 @@ func (c *AppsListInstallationsForAuthenticatedUserCmd) Run(isValueSetMap map[str
 }
 
 type AppsListPlansCmd struct {
-	internal.BaseCmd
 	Page    int64 `name:"page"`
 	PerPage int64 `name:"per_page"`
+	internal.BaseCmd
 }
 
 func (c *AppsListPlansCmd) Run(isValueSetMap map[string]bool) error {
@@ -370,9 +370,9 @@ func (c *AppsListPlansCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsListPlansStubbedCmd struct {
-	internal.BaseCmd
 	Page    int64 `name:"page"`
 	PerPage int64 `name:"per_page"`
+	internal.BaseCmd
 }
 
 func (c *AppsListPlansStubbedCmd) Run(isValueSetMap map[string]bool) error {
@@ -384,11 +384,11 @@ func (c *AppsListPlansStubbedCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsListReposCmd struct {
-	internal.BaseCmd
 	MachineMan bool  "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
 	Mercy      bool  "name:\"mercy-preview\" help:\"The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.mercy-preview+json\n```\""
 	Page       int64 `name:"page"`
 	PerPage    int64 `name:"per_page"`
+	internal.BaseCmd
 }
 
 func (c *AppsListReposCmd) Run(isValueSetMap map[string]bool) error {
@@ -402,9 +402,9 @@ func (c *AppsListReposCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsListSubscriptionsForAuthenticatedUserCmd struct {
-	internal.BaseCmd
 	Page    int64 `name:"page"`
 	PerPage int64 `name:"per_page"`
+	internal.BaseCmd
 }
 
 func (c *AppsListSubscriptionsForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -416,9 +416,9 @@ func (c *AppsListSubscriptionsForAuthenticatedUserCmd) Run(isValueSetMap map[str
 }
 
 type AppsListSubscriptionsForAuthenticatedUserStubbedCmd struct {
-	internal.BaseCmd
 	Page    int64 `name:"page"`
 	PerPage int64 `name:"per_page"`
+	internal.BaseCmd
 }
 
 func (c *AppsListSubscriptionsForAuthenticatedUserStubbedCmd) Run(isValueSetMap map[string]bool) error {
@@ -430,10 +430,10 @@ func (c *AppsListSubscriptionsForAuthenticatedUserStubbedCmd) Run(isValueSetMap 
 }
 
 type AppsRemoveRepoFromInstallationCmd struct {
-	internal.BaseCmd
 	InstallationId int64 `required:"" name:"installation_id"`
 	MachineMan     bool  "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
 	RepositoryId   int64 `required:"" name:"repository_id"`
+	internal.BaseCmd
 }
 
 func (c *AppsRemoveRepoFromInstallationCmd) Run(isValueSetMap map[string]bool) error {
@@ -446,9 +446,9 @@ func (c *AppsRemoveRepoFromInstallationCmd) Run(isValueSetMap map[string]bool) e
 }
 
 type AppsResetAuthorizationCmd struct {
-	internal.BaseCmd
 	AccessToken string `required:"" name:"access_token"`
 	ClientId    string `required:"" name:"client_id"`
+	internal.BaseCmd
 }
 
 func (c *AppsResetAuthorizationCmd) Run(isValueSetMap map[string]bool) error {
@@ -460,9 +460,9 @@ func (c *AppsResetAuthorizationCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsResetTokenCmd struct {
-	internal.BaseCmd
 	AccessToken string `name:"access_token"`
 	ClientId    string `required:"" name:"client_id"`
+	internal.BaseCmd
 }
 
 func (c *AppsResetTokenCmd) Run(isValueSetMap map[string]bool) error {
@@ -474,9 +474,9 @@ func (c *AppsResetTokenCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsRevokeAuthorizationForApplicationCmd struct {
-	internal.BaseCmd
 	AccessToken string `required:"" name:"access_token"`
 	ClientId    string `required:"" name:"client_id"`
+	internal.BaseCmd
 }
 
 func (c *AppsRevokeAuthorizationForApplicationCmd) Run(isValueSetMap map[string]bool) error {
@@ -488,9 +488,9 @@ func (c *AppsRevokeAuthorizationForApplicationCmd) Run(isValueSetMap map[string]
 }
 
 type AppsRevokeGrantForApplicationCmd struct {
-	internal.BaseCmd
 	AccessToken string `required:"" name:"access_token"`
 	ClientId    string `required:"" name:"client_id"`
+	internal.BaseCmd
 }
 
 func (c *AppsRevokeGrantForApplicationCmd) Run(isValueSetMap map[string]bool) error {

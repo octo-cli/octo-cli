@@ -30,9 +30,9 @@ type MigrationsCmd struct {
 }
 
 type MigrationsCancelImportCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *MigrationsCancelImportCmd) Run(isValueSetMap map[string]bool) error {
@@ -44,9 +44,9 @@ func (c *MigrationsCancelImportCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type MigrationsDeleteArchiveForAuthenticatedUserCmd struct {
-	internal.BaseCmd
 	MigrationId int64 `required:"" name:"migration_id"`
 	Wyandotte   bool  "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *MigrationsDeleteArchiveForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -58,10 +58,10 @@ func (c *MigrationsDeleteArchiveForAuthenticatedUserCmd) Run(isValueSetMap map[s
 }
 
 type MigrationsDeleteArchiveForOrgCmd struct {
-	internal.BaseCmd
 	MigrationId int64  `required:"" name:"migration_id"`
 	Org         string `required:"" name:"org"`
 	Wyandotte   bool   "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *MigrationsDeleteArchiveForOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -74,10 +74,10 @@ func (c *MigrationsDeleteArchiveForOrgCmd) Run(isValueSetMap map[string]bool) er
 }
 
 type MigrationsDownloadArchiveForOrgCmd struct {
-	internal.BaseCmd
 	MigrationId int64  `required:"" name:"migration_id"`
 	Org         string `required:"" name:"org"`
 	Wyandotte   bool   "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *MigrationsDownloadArchiveForOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -90,9 +90,9 @@ func (c *MigrationsDownloadArchiveForOrgCmd) Run(isValueSetMap map[string]bool) 
 }
 
 type MigrationsGetArchiveForAuthenticatedUserCmd struct {
-	internal.BaseCmd
 	MigrationId int64 `required:"" name:"migration_id"`
 	Wyandotte   bool  "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *MigrationsGetArchiveForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -104,10 +104,10 @@ func (c *MigrationsGetArchiveForAuthenticatedUserCmd) Run(isValueSetMap map[stri
 }
 
 type MigrationsGetCommitAuthorsCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	Since string `name:"since"`
+	internal.BaseCmd
 }
 
 func (c *MigrationsGetCommitAuthorsCmd) Run(isValueSetMap map[string]bool) error {
@@ -120,9 +120,9 @@ func (c *MigrationsGetCommitAuthorsCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type MigrationsGetImportProgressCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *MigrationsGetImportProgressCmd) Run(isValueSetMap map[string]bool) error {
@@ -134,9 +134,9 @@ func (c *MigrationsGetImportProgressCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type MigrationsGetLargeFilesCmd struct {
-	internal.BaseCmd
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *MigrationsGetLargeFilesCmd) Run(isValueSetMap map[string]bool) error {
@@ -148,9 +148,9 @@ func (c *MigrationsGetLargeFilesCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type MigrationsGetStatusForAuthenticatedUserCmd struct {
-	internal.BaseCmd
 	MigrationId int64 `required:"" name:"migration_id"`
 	Wyandotte   bool  "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *MigrationsGetStatusForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -162,10 +162,10 @@ func (c *MigrationsGetStatusForAuthenticatedUserCmd) Run(isValueSetMap map[strin
 }
 
 type MigrationsGetStatusForOrgCmd struct {
-	internal.BaseCmd
 	MigrationId int64  `required:"" name:"migration_id"`
 	Org         string `required:"" name:"org"`
 	Wyandotte   bool   "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *MigrationsGetStatusForOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -178,10 +178,10 @@ func (c *MigrationsGetStatusForOrgCmd) Run(isValueSetMap map[string]bool) error 
 }
 
 type MigrationsListForAuthenticatedUserCmd struct {
-	internal.BaseCmd
 	Page      int64 `name:"page"`
 	PerPage   int64 `name:"per_page"`
 	Wyandotte bool  "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *MigrationsListForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -194,11 +194,11 @@ func (c *MigrationsListForAuthenticatedUserCmd) Run(isValueSetMap map[string]boo
 }
 
 type MigrationsListForOrgCmd struct {
-	internal.BaseCmd
 	Org       string `required:"" name:"org"`
 	Page      int64  `name:"page"`
 	PerPage   int64  `name:"per_page"`
 	Wyandotte bool   "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *MigrationsListForOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -212,12 +212,12 @@ func (c *MigrationsListForOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type MigrationsListReposForOrgCmd struct {
-	internal.BaseCmd
 	MigrationId int64  `required:"" name:"migration_id"`
 	Org         string `required:"" name:"org"`
 	Page        int64  `name:"page"`
 	PerPage     int64  `name:"per_page"`
 	Wyandotte   bool   "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *MigrationsListReposForOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -232,11 +232,11 @@ func (c *MigrationsListReposForOrgCmd) Run(isValueSetMap map[string]bool) error 
 }
 
 type MigrationsListReposForUserCmd struct {
-	internal.BaseCmd
 	MigrationId int64 `required:"" name:"migration_id"`
 	Page        int64 `name:"page"`
 	PerPage     int64 `name:"per_page"`
 	Wyandotte   bool  "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *MigrationsListReposForUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -250,12 +250,12 @@ func (c *MigrationsListReposForUserCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type MigrationsMapCommitAuthorCmd struct {
-	internal.BaseCmd
 	AuthorId int64  `required:"" name:"author_id"`
 	Email    string `name:"email"`
 	Name     string `name:"name"`
 	Owner    string `name:"owner"`
 	Repo     string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *MigrationsMapCommitAuthorCmd) Run(isValueSetMap map[string]bool) error {
@@ -270,10 +270,10 @@ func (c *MigrationsMapCommitAuthorCmd) Run(isValueSetMap map[string]bool) error 
 }
 
 type MigrationsSetLfsPreferenceCmd struct {
-	internal.BaseCmd
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	UseLfs string `required:"" name:"use_lfs"`
+	internal.BaseCmd
 }
 
 func (c *MigrationsSetLfsPreferenceCmd) Run(isValueSetMap map[string]bool) error {
@@ -286,10 +286,10 @@ func (c *MigrationsSetLfsPreferenceCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type MigrationsStartForAuthenticatedUserCmd struct {
-	internal.BaseCmd
 	ExcludeAttachments bool     `name:"exclude_attachments"`
 	LockRepositories   bool     `name:"lock_repositories"`
 	Repositories       []string `required:"" name:"repositories"`
+	internal.BaseCmd
 }
 
 func (c *MigrationsStartForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -302,11 +302,11 @@ func (c *MigrationsStartForAuthenticatedUserCmd) Run(isValueSetMap map[string]bo
 }
 
 type MigrationsStartForOrgCmd struct {
-	internal.BaseCmd
 	ExcludeAttachments bool     `name:"exclude_attachments"`
 	LockRepositories   bool     `name:"lock_repositories"`
 	Org                string   `required:"" name:"org"`
 	Repositories       []string `required:"" name:"repositories"`
+	internal.BaseCmd
 }
 
 func (c *MigrationsStartForOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -320,7 +320,6 @@ func (c *MigrationsStartForOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type MigrationsStartImportCmd struct {
-	internal.BaseCmd
 	Owner       string `name:"owner"`
 	Repo        string `required:"" name:"repo"`
 	TfvcProject string `name:"tfvc_project"`
@@ -328,6 +327,7 @@ type MigrationsStartImportCmd struct {
 	VcsPassword string `name:"vcs_password"`
 	VcsUrl      string `required:"" name:"vcs_url"`
 	VcsUsername string `name:"vcs_username"`
+	internal.BaseCmd
 }
 
 func (c *MigrationsStartImportCmd) Run(isValueSetMap map[string]bool) error {
@@ -344,10 +344,10 @@ func (c *MigrationsStartImportCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type MigrationsUnlockRepoForAuthenticatedUserCmd struct {
-	internal.BaseCmd
 	MigrationId int64  `required:"" name:"migration_id"`
 	RepoName    string `required:"" name:"repo_name"`
 	Wyandotte   bool   "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *MigrationsUnlockRepoForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -360,11 +360,11 @@ func (c *MigrationsUnlockRepoForAuthenticatedUserCmd) Run(isValueSetMap map[stri
 }
 
 type MigrationsUnlockRepoForOrgCmd struct {
-	internal.BaseCmd
 	MigrationId int64  `required:"" name:"migration_id"`
 	Org         string `required:"" name:"org"`
 	RepoName    string `required:"" name:"repo_name"`
 	Wyandotte   bool   "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *MigrationsUnlockRepoForOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -378,11 +378,11 @@ func (c *MigrationsUnlockRepoForOrgCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type MigrationsUpdateImportCmd struct {
-	internal.BaseCmd
 	Owner       string `name:"owner"`
 	Repo        string `required:"" name:"repo"`
 	VcsPassword string `name:"vcs_password"`
 	VcsUsername string `name:"vcs_username"`
+	internal.BaseCmd
 }
 
 func (c *MigrationsUpdateImportCmd) Run(isValueSetMap map[string]bool) error {

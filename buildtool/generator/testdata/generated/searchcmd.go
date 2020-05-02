@@ -19,12 +19,12 @@ type SearchCmd struct {
 }
 
 type SearchCodeCmd struct {
-	internal.BaseCmd
 	Order   string `name:"order"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Q       string `required:"" name:"q"`
 	Sort    string `name:"sort"`
+	internal.BaseCmd
 }
 
 func (c *SearchCodeCmd) Run(isValueSetMap map[string]bool) error {
@@ -39,13 +39,13 @@ func (c *SearchCodeCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type SearchCommitsCmd struct {
-	internal.BaseCmd
 	Cloak   bool   "name:\"cloak-preview\" required:\"\" help:\"The Commit Search API is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2017-01-05-commit-search-api/) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.cloak-preview\n```\""
 	Order   string `name:"order"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Q       string `required:"" name:"q"`
 	Sort    string `name:"sort"`
+	internal.BaseCmd
 }
 
 func (c *SearchCommitsCmd) Run(isValueSetMap map[string]bool) error {
@@ -61,8 +61,8 @@ func (c *SearchCommitsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type SearchEmailLegacyCmd struct {
-	internal.BaseCmd
 	Email string `required:"" name:"email"`
+	internal.BaseCmd
 }
 
 func (c *SearchEmailLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -73,12 +73,12 @@ func (c *SearchEmailLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type SearchIssuesAndPullRequestsCmd struct {
-	internal.BaseCmd
 	Order   string `name:"order"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Q       string `required:"" name:"q"`
 	Sort    string `name:"sort"`
+	internal.BaseCmd
 }
 
 func (c *SearchIssuesAndPullRequestsCmd) Run(isValueSetMap map[string]bool) error {
@@ -93,11 +93,11 @@ func (c *SearchIssuesAndPullRequestsCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type SearchIssuesLegacyCmd struct {
-	internal.BaseCmd
 	Keyword    string `required:"" name:"keyword"`
 	Owner      string `required:"" name:"owner"`
 	Repository string `required:"" name:"repository"`
 	State      string `required:"" name:"state"`
+	internal.BaseCmd
 }
 
 func (c *SearchIssuesLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -111,11 +111,11 @@ func (c *SearchIssuesLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type SearchLabelsCmd struct {
-	internal.BaseCmd
 	Order        string `name:"order"`
 	Q            string `required:"" name:"q"`
 	RepositoryId int64  `required:"" name:"repository_id"`
 	Sort         string `name:"sort"`
+	internal.BaseCmd
 }
 
 func (c *SearchLabelsCmd) Run(isValueSetMap map[string]bool) error {
@@ -129,13 +129,13 @@ func (c *SearchLabelsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type SearchReposCmd struct {
-	internal.BaseCmd
 	Mercy   bool   "name:\"mercy-preview\" help:\"The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.mercy-preview+json\n```\""
 	Order   string `name:"order"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Q       string `required:"" name:"q"`
 	Sort    string `name:"sort"`
+	internal.BaseCmd
 }
 
 func (c *SearchReposCmd) Run(isValueSetMap map[string]bool) error {
@@ -151,12 +151,12 @@ func (c *SearchReposCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type SearchReposLegacyCmd struct {
-	internal.BaseCmd
 	Keyword   string `required:"" name:"keyword"`
 	Language  string `name:"language"`
 	Order     string `name:"order"`
 	Sort      string `name:"sort"`
 	StartPage string `name:"start_page"`
+	internal.BaseCmd
 }
 
 func (c *SearchReposLegacyCmd) Run(isValueSetMap map[string]bool) error {
@@ -171,9 +171,9 @@ func (c *SearchReposLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type SearchTopicsCmd struct {
-	internal.BaseCmd
 	Mercy bool   "name:\"mercy-preview\" help:\"The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.mercy-preview+json\n```\""
 	Q     string `required:"" name:"q"`
+	internal.BaseCmd
 }
 
 func (c *SearchTopicsCmd) Run(isValueSetMap map[string]bool) error {
@@ -185,12 +185,12 @@ func (c *SearchTopicsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type SearchUsersCmd struct {
-	internal.BaseCmd
 	Order   string `name:"order"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Q       string `required:"" name:"q"`
 	Sort    string `name:"sort"`
+	internal.BaseCmd
 }
 
 func (c *SearchUsersCmd) Run(isValueSetMap map[string]bool) error {
@@ -205,11 +205,11 @@ func (c *SearchUsersCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type SearchUsersLegacyCmd struct {
-	internal.BaseCmd
 	Keyword   string `required:"" name:"keyword"`
 	Order     string `name:"order"`
 	Sort      string `name:"sort"`
 	StartPage string `name:"start_page"`
+	internal.BaseCmd
 }
 
 func (c *SearchUsersLegacyCmd) Run(isValueSetMap map[string]bool) error {

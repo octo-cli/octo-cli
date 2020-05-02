@@ -14,9 +14,9 @@ type ScimCmd struct {
 }
 
 type ScimGetProvisioningDetailsForUserCmd struct {
-	internal.BaseCmd
 	Org        string `required:"" name:"org"`
 	ScimUserId int64  `required:"" name:"scim_user_id"`
+	internal.BaseCmd
 }
 
 func (c *ScimGetProvisioningDetailsForUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -28,11 +28,11 @@ func (c *ScimGetProvisioningDetailsForUserCmd) Run(isValueSetMap map[string]bool
 }
 
 type ScimListProvisionedIdentitiesCmd struct {
-	internal.BaseCmd
 	Count      int64  `name:"count"`
 	Filter     string `name:"filter"`
 	Org        string `required:"" name:"org"`
 	StartIndex int64  `name:"startIndex"`
+	internal.BaseCmd
 }
 
 func (c *ScimListProvisionedIdentitiesCmd) Run(isValueSetMap map[string]bool) error {
@@ -46,8 +46,8 @@ func (c *ScimListProvisionedIdentitiesCmd) Run(isValueSetMap map[string]bool) er
 }
 
 type ScimProvisionAndInviteUsersCmd struct {
-	internal.BaseCmd
 	Org string `required:"" name:"org"`
+	internal.BaseCmd
 }
 
 func (c *ScimProvisionAndInviteUsersCmd) Run(isValueSetMap map[string]bool) error {
@@ -58,9 +58,9 @@ func (c *ScimProvisionAndInviteUsersCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type ScimRemoveUserFromOrgCmd struct {
-	internal.BaseCmd
 	Org        string `required:"" name:"org"`
 	ScimUserId int64  `required:"" name:"scim_user_id"`
+	internal.BaseCmd
 }
 
 func (c *ScimRemoveUserFromOrgCmd) Run(isValueSetMap map[string]bool) error {
@@ -72,9 +72,9 @@ func (c *ScimRemoveUserFromOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ScimReplaceProvisionedUserInformationCmd struct {
-	internal.BaseCmd
 	Org        string `required:"" name:"org"`
 	ScimUserId int64  `required:"" name:"scim_user_id"`
+	internal.BaseCmd
 }
 
 func (c *ScimReplaceProvisionedUserInformationCmd) Run(isValueSetMap map[string]bool) error {
@@ -86,9 +86,9 @@ func (c *ScimReplaceProvisionedUserInformationCmd) Run(isValueSetMap map[string]
 }
 
 type ScimUpdateUserAttributeCmd struct {
-	internal.BaseCmd
 	Org        string `required:"" name:"org"`
 	ScimUserId int64  `required:"" name:"scim_user_id"`
+	internal.BaseCmd
 }
 
 func (c *ScimUpdateUserAttributeCmd) Run(isValueSetMap map[string]bool) error {

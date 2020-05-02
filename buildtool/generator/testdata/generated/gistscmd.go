@@ -26,8 +26,8 @@ type GistsCmd struct {
 }
 
 type GistsCheckIsStarredCmd struct {
-	internal.BaseCmd
 	GistId string `required:"" name:"gist_id"`
+	internal.BaseCmd
 }
 
 func (c *GistsCheckIsStarredCmd) Run(isValueSetMap map[string]bool) error {
@@ -38,9 +38,9 @@ func (c *GistsCheckIsStarredCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsCreateCommentCmd struct {
-	internal.BaseCmd
 	Body   string `required:"" name:"body"`
 	GistId string `required:"" name:"gist_id"`
+	internal.BaseCmd
 }
 
 func (c *GistsCreateCommentCmd) Run(isValueSetMap map[string]bool) error {
@@ -52,8 +52,8 @@ func (c *GistsCreateCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsDeleteCmd struct {
-	internal.BaseCmd
 	GistId string `required:"" name:"gist_id"`
+	internal.BaseCmd
 }
 
 func (c *GistsDeleteCmd) Run(isValueSetMap map[string]bool) error {
@@ -64,9 +64,9 @@ func (c *GistsDeleteCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsDeleteCommentCmd struct {
-	internal.BaseCmd
 	CommentId int64  `required:"" name:"comment_id"`
 	GistId    string `required:"" name:"gist_id"`
+	internal.BaseCmd
 }
 
 func (c *GistsDeleteCommentCmd) Run(isValueSetMap map[string]bool) error {
@@ -78,8 +78,8 @@ func (c *GistsDeleteCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsForkCmd struct {
-	internal.BaseCmd
 	GistId string `required:"" name:"gist_id"`
+	internal.BaseCmd
 }
 
 func (c *GistsForkCmd) Run(isValueSetMap map[string]bool) error {
@@ -90,8 +90,8 @@ func (c *GistsForkCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsGetCmd struct {
-	internal.BaseCmd
 	GistId string `required:"" name:"gist_id"`
+	internal.BaseCmd
 }
 
 func (c *GistsGetCmd) Run(isValueSetMap map[string]bool) error {
@@ -102,9 +102,9 @@ func (c *GistsGetCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsGetCommentCmd struct {
-	internal.BaseCmd
 	CommentId int64  `required:"" name:"comment_id"`
 	GistId    string `required:"" name:"gist_id"`
+	internal.BaseCmd
 }
 
 func (c *GistsGetCommentCmd) Run(isValueSetMap map[string]bool) error {
@@ -116,9 +116,9 @@ func (c *GistsGetCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsGetRevisionCmd struct {
-	internal.BaseCmd
 	GistId string `required:"" name:"gist_id"`
 	Sha    string `required:"" name:"sha"`
+	internal.BaseCmd
 }
 
 func (c *GistsGetRevisionCmd) Run(isValueSetMap map[string]bool) error {
@@ -130,10 +130,10 @@ func (c *GistsGetRevisionCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsListCmd struct {
-	internal.BaseCmd
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Since   string `name:"since"`
+	internal.BaseCmd
 }
 
 func (c *GistsListCmd) Run(isValueSetMap map[string]bool) error {
@@ -146,10 +146,10 @@ func (c *GistsListCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsListCommentsCmd struct {
-	internal.BaseCmd
 	GistId  string `required:"" name:"gist_id"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
+	internal.BaseCmd
 }
 
 func (c *GistsListCommentsCmd) Run(isValueSetMap map[string]bool) error {
@@ -162,10 +162,10 @@ func (c *GistsListCommentsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsListCommitsCmd struct {
-	internal.BaseCmd
 	GistId  string `required:"" name:"gist_id"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
+	internal.BaseCmd
 }
 
 func (c *GistsListCommitsCmd) Run(isValueSetMap map[string]bool) error {
@@ -178,11 +178,11 @@ func (c *GistsListCommitsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsListForUserCmd struct {
-	internal.BaseCmd
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
 	Since    string `name:"since"`
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *GistsListForUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -196,10 +196,10 @@ func (c *GistsListForUserCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsListForksCmd struct {
-	internal.BaseCmd
 	GistId  string `required:"" name:"gist_id"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
+	internal.BaseCmd
 }
 
 func (c *GistsListForksCmd) Run(isValueSetMap map[string]bool) error {
@@ -212,10 +212,10 @@ func (c *GistsListForksCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsListPublicCmd struct {
-	internal.BaseCmd
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Since   string `name:"since"`
+	internal.BaseCmd
 }
 
 func (c *GistsListPublicCmd) Run(isValueSetMap map[string]bool) error {
@@ -228,10 +228,10 @@ func (c *GistsListPublicCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsListStarredCmd struct {
-	internal.BaseCmd
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Since   string `name:"since"`
+	internal.BaseCmd
 }
 
 func (c *GistsListStarredCmd) Run(isValueSetMap map[string]bool) error {
@@ -244,8 +244,8 @@ func (c *GistsListStarredCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsStarCmd struct {
-	internal.BaseCmd
 	GistId string `required:"" name:"gist_id"`
+	internal.BaseCmd
 }
 
 func (c *GistsStarCmd) Run(isValueSetMap map[string]bool) error {
@@ -256,8 +256,8 @@ func (c *GistsStarCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsUnstarCmd struct {
-	internal.BaseCmd
 	GistId string `required:"" name:"gist_id"`
+	internal.BaseCmd
 }
 
 func (c *GistsUnstarCmd) Run(isValueSetMap map[string]bool) error {
@@ -268,10 +268,10 @@ func (c *GistsUnstarCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsUpdateCommentCmd struct {
-	internal.BaseCmd
 	Body      string `required:"" name:"body"`
 	CommentId int64  `required:"" name:"comment_id"`
 	GistId    string `required:"" name:"gist_id"`
+	internal.BaseCmd
 }
 
 func (c *GistsUpdateCommentCmd) Run(isValueSetMap map[string]bool) error {

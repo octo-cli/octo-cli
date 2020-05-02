@@ -34,10 +34,10 @@ type PullsCmd struct {
 }
 
 type PullsCheckIfMergedCmd struct {
-	internal.BaseCmd
 	Owner      string `name:"owner"`
 	PullNumber int64  `required:"" name:"pull_number"`
 	Repo       string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *PullsCheckIfMergedCmd) Run(isValueSetMap map[string]bool) error {
@@ -50,7 +50,6 @@ func (c *PullsCheckIfMergedCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsCreateCmd struct {
-	internal.BaseCmd
 	Base                string `required:"" name:"base"`
 	Body                string `name:"body"`
 	Draft               bool   `name:"draft"`
@@ -60,6 +59,7 @@ type PullsCreateCmd struct {
 	Repo                string `required:"" name:"repo"`
 	SailorV             bool   "name:\"sailor-v-preview\" help:\"You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.sailor-v-preview+json\n```\""
 	Title               string `required:"" name:"title"`
+	internal.BaseCmd
 }
 
 func (c *PullsCreateCmd) Run(isValueSetMap map[string]bool) error {
@@ -78,7 +78,6 @@ func (c *PullsCreateCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsCreateCommentCmd struct {
-	internal.BaseCmd
 	Body        string `required:"" name:"body"`
 	ComfortFade bool   "name:\"comfort-fade-preview\" help:\"Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.comfort-fade-preview+json\n```\""
 	CommitId    string `required:"" name:"commit_id"`
@@ -91,6 +90,7 @@ type PullsCreateCommentCmd struct {
 	Side        string `name:"side"`
 	StartLine   int64  `name:"start_line"`
 	StartSide   string `name:"start_side"`
+	internal.BaseCmd
 }
 
 func (c *PullsCreateCommentCmd) Run(isValueSetMap map[string]bool) error {
@@ -112,12 +112,12 @@ func (c *PullsCreateCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsCreateReviewCommentReplyCmd struct {
-	internal.BaseCmd
 	Body       string `required:"" name:"body"`
 	CommentId  int64  `required:"" name:"comment_id"`
 	Owner      string `name:"owner"`
 	PullNumber int64  `required:"" name:"pull_number"`
 	Repo       string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *PullsCreateReviewCommentReplyCmd) Run(isValueSetMap map[string]bool) error {
@@ -132,12 +132,12 @@ func (c *PullsCreateReviewCommentReplyCmd) Run(isValueSetMap map[string]bool) er
 }
 
 type PullsCreateReviewRequestCmd struct {
-	internal.BaseCmd
 	Owner         string   `name:"owner"`
 	PullNumber    int64    `required:"" name:"pull_number"`
 	Repo          string   `required:"" name:"repo"`
 	Reviewers     []string `name:"reviewers"`
 	TeamReviewers []string `name:"team_reviewers"`
+	internal.BaseCmd
 }
 
 func (c *PullsCreateReviewRequestCmd) Run(isValueSetMap map[string]bool) error {
@@ -152,10 +152,10 @@ func (c *PullsCreateReviewRequestCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsDeleteCommentCmd struct {
-	internal.BaseCmd
 	CommentId int64  `required:"" name:"comment_id"`
 	Owner     string `name:"owner"`
 	Repo      string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *PullsDeleteCommentCmd) Run(isValueSetMap map[string]bool) error {
@@ -168,11 +168,11 @@ func (c *PullsDeleteCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsDeletePendingReviewCmd struct {
-	internal.BaseCmd
 	Owner      string `name:"owner"`
 	PullNumber int64  `required:"" name:"pull_number"`
 	Repo       string `required:"" name:"repo"`
 	ReviewId   int64  `required:"" name:"review_id"`
+	internal.BaseCmd
 }
 
 func (c *PullsDeletePendingReviewCmd) Run(isValueSetMap map[string]bool) error {
@@ -186,12 +186,12 @@ func (c *PullsDeletePendingReviewCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsDeleteReviewRequestCmd struct {
-	internal.BaseCmd
 	Owner         string   `name:"owner"`
 	PullNumber    int64    `required:"" name:"pull_number"`
 	Repo          string   `required:"" name:"repo"`
 	Reviewers     []string `name:"reviewers"`
 	TeamReviewers []string `name:"team_reviewers"`
+	internal.BaseCmd
 }
 
 func (c *PullsDeleteReviewRequestCmd) Run(isValueSetMap map[string]bool) error {
@@ -206,12 +206,12 @@ func (c *PullsDeleteReviewRequestCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsDismissReviewCmd struct {
-	internal.BaseCmd
 	Message    string `required:"" name:"message"`
 	Owner      string `name:"owner"`
 	PullNumber int64  `required:"" name:"pull_number"`
 	Repo       string `required:"" name:"repo"`
 	ReviewId   int64  `required:"" name:"review_id"`
+	internal.BaseCmd
 }
 
 func (c *PullsDismissReviewCmd) Run(isValueSetMap map[string]bool) error {
@@ -226,11 +226,11 @@ func (c *PullsDismissReviewCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsGetCmd struct {
-	internal.BaseCmd
 	Owner      string `name:"owner"`
 	PullNumber int64  `required:"" name:"pull_number"`
 	Repo       string `required:"" name:"repo"`
 	SailorV    bool   "name:\"sailor-v-preview\" help:\"You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.sailor-v-preview+json\n```\""
+	internal.BaseCmd
 }
 
 func (c *PullsGetCmd) Run(isValueSetMap map[string]bool) error {
@@ -244,12 +244,12 @@ func (c *PullsGetCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsGetCommentCmd struct {
-	internal.BaseCmd
 	ComfortFade  bool   "name:\"comfort-fade-preview\" help:\"Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.comfort-fade-preview+json\n```\""
 	CommentId    int64  `required:"" name:"comment_id"`
 	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the review comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
+	internal.BaseCmd
 }
 
 func (c *PullsGetCommentCmd) Run(isValueSetMap map[string]bool) error {
@@ -264,13 +264,13 @@ func (c *PullsGetCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsGetCommentsForReviewCmd struct {
-	internal.BaseCmd
 	Owner      string `name:"owner"`
 	Page       int64  `name:"page"`
 	PerPage    int64  `name:"per_page"`
 	PullNumber int64  `required:"" name:"pull_number"`
 	Repo       string `required:"" name:"repo"`
 	ReviewId   int64  `required:"" name:"review_id"`
+	internal.BaseCmd
 }
 
 func (c *PullsGetCommentsForReviewCmd) Run(isValueSetMap map[string]bool) error {
@@ -286,11 +286,11 @@ func (c *PullsGetCommentsForReviewCmd) Run(isValueSetMap map[string]bool) error 
 }
 
 type PullsGetReviewCmd struct {
-	internal.BaseCmd
 	Owner      string `name:"owner"`
 	PullNumber int64  `required:"" name:"pull_number"`
 	Repo       string `required:"" name:"repo"`
 	ReviewId   int64  `required:"" name:"review_id"`
+	internal.BaseCmd
 }
 
 func (c *PullsGetReviewCmd) Run(isValueSetMap map[string]bool) error {
@@ -304,7 +304,6 @@ func (c *PullsGetReviewCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsListCmd struct {
-	internal.BaseCmd
 	Base      string `name:"base"`
 	Direction string `name:"direction"`
 	Head      string `name:"head"`
@@ -315,6 +314,7 @@ type PullsListCmd struct {
 	SailorV   bool   "name:\"sailor-v-preview\" help:\"You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.sailor-v-preview+json\n```\""
 	Sort      string `name:"sort"`
 	State     string `name:"state"`
+	internal.BaseCmd
 }
 
 func (c *PullsListCmd) Run(isValueSetMap map[string]bool) error {
@@ -334,7 +334,6 @@ func (c *PullsListCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsListCommentsCmd struct {
-	internal.BaseCmd
 	ComfortFade  bool   "name:\"comfort-fade-preview\" help:\"Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.comfort-fade-preview+json\n```\""
 	Direction    string `name:"direction"`
 	Owner        string `name:"owner"`
@@ -345,6 +344,7 @@ type PullsListCommentsCmd struct {
 	Since        string `name:"since"`
 	Sort         string `name:"sort"`
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the review comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
+	internal.BaseCmd
 }
 
 func (c *PullsListCommentsCmd) Run(isValueSetMap map[string]bool) error {
@@ -364,7 +364,6 @@ func (c *PullsListCommentsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsListCommentsForRepoCmd struct {
-	internal.BaseCmd
 	ComfortFade  bool   "name:\"comfort-fade-preview\" help:\"Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.comfort-fade-preview+json\n```\""
 	Direction    string `name:"direction"`
 	Owner        string `name:"owner"`
@@ -374,6 +373,7 @@ type PullsListCommentsForRepoCmd struct {
 	Since        string `name:"since"`
 	Sort         string `name:"sort"`
 	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the review comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
+	internal.BaseCmd
 }
 
 func (c *PullsListCommentsForRepoCmd) Run(isValueSetMap map[string]bool) error {
@@ -392,12 +392,12 @@ func (c *PullsListCommentsForRepoCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsListCommitsCmd struct {
-	internal.BaseCmd
 	Owner      string `name:"owner"`
 	Page       int64  `name:"page"`
 	PerPage    int64  `name:"per_page"`
 	PullNumber int64  `required:"" name:"pull_number"`
 	Repo       string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *PullsListCommitsCmd) Run(isValueSetMap map[string]bool) error {
@@ -412,12 +412,12 @@ func (c *PullsListCommitsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsListFilesCmd struct {
-	internal.BaseCmd
 	Owner      string `name:"owner"`
 	Page       int64  `name:"page"`
 	PerPage    int64  `name:"per_page"`
 	PullNumber int64  `required:"" name:"pull_number"`
 	Repo       string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *PullsListFilesCmd) Run(isValueSetMap map[string]bool) error {
@@ -432,12 +432,12 @@ func (c *PullsListFilesCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsListReviewRequestsCmd struct {
-	internal.BaseCmd
 	Owner      string `name:"owner"`
 	Page       int64  `name:"page"`
 	PerPage    int64  `name:"per_page"`
 	PullNumber int64  `required:"" name:"pull_number"`
 	Repo       string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *PullsListReviewRequestsCmd) Run(isValueSetMap map[string]bool) error {
@@ -452,12 +452,12 @@ func (c *PullsListReviewRequestsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsListReviewsCmd struct {
-	internal.BaseCmd
 	Owner      string `name:"owner"`
 	Page       int64  `name:"page"`
 	PerPage    int64  `name:"per_page"`
 	PullNumber int64  `required:"" name:"pull_number"`
 	Repo       string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *PullsListReviewsCmd) Run(isValueSetMap map[string]bool) error {
@@ -472,7 +472,6 @@ func (c *PullsListReviewsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsMergeCmd struct {
-	internal.BaseCmd
 	CommitMessage string `name:"commit_message"`
 	CommitTitle   string `name:"commit_title"`
 	MergeMethod   string `name:"merge_method"`
@@ -480,6 +479,7 @@ type PullsMergeCmd struct {
 	PullNumber    int64  `required:"" name:"pull_number"`
 	Repo          string `required:"" name:"repo"`
 	Sha           string `name:"sha"`
+	internal.BaseCmd
 }
 
 func (c *PullsMergeCmd) Run(isValueSetMap map[string]bool) error {
@@ -496,13 +496,13 @@ func (c *PullsMergeCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsSubmitReviewCmd struct {
-	internal.BaseCmd
 	Body       string `name:"body"`
 	Event      string `required:"" name:"event"`
 	Owner      string `name:"owner"`
 	PullNumber int64  `required:"" name:"pull_number"`
 	Repo       string `required:"" name:"repo"`
 	ReviewId   int64  `required:"" name:"review_id"`
+	internal.BaseCmd
 }
 
 func (c *PullsSubmitReviewCmd) Run(isValueSetMap map[string]bool) error {
@@ -518,12 +518,12 @@ func (c *PullsSubmitReviewCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsUpdateBranchCmd struct {
-	internal.BaseCmd
 	ExpectedHeadSha string `name:"expected_head_sha"`
 	Lydian          bool   "name:\"lydian-preview\" required:\"\" help:\"Updating the pull request branch with latest upstream changes is currently available for developers to preview. To access this new endpoint during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.lydian-preview+json\n```\""
 	Owner           string `name:"owner"`
 	PullNumber      int64  `required:"" name:"pull_number"`
 	Repo            string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *PullsUpdateBranchCmd) Run(isValueSetMap map[string]bool) error {
@@ -538,7 +538,6 @@ func (c *PullsUpdateBranchCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsUpdateCmd struct {
-	internal.BaseCmd
 	Base                string `name:"base"`
 	Body                string `name:"body"`
 	MaintainerCanModify bool   `name:"maintainer_can_modify"`
@@ -548,6 +547,7 @@ type PullsUpdateCmd struct {
 	SailorV             bool   "name:\"sailor-v-preview\" help:\"You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.sailor-v-preview+json\n```\""
 	State               string `name:"state"`
 	Title               string `name:"title"`
+	internal.BaseCmd
 }
 
 func (c *PullsUpdateCmd) Run(isValueSetMap map[string]bool) error {
@@ -566,12 +566,12 @@ func (c *PullsUpdateCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsUpdateCommentCmd struct {
-	internal.BaseCmd
 	Body        string `required:"" name:"body"`
 	ComfortFade bool   "name:\"comfort-fade-preview\" help:\"Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.comfort-fade-preview+json\n```\""
 	CommentId   int64  `required:"" name:"comment_id"`
 	Owner       string `name:"owner"`
 	Repo        string `required:"" name:"repo"`
+	internal.BaseCmd
 }
 
 func (c *PullsUpdateCommentCmd) Run(isValueSetMap map[string]bool) error {
@@ -586,12 +586,12 @@ func (c *PullsUpdateCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsUpdateReviewCmd struct {
-	internal.BaseCmd
 	Body       string `required:"" name:"body"`
 	Owner      string `name:"owner"`
 	PullNumber int64  `required:"" name:"pull_number"`
 	Repo       string `required:"" name:"repo"`
 	ReviewId   int64  `required:"" name:"review_id"`
+	internal.BaseCmd
 }
 
 func (c *PullsUpdateReviewCmd) Run(isValueSetMap map[string]bool) error {
