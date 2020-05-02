@@ -17,7 +17,7 @@ type LicensesGetCmd struct {
 
 func (c *LicensesGetCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/licenses/:license")
+	c.SetURLPath("/licenses/{license}")
 	c.UpdateURLPath("license", c.License)
 	return c.DoRequest("GET")
 }
@@ -30,7 +30,7 @@ type LicensesGetForRepoCmd struct {
 
 func (c *LicensesGetForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/license")
+	c.SetURLPath("/repos/{owner}/{repo}/license")
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")

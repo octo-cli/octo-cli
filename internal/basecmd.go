@@ -83,7 +83,7 @@ func (c *BaseCmd) UpdateURLPath(valName string, value interface{}) {
 	case nil:
 		strVal = ""
 	}
-	c.url.Path = strings.Replace(c.url.Path, ":"+valName, strVal, 1)
+	c.url.Path = strings.Replace(c.url.Path, "{"+valName+"}", strVal, 1)
 }
 
 //UpdatePreview adds a preview header to a request

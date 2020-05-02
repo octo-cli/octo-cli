@@ -1086,13 +1086,13 @@ Commands:
     Get single hook -
     https://developer.github.com/v3/orgs/hooks/#get-single-hook
 
+  orgs get-membership --org=STRING --username=STRING --token=STRING
+    Get organization membership -
+    https://developer.github.com/v3/orgs/members/#get-organization-membership
+
   orgs get-membership-for-authenticated-user --org=STRING --token=STRING
     Get your organization membership -
     https://developer.github.com/v3/orgs/members/#get-your-organization-membership
-
-  orgs get-membership-for-user --org=STRING --username=STRING --token=STRING
-    Get organization membership -
-    https://developer.github.com/v3/orgs/members/#get-organization-membership
 
   orgs list --token=STRING
     List all organizations -

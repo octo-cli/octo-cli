@@ -21,7 +21,7 @@ type ScimGetProvisioningDetailsForUserCmd struct {
 
 func (c *ScimGetProvisioningDetailsForUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/scim/v2/organizations/:org/Users/:scim_user_id")
+	c.SetURLPath("/scim/v2/organizations/{org}/Users/{scim_user_id}")
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLPath("scim_user_id", c.ScimUserId)
 	return c.DoRequest("GET")
@@ -37,7 +37,7 @@ type ScimListProvisionedIdentitiesCmd struct {
 
 func (c *ScimListProvisionedIdentitiesCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/scim/v2/organizations/:org/Users")
+	c.SetURLPath("/scim/v2/organizations/{org}/Users")
 	c.UpdateURLQuery("count", c.Count)
 	c.UpdateURLQuery("filter", c.Filter)
 	c.UpdateURLPath("org", c.Org)
@@ -52,7 +52,7 @@ type ScimProvisionAndInviteUsersCmd struct {
 
 func (c *ScimProvisionAndInviteUsersCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/scim/v2/organizations/:org/Users")
+	c.SetURLPath("/scim/v2/organizations/{org}/Users")
 	c.UpdateURLPath("org", c.Org)
 	return c.DoRequest("POST")
 }
@@ -65,7 +65,7 @@ type ScimRemoveUserFromOrgCmd struct {
 
 func (c *ScimRemoveUserFromOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/scim/v2/organizations/:org/Users/:scim_user_id")
+	c.SetURLPath("/scim/v2/organizations/{org}/Users/{scim_user_id}")
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLPath("scim_user_id", c.ScimUserId)
 	return c.DoRequest("DELETE")
@@ -79,7 +79,7 @@ type ScimReplaceProvisionedUserInformationCmd struct {
 
 func (c *ScimReplaceProvisionedUserInformationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/scim/v2/organizations/:org/Users/:scim_user_id")
+	c.SetURLPath("/scim/v2/organizations/{org}/Users/{scim_user_id}")
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLPath("scim_user_id", c.ScimUserId)
 	return c.DoRequest("PUT")
@@ -93,7 +93,7 @@ type ScimUpdateUserAttributeCmd struct {
 
 func (c *ScimUpdateUserAttributeCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/scim/v2/organizations/:org/Users/:scim_user_id")
+	c.SetURLPath("/scim/v2/organizations/{org}/Users/{scim_user_id}")
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLPath("scim_user_id", c.ScimUserId)
 	return c.DoRequest("PATCH")

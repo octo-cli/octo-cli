@@ -46,7 +46,7 @@ type OauthAuthorizationsDeleteAuthorizationCmd struct {
 
 func (c *OauthAuthorizationsDeleteAuthorizationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/authorizations/:authorization_id")
+	c.SetURLPath("/authorizations/{authorization_id}")
 	c.UpdateURLPath("authorization_id", c.AuthorizationId)
 	return c.DoRequest("DELETE")
 }
@@ -58,7 +58,7 @@ type OauthAuthorizationsDeleteGrantCmd struct {
 
 func (c *OauthAuthorizationsDeleteGrantCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/applications/grants/:grant_id")
+	c.SetURLPath("/applications/grants/{grant_id}")
 	c.UpdateURLPath("grant_id", c.GrantId)
 	return c.DoRequest("DELETE")
 }
@@ -70,7 +70,7 @@ type OauthAuthorizationsGetAuthorizationCmd struct {
 
 func (c *OauthAuthorizationsGetAuthorizationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/authorizations/:authorization_id")
+	c.SetURLPath("/authorizations/{authorization_id}")
 	c.UpdateURLPath("authorization_id", c.AuthorizationId)
 	return c.DoRequest("GET")
 }
@@ -82,7 +82,7 @@ type OauthAuthorizationsGetGrantCmd struct {
 
 func (c *OauthAuthorizationsGetGrantCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/applications/grants/:grant_id")
+	c.SetURLPath("/applications/grants/{grant_id}")
 	c.UpdateURLPath("grant_id", c.GrantId)
 	return c.DoRequest("GET")
 }
@@ -99,7 +99,7 @@ type OauthAuthorizationsGetOrCreateAuthorizationForAppAndFingerprintCmd struct {
 
 func (c *OauthAuthorizationsGetOrCreateAuthorizationForAppAndFingerprintCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/authorizations/clients/:client_id/:fingerprint")
+	c.SetURLPath("/authorizations/clients/{client_id}/{fingerprint}")
 	c.UpdateURLPath("client_id", c.ClientId)
 	c.UpdateBody("client_secret", c.ClientSecret)
 	c.UpdateURLPath("fingerprint", c.Fingerprint)
@@ -121,7 +121,7 @@ type OauthAuthorizationsGetOrCreateAuthorizationForAppCmd struct {
 
 func (c *OauthAuthorizationsGetOrCreateAuthorizationForAppCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/authorizations/clients/:client_id")
+	c.SetURLPath("/authorizations/clients/{client_id}")
 	c.UpdateURLPath("client_id", c.ClientId)
 	c.UpdateBody("client_secret", c.ClientSecret)
 	c.UpdateBody("fingerprint", c.Fingerprint)
@@ -172,7 +172,7 @@ type OauthAuthorizationsUpdateAuthorizationCmd struct {
 
 func (c *OauthAuthorizationsUpdateAuthorizationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/authorizations/:authorization_id")
+	c.SetURLPath("/authorizations/{authorization_id}")
 	c.UpdateBody("add_scopes", c.AddScopes)
 	c.UpdateURLPath("authorization_id", c.AuthorizationId)
 	c.UpdateBody("fingerprint", c.Fingerprint)

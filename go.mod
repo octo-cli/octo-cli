@@ -5,10 +5,9 @@ go 1.14
 require (
 	github.com/alecthomas/kong v0.2.9
 	github.com/dnaeon/go-vcr v0.0.0-20180920040454-5637cf3d8a31
-	github.com/fatih/camelcase v1.0.0
 	github.com/fatih/structtag v1.0.0
 	github.com/getkin/kin-openapi v0.8.0
-	github.com/golang/protobuf v1.2.0
+	github.com/iancoleman/strcase v0.0.0-20191112232945-16388991a334
 	github.com/kr/pretty v0.1.0 // indirect
 	github.com/pkg/errors v0.9.1
 	github.com/spf13/afero v1.1.2

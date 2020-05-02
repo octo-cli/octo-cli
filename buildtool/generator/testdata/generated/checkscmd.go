@@ -25,7 +25,7 @@ type ChecksCreateSuiteCmd struct {
 
 func (c *ChecksCreateSuiteCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/check-suites")
+	c.SetURLPath("/repos/{owner}/{repo}/check-suites")
 	c.UpdatePreview("antiope", c.Antiope)
 	c.UpdateBody("head_sha", c.HeadSha)
 	c.UpdateURLPath("owner", c.Owner)
@@ -43,7 +43,7 @@ type ChecksGetCmd struct {
 
 func (c *ChecksGetCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/check-runs/:check_run_id")
+	c.SetURLPath("/repos/{owner}/{repo}/check-runs/{check_run_id}")
 	c.UpdatePreview("antiope", c.Antiope)
 	c.UpdateURLPath("check_run_id", c.CheckRunId)
 	c.UpdateURLPath("owner", c.Owner)
@@ -61,7 +61,7 @@ type ChecksGetSuiteCmd struct {
 
 func (c *ChecksGetSuiteCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/check-suites/:check_suite_id")
+	c.SetURLPath("/repos/{owner}/{repo}/check-suites/{check_suite_id}")
 	c.UpdatePreview("antiope", c.Antiope)
 	c.UpdateURLPath("check_suite_id", c.CheckSuiteId)
 	c.UpdateURLPath("owner", c.Owner)
@@ -81,7 +81,7 @@ type ChecksListAnnotationsCmd struct {
 
 func (c *ChecksListAnnotationsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/check-runs/:check_run_id/annotations")
+	c.SetURLPath("/repos/{owner}/{repo}/check-runs/{check_run_id}/annotations")
 	c.UpdatePreview("antiope", c.Antiope)
 	c.UpdateURLPath("check_run_id", c.CheckRunId)
 	c.UpdateURLPath("owner", c.Owner)
@@ -106,7 +106,7 @@ type ChecksListForRefCmd struct {
 
 func (c *ChecksListForRefCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/commits/:ref/check-runs")
+	c.SetURLPath("/repos/{owner}/{repo}/commits/{ref}/check-runs")
 	c.UpdatePreview("antiope", c.Antiope)
 	c.UpdateURLQuery("check_name", c.CheckName)
 	c.UpdateURLQuery("filter", c.Filter)
@@ -134,7 +134,7 @@ type ChecksListForSuiteCmd struct {
 
 func (c *ChecksListForSuiteCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/check-suites/:check_suite_id/check-runs")
+	c.SetURLPath("/repos/{owner}/{repo}/check-suites/{check_suite_id}/check-runs")
 	c.UpdatePreview("antiope", c.Antiope)
 	c.UpdateURLQuery("check_name", c.CheckName)
 	c.UpdateURLPath("check_suite_id", c.CheckSuiteId)
@@ -161,7 +161,7 @@ type ChecksListSuitesForRefCmd struct {
 
 func (c *ChecksListSuitesForRefCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/commits/:ref/check-suites")
+	c.SetURLPath("/repos/{owner}/{repo}/commits/{ref}/check-suites")
 	c.UpdatePreview("antiope", c.Antiope)
 	c.UpdateURLQuery("app_id", c.AppId)
 	c.UpdateURLQuery("check_name", c.CheckName)
@@ -183,7 +183,7 @@ type ChecksRerequestSuiteCmd struct {
 
 func (c *ChecksRerequestSuiteCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/check-suites/:check_suite_id/rerequest")
+	c.SetURLPath("/repos/{owner}/{repo}/check-suites/{check_suite_id}/rerequest")
 	c.UpdatePreview("antiope", c.Antiope)
 	c.UpdateURLPath("check_suite_id", c.CheckSuiteId)
 	c.UpdateURLPath("owner", c.Owner)

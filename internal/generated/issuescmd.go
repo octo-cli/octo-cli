@@ -56,7 +56,7 @@ type IssuesAddAssigneesCmd struct {
 
 func (c *IssuesAddAssigneesCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/issues/:issue_number/assignees")
+	c.SetURLPath("/repos/{owner}/{repo}/issues/{issue_number}/assignees")
 	c.UpdateBody("assignees", c.Assignees)
 	c.UpdateURLPath("issue_number", c.IssueNumber)
 	c.UpdateURLPath("owner", c.Owner)
@@ -74,7 +74,7 @@ type IssuesAddLabelsCmd struct {
 
 func (c *IssuesAddLabelsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/issues/:issue_number/labels")
+	c.SetURLPath("/repos/{owner}/{repo}/issues/{issue_number}/labels")
 	c.UpdateURLPath("issue_number", c.IssueNumber)
 	c.UpdateBody("labels", c.Labels)
 	c.UpdateURLPath("owner", c.Owner)
@@ -91,7 +91,7 @@ type IssuesCheckAssigneeCmd struct {
 
 func (c *IssuesCheckAssigneeCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/assignees/:assignee")
+	c.SetURLPath("/repos/{owner}/{repo}/assignees/{assignee}")
 	c.UpdateURLPath("assignee", c.Assignee)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
@@ -112,7 +112,7 @@ type IssuesCreateCmd struct {
 
 func (c *IssuesCreateCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/issues")
+	c.SetURLPath("/repos/{owner}/{repo}/issues")
 	c.UpdateBody("assignee", c.Assignee)
 	c.UpdateBody("assignees", c.Assignees)
 	c.UpdateBody("body", c.Body)
@@ -134,7 +134,7 @@ type IssuesCreateCommentCmd struct {
 
 func (c *IssuesCreateCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/issues/:issue_number/comments")
+	c.SetURLPath("/repos/{owner}/{repo}/issues/{issue_number}/comments")
 	c.UpdateBody("body", c.Body)
 	c.UpdateURLPath("issue_number", c.IssueNumber)
 	c.UpdateURLPath("owner", c.Owner)
@@ -153,7 +153,7 @@ type IssuesCreateLabelCmd struct {
 
 func (c *IssuesCreateLabelCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/labels")
+	c.SetURLPath("/repos/{owner}/{repo}/labels")
 	c.UpdateBody("color", c.Color)
 	c.UpdateBody("description", c.Description)
 	c.UpdateBody("name", c.Name)
@@ -174,7 +174,7 @@ type IssuesCreateMilestoneCmd struct {
 
 func (c *IssuesCreateMilestoneCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/milestones")
+	c.SetURLPath("/repos/{owner}/{repo}/milestones")
 	c.UpdateBody("description", c.Description)
 	c.UpdateBody("due_on", c.DueOn)
 	c.UpdateURLPath("owner", c.Owner)
@@ -193,7 +193,7 @@ type IssuesDeleteCommentCmd struct {
 
 func (c *IssuesDeleteCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/issues/comments/:comment_id")
+	c.SetURLPath("/repos/{owner}/{repo}/issues/comments/{comment_id}")
 	c.UpdateURLPath("comment_id", c.CommentId)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
@@ -209,7 +209,7 @@ type IssuesDeleteLabelCmd struct {
 
 func (c *IssuesDeleteLabelCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/labels/:name")
+	c.SetURLPath("/repos/{owner}/{repo}/labels/{name}")
 	c.UpdateURLPath("name", c.Name)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
@@ -225,7 +225,7 @@ type IssuesDeleteMilestoneCmd struct {
 
 func (c *IssuesDeleteMilestoneCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/milestones/:milestone_number")
+	c.SetURLPath("/repos/{owner}/{repo}/milestones/{milestone_number}")
 	c.UpdateURLPath("milestone_number", c.MilestoneNumber)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
@@ -242,7 +242,7 @@ type IssuesGetCmd struct {
 
 func (c *IssuesGetCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/issues/:issue_number")
+	c.SetURLPath("/repos/{owner}/{repo}/issues/{issue_number}")
 	c.UpdateURLPath("issue_number", c.IssueNumber)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
@@ -261,7 +261,7 @@ type IssuesGetCommentCmd struct {
 
 func (c *IssuesGetCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/issues/comments/:comment_id")
+	c.SetURLPath("/repos/{owner}/{repo}/issues/comments/{comment_id}")
 	c.UpdateURLPath("comment_id", c.CommentId)
 	c.UpdatePreview("machine-man", c.MachineMan)
 	c.UpdateURLPath("owner", c.Owner)
@@ -282,7 +282,7 @@ type IssuesGetEventCmd struct {
 
 func (c *IssuesGetEventCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/issues/events/:event_id")
+	c.SetURLPath("/repos/{owner}/{repo}/issues/events/{event_id}")
 	c.UpdateURLPath("event_id", c.EventId)
 	c.UpdatePreview("machine-man", c.MachineMan)
 	c.UpdateURLPath("owner", c.Owner)
@@ -301,7 +301,7 @@ type IssuesGetLabelCmd struct {
 
 func (c *IssuesGetLabelCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/labels/:name")
+	c.SetURLPath("/repos/{owner}/{repo}/labels/{name}")
 	c.UpdateURLPath("name", c.Name)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
@@ -317,7 +317,7 @@ type IssuesGetMilestoneCmd struct {
 
 func (c *IssuesGetMilestoneCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/milestones/:milestone_number")
+	c.SetURLPath("/repos/{owner}/{repo}/milestones/{milestone_number}")
 	c.UpdateURLPath("milestone_number", c.MilestoneNumber)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
@@ -334,7 +334,7 @@ type IssuesListAssigneesCmd struct {
 
 func (c *IssuesListAssigneesCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/assignees")
+	c.SetURLPath("/repos/{owner}/{repo}/assignees")
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
@@ -385,7 +385,7 @@ type IssuesListCommentsCmd struct {
 
 func (c *IssuesListCommentsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/issues/:issue_number/comments")
+	c.SetURLPath("/repos/{owner}/{repo}/issues/{issue_number}/comments")
 	c.UpdateURLPath("issue_number", c.IssueNumber)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLQuery("page", c.Page)
@@ -410,7 +410,7 @@ type IssuesListCommentsForRepoCmd struct {
 
 func (c *IssuesListCommentsForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/issues/comments")
+	c.SetURLPath("/repos/{owner}/{repo}/issues/comments")
 	c.UpdateURLQuery("direction", c.Direction)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLQuery("page", c.Page)
@@ -435,7 +435,7 @@ type IssuesListEventsCmd struct {
 
 func (c *IssuesListEventsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/issues/:issue_number/events")
+	c.SetURLPath("/repos/{owner}/{repo}/issues/{issue_number}/events")
 	c.UpdateURLPath("issue_number", c.IssueNumber)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLQuery("page", c.Page)
@@ -458,7 +458,7 @@ type IssuesListEventsForRepoCmd struct {
 
 func (c *IssuesListEventsForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/issues/events")
+	c.SetURLPath("/repos/{owner}/{repo}/issues/events")
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
@@ -481,7 +481,7 @@ type IssuesListEventsForTimelineCmd struct {
 
 func (c *IssuesListEventsForTimelineCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/issues/:issue_number/timeline")
+	c.SetURLPath("/repos/{owner}/{repo}/issues/{issue_number}/timeline")
 	c.UpdateURLPath("issue_number", c.IssueNumber)
 	c.UpdatePreview("mockingbird", c.Mockingbird)
 	c.UpdateURLPath("owner", c.Owner)
@@ -539,7 +539,7 @@ type IssuesListForOrgCmd struct {
 
 func (c *IssuesListForOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/issues")
+	c.SetURLPath("/orgs/{org}/issues")
 	c.UpdateURLQuery("direction", c.Direction)
 	c.UpdateURLQuery("filter", c.Filter)
 	c.UpdateURLQuery("labels", c.Labels)
@@ -575,7 +575,7 @@ type IssuesListForRepoCmd struct {
 
 func (c *IssuesListForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/issues")
+	c.SetURLPath("/repos/{owner}/{repo}/issues")
 	c.UpdateURLQuery("assignee", c.Assignee)
 	c.UpdateURLQuery("creator", c.Creator)
 	c.UpdateURLQuery("direction", c.Direction)
@@ -605,7 +605,7 @@ type IssuesListLabelsForMilestoneCmd struct {
 
 func (c *IssuesListLabelsForMilestoneCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/milestones/:milestone_number/labels")
+	c.SetURLPath("/repos/{owner}/{repo}/milestones/{milestone_number}/labels")
 	c.UpdateURLPath("milestone_number", c.MilestoneNumber)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLQuery("page", c.Page)
@@ -624,7 +624,7 @@ type IssuesListLabelsForRepoCmd struct {
 
 func (c *IssuesListLabelsForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/labels")
+	c.SetURLPath("/repos/{owner}/{repo}/labels")
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
@@ -643,7 +643,7 @@ type IssuesListLabelsOnIssueCmd struct {
 
 func (c *IssuesListLabelsOnIssueCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/issues/:issue_number/labels")
+	c.SetURLPath("/repos/{owner}/{repo}/issues/{issue_number}/labels")
 	c.UpdateURLPath("issue_number", c.IssueNumber)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLQuery("page", c.Page)
@@ -665,7 +665,7 @@ type IssuesListMilestonesForRepoCmd struct {
 
 func (c *IssuesListMilestonesForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/milestones")
+	c.SetURLPath("/repos/{owner}/{repo}/milestones")
 	c.UpdateURLQuery("direction", c.Direction)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLQuery("page", c.Page)
@@ -687,7 +687,7 @@ type IssuesLockCmd struct {
 
 func (c *IssuesLockCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/issues/:issue_number/lock")
+	c.SetURLPath("/repos/{owner}/{repo}/issues/{issue_number}/lock")
 	c.UpdateURLPath("issue_number", c.IssueNumber)
 	c.UpdateBody("lock_reason", c.LockReason)
 	c.UpdateURLPath("owner", c.Owner)
@@ -705,7 +705,7 @@ type IssuesRemoveAllLabelsCmd struct {
 
 func (c *IssuesRemoveAllLabelsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/issues/:issue_number/labels")
+	c.SetURLPath("/repos/{owner}/{repo}/issues/{issue_number}/labels")
 	c.UpdateURLPath("issue_number", c.IssueNumber)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
@@ -722,7 +722,7 @@ type IssuesRemoveAssigneesCmd struct {
 
 func (c *IssuesRemoveAssigneesCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/issues/:issue_number/assignees")
+	c.SetURLPath("/repos/{owner}/{repo}/issues/{issue_number}/assignees")
 	c.UpdateBody("assignees", c.Assignees)
 	c.UpdateURLPath("issue_number", c.IssueNumber)
 	c.UpdateURLPath("owner", c.Owner)
@@ -740,7 +740,7 @@ type IssuesRemoveLabelCmd struct {
 
 func (c *IssuesRemoveLabelCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/issues/:issue_number/labels/:name")
+	c.SetURLPath("/repos/{owner}/{repo}/issues/{issue_number}/labels/{name}")
 	c.UpdateURLPath("issue_number", c.IssueNumber)
 	c.UpdateURLPath("name", c.Name)
 	c.UpdateURLPath("owner", c.Owner)
@@ -758,7 +758,7 @@ type IssuesReplaceAllLabelsCmd struct {
 
 func (c *IssuesReplaceAllLabelsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/issues/:issue_number/labels")
+	c.SetURLPath("/repos/{owner}/{repo}/issues/{issue_number}/labels")
 	c.UpdateURLPath("issue_number", c.IssueNumber)
 	c.UpdateBody("labels", c.Labels)
 	c.UpdateURLPath("owner", c.Owner)
@@ -775,7 +775,7 @@ type IssuesUnlockCmd struct {
 
 func (c *IssuesUnlockCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/issues/:issue_number/lock")
+	c.SetURLPath("/repos/{owner}/{repo}/issues/{issue_number}/lock")
 	c.UpdateURLPath("issue_number", c.IssueNumber)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
@@ -798,7 +798,7 @@ type IssuesUpdateCmd struct {
 
 func (c *IssuesUpdateCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/issues/:issue_number")
+	c.SetURLPath("/repos/{owner}/{repo}/issues/{issue_number}")
 	c.UpdateBody("assignee", c.Assignee)
 	c.UpdateBody("assignees", c.Assignees)
 	c.UpdateBody("body", c.Body)
@@ -822,7 +822,7 @@ type IssuesUpdateCommentCmd struct {
 
 func (c *IssuesUpdateCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/issues/comments/:comment_id")
+	c.SetURLPath("/repos/{owner}/{repo}/issues/comments/{comment_id}")
 	c.UpdateBody("body", c.Body)
 	c.UpdateURLPath("comment_id", c.CommentId)
 	c.UpdateURLPath("owner", c.Owner)
@@ -842,7 +842,7 @@ type IssuesUpdateLabelCmd struct {
 
 func (c *IssuesUpdateLabelCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/labels/:name")
+	c.SetURLPath("/repos/{owner}/{repo}/labels/{name}")
 	c.UpdateBody("color", c.Color)
 	c.UpdateBody("description", c.Description)
 	c.UpdateURLPath("name", c.Name)
@@ -865,7 +865,7 @@ type IssuesUpdateMilestoneCmd struct {
 
 func (c *IssuesUpdateMilestoneCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/milestones/:milestone_number")
+	c.SetURLPath("/repos/{owner}/{repo}/milestones/{milestone_number}")
 	c.UpdateBody("description", c.Description)
 	c.UpdateBody("due_on", c.DueOn)
 	c.UpdateURLPath("milestone_number", c.MilestoneNumber)
