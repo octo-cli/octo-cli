@@ -67,7 +67,7 @@ type SearchEmailLegacyCmd struct {
 
 func (c *SearchEmailLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/legacy/user/email/:email")
+	c.SetURLPath("/legacy/user/email/{email}")
 	c.UpdateURLPath("email", c.Email)
 	return c.DoRequest("GET")
 }
@@ -102,7 +102,7 @@ type SearchIssuesLegacyCmd struct {
 
 func (c *SearchIssuesLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/legacy/issues/search/:owner/:repository/:state/:keyword")
+	c.SetURLPath("/legacy/issues/search/{owner}/{repository}/{state}/{keyword}")
 	c.UpdateURLPath("keyword", c.Keyword)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repository", c.Repository)
@@ -161,7 +161,7 @@ type SearchReposLegacyCmd struct {
 
 func (c *SearchReposLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/legacy/repos/search/:keyword")
+	c.SetURLPath("/legacy/repos/search/{keyword}")
 	c.UpdateURLPath("keyword", c.Keyword)
 	c.UpdateURLQuery("language", c.Language)
 	c.UpdateURLQuery("order", c.Order)
@@ -214,7 +214,7 @@ type SearchUsersLegacyCmd struct {
 
 func (c *SearchUsersLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/legacy/user/search/:keyword")
+	c.SetURLPath("/legacy/user/search/{keyword}")
 	c.UpdateURLPath("keyword", c.Keyword)
 	c.UpdateURLQuery("order", c.Order)
 	c.UpdateURLQuery("sort", c.Sort)

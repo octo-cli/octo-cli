@@ -2,6 +2,7 @@ package generator
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"go/format"
 	"path/filepath"
@@ -9,9 +10,9 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/fatih/camelcase"
 	"github.com/fatih/structtag"
-	"github.com/pkg/errors"
+	"github.com/getkin/kin-openapi/openapi3"
+	"github.com/iancoleman/strcase"
 	"github.com/spf13/afero"
 	"golang.org/x/tools/imports"
 )
@@ -24,17 +25,9 @@ var paramTypes = map[string]string{
 	"boolean":   "bool",
 }
 
-func sortedRoutesMapKeys(mp map[string]Routes) []string {
-	var keys []string
-	for k := range mp {
-		keys = append(keys, k)
-	}
-	sort.Strings(keys)
-	return keys
-}
-
 var updateMethodMap = map[string]string{
 	"url":     "UpdateURLPath",
+	"path":    "UpdateURLPath",
 	"body":    "UpdateBody",
 	"query":   "UpdateURLQuery",
 	"header":  "AddRequestHeader",
@@ -104,48 +97,61 @@ func verify(routesPath, outputPath string) ([]string, error) {
 }
 
 func Generate(routesPath, outputPath string, fs afero.Fs) {
-	if fs == nil {
-		fs = afero.NewOsFs()
+	files, err := genFileTmpls(routesPath)
+	if err != nil {
+		panic(err)
 	}
+	for filename, fileTmpl := range files {
+		err := writeGoFile(filename, "main", fileTmpl, outputPath, fs)
+		if err != nil {
+			panic(err)
+		}
+	}
+}
+
+func genFileTmpls(routesPath string) (map[string]FileTmpl, error) {
 	CLITmpl := StructTmplHelper{
 		Name: "CLI",
 	}
 	cmdHelps := map[string]map[string]string{}
 	flagHelps := map[string]map[string]map[string]string{}
-	routesMap, err := parseRoutesFile(routesPath)
+	svcTmpls := map[string]*SvcTmpl{}
+	swagger, err := openapi3.NewSwaggerLoader().LoadSwaggerFromFile(routesPath)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
-	var svcTmpls []SvcTmpl
-	for _, svcName := range sortedRoutesMapKeys(routesMap) {
-		svc := routesMap[svcName]
-		svcName = strings.Title(svcName)
-		svcNodeName := nodeName(svcName)
-		cmdHelps[svcNodeName] = map[string]string{}
-		if flagHelps[svcNodeName] == nil {
-			flagHelps[svcNodeName] = map[string]map[string]string{}
-		}
-		CLITmpl.Fields = append(CLITmpl.Fields, StructField{
-			Name: svcName,
-			Type: svcName + "Cmd",
-			Tags: newTags(newTag("cmd", "")),
-		})
-
-		svcTmpl := SvcTmpl{
-			SvcStruct: StructTmplHelper{
-				Name: svcName + "Cmd",
-			},
-		}
-
-		for _, route := range svc {
-			if svcName == "Orgs" && route.IDName == "list" && route.Path == "/user/orgs" {
-				route.IDName = "list-for-current-user"
+	for path, pathItem := range swagger.Paths {
+		for method, op := range pathItem.Operations() {
+			opID := strings.Split(op.OperationID, "/")
+			if len(opID) != 2 {
+				continue
 			}
-			if svcName == "Orgs" && route.IDName == "get-membership" && route.Path == "/orgs/:org/memberships/:username" {
-				route.IDName = "get-membership-for-user"
+			idName := opID[1]
+			svcNodeName := opID[0]
+			svcName := strcase.ToCamel(opID[0])
+			if cmdHelps[svcNodeName] == nil {
+				cmdHelps[svcNodeName] = map[string]string{}
 			}
 
-			structName := svcName + toArgName(route.IDName) + "Cmd"
+			if flagHelps[svcNodeName] == nil {
+				flagHelps[svcNodeName] = map[string]map[string]string{}
+			}
+
+			if svcTmpls[svcName] == nil {
+
+				svcTmpls[svcName] = &SvcTmpl{
+					SvcStruct: StructTmplHelper{
+						Name: svcName + "Cmd",
+					},
+				}
+				CLITmpl.Fields = append(CLITmpl.Fields, StructField{
+					Name: svcName,
+					Type: svcName + "Cmd",
+					Tags: newTags(newTag("cmd", "")),
+				})
+			}
+
+			structName := svcName + toArgName(idName) + "Cmd"
 			tmplHelper := StructTmplHelper{
 				Name:   structName,
 				Fields: []StructField{{Type: "internal.BaseCmd"}},
@@ -153,102 +159,54 @@ func Generate(routesPath, outputPath string, fs afero.Fs) {
 
 			runMethod := RunMethod{
 				ReceiverName: structName,
-				Method:       strings.ToUpper(route.Method),
-				URLPath:      route.Path,
+				Method:       strings.ToUpper(method),
+				URLPath:      path,
 			}
 
-			skipThisRoute := false
-			for _, preview := range route.Previews {
-				tags := newTags(newTag("name", preview.Name+"-preview"))
-				if preview.Required {
-					setTag(tags, newTag("required", ""))
-				}
-				setTag(tags, newTag("help", preview.Description))
-
-				previewParamName := toArgName(preview.Name)
-				tmplHelper.Fields = append(tmplHelper.Fields,
-					StructField{
-						Name: previewParamName,
-						Type: "bool",
-						Tags: tags,
-					},
-				)
-				runMethod.Params = append(runMethod.Params, RunMethodParam{
-					Name:         preview.Name,
-					UpdateMethod: updateMethodMap["preview"],
-					ValueField:   previewParamName,
-				})
+			if flagHelps[svcNodeName][idName] == nil {
+				flagHelps[svcNodeName][idName] = map[string]string{}
 			}
-			for i := 0; i < len(route.Params); i++ {
-				param := route.Params[i]
-				// We want owner to be optional so that repo can be set as part of repo like
-				//  --repo=owner/repo
-				if param.Name == "owner" {
-					if len(route.Params) > i {
-						if len(route.Params) > i+1 && route.Params[i+1].Name == "repo" {
-							param.Required = false
-						}
-					}
-				}
-				if flagHelps[svcNodeName][route.IDName] == nil {
-					flagHelps[svcNodeName][route.IDName] = map[string]string{}
-				}
 
-				paramName := toArgName(param.Name)
-				paramType, ok := paramTypes[param.Type]
-				if !ok {
-					fmt.Printf("skipping %s/%s because param %s has type %s \n", svcNodeName, route.IDName, param.Name, param.Type)
-					delete(flagHelps[svcNodeName], route.IDName)
-					skipThisRoute = true
-					break
-				}
-				tags := &structtag.Tags{}
-				if param.Required {
-					setTag(tags, &structtag.Tag{Key: "required"})
-				}
-				setTag(tags, &structtag.Tag{Key: "name", Name: param.Name})
-
-				flagHelps[svcNodeName][route.IDName][param.Name] = param.Description
-				sf := StructField{
-					Name: paramName,
-					Type: paramType,
-					Tags: tags,
-				}
-				tmplHelper.Fields = append(tmplHelper.Fields, sf)
-
-				runMethod.Params = append(runMethod.Params, RunMethodParam{
-					Name:         param.Name,
-					UpdateMethod: updateMethodMap[param.Location],
-					ValueField:   paramName,
-				})
-			}
-			if skipThisRoute {
+			err := previewData(op, &tmplHelper.Fields, &runMethod.Params, flagHelps[svcNodeName][idName])
+			if err != nil {
+				delete(flagHelps[svcNodeName], idName)
 				continue
 			}
+
+			err = bodyParamData(op, &tmplHelper.Fields, &runMethod.Params, flagHelps[svcNodeName][idName])
+			if err != nil {
+				delete(flagHelps[svcNodeName], idName)
+				continue
+			}
+
+			err = paramData(op, &tmplHelper.Fields, &runMethod.Params, flagHelps[svcNodeName][idName])
+			if err != nil {
+				delete(flagHelps[svcNodeName], idName)
+				continue
+			}
+
+			svcTmpl := svcTmpls[svcName]
 
 			svcTmpl.CmdStructAndMethods = append(svcTmpl.CmdStructAndMethods, CmdStructAndMethod{
 				CmdStruct: tmplHelper,
 				RunMethod: runMethod,
 			})
-			helpText := route.Name
-			if route.DocumentationURL != "" {
-				helpText = fmt.Sprintf("%v - %v", route.Name, route.DocumentationURL)
+
+			helpText := op.Summary
+			if op.ExternalDocs.URL != "" {
+				helpText = fmt.Sprintf("%v - %v", helpText, op.ExternalDocs.URL)
 			}
-			cmdHelps[svcNodeName][route.IDName] = helpText
+			cmdHelps[svcNodeName][idName] = helpText
 			svcTmpl.SvcStruct.Fields = append(svcTmpl.SvcStruct.Fields, StructField{
-				Name: toArgName(route.IDName),
+				Name: toArgName(idName),
 				Type: structName,
 				Tags: newTags(newTag("cmd", "")),
 			})
-
 		}
-		tmplSorting(svcTmpl)
-		svcTmpls = append(svcTmpls, svcTmpl)
 	}
-	err = fs.MkdirAll(outputPath, 0755)
-	if err != nil {
-		panic(err)
-	}
+	sort.Slice(CLITmpl.Fields, func(i, j int) bool {
+		return CLITmpl.Fields[i].Name < CLITmpl.Fields[j].Name
+	})
 	files := map[string]FileTmpl{
 		"cli.go": {
 			CmdHelps:  cmdHelps,
@@ -258,18 +216,138 @@ func Generate(routesPath, outputPath string, fs afero.Fs) {
 			},
 		},
 	}
-	for _, svcTmpl := range svcTmpls {
+	svcTmplsKeys := make([]string, 0, len(svcTmpls))
+	for k := range svcTmpls {
+		svcTmplsKeys = append(svcTmplsKeys, k)
+	}
+	sort.Strings(svcTmplsKeys)
+	for _, key := range svcTmplsKeys {
+		svcTmpl := svcTmpls[key]
+		tmplSorting(svcTmpl)
 		filename := strings.ToLower(svcTmpl.SvcStruct.Name) + ".go"
 		files[filename] = FileTmpl{
-			SvcTmpls: []SvcTmpl{svcTmpl},
+			SvcTmpls: []SvcTmpl{*svcTmpl},
 		}
 	}
-	for filename, fileTmpl := range files {
-		err = writeGoFile(filename, "main", fileTmpl, outputPath, fs)
-		if err != nil {
-			panic(err)
-		}
+	return files, nil
+}
+
+func paramRequired(parameters openapi3.Parameters, idx int) bool {
+	param := parameters[idx].Value
+	if param.Name != "owner" || param.In != "path" || idx == len(parameters)-1 {
+		return param.Required
 	}
+	nextParam := parameters[idx+1].Value
+	return nextParam.Name != "repo" || nextParam.In != "path"
+}
+
+func previewData(op *openapi3.Operation, fields *[]StructField, rmParams *[]RunMethodParam, helpers map[string]string) error {
+	xMsg, ok := op.Extensions["x-github"].(json.RawMessage)
+	if !ok {
+		return nil
+	}
+
+	xg := struct {
+		Legacy          bool
+		EnabledForApps  bool
+		GithubCloudOnly bool
+		Previews        []struct {
+			Name     string
+			Required bool
+			Note     string
+		}
+	}{}
+
+	err := json.Unmarshal(xMsg, &xg)
+	if err != nil {
+		return err
+	}
+	for _, preview := range xg.Previews {
+		tags := newTags(newTag("name", preview.Name+"-preview"))
+		if preview.Required {
+			setTag(tags, newTag("required", ""))
+		}
+		setTag(tags, newTag("help", preview.Note))
+		*fields = append(*fields, StructField{
+			Name: toArgName(preview.Name),
+			Type: "bool",
+			Tags: tags,
+		})
+		*rmParams = append(*rmParams, RunMethodParam{
+			Name:         preview.Name,
+			UpdateMethod: updateMethodMap["preview"],
+			ValueField:   toArgName(preview.Name),
+		})
+	}
+	return nil
+}
+
+func paramData(op *openapi3.Operation, fields *[]StructField, rmParams *[]RunMethodParam, helpers map[string]string) error {
+	for i, pRef := range op.Parameters {
+		param := pRef.Value
+		if param.Name == "accept" {
+			continue
+		}
+		paramType, ok := paramTypes[param.Schema.Value.Type]
+		if !ok {
+			return fmt.Errorf("unexpected type %q for parameter %q", param.Schema.Value.Type, param.Name)
+		}
+		required := paramRequired(op.Parameters, i)
+		tags := new(structtag.Tags)
+		if required {
+			setTag(tags, &structtag.Tag{Key: "required"})
+		}
+		setTag(tags, &structtag.Tag{Key: "name", Name: param.Name})
+		*fields = append(*fields, StructField{
+			Name: toArgName(param.Name),
+			Type: paramType,
+			Tags: tags,
+		})
+		*rmParams = append(*rmParams, RunMethodParam{
+			Name:         param.Name,
+			ValueField:   toArgName(param.Name),
+			UpdateMethod: updateMethodMap[param.In],
+		})
+		helpers[param.Name] = param.Description
+	}
+	return nil
+}
+
+func bodyParamData(op *openapi3.Operation, fields *[]StructField, rmParams *[]RunMethodParam, helpers map[string]string) error {
+	if op.RequestBody == nil || op.RequestBody.Value.Content.Get("application/json") == nil {
+		return nil
+	}
+	bodySchema := op.RequestBody.Value.Content.Get("application/json").Schema.Value
+	required := map[string]bool{}
+	for _, s := range bodySchema.Required {
+		required[s] = true
+	}
+
+	for nm, prop := range bodySchema.Properties {
+		pv := prop.Value
+		paramType, ok := paramTypes[getPropType(pv)]
+		if !ok {
+			return fmt.Errorf("unexpected type")
+		}
+		tags := new(structtag.Tags)
+		if required[nm] {
+			setTag(tags, &structtag.Tag{Key: "required"})
+		}
+		setTag(tags, &structtag.Tag{Key: "name", Name: nm})
+		*fields = append(*fields, StructField{
+			Name: toArgName(nm),
+			Type: paramType,
+			Tags: tags,
+		})
+
+		*rmParams = append(*rmParams, RunMethodParam{
+			Name:         nm,
+			UpdateMethod: updateMethodMap["body"],
+			ValueField:   toArgName(nm),
+		})
+		helpers[nm] = pv.Description
+	}
+	return nil
 }
 
 func sortCmdStructFields(fields []StructField) {
@@ -295,7 +373,7 @@ func sortCmdStructFields(fields []StructField) {
 	copy(fields, newFields)
 }
 
-func tmplSorting(svcTmpl SvcTmpl) {
+func tmplSorting(svcTmpl *SvcTmpl) {
 	sort.Slice(svcTmpl.SvcStruct.Fields, func(i, j int) bool {
 		return svcTmpl.SvcStruct.Fields[i].Name < svcTmpl.SvcStruct.Fields[j].Name
 	})
@@ -452,18 +530,18 @@ func writeGoFile(filename, templateName string, p interface{}, path string, fs a
 	var buf bytes.Buffer
 	err := tmpl.ExecuteTemplate(&buf, templateName, p)
 	if err != nil {
-		return errors.Wrap(err, "failed to execute template")
+		return err
 	}
 	out, err := format.Source(buf.Bytes())
 	if err != nil {
 		fmt.Println(filename)
 		fmt.Println(templateName)
 		fmt.Println(buf.String())
-		return errors.Wrap(err, "failed running format.Source")
+		return err
 	}
 	out, err = imports.Process("", out, nil)
 	if err != nil {
-		return errors.Wrap(err, "failed running imports.Process")
+		return err
 	}
 	fl := filepath.Join(path, filename)
 	return afero.WriteFile(fs, fl, out, 0644)
@@ -482,7 +560,13 @@ func toArgName(in string) string {
 	return out
 }
 
-//nodeName returns a string transformed from CamelCase to dash separated lower case.
-func nodeName(s string) string {
-	return strings.ToLower(strings.Join(camelcase.Split(s), "-"))
+func getPropType(schema *openapi3.Schema) string {
+	if schema == nil {
+		return ""
+	}
+	if schema.Type != "array" || schema.Items == nil {
+		return schema.Type
+	}
+	itemType := schema.Items.Value.Type
+	return fmt.Sprintf("%s[]", itemType)
 }

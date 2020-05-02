@@ -30,7 +30,7 @@ type CodesOfConductGetConductCodeCmd struct {
 
 func (c *CodesOfConductGetConductCodeCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/codes_of_conduct/:key")
+	c.SetURLPath("/codes_of_conduct/{key}")
 	c.UpdateURLPath("key", c.Key)
 	c.UpdatePreview("scarlet-witch", c.ScarletWitch)
 	return c.DoRequest("GET")
@@ -45,7 +45,7 @@ type CodesOfConductGetForRepoCmd struct {
 
 func (c *CodesOfConductGetForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/community/code_of_conduct")
+	c.SetURLPath("/repos/{owner}/{repo}/community/code_of_conduct")
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdatePreview("scarlet-witch", c.ScarletWitch)

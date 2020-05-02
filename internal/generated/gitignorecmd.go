@@ -16,7 +16,7 @@ type GitignoreGetTemplateCmd struct {
 
 func (c *GitignoreGetTemplateCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/gitignore/templates/:name")
+	c.SetURLPath("/gitignore/templates/{name}")
 	c.UpdateURLPath("name", c.Name)
 	return c.DoRequest("GET")
 }

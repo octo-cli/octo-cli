@@ -27,7 +27,7 @@ type GitCreateBlobCmd struct {
 
 func (c *GitCreateBlobCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/git/blobs")
+	c.SetURLPath("/repos/{owner}/{repo}/git/blobs")
 	c.UpdateBody("content", c.Content)
 	c.UpdateBody("encoding", c.Encoding)
 	c.UpdateURLPath("owner", c.Owner)
@@ -45,7 +45,7 @@ type GitCreateRefCmd struct {
 
 func (c *GitCreateRefCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/git/refs")
+	c.SetURLPath("/repos/{owner}/{repo}/git/refs")
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateBody("ref", c.Ref)
 	c.UpdateURLPath("repo", c.Repo)
@@ -62,7 +62,7 @@ type GitDeleteRefCmd struct {
 
 func (c *GitDeleteRefCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/git/refs/:ref")
+	c.SetURLPath("/repos/{owner}/{repo}/git/refs/{ref}")
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("ref", c.Ref)
 	c.UpdateURLPath("repo", c.Repo)
@@ -78,7 +78,7 @@ type GitGetBlobCmd struct {
 
 func (c *GitGetBlobCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/git/blobs/:file_sha")
+	c.SetURLPath("/repos/{owner}/{repo}/git/blobs/{file_sha}")
 	c.UpdateURLPath("file_sha", c.FileSha)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
@@ -94,7 +94,7 @@ type GitGetCommitCmd struct {
 
 func (c *GitGetCommitCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/git/commits/:commit_sha")
+	c.SetURLPath("/repos/{owner}/{repo}/git/commits/{commit_sha}")
 	c.UpdateURLPath("commit_sha", c.CommitSha)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
@@ -110,7 +110,7 @@ type GitGetRefCmd struct {
 
 func (c *GitGetRefCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/git/ref/:ref")
+	c.SetURLPath("/repos/{owner}/{repo}/git/ref/{ref}")
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("ref", c.Ref)
 	c.UpdateURLPath("repo", c.Repo)
@@ -126,7 +126,7 @@ type GitGetTagCmd struct {
 
 func (c *GitGetTagCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/git/tags/:tag_sha")
+	c.SetURLPath("/repos/{owner}/{repo}/git/tags/{tag_sha}")
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("tag_sha", c.TagSha)
@@ -143,7 +143,7 @@ type GitGetTreeCmd struct {
 
 func (c *GitGetTreeCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/git/trees/:tree_sha")
+	c.SetURLPath("/repos/{owner}/{repo}/git/trees/{tree_sha}")
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLQuery("recursive", c.Recursive)
 	c.UpdateURLPath("repo", c.Repo)
@@ -162,7 +162,7 @@ type GitListMatchingRefsCmd struct {
 
 func (c *GitListMatchingRefsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/git/matching-refs/:ref")
+	c.SetURLPath("/repos/{owner}/{repo}/git/matching-refs/{ref}")
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
@@ -182,7 +182,7 @@ type GitUpdateRefCmd struct {
 
 func (c *GitUpdateRefCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/git/refs/:ref")
+	c.SetURLPath("/repos/{owner}/{repo}/git/refs/{ref}")
 	c.UpdateBody("force", c.Force)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("ref", c.Ref)

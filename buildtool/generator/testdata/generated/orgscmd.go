@@ -16,8 +16,8 @@ type OrgsCmd struct {
 	DeleteHook                         OrgsDeleteHookCmd                         `cmd:""`
 	Get                                OrgsGetCmd                                `cmd:""`
 	GetHook                            OrgsGetHookCmd                            `cmd:""`
+	GetMembership                      OrgsGetMembershipCmd                      `cmd:""`
 	GetMembershipForAuthenticatedUser  OrgsGetMembershipForAuthenticatedUserCmd  `cmd:""`
-	GetMembershipForUser               OrgsGetMembershipForUserCmd               `cmd:""`
 	List                               OrgsListCmd                               `cmd:""`
 	ListBlockedUsers                   OrgsListBlockedUsersCmd                   `cmd:""`
 	ListCredentialAuthorizations       OrgsListCredentialAuthorizationsCmd       `cmd:""`
@@ -51,7 +51,7 @@ type OrgsAddOrUpdateMembershipCmd struct {
 
 func (c *OrgsAddOrUpdateMembershipCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/memberships/:username")
+	c.SetURLPath("/orgs/{org}/memberships/{username}")
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateBody("role", c.Role)
 	c.UpdateURLPath("username", c.Username)
@@ -66,7 +66,7 @@ type OrgsBlockUserCmd struct {
 
 func (c *OrgsBlockUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/blocks/:username")
+	c.SetURLPath("/orgs/{org}/blocks/{username}")
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLPath("username", c.Username)
 	return c.DoRequest("PUT")
@@ -80,7 +80,7 @@ type OrgsCheckBlockedUserCmd struct {
 
 func (c *OrgsCheckBlockedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/blocks/:username")
+	c.SetURLPath("/orgs/{org}/blocks/{username}")
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLPath("username", c.Username)
 	return c.DoRequest("GET")
@@ -94,7 +94,7 @@ type OrgsCheckMembershipCmd struct {
 
 func (c *OrgsCheckMembershipCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/members/:username")
+	c.SetURLPath("/orgs/{org}/members/{username}")
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLPath("username", c.Username)
 	return c.DoRequest("GET")
@@ -108,7 +108,7 @@ type OrgsCheckPublicMembershipCmd struct {
 
 func (c *OrgsCheckPublicMembershipCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/public_members/:username")
+	c.SetURLPath("/orgs/{org}/public_members/{username}")
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLPath("username", c.Username)
 	return c.DoRequest("GET")
@@ -122,7 +122,7 @@ type OrgsConcealMembershipCmd struct {
 
 func (c *OrgsConcealMembershipCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/public_members/:username")
+	c.SetURLPath("/orgs/{org}/public_members/{username}")
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLPath("username", c.Username)
 	return c.DoRequest("DELETE")
@@ -136,7 +136,7 @@ type OrgsConvertMemberToOutsideCollaboratorCmd struct {
 
 func (c *OrgsConvertMemberToOutsideCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/outside_collaborators/:username")
+	c.SetURLPath("/orgs/{org}/outside_collaborators/{username}")
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLPath("username", c.Username)
 	return c.DoRequest("PUT")
@@ -153,7 +153,7 @@ type OrgsCreateInvitationCmd struct {
 
 func (c *OrgsCreateInvitationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/invitations")
+	c.SetURLPath("/orgs/{org}/invitations")
 	c.UpdateBody("email", c.Email)
 	c.UpdateBody("invitee_id", c.InviteeId)
 	c.UpdateURLPath("org", c.Org)
@@ -170,7 +170,7 @@ type OrgsDeleteHookCmd struct {
 
 func (c *OrgsDeleteHookCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/hooks/:hook_id")
+	c.SetURLPath("/orgs/{org}/hooks/{hook_id}")
 	c.UpdateURLPath("hook_id", c.HookId)
 	c.UpdateURLPath("org", c.Org)
 	return c.DoRequest("DELETE")
@@ -184,7 +184,7 @@ type OrgsGetCmd struct {
 
 func (c *OrgsGetCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org")
+	c.SetURLPath("/orgs/{org}")
 	c.UpdateURLPath("org", c.Org)
 	c.UpdatePreview("surtur", c.Surtur)
 	return c.DoRequest("GET")
@@ -198,9 +198,23 @@ type OrgsGetHookCmd struct {
 
 func (c *OrgsGetHookCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/hooks/:hook_id")
+	c.SetURLPath("/orgs/{org}/hooks/{hook_id}")
 	c.UpdateURLPath("hook_id", c.HookId)
 	c.UpdateURLPath("org", c.Org)
+	return c.DoRequest("GET")
+}
+
+type OrgsGetMembershipCmd struct {
+	Org      string `required:"" name:"org"`
+	Username string `required:"" name:"username"`
+	internal.BaseCmd
+}
+
+func (c *OrgsGetMembershipCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/{org}/memberships/{username}")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("username", c.Username)
 	return c.DoRequest("GET")
 }
 
@@ -211,22 +225,8 @@ type OrgsGetMembershipForAuthenticatedUserCmd struct {
 
 func (c *OrgsGetMembershipForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/memberships/orgs/:org")
+	c.SetURLPath("/user/memberships/orgs/{org}")
 	c.UpdateURLPath("org", c.Org)
-	return c.DoRequest("GET")
-}
-
-type OrgsGetMembershipForUserCmd struct {
-	Org      string `required:"" name:"org"`
-	Username string `required:"" name:"username"`
-	internal.BaseCmd
-}
-
-func (c *OrgsGetMembershipForUserCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/memberships/:username")
-	c.UpdateURLPath("org", c.Org)
-	c.UpdateURLPath("username", c.Username)
 	return c.DoRequest("GET")
 }
 
@@ -237,7 +237,7 @@ type OrgsListBlockedUsersCmd struct {
 
 func (c *OrgsListBlockedUsersCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/blocks")
+	c.SetURLPath("/orgs/{org}/blocks")
 	c.UpdateURLPath("org", c.Org)
 	return c.DoRequest("GET")
 }
@@ -261,7 +261,7 @@ type OrgsListCredentialAuthorizationsCmd struct {
 
 func (c *OrgsListCredentialAuthorizationsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/credential-authorizations")
+	c.SetURLPath("/orgs/{org}/credential-authorizations")
 	c.UpdateURLPath("org", c.Org)
 	return c.DoRequest("GET")
 }
@@ -289,7 +289,7 @@ type OrgsListForUserCmd struct {
 
 func (c *OrgsListForUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/users/:username/orgs")
+	c.SetURLPath("/users/{username}/orgs")
 	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLPath("username", c.Username)
@@ -305,7 +305,7 @@ type OrgsListHooksCmd struct {
 
 func (c *OrgsListHooksCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/hooks")
+	c.SetURLPath("/orgs/{org}/hooks")
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
@@ -322,7 +322,7 @@ type OrgsListInstallationsCmd struct {
 
 func (c *OrgsListInstallationsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/installations")
+	c.SetURLPath("/orgs/{org}/installations")
 	c.UpdatePreview("machine-man", c.MachineMan)
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLQuery("page", c.Page)
@@ -340,7 +340,7 @@ type OrgsListInvitationTeamsCmd struct {
 
 func (c *OrgsListInvitationTeamsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/invitations/:invitation_id/teams")
+	c.SetURLPath("/orgs/{org}/invitations/{invitation_id}/teams")
 	c.UpdateURLPath("invitation_id", c.InvitationId)
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLQuery("page", c.Page)
@@ -359,7 +359,7 @@ type OrgsListMembersCmd struct {
 
 func (c *OrgsListMembersCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/members")
+	c.SetURLPath("/orgs/{org}/members")
 	c.UpdateURLQuery("filter", c.Filter)
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLQuery("page", c.Page)
@@ -394,7 +394,7 @@ type OrgsListOutsideCollaboratorsCmd struct {
 
 func (c *OrgsListOutsideCollaboratorsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/outside_collaborators")
+	c.SetURLPath("/orgs/{org}/outside_collaborators")
 	c.UpdateURLQuery("filter", c.Filter)
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLQuery("page", c.Page)
@@ -411,7 +411,7 @@ type OrgsListPendingInvitationsCmd struct {
 
 func (c *OrgsListPendingInvitationsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/invitations")
+	c.SetURLPath("/orgs/{org}/invitations")
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
@@ -427,7 +427,7 @@ type OrgsListPublicMembersCmd struct {
 
 func (c *OrgsListPublicMembersCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/public_members")
+	c.SetURLPath("/orgs/{org}/public_members")
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
@@ -442,7 +442,7 @@ type OrgsPingHookCmd struct {
 
 func (c *OrgsPingHookCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/hooks/:hook_id/pings")
+	c.SetURLPath("/orgs/{org}/hooks/{hook_id}/pings")
 	c.UpdateURLPath("hook_id", c.HookId)
 	c.UpdateURLPath("org", c.Org)
 	return c.DoRequest("POST")
@@ -456,7 +456,7 @@ type OrgsPublicizeMembershipCmd struct {
 
 func (c *OrgsPublicizeMembershipCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/public_members/:username")
+	c.SetURLPath("/orgs/{org}/public_members/{username}")
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLPath("username", c.Username)
 	return c.DoRequest("PUT")
@@ -470,7 +470,7 @@ type OrgsRemoveCredentialAuthorizationCmd struct {
 
 func (c *OrgsRemoveCredentialAuthorizationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/credential-authorizations/:credential_id")
+	c.SetURLPath("/orgs/{org}/credential-authorizations/{credential_id}")
 	c.UpdateURLPath("credential_id", c.CredentialId)
 	c.UpdateURLPath("org", c.Org)
 	return c.DoRequest("DELETE")
@@ -484,7 +484,7 @@ type OrgsRemoveMemberCmd struct {
 
 func (c *OrgsRemoveMemberCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/members/:username")
+	c.SetURLPath("/orgs/{org}/members/{username}")
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLPath("username", c.Username)
 	return c.DoRequest("DELETE")
@@ -498,7 +498,7 @@ type OrgsRemoveMembershipCmd struct {
 
 func (c *OrgsRemoveMembershipCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/memberships/:username")
+	c.SetURLPath("/orgs/{org}/memberships/{username}")
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLPath("username", c.Username)
 	return c.DoRequest("DELETE")
@@ -512,7 +512,7 @@ type OrgsRemoveOutsideCollaboratorCmd struct {
 
 func (c *OrgsRemoveOutsideCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/outside_collaborators/:username")
+	c.SetURLPath("/orgs/{org}/outside_collaborators/{username}")
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLPath("username", c.Username)
 	return c.DoRequest("DELETE")
@@ -526,7 +526,7 @@ type OrgsUnblockUserCmd struct {
 
 func (c *OrgsUnblockUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/blocks/:username")
+	c.SetURLPath("/orgs/{org}/blocks/{username}")
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLPath("username", c.Username)
 	return c.DoRequest("DELETE")
@@ -554,7 +554,7 @@ type OrgsUpdateCmd struct {
 
 func (c *OrgsUpdateCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org")
+	c.SetURLPath("/orgs/{org}")
 	c.UpdateBody("billing_email", c.BillingEmail)
 	c.UpdateBody("company", c.Company)
 	c.UpdateBody("default_repository_permission", c.DefaultRepositoryPermission)
@@ -582,7 +582,7 @@ type OrgsUpdateMembershipCmd struct {
 
 func (c *OrgsUpdateMembershipCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/memberships/orgs/:org")
+	c.SetURLPath("/user/memberships/orgs/{org}")
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateBody("state", c.State)
 	return c.DoRequest("PATCH")

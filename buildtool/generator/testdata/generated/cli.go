@@ -272,8 +272,8 @@ var CmdHelps = map[string]map[string]string{
 		"delete-hook":                            "Delete a hook - https://developer.github.com/v3/orgs/hooks/#delete-a-hook",
 		"get":                                    "Get an organization - https://developer.github.com/v3/orgs/#get-an-organization",
 		"get-hook":                               "Get single hook - https://developer.github.com/v3/orgs/hooks/#get-single-hook",
+		"get-membership":                         "Get organization membership - https://developer.github.com/v3/orgs/members/#get-organization-membership",
 		"get-membership-for-authenticated-user":  "Get your organization membership - https://developer.github.com/v3/orgs/members/#get-your-organization-membership",
-		"get-membership-for-user":                "Get organization membership - https://developer.github.com/v3/orgs/members/#get-organization-membership",
 		"list":                                   "List all organizations - https://developer.github.com/v3/orgs/#list-all-organizations",
 		"list-blocked-users":                     "List blocked users - https://developer.github.com/v3/orgs/blocking/#list-blocked-users",
 		"list-credential-authorizations":         "List credential authorizations for an organization - https://developer.github.com/v3/orgs/#list-credential-authorizations-for-an-organization",
@@ -842,6 +842,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 		"delete-thread-subscription": {
 			"thread_id": "thread_id parameter",
 		},
+		"get-feeds": {},
 		"get-repo-subscription": {
 			"owner": "owner parameter",
 			"repo":  "repo parameter",
@@ -1021,6 +1022,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"access_token": "The OAuth access token used to authenticate to the GitHub API.",
 			"client_id":    "client_id parameter",
 		},
+		"get-authenticated": {},
 		"get-by-slug": {
 			"app_slug": "app_slug parameter",
 		},
@@ -1110,6 +1112,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"access_token": "access_token parameter",
 			"client_id":    "client_id parameter",
 		},
+		"revoke-installation-token": {},
 	},
 	"checks": {
 		"create-suite": {
@@ -1170,6 +1173,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 		},
 	},
 	"codes-of-conduct": {
+		"get-all-codes-of-conduct": {},
 		"get-conduct-code": {
 			"key": "key parameter",
 		},
@@ -1178,7 +1182,9 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"repo":  "repo parameter",
 		},
 	},
-	"emojis": {},
+	"emojis": {
+		"get": {},
+	},
 	"gists": {
 		"check-is-starred": {
 			"gist_id": "gist_id parameter",
@@ -1319,6 +1325,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 		"get-template": {
 			"name": "name parameter",
 		},
+		"list-templates": {},
 	},
 	"interactions": {
 		"add-or-update-restrictions-for-org": {
@@ -1630,6 +1637,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"owner": "owner parameter",
 			"repo":  "repo parameter",
 		},
+		"list-commonly-used": {},
 	},
 	"markdown": {
 		"render": {
@@ -1641,7 +1649,9 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"content-type": "Setting content-type header is required for this endpoint",
 		},
 	},
-	"meta": {},
+	"meta": {
+		"get": {},
+	},
 	"migrations": {
 		"cancel-import": {
 			"owner": "owner parameter",
@@ -1852,12 +1862,12 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"hook_id": "hook_id parameter",
 			"org":     "org parameter",
 		},
-		"get-membership-for-authenticated-user": {
-			"org": "org parameter",
-		},
-		"get-membership-for-user": {
+		"get-membership": {
 			"org":      "org parameter",
 			"username": "username parameter",
+		},
+		"get-membership-for-authenticated-user": {
+			"org": "org parameter",
 		},
 		"list": {
 			"since": "The integer ID of the last organization that you've seen.",
@@ -2288,7 +2298,9 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"review_id":   "review_id parameter",
 		},
 	},
-	"rate-limit": {},
+	"rate-limit": {
+		"get": {},
+	},
 	"reactions": {
 		"create-for-commit-comment": {
 			"comment_id": "comment_id parameter",
@@ -3710,6 +3722,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 		"follow": {
 			"username": "username parameter",
 		},
+		"get-authenticated": {},
 		"get-by-username": {
 			"username": "username parameter",
 		},
@@ -3727,6 +3740,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 		"list": {
 			"since": "The integer ID of the last User that you've seen.",
 		},
+		"list-blocked": {},
 		"list-emails": {
 			"page":     "Page number of the results to fetch.",
 			"per_page": "Results per page (max 100)",

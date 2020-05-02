@@ -42,7 +42,7 @@ type ProjectsAddCollaboratorCmd struct {
 
 func (c *ProjectsAddCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/projects/:project_id/collaborators/:username")
+	c.SetURLPath("/projects/{project_id}/collaborators/{username}")
 	c.UpdatePreview("inertia", c.Inertia)
 	c.UpdateBody("permission", c.Permission)
 	c.UpdateURLPath("project_id", c.ProjectId)
@@ -61,7 +61,7 @@ type ProjectsCreateCardCmd struct {
 
 func (c *ProjectsCreateCardCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/projects/columns/:column_id/cards")
+	c.SetURLPath("/projects/columns/{column_id}/cards")
 	c.UpdateURLPath("column_id", c.ColumnId)
 	c.UpdateBody("content_id", c.ContentId)
 	c.UpdateBody("content_type", c.ContentType)
@@ -79,7 +79,7 @@ type ProjectsCreateColumnCmd struct {
 
 func (c *ProjectsCreateColumnCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/projects/:project_id/columns")
+	c.SetURLPath("/projects/{project_id}/columns")
 	c.UpdatePreview("inertia", c.Inertia)
 	c.UpdateBody("name", c.Name)
 	c.UpdateURLPath("project_id", c.ProjectId)
@@ -112,7 +112,7 @@ type ProjectsCreateForOrgCmd struct {
 
 func (c *ProjectsCreateForOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/projects")
+	c.SetURLPath("/orgs/{org}/projects")
 	c.UpdateBody("body", c.Body)
 	c.UpdatePreview("inertia", c.Inertia)
 	c.UpdateBody("name", c.Name)
@@ -131,7 +131,7 @@ type ProjectsCreateForRepoCmd struct {
 
 func (c *ProjectsCreateForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/projects")
+	c.SetURLPath("/repos/{owner}/{repo}/projects")
 	c.UpdateBody("body", c.Body)
 	c.UpdatePreview("inertia", c.Inertia)
 	c.UpdateBody("name", c.Name)
@@ -148,7 +148,7 @@ type ProjectsDeleteCardCmd struct {
 
 func (c *ProjectsDeleteCardCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/projects/columns/cards/:card_id")
+	c.SetURLPath("/projects/columns/cards/{card_id}")
 	c.UpdateURLPath("card_id", c.CardId)
 	c.UpdatePreview("inertia", c.Inertia)
 	return c.DoRequest("DELETE")
@@ -162,7 +162,7 @@ type ProjectsDeleteCmd struct {
 
 func (c *ProjectsDeleteCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/projects/:project_id")
+	c.SetURLPath("/projects/{project_id}")
 	c.UpdatePreview("inertia", c.Inertia)
 	c.UpdateURLPath("project_id", c.ProjectId)
 	return c.DoRequest("DELETE")
@@ -176,7 +176,7 @@ type ProjectsDeleteColumnCmd struct {
 
 func (c *ProjectsDeleteColumnCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/projects/columns/:column_id")
+	c.SetURLPath("/projects/columns/{column_id}")
 	c.UpdateURLPath("column_id", c.ColumnId)
 	c.UpdatePreview("inertia", c.Inertia)
 	return c.DoRequest("DELETE")
@@ -190,7 +190,7 @@ type ProjectsGetCardCmd struct {
 
 func (c *ProjectsGetCardCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/projects/columns/cards/:card_id")
+	c.SetURLPath("/projects/columns/cards/{card_id}")
 	c.UpdateURLPath("card_id", c.CardId)
 	c.UpdatePreview("inertia", c.Inertia)
 	return c.DoRequest("GET")
@@ -204,7 +204,7 @@ type ProjectsGetCmd struct {
 
 func (c *ProjectsGetCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/projects/:project_id")
+	c.SetURLPath("/projects/{project_id}")
 	c.UpdatePreview("inertia", c.Inertia)
 	c.UpdateURLPath("project_id", c.ProjectId)
 	return c.DoRequest("GET")
@@ -218,7 +218,7 @@ type ProjectsGetColumnCmd struct {
 
 func (c *ProjectsGetColumnCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/projects/columns/:column_id")
+	c.SetURLPath("/projects/columns/{column_id}")
 	c.UpdateURLPath("column_id", c.ColumnId)
 	c.UpdatePreview("inertia", c.Inertia)
 	return c.DoRequest("GET")
@@ -235,7 +235,7 @@ type ProjectsListCardsCmd struct {
 
 func (c *ProjectsListCardsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/projects/columns/:column_id/cards")
+	c.SetURLPath("/projects/columns/{column_id}/cards")
 	c.UpdateURLQuery("archived_state", c.ArchivedState)
 	c.UpdateURLPath("column_id", c.ColumnId)
 	c.UpdatePreview("inertia", c.Inertia)
@@ -255,7 +255,7 @@ type ProjectsListCollaboratorsCmd struct {
 
 func (c *ProjectsListCollaboratorsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/projects/:project_id/collaborators")
+	c.SetURLPath("/projects/{project_id}/collaborators")
 	c.UpdateURLQuery("affiliation", c.Affiliation)
 	c.UpdatePreview("inertia", c.Inertia)
 	c.UpdateURLQuery("page", c.Page)
@@ -274,7 +274,7 @@ type ProjectsListColumnsCmd struct {
 
 func (c *ProjectsListColumnsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/projects/:project_id/columns")
+	c.SetURLPath("/projects/{project_id}/columns")
 	c.UpdatePreview("inertia", c.Inertia)
 	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
@@ -293,7 +293,7 @@ type ProjectsListForOrgCmd struct {
 
 func (c *ProjectsListForOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/projects")
+	c.SetURLPath("/orgs/{org}/projects")
 	c.UpdatePreview("inertia", c.Inertia)
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLQuery("page", c.Page)
@@ -314,7 +314,7 @@ type ProjectsListForRepoCmd struct {
 
 func (c *ProjectsListForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/projects")
+	c.SetURLPath("/repos/{owner}/{repo}/projects")
 	c.UpdatePreview("inertia", c.Inertia)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLQuery("page", c.Page)
@@ -335,7 +335,7 @@ type ProjectsListForUserCmd struct {
 
 func (c *ProjectsListForUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/users/:username/projects")
+	c.SetURLPath("/users/{username}/projects")
 	c.UpdatePreview("inertia", c.Inertia)
 	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
@@ -354,7 +354,7 @@ type ProjectsMoveCardCmd struct {
 
 func (c *ProjectsMoveCardCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/projects/columns/cards/:card_id/moves")
+	c.SetURLPath("/projects/columns/cards/{card_id}/moves")
 	c.UpdateURLPath("card_id", c.CardId)
 	c.UpdateBody("column_id", c.ColumnId)
 	c.UpdatePreview("inertia", c.Inertia)
@@ -371,7 +371,7 @@ type ProjectsMoveColumnCmd struct {
 
 func (c *ProjectsMoveColumnCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/projects/columns/:column_id/moves")
+	c.SetURLPath("/projects/columns/{column_id}/moves")
 	c.UpdateURLPath("column_id", c.ColumnId)
 	c.UpdatePreview("inertia", c.Inertia)
 	c.UpdateBody("position", c.Position)
@@ -387,7 +387,7 @@ type ProjectsRemoveCollaboratorCmd struct {
 
 func (c *ProjectsRemoveCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/projects/:project_id/collaborators/:username")
+	c.SetURLPath("/projects/{project_id}/collaborators/{username}")
 	c.UpdatePreview("inertia", c.Inertia)
 	c.UpdateURLPath("project_id", c.ProjectId)
 	c.UpdateURLPath("username", c.Username)
@@ -403,7 +403,7 @@ type ProjectsReviewUserPermissionLevelCmd struct {
 
 func (c *ProjectsReviewUserPermissionLevelCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/projects/:project_id/collaborators/:username/permission")
+	c.SetURLPath("/projects/{project_id}/collaborators/{username}/permission")
 	c.UpdatePreview("inertia", c.Inertia)
 	c.UpdateURLPath("project_id", c.ProjectId)
 	c.UpdateURLPath("username", c.Username)
@@ -420,7 +420,7 @@ type ProjectsUpdateCardCmd struct {
 
 func (c *ProjectsUpdateCardCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/projects/columns/cards/:card_id")
+	c.SetURLPath("/projects/columns/cards/{card_id}")
 	c.UpdateBody("archived", c.Archived)
 	c.UpdateURLPath("card_id", c.CardId)
 	c.UpdatePreview("inertia", c.Inertia)
@@ -441,7 +441,7 @@ type ProjectsUpdateCmd struct {
 
 func (c *ProjectsUpdateCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/projects/:project_id")
+	c.SetURLPath("/projects/{project_id}")
 	c.UpdateBody("body", c.Body)
 	c.UpdatePreview("inertia", c.Inertia)
 	c.UpdateBody("name", c.Name)
@@ -461,7 +461,7 @@ type ProjectsUpdateColumnCmd struct {
 
 func (c *ProjectsUpdateColumnCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/projects/columns/:column_id")
+	c.SetURLPath("/projects/columns/{column_id}")
 	c.UpdateURLPath("column_id", c.ColumnId)
 	c.UpdatePreview("inertia", c.Inertia)
 	c.UpdateBody("name", c.Name)

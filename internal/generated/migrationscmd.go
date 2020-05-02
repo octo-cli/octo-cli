@@ -37,7 +37,7 @@ type MigrationsCancelImportCmd struct {
 
 func (c *MigrationsCancelImportCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/import")
+	c.SetURLPath("/repos/{owner}/{repo}/import")
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("DELETE")
@@ -51,7 +51,7 @@ type MigrationsDeleteArchiveForAuthenticatedUserCmd struct {
 
 func (c *MigrationsDeleteArchiveForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/migrations/:migration_id/archive")
+	c.SetURLPath("/user/migrations/{migration_id}/archive")
 	c.UpdateURLPath("migration_id", c.MigrationId)
 	c.UpdatePreview("wyandotte", c.Wyandotte)
 	return c.DoRequest("DELETE")
@@ -66,7 +66,7 @@ type MigrationsDeleteArchiveForOrgCmd struct {
 
 func (c *MigrationsDeleteArchiveForOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/migrations/:migration_id/archive")
+	c.SetURLPath("/orgs/{org}/migrations/{migration_id}/archive")
 	c.UpdateURLPath("migration_id", c.MigrationId)
 	c.UpdateURLPath("org", c.Org)
 	c.UpdatePreview("wyandotte", c.Wyandotte)
@@ -82,7 +82,7 @@ type MigrationsDownloadArchiveForOrgCmd struct {
 
 func (c *MigrationsDownloadArchiveForOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/migrations/:migration_id/archive")
+	c.SetURLPath("/orgs/{org}/migrations/{migration_id}/archive")
 	c.UpdateURLPath("migration_id", c.MigrationId)
 	c.UpdateURLPath("org", c.Org)
 	c.UpdatePreview("wyandotte", c.Wyandotte)
@@ -97,7 +97,7 @@ type MigrationsGetArchiveForAuthenticatedUserCmd struct {
 
 func (c *MigrationsGetArchiveForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/migrations/:migration_id/archive")
+	c.SetURLPath("/user/migrations/{migration_id}/archive")
 	c.UpdateURLPath("migration_id", c.MigrationId)
 	c.UpdatePreview("wyandotte", c.Wyandotte)
 	return c.DoRequest("GET")
@@ -112,7 +112,7 @@ type MigrationsGetCommitAuthorsCmd struct {
 
 func (c *MigrationsGetCommitAuthorsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/import/authors")
+	c.SetURLPath("/repos/{owner}/{repo}/import/authors")
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("since", c.Since)
@@ -127,7 +127,7 @@ type MigrationsGetImportProgressCmd struct {
 
 func (c *MigrationsGetImportProgressCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/import")
+	c.SetURLPath("/repos/{owner}/{repo}/import")
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
@@ -141,7 +141,7 @@ type MigrationsGetLargeFilesCmd struct {
 
 func (c *MigrationsGetLargeFilesCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/import/large_files")
+	c.SetURLPath("/repos/{owner}/{repo}/import/large_files")
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
@@ -155,7 +155,7 @@ type MigrationsGetStatusForAuthenticatedUserCmd struct {
 
 func (c *MigrationsGetStatusForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/migrations/:migration_id")
+	c.SetURLPath("/user/migrations/{migration_id}")
 	c.UpdateURLPath("migration_id", c.MigrationId)
 	c.UpdatePreview("wyandotte", c.Wyandotte)
 	return c.DoRequest("GET")
@@ -170,7 +170,7 @@ type MigrationsGetStatusForOrgCmd struct {
 
 func (c *MigrationsGetStatusForOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/migrations/:migration_id")
+	c.SetURLPath("/orgs/{org}/migrations/{migration_id}")
 	c.UpdateURLPath("migration_id", c.MigrationId)
 	c.UpdateURLPath("org", c.Org)
 	c.UpdatePreview("wyandotte", c.Wyandotte)
@@ -203,7 +203,7 @@ type MigrationsListForOrgCmd struct {
 
 func (c *MigrationsListForOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/migrations")
+	c.SetURLPath("/orgs/{org}/migrations")
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
@@ -222,7 +222,7 @@ type MigrationsListReposForOrgCmd struct {
 
 func (c *MigrationsListReposForOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/migrations/:migration_id/repositories")
+	c.SetURLPath("/orgs/{org}/migrations/{migration_id}/repositories")
 	c.UpdateURLPath("migration_id", c.MigrationId)
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLQuery("page", c.Page)
@@ -241,7 +241,7 @@ type MigrationsListReposForUserCmd struct {
 
 func (c *MigrationsListReposForUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/:migration_id/repositories")
+	c.SetURLPath("/user/{migration_id}/repositories")
 	c.UpdateURLPath("migration_id", c.MigrationId)
 	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
@@ -260,7 +260,7 @@ type MigrationsMapCommitAuthorCmd struct {
 
 func (c *MigrationsMapCommitAuthorCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/import/authors/:author_id")
+	c.SetURLPath("/repos/{owner}/{repo}/import/authors/{author_id}")
 	c.UpdateURLPath("author_id", c.AuthorId)
 	c.UpdateBody("email", c.Email)
 	c.UpdateBody("name", c.Name)
@@ -278,7 +278,7 @@ type MigrationsSetLfsPreferenceCmd struct {
 
 func (c *MigrationsSetLfsPreferenceCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/import/lfs")
+	c.SetURLPath("/repos/{owner}/{repo}/import/lfs")
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateBody("use_lfs", c.UseLfs)
@@ -311,7 +311,7 @@ type MigrationsStartForOrgCmd struct {
 
 func (c *MigrationsStartForOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/migrations")
+	c.SetURLPath("/orgs/{org}/migrations")
 	c.UpdateBody("exclude_attachments", c.ExcludeAttachments)
 	c.UpdateBody("lock_repositories", c.LockRepositories)
 	c.UpdateURLPath("org", c.Org)
@@ -332,7 +332,7 @@ type MigrationsStartImportCmd struct {
 
 func (c *MigrationsStartImportCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/import")
+	c.SetURLPath("/repos/{owner}/{repo}/import")
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateBody("tfvc_project", c.TfvcProject)
@@ -352,7 +352,7 @@ type MigrationsUnlockRepoForAuthenticatedUserCmd struct {
 
 func (c *MigrationsUnlockRepoForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/migrations/:migration_id/repos/:repo_name/lock")
+	c.SetURLPath("/user/migrations/{migration_id}/repos/{repo_name}/lock")
 	c.UpdateURLPath("migration_id", c.MigrationId)
 	c.UpdateURLPath("repo_name", c.RepoName)
 	c.UpdatePreview("wyandotte", c.Wyandotte)
@@ -369,7 +369,7 @@ type MigrationsUnlockRepoForOrgCmd struct {
 
 func (c *MigrationsUnlockRepoForOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/:org/migrations/:migration_id/repos/:repo_name/lock")
+	c.SetURLPath("/orgs/{org}/migrations/{migration_id}/repos/{repo_name}/lock")
 	c.UpdateURLPath("migration_id", c.MigrationId)
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLPath("repo_name", c.RepoName)
@@ -387,7 +387,7 @@ type MigrationsUpdateImportCmd struct {
 
 func (c *MigrationsUpdateImportCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/:owner/:repo/import")
+	c.SetURLPath("/repos/{owner}/{repo}/import")
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateBody("vcs_password", c.VcsPassword)
