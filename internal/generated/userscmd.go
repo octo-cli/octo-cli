@@ -40,8 +40,8 @@ type UsersCmd struct {
 }
 
 type UsersAddEmailsCmd struct {
-	internal.BaseCmd
 	Emails []string `required:"" name:"emails"`
+	internal.BaseCmd
 }
 
 func (c *UsersAddEmailsCmd) Run(isValueSetMap map[string]bool) error {
@@ -52,8 +52,8 @@ func (c *UsersAddEmailsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersBlockCmd struct {
-	internal.BaseCmd
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *UsersBlockCmd) Run(isValueSetMap map[string]bool) error {
@@ -64,8 +64,8 @@ func (c *UsersBlockCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersCheckBlockedCmd struct {
-	internal.BaseCmd
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *UsersCheckBlockedCmd) Run(isValueSetMap map[string]bool) error {
@@ -76,8 +76,8 @@ func (c *UsersCheckBlockedCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersCheckFollowingCmd struct {
-	internal.BaseCmd
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *UsersCheckFollowingCmd) Run(isValueSetMap map[string]bool) error {
@@ -88,9 +88,9 @@ func (c *UsersCheckFollowingCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersCheckFollowingForUserCmd struct {
-	internal.BaseCmd
 	TargetUser string `required:"" name:"target_user"`
 	Username   string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *UsersCheckFollowingForUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -102,8 +102,8 @@ func (c *UsersCheckFollowingForUserCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type UsersCreateGpgKeyCmd struct {
-	internal.BaseCmd
 	ArmoredPublicKey string `name:"armored_public_key"`
+	internal.BaseCmd
 }
 
 func (c *UsersCreateGpgKeyCmd) Run(isValueSetMap map[string]bool) error {
@@ -114,9 +114,9 @@ func (c *UsersCreateGpgKeyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersCreatePublicKeyCmd struct {
-	internal.BaseCmd
 	Key   string `name:"key"`
 	Title string `name:"title"`
+	internal.BaseCmd
 }
 
 func (c *UsersCreatePublicKeyCmd) Run(isValueSetMap map[string]bool) error {
@@ -128,8 +128,8 @@ func (c *UsersCreatePublicKeyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersDeleteEmailsCmd struct {
-	internal.BaseCmd
 	Emails []string `required:"" name:"emails"`
+	internal.BaseCmd
 }
 
 func (c *UsersDeleteEmailsCmd) Run(isValueSetMap map[string]bool) error {
@@ -140,8 +140,8 @@ func (c *UsersDeleteEmailsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersDeleteGpgKeyCmd struct {
-	internal.BaseCmd
 	GpgKeyId int64 `required:"" name:"gpg_key_id"`
+	internal.BaseCmd
 }
 
 func (c *UsersDeleteGpgKeyCmd) Run(isValueSetMap map[string]bool) error {
@@ -152,8 +152,8 @@ func (c *UsersDeleteGpgKeyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersDeletePublicKeyCmd struct {
-	internal.BaseCmd
 	KeyId int64 `required:"" name:"key_id"`
+	internal.BaseCmd
 }
 
 func (c *UsersDeletePublicKeyCmd) Run(isValueSetMap map[string]bool) error {
@@ -164,8 +164,8 @@ func (c *UsersDeletePublicKeyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersFollowCmd struct {
-	internal.BaseCmd
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *UsersFollowCmd) Run(isValueSetMap map[string]bool) error {
@@ -186,8 +186,8 @@ func (c *UsersGetAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersGetByUsernameCmd struct {
-	internal.BaseCmd
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *UsersGetByUsernameCmd) Run(isValueSetMap map[string]bool) error {
@@ -198,10 +198,10 @@ func (c *UsersGetByUsernameCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersGetContextForUserCmd struct {
-	internal.BaseCmd
 	SubjectId   string `name:"subject_id"`
 	SubjectType string `name:"subject_type"`
 	Username    string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *UsersGetContextForUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -214,8 +214,8 @@ func (c *UsersGetContextForUserCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersGetGpgKeyCmd struct {
-	internal.BaseCmd
 	GpgKeyId int64 `required:"" name:"gpg_key_id"`
+	internal.BaseCmd
 }
 
 func (c *UsersGetGpgKeyCmd) Run(isValueSetMap map[string]bool) error {
@@ -226,8 +226,8 @@ func (c *UsersGetGpgKeyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersGetPublicKeyCmd struct {
-	internal.BaseCmd
 	KeyId int64 `required:"" name:"key_id"`
+	internal.BaseCmd
 }
 
 func (c *UsersGetPublicKeyCmd) Run(isValueSetMap map[string]bool) error {
@@ -248,8 +248,8 @@ func (c *UsersListBlockedCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersListCmd struct {
-	internal.BaseCmd
 	Since string `name:"since"`
+	internal.BaseCmd
 }
 
 func (c *UsersListCmd) Run(isValueSetMap map[string]bool) error {
@@ -260,9 +260,9 @@ func (c *UsersListCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersListEmailsCmd struct {
-	internal.BaseCmd
 	Page    int64 `name:"page"`
 	PerPage int64 `name:"per_page"`
+	internal.BaseCmd
 }
 
 func (c *UsersListEmailsCmd) Run(isValueSetMap map[string]bool) error {
@@ -274,9 +274,9 @@ func (c *UsersListEmailsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersListFollowedByAuthenticatedCmd struct {
-	internal.BaseCmd
 	Page    int64 `name:"page"`
 	PerPage int64 `name:"per_page"`
+	internal.BaseCmd
 }
 
 func (c *UsersListFollowedByAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
@@ -288,9 +288,9 @@ func (c *UsersListFollowedByAuthenticatedCmd) Run(isValueSetMap map[string]bool)
 }
 
 type UsersListFollowersForAuthenticatedUserCmd struct {
-	internal.BaseCmd
 	Page    int64 `name:"page"`
 	PerPage int64 `name:"per_page"`
+	internal.BaseCmd
 }
 
 func (c *UsersListFollowersForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -302,10 +302,10 @@ func (c *UsersListFollowersForAuthenticatedUserCmd) Run(isValueSetMap map[string
 }
 
 type UsersListFollowersForUserCmd struct {
-	internal.BaseCmd
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *UsersListFollowersForUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -318,10 +318,10 @@ func (c *UsersListFollowersForUserCmd) Run(isValueSetMap map[string]bool) error 
 }
 
 type UsersListFollowingForUserCmd struct {
-	internal.BaseCmd
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *UsersListFollowingForUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -334,9 +334,9 @@ func (c *UsersListFollowingForUserCmd) Run(isValueSetMap map[string]bool) error 
 }
 
 type UsersListGpgKeysCmd struct {
-	internal.BaseCmd
 	Page    int64 `name:"page"`
 	PerPage int64 `name:"per_page"`
+	internal.BaseCmd
 }
 
 func (c *UsersListGpgKeysCmd) Run(isValueSetMap map[string]bool) error {
@@ -348,10 +348,10 @@ func (c *UsersListGpgKeysCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersListGpgKeysForUserCmd struct {
-	internal.BaseCmd
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *UsersListGpgKeysForUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -364,9 +364,9 @@ func (c *UsersListGpgKeysForUserCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersListPublicEmailsCmd struct {
-	internal.BaseCmd
 	Page    int64 `name:"page"`
 	PerPage int64 `name:"per_page"`
+	internal.BaseCmd
 }
 
 func (c *UsersListPublicEmailsCmd) Run(isValueSetMap map[string]bool) error {
@@ -378,9 +378,9 @@ func (c *UsersListPublicEmailsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersListPublicKeysCmd struct {
-	internal.BaseCmd
 	Page    int64 `name:"page"`
 	PerPage int64 `name:"per_page"`
+	internal.BaseCmd
 }
 
 func (c *UsersListPublicKeysCmd) Run(isValueSetMap map[string]bool) error {
@@ -392,10 +392,10 @@ func (c *UsersListPublicKeysCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersListPublicKeysForUserCmd struct {
-	internal.BaseCmd
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *UsersListPublicKeysForUserCmd) Run(isValueSetMap map[string]bool) error {
@@ -408,9 +408,9 @@ func (c *UsersListPublicKeysForUserCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type UsersTogglePrimaryEmailVisibilityCmd struct {
-	internal.BaseCmd
 	Email      string `required:"" name:"email"`
 	Visibility string `required:"" name:"visibility"`
+	internal.BaseCmd
 }
 
 func (c *UsersTogglePrimaryEmailVisibilityCmd) Run(isValueSetMap map[string]bool) error {
@@ -422,8 +422,8 @@ func (c *UsersTogglePrimaryEmailVisibilityCmd) Run(isValueSetMap map[string]bool
 }
 
 type UsersUnblockCmd struct {
-	internal.BaseCmd
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *UsersUnblockCmd) Run(isValueSetMap map[string]bool) error {
@@ -434,8 +434,8 @@ func (c *UsersUnblockCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersUnfollowCmd struct {
-	internal.BaseCmd
 	Username string `required:"" name:"username"`
+	internal.BaseCmd
 }
 
 func (c *UsersUnfollowCmd) Run(isValueSetMap map[string]bool) error {
@@ -446,7 +446,6 @@ func (c *UsersUnfollowCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersUpdateAuthenticatedCmd struct {
-	internal.BaseCmd
 	Bio      string `name:"bio"`
 	Blog     string `name:"blog"`
 	Company  string `name:"company"`
@@ -454,6 +453,7 @@ type UsersUpdateAuthenticatedCmd struct {
 	Hireable bool   `name:"hireable"`
 	Location string `name:"location"`
 	Name     string `name:"name"`
+	internal.BaseCmd
 }
 
 func (c *UsersUpdateAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
