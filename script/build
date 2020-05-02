@@ -4,6 +4,4 @@ set -e
 
 CDPATH="" cd -- "$(dirname -- "$(dirname -- "$0")")"
 
-make -s bin/buildtool
-
-bin/buildtool build "$@"
+make -s bin/octo

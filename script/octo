@@ -3,6 +3,6 @@
 set -e
 
 CDPATH="" cd -- "$(dirname -- "$(dirname -- "$0")")"
-make -s bin/buildtool
 
-bin/buildtool latest-tagged-release "$@"
+make -s bin/octo
+bin/octo "$@"
