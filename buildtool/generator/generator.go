@@ -197,6 +197,7 @@ func Generate(routesPath, outputPath string, fs afero.Fs) {
 				paramName := toArgName(param.Name)
 				paramType, ok := paramTypes[param.Type]
 				if !ok {
+					fmt.Printf("skipping %s/%s because param %s has type %s \n", svcNodeName, route.IDName, param.Name, param.Type)
 					delete(flagHelps[svcNodeName], route.IDName)
 					skipThisRoute = true
 					break
