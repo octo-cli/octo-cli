@@ -1,57 +1,9 @@
 # Contributing to octo-cli
 
-## Requirements
-
-- Go 1.11+
-
-## Buildtool
-
-`./buildtool` contains a cli for most of the tooling you will need for
-developing octo-cli. To build buildtool, run either `script/bootstrap`
-or `go build -o bin/buildtool ./buildtool`.
-
-If you modify code in buildtool itself, You can rebuild it with `script/bootstrap --force`
-or `bin/buildtool bootstrap --force`
-
-```
-  bootstrap
-    bootstraps a dev environment
-
-  build
-    build bin/octo
-
-  build-lint
-    builds bin/golangci-lint
-
-  cibuild
-    run ci
-
-  generate
-    generate production code
-
-  latest-tagged-release
-    get the latest tagged version
-
-  lint
-    run lint
-
-  tag-release
-    creates a git tag for a new release of octo-cli
-
-  update-readme
-    updates the help output section of README.md
-
-  update-routes
-    update routes.json with the latest
-
-  update-testdata
-    updates routes.json and generated in internal/generator/testdata
-```
-
 ## Scripts
 
-For those used to [Scripts to Rule Them All](https://githubengineering.com/scripts-to-rule-them-all/),
-octo-cli has scripts to match most of the buildtool commands.
+octo-cli uses [Scripts to Rule Them All](https://githubengineering.com/scripts-to-rule-them-all/). There is also a
+ Makefile, but make should primarily be used by scripts.
 
 ## Issues before PRs
 
@@ -64,10 +16,7 @@ vision. Please don't make us do that.
 ## Questions and Help
 
 If you have questions or get stuck, you can create an issue here asking
-for clarification. You can also ask on the [#octo-cli](https://invite.slack.golangbridge.org/)
-channel on [gophers slack](https://invite.slack.golangbridge.org/). I
-created that channel right before typing this, so if you act fast, you
-may just be first post.
+for clarification.
 
 ## Project structure
 
@@ -76,15 +25,13 @@ for GitHub's REST API that is generated from [Octokit routes](https://octokit.gi
 That last bit about being generated is key to understanding the project
 structure.
 
-### `./routes.json`
-`routes.json` is what we download from [Octokit routes](https://octokit.github.io/routes/).
-It is json that describes all the REST endpoints covered in [GitHub's documentation](https://developer.github.com/v3/).
+### `./api.github.com.json`
+`api.github.com.json` is what we download from [Octokit routes](https://octokit.github.io/routes/).
+It is an openapi v3 schema that describes all the REST endpoints covered in 
+[GitHub's documentation](https://developer.github.com/v3/).
 Updating routes.json will eventually be automated. Until then, only trusted
 octo-cli developers can update routes.json. PRs with changes to routes.json
 will be politely rejected.
-
-### `./buildtool`
-See [#Buildtool]
 
 ### `./buildtool/generator/`
 `buildtool/generator/` is the code that parses routes.json and creates commands
@@ -129,9 +76,9 @@ Each executable command struct has a `Run()` method. This is what is
 executed when the command is run. Here flag values are used to modify the
 API request then the request is performed by `DoRequest` on the last line.
 
-### `./internal/generated/basecmd.go`
+### `./internal/basecmd.go`
 
-This contains the `baseCmd` struct and it's receivers. `baseCmd` is an
+This contains the `BaseCmd` struct and it's receivers. `BaseCmd` is an
 anonymous member of every executable command struct.  This can be thought
 of as the low-level api client that the generated code uses.
 
