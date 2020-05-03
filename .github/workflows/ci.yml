@@ -11,5 +11,5 @@ jobs:
           go-version: '~1.14.0'
       - run: script/generate --verify
       - run: script/update-readme --verify
-      - run: script/test -race
+      - run: script/test
       - run: script/lint
