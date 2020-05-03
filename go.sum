@@ -54,3 +54,5 @@ gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127/go.mod h1:Co6ibVJAznAaIkqp8
 gopkg.in/yaml.v2 v2.2.2/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=
 gopkg.in/yaml.v2 v2.2.8 h1:obN1ZagJSUGI0Ek/LBmuj4SNLPfIny3KsKFopxRdj10=
 gopkg.in/yaml.v2 v2.2.8/go.mod h1:hI93XBmqTisBFMUTm0b8Fm+jr3Dg1NNxqwp+5A1VGuI=
+moul.io/http2curl/v2 v2.2.0 h1:hW/sAIQVKi2jVL8sddaiafWtfBg3QJ6fGnf+Z5pM5hU=
+moul.io/http2curl/v2 v2.2.0/go.mod h1:8bDGMWGIf6jyw+nEdmgQnbJPHFz3rjCfvMmEfajchkY=

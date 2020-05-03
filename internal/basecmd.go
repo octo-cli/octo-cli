@@ -9,10 +9,12 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"regexp"
 	"strconv"
 	"strings"
 
 	"golang.org/x/oauth2"
+	"moul.io/http2curl/v2"
 )
 
 var (
@@ -40,6 +42,7 @@ type BaseCmd struct {
 	APIBaseURL    string `env:"GITHUB_API_BASE_URL" default:"https://api.github.com"`
 	RawOutput     bool   `help:"don't format json output."`
 	Format        string `help:"format output with a go template"`
+	Curl          bool   `help:"returns a corresponding curl request"`
 }
 
 //SetURLPath sets the path of url
@@ -172,6 +175,27 @@ func (c *BaseCmd) DoRequest(method string) error {
 	req, err := c.newRequest(method)
 	if err != nil {
 		return err
+	}
+
+	if c.Curl {
+		var curl *http2curl.CurlCommand
+		curl, err = http2curl.GetCurlCommand(req)
+		if err != nil {
+			return err
+		}
+		for i, curler := range *curl {
+			if i == 0 || (*curl)[i-1] != "-d" {
+				continue
+			}
+			(*curl)[i] = regexp.MustCompile(`\s*'\s*$`).ReplaceAllString(curler, "'")
+		}
+		*curl = append((*curl)[:len(*curl)-1],
+			"-H",
+			`"Authorization: token $GITHUB_TOKEN"`,
+			(*curl)[len(*curl)-1],
+		)
+		fmt.Fprintln(Stdout, curl.String())
+		return nil
 	}
 
 	resp, err := c.httpClient().Do(req)
