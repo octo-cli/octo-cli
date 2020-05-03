@@ -18,4 +18,5 @@ require (
 	golang.org/x/tools v0.0.0-20181106213628-e21233ffa6c3
 	google.golang.org/appengine v1.2.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
+	moul.io/http2curl/v2 v2.2.0
 )

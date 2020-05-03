@@ -1,9 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
 	"github.com/alecthomas/kong"
+	"github.com/octo-cli/octo-cli/internal"
 	"github.com/octo-cli/octo-cli/internal/generated"
 )
 
@@ -13,6 +15,10 @@ type cli struct {
 	generated.CLI
 	Version            kong.VersionFlag
 	InstallCompletions kong.InstallCompletionFlag
+}
+
+func init() {
+	internal.UserAgent = fmt.Sprintf("octo-cli/%s", version)
 }
 
 func main() {

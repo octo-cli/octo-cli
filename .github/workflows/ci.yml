@@ -9,7 +9,16 @@ jobs:
       - uses: actions/setup-go@v2
         with:
           go-version: '~1.14.0'
+      - uses: actions/cache@v1
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go1.14.0-${{ hashFiles('**/go.sum') }}
+      - uses: actions/cache@v1
+        with:
+          path: .bindown
+          key: bindown-${{ hashFiles('bindown.yml') }}
+      - run: go mod download
       - run: script/generate --verify
       - run: script/update-readme --verify
-      - run: script/test -race
+      - run: script/test
       - run: script/lint
