@@ -2,10 +2,10 @@
 
 Octo-cli is a command line client for GitHub's REST API. It is intended to make
 it easier to interact with GitHub in shell scripts. In most cases, it should
-be more convenient than curl and more scriptable than [hub](https://hub.github.com/).
+be more convenient than curl and more scriptable than [gh](https://cli.github.com/).
 
 If you are looking for a command-line client to use interactively, please
-try [hub](https://hub.github.com/) first. Octo-cli is primarily intended
+try [gh](https://cli.github.com/) first. Octo-cli is primarily intended
 for scripting.
 
 ## Installation
