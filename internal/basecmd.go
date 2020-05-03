@@ -33,7 +33,7 @@ var (
 type BaseCmd struct {
 	isValueSetMap map[string]bool
 	url           url.URL
-	reqBody       *map[string]interface{}
+	reqBody       map[string]interface{}
 	acceptHeaders []string
 	reqHeader     http.Header
 	Token         string `env:"GITHUB_TOKEN" required:""`
@@ -63,13 +63,28 @@ func (c *BaseCmd) AddRequestHeader(headerName, value string) {
 //UpdateBody adds a flag's value a request body
 func (c *BaseCmd) UpdateBody(flagName string, value interface{}) {
 	if c.reqBody == nil {
-		c.reqBody = &map[string]interface{}{}
+		c.reqBody = map[string]interface{}{}
 	}
 	if c.isValueSet(flagName) {
-		b := *c.reqBody
-		b[flagName] = value
-		c.reqBody = &b
+		key := strings.Split(flagName, ".")
+		setBodyValue(c.reqBody, key, value)
 	}
+}
+
+func setBodyValue(body map[string]interface{}, key []string, value interface{}) {
+	if len(key) == 1 {
+		body[key[0]] = value
+		return
+	}
+	var nextMap map[string]interface{}
+	switch currentVal := body[key[0]].(type) {
+	case map[string]interface{}:
+		nextMap = currentVal
+	default:
+		nextMap = map[string]interface{}{}
+		body[key[0]] = nextMap
+	}
+	setBodyValue(nextMap, key[1:], value)
 }
 
 //UpdateURLPath sets a param in the url path
