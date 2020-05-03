@@ -102,16 +102,6 @@ command.
 The decision to not automatically set preview headers is intended to prevent
 users from unknowingly becoming reliant on APIs that are subject to change.
 
-#### Errors
-
-Octo-cli exits non-zero when it sees an http status >= 400. It does no
-error handling beyond this, and it hasn't been decided how we want to
-handle errors.
-
-#### Debugging
-
-There's not currently any way to make octo-cli output any debugging data.
-
 #### Examples
 
 ###### Use GITHUB_TOKEN environment variable to set your credentials
