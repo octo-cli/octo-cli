@@ -17,6 +17,9 @@ import (
 	"moul.io/http2curl/v2"
 )
 
+//UserAgent is the user agent for our https
+var UserAgent = "octo-cli"
+
 var (
 	// Stdout is where to write output
 	Stdout io.Writer = os.Stdout
@@ -154,6 +157,7 @@ func (c *BaseCmd) newRequest(method string) (*http.Request, error) {
 	acceptHeaders := []string{"application/vnd.github.v3+json"}
 	acceptHeaders = append(acceptHeaders, c.acceptHeaders...)
 	req.Header.Set("Accept", strings.Join(acceptHeaders, ", "))
+	req.Header.Set("User-Agent", UserAgent)
 	reqHeader := c.reqHeader.Clone()
 	for k, v := range reqHeader {
 		req.Header[k] = v
