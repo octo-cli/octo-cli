@@ -6,7 +6,9 @@ import "github.com/octo-cli/octo-cli/internal"
 
 type GitCmd struct {
 	CreateBlob       GitCreateBlobCmd       `cmd:""`
+	CreateCommit     GitCreateCommitCmd     `cmd:""`
 	CreateRef        GitCreateRefCmd        `cmd:""`
+	CreateTag        GitCreateTagCmd        `cmd:""`
 	DeleteRef        GitDeleteRefCmd        `cmd:""`
 	GetBlob          GitGetBlobCmd          `cmd:""`
 	GetCommit        GitGetCommitCmd        `cmd:""`
@@ -35,6 +37,40 @@ func (c *GitCreateBlobCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("POST")
 }
 
+type GitCreateCommitCmd struct {
+	AuthorDate     string   `name:"author.date"`
+	AuthorEmail    string   `name:"author.email"`
+	AuthorName     string   `name:"author.name"`
+	CommitterDate  string   `name:"committer.date"`
+	CommitterEmail string   `name:"committer.email"`
+	CommitterName  string   `name:"committer.name"`
+	Message        string   `required:"" name:"message"`
+	Owner          string   `name:"owner"`
+	Parents        []string `required:"" name:"parents"`
+	Repo           string   `required:"" name:"repo"`
+	Signature      string   `name:"signature"`
+	Tree           string   `required:"" name:"tree"`
+	internal.BaseCmd
+}
+
+func (c *GitCreateCommitCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{owner}/{repo}/git/commits")
+	c.UpdateBody("author.date", c.AuthorDate)
+	c.UpdateBody("author.email", c.AuthorEmail)
+	c.UpdateBody("author.name", c.AuthorName)
+	c.UpdateBody("committer.date", c.CommitterDate)
+	c.UpdateBody("committer.email", c.CommitterEmail)
+	c.UpdateBody("committer.name", c.CommitterName)
+	c.UpdateBody("message", c.Message)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateBody("parents", c.Parents)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("signature", c.Signature)
+	c.UpdateBody("tree", c.Tree)
+	return c.DoRequest("POST")
+}
+
 type GitCreateRefCmd struct {
 	Owner string `name:"owner"`
 	Ref   string `required:"" name:"ref"`
@@ -50,6 +86,34 @@ func (c *GitCreateRefCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateBody("ref", c.Ref)
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateBody("sha", c.Sha)
+	return c.DoRequest("POST")
+}
+
+type GitCreateTagCmd struct {
+	Message     string `required:"" name:"message"`
+	Object      string `required:"" name:"object"`
+	Owner       string `name:"owner"`
+	Repo        string `required:"" name:"repo"`
+	Tag         string `required:"" name:"tag"`
+	TaggerDate  string `name:"tagger.date"`
+	TaggerEmail string `name:"tagger.email"`
+	TaggerName  string `name:"tagger.name"`
+	Type        string `required:"" name:"type"`
+	internal.BaseCmd
+}
+
+func (c *GitCreateTagCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{owner}/{repo}/git/tags")
+	c.UpdateBody("message", c.Message)
+	c.UpdateBody("object", c.Object)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("tag", c.Tag)
+	c.UpdateBody("tagger.date", c.TaggerDate)
+	c.UpdateBody("tagger.email", c.TaggerEmail)
+	c.UpdateBody("tagger.name", c.TaggerName)
+	c.UpdateBody("type", c.Type)
 	return c.DoRequest("POST")
 }
 
