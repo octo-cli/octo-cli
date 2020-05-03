@@ -167,19 +167,31 @@ func genFileTmpls(routesPath string) (map[string]FileTmpl, error) {
 				flagHelps[svcNodeName][idName] = map[string]string{}
 			}
 
-			err := previewData(op, &tmplHelper.Fields, &runMethod.Params, flagHelps[svcNodeName][idName])
+			pd := propDataVals{
+				fields:   &tmplHelper.Fields,
+				rmParams: &runMethod.Params,
+				helpers:  flagHelps[svcNodeName][idName],
+			}
+
+			err := previewData(op, pd)
 			if err != nil {
 				delete(flagHelps[svcNodeName], idName)
 				continue
 			}
 
-			err = bodyParamData(op, &tmplHelper.Fields, &runMethod.Params, flagHelps[svcNodeName][idName])
+			unsupportedBodyParams, err := bodyParamData(op, pd)
 			if err != nil {
+				fmt.Printf("%s has the following required params that are not supported:\n", op.OperationID)
+				for s, b := range unsupportedBodyParams {
+					if b {
+						fmt.Println(s)
+					}
+				}
 				delete(flagHelps[svcNodeName], idName)
 				continue
 			}
 
-			err = paramData(op, &tmplHelper.Fields, &runMethod.Params, flagHelps[svcNodeName][idName])
+			err = paramData(op, pd)
 			if err != nil {
 				delete(flagHelps[svcNodeName], idName)
 				continue
@@ -241,7 +253,7 @@ func paramRequired(parameters openapi3.Parameters, idx int) bool {
 	return nextParam.Name != "repo" || nextParam.In != "path"
 }
 
-func previewData(op *openapi3.Operation, fields *[]StructField, rmParams *[]RunMethodParam, helpers map[string]string) error {
+func previewData(op *openapi3.Operation, pd propDataVals) error {
 	xMsg, ok := op.Extensions["x-github"].(json.RawMessage)
 	if !ok {
 		return nil
@@ -268,12 +280,12 @@ func previewData(op *openapi3.Operation, fields *[]StructField, rmParams *[]RunM
 			setTag(tags, newTag("required", ""))
 		}
 		setTag(tags, newTag("help", preview.Note))
-		*fields = append(*fields, StructField{
+		*pd.fields = append(*pd.fields, StructField{
 			Name: toArgName(preview.Name),
 			Type: "bool",
 			Tags: tags,
 		})
-		*rmParams = append(*rmParams, RunMethodParam{
+		*pd.rmParams = append(*pd.rmParams, RunMethodParam{
 			Name:         preview.Name,
 			UpdateMethod: updateMethodMap["preview"],
 			ValueField:   toArgName(preview.Name),
@@ -282,7 +294,7 @@ func previewData(op *openapi3.Operation, fields *[]StructField, rmParams *[]RunM
 	return nil
 }
 
-func paramData(op *openapi3.Operation, fields *[]StructField, rmParams *[]RunMethodParam, helpers map[string]string) error {
+func paramData(op *openapi3.Operation, pd propDataVals) error {
 	for i, pRef := range op.Parameters {
 		param := pRef.Value
 		if param.Name == "accept" {
@@ -298,56 +310,93 @@ func paramData(op *openapi3.Operation, fields *[]StructField, rmParams *[]RunMet
 			setTag(tags, &structtag.Tag{Key: "required"})
 		}
 		setTag(tags, &structtag.Tag{Key: "name", Name: param.Name})
-		*fields = append(*fields, StructField{
+		*pd.fields = append(*pd.fields, StructField{
 			Name: toArgName(param.Name),
 			Type: paramType,
 			Tags: tags,
 		})
-		*rmParams = append(*rmParams, RunMethodParam{
+		*pd.rmParams = append(*pd.rmParams, RunMethodParam{
 			Name:         param.Name,
 			ValueField:   toArgName(param.Name),
 			UpdateMethod: updateMethodMap[param.In],
 		})
-		helpers[param.Name] = param.Description
+		pd.helpers[param.Name] = param.Description
 	}
 	return nil
 }
 
-func bodyParamData(op *openapi3.Operation, fields *[]StructField, rmParams *[]RunMethodParam, helpers map[string]string) error {
+type propDataVals struct {
+	fields   *[]StructField
+	rmParams *[]RunMethodParam
+	helpers  map[string]string
+}
+
+func bodyParamData(op *openapi3.Operation, pd propDataVals) (map[string]bool, error) {
 	if op.RequestBody == nil || op.RequestBody.Value.Content.Get("application/json") == nil {
-		return nil
+		return nil, nil
 	}
 	bodySchema := op.RequestBody.Value.Content.Get("application/json").Schema.Value
 	required := map[string]bool{}
 	for _, s := range bodySchema.Required {
 		required[s] = true
 	}
-
-	for nm, prop := range bodySchema.Properties {
-		pv := prop.Value
-		paramType, ok := paramTypes[getPropType(pv)]
-		if !ok {
-			return fmt.Errorf("unexpected type")
-		}
-		tags := new(structtag.Tags)
-		if required[nm] {
-			setTag(tags, &structtag.Tag{Key: "required"})
-		}
-		setTag(tags, &structtag.Tag{Key: "name", Name: nm})
-		*fields = append(*fields, StructField{
-			Name: toArgName(nm),
-			Type: paramType,
-			Tags: tags,
-		})
-
-		*rmParams = append(*rmParams, RunMethodParam{
-			Name:         nm,
-			UpdateMethod: updateMethodMap["body"],
-			ValueField:   toArgName(nm),
-		})
-		helpers[nm] = pv.Description
+	unsupported := map[string]bool{}
+	for propertyName, prop := range bodySchema.Properties {
+		singleBodyParam(propertyName, prop, unsupported, required, pd)
 	}
-	return nil
+	var err error
+	for _, b := range unsupported {
+		if b {
+			err = fmt.Errorf("body has at least one required field with an unsupported type")
+			break
+		}
+	}
+	return unsupported, err
+}
+
+func singleBodyParam(propertyName string, prop *openapi3.SchemaRef, unsupported map[string]bool, required map[string]bool, pd propDataVals) {
+	pv := prop.Value
+
+	dotCount := strings.Count(propertyName, ".")
+	if dotCount > 1 {
+		fmt.Println(propertyName)
+	}
+
+	if pv.Type == "object" {
+		if required[propertyName] {
+			for _, s := range pv.Required {
+				required[fmt.Sprintf("%s.%s", propertyName, s)] = true
+			}
+		}
+		for subName, pRef := range pv.Properties {
+			name := propertyName + "." + subName
+			singleBodyParam(name, pRef, unsupported, required, pd)
+		}
+		return
+	}
+
+	paramType, ok := paramTypes[getPropType(pv)]
+	if !ok {
+		unsupported[propertyName] = required[propertyName]
+		return
+	}
+	tags := new(structtag.Tags)
+	if required[propertyName] {
+		setTag(tags, &structtag.Tag{Key: "required"})
+	}
+	setTag(tags, &structtag.Tag{Key: "name", Name: propertyName})
+	*pd.fields = append(*pd.fields, StructField{
+		Name: toArgName(propertyName),
+		Type: paramType,
+		Tags: tags,
+	})
+
+	*pd.rmParams = append(*pd.rmParams, RunMethodParam{
+		Name:         propertyName,
+		UpdateMethod: updateMethodMap["body"],
+		ValueField:   toArgName(propertyName),
+	})
+	pd.helpers[propertyName] = pv.Description
 }
 
 func sortCmdStructFields(fields []StructField) {
@@ -550,7 +599,7 @@ func writeGoFile(filename, templateName string, p interface{}, path string, fs a
 //toArgName takes input like "foo-bar" and returns "FooBar"
 func toArgName(in string) string {
 	out := in
-	for _, separator := range []string{"_", "-"} {
+	for _, separator := range []string{"_", "-", "."} {
 		words := strings.Split(out, separator)
 		for i, word := range words {
 			words[i] = strings.Title(word)

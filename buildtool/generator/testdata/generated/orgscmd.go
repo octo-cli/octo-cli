@@ -12,6 +12,7 @@ type OrgsCmd struct {
 	CheckPublicMembership              OrgsCheckPublicMembershipCmd              `cmd:""`
 	ConcealMembership                  OrgsConcealMembershipCmd                  `cmd:""`
 	ConvertMemberToOutsideCollaborator OrgsConvertMemberToOutsideCollaboratorCmd `cmd:""`
+	CreateHook                         OrgsCreateHookCmd                         `cmd:""`
 	CreateInvitation                   OrgsCreateInvitationCmd                   `cmd:""`
 	DeleteHook                         OrgsDeleteHookCmd                         `cmd:""`
 	Get                                OrgsGetCmd                                `cmd:""`
@@ -39,6 +40,7 @@ type OrgsCmd struct {
 	RemoveOutsideCollaborator          OrgsRemoveOutsideCollaboratorCmd          `cmd:""`
 	UnblockUser                        OrgsUnblockUserCmd                        `cmd:""`
 	Update                             OrgsUpdateCmd                             `cmd:""`
+	UpdateHook                         OrgsUpdateHookCmd                         `cmd:""`
 	UpdateMembership                   OrgsUpdateMembershipCmd                   `cmd:""`
 }
 
@@ -140,6 +142,32 @@ func (c *OrgsConvertMemberToOutsideCollaboratorCmd) Run(isValueSetMap map[string
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLPath("username", c.Username)
 	return c.DoRequest("PUT")
+}
+
+type OrgsCreateHookCmd struct {
+	Active            bool     `name:"active"`
+	ConfigContentType string   `name:"config.content_type"`
+	ConfigInsecureSsl string   `name:"config.insecure_ssl"`
+	ConfigSecret      string   `name:"config.secret"`
+	ConfigUrl         string   `required:"" name:"config.url"`
+	Events            []string `name:"events"`
+	Name              string   `required:"" name:"name"`
+	Org               string   `required:"" name:"org"`
+	internal.BaseCmd
+}
+
+func (c *OrgsCreateHookCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/{org}/hooks")
+	c.UpdateBody("active", c.Active)
+	c.UpdateBody("config.content_type", c.ConfigContentType)
+	c.UpdateBody("config.insecure_ssl", c.ConfigInsecureSsl)
+	c.UpdateBody("config.secret", c.ConfigSecret)
+	c.UpdateBody("config.url", c.ConfigUrl)
+	c.UpdateBody("events", c.Events)
+	c.UpdateBody("name", c.Name)
+	c.UpdateURLPath("org", c.Org)
+	return c.DoRequest("POST")
 }
 
 type OrgsCreateInvitationCmd struct {
@@ -571,6 +599,32 @@ func (c *OrgsUpdateCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateBody("name", c.Name)
 	c.UpdateURLPath("org", c.Org)
 	c.UpdatePreview("surtur", c.Surtur)
+	return c.DoRequest("PATCH")
+}
+
+type OrgsUpdateHookCmd struct {
+	Active            bool     `name:"active"`
+	ConfigContentType string   `name:"config.content_type"`
+	ConfigInsecureSsl string   `name:"config.insecure_ssl"`
+	ConfigSecret      string   `name:"config.secret"`
+	ConfigUrl         string   `name:"config.url"`
+	Events            []string `name:"events"`
+	HookId            int64    `required:"" name:"hook_id"`
+	Org               string   `required:"" name:"org"`
+	internal.BaseCmd
+}
+
+func (c *OrgsUpdateHookCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/{org}/hooks/{hook_id}")
+	c.UpdateBody("active", c.Active)
+	c.UpdateBody("config.content_type", c.ConfigContentType)
+	c.UpdateBody("config.insecure_ssl", c.ConfigInsecureSsl)
+	c.UpdateBody("config.secret", c.ConfigSecret)
+	c.UpdateBody("config.url", c.ConfigUrl)
+	c.UpdateBody("events", c.Events)
+	c.UpdateURLPath("hook_id", c.HookId)
+	c.UpdateURLPath("org", c.Org)
 	return c.DoRequest("PATCH")
 }
 

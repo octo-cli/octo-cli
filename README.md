@@ -448,6 +448,10 @@ Commands:
     Create a GitHub App from a manifest -
     https://developer.github.com/v3/apps/#create-a-github-app-from-a-manifest
 
+  apps create-installation-token --installation_id=INT-64 --machine-man-preview --token=STRING
+    Create a new installation token -
+    https://developer.github.com/v3/apps/#create-a-new-installation-token
+
   apps delete-authorization --client_id=STRING --token=STRING
     Delete an app authorization -
     https://developer.github.com/v3/apps/oauth_applications/#delete-an-app-authorization
@@ -555,6 +559,10 @@ Commands:
     Revoke an installation token -
     https://developer.github.com/v3/apps/installations/#revoke-an-installation-token
 
+  checks create --antiope-preview --head_sha=STRING --name=STRING --repo=STRING --token=STRING
+    Create a check run -
+    https://developer.github.com/v3/checks/runs/#create-a-check-run
+
   checks create-suite --antiope-preview --head_sha=STRING --repo=STRING --token=STRING
     Create a check suite -
     https://developer.github.com/v3/checks/suites/#create-a-check-suite
@@ -587,6 +595,14 @@ Commands:
     Rerequest a check suite -
     https://developer.github.com/v3/checks/suites/#rerequest-a-check-suite
 
+  checks set-suites-preferences --antiope-preview --repo=STRING --token=STRING
+    Update repository preferences for check suites -
+    https://developer.github.com/v3/checks/suites/#update-repository-preferences-for-check-suites
+
+  checks update --antiope-preview --check_run_id=INT-64 --repo=STRING --token=STRING
+    Update a check run -
+    https://developer.github.com/v3/checks/runs/#update-a-check-run
+
   codes-of-conduct get-all-codes-of-conduct --scarlet-witch-preview --token=STRING
     List all codes of conduct -
     https://developer.github.com/v3/codes_of_conduct/#list-all-codes-of-conduct
@@ -605,6 +621,9 @@ Commands:
   gists check-is-starred --gist_id=STRING --token=STRING
     Check if a gist is starred -
     https://developer.github.com/v3/gists/#check-if-a-gist-is-starred
+
+  gists create --token=STRING
+    Create a gist - https://developer.github.com/v3/gists/#create-a-gist
 
   gists create-comment --body=STRING --gist_id=STRING --token=STRING
     Create a comment -
@@ -662,6 +681,9 @@ Commands:
   gists unstar --gist_id=STRING --token=STRING
     Unstar a gist - https://developer.github.com/v3/gists/#unstar-a-gist
 
+  gists update --gist_id=STRING --token=STRING
+    Update a gist - https://developer.github.com/v3/gists/#update-a-gist
+
   gists update-comment --body=STRING --comment_id=INT-64 --gist_id=STRING --token=STRING
     Edit a comment -
     https://developer.github.com/v3/gists/comments/#edit-a-comment
@@ -669,9 +691,17 @@ Commands:
   git create-blob --content=STRING --repo=STRING --token=STRING
     Create a blob - https://developer.github.com/v3/git/blobs/#create-a-blob
 
+  git create-commit --message=STRING --parents=PARENTS,... --repo=STRING --tree=STRING --token=STRING
+    Create a commit -
+    https://developer.github.com/v3/git/commits/#create-a-commit
+
   git create-ref --ref=STRING --repo=STRING --sha=STRING --token=STRING
     Create a reference -
     https://developer.github.com/v3/git/refs/#create-a-reference
+
+  git create-tag --message=STRING --object=STRING --repo=STRING --tag=STRING --type=STRING --token=STRING
+    Create a tag object -
+    https://developer.github.com/v3/git/tags/#create-a-tag-object
 
   git delete-ref --ref=STRING --repo=STRING --token=STRING
     Delete a reference -
@@ -1062,6 +1092,9 @@ Commands:
     Convert member to outside collaborator -
     https://developer.github.com/v3/orgs/outside_collaborators/#convert-member-to-outside-collaborator
 
+  orgs create-hook --config.url=STRING --name=STRING --org=STRING --token=STRING
+    Create a hook - https://developer.github.com/v3/orgs/hooks/#create-a-hook
+
   orgs create-invitation --org=STRING --token=STRING
     Create organization invitation -
     https://developer.github.com/v3/orgs/members/#create-organization-invitation
@@ -1165,6 +1198,9 @@ Commands:
   orgs update --org=STRING --token=STRING
     Edit an organization -
     https://developer.github.com/v3/orgs/#edit-an-organization
+
+  orgs update-hook --hook_id=INT-64 --org=STRING --token=STRING
+    Edit a hook - https://developer.github.com/v3/orgs/hooks/#edit-a-hook
 
   orgs update-membership --org=STRING --state=STRING --token=STRING
     Edit your organization membership -
@@ -1280,6 +1316,10 @@ Commands:
   pulls create-comment --body=STRING --commit_id=STRING --path=STRING --pull_number=INT-64 --repo=STRING --token=STRING
     Create a comment -
     https://developer.github.com/v3/pulls/comments/#create-a-comment
+
+  pulls create-review --pull_number=INT-64 --repo=STRING --token=STRING
+    Create a pull request review -
+    https://developer.github.com/v3/pulls/reviews/#create-a-pull-request-review
 
   pulls create-review-comment-reply --body=STRING --comment_id=INT-64 --pull_number=INT-64 --repo=STRING --token=STRING
     Create a review comment reply -
@@ -1529,6 +1569,10 @@ Commands:
     Create a deployment status -
     https://developer.github.com/v3/repos/deployments/#create-a-deployment-status
 
+  repos create-dispatch-event --repo=STRING --token=STRING
+    Create a repository dispatch event -
+    https://developer.github.com/v3/repos/#create-a-repository-dispatch-event
+
   repos create-for-authenticated-user --name=STRING --token=STRING
     Create a repository for the authenticated user -
     https://developer.github.com/v3/repos/#create-a-repository-for-the-authenticated-user
@@ -1536,9 +1580,16 @@ Commands:
   repos create-fork --repo=STRING --token=STRING
     Create a fork - https://developer.github.com/v3/repos/forks/#create-a-fork
 
+  repos create-hook --config.url=STRING --repo=STRING --token=STRING
+    Create a hook - https://developer.github.com/v3/repos/hooks/#create-a-hook
+
   repos create-in-org --name=STRING --org=STRING --token=STRING
     Create an organization repository -
     https://developer.github.com/v3/repos/#create-an-organization-repository
+
+  repos create-or-update-file --content=STRING --message=STRING --path=STRING --repo=STRING --token=STRING
+    Create or update a file -
+    https://developer.github.com/v3/repos/contents/#create-or-update-a-file
 
   repos create-release --repo=STRING --tag_name=STRING --token=STRING
     Create a release -
@@ -1572,6 +1623,10 @@ Commands:
     Delete a download -
     https://developer.github.com/v3/repos/downloads/#delete-a-download
 
+  repos delete-file --message=STRING --path=STRING --repo=STRING --sha=STRING --token=STRING
+    Delete a file -
+    https://developer.github.com/v3/repos/contents/#delete-a-file
+
   repos delete-hook --hook_id=INT-64 --repo=STRING --token=STRING
     Delete a hook - https://developer.github.com/v3/repos/hooks/#delete-a-hook
 
@@ -1602,6 +1657,10 @@ Commands:
   repos enable-automated-security-fixes --london-preview --repo=STRING --token=STRING
     Enable automated security fixes -
     https://developer.github.com/v3/repos/#enable-automated-security-fixes
+
+  repos enable-pages-site --repo=STRING --switcheroo-preview --token=STRING
+    Enable a Pages site -
+    https://developer.github.com/v3/repos/pages/#enable-a-pages-site
 
   repos enable-vulnerability-alerts --dorian-preview --repo=STRING --token=STRING
     Enable vulnerability alerts -
@@ -1962,9 +2021,16 @@ Commands:
     Update a repository -
     https://developer.github.com/v3/repos/#update-a-repository
 
+  repos update-branch-protection --branch=STRING --enforce_admins --repo=STRING --required_status_checks.contexts=REQUIRED_STATUS_CHECKS.CONTEXTS,... --required_status_checks.strict --restrictions.teams=RESTRICTIONS.TEAMS,... --restrictions.users=RESTRICTIONS.USERS,... --token=STRING
+    Update branch protection -
+    https://developer.github.com/v3/repos/branches/#update-branch-protection
+
   repos update-commit-comment --body=STRING --comment_id=INT-64 --repo=STRING --token=STRING
     Update a commit comment -
     https://developer.github.com/v3/repos/comments/#update-a-commit-comment
+
+  repos update-hook --hook_id=INT-64 --repo=STRING --token=STRING
+    Edit a hook - https://developer.github.com/v3/repos/hooks/#edit-a-hook
 
   repos update-information-about-pages-site --repo=STRING --token=STRING
     Update information about a Pages site -
@@ -1973,6 +2039,10 @@ Commands:
   repos update-invitation --invitation_id=INT-64 --repo=STRING --token=STRING
     Update a repository invitation -
     https://developer.github.com/v3/repos/invitations/#update-a-repository-invitation
+
+  repos update-protected-branch-pull-request-review-enforcement --branch=STRING --repo=STRING --token=STRING
+    Update pull request review enforcement of protected branch -
+    https://developer.github.com/v3/repos/branches/#update-pull-request-review-enforcement-of-protected-branch
 
   repos update-protected-branch-required-status-checks --branch=STRING --repo=STRING --token=STRING
     Update required status checks of protected branch -

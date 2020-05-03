@@ -10,6 +10,7 @@ type AppsCmd struct {
 	CheckToken                                   AppsCheckTokenCmd                                   `cmd:""`
 	CreateContentAttachment                      AppsCreateContentAttachmentCmd                      `cmd:""`
 	CreateFromManifest                           AppsCreateFromManifestCmd                           `cmd:""`
+	CreateInstallationToken                      AppsCreateInstallationTokenCmd                      `cmd:""`
 	DeleteAuthorization                          AppsDeleteAuthorizationCmd                          `cmd:""`
 	DeleteInstallation                           AppsDeleteInstallationCmd                           `cmd:""`
 	DeleteToken                                  AppsDeleteTokenCmd                                  `cmd:""`
@@ -110,6 +111,22 @@ func (c *AppsCreateFromManifestCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/app-manifests/{code}/conversions")
 	c.UpdateURLPath("code", c.Code)
+	return c.DoRequest("POST")
+}
+
+type AppsCreateInstallationTokenCmd struct {
+	InstallationId int64   `required:"" name:"installation_id"`
+	MachineMan     bool    "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
+	RepositoryIds  []int64 `name:"repository_ids"`
+	internal.BaseCmd
+}
+
+func (c *AppsCreateInstallationTokenCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/app/installations/{installation_id}/access_tokens")
+	c.UpdateURLPath("installation_id", c.InstallationId)
+	c.UpdatePreview("machine-man", c.MachineMan)
+	c.UpdateBody("repository_ids", c.RepositoryIds)
 	return c.DoRequest("POST")
 }
 

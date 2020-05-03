@@ -50,6 +50,9 @@ func OutputResult(resp *http.Response, rawOutput bool, format string, stdout io.
 	if err != nil {
 		return err
 	}
+	if len(body) == 0 {
+		return nil
+	}
 	if format != "" {
 		body, err = formatOutput(body, format)
 		if err != nil {

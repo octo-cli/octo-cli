@@ -20,9 +20,12 @@ type ReposCmd struct {
 	CreateCommitComment                                ReposCreateCommitCommentCmd                                `cmd:""`
 	CreateDeployment                                   ReposCreateDeploymentCmd                                   `cmd:""`
 	CreateDeploymentStatus                             ReposCreateDeploymentStatusCmd                             `cmd:""`
+	CreateDispatchEvent                                ReposCreateDispatchEventCmd                                `cmd:""`
 	CreateForAuthenticatedUser                         ReposCreateForAuthenticatedUserCmd                         `cmd:""`
 	CreateFork                                         ReposCreateForkCmd                                         `cmd:""`
+	CreateHook                                         ReposCreateHookCmd                                         `cmd:""`
 	CreateInOrg                                        ReposCreateInOrgCmd                                        `cmd:""`
+	CreateOrUpdateFile                                 ReposCreateOrUpdateFileCmd                                 `cmd:""`
 	CreateRelease                                      ReposCreateReleaseCmd                                      `cmd:""`
 	CreateStatus                                       ReposCreateStatusCmd                                       `cmd:""`
 	CreateUsingTemplate                                ReposCreateUsingTemplateCmd                                `cmd:""`
@@ -31,6 +34,7 @@ type ReposCmd struct {
 	DeleteCommitComment                                ReposDeleteCommitCommentCmd                                `cmd:""`
 	DeleteDeployment                                   ReposDeleteDeploymentCmd                                   `cmd:""`
 	DeleteDownload                                     ReposDeleteDownloadCmd                                     `cmd:""`
+	DeleteFile                                         ReposDeleteFileCmd                                         `cmd:""`
 	DeleteHook                                         ReposDeleteHookCmd                                         `cmd:""`
 	DeleteInvitation                                   ReposDeleteInvitationCmd                                   `cmd:""`
 	DeleteRelease                                      ReposDeleteReleaseCmd                                      `cmd:""`
@@ -39,6 +43,7 @@ type ReposCmd struct {
 	DisablePagesSite                                   ReposDisablePagesSiteCmd                                   `cmd:""`
 	DisableVulnerabilityAlerts                         ReposDisableVulnerabilityAlertsCmd                         `cmd:""`
 	EnableAutomatedSecurityFixes                       ReposEnableAutomatedSecurityFixesCmd                       `cmd:""`
+	EnablePagesSite                                    ReposEnablePagesSiteCmd                                    `cmd:""`
 	EnableVulnerabilityAlerts                          ReposEnableVulnerabilityAlertsCmd                          `cmd:""`
 	Get                                                ReposGetCmd                                                `cmd:""`
 	GetAllTopics                                       ReposGetAllTopicsCmd                                       `cmd:""`
@@ -132,9 +137,12 @@ type ReposCmd struct {
 	TestPushHook                                       ReposTestPushHookCmd                                       `cmd:""`
 	Transfer                                           ReposTransferCmd                                           `cmd:""`
 	Update                                             ReposUpdateCmd                                             `cmd:""`
+	UpdateBranchProtection                             ReposUpdateBranchProtectionCmd                             `cmd:""`
 	UpdateCommitComment                                ReposUpdateCommitCommentCmd                                `cmd:""`
+	UpdateHook                                         ReposUpdateHookCmd                                         `cmd:""`
 	UpdateInformationAboutPagesSite                    ReposUpdateInformationAboutPagesSiteCmd                    `cmd:""`
 	UpdateInvitation                                   ReposUpdateInvitationCmd                                   `cmd:""`
+	UpdateProtectedBranchPullRequestReviewEnforcement  ReposUpdateProtectedBranchPullRequestReviewEnforcementCmd  `cmd:""`
 	UpdateProtectedBranchRequiredStatusChecks          ReposUpdateProtectedBranchRequiredStatusChecksCmd          `cmd:""`
 	UpdateRelease                                      ReposUpdateReleaseCmd                                      `cmd:""`
 	UpdateReleaseAsset                                 ReposUpdateReleaseAssetCmd                                 `cmd:""`
@@ -431,6 +439,22 @@ func (c *ReposCreateDeploymentStatusCmd) Run(isValueSetMap map[string]bool) erro
 	return c.DoRequest("POST")
 }
 
+type ReposCreateDispatchEventCmd struct {
+	EventType string `name:"event_type"`
+	Owner     string `name:"owner"`
+	Repo      string `required:"" name:"repo"`
+	internal.BaseCmd
+}
+
+func (c *ReposCreateDispatchEventCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{owner}/{repo}/dispatches")
+	c.UpdateBody("event_type", c.EventType)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("POST")
+}
+
 type ReposCreateForAuthenticatedUserCmd struct {
 	AllowMergeCommit    bool   `name:"allow_merge_commit"`
 	AllowRebaseMerge    bool   `name:"allow_rebase_merge"`
@@ -495,6 +519,34 @@ func (c *ReposCreateForkCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("POST")
 }
 
+type ReposCreateHookCmd struct {
+	Active            bool     `name:"active"`
+	ConfigContentType string   `name:"config.content_type"`
+	ConfigInsecureSsl string   `name:"config.insecure_ssl"`
+	ConfigSecret      string   `name:"config.secret"`
+	ConfigUrl         string   `required:"" name:"config.url"`
+	Events            []string `name:"events"`
+	Name              string   `name:"name"`
+	Owner             string   `name:"owner"`
+	Repo              string   `required:"" name:"repo"`
+	internal.BaseCmd
+}
+
+func (c *ReposCreateHookCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{owner}/{repo}/hooks")
+	c.UpdateBody("active", c.Active)
+	c.UpdateBody("config.content_type", c.ConfigContentType)
+	c.UpdateBody("config.insecure_ssl", c.ConfigInsecureSsl)
+	c.UpdateBody("config.secret", c.ConfigSecret)
+	c.UpdateBody("config.url", c.ConfigUrl)
+	c.UpdateBody("events", c.Events)
+	c.UpdateBody("name", c.Name)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("POST")
+}
+
 type ReposCreateInOrgCmd struct {
 	AllowMergeCommit    bool   `name:"allow_merge_commit"`
 	AllowRebaseMerge    bool   `name:"allow_rebase_merge"`
@@ -543,6 +595,38 @@ func (c *ReposCreateInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateBody("team_id", c.TeamId)
 	c.UpdateBody("visibility", c.Visibility)
 	return c.DoRequest("POST")
+}
+
+type ReposCreateOrUpdateFileCmd struct {
+	AuthorEmail    string `name:"author.email"`
+	AuthorName     string `name:"author.name"`
+	Branch         string `name:"branch"`
+	CommitterEmail string `name:"committer.email"`
+	CommitterName  string `name:"committer.name"`
+	Content        string `required:"" name:"content"`
+	Message        string `required:"" name:"message"`
+	Owner          string `name:"owner"`
+	Path           string `required:"" name:"path"`
+	Repo           string `required:"" name:"repo"`
+	Sha            string `name:"sha"`
+	internal.BaseCmd
+}
+
+func (c *ReposCreateOrUpdateFileCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{owner}/{repo}/contents/{path}")
+	c.UpdateBody("author.email", c.AuthorEmail)
+	c.UpdateBody("author.name", c.AuthorName)
+	c.UpdateBody("branch", c.Branch)
+	c.UpdateBody("committer.email", c.CommitterEmail)
+	c.UpdateBody("committer.name", c.CommitterName)
+	c.UpdateBody("content", c.Content)
+	c.UpdateBody("message", c.Message)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("path", c.Path)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("sha", c.Sha)
+	return c.DoRequest("PUT")
 }
 
 type ReposCreateReleaseCmd struct {
@@ -693,6 +777,36 @@ func (c *ReposDeleteDownloadCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("DELETE")
 }
 
+type ReposDeleteFileCmd struct {
+	AuthorEmail    string `name:"author.email"`
+	AuthorName     string `name:"author.name"`
+	Branch         string `name:"branch"`
+	CommitterEmail string `name:"committer.email"`
+	CommitterName  string `name:"committer.name"`
+	Message        string `required:"" name:"message"`
+	Owner          string `name:"owner"`
+	Path           string `required:"" name:"path"`
+	Repo           string `required:"" name:"repo"`
+	Sha            string `required:"" name:"sha"`
+	internal.BaseCmd
+}
+
+func (c *ReposDeleteFileCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{owner}/{repo}/contents/{path}")
+	c.UpdateBody("author.email", c.AuthorEmail)
+	c.UpdateBody("author.name", c.AuthorName)
+	c.UpdateBody("branch", c.Branch)
+	c.UpdateBody("committer.email", c.CommitterEmail)
+	c.UpdateBody("committer.name", c.CommitterName)
+	c.UpdateBody("message", c.Message)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("path", c.Path)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("sha", c.Sha)
+	return c.DoRequest("DELETE")
+}
+
 type ReposDeleteHookCmd struct {
 	HookId int64  `required:"" name:"hook_id"`
 	Owner  string `name:"owner"`
@@ -819,6 +933,26 @@ func (c *ReposEnableAutomatedSecurityFixesCmd) Run(isValueSetMap map[string]bool
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("PUT")
+}
+
+type ReposEnablePagesSiteCmd struct {
+	Owner        string `name:"owner"`
+	Repo         string `required:"" name:"repo"`
+	SourceBranch string `name:"source.branch"`
+	SourcePath   string `name:"source.path"`
+	Switcheroo   bool   "name:\"switcheroo-preview\" required:\"\" help:\"Enabling and disabling Pages in the Pages API is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2019-03-14-enabling-disabling-pages/) preview for more details. To access the new endpoints during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.switcheroo-preview+json\n```\""
+	internal.BaseCmd
+}
+
+func (c *ReposEnablePagesSiteCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{owner}/{repo}/pages")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("source.branch", c.SourceBranch)
+	c.UpdateBody("source.path", c.SourcePath)
+	c.UpdatePreview("switcheroo", c.Switcheroo)
+	return c.DoRequest("POST")
 }
 
 type ReposEnableVulnerabilityAlertsCmd struct {
@@ -2413,6 +2547,52 @@ func (c *ReposTransferCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("POST")
 }
 
+type ReposUpdateBranchProtectionCmd struct {
+	AllowDeletions                                         bool     `name:"allow_deletions"`
+	AllowForcePushes                                       bool     `name:"allow_force_pushes"`
+	Branch                                                 string   `required:"" name:"branch"`
+	EnforceAdmins                                          bool     `required:"" name:"enforce_admins"`
+	LukeCage                                               bool     "name:\"luke-cage-preview\" help:\"The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.luke-cage-preview+json\n```\""
+	Owner                                                  string   `name:"owner"`
+	Repo                                                   string   `required:"" name:"repo"`
+	RequiredLinearHistory                                  bool     `name:"required_linear_history"`
+	RequiredPullRequestReviewsDismissStaleReviews          bool     `name:"required_pull_request_reviews.dismiss_stale_reviews"`
+	RequiredPullRequestReviewsDismissalRestrictionsTeams   []string `name:"required_pull_request_reviews.dismissal_restrictions.teams"`
+	RequiredPullRequestReviewsDismissalRestrictionsUsers   []string `name:"required_pull_request_reviews.dismissal_restrictions.users"`
+	RequiredPullRequestReviewsRequireCodeOwnerReviews      bool     `name:"required_pull_request_reviews.require_code_owner_reviews"`
+	RequiredPullRequestReviewsRequiredApprovingReviewCount int64    `name:"required_pull_request_reviews.required_approving_review_count"`
+	RequiredStatusChecksContexts                           []string `required:"" name:"required_status_checks.contexts"`
+	RequiredStatusChecksStrict                             bool     `required:"" name:"required_status_checks.strict"`
+	RestrictionsApps                                       []string `name:"restrictions.apps"`
+	RestrictionsTeams                                      []string `required:"" name:"restrictions.teams"`
+	RestrictionsUsers                                      []string `required:"" name:"restrictions.users"`
+	internal.BaseCmd
+}
+
+func (c *ReposUpdateBranchProtectionCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection")
+	c.UpdateBody("allow_deletions", c.AllowDeletions)
+	c.UpdateBody("allow_force_pushes", c.AllowForcePushes)
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateBody("enforce_admins", c.EnforceAdmins)
+	c.UpdatePreview("luke-cage", c.LukeCage)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("required_linear_history", c.RequiredLinearHistory)
+	c.UpdateBody("required_pull_request_reviews.dismiss_stale_reviews", c.RequiredPullRequestReviewsDismissStaleReviews)
+	c.UpdateBody("required_pull_request_reviews.dismissal_restrictions.teams", c.RequiredPullRequestReviewsDismissalRestrictionsTeams)
+	c.UpdateBody("required_pull_request_reviews.dismissal_restrictions.users", c.RequiredPullRequestReviewsDismissalRestrictionsUsers)
+	c.UpdateBody("required_pull_request_reviews.require_code_owner_reviews", c.RequiredPullRequestReviewsRequireCodeOwnerReviews)
+	c.UpdateBody("required_pull_request_reviews.required_approving_review_count", c.RequiredPullRequestReviewsRequiredApprovingReviewCount)
+	c.UpdateBody("required_status_checks.contexts", c.RequiredStatusChecksContexts)
+	c.UpdateBody("required_status_checks.strict", c.RequiredStatusChecksStrict)
+	c.UpdateBody("restrictions.apps", c.RestrictionsApps)
+	c.UpdateBody("restrictions.teams", c.RestrictionsTeams)
+	c.UpdateBody("restrictions.users", c.RestrictionsUsers)
+	return c.DoRequest("PUT")
+}
+
 type ReposUpdateCmd struct {
 	AllowMergeCommit    bool   `name:"allow_merge_commit"`
 	AllowRebaseMerge    bool   `name:"allow_rebase_merge"`
@@ -2479,6 +2659,38 @@ func (c *ReposUpdateCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("PATCH")
 }
 
+type ReposUpdateHookCmd struct {
+	Active            bool     `name:"active"`
+	AddEvents         []string `name:"add_events"`
+	ConfigContentType string   `name:"config.content_type"`
+	ConfigInsecureSsl string   `name:"config.insecure_ssl"`
+	ConfigSecret      string   `name:"config.secret"`
+	ConfigUrl         string   `name:"config.url"`
+	Events            []string `name:"events"`
+	HookId            int64    `required:"" name:"hook_id"`
+	Owner             string   `name:"owner"`
+	RemoveEvents      []string `name:"remove_events"`
+	Repo              string   `required:"" name:"repo"`
+	internal.BaseCmd
+}
+
+func (c *ReposUpdateHookCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{owner}/{repo}/hooks/{hook_id}")
+	c.UpdateBody("active", c.Active)
+	c.UpdateBody("add_events", c.AddEvents)
+	c.UpdateBody("config.content_type", c.ConfigContentType)
+	c.UpdateBody("config.insecure_ssl", c.ConfigInsecureSsl)
+	c.UpdateBody("config.secret", c.ConfigSecret)
+	c.UpdateBody("config.url", c.ConfigUrl)
+	c.UpdateBody("events", c.Events)
+	c.UpdateURLPath("hook_id", c.HookId)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateBody("remove_events", c.RemoveEvents)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("PATCH")
+}
+
 type ReposUpdateInformationAboutPagesSiteCmd struct {
 	Cname  string `name:"cname"`
 	Owner  string `name:"owner"`
@@ -2512,6 +2724,34 @@ func (c *ReposUpdateInvitationCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateBody("permissions", c.Permissions)
 	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("PATCH")
+}
+
+type ReposUpdateProtectedBranchPullRequestReviewEnforcementCmd struct {
+	Branch                       string   `required:"" name:"branch"`
+	DismissStaleReviews          bool     `name:"dismiss_stale_reviews"`
+	DismissalRestrictionsTeams   []string `name:"dismissal_restrictions.teams"`
+	DismissalRestrictionsUsers   []string `name:"dismissal_restrictions.users"`
+	LukeCage                     bool     "name:\"luke-cage-preview\" help:\"The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.luke-cage-preview+json\n```\""
+	Owner                        string   `name:"owner"`
+	Repo                         string   `required:"" name:"repo"`
+	RequireCodeOwnerReviews      bool     `name:"require_code_owner_reviews"`
+	RequiredApprovingReviewCount int64    `name:"required_approving_review_count"`
+	internal.BaseCmd
+}
+
+func (c *ReposUpdateProtectedBranchPullRequestReviewEnforcementCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews")
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateBody("dismiss_stale_reviews", c.DismissStaleReviews)
+	c.UpdateBody("dismissal_restrictions.teams", c.DismissalRestrictionsTeams)
+	c.UpdateBody("dismissal_restrictions.users", c.DismissalRestrictionsUsers)
+	c.UpdatePreview("luke-cage", c.LukeCage)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("require_code_owner_reviews", c.RequireCodeOwnerReviews)
+	c.UpdateBody("required_approving_review_count", c.RequiredApprovingReviewCount)
 	return c.DoRequest("PATCH")
 }
 

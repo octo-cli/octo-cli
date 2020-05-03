@@ -6,6 +6,7 @@ import "github.com/octo-cli/octo-cli/internal"
 
 type GistsCmd struct {
 	CheckIsStarred GistsCheckIsStarredCmd `cmd:""`
+	Create         GistsCreateCmd         `cmd:""`
 	CreateComment  GistsCreateCommentCmd  `cmd:""`
 	Delete         GistsDeleteCmd         `cmd:""`
 	DeleteComment  GistsDeleteCommentCmd  `cmd:""`
@@ -22,6 +23,7 @@ type GistsCmd struct {
 	ListStarred    GistsListStarredCmd    `cmd:""`
 	Star           GistsStarCmd           `cmd:""`
 	Unstar         GistsUnstarCmd         `cmd:""`
+	Update         GistsUpdateCmd         `cmd:""`
 	UpdateComment  GistsUpdateCommentCmd  `cmd:""`
 }
 
@@ -35,6 +37,22 @@ func (c *GistsCheckIsStarredCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetURLPath("/gists/{gist_id}/star")
 	c.UpdateURLPath("gist_id", c.GistId)
 	return c.DoRequest("GET")
+}
+
+type GistsCreateCmd struct {
+	Description  string `name:"description"`
+	FilesContent string `name:"files.content"`
+	Public       bool   `name:"public"`
+	internal.BaseCmd
+}
+
+func (c *GistsCreateCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/gists")
+	c.UpdateBody("description", c.Description)
+	c.UpdateBody("files.content", c.FilesContent)
+	c.UpdateBody("public", c.Public)
+	return c.DoRequest("POST")
 }
 
 type GistsCreateCommentCmd struct {
@@ -265,6 +283,24 @@ func (c *GistsUnstarCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetURLPath("/gists/{gist_id}/star")
 	c.UpdateURLPath("gist_id", c.GistId)
 	return c.DoRequest("DELETE")
+}
+
+type GistsUpdateCmd struct {
+	Description   string `name:"description"`
+	FilesContent  string `name:"files.content"`
+	FilesFilename string `name:"files.filename"`
+	GistId        string `required:"" name:"gist_id"`
+	internal.BaseCmd
+}
+
+func (c *GistsUpdateCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/gists/{gist_id}")
+	c.UpdateBody("description", c.Description)
+	c.UpdateBody("files.content", c.FilesContent)
+	c.UpdateBody("files.filename", c.FilesFilename)
+	c.UpdateURLPath("gist_id", c.GistId)
+	return c.DoRequest("PATCH")
 }
 
 type GistsUpdateCommentCmd struct {
