@@ -45,7 +45,7 @@ func (c *MigrationsCancelImportCmd) Run(isValueSetMap map[string]bool) error {
 
 type MigrationsDeleteArchiveForAuthenticatedUserCmd struct {
 	MigrationId int64 `required:"" name:"migration_id"`
-	Wyandotte   bool  "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
+	Wyandotte   bool  `required:"" name:"wyandotte-preview"`
 	internal.BaseCmd
 }
 
@@ -60,7 +60,7 @@ func (c *MigrationsDeleteArchiveForAuthenticatedUserCmd) Run(isValueSetMap map[s
 type MigrationsDeleteArchiveForOrgCmd struct {
 	MigrationId int64  `required:"" name:"migration_id"`
 	Org         string `required:"" name:"org"`
-	Wyandotte   bool   "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
+	Wyandotte   bool   `required:"" name:"wyandotte-preview"`
 	internal.BaseCmd
 }
 
@@ -76,7 +76,7 @@ func (c *MigrationsDeleteArchiveForOrgCmd) Run(isValueSetMap map[string]bool) er
 type MigrationsDownloadArchiveForOrgCmd struct {
 	MigrationId int64  `required:"" name:"migration_id"`
 	Org         string `required:"" name:"org"`
-	Wyandotte   bool   "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
+	Wyandotte   bool   `required:"" name:"wyandotte-preview"`
 	internal.BaseCmd
 }
 
@@ -91,7 +91,7 @@ func (c *MigrationsDownloadArchiveForOrgCmd) Run(isValueSetMap map[string]bool) 
 
 type MigrationsGetArchiveForAuthenticatedUserCmd struct {
 	MigrationId int64 `required:"" name:"migration_id"`
-	Wyandotte   bool  "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
+	Wyandotte   bool  `required:"" name:"wyandotte-preview"`
 	internal.BaseCmd
 }
 
@@ -149,7 +149,7 @@ func (c *MigrationsGetLargeFilesCmd) Run(isValueSetMap map[string]bool) error {
 
 type MigrationsGetStatusForAuthenticatedUserCmd struct {
 	MigrationId int64 `required:"" name:"migration_id"`
-	Wyandotte   bool  "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
+	Wyandotte   bool  `required:"" name:"wyandotte-preview"`
 	internal.BaseCmd
 }
 
@@ -164,7 +164,7 @@ func (c *MigrationsGetStatusForAuthenticatedUserCmd) Run(isValueSetMap map[strin
 type MigrationsGetStatusForOrgCmd struct {
 	MigrationId int64  `required:"" name:"migration_id"`
 	Org         string `required:"" name:"org"`
-	Wyandotte   bool   "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
+	Wyandotte   bool   `required:"" name:"wyandotte-preview"`
 	internal.BaseCmd
 }
 
@@ -180,7 +180,7 @@ func (c *MigrationsGetStatusForOrgCmd) Run(isValueSetMap map[string]bool) error 
 type MigrationsListForAuthenticatedUserCmd struct {
 	Page      int64 `name:"page"`
 	PerPage   int64 `name:"per_page"`
-	Wyandotte bool  "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
+	Wyandotte bool  `required:"" name:"wyandotte-preview"`
 	internal.BaseCmd
 }
 
@@ -197,7 +197,7 @@ type MigrationsListForOrgCmd struct {
 	Org       string `required:"" name:"org"`
 	Page      int64  `name:"page"`
 	PerPage   int64  `name:"per_page"`
-	Wyandotte bool   "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
+	Wyandotte bool   `required:"" name:"wyandotte-preview"`
 	internal.BaseCmd
 }
 
@@ -216,7 +216,7 @@ type MigrationsListReposForOrgCmd struct {
 	Org         string `required:"" name:"org"`
 	Page        int64  `name:"page"`
 	PerPage     int64  `name:"per_page"`
-	Wyandotte   bool   "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
+	Wyandotte   bool   `required:"" name:"wyandotte-preview"`
 	internal.BaseCmd
 }
 
@@ -235,7 +235,7 @@ type MigrationsListReposForUserCmd struct {
 	MigrationId int64 `required:"" name:"migration_id"`
 	Page        int64 `name:"page"`
 	PerPage     int64 `name:"per_page"`
-	Wyandotte   bool  "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
+	Wyandotte   bool  `required:"" name:"wyandotte-preview"`
 	internal.BaseCmd
 }
 
@@ -346,7 +346,7 @@ func (c *MigrationsStartImportCmd) Run(isValueSetMap map[string]bool) error {
 type MigrationsUnlockRepoForAuthenticatedUserCmd struct {
 	MigrationId int64  `required:"" name:"migration_id"`
 	RepoName    string `required:"" name:"repo_name"`
-	Wyandotte   bool   "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
+	Wyandotte   bool   `required:"" name:"wyandotte-preview"`
 	internal.BaseCmd
 }
 
@@ -363,7 +363,7 @@ type MigrationsUnlockRepoForOrgCmd struct {
 	MigrationId int64  `required:"" name:"migration_id"`
 	Org         string `required:"" name:"org"`
 	RepoName    string `required:"" name:"repo_name"`
-	Wyandotte   bool   "name:\"wyandotte-preview\" required:\"\" help:\"To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.wyandotte-preview+json\n```\""
+	Wyandotte   bool   `required:"" name:"wyandotte-preview"`
 	internal.BaseCmd
 }
 

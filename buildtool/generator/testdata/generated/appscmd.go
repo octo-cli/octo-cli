@@ -42,7 +42,7 @@ type AppsCmd struct {
 
 type AppsAddRepoToInstallationCmd struct {
 	InstallationId int64 `required:"" name:"installation_id"`
-	MachineMan     bool  "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
+	MachineMan     bool  `required:"" name:"machine-man-preview"`
 	RepositoryId   int64 `required:"" name:"repository_id"`
 	internal.BaseCmd
 }
@@ -87,7 +87,7 @@ func (c *AppsCheckTokenCmd) Run(isValueSetMap map[string]bool) error {
 type AppsCreateContentAttachmentCmd struct {
 	Body               string `required:"" name:"body"`
 	ContentReferenceId int64  `required:"" name:"content_reference_id"`
-	Corsair            bool   "name:\"corsair-preview\" required:\"\" help:\"To access the Content Attachments API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.corsair-preview+json\n```\""
+	Corsair            bool   `required:"" name:"corsair-preview"`
 	Title              string `required:"" name:"title"`
 	internal.BaseCmd
 }
@@ -116,7 +116,7 @@ func (c *AppsCreateFromManifestCmd) Run(isValueSetMap map[string]bool) error {
 
 type AppsCreateInstallationTokenCmd struct {
 	InstallationId int64   `required:"" name:"installation_id"`
-	MachineMan     bool    "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
+	MachineMan     bool    `required:"" name:"machine-man-preview"`
 	RepositoryIds  []int64 `name:"repository_ids"`
 	internal.BaseCmd
 }
@@ -146,7 +146,7 @@ func (c *AppsDeleteAuthorizationCmd) Run(isValueSetMap map[string]bool) error {
 
 type AppsDeleteInstallationCmd struct {
 	InstallationId int64 `required:"" name:"installation_id"`
-	MachineMan     bool  "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
+	MachineMan     bool  `required:"" name:"machine-man-preview"`
 	internal.BaseCmd
 }
 
@@ -173,7 +173,7 @@ func (c *AppsDeleteTokenCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsGetAuthenticatedCmd struct {
-	MachineMan bool "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
+	MachineMan bool `required:"" name:"machine-man-preview"`
 	internal.BaseCmd
 }
 
@@ -186,7 +186,7 @@ func (c *AppsGetAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
 
 type AppsGetBySlugCmd struct {
 	AppSlug    string `required:"" name:"app_slug"`
-	MachineMan bool   "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
+	MachineMan bool   `required:"" name:"machine-man-preview"`
 	internal.BaseCmd
 }
 
@@ -200,7 +200,7 @@ func (c *AppsGetBySlugCmd) Run(isValueSetMap map[string]bool) error {
 
 type AppsGetInstallationCmd struct {
 	InstallationId int64 `required:"" name:"installation_id"`
-	MachineMan     bool  "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
+	MachineMan     bool  `required:"" name:"machine-man-preview"`
 	internal.BaseCmd
 }
 
@@ -213,7 +213,7 @@ func (c *AppsGetInstallationCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsGetOrgInstallationCmd struct {
-	MachineMan bool   "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
+	MachineMan bool   `required:"" name:"machine-man-preview"`
 	Org        string `required:"" name:"org"`
 	internal.BaseCmd
 }
@@ -227,7 +227,7 @@ func (c *AppsGetOrgInstallationCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsGetRepoInstallationCmd struct {
-	MachineMan bool   "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
+	MachineMan bool   `required:"" name:"machine-man-preview"`
 	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
 	internal.BaseCmd
@@ -267,7 +267,7 @@ func (c *AppsGetSubscriptionPlanForAccountStubbedCmd) Run(isValueSetMap map[stri
 }
 
 type AppsGetUserInstallationCmd struct {
-	MachineMan bool   "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
+	MachineMan bool   `required:"" name:"machine-man-preview"`
 	Username   string `required:"" name:"username"`
 	internal.BaseCmd
 }
@@ -322,8 +322,8 @@ func (c *AppsListAccountsForPlanStubbedCmd) Run(isValueSetMap map[string]bool) e
 
 type AppsListInstallationReposForAuthenticatedUserCmd struct {
 	InstallationId int64 `required:"" name:"installation_id"`
-	MachineMan     bool  "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
-	Mercy          bool  "name:\"mercy-preview\" help:\"The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.mercy-preview+json\n```\""
+	MachineMan     bool  `required:"" name:"machine-man-preview"`
+	Mercy          bool  `name:"mercy-preview"`
 	Page           int64 `name:"page"`
 	PerPage        int64 `name:"per_page"`
 	internal.BaseCmd
@@ -341,7 +341,7 @@ func (c *AppsListInstallationReposForAuthenticatedUserCmd) Run(isValueSetMap map
 }
 
 type AppsListInstallationsCmd struct {
-	MachineMan bool  "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
+	MachineMan bool  `required:"" name:"machine-man-preview"`
 	Page       int64 `name:"page"`
 	PerPage    int64 `name:"per_page"`
 	internal.BaseCmd
@@ -357,7 +357,7 @@ func (c *AppsListInstallationsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsListInstallationsForAuthenticatedUserCmd struct {
-	MachineMan bool  "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
+	MachineMan bool  `required:"" name:"machine-man-preview"`
 	Page       int64 `name:"page"`
 	PerPage    int64 `name:"per_page"`
 	internal.BaseCmd
@@ -401,8 +401,8 @@ func (c *AppsListPlansStubbedCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsListReposCmd struct {
-	MachineMan bool  "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
-	Mercy      bool  "name:\"mercy-preview\" help:\"The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.mercy-preview+json\n```\""
+	MachineMan bool  `required:"" name:"machine-man-preview"`
+	Mercy      bool  `name:"mercy-preview"`
 	Page       int64 `name:"page"`
 	PerPage    int64 `name:"per_page"`
 	internal.BaseCmd
@@ -448,7 +448,7 @@ func (c *AppsListSubscriptionsForAuthenticatedUserStubbedCmd) Run(isValueSetMap 
 
 type AppsRemoveRepoFromInstallationCmd struct {
 	InstallationId int64 `required:"" name:"installation_id"`
-	MachineMan     bool  "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
+	MachineMan     bool  `required:"" name:"machine-man-preview"`
 	RepositoryId   int64 `required:"" name:"repository_id"`
 	internal.BaseCmd
 }

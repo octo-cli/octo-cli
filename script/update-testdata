@@ -10,4 +10,5 @@ mkdir -p ./buildtool/generator/testdata/generated
 cp ./api.github.com.json ./buildtool/generator/testdata/routes.json
 script/generate \
   --routes-path ./buildtool/generator/testdata/routes.json \
-  --output-path ./buildtool/generator/testdata/generated
+  --output-path ./buildtool/generator/testdata/generated \
+  --docs-path ./buildtool/generator/testdata/docs

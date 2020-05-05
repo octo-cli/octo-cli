@@ -11,7 +11,7 @@ type CodesOfConductCmd struct {
 }
 
 type CodesOfConductGetAllCodesOfConductCmd struct {
-	ScarletWitch bool "name:\"scarlet-witch-preview\" required:\"\" help:\"The Codes of Conduct API is currently available for developers to preview.\n\nTo access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.scarlet-witch-preview+json\n```\""
+	ScarletWitch bool `required:"" name:"scarlet-witch-preview"`
 	internal.BaseCmd
 }
 
@@ -24,7 +24,7 @@ func (c *CodesOfConductGetAllCodesOfConductCmd) Run(isValueSetMap map[string]boo
 
 type CodesOfConductGetConductCodeCmd struct {
 	Key          string `required:"" name:"key"`
-	ScarletWitch bool   "name:\"scarlet-witch-preview\" required:\"\" help:\"The Codes of Conduct API is currently available for developers to preview.\n\nTo access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.scarlet-witch-preview+json\n```\""
+	ScarletWitch bool   `required:"" name:"scarlet-witch-preview"`
 	internal.BaseCmd
 }
 
@@ -39,7 +39,7 @@ func (c *CodesOfConductGetConductCodeCmd) Run(isValueSetMap map[string]bool) err
 type CodesOfConductGetForRepoCmd struct {
 	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
-	ScarletWitch bool   "name:\"scarlet-witch-preview\" required:\"\" help:\"The Codes of Conduct API is currently available for developers to preview.\n\nTo access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.scarlet-witch-preview+json\n```\""
+	ScarletWitch bool   `required:"" name:"scarlet-witch-preview"`
 	internal.BaseCmd
 }
 

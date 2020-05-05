@@ -119,7 +119,7 @@ func (c *TeamsAddOrUpdateMembershipLegacyCmd) Run(isValueSetMap map[string]bool)
 }
 
 type TeamsAddOrUpdateProjectInOrgCmd struct {
-	Inertia    bool   "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.inertia-preview+json\n```\""
+	Inertia    bool   `required:"" name:"inertia-preview"`
 	Org        string `required:"" name:"org"`
 	Permission string `name:"permission"`
 	ProjectId  int64  `required:"" name:"project_id"`
@@ -139,7 +139,7 @@ func (c *TeamsAddOrUpdateProjectInOrgCmd) Run(isValueSetMap map[string]bool) err
 }
 
 type TeamsAddOrUpdateProjectLegacyCmd struct {
-	Inertia    bool   "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.inertia-preview+json\n```\""
+	Inertia    bool   `required:"" name:"inertia-preview"`
 	Permission string `name:"permission"`
 	ProjectId  int64  `required:"" name:"project_id"`
 	TeamId     int64  `required:"" name:"team_id"`
@@ -258,7 +258,7 @@ type TeamsCreateDiscussionCommentInOrgCmd struct {
 	Body             string `required:"" name:"body"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	Org              string `required:"" name:"org"`
-	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
+	SquirrelGirl     bool   `name:"squirrel-girl-preview"`
 	TeamSlug         string `required:"" name:"team_slug"`
 	internal.BaseCmd
 }
@@ -277,7 +277,7 @@ func (c *TeamsCreateDiscussionCommentInOrgCmd) Run(isValueSetMap map[string]bool
 type TeamsCreateDiscussionCommentLegacyCmd struct {
 	Body             string `required:"" name:"body"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
-	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
+	SquirrelGirl     bool   `name:"squirrel-girl-preview"`
 	TeamId           int64  `required:"" name:"team_id"`
 	internal.BaseCmd
 }
@@ -296,7 +296,7 @@ type TeamsCreateDiscussionInOrgCmd struct {
 	Body         string `required:"" name:"body"`
 	Org          string `required:"" name:"org"`
 	Private      bool   `name:"private"`
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
+	SquirrelGirl bool   `name:"squirrel-girl-preview"`
 	TeamSlug     string `required:"" name:"team_slug"`
 	Title        string `required:"" name:"title"`
 	internal.BaseCmd
@@ -317,7 +317,7 @@ func (c *TeamsCreateDiscussionInOrgCmd) Run(isValueSetMap map[string]bool) error
 type TeamsCreateDiscussionLegacyCmd struct {
 	Body         string `required:"" name:"body"`
 	Private      bool   `name:"private"`
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
+	SquirrelGirl bool   `name:"squirrel-girl-preview"`
 	TeamId       int64  `required:"" name:"team_id"`
 	Title        string `required:"" name:"title"`
 	internal.BaseCmd
@@ -442,7 +442,7 @@ type TeamsGetDiscussionCommentInOrgCmd struct {
 	CommentNumber    int64  `required:"" name:"comment_number"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	Org              string `required:"" name:"org"`
-	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
+	SquirrelGirl     bool   `name:"squirrel-girl-preview"`
 	TeamSlug         string `required:"" name:"team_slug"`
 	internal.BaseCmd
 }
@@ -461,7 +461,7 @@ func (c *TeamsGetDiscussionCommentInOrgCmd) Run(isValueSetMap map[string]bool) e
 type TeamsGetDiscussionCommentLegacyCmd struct {
 	CommentNumber    int64 `required:"" name:"comment_number"`
 	DiscussionNumber int64 `required:"" name:"discussion_number"`
-	SquirrelGirl     bool  "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
+	SquirrelGirl     bool  `name:"squirrel-girl-preview"`
 	TeamId           int64 `required:"" name:"team_id"`
 	internal.BaseCmd
 }
@@ -479,7 +479,7 @@ func (c *TeamsGetDiscussionCommentLegacyCmd) Run(isValueSetMap map[string]bool) 
 type TeamsGetDiscussionInOrgCmd struct {
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	Org              string `required:"" name:"org"`
-	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
+	SquirrelGirl     bool   `name:"squirrel-girl-preview"`
 	TeamSlug         string `required:"" name:"team_slug"`
 	internal.BaseCmd
 }
@@ -496,7 +496,7 @@ func (c *TeamsGetDiscussionInOrgCmd) Run(isValueSetMap map[string]bool) error {
 
 type TeamsGetDiscussionLegacyCmd struct {
 	DiscussionNumber int64 `required:"" name:"discussion_number"`
-	SquirrelGirl     bool  "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
+	SquirrelGirl     bool  `name:"squirrel-girl-preview"`
 	TeamId           int64 `required:"" name:"team_id"`
 	internal.BaseCmd
 }
@@ -622,7 +622,7 @@ type TeamsListDiscussionCommentsInOrgCmd struct {
 	Org              string `required:"" name:"org"`
 	Page             int64  `name:"page"`
 	PerPage          int64  `name:"per_page"`
-	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
+	SquirrelGirl     bool   `name:"squirrel-girl-preview"`
 	TeamSlug         string `required:"" name:"team_slug"`
 	internal.BaseCmd
 }
@@ -645,7 +645,7 @@ type TeamsListDiscussionCommentsLegacyCmd struct {
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	Page             int64  `name:"page"`
 	PerPage          int64  `name:"per_page"`
-	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
+	SquirrelGirl     bool   `name:"squirrel-girl-preview"`
 	TeamId           int64  `required:"" name:"team_id"`
 	internal.BaseCmd
 }
@@ -667,7 +667,7 @@ type TeamsListDiscussionsInOrgCmd struct {
 	Org          string `required:"" name:"org"`
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
+	SquirrelGirl bool   `name:"squirrel-girl-preview"`
 	TeamSlug     string `required:"" name:"team_slug"`
 	internal.BaseCmd
 }
@@ -688,7 +688,7 @@ type TeamsListDiscussionsLegacyCmd struct {
 	Direction    string `name:"direction"`
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
+	SquirrelGirl bool   `name:"squirrel-girl-preview"`
 	TeamId       int64  `required:"" name:"team_id"`
 	internal.BaseCmd
 }
@@ -833,7 +833,7 @@ func (c *TeamsListPendingInvitationsLegacyCmd) Run(isValueSetMap map[string]bool
 }
 
 type TeamsListProjectsInOrgCmd struct {
-	Inertia  bool   "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.inertia-preview+json\n```\""
+	Inertia  bool   `required:"" name:"inertia-preview"`
 	Org      string `required:"" name:"org"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
@@ -853,7 +853,7 @@ func (c *TeamsListProjectsInOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsListProjectsLegacyCmd struct {
-	Inertia bool  "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.inertia-preview+json\n```\""
+	Inertia bool  `required:"" name:"inertia-preview"`
 	Page    int64 `name:"page"`
 	PerPage int64 `name:"per_page"`
 	TeamId  int64 `required:"" name:"team_id"`
@@ -1013,7 +1013,7 @@ func (c *TeamsRemoveRepoLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsReviewProjectInOrgCmd struct {
-	Inertia   bool   "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.inertia-preview+json\n```\""
+	Inertia   bool   `required:"" name:"inertia-preview"`
 	Org       string `required:"" name:"org"`
 	ProjectId int64  `required:"" name:"project_id"`
 	TeamSlug  string `required:"" name:"team_slug"`
@@ -1031,7 +1031,7 @@ func (c *TeamsReviewProjectInOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsReviewProjectLegacyCmd struct {
-	Inertia   bool  "name:\"inertia-preview\" required:\"\" help:\"The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.inertia-preview+json\n```\""
+	Inertia   bool  `required:"" name:"inertia-preview"`
 	ProjectId int64 `required:"" name:"project_id"`
 	TeamId    int64 `required:"" name:"team_id"`
 	internal.BaseCmd
@@ -1051,7 +1051,7 @@ type TeamsUpdateDiscussionCommentInOrgCmd struct {
 	CommentNumber    int64  `required:"" name:"comment_number"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	Org              string `required:"" name:"org"`
-	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
+	SquirrelGirl     bool   `name:"squirrel-girl-preview"`
 	TeamSlug         string `required:"" name:"team_slug"`
 	internal.BaseCmd
 }
@@ -1072,7 +1072,7 @@ type TeamsUpdateDiscussionCommentLegacyCmd struct {
 	Body             string `required:"" name:"body"`
 	CommentNumber    int64  `required:"" name:"comment_number"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
-	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
+	SquirrelGirl     bool   `name:"squirrel-girl-preview"`
 	TeamId           int64  `required:"" name:"team_id"`
 	internal.BaseCmd
 }
@@ -1092,7 +1092,7 @@ type TeamsUpdateDiscussionInOrgCmd struct {
 	Body             string `name:"body"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	Org              string `required:"" name:"org"`
-	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
+	SquirrelGirl     bool   `name:"squirrel-girl-preview"`
 	TeamSlug         string `required:"" name:"team_slug"`
 	Title            string `name:"title"`
 	internal.BaseCmd
@@ -1113,7 +1113,7 @@ func (c *TeamsUpdateDiscussionInOrgCmd) Run(isValueSetMap map[string]bool) error
 type TeamsUpdateDiscussionLegacyCmd struct {
 	Body             string `name:"body"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
-	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" help:\"The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
+	SquirrelGirl     bool   `name:"squirrel-girl-preview"`
 	TeamId           int64  `required:"" name:"team_id"`
 	Title            string `name:"title"`
 	internal.BaseCmd
