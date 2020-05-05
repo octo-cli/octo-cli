@@ -206,7 +206,7 @@ func (c *OrgsDeleteHookCmd) Run(isValueSetMap map[string]bool) error {
 
 type OrgsGetCmd struct {
 	Org    string `required:"" name:"org"`
-	Surtur bool   "name:\"surtur-preview\" help:\"New repository creation permissions are available to preview. You can now use `members_can_create_public_repositories`, `members_can_create_private_repositories`, and `members_can_create_internal_repositories`. You can only allow members to create internal repositories if your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+. These parameters provide more granular permissions to configure the type of repositories organization members can create.\n\nTo access these new parameters during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.surtur-preview+json\n```\""
+	Surtur bool   `name:"surtur-preview"`
 	internal.BaseCmd
 }
 
@@ -341,7 +341,7 @@ func (c *OrgsListHooksCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsListInstallationsCmd struct {
-	MachineMan bool   "name:\"machine-man-preview\" required:\"\" help:\"To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```\""
+	MachineMan bool   `required:"" name:"machine-man-preview"`
 	Org        string `required:"" name:"org"`
 	Page       int64  `name:"page"`
 	PerPage    int64  `name:"per_page"`
@@ -576,7 +576,7 @@ type OrgsUpdateCmd struct {
 	MembersCanCreateRepositories         bool   `name:"members_can_create_repositories"`
 	Name                                 string `name:"name"`
 	Org                                  string `required:"" name:"org"`
-	Surtur                               bool   "name:\"surtur-preview\" help:\"New repository creation permissions are available to preview. You can now use `members_can_create_public_repositories`, `members_can_create_private_repositories`, and `members_can_create_internal_repositories`. You can only allow members to create internal repositories if your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+. These parameters provide more granular permissions to configure the type of repositories organization members can create.\n\nTo access these new parameters during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.surtur-preview+json\n```\""
+	Surtur                               bool   `name:"surtur-preview"`
 	internal.BaseCmd
 }
 

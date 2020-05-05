@@ -16,7 +16,7 @@ type InteractionsCmd struct {
 type InteractionsAddOrUpdateRestrictionsForOrgCmd struct {
 	Limit  string `required:"" name:"limit"`
 	Org    string `required:"" name:"org"`
-	Sombra bool   "name:\"sombra-preview\" required:\"\" help:\"The Interactions API is currently in public preview. See the [blog post](https://developer.github.com/changes/2018-12-18-interactions-preview) preview for more details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.sombra-preview\n```\""
+	Sombra bool   `required:"" name:"sombra-preview"`
 	internal.BaseCmd
 }
 
@@ -33,7 +33,7 @@ type InteractionsAddOrUpdateRestrictionsForRepoCmd struct {
 	Limit  string `required:"" name:"limit"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
-	Sombra bool   "name:\"sombra-preview\" required:\"\" help:\"The Interactions API is currently in public preview. See the [blog post](https://developer.github.com/changes/2018-12-18-interactions-preview) preview for more details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.sombra-preview\n```\""
+	Sombra bool   `required:"" name:"sombra-preview"`
 	internal.BaseCmd
 }
 
@@ -49,7 +49,7 @@ func (c *InteractionsAddOrUpdateRestrictionsForRepoCmd) Run(isValueSetMap map[st
 
 type InteractionsGetRestrictionsForOrgCmd struct {
 	Org    string `required:"" name:"org"`
-	Sombra bool   "name:\"sombra-preview\" required:\"\" help:\"The Interactions API is currently in public preview. See the [blog post](https://developer.github.com/changes/2018-12-18-interactions-preview) preview for more details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.sombra-preview\n```\""
+	Sombra bool   `required:"" name:"sombra-preview"`
 	internal.BaseCmd
 }
 
@@ -64,7 +64,7 @@ func (c *InteractionsGetRestrictionsForOrgCmd) Run(isValueSetMap map[string]bool
 type InteractionsGetRestrictionsForRepoCmd struct {
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
-	Sombra bool   "name:\"sombra-preview\" required:\"\" help:\"The Interactions API is currently in public preview. See the [blog post](https://developer.github.com/changes/2018-12-18-interactions-preview) preview for more details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.sombra-preview\n```\""
+	Sombra bool   `required:"" name:"sombra-preview"`
 	internal.BaseCmd
 }
 
@@ -79,7 +79,7 @@ func (c *InteractionsGetRestrictionsForRepoCmd) Run(isValueSetMap map[string]boo
 
 type InteractionsRemoveRestrictionsForOrgCmd struct {
 	Org    string `required:"" name:"org"`
-	Sombra bool   "name:\"sombra-preview\" required:\"\" help:\"The Interactions API is currently in public preview. See the [blog post](https://developer.github.com/changes/2018-12-18-interactions-preview) preview for more details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.sombra-preview\n```\""
+	Sombra bool   `required:"" name:"sombra-preview"`
 	internal.BaseCmd
 }
 
@@ -94,7 +94,7 @@ func (c *InteractionsRemoveRestrictionsForOrgCmd) Run(isValueSetMap map[string]b
 type InteractionsRemoveRestrictionsForRepoCmd struct {
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
-	Sombra bool   "name:\"sombra-preview\" required:\"\" help:\"The Interactions API is currently in public preview. See the [blog post](https://developer.github.com/changes/2018-12-18-interactions-preview) preview for more details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.sombra-preview\n```\""
+	Sombra bool   `required:"" name:"sombra-preview"`
 	internal.BaseCmd
 }
 

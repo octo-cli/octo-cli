@@ -137,7 +137,6 @@ type ReposCmd struct {
 	TestPushHook                                       ReposTestPushHookCmd                                       `cmd:""`
 	Transfer                                           ReposTransferCmd                                           `cmd:""`
 	Update                                             ReposUpdateCmd                                             `cmd:""`
-	UpdateBranchProtection                             ReposUpdateBranchProtectionCmd                             `cmd:""`
 	UpdateCommitComment                                ReposUpdateCommitCommentCmd                                `cmd:""`
 	UpdateHook                                         ReposUpdateHookCmd                                         `cmd:""`
 	UpdateInformationAboutPagesSite                    ReposUpdateInformationAboutPagesSiteCmd                    `cmd:""`
@@ -146,7 +145,6 @@ type ReposCmd struct {
 	UpdateProtectedBranchRequiredStatusChecks          ReposUpdateProtectedBranchRequiredStatusChecksCmd          `cmd:""`
 	UpdateRelease                                      ReposUpdateReleaseCmd                                      `cmd:""`
 	UpdateReleaseAsset                                 ReposUpdateReleaseAssetCmd                                 `cmd:""`
-	UploadReleaseAsset                                 ReposUploadReleaseAssetCmd                                 `cmd:""`
 }
 
 type ReposAcceptInvitationCmd struct {
@@ -235,7 +233,7 @@ type ReposAddProtectedBranchRequiredSignaturesCmd struct {
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
-	Zzzax  bool   "name:\"zzzax-preview\" required:\"\" help:\"Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.zzzax-preview+json\n```\""
+	Zzzax  bool   `required:"" name:"zzzax-preview"`
 	internal.BaseCmd
 }
 
@@ -314,7 +312,7 @@ func (c *ReposCheckCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposCheckVulnerabilityAlertsCmd struct {
-	Dorian bool   "name:\"dorian-preview\" required:\"\" help:\"Enabling and disabling vulnerability alerts for a repository using the REST API is currently available for developers to preview. To access these new endpoints during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.dorian-preview+json\n```\""
+	Dorian bool   `required:"" name:"dorian-preview"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
@@ -372,7 +370,7 @@ func (c *ReposCreateCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposCreateDeploymentCmd struct {
-	AntMan                bool     "name:\"ant-man-preview\" help:\"The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.ant-man-preview+json\n```\""
+	AntMan                bool     `name:"ant-man-preview"`
 	AutoMerge             bool     `name:"auto_merge"`
 	Description           string   `name:"description"`
 	Environment           string   `name:"environment"`
@@ -406,13 +404,13 @@ func (c *ReposCreateDeploymentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposCreateDeploymentStatusCmd struct {
-	AntMan         bool   "name:\"ant-man-preview\" help:\"The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.ant-man-preview+json\n```\""
+	AntMan         bool   `name:"ant-man-preview"`
 	AutoInactive   bool   `name:"auto_inactive"`
 	DeploymentId   int64  `required:"" name:"deployment_id"`
 	Description    string `name:"description"`
 	Environment    string `name:"environment"`
 	EnvironmentUrl string `name:"environment_url"`
-	Flash          bool   "name:\"flash-preview\" help:\"New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](https://developer.github.com/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.\n\nTo access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must provide the following custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.flash-preview+json\n```\""
+	Flash          bool   `name:"flash-preview"`
 	LogUrl         string `name:"log_url"`
 	Owner          string `name:"owner"`
 	Repo           string `required:"" name:"repo"`
@@ -460,7 +458,7 @@ type ReposCreateForAuthenticatedUserCmd struct {
 	AllowRebaseMerge    bool   `name:"allow_rebase_merge"`
 	AllowSquashMerge    bool   `name:"allow_squash_merge"`
 	AutoInit            bool   `name:"auto_init"`
-	Baptiste            bool   "name:\"baptiste-preview\" help:\"The `is_template` and `template_repository` keys are currently available for developer to preview. See [Create a repository using a template](https://developer.github.com/v3/repos/#create-a-repository-using-a-template) to learn how to create template repositories. To access these new response keys during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.baptiste-preview+json\n```\""
+	Baptiste            bool   `name:"baptiste-preview"`
 	DeleteBranchOnMerge bool   `name:"delete_branch_on_merge"`
 	Description         string `name:"description"`
 	GitignoreTemplate   string `name:"gitignore_template"`
@@ -471,7 +469,7 @@ type ReposCreateForAuthenticatedUserCmd struct {
 	IsTemplate          bool   `name:"is_template"`
 	LicenseTemplate     string `name:"license_template"`
 	Name                string `required:"" name:"name"`
-	Nebula              bool   "name:\"nebula-preview\" help:\"You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).\n\nTo access repository visibility during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.nebula-preview+json\n```\""
+	Nebula              bool   `name:"nebula-preview"`
 	Private             bool   `name:"private"`
 	TeamId              int64  `name:"team_id"`
 	Visibility          string `name:"visibility"`
@@ -552,7 +550,7 @@ type ReposCreateInOrgCmd struct {
 	AllowRebaseMerge    bool   `name:"allow_rebase_merge"`
 	AllowSquashMerge    bool   `name:"allow_squash_merge"`
 	AutoInit            bool   `name:"auto_init"`
-	Baptiste            bool   "name:\"baptiste-preview\" help:\"The `is_template` and `template_repository` keys are currently available for developer to preview. See [Create a repository using a template](https://developer.github.com/v3/repos/#create-a-repository-using-a-template) to learn how to create template repositories. To access these new response keys during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.baptiste-preview+json\n```\""
+	Baptiste            bool   `name:"baptiste-preview"`
 	DeleteBranchOnMerge bool   `name:"delete_branch_on_merge"`
 	Description         string `name:"description"`
 	GitignoreTemplate   string `name:"gitignore_template"`
@@ -563,7 +561,7 @@ type ReposCreateInOrgCmd struct {
 	IsTemplate          bool   `name:"is_template"`
 	LicenseTemplate     string `name:"license_template"`
 	Name                string `required:"" name:"name"`
-	Nebula              bool   "name:\"nebula-preview\" help:\"You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).\n\nTo access repository visibility during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.nebula-preview+json\n```\""
+	Nebula              bool   `name:"nebula-preview"`
 	Org                 string `required:"" name:"org"`
 	Private             bool   `name:"private"`
 	TeamId              int64  `name:"team_id"`
@@ -680,7 +678,7 @@ func (c *ReposCreateStatusCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposCreateUsingTemplateCmd struct {
-	Baptiste      bool   "name:\"baptiste-preview\" required:\"\" help:\"Creating and using repository templates is currently available for developers to preview. To access this new endpoint during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.baptiste-preview+json\n```\""
+	Baptiste      bool   `required:"" name:"baptiste-preview"`
 	Description   string `name:"description"`
 	Name          string `required:"" name:"name"`
 	Owner         string `name:"owner"`
@@ -872,7 +870,7 @@ func (c *ReposDeleteReleaseCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposDisableAutomatedSecurityFixesCmd struct {
-	London bool   "name:\"london-preview\" required:\"\" help:\"Enabling or disabling automated security fixes is currently available for developers to preview. To access this new endpoint during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.london-preview+json\n```\""
+	London bool   `required:"" name:"london-preview"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
@@ -890,7 +888,7 @@ func (c *ReposDisableAutomatedSecurityFixesCmd) Run(isValueSetMap map[string]boo
 type ReposDisablePagesSiteCmd struct {
 	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
-	Switcheroo bool   "name:\"switcheroo-preview\" required:\"\" help:\"Enabling and disabling Pages in the Pages API is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2019-03-14-enabling-disabling-pages/) preview for more details. To access the new endpoints during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.switcheroo-preview+json\n```\""
+	Switcheroo bool   `required:"" name:"switcheroo-preview"`
 	internal.BaseCmd
 }
 
@@ -904,7 +902,7 @@ func (c *ReposDisablePagesSiteCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposDisableVulnerabilityAlertsCmd struct {
-	Dorian bool   "name:\"dorian-preview\" required:\"\" help:\"Enabling and disabling vulnerability alerts for a repository using the REST API is currently available for developers to preview. To access these new endpoints during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.dorian-preview+json\n```\""
+	Dorian bool   `required:"" name:"dorian-preview"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
@@ -920,7 +918,7 @@ func (c *ReposDisableVulnerabilityAlertsCmd) Run(isValueSetMap map[string]bool) 
 }
 
 type ReposEnableAutomatedSecurityFixesCmd struct {
-	London bool   "name:\"london-preview\" required:\"\" help:\"Enabling or disabling automated security fixes is currently available for developers to preview. To access this new endpoint during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.london-preview+json\n```\""
+	London bool   `required:"" name:"london-preview"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
@@ -940,7 +938,7 @@ type ReposEnablePagesSiteCmd struct {
 	Repo         string `required:"" name:"repo"`
 	SourceBranch string `name:"source.branch"`
 	SourcePath   string `name:"source.path"`
-	Switcheroo   bool   "name:\"switcheroo-preview\" required:\"\" help:\"Enabling and disabling Pages in the Pages API is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2019-03-14-enabling-disabling-pages/) preview for more details. To access the new endpoints during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.switcheroo-preview+json\n```\""
+	Switcheroo   bool   `required:"" name:"switcheroo-preview"`
 	internal.BaseCmd
 }
 
@@ -956,7 +954,7 @@ func (c *ReposEnablePagesSiteCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposEnableVulnerabilityAlertsCmd struct {
-	Dorian bool   "name:\"dorian-preview\" required:\"\" help:\"Enabling and disabling vulnerability alerts for a repository using the REST API is currently available for developers to preview. To access these new endpoints during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.dorian-preview+json\n```\""
+	Dorian bool   `required:"" name:"dorian-preview"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
@@ -972,7 +970,7 @@ func (c *ReposEnableVulnerabilityAlertsCmd) Run(isValueSetMap map[string]bool) e
 }
 
 type ReposGetAllTopicsCmd struct {
-	Mercy bool   "name:\"mercy-preview\" required:\"\" help:\"The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.mercy-preview+json\n```\""
+	Mercy bool   `required:"" name:"mercy-preview"`
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	internal.BaseCmd
@@ -1039,7 +1037,7 @@ func (c *ReposGetBranchCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetBranchProtectionCmd struct {
 	Branch   string `required:"" name:"branch"`
-	LukeCage bool   "name:\"luke-cage-preview\" help:\"The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.luke-cage-preview+json\n```\""
+	LukeCage bool   `name:"luke-cage-preview"`
 	Owner    string `name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	internal.BaseCmd
@@ -1072,10 +1070,10 @@ func (c *ReposGetClonesCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetCmd struct {
-	Nebula       bool   "name:\"nebula-preview\" help:\"You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).\n\nTo access repository visibility during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.nebula-preview+json\n```\""
+	Nebula       bool   `name:"nebula-preview"`
 	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
-	ScarletWitch bool   "name:\"scarlet-witch-preview\" help:\"Developers can preview a new `code_of_conduct` key in responses. For more information, see [Codes of Conduct API](https://developer.github.com/v3/codes_of_conduct/).\n\nTo access this new response key during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.scarlet-witch-preview+json\n```\""
+	ScarletWitch bool   `name:"scarlet-witch-preview"`
 	internal.BaseCmd
 }
 
@@ -1169,7 +1167,7 @@ type ReposGetCommitCommentCmd struct {
 	CommentId    int64  `required:"" name:"comment_id"`
 	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.\""
+	SquirrelGirl bool   `name:"squirrel-girl-preview"`
 	internal.BaseCmd
 }
 
@@ -1232,9 +1230,9 @@ func (c *ReposGetDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetDeploymentCmd struct {
-	AntMan       bool   "name:\"ant-man-preview\" help:\"The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.ant-man-preview+json\n```\""
+	AntMan       bool   `name:"ant-man-preview"`
 	DeploymentId int64  `required:"" name:"deployment_id"`
-	MachineMan   bool   "name:\"machine-man-preview\" help:\"If a deployment is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).\n\nTo receive the `performed_via_github_app` object in the response, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.machine-man-preview\n```\""
+	MachineMan   bool   `name:"machine-man-preview"`
 	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	internal.BaseCmd
@@ -1252,10 +1250,10 @@ func (c *ReposGetDeploymentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetDeploymentStatusCmd struct {
-	AntMan       bool   "name:\"ant-man-preview\" help:\"The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.ant-man-preview+json\n```\""
+	AntMan       bool   `name:"ant-man-preview"`
 	DeploymentId int64  `required:"" name:"deployment_id"`
-	Flash        bool   "name:\"flash-preview\" help:\"New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](https://developer.github.com/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.\n\nTo access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must provide the following custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.flash-preview+json\n```\""
-	MachineMan   bool   "name:\"machine-man-preview\" help:\"If a deployment is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).\n\nTo receive the `performed_via_github_app` object in the response, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.machine-man-preview\n```\""
+	Flash        bool   `name:"flash-preview"`
+	MachineMan   bool   `name:"machine-man-preview"`
 	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	StatusId     int64  `required:"" name:"status_id"`
@@ -1397,7 +1395,7 @@ func (c *ReposGetProtectedBranchAdminEnforcementCmd) Run(isValueSetMap map[strin
 
 type ReposGetProtectedBranchPullRequestReviewEnforcementCmd struct {
 	Branch   string `required:"" name:"branch"`
-	LukeCage bool   "name:\"luke-cage-preview\" help:\"The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.luke-cage-preview+json\n```\""
+	LukeCage bool   `name:"luke-cage-preview"`
 	Owner    string `name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	internal.BaseCmd
@@ -1417,7 +1415,7 @@ type ReposGetProtectedBranchRequiredSignaturesCmd struct {
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
-	Zzzax  bool   "name:\"zzzax-preview\" required:\"\" help:\"Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.zzzax-preview+json\n```\""
+	Zzzax  bool   `required:"" name:"zzzax-preview"`
 	internal.BaseCmd
 }
 
@@ -1659,7 +1657,7 @@ func (c *ReposListBranchesCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposListBranchesForHeadCommitCmd struct {
 	CommitSha string `required:"" name:"commit_sha"`
-	Groot     bool   "name:\"groot-preview\" required:\"\" help:\"Listing branches or pull requests for a commit in the Commits API is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2019-04-11-pulls-branches-for-commit/) for more details. To access the new endpoints during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.groot-preview+json\n```\""
+	Groot     bool   `required:"" name:"groot-preview"`
 	Owner     string `name:"owner"`
 	Repo      string `required:"" name:"repo"`
 	internal.BaseCmd
@@ -1701,7 +1699,7 @@ type ReposListCommentsForCommitCmd struct {
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
 	Repo         string `required:"" name:"repo"`
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.\""
+	SquirrelGirl bool   `name:"squirrel-girl-preview"`
 	internal.BaseCmd
 }
 
@@ -1722,7 +1720,7 @@ type ReposListCommitCommentsCmd struct {
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
 	Repo         string `required:"" name:"repo"`
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.\""
+	SquirrelGirl bool   `name:"squirrel-girl-preview"`
 	internal.BaseCmd
 }
 
@@ -1804,9 +1802,9 @@ func (c *ReposListDeployKeysCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListDeploymentStatusesCmd struct {
-	AntMan       bool   "name:\"ant-man-preview\" help:\"The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.ant-man-preview+json\n```\""
+	AntMan       bool   `name:"ant-man-preview"`
 	DeploymentId int64  `required:"" name:"deployment_id"`
-	Flash        bool   "name:\"flash-preview\" help:\"New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](https://developer.github.com/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.\n\nTo access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must provide the following custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.flash-preview+json\n```\""
+	Flash        bool   `name:"flash-preview"`
 	Owner        string `name:"owner"`
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
@@ -1828,7 +1826,7 @@ func (c *ReposListDeploymentStatusesCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type ReposListDeploymentsCmd struct {
-	AntMan      bool   "name:\"ant-man-preview\" help:\"The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.ant-man-preview+json\n```\""
+	AntMan      bool   `name:"ant-man-preview"`
 	Environment string `name:"environment"`
 	Owner       string `name:"owner"`
 	Page        int64  `name:"page"`
@@ -1898,9 +1896,9 @@ func (c *ReposListForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) er
 }
 
 type ReposListForOrgCmd struct {
-	Baptiste  bool   "name:\"baptiste-preview\" help:\"The `is_template` and `template_repository` keys are currently available for developer to preview. See [Create a repository using a template](https://developer.github.com/v3/repos/#create-a-repository-using-a-template) to learn how to create template repositories. To access these new response keys during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.baptiste-preview+json\n```\""
+	Baptiste  bool   `name:"baptiste-preview"`
 	Direction string `name:"direction"`
-	Nebula    bool   "name:\"nebula-preview\" help:\"You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).\n\nTo access repository visibility during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.nebula-preview+json\n```\""
+	Nebula    bool   `name:"nebula-preview"`
 	Org       string `required:"" name:"org"`
 	Page      int64  `name:"page"`
 	PerPage   int64  `name:"per_page"`
@@ -1925,7 +1923,7 @@ func (c *ReposListForOrgCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposListForUserCmd struct {
 	Direction string `name:"direction"`
-	Nebula    bool   "name:\"nebula-preview\" help:\"You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).\n\nTo access repository visibility during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.nebula-preview+json\n```\""
+	Nebula    bool   `name:"nebula-preview"`
 	Page      int64  `name:"page"`
 	PerPage   int64  `name:"per_page"`
 	Sort      string `name:"sort"`
@@ -2079,7 +2077,7 @@ func (c *ReposListPublicCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposListPullRequestsAssociatedWithCommitCmd struct {
 	CommitSha string `required:"" name:"commit_sha"`
-	Groot     bool   "name:\"groot-preview\" required:\"\" help:\"Listing branches or pull requests for a commit in the Commits API is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2019-04-11-pulls-branches-for-commit/) for more details. To access the new endpoints during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.groot-preview+json\n```\""
+	Groot     bool   `required:"" name:"groot-preview"`
 	Owner     string `name:"owner"`
 	Page      int64  `name:"page"`
 	PerPage   int64  `name:"per_page"`
@@ -2309,7 +2307,7 @@ type ReposRemoveProtectedBranchRequiredSignaturesCmd struct {
 	Branch string `required:"" name:"branch"`
 	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
-	Zzzax  bool   "name:\"zzzax-preview\" required:\"\" help:\"Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.zzzax-preview+json\n```\""
+	Zzzax  bool   `required:"" name:"zzzax-preview"`
 	internal.BaseCmd
 }
 
@@ -2404,7 +2402,7 @@ func (c *ReposRemoveProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[st
 }
 
 type ReposReplaceAllTopicsCmd struct {
-	Mercy bool     "name:\"mercy-preview\" required:\"\" help:\"Repository topics on GitHub are currently available for developers to preview. To use this endpoint, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.mercy-preview+json\n```\""
+	Mercy bool     `required:"" name:"mercy-preview"`
 	Names []string `required:"" name:"names"`
 	Owner string   `name:"owner"`
 	Repo  string   `required:"" name:"repo"`
@@ -2547,58 +2545,12 @@ func (c *ReposTransferCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("POST")
 }
 
-type ReposUpdateBranchProtectionCmd struct {
-	AllowDeletions                                         bool     `name:"allow_deletions"`
-	AllowForcePushes                                       bool     `name:"allow_force_pushes"`
-	Branch                                                 string   `required:"" name:"branch"`
-	EnforceAdmins                                          bool     `required:"" name:"enforce_admins"`
-	LukeCage                                               bool     "name:\"luke-cage-preview\" help:\"The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.luke-cage-preview+json\n```\""
-	Owner                                                  string   `name:"owner"`
-	Repo                                                   string   `required:"" name:"repo"`
-	RequiredLinearHistory                                  bool     `name:"required_linear_history"`
-	RequiredPullRequestReviewsDismissStaleReviews          bool     `name:"required_pull_request_reviews.dismiss_stale_reviews"`
-	RequiredPullRequestReviewsDismissalRestrictionsTeams   []string `name:"required_pull_request_reviews.dismissal_restrictions.teams"`
-	RequiredPullRequestReviewsDismissalRestrictionsUsers   []string `name:"required_pull_request_reviews.dismissal_restrictions.users"`
-	RequiredPullRequestReviewsRequireCodeOwnerReviews      bool     `name:"required_pull_request_reviews.require_code_owner_reviews"`
-	RequiredPullRequestReviewsRequiredApprovingReviewCount int64    `name:"required_pull_request_reviews.required_approving_review_count"`
-	RequiredStatusChecksContexts                           []string `required:"" name:"required_status_checks.contexts"`
-	RequiredStatusChecksStrict                             bool     `required:"" name:"required_status_checks.strict"`
-	RestrictionsApps                                       []string `name:"restrictions.apps"`
-	RestrictionsTeams                                      []string `required:"" name:"restrictions.teams"`
-	RestrictionsUsers                                      []string `required:"" name:"restrictions.users"`
-	internal.BaseCmd
-}
-
-func (c *ReposUpdateBranchProtectionCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection")
-	c.UpdateBody("allow_deletions", c.AllowDeletions)
-	c.UpdateBody("allow_force_pushes", c.AllowForcePushes)
-	c.UpdateURLPath("branch", c.Branch)
-	c.UpdateBody("enforce_admins", c.EnforceAdmins)
-	c.UpdatePreview("luke-cage", c.LukeCage)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateBody("required_linear_history", c.RequiredLinearHistory)
-	c.UpdateBody("required_pull_request_reviews.dismiss_stale_reviews", c.RequiredPullRequestReviewsDismissStaleReviews)
-	c.UpdateBody("required_pull_request_reviews.dismissal_restrictions.teams", c.RequiredPullRequestReviewsDismissalRestrictionsTeams)
-	c.UpdateBody("required_pull_request_reviews.dismissal_restrictions.users", c.RequiredPullRequestReviewsDismissalRestrictionsUsers)
-	c.UpdateBody("required_pull_request_reviews.require_code_owner_reviews", c.RequiredPullRequestReviewsRequireCodeOwnerReviews)
-	c.UpdateBody("required_pull_request_reviews.required_approving_review_count", c.RequiredPullRequestReviewsRequiredApprovingReviewCount)
-	c.UpdateBody("required_status_checks.contexts", c.RequiredStatusChecksContexts)
-	c.UpdateBody("required_status_checks.strict", c.RequiredStatusChecksStrict)
-	c.UpdateBody("restrictions.apps", c.RestrictionsApps)
-	c.UpdateBody("restrictions.teams", c.RestrictionsTeams)
-	c.UpdateBody("restrictions.users", c.RestrictionsUsers)
-	return c.DoRequest("PUT")
-}
-
 type ReposUpdateCmd struct {
 	AllowMergeCommit    bool   `name:"allow_merge_commit"`
 	AllowRebaseMerge    bool   `name:"allow_rebase_merge"`
 	AllowSquashMerge    bool   `name:"allow_squash_merge"`
 	Archived            bool   `name:"archived"`
-	Baptiste            bool   "name:\"baptiste-preview\" help:\"The `is_template` and `template_repository` keys are currently available for developer to preview. See [Create a repository using a template](https://developer.github.com/v3/repos/#create-a-repository-using-a-template) to learn how to create template repositories. To access these new response keys during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.baptiste-preview+json\n```\""
+	Baptiste            bool   `name:"baptiste-preview"`
 	DefaultBranch       string `name:"default_branch"`
 	DeleteBranchOnMerge bool   `name:"delete_branch_on_merge"`
 	Description         string `name:"description"`
@@ -2608,7 +2560,7 @@ type ReposUpdateCmd struct {
 	Homepage            string `name:"homepage"`
 	IsTemplate          bool   `name:"is_template"`
 	Name                string `name:"name"`
-	Nebula              bool   "name:\"nebula-preview\" help:\"You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).\n\nTo access repository visibility during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.nebula-preview+json\n```\""
+	Nebula              bool   `name:"nebula-preview"`
 	Owner               string `name:"owner"`
 	Private             bool   `name:"private"`
 	Repo                string `required:"" name:"repo"`
@@ -2732,7 +2684,7 @@ type ReposUpdateProtectedBranchPullRequestReviewEnforcementCmd struct {
 	DismissStaleReviews          bool     `name:"dismiss_stale_reviews"`
 	DismissalRestrictionsTeams   []string `name:"dismissal_restrictions.teams"`
 	DismissalRestrictionsUsers   []string `name:"dismissal_restrictions.users"`
-	LukeCage                     bool     "name:\"luke-cage-preview\" help:\"The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.luke-cage-preview+json\n```\""
+	LukeCage                     bool     `name:"luke-cage-preview"`
 	Owner                        string   `name:"owner"`
 	Repo                         string   `required:"" name:"repo"`
 	RequireCodeOwnerReviews      bool     `name:"require_code_owner_reviews"`
@@ -2821,28 +2773,4 @@ func (c *ReposUpdateReleaseCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateBody("tag_name", c.TagName)
 	c.UpdateBody("target_commitish", c.TargetCommitish)
 	return c.DoRequest("PATCH")
-}
-
-type ReposUploadReleaseAssetCmd struct {
-	ContentLength string `required:"" name:"content-length"`
-	ContentType   string `required:"" name:"content-type"`
-	Label         string `name:"label"`
-	Name          string `name:"name"`
-	Owner         string `name:"owner"`
-	ReleaseId     int64  `required:"" name:"release_id"`
-	Repo          string `required:"" name:"repo"`
-	internal.BaseCmd
-}
-
-func (c *ReposUploadReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/releases/{release_id}/assets")
-	c.AddRequestHeader("content-length", c.ContentLength)
-	c.AddRequestHeader("content-type", c.ContentType)
-	c.UpdateURLQuery("label", c.Label)
-	c.UpdateURLQuery("name", c.Name)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("release_id", c.ReleaseId)
-	c.UpdateURLPath("repo", c.Repo)
-	return c.DoRequest("POST")
 }

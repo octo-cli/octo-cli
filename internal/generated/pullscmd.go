@@ -58,7 +58,7 @@ type PullsCreateCmd struct {
 	MaintainerCanModify bool   `name:"maintainer_can_modify"`
 	Owner               string `name:"owner"`
 	Repo                string `required:"" name:"repo"`
-	SailorV             bool   "name:\"sailor-v-preview\" help:\"You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.sailor-v-preview+json\n```\""
+	SailorV             bool   `name:"sailor-v-preview"`
 	Title               string `required:"" name:"title"`
 	internal.BaseCmd
 }
@@ -80,7 +80,7 @@ func (c *PullsCreateCmd) Run(isValueSetMap map[string]bool) error {
 
 type PullsCreateCommentCmd struct {
 	Body        string `required:"" name:"body"`
-	ComfortFade bool   "name:\"comfort-fade-preview\" help:\"Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.comfort-fade-preview+json\n```\""
+	ComfortFade bool   `name:"comfort-fade-preview"`
 	CommitId    string `required:"" name:"commit_id"`
 	Line        int64  `name:"line"`
 	Owner       string `name:"owner"`
@@ -252,7 +252,7 @@ type PullsGetCmd struct {
 	Owner      string `name:"owner"`
 	PullNumber int64  `required:"" name:"pull_number"`
 	Repo       string `required:"" name:"repo"`
-	SailorV    bool   "name:\"sailor-v-preview\" help:\"You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.sailor-v-preview+json\n```\""
+	SailorV    bool   `name:"sailor-v-preview"`
 	internal.BaseCmd
 }
 
@@ -267,11 +267,11 @@ func (c *PullsGetCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsGetCommentCmd struct {
-	ComfortFade  bool   "name:\"comfort-fade-preview\" help:\"Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.comfort-fade-preview+json\n```\""
+	ComfortFade  bool   `name:"comfort-fade-preview"`
 	CommentId    int64  `required:"" name:"comment_id"`
 	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the review comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
+	SquirrelGirl bool   `name:"squirrel-girl-preview"`
 	internal.BaseCmd
 }
 
@@ -334,7 +334,7 @@ type PullsListCmd struct {
 	Page      int64  `name:"page"`
 	PerPage   int64  `name:"per_page"`
 	Repo      string `required:"" name:"repo"`
-	SailorV   bool   "name:\"sailor-v-preview\" help:\"You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.sailor-v-preview+json\n```\""
+	SailorV   bool   `name:"sailor-v-preview"`
 	Sort      string `name:"sort"`
 	State     string `name:"state"`
 	internal.BaseCmd
@@ -357,7 +357,7 @@ func (c *PullsListCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsListCommentsCmd struct {
-	ComfortFade  bool   "name:\"comfort-fade-preview\" help:\"Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.comfort-fade-preview+json\n```\""
+	ComfortFade  bool   `name:"comfort-fade-preview"`
 	Direction    string `name:"direction"`
 	Owner        string `name:"owner"`
 	Page         int64  `name:"page"`
@@ -366,7 +366,7 @@ type PullsListCommentsCmd struct {
 	Repo         string `required:"" name:"repo"`
 	Since        string `name:"since"`
 	Sort         string `name:"sort"`
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the review comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
+	SquirrelGirl bool   `name:"squirrel-girl-preview"`
 	internal.BaseCmd
 }
 
@@ -387,7 +387,7 @@ func (c *PullsListCommentsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsListCommentsForRepoCmd struct {
-	ComfortFade  bool   "name:\"comfort-fade-preview\" help:\"Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.comfort-fade-preview+json\n```\""
+	ComfortFade  bool   `name:"comfort-fade-preview"`
 	Direction    string `name:"direction"`
 	Owner        string `name:"owner"`
 	Page         int64  `name:"page"`
@@ -395,7 +395,7 @@ type PullsListCommentsForRepoCmd struct {
 	Repo         string `required:"" name:"repo"`
 	Since        string `name:"since"`
 	Sort         string `name:"sort"`
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the review comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\""
+	SquirrelGirl bool   `name:"squirrel-girl-preview"`
 	internal.BaseCmd
 }
 
@@ -542,7 +542,7 @@ func (c *PullsSubmitReviewCmd) Run(isValueSetMap map[string]bool) error {
 
 type PullsUpdateBranchCmd struct {
 	ExpectedHeadSha string `name:"expected_head_sha"`
-	Lydian          bool   "name:\"lydian-preview\" required:\"\" help:\"Updating the pull request branch with latest upstream changes is currently available for developers to preview. To access this new endpoint during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.lydian-preview+json\n```\""
+	Lydian          bool   `required:"" name:"lydian-preview"`
 	Owner           string `name:"owner"`
 	PullNumber      int64  `required:"" name:"pull_number"`
 	Repo            string `required:"" name:"repo"`
@@ -567,7 +567,7 @@ type PullsUpdateCmd struct {
 	Owner               string `name:"owner"`
 	PullNumber          int64  `required:"" name:"pull_number"`
 	Repo                string `required:"" name:"repo"`
-	SailorV             bool   "name:\"sailor-v-preview\" help:\"You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.sailor-v-preview+json\n```\""
+	SailorV             bool   `name:"sailor-v-preview"`
 	State               string `name:"state"`
 	Title               string `name:"title"`
 	internal.BaseCmd
@@ -590,7 +590,7 @@ func (c *PullsUpdateCmd) Run(isValueSetMap map[string]bool) error {
 
 type PullsUpdateCommentCmd struct {
 	Body        string `required:"" name:"body"`
-	ComfortFade bool   "name:\"comfort-fade-preview\" help:\"Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.comfort-fade-preview+json\n```\""
+	ComfortFade bool   `name:"comfort-fade-preview"`
 	CommentId   int64  `required:"" name:"comment_id"`
 	Owner       string `name:"owner"`
 	Repo        string `required:"" name:"repo"`

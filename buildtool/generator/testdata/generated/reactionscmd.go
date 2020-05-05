@@ -35,7 +35,7 @@ type ReactionsCreateForCommitCommentCmd struct {
 	Content      string `required:"" name:"content"`
 	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	SquirrelGirl bool   `required:"" name:"squirrel-girl-preview"`
 	internal.BaseCmd
 }
 
@@ -55,7 +55,7 @@ type ReactionsCreateForIssueCmd struct {
 	IssueNumber  int64  `required:"" name:"issue_number"`
 	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	SquirrelGirl bool   `required:"" name:"squirrel-girl-preview"`
 	internal.BaseCmd
 }
 
@@ -75,7 +75,7 @@ type ReactionsCreateForIssueCommentCmd struct {
 	Content      string `required:"" name:"content"`
 	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	SquirrelGirl bool   `required:"" name:"squirrel-girl-preview"`
 	internal.BaseCmd
 }
 
@@ -95,7 +95,7 @@ type ReactionsCreateForPullRequestReviewCommentCmd struct {
 	Content      string `required:"" name:"content"`
 	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	SquirrelGirl bool   `required:"" name:"squirrel-girl-preview"`
 	internal.BaseCmd
 }
 
@@ -115,7 +115,7 @@ type ReactionsCreateForTeamDiscussionCommentInOrgCmd struct {
 	Content          string `required:"" name:"content"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	Org              string `required:"" name:"org"`
-	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	SquirrelGirl     bool   `required:"" name:"squirrel-girl-preview"`
 	TeamSlug         string `required:"" name:"team_slug"`
 	internal.BaseCmd
 }
@@ -136,7 +136,7 @@ type ReactionsCreateForTeamDiscussionCommentLegacyCmd struct {
 	CommentNumber    int64  `required:"" name:"comment_number"`
 	Content          string `required:"" name:"content"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
-	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	SquirrelGirl     bool   `required:"" name:"squirrel-girl-preview"`
 	TeamId           int64  `required:"" name:"team_id"`
 	internal.BaseCmd
 }
@@ -156,7 +156,7 @@ type ReactionsCreateForTeamDiscussionInOrgCmd struct {
 	Content          string `required:"" name:"content"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	Org              string `required:"" name:"org"`
-	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	SquirrelGirl     bool   `required:"" name:"squirrel-girl-preview"`
 	TeamSlug         string `required:"" name:"team_slug"`
 	internal.BaseCmd
 }
@@ -175,7 +175,7 @@ func (c *ReactionsCreateForTeamDiscussionInOrgCmd) Run(isValueSetMap map[string]
 type ReactionsCreateForTeamDiscussionLegacyCmd struct {
 	Content          string `required:"" name:"content"`
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
-	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	SquirrelGirl     bool   `required:"" name:"squirrel-girl-preview"`
 	TeamId           int64  `required:"" name:"team_id"`
 	internal.BaseCmd
 }
@@ -195,7 +195,7 @@ type ReactionsDeleteForCommitCommentCmd struct {
 	Owner        string `name:"owner"`
 	ReactionId   int64  `required:"" name:"reaction_id"`
 	Repo         string `required:"" name:"repo"`
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	SquirrelGirl bool   `required:"" name:"squirrel-girl-preview"`
 	internal.BaseCmd
 }
 
@@ -215,7 +215,7 @@ type ReactionsDeleteForIssueCmd struct {
 	Owner        string `name:"owner"`
 	ReactionId   int64  `required:"" name:"reaction_id"`
 	Repo         string `required:"" name:"repo"`
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	SquirrelGirl bool   `required:"" name:"squirrel-girl-preview"`
 	internal.BaseCmd
 }
 
@@ -235,7 +235,7 @@ type ReactionsDeleteForIssueCommentCmd struct {
 	Owner        string `name:"owner"`
 	ReactionId   int64  `required:"" name:"reaction_id"`
 	Repo         string `required:"" name:"repo"`
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	SquirrelGirl bool   `required:"" name:"squirrel-girl-preview"`
 	internal.BaseCmd
 }
 
@@ -255,7 +255,7 @@ type ReactionsDeleteForPullRequestCommentCmd struct {
 	Owner        string `name:"owner"`
 	ReactionId   int64  `required:"" name:"reaction_id"`
 	Repo         string `required:"" name:"repo"`
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	SquirrelGirl bool   `required:"" name:"squirrel-girl-preview"`
 	internal.BaseCmd
 }
 
@@ -274,7 +274,7 @@ type ReactionsDeleteForTeamDiscussionCmd struct {
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	Org              string `required:"" name:"org"`
 	ReactionId       int64  `required:"" name:"reaction_id"`
-	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	SquirrelGirl     bool   `required:"" name:"squirrel-girl-preview"`
 	TeamSlug         string `required:"" name:"team_slug"`
 	internal.BaseCmd
 }
@@ -295,7 +295,7 @@ type ReactionsDeleteForTeamDiscussionCommentCmd struct {
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	Org              string `required:"" name:"org"`
 	ReactionId       int64  `required:"" name:"reaction_id"`
-	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	SquirrelGirl     bool   `required:"" name:"squirrel-girl-preview"`
 	TeamSlug         string `required:"" name:"team_slug"`
 	internal.BaseCmd
 }
@@ -314,7 +314,7 @@ func (c *ReactionsDeleteForTeamDiscussionCommentCmd) Run(isValueSetMap map[strin
 
 type ReactionsDeleteLegacyCmd struct {
 	ReactionId   int64 `required:"" name:"reaction_id"`
-	SquirrelGirl bool  "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	SquirrelGirl bool  `required:"" name:"squirrel-girl-preview"`
 	internal.BaseCmd
 }
 
@@ -333,7 +333,7 @@ type ReactionsListForCommitCommentCmd struct {
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
 	Repo         string `required:"" name:"repo"`
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	SquirrelGirl bool   `required:"" name:"squirrel-girl-preview"`
 	internal.BaseCmd
 }
 
@@ -357,7 +357,7 @@ type ReactionsListForIssueCmd struct {
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
 	Repo         string `required:"" name:"repo"`
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	SquirrelGirl bool   `required:"" name:"squirrel-girl-preview"`
 	internal.BaseCmd
 }
 
@@ -381,7 +381,7 @@ type ReactionsListForIssueCommentCmd struct {
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
 	Repo         string `required:"" name:"repo"`
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	SquirrelGirl bool   `required:"" name:"squirrel-girl-preview"`
 	internal.BaseCmd
 }
 
@@ -405,7 +405,7 @@ type ReactionsListForPullRequestReviewCommentCmd struct {
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
 	Repo         string `required:"" name:"repo"`
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	SquirrelGirl bool   `required:"" name:"squirrel-girl-preview"`
 	internal.BaseCmd
 }
 
@@ -429,7 +429,7 @@ type ReactionsListForTeamDiscussionCommentInOrgCmd struct {
 	Org              string `required:"" name:"org"`
 	Page             int64  `name:"page"`
 	PerPage          int64  `name:"per_page"`
-	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	SquirrelGirl     bool   `required:"" name:"squirrel-girl-preview"`
 	TeamSlug         string `required:"" name:"team_slug"`
 	internal.BaseCmd
 }
@@ -454,7 +454,7 @@ type ReactionsListForTeamDiscussionCommentLegacyCmd struct {
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	Page             int64  `name:"page"`
 	PerPage          int64  `name:"per_page"`
-	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	SquirrelGirl     bool   `required:"" name:"squirrel-girl-preview"`
 	TeamId           int64  `required:"" name:"team_id"`
 	internal.BaseCmd
 }
@@ -478,7 +478,7 @@ type ReactionsListForTeamDiscussionInOrgCmd struct {
 	Org              string `required:"" name:"org"`
 	Page             int64  `name:"page"`
 	PerPage          int64  `name:"per_page"`
-	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	SquirrelGirl     bool   `required:"" name:"squirrel-girl-preview"`
 	TeamSlug         string `required:"" name:"team_slug"`
 	internal.BaseCmd
 }
@@ -501,7 +501,7 @@ type ReactionsListForTeamDiscussionLegacyCmd struct {
 	DiscussionNumber int64  `required:"" name:"discussion_number"`
 	Page             int64  `name:"page"`
 	PerPage          int64  `name:"per_page"`
-	SquirrelGirl     bool   "name:\"squirrel-girl-preview\" required:\"\" help:\"APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```\""
+	SquirrelGirl     bool   `required:"" name:"squirrel-girl-preview"`
 	TeamId           int64  `required:"" name:"team_id"`
 	internal.BaseCmd
 }

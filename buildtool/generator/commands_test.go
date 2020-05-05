@@ -1,6 +1,7 @@
 package generator
 
 import (
+	"io/ioutil"
 	"path/filepath"
 	"sort"
 	"testing"
@@ -13,29 +14,16 @@ import (
 var testdataFs = afero.NewOsFs()
 
 func Test_genCliRun_Run(t *testing.T) {
-	t.Run("creates the right files", func(t *testing.T) {
-		fs := afero.NewMemMapFs()
-		tempDir, err := afero.TempDir(fs, "", "")
-		require.NoError(t, err)
-		k := &GenerateCmd{
-			RoutesPath: "testdata/routes.json",
-			OutputPath: tempDir,
-			fs:         fs,
-		}
-		err = k.Run()
-		assert.NoError(t, err)
-		genFiles := getDirectoryFileNames(t, tempDir, fs)
-		wantFiles := getDirectoryFileNames(t, "testdata/generated", testdataFs)
-		assert.Equal(t, wantFiles, genFiles)
-	})
-
 	t.Run("file content matches", func(t *testing.T) {
 		fs := afero.NewMemMapFs()
-		tempDir, err := afero.TempDir(fs, "", "")
+		genDir, err := afero.TempDir(fs, "", "")
+		require.NoError(t, err)
+		docsDir, err := afero.TempDir(fs, "", "")
 		require.NoError(t, err)
 		k := &GenerateCmd{
 			RoutesPath: "testdata/routes.json",
-			OutputPath: tempDir,
+			OutputPath: genDir,
+			DocsPath:   docsDir,
 			fs:         fs,
 		}
 		err = k.Run()
@@ -43,10 +31,17 @@ func Test_genCliRun_Run(t *testing.T) {
 		wantFiles := getDirectoryFileNames(t, "testdata/generated", testdataFs)
 		for _, wantFile := range wantFiles {
 			wantData := readFile(t, testdataFs, "testdata/generated", wantFile)
-			gotData := readFile(t, fs, tempDir, wantFile)
+			gotData := readFile(t, fs, genDir, wantFile)
 			assert.Equalf(t, string(wantData), string(gotData), "file contents are not equal for %q", wantFile)
 		}
-
+		wantUnsup, err := ioutil.ReadFile("testdata/docs/unsupported.md")
+		require.NoError(t, err)
+		gotUnsup := readFile(t, fs, docsDir, "unsupported.md")
+		require.Equal(t, wantUnsup, gotUnsup)
+		wantOperations, err := ioutil.ReadFile("testdata/docs/operations.md")
+		require.NoError(t, err)
+		gotOps := readFile(t, fs, docsDir, "operations.md")
+		require.Equal(t, wantOperations, gotOps)
 	})
 }
 

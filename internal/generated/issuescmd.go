@@ -236,7 +236,7 @@ type IssuesGetCmd struct {
 	IssueNumber  int64  `required:"" name:"issue_number"`
 	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.\""
+	SquirrelGirl bool   `name:"squirrel-girl-preview"`
 	internal.BaseCmd
 }
 
@@ -252,10 +252,10 @@ func (c *IssuesGetCmd) Run(isValueSetMap map[string]bool) error {
 
 type IssuesGetCommentCmd struct {
 	CommentId    int64  `required:"" name:"comment_id"`
-	MachineMan   bool   "name:\"machine-man-preview\" help:\"If an issue comment is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).\n\nTo receive the `performed_via_github_app` object in the response, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.machine-man-preview\n```\""
+	MachineMan   bool   `name:"machine-man-preview"`
 	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.\""
+	SquirrelGirl bool   `name:"squirrel-girl-preview"`
 	internal.BaseCmd
 }
 
@@ -272,11 +272,11 @@ func (c *IssuesGetCommentCmd) Run(isValueSetMap map[string]bool) error {
 
 type IssuesGetEventCmd struct {
 	EventId    int64  `required:"" name:"event_id"`
-	MachineMan bool   "name:\"machine-man-preview\" help:\"If an issue event is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).\n\nTo receive the `performed_via_github_app` object in the response, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.machine-man-preview\n```\""
+	MachineMan bool   `name:"machine-man-preview"`
 	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
-	SailorV    bool   "name:\"sailor-v-preview\" help:\"You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.sailor-v-preview+json\n```\""
-	Starfox    bool   "name:\"starfox-preview\" help:\"Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](https://developer.github.com/changes/2018-09-05-project-card-events).\n\nTo receive the `project_card` attribute, project boards must be [enabled](https://help.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.starfox-preview+json\n```\""
+	SailorV    bool   `name:"sailor-v-preview"`
+	Starfox    bool   `name:"starfox-preview"`
 	internal.BaseCmd
 }
 
@@ -346,12 +346,12 @@ type IssuesListCmd struct {
 	Direction    string `name:"direction"`
 	Filter       string `name:"filter"`
 	Labels       string `name:"labels"`
-	MachineMan   bool   "name:\"machine-man-preview\" help:\"If an issue is opened via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).\n\nTo receive the `performed_via_github_app` object in the response, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.machine-man-preview\n```\""
+	MachineMan   bool   `name:"machine-man-preview"`
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
 	Since        string `name:"since"`
 	Sort         string `name:"sort"`
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.\""
+	SquirrelGirl bool   `name:"squirrel-girl-preview"`
 	State        string `name:"state"`
 	internal.BaseCmd
 }
@@ -379,7 +379,7 @@ type IssuesListCommentsCmd struct {
 	PerPage      int64  `name:"per_page"`
 	Repo         string `required:"" name:"repo"`
 	Since        string `name:"since"`
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.\""
+	SquirrelGirl bool   `name:"squirrel-girl-preview"`
 	internal.BaseCmd
 }
 
@@ -404,7 +404,7 @@ type IssuesListCommentsForRepoCmd struct {
 	Repo         string `required:"" name:"repo"`
 	Since        string `name:"since"`
 	Sort         string `name:"sort"`
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.\""
+	SquirrelGirl bool   `name:"squirrel-girl-preview"`
 	internal.BaseCmd
 }
 
@@ -428,8 +428,8 @@ type IssuesListEventsCmd struct {
 	Page        int64  `name:"page"`
 	PerPage     int64  `name:"per_page"`
 	Repo        string `required:"" name:"repo"`
-	SailorV     bool   "name:\"sailor-v-preview\" help:\"You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.sailor-v-preview+json\n```\""
-	Starfox     bool   "name:\"starfox-preview\" help:\"Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](https://developer.github.com/changes/2018-09-05-project-card-events).\n\nTo receive the `project_card` attribute, project boards must be [enabled](https://help.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.starfox-preview+json\n```\""
+	SailorV     bool   `name:"sailor-v-preview"`
+	Starfox     bool   `name:"starfox-preview"`
 	internal.BaseCmd
 }
 
@@ -451,8 +451,8 @@ type IssuesListEventsForRepoCmd struct {
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
-	SailorV bool   "name:\"sailor-v-preview\" help:\"You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.sailor-v-preview+json\n```\""
-	Starfox bool   "name:\"starfox-preview\" help:\"Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](https://developer.github.com/changes/2018-09-05-project-card-events).\n\nTo receive the `project_card` attribute, project boards must be [enabled](https://help.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.starfox-preview+json\n```\""
+	SailorV bool   `name:"sailor-v-preview"`
+	Starfox bool   `name:"starfox-preview"`
 	internal.BaseCmd
 }
 
@@ -470,12 +470,12 @@ func (c *IssuesListEventsForRepoCmd) Run(isValueSetMap map[string]bool) error {
 
 type IssuesListEventsForTimelineCmd struct {
 	IssueNumber int64  `required:"" name:"issue_number"`
-	Mockingbird bool   "name:\"mockingbird-preview\" required:\"\" help:\"The API to get issue timeline events is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-23-timeline-preview-api/) for full details. To access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.mockingbird-preview\n```\""
+	Mockingbird bool   `required:"" name:"mockingbird-preview"`
 	Owner       string `name:"owner"`
 	Page        int64  `name:"page"`
 	PerPage     int64  `name:"per_page"`
 	Repo        string `required:"" name:"repo"`
-	Starfox     bool   "name:\"starfox-preview\" help:\"Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](https://developer.github.com/changes/2018-09-05-project-card-events).\n\nTo receive the `project_card` attribute, project boards must be [enabled](https://help.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.starfox-preview+json\n```\""
+	Starfox     bool   `name:"starfox-preview"`
 	internal.BaseCmd
 }
 
@@ -496,12 +496,12 @@ type IssuesListForAuthenticatedUserCmd struct {
 	Direction    string `name:"direction"`
 	Filter       string `name:"filter"`
 	Labels       string `name:"labels"`
-	MachineMan   bool   "name:\"machine-man-preview\" help:\"If an issue is opened via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).\n\nTo receive the `performed_via_github_app` object in the response, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.machine-man-preview\n```\""
+	MachineMan   bool   `name:"machine-man-preview"`
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
 	Since        string `name:"since"`
 	Sort         string `name:"sort"`
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.\""
+	SquirrelGirl bool   `name:"squirrel-girl-preview"`
 	State        string `name:"state"`
 	internal.BaseCmd
 }
@@ -526,13 +526,13 @@ type IssuesListForOrgCmd struct {
 	Direction    string `name:"direction"`
 	Filter       string `name:"filter"`
 	Labels       string `name:"labels"`
-	MachineMan   bool   "name:\"machine-man-preview\" help:\"If an issue is opened via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).\n\nTo receive the `performed_via_github_app` object in the response, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.machine-man-preview\n```\""
+	MachineMan   bool   `name:"machine-man-preview"`
 	Org          string `required:"" name:"org"`
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
 	Since        string `name:"since"`
 	Sort         string `name:"sort"`
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.\""
+	SquirrelGirl bool   `name:"squirrel-girl-preview"`
 	State        string `name:"state"`
 	internal.BaseCmd
 }
@@ -559,7 +559,7 @@ type IssuesListForRepoCmd struct {
 	Creator      string `name:"creator"`
 	Direction    string `name:"direction"`
 	Labels       string `name:"labels"`
-	MachineMan   bool   "name:\"machine-man-preview\" help:\"If an issue is opened via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).\n\nTo receive the `performed_via_github_app` object in the response, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.machine-man-preview\n```\""
+	MachineMan   bool   `name:"machine-man-preview"`
 	Mentioned    string `name:"mentioned"`
 	Milestone    string `name:"milestone"`
 	Owner        string `name:"owner"`
@@ -568,7 +568,7 @@ type IssuesListForRepoCmd struct {
 	Repo         string `required:"" name:"repo"`
 	Since        string `name:"since"`
 	Sort         string `name:"sort"`
-	SquirrelGirl bool   "name:\"squirrel-girl-preview\" help:\"An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.\""
+	SquirrelGirl bool   `name:"squirrel-girl-preview"`
 	State        string `name:"state"`
 	internal.BaseCmd
 }
@@ -681,7 +681,7 @@ type IssuesLockCmd struct {
 	LockReason  string `name:"lock_reason"`
 	Owner       string `name:"owner"`
 	Repo        string `required:"" name:"repo"`
-	SailorV     bool   "name:\"sailor-v-preview\" help:\"You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.sailor-v-preview+json\n```\""
+	SailorV     bool   `name:"sailor-v-preview"`
 	internal.BaseCmd
 }
 

@@ -39,7 +39,7 @@ func (c *SearchCodeCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type SearchCommitsCmd struct {
-	Cloak   bool   "name:\"cloak-preview\" required:\"\" help:\"The Commit Search API is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2017-01-05-commit-search-api/) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.cloak-preview\n```\""
+	Cloak   bool   `required:"" name:"cloak-preview"`
 	Order   string `name:"order"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
@@ -129,7 +129,7 @@ func (c *SearchLabelsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type SearchReposCmd struct {
-	Mercy   bool   "name:\"mercy-preview\" help:\"The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.mercy-preview+json\n```\""
+	Mercy   bool   `name:"mercy-preview"`
 	Order   string `name:"order"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
@@ -171,7 +171,7 @@ func (c *SearchReposLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type SearchTopicsCmd struct {
-	Mercy bool   "name:\"mercy-preview\" help:\"The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.mercy-preview+json\n```\""
+	Mercy bool   `name:"mercy-preview"`
 	Q     string `required:"" name:"q"`
 	internal.BaseCmd
 }

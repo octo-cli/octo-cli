@@ -11,6 +11,7 @@ type (
 	GenerateCmd struct {
 		RoutesPath string `type:"existingfile" default:"api.github.com.json"`
 		OutputPath string `type:"existingdir" default:"./internal/generated"`
+		DocsPath   string `type:"existingdir" default:"./docs"`
 		Verify     bool   `help:"Verify a new run won't change anything"`
 		fs         afero.Fs
 	}
@@ -29,7 +30,7 @@ func (k *GenerateCmd) Run() error {
 			return fmt.Errorf("some files did not match: %v", diffs)
 		}
 	} else {
-		Generate(k.RoutesPath, k.OutputPath, k.fs)
+		return Generate(k.RoutesPath, k.OutputPath, k.DocsPath, k.fs)
 	}
 	return nil
 }
