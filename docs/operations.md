@@ -6,7 +6,7 @@
 
 https://developer.github.com/v3/actions/workflow-runs/#cancel-a-workflow-run
 
-Cancels a workflow run using its `id`. Anyone with write access to the repository can use this endpoint. GitHub Apps must have the `actions` permission to use this endpoint.
+Cancels a workflow run using its `id`. Anyone with write access to the repository and an access token with the `repo` scope can use this endpoint. GitHub Apps must have the `actions` permission to use this endpoint.
 
 ### parameters
 
@@ -20,7 +20,7 @@ Cancels a workflow run using its `id`. Anyone with write access to the repositor
 
 https://developer.github.com/v3/actions/secrets/#create-or-update-a-secret-for-a-repository
 
-Creates or updates a secret with an encrypted value. Encrypt your secret using [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages). Anyone with write access to the repository can use this endpoint. GitHub Apps must have the `secrets` permission to use this endpoint.
+Creates or updates a secret with an encrypted value. Encrypt your secret using [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages). Anyone with write access to the repository and an access token with the `repo` scope can use this endpoint. GitHub Apps must have the `secrets` permission to use this endpoint.
 
 Encrypt your secret using the [tweetsodium](https://github.com/mastahyeti/tweetsodium) library.
 
@@ -52,7 +52,7 @@ https://developer.github.com/v3/actions/self-hosted-runners/#create-a-registrati
 
 **Warning:** The self-hosted runners API for organizations is currently in public beta and subject to change.
 
-Returns a token that you can pass to the `config` script. The token expires after one hour. Anyone with admin access to the organization can use this endpoint. GitHub Apps must have the `self-hosted runners:write` organization permission to use this endpoint.
+Returns a token that you can pass to the `config` script. The token expires after one hour. Anyone with admin access to the organization can use this endpoint.
 
 Configure your self-hosted runner, replacing `TOKEN` with the registration token provided by this endpoint.
 
@@ -67,7 +67,7 @@ Configure your self-hosted runner, replacing `TOKEN` with the registration token
 
 https://developer.github.com/v3/actions/self-hosted-runners/#create-a-registration-token-for-a-repository
 
-Returns a token that you can pass to the `config` script. The token expires after one hour. Anyone with admin access to the repository can use this endpoint. GitHub Apps must have the `administration:write` repository permission to use this endpoint.
+Returns a token that you can pass to the `config` script. The token expires after one hour. Anyone with admin access to the repository and an access token with the `repo` scope can use this endpoint.
 
 Configure your self-hosted runner, replacing TOKEN with the registration token provided by this endpoint.
 
@@ -84,7 +84,7 @@ https://developer.github.com/v3/actions/self-hosted-runners/#create-a-remove-tok
 
 **Warning:** The self-hosted runners API for organizations is currently in public beta and subject to change.
 
-Returns a token that you can pass to the `config` script to remove a self-hosted runner from an organization. The token expires after one hour. Anyone with admin access to the organization can use this endpoint. GitHub Apps must have the `self-hosted runners:write` organization permission to use this endpoint.
+Returns a token that you can pass to the `config` script to remove a self-hosted runner from an organization. The token expires after one hour. Anyone with admin access to the organization can use this endpoint.
 
 To remove your self-hosted runner from an organization, replace `TOKEN` with the remove token provided by this endpoint.
 
@@ -99,7 +99,7 @@ To remove your self-hosted runner from an organization, replace `TOKEN` with the
 
 https://developer.github.com/v3/actions/self-hosted-runners/#create-a-remove-token-for-a-repository
 
-Returns a token that you can pass to remove a self-hosted runner from a repository. The token expires after one hour. Anyone with admin access to the repository can use this endpoint. GitHub Apps must have the `administration:write` repository permission to use this endpoint.
+Returns a token that you can pass to remove a self-hosted runner from a repository. The token expires after one hour. Anyone with admin access to the repository and an access token with the `repo` scope can use this endpoint.
 
 Remove your self-hosted runner from a repository, replacing TOKEN with the remove token provided by this endpoint.
 
@@ -114,7 +114,7 @@ Remove your self-hosted runner from a repository, replacing TOKEN with the remov
 
 https://developer.github.com/v3/actions/artifacts/#delete-an-artifact
 
-Deletes an artifact for a workflow run. Anyone with write access to the repository can use this endpoint. GitHub Apps must have the `actions` permission to use this endpoint.
+Deletes an artifact for a workflow run. Anyone with write access to the repository and an access token with the `repo` scope can use this endpoint. GitHub Apps must have the `actions` permission to use this endpoint.
 
 ### parameters
 
@@ -128,7 +128,7 @@ Deletes an artifact for a workflow run. Anyone with write access to the reposito
 
 https://developer.github.com/v3/actions/secrets/#delete-a-secret-from-a-repository
 
-Deletes a secret in a repository using the secret name. Anyone with write access to the repository can use this endpoint. GitHub Apps must have the `secrets` permission to use this endpoint.
+Deletes a secret in a repository using the secret name. Anyone with write access to the repository and an access token with the `repo` scope can use this endpoint. GitHub Apps must have the `secrets` permission to use this endpoint.
 
 ### parameters
 
@@ -144,7 +144,7 @@ https://developer.github.com/v3/actions/self-hosted-runners/#delete-a-self-hoste
 
 **Warning:** The self-hosted runners API for organizations is currently in public beta and subject to change.
 
-Forces the removal of a self-hosted runner from an organization. You can use this endpoint to completely remove the runner when the machine you were using no longer exists. Anyone with admin access to the organization can use this endpoint. GitHub Apps must have the `self-hosted runners:write` organization permission to use this endpoint.
+Forces the removal of a self-hosted runner from an organization. You can use this endpoint to completely remove the runner when the machine you were using no longer exists. Anyone with admin access to the organization can use this endpoint.
 
 ### parameters
 
@@ -158,7 +158,7 @@ Forces the removal of a self-hosted runner from an organization. You can use thi
 
 https://developer.github.com/v3/actions/self-hosted-runners/#delete-a-self-hosted-runner-from-a-repository
 
-Forces the removal of a self-hosted runner from a repository. You can use this endpoint to completely remove the runner when the machine you were using no longer exists. Anyone with admin access to the repository can use this endpoint. GitHub Apps must have the `administration:write` repository permission to use this endpoint.
+Forces the removal of a self-hosted runner from a repository. You can use this endpoint to completely remove the runner when the machine you were using no longer exists. Anyone with admin access to the repository and an access token with the `repo` scope can use this endpoint.
 
 ### parameters
 
@@ -172,7 +172,7 @@ Forces the removal of a self-hosted runner from a repository. You can use this e
 
 https://developer.github.com/v3/actions/workflow-runs/#delete-workflow-run-logs
 
-Deletes all logs for a workflow run. Anyone with write access to the repository can use this endpoint. GitHub Apps must have the `actions` permission to use this endpoint.
+Deletes all logs for a workflow run. Anyone with write access to the repository and an access token with the `repo` scope can use this endpoint. GitHub Apps must have the `actions` permission to use this endpoint.
 
 ### parameters
 
@@ -186,7 +186,7 @@ Deletes all logs for a workflow run. Anyone with write access to the repository 
 
 https://developer.github.com/v3/actions/artifacts/#download-an-artifact
 
-Gets a redirect URL to download an archive for a repository. This URL expires after 1 minute. Look for `Location:` in the response header to find the URL for the download. The `:archive_format` must be `zip`. Anyone with read access to the repository can use this endpoint. GitHub Apps must have the `actions` permission to use this endpoint.
+Gets a redirect URL to download an archive for a repository. This URL expires after 1 minute. Look for `Location:` in the response header to find the URL for the download. The `:archive_format` must be `zip`. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions` permission to use this endpoint.
 
 Call this endpoint using the `-v` flag, which enables verbose output and allows you to see the download URL in the header. To download the file into the current working directory, specify the filename using the `-o` flag.
 
@@ -199,11 +199,43 @@ Call this endpoint using the `-v` flag, which enables verbose output and allows 
 | artifact_id | __Required__ artifact_id parameter |
 | repo | __Required__ repo parameter |
 
+## actions download-workflow-job-logs
+
+https://developer.github.com/v3/actions/workflow-jobs/#download-workflow-job-logs
+
+Gets a redirect URL to download a plain text file of logs for a workflow job. This link expires after 1 minute. Look for `Location:` in the response header to find the URL for the download. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions` permission to use this endpoint.
+
+Call this endpoint using the `-v` flag, which enables verbose output and allows you to see the download URL in the header. To download the file into the current working directory, specify the filename using the `-o` flag.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| job_id | __Required__ job_id parameter |
+| repo | __Required__ repo parameter |
+
+## actions download-workflow-run-logs
+
+https://developer.github.com/v3/actions/workflow-runs/#download-workflow-run-logs
+
+Gets a redirect URL to download an archive of log files for a workflow run. This link expires after 1 minute. Look for `Location:` in the response header to find the URL for the download. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions` permission to use this endpoint.
+
+Call this endpoint using the `-v` flag, which enables verbose output and allows you to see the download URL in the header. To download the file into the current working directory, specify the filename using the `-o` flag.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| repo | __Required__ repo parameter |
+| run_id | __Required__ run_id parameter |
+
 ## actions get-artifact
 
 https://developer.github.com/v3/actions/artifacts/#get-an-artifact
 
-Gets a specific artifact for a workflow run. Anyone with read access to the repository can use this endpoint. GitHub Apps must have the `actions` permission to use this endpoint.
+Gets a specific artifact for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions` permission to use this endpoint.
 
 ### parameters
 
@@ -217,7 +249,7 @@ Gets a specific artifact for a workflow run. Anyone with read access to the repo
 
 https://developer.github.com/v3/actions/secrets/#get-your-public-key
 
-Gets your public key, which you must store. You need your public key to use other secrets endpoints. Use the returned `key` to encrypt your secrets. Anyone with read access to the repository can use this endpoint. GitHub Apps must have the `secrets` permission to use this endpoint.
+Gets your public key, which you must store. You need your public key to use other secrets endpoints. Use the returned `key` to encrypt your secrets. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `secrets` permission to use this endpoint.
 
 ### parameters
 
@@ -230,7 +262,7 @@ Gets your public key, which you must store. You need your public key to use othe
 
 https://developer.github.com/v3/actions/secrets/#get-a-secret
 
-Gets a single secret without revealing its encrypted value. Anyone with write access to the repository can use this endpoint. GitHub Apps must have the `secrets` permission to use this endpoint.
+Gets a single secret without revealing its encrypted value. Anyone with write access to the repository and an access token with the `repo` scope can use this endpoint. GitHub Apps must have the `secrets` permission to use this endpoint.
 
 ### parameters
 
@@ -246,7 +278,7 @@ https://developer.github.com/v3/actions/self-hosted-runners/#get-a-self-hosted-r
 
 **Warning:** The self-hosted runners API for organizations is currently in public beta and subject to change.
 
-Gets a specific self-hosted runner for an organization. Anyone with admin access to the organization can use this endpoint. GitHub Apps must have the `self-hosted runners:read` organization permission to use this endpoint.
+Gets a specific self-hosted runner for an organization. Anyone with admin access to the organization can use this endpoint.
 
 ### parameters
 
@@ -260,7 +292,7 @@ Gets a specific self-hosted runner for an organization. Anyone with admin access
 
 https://developer.github.com/v3/actions/self-hosted-runners/#get-a-self-hosted-runner-for-a-repository
 
-Gets a specific self-hosted runner. Anyone with admin access to the repository can use this endpoint. GitHub Apps must have the `administration:read` repository permission to use this endpoint.
+Gets a specific self-hosted runner. Anyone with admin access to the repository and an access token with the `repo` scope can use this endpoint.
 
 ### parameters
 
@@ -274,7 +306,7 @@ Gets a specific self-hosted runner. Anyone with admin access to the repository c
 
 https://developer.github.com/v3/actions/workflows/#get-a-workflow
 
-Gets a specific workflow. You can also replace `:workflow_id` with `:workflow_file_name`. For example, you could use `main.yml`. Anyone with read access to the repository can use this endpoint. GitHub Apps must have the `actions` permission to use this endpoint.
+Gets a specific workflow. You can also replace `:workflow_id` with `:workflow_file_name`. For example, you could use `main.yml`. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions` permission to use this endpoint.
 
 ### parameters
 
@@ -288,7 +320,7 @@ Gets a specific workflow. You can also replace `:workflow_id` with `:workflow_fi
 
 https://developer.github.com/v3/actions/workflow-jobs/#get-a-workflow-job
 
-Gets a specific job in a workflow run. Anyone with read access to the repository can use this endpoint. GitHub Apps must have the `actions` permission to use this endpoint.
+Gets a specific job in a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions` permission to use this endpoint.
 
 ### parameters
 
@@ -302,7 +334,7 @@ Gets a specific job in a workflow run. Anyone with read access to the repository
 
 https://developer.github.com/v3/actions/workflow-runs/#get-a-workflow-run
 
-Gets a specific workflow run. Anyone with read access to the repository can use this endpoint. GitHub Apps must have the `actions` permission to use this endpoint.
+Gets a specific workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions` permission to use this endpoint.
 
 ### parameters
 
@@ -316,7 +348,7 @@ Gets a specific workflow run. Anyone with read access to the repository can use 
 
 https://developer.github.com/v3/actions/artifacts/#list-artifacts-for-a-repository
 
-Lists all artifacts for a repository. Anyone with read access to the repository can use this endpoint. GitHub Apps must have the `actions` permission to use this endpoint.
+Lists all artifacts for a repository. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions` permission to use this endpoint.
 
 ### parameters
 
@@ -331,7 +363,7 @@ Lists all artifacts for a repository. Anyone with read access to the repository 
 
 https://developer.github.com/v3/actions/workflow-jobs/#list-jobs-for-a-workflow-run
 
-Lists jobs for a workflow run. Anyone with read access to the repository can use this endpoint. GitHub Apps must have the `actions` permission to use this endpoint. You can use parameters to narrow the list of results. For more information about using parameters, see [Parameters](https://developer.github.com/v3/#parameters).
+Lists jobs for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions` permission to use this endpoint. You can use parameters to narrow the list of results. For more information about using parameters, see [Parameters](https://developer.github.com/v3/#parameters).
 
 ### parameters
 
@@ -350,7 +382,7 @@ https://developer.github.com/v3/actions/workflow-runs/#list-repository-workflow-
 
 Lists all workflow runs for a repository. You can use parameters to narrow the list of results. For more information about using parameters, see [Parameters](https://developer.github.com/v3/#parameters).
 
-Anyone with read access to the repository can use this endpoint. GitHub Apps must have the `actions` permission to use this endpoint.
+Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions` permission to use this endpoint.
 
 ### parameters
 
@@ -369,7 +401,7 @@ Anyone with read access to the repository can use this endpoint. GitHub Apps mus
 
 https://developer.github.com/v3/actions/workflows/#list-repository-workflows
 
-Lists the workflows in a repository. Anyone with read access to the repository can use this endpoint. GitHub Apps must have the `actions` permission to use this endpoint.
+Lists the workflows in a repository. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions` permission to use this endpoint.
 
 ### parameters
 
@@ -386,7 +418,7 @@ https://developer.github.com/v3/actions/self-hosted-runners/#list-runner-applica
 
 **Warning:** The self-hosted runners API for organizations is currently in public beta and subject to change.
 
-Lists binaries for the runner application that you can download and run. Anyone with admin access to the organization can use this endpoint. GitHub Apps must have the `self-hosted runners:read` organization permission to use this endpoint.
+Lists binaries for the runner application that you can download and run. Anyone with admin access to the organization can use this endpoint.
 
 ### parameters
 
@@ -399,7 +431,7 @@ Lists binaries for the runner application that you can download and run. Anyone 
 
 https://developer.github.com/v3/actions/self-hosted-runners/#list-runner-applications-for-a-repository
 
-Lists binaries for the runner application that you can download and run. Anyone with admin access to the repository can use this endpoint. GitHub Apps must have the `administration:read` repository permission to use this endpoint.
+Lists binaries for the runner application that you can download and run. Anyone with admin access to the repository and an access token with the `repo` scope can use this endpoint.
 
 ### parameters
 
@@ -412,7 +444,7 @@ Lists binaries for the runner application that you can download and run. Anyone 
 
 https://developer.github.com/v3/actions/secrets/#list-secrets-for-a-repository
 
-Lists all secrets available in a repository without revealing their encrypted values. Anyone with write access to the repository can use this endpoint. GitHub Apps must have the `secrets` permission to use this endpoint.
+Lists all secrets available in a repository without revealing their encrypted values. Anyone with write access to the repository and an access token with the `repo` scope can use this endpoint. GitHub Apps must have the `secrets` permission to use this endpoint.
 
 ### parameters
 
@@ -429,7 +461,7 @@ https://developer.github.com/v3/actions/self-hosted-runners/#list-self-hosted-ru
 
 **Warning:** The self-hosted runners API for organizations is currently in public beta and subject to change.
 
-Lists all self-hosted runners for an organization. Anyone with admin access to the organization can use this endpoint. GitHub Apps must have the `self-hosted runners:read` organization permission to use this endpoint.
+Lists all self-hosted runners for an organization. Anyone with admin access to the organization can use this endpoint.
 
 ### parameters
 
@@ -444,31 +476,13 @@ Lists all self-hosted runners for an organization. Anyone with admin access to t
 
 https://developer.github.com/v3/actions/self-hosted-runners/#list-self-hosted-runners-for-a-repository
 
-Lists all self-hosted runners for a repository. Anyone with admin access to the repository can use this endpoint. GitHub Apps must have the `administration:read` repository permission to use this endpoint.
+Lists all self-hosted runners for a repository. Anyone with admin access to the repository and an access token with the `repo` scope can use this endpoint.
 
 ### parameters
 
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
-| page | Page number of the results to fetch. |
-| per_page | Results per page (max 100) |
-
-## actions list-workflow-job-logs
-
-https://developer.github.com/v3/actions/workflow-jobs/#list-workflow-job-logs
-
-Gets a redirect URL to download a plain text file of logs for a workflow job. This link expires after 1 minute. Look for `Location:` in the response header to find the URL for the download. Anyone with read access to the repository can use this endpoint. GitHub Apps must have the `actions` permission to use this endpoint.
-
-Call this endpoint using the `-v` flag, which enables verbose output and allows you to see the download URL in the header. To download the file into the current working directory, specify the filename using the `-o` flag.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| job_id | __Required__ job_id parameter |
 | repo | __Required__ repo parameter |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -477,25 +491,7 @@ Call this endpoint using the `-v` flag, which enables verbose output and allows 
 
 https://developer.github.com/v3/actions/artifacts/#list-workflow-run-artifacts
 
-Lists artifacts for a workflow run. Anyone with read access to the repository can use this endpoint. GitHub Apps must have the `actions` permission to use this endpoint.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| repo | __Required__ repo parameter |
-| run_id | __Required__ run_id parameter |
-| page | Page number of the results to fetch. |
-| per_page | Results per page (max 100) |
-
-## actions list-workflow-run-logs
-
-https://developer.github.com/v3/actions/workflow-runs/#list-workflow-run-logs
-
-Gets a redirect URL to download an archive of log files for a workflow run. This link expires after 1 minute. Look for `Location:` in the response header to find the URL for the download. Anyone with read access to the repository can use this endpoint. GitHub Apps must have the `actions` permission to use this endpoint.
-
-Call this endpoint using the `-v` flag, which enables verbose output and allows you to see the download URL in the header. To download the file into the current working directory, specify the filename using the `-o` flag.
+Lists artifacts for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions` permission to use this endpoint.
 
 ### parameters
 
@@ -513,7 +509,7 @@ https://developer.github.com/v3/actions/workflow-runs/#list-workflow-runs
 
 List all workflow runs for a workflow. You can also replace `:workflow_id` with `:workflow_file_name`. For example, you could use `main.yml`. You can use parameters to narrow the list of results. For more information about using parameters, see [Parameters](https://developer.github.com/v3/#parameters).
 
-Anyone with read access to the repository can use this endpoint.
+Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope.
 
 ### parameters
 
@@ -533,7 +529,7 @@ Anyone with read access to the repository can use this endpoint.
 
 https://developer.github.com/v3/actions/workflow-runs/#re-run-a-workflow
 
-Re-runs your workflow run using its `id`. Anyone with write access to the repository can use this endpoint. GitHub Apps must have the `actions` permission to use this endpoint.
+Re-runs your workflow run using its `id`. Anyone with write access to the repository and an access token with the `repo` scope can use this endpoint. GitHub Apps must have the `actions` permission to use this endpoint.
 
 ### parameters
 
@@ -1178,7 +1174,7 @@ Deleting an OAuth application's grant will also delete all OAuth tokens associat
 
 https://developer.github.com/v3/apps/#delete-an-installation
 
-Uninstalls a GitHub App on a user, organization, or business account.
+Uninstalls a GitHub App on a user, organization, or business account. If you prefer to temporarily suspend an app's access to your account's resources, then we recommend the "[Suspend an installation](https://developer.github.com/v3/apps/#suspend-an-installation)" endpoint.
 
 You must use a [JWT](https://developer.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
 
@@ -1594,6 +1590,44 @@ Revokes the installation token you're using to authenticate as an installation a
 Once an installation token is revoked, the token is invalidated and cannot be used. Other endpoints that require the revoked installation token must have a new installation token to work. You can create a new token using the "[Create a new installation token](https://developer.github.com/v3/apps/#create-a-new-installation-token)" endpoint.
 
 You must use an [installation access token](https://developer.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-an-installation) to access this endpoint.
+
+## apps suspend-installation
+
+https://developer.github.com/v3/apps/#suspend-an-installation
+
+**Note:** Suspending a GitHub App installation is currently in beta and subject to change. Before you can suspend a GitHub App, the app owner must enable suspending installations for the app by opting-in to the beta. For more information, see "[Suspending a GitHub App installation](https://developer.github.com/apps/managing-github-apps/suspending-a-github-app-installation/)."
+
+Suspends a GitHub App on a user, organization, or business account, which blocks the app from accessing the account's resources. When a GitHub App is suspended, the app's access to the GitHub API or webhook events is blocked for that account.
+
+To suspend a GitHub App, you must be an account owner or have admin permissions in the repository or organization where the app is installed.
+
+You must use a [JWT](https://developer.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| installation_id | __Required__ installation_id parameter |
+
+## apps unsuspend-installation
+
+https://developer.github.com/v3/apps/#unsuspend-an-installation
+
+**Note:** Suspending a GitHub App installation is currently in beta and subject to change. Before you can suspend a GitHub App, the app owner must enable suspending installations for the app by opting-in to the beta. For more information, see "[Suspending a GitHub App installation](https://developer.github.com/apps/managing-github-apps/suspending-a-github-app-installation/)."
+
+Removes a GitHub App installation suspension.
+
+To unsuspend a GitHub App, you must be an account owner or have admin permissions in the repository or organization where the app is installed and suspended.
+
+You must use a [JWT](https://developer.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| installation_id | __Required__ installation_id parameter |
 
 # checks
 
