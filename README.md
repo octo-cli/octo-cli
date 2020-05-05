@@ -206,6 +206,14 @@ Commands:
     Download an artifact -
     https://developer.github.com/v3/actions/artifacts/#download-an-artifact
 
+  actions download-workflow-job-logs --job_id=INT-64 --repo=STRING --token=STRING
+    Download workflow job logs -
+    https://developer.github.com/v3/actions/workflow-jobs/#download-workflow-job-logs
+
+  actions download-workflow-run-logs --repo=STRING --run_id=INT-64 --token=STRING
+    Download workflow run logs -
+    https://developer.github.com/v3/actions/workflow-runs/#download-workflow-run-logs
+
   actions get-artifact --artifact_id=INT-64 --repo=STRING --token=STRING
     Get an artifact -
     https://developer.github.com/v3/actions/artifacts/#get-an-artifact
@@ -273,17 +281,9 @@ Commands:
     List self-hosted runners for a repository -
     https://developer.github.com/v3/actions/self-hosted-runners/#list-self-hosted-runners-for-a-repository
 
-  actions list-workflow-job-logs --job_id=INT-64 --repo=STRING --token=STRING
-    List workflow job logs -
-    https://developer.github.com/v3/actions/workflow-jobs/#list-workflow-job-logs
-
   actions list-workflow-run-artifacts --repo=STRING --run_id=INT-64 --token=STRING
     List workflow run artifacts -
     https://developer.github.com/v3/actions/artifacts/#list-workflow-run-artifacts
-
-  actions list-workflow-run-logs --repo=STRING --run_id=INT-64 --token=STRING
-    List workflow run logs -
-    https://developer.github.com/v3/actions/workflow-runs/#list-workflow-run-logs
 
   actions list-workflow-runs --repo=STRING --workflow_id=INT-64 --token=STRING
     List workflow runs -
@@ -558,6 +558,14 @@ Commands:
   apps revoke-installation-token --token=STRING
     Revoke an installation token -
     https://developer.github.com/v3/apps/installations/#revoke-an-installation-token
+
+  apps suspend-installation --installation_id=INT-64 --token=STRING
+    Suspend an installation -
+    https://developer.github.com/v3/apps/#suspend-an-installation
+
+  apps unsuspend-installation --installation_id=INT-64 --token=STRING
+    Unsuspend an installation -
+    https://developer.github.com/v3/apps/#unsuspend-an-installation
 
   checks create --antiope-preview --head_sha=STRING --name=STRING --repo=STRING --token=STRING
     Create a check run -

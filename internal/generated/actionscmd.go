@@ -17,6 +17,8 @@ type ActionsCmd struct {
 	DeleteSelfHostedRunnerFromRepo ActionsDeleteSelfHostedRunnerFromRepoCmd `cmd:""`
 	DeleteWorkflowRunLogs          ActionsDeleteWorkflowRunLogsCmd          `cmd:""`
 	DownloadArtifact               ActionsDownloadArtifactCmd               `cmd:""`
+	DownloadWorkflowJobLogs        ActionsDownloadWorkflowJobLogsCmd        `cmd:""`
+	DownloadWorkflowRunLogs        ActionsDownloadWorkflowRunLogsCmd        `cmd:""`
 	GetArtifact                    ActionsGetArtifactCmd                    `cmd:""`
 	GetPublicKey                   ActionsGetPublicKeyCmd                   `cmd:""`
 	GetSecret                      ActionsGetSecretCmd                      `cmd:""`
@@ -34,9 +36,7 @@ type ActionsCmd struct {
 	ListSecretsForRepo             ActionsListSecretsForRepoCmd             `cmd:""`
 	ListSelfHostedRunnersForOrg    ActionsListSelfHostedRunnersForOrgCmd    `cmd:""`
 	ListSelfHostedRunnersForRepo   ActionsListSelfHostedRunnersForRepoCmd   `cmd:""`
-	ListWorkflowJobLogs            ActionsListWorkflowJobLogsCmd            `cmd:""`
 	ListWorkflowRunArtifacts       ActionsListWorkflowRunArtifactsCmd       `cmd:""`
-	ListWorkflowRunLogs            ActionsListWorkflowRunLogsCmd            `cmd:""`
 	ListWorkflowRuns               ActionsListWorkflowRunsCmd               `cmd:""`
 	ReRunWorkflow                  ActionsReRunWorkflowCmd                  `cmd:""`
 }
@@ -222,6 +222,38 @@ func (c *ActionsDownloadArtifactCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLPath("artifact_id", c.ArtifactId)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ActionsDownloadWorkflowJobLogsCmd struct {
+	JobId int64  `required:"" name:"job_id"`
+	Owner string `name:"owner"`
+	Repo  string `required:"" name:"repo"`
+	internal.BaseCmd
+}
+
+func (c *ActionsDownloadWorkflowJobLogsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{owner}/{repo}/actions/jobs/{job_id}/logs")
+	c.UpdateURLPath("job_id", c.JobId)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ActionsDownloadWorkflowRunLogsCmd struct {
+	Owner string `name:"owner"`
+	Repo  string `required:"" name:"repo"`
+	RunId int64  `required:"" name:"run_id"`
+	internal.BaseCmd
+}
+
+func (c *ActionsDownloadWorkflowRunLogsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{owner}/{repo}/actions/runs/{run_id}/logs")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("run_id", c.RunId)
 	return c.DoRequest("GET")
 }
 
@@ -511,26 +543,6 @@ func (c *ActionsListSelfHostedRunnersForRepoCmd) Run(isValueSetMap map[string]bo
 	return c.DoRequest("GET")
 }
 
-type ActionsListWorkflowJobLogsCmd struct {
-	JobId   int64  `required:"" name:"job_id"`
-	Owner   string `name:"owner"`
-	Page    int64  `name:"page"`
-	PerPage int64  `name:"per_page"`
-	Repo    string `required:"" name:"repo"`
-	internal.BaseCmd
-}
-
-func (c *ActionsListWorkflowJobLogsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/actions/jobs/{job_id}/logs")
-	c.UpdateURLPath("job_id", c.JobId)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLPath("repo", c.Repo)
-	return c.DoRequest("GET")
-}
-
 type ActionsListWorkflowRunArtifactsCmd struct {
 	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
@@ -543,26 +555,6 @@ type ActionsListWorkflowRunArtifactsCmd struct {
 func (c *ActionsListWorkflowRunArtifactsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/actions/runs/{run_id}/artifacts")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("run_id", c.RunId)
-	return c.DoRequest("GET")
-}
-
-type ActionsListWorkflowRunLogsCmd struct {
-	Owner   string `name:"owner"`
-	Page    int64  `name:"page"`
-	PerPage int64  `name:"per_page"`
-	Repo    string `required:"" name:"repo"`
-	RunId   int64  `required:"" name:"run_id"`
-	internal.BaseCmd
-}
-
-func (c *ActionsListWorkflowRunLogsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/actions/runs/{run_id}/logs")
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)

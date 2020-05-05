@@ -44,6 +44,8 @@ var CmdHelps = map[string]map[string]string{
 		"delete-self-hosted-runner-from-repo": "Delete a self-hosted runner from a repository - https://developer.github.com/v3/actions/self-hosted-runners/#delete-a-self-hosted-runner-from-a-repository",
 		"delete-workflow-run-logs":            "Delete workflow run logs - https://developer.github.com/v3/actions/workflow-runs/#delete-workflow-run-logs",
 		"download-artifact":                   "Download an artifact - https://developer.github.com/v3/actions/artifacts/#download-an-artifact",
+		"download-workflow-job-logs":          "Download workflow job logs - https://developer.github.com/v3/actions/workflow-jobs/#download-workflow-job-logs",
+		"download-workflow-run-logs":          "Download workflow run logs - https://developer.github.com/v3/actions/workflow-runs/#download-workflow-run-logs",
 		"get-artifact":                        "Get an artifact - https://developer.github.com/v3/actions/artifacts/#get-an-artifact",
 		"get-public-key":                      "Get your public key - https://developer.github.com/v3/actions/secrets/#get-your-public-key",
 		"get-secret":                          "Get a secret - https://developer.github.com/v3/actions/secrets/#get-a-secret",
@@ -61,9 +63,7 @@ var CmdHelps = map[string]map[string]string{
 		"list-secrets-for-repo":               "List secrets for a repository - https://developer.github.com/v3/actions/secrets/#list-secrets-for-a-repository",
 		"list-self-hosted-runners-for-org":    "List self-hosted runners for an organization - https://developer.github.com/v3/actions/self-hosted-runners/#list-self-hosted-runners-for-an-organization",
 		"list-self-hosted-runners-for-repo":   "List self-hosted runners for a repository - https://developer.github.com/v3/actions/self-hosted-runners/#list-self-hosted-runners-for-a-repository",
-		"list-workflow-job-logs":              "List workflow job logs - https://developer.github.com/v3/actions/workflow-jobs/#list-workflow-job-logs",
 		"list-workflow-run-artifacts":         "List workflow run artifacts - https://developer.github.com/v3/actions/artifacts/#list-workflow-run-artifacts",
-		"list-workflow-run-logs":              "List workflow run logs - https://developer.github.com/v3/actions/workflow-runs/#list-workflow-run-logs",
 		"list-workflow-runs":                  "List workflow runs - https://developer.github.com/v3/actions/workflow-runs/#list-workflow-runs",
 		"re-run-workflow":                     "Re-run a workflow - https://developer.github.com/v3/actions/workflow-runs/#re-run-a-workflow",
 	},
@@ -137,6 +137,8 @@ var CmdHelps = map[string]map[string]string{
 		"revoke-authorization-for-application":              "Revoke an authorization for an application - https://developer.github.com/v3/apps/oauth_applications/#revoke-an-authorization-for-an-application",
 		"revoke-grant-for-application":                      "Revoke a grant for an application - https://developer.github.com/v3/apps/oauth_applications/#revoke-a-grant-for-an-application",
 		"revoke-installation-token":                         "Revoke an installation token - https://developer.github.com/v3/apps/installations/#revoke-an-installation-token",
+		"suspend-installation":                              "Suspend an installation - https://developer.github.com/v3/apps/#suspend-an-installation",
+		"unsuspend-installation":                            "Unsuspend an installation - https://developer.github.com/v3/apps/#unsuspend-an-installation",
 	},
 	"checks": {
 		"create":                 "Create a check run - https://developer.github.com/v3/checks/runs/#create-a-check-run",
@@ -737,6 +739,16 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"owner":          "owner parameter",
 			"repo":           "repo parameter",
 		},
+		"download-workflow-job-logs": {
+			"job_id": "job_id parameter",
+			"owner":  "owner parameter",
+			"repo":   "repo parameter",
+		},
+		"download-workflow-run-logs": {
+			"owner":  "owner parameter",
+			"repo":   "repo parameter",
+			"run_id": "run_id parameter",
+		},
 		"get-artifact": {
 			"artifact_id": "artifact_id parameter",
 			"owner":       "owner parameter",
@@ -829,21 +841,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"per_page": "Results per page (max 100)",
 			"repo":     "repo parameter",
 		},
-		"list-workflow-job-logs": {
-			"job_id":   "job_id parameter",
-			"owner":    "owner parameter",
-			"page":     "Page number of the results to fetch.",
-			"per_page": "Results per page (max 100)",
-			"repo":     "repo parameter",
-		},
 		"list-workflow-run-artifacts": {
-			"owner":    "owner parameter",
-			"page":     "Page number of the results to fetch.",
-			"per_page": "Results per page (max 100)",
-			"repo":     "repo parameter",
-			"run_id":   "run_id parameter",
-		},
-		"list-workflow-run-logs": {
 			"owner":    "owner parameter",
 			"page":     "Page number of the results to fetch.",
 			"per_page": "Results per page (max 100)",
@@ -1176,6 +1174,12 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"client_id":    "client_id parameter",
 		},
 		"revoke-installation-token": {},
+		"suspend-installation": {
+			"installation_id": "installation_id parameter",
+		},
+		"unsuspend-installation": {
+			"installation_id": "installation_id parameter",
+		},
 	},
 	"checks": {
 		"create": {
