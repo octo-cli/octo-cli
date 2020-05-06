@@ -1,0 +1,68 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - application/vnd.github.v3+json
+      User-Agent:
+      - octo-cli
+    url: https://api.github.com/repos/octo-cli-testorg/test-create-issue/issues/1/labels/foo
+    method: DELETE
+  response:
+    body: '[{"id":2041973379,"node_id":"MDU6TGFiZWwyMDQxOTczMzc5","url":"https://api.github.com/repos/octo-cli-testorg/test-create-issue/labels/bar","name":"bar","color":"ededed","default":false,"description":null},{"id":1093660620,"node_id":"MDU6TGFiZWwxMDkzNjYwNjIw","url":"https://api.github.com/repos/octo-cli-testorg/test-create-issue/labels/label1","name":"label1","color":"ededed","default":false,"description":null},{"id":1093660621,"node_id":"MDU6TGFiZWwxMDkzNjYwNjIx","url":"https://api.github.com/repos/octo-cli-testorg/test-create-issue/labels/label2","name":"label2","color":"ededed","default":false,"description":null}]'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval,
+        X-GitHub-Media-Type, Deprecation, Sunset
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Content-Security-Policy:
+      - default-src 'none'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 06 May 2020 20:08:48 GMT
+      Etag:
+      - W/"8fc8c99bdf54d37652c8ea22b2de0698"
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Server:
+      - GitHub.com
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding, Accept, X-Requested-With
+      X-Accepted-Oauth-Scopes:
+      - ""
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Github-Request-Id:
+      - 8E94:282F:323BC9:76934C:5EB3194F
+      X-Oauth-Scopes:
+      - admin:enterprise, admin:gpg_key, admin:org, admin:org_hook, admin:public_key,
+        admin:repo_hook, delete:packages, delete_repo, gist, notifications, read:packages,
+        repo, user, workflow, write:discussion, write:packages
+      X-Ratelimit-Limit:
+      - "5000"
+      X-Ratelimit-Remaining:
+      - "4974"
+      X-Ratelimit-Reset:
+      - "1588797289"
+      X-Xss-Protection:
+      - 1; mode=block
+    status: 200 OK
+    code: 200
+    duration: ""

@@ -4,7 +4,7 @@ go 1.14
 
 require (
 	github.com/alecthomas/kong v0.2.5-0.20200316010313-509fd46c42d7
-	github.com/dnaeon/go-vcr v0.0.0-20180920040454-5637cf3d8a31
+	github.com/dnaeon/go-vcr v1.0.1
 	github.com/fatih/structtag v1.0.0
 	github.com/getkin/kin-openapi v0.8.0
 	github.com/kr/pretty v0.1.0 // indirect
