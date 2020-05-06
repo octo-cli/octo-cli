@@ -1,0 +1,50 @@
+#!/bin/sh
+
+set -e
+
+CDPATH="" cd -- "$(dirname -- "$(dirname -- "$0")")"
+
+make -s bin/octo
+touch ./current-schema-tag.txt
+
+current_tag="$(cat current-schema-tag.txt)"
+
+latest_tag="$(
+  bin/octo repos get-latest-release \
+    --repo octokit/routes \
+    --format "{{.tag_name}}"
+)"
+
+# exit when we are already up to date
+[ "$current_tag" = "$latest_tag" ] && exit
+
+update_branch="update-routes-release-$latest_tag"
+
+pullcount="$(
+  bin/octo pulls list \
+    --repo octo-cli/octo-cli \
+    --head "octo-cli:$update_branch" \
+    --format "{{len .}}"
+)"
+
+# exit if there's already a pr for this update
+[ "$pullcount" != "0" ] && exit
+
+git checkout -b "$update_branch"
+
+url="https://github.com/octokit/routes/releases/download/$latest_tag/api.github.com.json"
+curl -sOL "$url"
+printf "%s" "$latest_tag" >./current-schema-tag.txt
+script/generate
+script/update-readme
+
+git add README.md api.github.com.json current-schema-tag.txt docs/ internal/generated/
+git commit -m "update to octokit/routes tag $latest_tag"
+git push --set-upstream origin "$update_branch"
+
+bin/octo pulls create \
+  --base master \
+  --head "$update_branch" \
+  --repo octo-cli/octo-cli \
+  --title "Update to routes $latest_tag" \
+  --body "https://github.com/octokit/routes has a new release. Here's a PR with the changes."
