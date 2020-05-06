@@ -4,6 +4,9 @@ set -e
 
 CDPATH="" cd -- "$(dirname -- "$(dirname -- "$0")")"
 
+[ -n "$CI" ] && GITHUB_TOKEN="$TKN"
+export GITHUB_TOKEN
+
 make -s bin/octo
 touch ./current-schema-tag.txt
 
