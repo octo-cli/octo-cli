@@ -27,8 +27,13 @@ var unsupportedChecks = []unsupportedCheck{
 	{
 		reason: "manually set to unsupported",
 		check: func(op *openapi3.Operation, routePath, method string) bool {
-			if op.OperationID == "markdown/render-raw" {
-				return true
+			disList := []string{
+				"markdown/render-raw",
+			}
+			for _, dissed := range disList {
+				if op.OperationID == dissed {
+					return true
+				}
 			}
 			return false
 		},
