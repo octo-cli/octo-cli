@@ -28,7 +28,7 @@ pullcount="$(
 )"
 
 # exit if there's already a pr for this update
-[ "$pullcount" != "0" ] && echo "pr already exists" && exit
+[ "$pullcount" != "0" ] && echo "pr already exists for $update_branch" && exit
 
 git checkout -b "$update_branch"
 
