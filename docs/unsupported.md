@@ -2,8 +2,7 @@
 # Unsupported Operations
 
  - `git create-tree` - contains required body parameters of an unsupported type
- - `markdown render` - returns non-json
- - `markdown render-raw` - returns non-json
+ - `markdown render-raw` - accepts non-json body
  - `repos update-branch-protection` - contains required body parameters of an unsupported type
  - `repos upload-release-asset` - accepts non-json body
  - `teams create-or-update-id-p-group-connections-in-org` - contains required body parameters of an unsupported type

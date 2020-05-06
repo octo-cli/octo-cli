@@ -1,10 +1,8 @@
 package supported
 
 import (
-	"fmt"
 	"sort"
 	"strconv"
-	"strings"
 
 	"github.com/getkin/kin-openapi/openapi3"
 	"github.com/octo-cli/octo-cli/internal/generator/swaggerparser"
@@ -78,40 +76,6 @@ var unsupportedChecks = []unsupportedCheck{
 		reason: "unhandled server in openapi spec",
 		check: func(op *openapi3.Operation, routePath, method string) bool {
 			return op.Servers != nil
-		},
-	},
-	{
-		reason: "returns non-json",
-		check: func(op *openapi3.Operation, routePath, method string) bool {
-			// both markdown functions return non-json even if the doc doesn't make that clear.
-			if swaggerparser.GetOperationSvcName(op) == "markdown" {
-				return true
-			}
-			for code, ref := range op.Responses {
-				if len(ref.Value.Content) == 0 {
-					return false
-				}
-				c, err := strconv.Atoi(code)
-				if err != nil {
-					continue
-				}
-				if c >= 400 {
-					continue
-				}
-				var hasJSON bool
-				for s := range ref.Value.Content {
-					if strings.HasSuffix(s, "json") {
-						hasJSON = true
-						break
-					}
-
-				}
-				if !hasJSON {
-					fmt.Println(code)
-					return true
-				}
-			}
-			return false
 		},
 	},
 }

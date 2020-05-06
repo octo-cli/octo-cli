@@ -934,6 +934,10 @@ Commands:
     List commonly used licenses -
     https://developer.github.com/v3/licenses/#list-commonly-used-licenses
 
+  markdown render --text=STRING --token=STRING
+    Render an arbitrary Markdown document -
+    https://developer.github.com/v3/markdown/#render-an-arbitrary-markdown-document
+
   meta get --token=STRING
     Get - https://developer.github.com/v3/meta/#meta
 

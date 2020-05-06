@@ -63,6 +63,9 @@ func (c *BaseCmd) isValueSet(valueName string) bool {
 }
 
 func (c *BaseCmd) AddRequestHeader(headerName, value string) {
+	if c.reqHeader == nil {
+		c.reqHeader = http.Header{}
+	}
 	c.reqHeader.Add(headerName, value)
 }
 

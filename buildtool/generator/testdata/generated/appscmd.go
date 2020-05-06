@@ -38,6 +38,8 @@ type AppsCmd struct {
 	RevokeAuthorizationForApplication            AppsRevokeAuthorizationForApplicationCmd            `cmd:""`
 	RevokeGrantForApplication                    AppsRevokeGrantForApplicationCmd                    `cmd:""`
 	RevokeInstallationToken                      AppsRevokeInstallationTokenCmd                      `cmd:""`
+	SuspendInstallation                          AppsSuspendInstallationCmd                          `cmd:""`
+	UnsuspendInstallation                        AppsUnsuspendInstallationCmd                        `cmd:""`
 }
 
 type AppsAddRepoToInstallationCmd struct {
@@ -525,5 +527,29 @@ type AppsRevokeInstallationTokenCmd struct {
 func (c *AppsRevokeInstallationTokenCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/installation/token")
+	return c.DoRequest("DELETE")
+}
+
+type AppsSuspendInstallationCmd struct {
+	InstallationId int64 `required:"" name:"installation_id"`
+	internal.BaseCmd
+}
+
+func (c *AppsSuspendInstallationCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/app/installations/{installation_id}/suspended")
+	c.UpdateURLPath("installation_id", c.InstallationId)
+	return c.DoRequest("PUT")
+}
+
+type AppsUnsuspendInstallationCmd struct {
+	InstallationId int64 `required:"" name:"installation_id"`
+	internal.BaseCmd
+}
+
+func (c *AppsUnsuspendInstallationCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/app/installations/{installation_id}/suspended")
+	c.UpdateURLPath("installation_id", c.InstallationId)
 	return c.DoRequest("DELETE")
 }

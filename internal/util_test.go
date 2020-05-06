@@ -115,8 +115,10 @@ func TestOutputResult(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			stdout := &bytes.Buffer{}
 			resp := &http.Response{
-				Body: ioutil.NopCloser(strings.NewReader(tt.args.respBody)),
+				Body:   ioutil.NopCloser(strings.NewReader(tt.args.respBody)),
+				Header: http.Header{},
 			}
+			resp.Header.Set("content-type", "application/json")
 			if err := OutputResult(resp, tt.args.rawOutput, tt.args.format, stdout); (err != nil) != tt.wantErr {
 				t.Errorf("OutputResult() error = %v, wantErr %v", err, tt.wantErr)
 				return

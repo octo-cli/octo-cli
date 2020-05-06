@@ -15,6 +15,7 @@ type CLI struct {
 	Interactions        InteractionsCmd        `cmd:""`
 	Issues              IssuesCmd              `cmd:""`
 	Licenses            LicensesCmd            `cmd:""`
+	Markdown            MarkdownCmd            `cmd:""`
 	Meta                MetaCmd                `cmd:""`
 	Migrations          MigrationsCmd          `cmd:""`
 	OauthAuthorizations OauthAuthorizationsCmd `cmd:""`
@@ -254,6 +255,9 @@ var CmdHelps = map[string]map[string]string{
 		"get":                "Get an individual license - https://developer.github.com/v3/licenses/#get-an-individual-license",
 		"get-for-repo":       "Get the contents of a repository's license - https://developer.github.com/v3/licenses/#get-the-contents-of-a-repositorys-license",
 		"list-commonly-used": "List commonly used licenses - https://developer.github.com/v3/licenses/#list-commonly-used-licenses",
+	},
+	"markdown": {
+		"render": "Render an arbitrary Markdown document - https://developer.github.com/v3/markdown/#render-an-arbitrary-markdown-document",
 	},
 	"meta": {
 		"get": "Get - https://developer.github.com/v3/meta/#meta",
@@ -1819,6 +1823,13 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"repo":  "repo parameter",
 		},
 		"list-commonly-used": {},
+	},
+	"markdown": {
+		"render": {
+			"context": "The repository context to use when creating references in `gfm` mode. Omit this parameter when using `markdown` mode.",
+			"mode":    "The rendering mode. Can be either:  \n\\* `markdown` to render a document in plain Markdown, just like README.md files are rendered.  \n\\* `gfm` to render a document in [GitHub Flavored Markdown](https://github.github.com/gfm/), which creates links for user mentions as well as references to SHA-1 hashes, issues, and pull requests.",
+			"text":    "The Markdown text to render in HTML. Markdown content must be 400 KB or less.",
+		},
 	},
 	"meta": {
 		"get": {},
