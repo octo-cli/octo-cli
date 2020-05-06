@@ -18,19 +18,21 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-var record = false
-
 func startVCR(t *testing.T, recPath string) func() {
 	t.Helper()
 	var recorderMode = recorder.ModeReplaying
 	_ = os.Setenv("GITHUB_TOKEN", "deadbeef")
 	if record {
 		recorderMode = recorder.ModeRecording
-		_ = godotenv.Load("../.env") //nolint:errcheck
-		tkn := os.Getenv("TESTUSER_TOKEN")
-		require.NotEmpty(t, tkn, "Can't be in record mode without a TESTUSER_TOKEN. Try adding it to a .env file in the repo root.")
+	}
+	_ = godotenv.Load("../.env") //nolint:errcheck
+	tkn := os.Getenv("TESTUSER_TOKEN")
+	if tkn != "" {
 		_ = os.Setenv("GITHUB_TOKEN", tkn)
 	}
+	//require.NotEmpty(t, tkn, "Can't be in record mode without a TESTUSER_TOKEN. Try adding it to a .env file in the repo root.")
+	//_ = os.Setenv("GITHUB_TOKEN", tkn)
+	//}
 
 	var err error
 	rec, err := recorder.NewAsMode(recPath, recorderMode, nil)

@@ -1,0 +1,63 @@
+---
+version: 1
+interactions:
+- request:
+    body: |
+      {"text":"\n# header\n\nthis is the body\n"}
+    form: {}
+    headers:
+      Accept:
+      - application/vnd.github.v3+json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - octo-cli
+    url: https://api.github.com/markdown
+    method: POST
+  response:
+    body: |
+      <h1>
+      <a id="user-content-header" class="anchor" href="#header" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>header</h1>
+      <p>this is the body</p>
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval,
+        X-GitHub-Media-Type, Deprecation, Sunset
+      Content-Security-Policy:
+      - default-src 'none'
+      Content-Type:
+      - text/html;charset=utf-8
+      Date:
+      - Wed, 06 May 2020 21:22:37 GMT
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Server:
+      - GitHub.com
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Vary:
+      - Accept-Encoding, Accept, X-Requested-With
+      X-Commonmarker-Version:
+      - 0.21.0
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Github-Request-Id:
+      - 9B53:3A76:57828E:A1D3D6:5EB32A9C
+      X-Ratelimit-Limit:
+      - "5000"
+      X-Ratelimit-Remaining:
+      - "4969"
+      X-Ratelimit-Reset:
+      - "1588801527"
+      X-Xss-Protection:
+      - 1; mode=block
+    status: 200 OK
+    code: 200
+    duration: ""
