@@ -30,9 +30,6 @@ func startVCR(t *testing.T, recPath string) func() {
 	if tkn != "" {
 		_ = os.Setenv("GITHUB_TOKEN", tkn)
 	}
-	//require.NotEmpty(t, tkn, "Can't be in record mode without a TESTUSER_TOKEN. Try adding it to a .env file in the repo root.")
-	//_ = os.Setenv("GITHUB_TOKEN", tkn)
-	//}
 
 	var err error
 	rec, err := recorder.NewAsMode(recPath, recorderMode, nil)
