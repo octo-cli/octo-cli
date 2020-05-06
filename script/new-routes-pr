@@ -16,7 +16,7 @@ latest_tag="$(
 )"
 
 # exit when we are already up to date
-[ "$current_tag" = "$latest_tag" ] && exit
+[ "$current_tag" = "$latest_tag" ] && echo "already up to date" && exit
 
 update_branch="update-routes-release-$latest_tag"
 
@@ -28,7 +28,7 @@ pullcount="$(
 )"
 
 # exit if there's already a pr for this update
-[ "$pullcount" != "0" ] && exit
+[ "$pullcount" != "0" ] && echo "pr already exists" && exit
 
 git checkout -b "$update_branch"
 
