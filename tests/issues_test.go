@@ -13,7 +13,7 @@ import (
 )
 
 func TestIssues(t *testing.T) {
-	t.Run("Create", func(t *testing.T) {
+	t.Run("create", func(t *testing.T) {
 		format := `{{.state}} : {{.title}} : {{.body}}`
 		newCmdLine(`issues`,
 			`create`,
@@ -30,7 +30,7 @@ func TestIssues(t *testing.T) {
 
 	})
 
-	t.Run("Get", func(t *testing.T) {
+	t.Run("get", func(t *testing.T) {
 		format := `{{.state}} : {{.title}} : {{.body}}`
 		newCmdLine(`issues`,
 			`get`,
@@ -39,6 +39,29 @@ func TestIssues(t *testing.T) {
 			`--issue_number=1`,
 			`--format`, format,
 		).test(t, "test_issues_get", "open : \"test this\" : \"test this body\"\n", "", false)
+	})
+
+	t.Run("add-labels", func(t *testing.T) {
+		format := `{{range .}}{{.name}} {{end}}`
+		newCmdLine(`issues`,
+			`add-labels`,
+			`--repo=octo-cli-testorg/test-create-issue`,
+			`--issue_number=1`,
+			`--labels`, `foo`,
+			`--labels=bar`,
+			`--format`, format,
+		).test(t, "test_issues_add-labels", "bar foo label1 label2 \n", "", false)
+	})
+
+	t.Run("remove-label", func(t *testing.T) {
+		format := `{{range .}}{{.name}} {{end}}`
+		newCmdLine(`issues`,
+			`remove-label`,
+			`--repo=octo-cli-testorg/test-create-issue`,
+			`--issue_number=1`,
+			`--name`, `foo`,
+			`--format`, format,
+		).test(t, "test_issues_remove-label", "bar label1 label2 \n", "", false)
 	})
 
 	t.Run("play with  output", func(t *testing.T) {

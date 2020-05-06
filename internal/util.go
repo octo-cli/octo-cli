@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"mime"
 	"net/http"
 	"text/template"
 
@@ -42,6 +43,9 @@ func formatOutput(jsonBytes []byte, format string) ([]byte, error) {
 
 //OutputResult writes the body of an http.Response to stdout
 func OutputResult(resp *http.Response, rawOutput bool, format string, stdout io.Writer) error {
+	contentType, _, err := mime.ParseMediaType(resp.Header.Get("content-type"))
+	_ = err //nolint:errcheck //just treat it like raw text if we can't get a media type
+
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return err
@@ -53,12 +57,13 @@ func OutputResult(resp *http.Response, rawOutput bool, format string, stdout io.
 	if len(body) == 0 {
 		return nil
 	}
-	if format != "" {
+	switch {
+	case format != "":
 		body, err = formatOutput(body, format)
 		if err != nil {
 			return err
 		}
-	} else if !rawOutput {
+	case contentType == "application/json" && !rawOutput:
 		body, err = prettyPrintJSON(body)
 		if err != nil {
 			return err

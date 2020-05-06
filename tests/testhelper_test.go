@@ -11,27 +11,26 @@ import (
 	"github.com/alecthomas/kong"
 	"github.com/dnaeon/go-vcr/cassette"
 	"github.com/dnaeon/go-vcr/recorder"
+	"github.com/joho/godotenv"
 	"github.com/octo-cli/octo-cli/internal"
 	"github.com/octo-cli/octo-cli/internal/generated"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
-func init() {
-	tkn, ok := os.LookupEnv("TESTUSER_TOKEN")
-	if !ok {
-		tkn = "deadbeef"
-		recorderMode = recorder.ModeReplaying
-	} else {
-		recorderMode = recorder.ModeRecording
-	}
-	_ = os.Setenv("GITHUB_TOKEN", tkn)
-}
-
-var recorderMode recorder.Mode
-
 func startVCR(t *testing.T, recPath string) func() {
 	t.Helper()
+	var recorderMode = recorder.ModeReplaying
+	_ = os.Setenv("GITHUB_TOKEN", "deadbeef")
+	if record {
+		recorderMode = recorder.ModeRecording
+	}
+	_ = godotenv.Load("../.env") //nolint:errcheck
+	tkn := os.Getenv("TESTUSER_TOKEN")
+	if tkn != "" {
+		_ = os.Setenv("GITHUB_TOKEN", tkn)
+	}
+
 	var err error
 	rec, err := recorder.NewAsMode(recPath, recorderMode, nil)
 	rec.SetMatcher(func(r *http.Request, i cassette.Request) bool {
