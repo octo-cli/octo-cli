@@ -7,6 +7,7 @@ type CLI struct {
 	Activity            ActivityCmd            `cmd:""`
 	Apps                AppsCmd                `cmd:""`
 	Checks              ChecksCmd              `cmd:""`
+	CodeScanning        CodeScanningCmd        `cmd:""`
 	CodesOfConduct      CodesOfConductCmd      `cmd:""`
 	Emojis              EmojisCmd              `cmd:""`
 	Gists               GistsCmd               `cmd:""`
@@ -153,6 +154,10 @@ var CmdHelps = map[string]map[string]string{
 		"rerequest-suite":        "Rerequest a check suite - https://developer.github.com/v3/checks/suites/#rerequest-a-check-suite",
 		"set-suites-preferences": "Update repository preferences for check suites - https://developer.github.com/v3/checks/suites/#update-repository-preferences-for-check-suites",
 		"update":                 "Update a check run - https://developer.github.com/v3/checks/runs/#update-a-check-run",
+	},
+	"code-scanning": {
+		"get-alert":            "Get a code scanning alert - https://developer.github.com/v3/code-scanning/#get-a-code-scanning-alert",
+		"list-alerts-for-repo": "List code scanning alerts for a repository - https://developer.github.com/v3/code-scanning/#list-code-scanning-alerts-for-a-repository",
 	},
 	"codes-of-conduct": {
 		"get-all-codes-of-conduct": "List all codes of conduct - https://developer.github.com/v3/codes_of_conduct/#list-all-codes-of-conduct",
@@ -1286,6 +1291,18 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"repo":            "repo parameter",
 			"started_at":      "This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.",
 			"status":          "The current status. Can be one of `queued`, `in_progress`, or `completed`.",
+		},
+	},
+	"code-scanning": {
+		"get-alert": {
+			"alert_id": "alert_id parameter",
+			"owner":    "owner parameter",
+			"repo":     "repo parameter",
+		},
+		"list-alerts-for-repo": {
+			"owner": "owner parameter",
+			"repo":  "repo parameter",
+			"state": "Set to `closed` to list only closed code scanning alerts.",
 		},
 	},
 	"codes-of-conduct": {
