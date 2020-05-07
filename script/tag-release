@@ -35,3 +35,4 @@ tg="$(
 )"
 
 echo "::set-output name=releasetag::$tg"
+
