@@ -15,3 +15,6 @@ bin/buildtool: gobuildcache
 
 bin/octo: gobuildcache
 	${GOBUILD} -o $@ -ldflags "-s -w" ./
+
+bin/goreleaser:
+	script/bindown install $(notdir $@)
