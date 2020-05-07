@@ -611,6 +611,14 @@ Commands:
     Update a check run -
     https://developer.github.com/v3/checks/runs/#update-a-check-run
 
+  code-scanning get-alert --alert_id=INT-64 --repo=STRING --token=STRING
+    Get a code scanning alert -
+    https://developer.github.com/v3/code-scanning/#get-a-code-scanning-alert
+
+  code-scanning list-alerts-for-repo --repo=STRING --token=STRING
+    List code scanning alerts for a repository -
+    https://developer.github.com/v3/code-scanning/#list-code-scanning-alerts-for-a-repository
+
   codes-of-conduct get-all-codes-of-conduct --scarlet-witch-preview --token=STRING
     List all codes of conduct -
     https://developer.github.com/v3/codes_of_conduct/#list-all-codes-of-conduct
