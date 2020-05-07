@@ -1,10 +1,7 @@
 name: update-routes
 on:
   schedule:
-    - cron: '*/5 * * * *'
-  push:
-    branches:
-      - master
+    - cron: '*/30 * * * *'
 jobs:
   update-routes:
     runs-on: ubuntu-18.04
