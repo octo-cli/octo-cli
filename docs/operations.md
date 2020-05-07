@@ -1853,6 +1853,39 @@ Updates a check run for a specific commit in a repository. Your GitHub App must 
 | started_at | This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 | status | The current status. Can be one of `queued`, `in_progress`, or `completed`. |
 
+# code-scanning
+
+
+## code-scanning get-alert
+
+https://developer.github.com/v3/code-scanning/#get-a-code-scanning-alert
+
+Gets a single code scanning alert. You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` read permission to use this endpoint.
+
+The security `alert_id` is found at the end of the security alert's URL. For example, the security alert ID for `https://github.com/Octo-org/octo-repo/security/code-scanning/88` is `88`.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| alert_id | __Required__ alert_id parameter |
+| repo | __Required__ repo parameter |
+
+## code-scanning list-alerts-for-repo
+
+https://developer.github.com/v3/code-scanning/#list-code-scanning-alerts-for-a-repository
+
+Lists all open code scanning alerts for a repository. You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` read permission to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| repo | __Required__ repo parameter |
+| state | Set to `closed` to list only closed code scanning alerts. |
+
 # codes-of-conduct
 
 
