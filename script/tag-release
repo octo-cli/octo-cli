@@ -35,4 +35,3 @@ tg="$(
 )"
 echo "i dare say that tg is $tg"
 echo "::set-output name=releasetag::$tg"
-
