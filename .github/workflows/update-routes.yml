@@ -15,4 +15,4 @@ jobs:
           go-version: '~1.14.0'
       - run: script/new-routes-pr
         env:
-          TKN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

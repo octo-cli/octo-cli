@@ -4,9 +4,6 @@ set -e
 
 CDPATH="" cd -- "$(dirname -- "$(dirname -- "$0")")"
 
-[ -n "$CI" ] && GITHUB_TOKEN="$TKN"
-export GITHUB_TOKEN
-
 make -s bin/octo
 touch ./current-schema-tag.txt
 
@@ -42,7 +39,7 @@ script/generate
 script/update-readme
 
 git add README.md api.github.com.json current-schema-tag.txt docs/ internal/generated/
-git commit -m "update to octokit/routes tag $latest_tag"
+git commit -m "update to octokit/routes tag $latest_tag" --author "octo-cli bot <octo-cli@local>"
 git push --set-upstream origin "$update_branch"
 
 bin/octo pulls create \
