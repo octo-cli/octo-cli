@@ -4,7 +4,7 @@ on:
     tags:
       - 'v*'
 jobs:
-  update-routes:
+  release:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
