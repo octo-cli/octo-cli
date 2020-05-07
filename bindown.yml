@@ -10,6 +10,10 @@ dependencies:
     template: origin#goreleaser
     vars:
       version: 0.133.0
+  semver-next:
+    template: origin#semver-next
+    vars:
+      version: 0.9.0
   shellcheck:
     template: origin#shellcheck
     vars:
@@ -78,6 +82,28 @@ templates:
     - linux/amd64
     - windows/386
     - windows/amd64
+  origin#semver-next:
+    url: https://github.com/WillAbides/semver-next/releases/download/v{{.version}}/semver-next_{{.version}}_{{.os}}_{{.arch}}.tar.gz
+    archive_path: semver-next{{.archivepathsuffix}}
+    bin: semver-next
+    vars:
+      archivepathsuffix: ""
+    required_vars:
+    - version
+    overrides:
+    - matcher:
+        os:
+        - windows
+      dependency:
+        vars:
+          archivepathsuffix: .exe
+    systems:
+    - darwin/386
+    - darwin/amd64
+    - linux/386
+    - linux/amd64
+    - windows/386
+    - windows/amd64
   origin#shellcheck:
     url: https://github.com/koalaman/shellcheck/releases/download/v{{.version}}/shellcheck-v{{.version}}.{{.os}}.{{.arch}}.tar.xz
     archive_path: shellcheck-v{{.version}}/shellcheck
@@ -101,6 +127,10 @@ templates:
 template_sources:
   origin: https://raw.githubusercontent.com/WillAbides/bindown-templates/master/bindown.yml
 url_checksums:
+  https://github.com/WillAbides/semver-next/releases/download/v0.8.0/semver-next_0.8.0_darwin_amd64.tar.gz: f51e111703a1c54c7e85e5152a7649b7877eaa6d3acd730566df770e606f0b48
+  https://github.com/WillAbides/semver-next/releases/download/v0.8.0/semver-next_0.8.0_linux_amd64.tar.gz: 00284b702ad4134906a233c80cdf6c8804ace5cf0233fce0b2a760f6111df825
+  https://github.com/WillAbides/semver-next/releases/download/v0.9.0/semver-next_0.9.0_darwin_amd64.tar.gz: f40720df116ae869d1364130fd2f447fc7e22fdddeafccdde6289a3a7b8c2379
+  https://github.com/WillAbides/semver-next/releases/download/v0.9.0/semver-next_0.9.0_linux_amd64.tar.gz: 13d72ebc992d0c34cfc6d3344f1a47168fb8424c1d566eea5494cb81106b0747
   https://github.com/golangci/golangci-lint/releases/download/v1.25.0/golangci-lint-1.25.0-darwin-amd64.tar.gz: 02220b8e7f1470ca73acd16b9aefd6ecd3516e70e91728b1563eaf5a083e4125
   https://github.com/golangci/golangci-lint/releases/download/v1.25.0/golangci-lint-1.25.0-linux-amd64.tar.gz: 2c9b36a140c5493cac46d596d80316645221f338099d74f001b0a4dc84728da8
   https://github.com/goreleaser/goreleaser/releases/download/v0.133.0/goreleaser_Darwin_x86_64.tar.gz: cabc8445d4342abff706990ba13e8800ead58d5a6dff67f3cd87e5e9c646bd7d

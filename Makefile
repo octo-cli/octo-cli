@@ -18,3 +18,6 @@ bin/octo: gobuildcache
 
 bin/goreleaser:
 	script/bindown install $(notdir $@)
+
+bin/semver-next:
+	script/bindown install $(notdir $@)
