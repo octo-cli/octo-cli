@@ -1,0 +1,32 @@
+#!/bin/sh
+
+set -e
+
+CDPATH="" cd -- "$(dirname -- "$(dirname -- "$0")")"
+
+make -s bin/semver-next
+
+set +e
+
+bin/semver-next octo-cli/octo-cli \
+  --max-bump=MINOR \
+  --require-labels \
+  --require-change
+
+case "$?" in
+  "10")
+    exit 0
+    ;;
+  "0")
+    ;;
+  *)
+    exit 1
+esac
+
+set -e
+
+bin/semver-next octo-cli/octo-cli \
+  --max-bump=MINOR \
+  --require-labels \
+  --require-change \
+  --create-tag

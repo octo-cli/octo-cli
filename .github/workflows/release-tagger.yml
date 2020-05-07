@@ -1,0 +1,16 @@
+name: release-tagger
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types:
+      - labeled
+jobs:
+  update-routes:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: script/tag-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
