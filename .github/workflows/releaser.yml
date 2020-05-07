@@ -12,11 +12,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: script/tag-release
-        id: tag-release
+        id: tagrelease
         env:
           GITHUB_TOKEN: ${{ github.token }}
     outputs:
-      tag: ${{ steps.tag-release.outputs.tag }}
+      tag: ${{ steps.tagrelease.outputs.tag }}
   release:
     needs: tag
     if: ${{ needs.tag.outputs.tag != '' }}
