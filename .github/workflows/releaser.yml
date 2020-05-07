@@ -20,7 +20,7 @@ jobs:
 
   release:
     needs: tag
-    if: ${{ needs.tag.outputs.tag != '' }}
+#    if: ${{ needs.tag.outputs.tag != '' }}
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/setup-go@v2
