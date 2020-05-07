@@ -39,6 +39,10 @@ script/generate
 script/update-readme
 
 git add README.md api.github.com.json current-schema-tag.txt docs/ internal/generated/
+
+[ -z "$(git config --get user.name)" ] && git config user.name "octo-cli bot"
+[ -z "$(git config --get user.email)" ] && git config user.email "octo-cli-bot@local"
+
 git commit -m "update to octokit/routes tag $latest_tag" --author "octo-cli bot <octo-cli@local>"
 git push --set-upstream origin "$update_branch"
 
