@@ -7,7 +7,7 @@ on:
     types:
       - labeled
 jobs:
-  update-routes:
+  tag-release:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
