@@ -11,22 +11,27 @@ set +e
 bin/semver-next octo-cli/octo-cli \
   --max-bump=MINOR \
   --require-labels \
-  --require-change
+  --require-change >/dev/null
 
 case "$?" in
-  "10")
-    exit 0
-    ;;
-  "0")
-    ;;
-  *)
-    exit 1
+"10")
+  exit 0
+  ;;
+"0") ;;
+
+*)
+  exit 1
+  ;;
 esac
 
 set -e
 
-bin/semver-next octo-cli/octo-cli \
-  --max-bump=MINOR \
-  --require-labels \
-  --require-change \
-  --create-tag
+tg="$(
+  bin/semver-next octo-cli/octo-cli \
+    --max-bump=MINOR \
+    --require-labels \
+    --require-change \
+    --create-tag
+)"
+
+echo "::set-output name=releasetag::$tg"
