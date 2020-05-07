@@ -16,11 +16,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
     outputs:
-      tag: ${{ steps.tag-release.tag }}
+      tag: ${{ steps.tag-release.outputs.tag }}
 
   release:
     needs: tag
-#    if: ${{ needs.tag.outputs.tag != '' }}
+    if: ${{ needs.tag.outputs.tag != '' }}
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/setup-go@v2
