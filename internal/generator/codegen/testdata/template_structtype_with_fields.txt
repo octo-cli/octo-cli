@@ -1,0 +1,4 @@
+type myname struct {
+	field1 fieldType
+	field2 fieldType `tagKey:"tagVal" emptyTag:""`
+}
