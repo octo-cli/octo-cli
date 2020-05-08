@@ -21,24 +21,24 @@ func Test_genCliRun_Run(t *testing.T) {
 		docsDir, err := afero.TempDir(fs, "", "")
 		require.NoError(t, err)
 		k := &GenerateCmd{
-			RoutesPath: "testdata/routes.json",
+			RoutesPath: "../../internal/generator/testdata/routes.json",
 			OutputPath: genDir,
 			DocsPath:   docsDir,
 			fs:         fs,
 		}
 		err = k.Run()
 		assert.NoError(t, err)
-		wantFiles := getDirectoryFileNames(t, "testdata/generated", testdataFs)
+		wantFiles := getDirectoryFileNames(t, "../../internal/generator/testdata/generated", testdataFs)
 		for _, wantFile := range wantFiles {
-			wantData := readFile(t, testdataFs, "testdata/generated", wantFile)
+			wantData := readFile(t, testdataFs, "../../internal/generator/testdata/generated", wantFile)
 			gotData := readFile(t, fs, genDir, wantFile)
 			assert.Equalf(t, string(wantData), string(gotData), "file contents are not equal for %q", wantFile)
 		}
-		wantUnsup, err := ioutil.ReadFile("testdata/docs/unsupported.md")
+		wantUnsup, err := ioutil.ReadFile("../../internal/generator/testdata/docs/unsupported.md")
 		require.NoError(t, err)
 		gotUnsup := readFile(t, fs, docsDir, "unsupported.md")
 		require.Equal(t, wantUnsup, gotUnsup)
-		wantOperations, err := ioutil.ReadFile("testdata/docs/operations.md")
+		wantOperations, err := ioutil.ReadFile("../../internal/generator/testdata/docs/operations.md")
 		require.NoError(t, err)
 		gotOps := readFile(t, fs, docsDir, "operations.md")
 		require.Equal(t, wantOperations, gotOps)

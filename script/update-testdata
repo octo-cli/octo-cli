@@ -5,10 +5,10 @@ set -e
 CDPATH="" cd -- "$(dirname -- "$(dirname -- "$0")")"
 make -s bin/buildtool
 
-mkdir -p ./buildtool/generator/testdata/generated
+mkdir -p ./internal/generator/testdata/generated
 
-cp ./api.github.com.json ./buildtool/generator/testdata/routes.json
+cp ./api.github.com.json ./internal/generator/testdata/routes.json
 script/generate \
-  --routes-path ./buildtool/generator/testdata/routes.json \
-  --output-path ./buildtool/generator/testdata/generated \
-  --docs-path ./buildtool/generator/testdata/docs
+  --routes-path ./internal/generator/testdata/routes.json \
+  --output-path ./internal/generator/testdata/generated \
+  --docs-path ./internal/generator/testdata/docs
