@@ -21,4 +21,4 @@ if [ "$1" = "--check" ]; then
 fi
 
 go run ./readmegen.go
-go run ./docgen.go -schema api.github.com.json -out ./internal/generated
+go run ./docgen.go -schema api.github.com.json -out ./docs
