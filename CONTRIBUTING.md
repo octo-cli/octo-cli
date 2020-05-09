@@ -33,8 +33,8 @@ Updating routes.json will eventually be automated. Until then, only trusted
 octo-cli developers can update routes.json. PRs with changes to routes.json
 will be politely rejected.
 
-### `./buildtool/generator/`
-`buildtool/generator/` is the code that parses routes.json and creates commands
+### `./internal/generator/`
+`internal/generator/` is the code that parses routes.json and creates commands
 for each defined endpoint. Most of the action here is in the Generate
 function and `const tmplt`. Generate is currently a bit of an oversized
 mess. Please bear with us until it is broken up into more easily grokked
@@ -43,17 +43,9 @@ pieces.
 Generator is not well tested. Tests consist generating new commands and
 checking whether they match the expected output. Unit tests are needed here.
 
-### `./buildtool/generator/testdata`
+### `./internal/generator/testdata`
 As you probably guessed this is test data for generator's few tests. This
 should only be modified by running `./script/update-testdata`.
-
-### `./internal/`
-
-Just a note about [internal directories](https://golang.org/doc/go1.4#internalpackages)
-in a go project. Packages that have a directory named `internal` cannot
-be imported by packages in other projects. I've run across other go devs
-who don't know this, so I wanted to include the reasoning for this name
-here.
 
 ### `./internal/generated`
 
@@ -84,4 +76,4 @@ of as the low-level api client that the generated code uses.
 
 ### `./tests/`
 
-`./tests/` contains tests. Not many of them yet.
+`./tests/` contains vcr style tests for a select few commands.
