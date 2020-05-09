@@ -9,6 +9,8 @@ import (
 	"github.com/octo-cli/octo-cli/internal/generated"
 )
 
+//go:generate go run ./codegen.go -schema api.github.com.json -out ./internal/generated
+
 var version = "development"
 
 type cli struct {
