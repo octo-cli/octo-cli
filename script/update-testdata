@@ -3,7 +3,6 @@
 set -e
 
 CDPATH="" cd -- "$(dirname -- "$(dirname -- "$0")")"
-make -s bin/buildtool
 
 mkdir -p ./internal/generator/testdata/generated
 

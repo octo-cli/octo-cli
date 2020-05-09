@@ -18,7 +18,7 @@ jobs:
           path: .bindown
           key: bindown-${{ hashFiles('bindown.yml') }}
       - run: go mod download
-      - run: script/generate --verify
-      - run: script/update-readme --verify
+      - run: script/generate --check
+      - run: script/update-readme --check
       - run: script/test
       - run: script/lint

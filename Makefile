@@ -10,9 +10,6 @@ bin/golangci-lint:
 bin/shellcheck:
 	script/bindown install $(notdir $@)
 
-bin/buildtool: gobuildcache
-	${GOBUILD} -o $@ ./buildtool
-
 bin/octo: gobuildcache
 	${GOBUILD} -o $@ -ldflags "-s -w" ./
 
