@@ -41,11 +41,18 @@ type BaseCmd struct {
 	reqBody       map[string]interface{}
 	acceptHeaders []string
 	reqHeader     http.Header
-	Token         string `env:"GITHUB_TOKEN" required:""`
+	Token         string `env:"GITHUB_TOKEN" hidden:""`
 	APIBaseURL    string `env:"GITHUB_API_BASE_URL" default:"https://api.github.com"`
 	RawOutput     bool   `help:"don't format json output."`
-	Format        string `help:"format output with a go template"`
+	Format        string `help:"format json output with a go template"`
 	Curl          bool   `help:"returns a corresponding curl request"`
+}
+
+func (c *BaseCmd) AfterApply() error {
+	if c.Token == "" {
+		return fmt.Errorf("missing environment variable: GITHUB_TOKEN")
+	}
+	return nil
 }
 
 //SetURLPath sets the path of url
