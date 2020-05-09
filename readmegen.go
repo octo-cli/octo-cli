@@ -1,17 +1,26 @@
+// +build generator
+
 package main
 
 import (
-	"bytes"
 	"io/ioutil"
+	"log"
 	"os/exec"
 	"regexp"
 
 	"github.com/pkg/errors"
 )
 
+func main() {
+	err := updateReadme("README.md")
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
 var readmeRegexp = regexp.MustCompile(`(?s:<!--- START HELP OUTPUT --->.*<!--- END HELP OUTPUT --->)`)
 
-func updateReadme(readmePath string, verify bool) error {
+func updateReadme(readmePath string) error {
 	helpContent, err := getHelpOutput()
 	if err != nil {
 		return errors.Wrap(err, "failed getting help output")
@@ -23,15 +32,7 @@ func updateReadme(readmePath string, verify bool) error {
 	}
 	newReadmeContent := readmeRegexp.ReplaceAll(oldReadmeContent, helpContent)
 
-	if verify {
-		if !bytes.Equal(newReadmeContent, oldReadmeContent) {
-			err = errors.Errorf("%q is not current", readmePath)
-		}
-	} else {
-		err = ioutil.WriteFile(readmePath, newReadmeContent, 0644)
-		err = errors.Wrapf(err, "failed writing file %q", readmePath)
-	}
-	return err
+	return ioutil.WriteFile(readmePath, newReadmeContent, 0644)
 }
 
 func getHelpOutput() ([]byte, error) {
