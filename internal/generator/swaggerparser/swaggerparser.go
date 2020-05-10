@@ -83,8 +83,8 @@ func GetObjParamInfo(ref *openapi3.SchemaRef, names []string, parentRequired boo
 	var result []BodyParamInfo
 	if len(ref.Value.Properties) == 0 {
 		result = append(result, BodyParamInfo{
-			Name: strings.Join(names, "."),
-			Ref: ref,
+			Name:     strings.Join(names, "."),
+			Ref:      ref,
 			Required: parentRequired,
 		})
 	}
