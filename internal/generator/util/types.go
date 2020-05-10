@@ -14,6 +14,7 @@ var ParamTypes = map[string]string{
 	"integer[]": "[]int64",
 	"boolean":   "bool",
 	"object":    "internal.JSONObject",
+	"object[]":  "[]internal.JSONObject",
 }
 
 func GetPropType(schema *openapi3.Schema) string {

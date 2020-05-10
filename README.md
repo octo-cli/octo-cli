@@ -719,6 +719,9 @@ Commands:
     Create a tag object -
     https://developer.github.com/v3/git/tags/#create-a-tag-object
 
+  git create-tree --repo=STRING --tree=TREE,...
+    Create a tree - https://developer.github.com/v3/git/trees/#create-a-tree
+
   git delete-ref --ref=STRING --repo=STRING
     Delete a reference -
     https://developer.github.com/v3/git/refs/#delete-a-reference
@@ -2178,6 +2181,14 @@ Commands:
   teams create-discussion-legacy --body=STRING --team_id=INT-64 --title=STRING
     Create a discussion (Legacy) -
     https://developer.github.com/v3/teams/discussions/#create-a-discussion-legacy
+
+  teams create-or-update-id-p-group-connections-in-org --groups=GROUPS,... --org=STRING --team_slug=STRING
+    Create or update IdP group connections -
+    https://developer.github.com/v3/teams/team_sync/#create-or-update-idp-group-connections
+
+  teams create-or-update-id-p-group-connections-legacy --groups=GROUPS,... --team_id=INT-64
+    Create or update IdP group connections (Legacy) -
+    https://developer.github.com/v3/teams/team_sync/#create-or-update-idp-group-connections-legacy
 
   teams delete-discussion-comment-in-org --comment_number=INT-64 --discussion_number=INT-64 --org=STRING --team_slug=STRING
     Delete a comment -

@@ -19,26 +19,30 @@ type ChecksCmd struct {
 }
 
 type ChecksCreateCmd struct {
-	Antiope       bool   `required:"" name:"antiope-preview"`
-	CompletedAt   string `name:"completed_at"`
-	Conclusion    string `name:"conclusion"`
-	DetailsUrl    string `name:"details_url"`
-	ExternalId    string `name:"external_id"`
-	HeadSha       string `required:"" name:"head_sha"`
-	Name          string `required:"" name:"name"`
-	OutputSummary string `name:"output.summary"`
-	OutputText    string `name:"output.text"`
-	OutputTitle   string `name:"output.title"`
-	Owner         string `name:"owner"`
-	Repo          string `required:"" name:"repo"`
-	StartedAt     string `name:"started_at"`
-	Status        string `name:"status"`
+	Actions           []internal.JSONObject `name:"actions"`
+	Antiope           bool                  `required:"" name:"antiope-preview"`
+	CompletedAt       string                `name:"completed_at"`
+	Conclusion        string                `name:"conclusion"`
+	DetailsUrl        string                `name:"details_url"`
+	ExternalId        string                `name:"external_id"`
+	HeadSha           string                `required:"" name:"head_sha"`
+	Name              string                `required:"" name:"name"`
+	OutputAnnotations []internal.JSONObject `name:"output.annotations"`
+	OutputImages      []internal.JSONObject `name:"output.images"`
+	OutputSummary     string                `name:"output.summary"`
+	OutputText        string                `name:"output.text"`
+	OutputTitle       string                `name:"output.title"`
+	Owner             string                `name:"owner"`
+	Repo              string                `required:"" name:"repo"`
+	StartedAt         string                `name:"started_at"`
+	Status            string                `name:"status"`
 	internal.BaseCmd
 }
 
 func (c *ChecksCreateCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/check-runs")
+	c.UpdateBody("actions", c.Actions)
 	c.UpdatePreview("antiope", c.Antiope)
 	c.UpdateBody("completed_at", c.CompletedAt)
 	c.UpdateBody("conclusion", c.Conclusion)
@@ -46,6 +50,8 @@ func (c *ChecksCreateCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateBody("external_id", c.ExternalId)
 	c.UpdateBody("head_sha", c.HeadSha)
 	c.UpdateBody("name", c.Name)
+	c.UpdateBody("output.annotations", c.OutputAnnotations)
+	c.UpdateBody("output.images", c.OutputImages)
 	c.UpdateBody("output.summary", c.OutputSummary)
 	c.UpdateBody("output.text", c.OutputText)
 	c.UpdateBody("output.title", c.OutputTitle)
@@ -233,9 +239,10 @@ func (c *ChecksRerequestSuiteCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ChecksSetSuitesPreferencesCmd struct {
-	Antiope bool   `required:"" name:"antiope-preview"`
-	Owner   string `name:"owner"`
-	Repo    string `required:"" name:"repo"`
+	Antiope           bool                  `required:"" name:"antiope-preview"`
+	AutoTriggerChecks []internal.JSONObject `name:"auto_trigger_checks"`
+	Owner             string                `name:"owner"`
+	Repo              string                `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -243,32 +250,37 @@ func (c *ChecksSetSuitesPreferencesCmd) Run(isValueSetMap map[string]bool) error
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/check-suites/preferences")
 	c.UpdatePreview("antiope", c.Antiope)
+	c.UpdateBody("auto_trigger_checks", c.AutoTriggerChecks)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("PATCH")
 }
 
 type ChecksUpdateCmd struct {
-	Antiope       bool   `required:"" name:"antiope-preview"`
-	CheckRunId    int64  `required:"" name:"check_run_id"`
-	CompletedAt   string `name:"completed_at"`
-	Conclusion    string `name:"conclusion"`
-	DetailsUrl    string `name:"details_url"`
-	ExternalId    string `name:"external_id"`
-	Name          string `name:"name"`
-	OutputSummary string `name:"output.summary"`
-	OutputText    string `name:"output.text"`
-	OutputTitle   string `name:"output.title"`
-	Owner         string `name:"owner"`
-	Repo          string `required:"" name:"repo"`
-	StartedAt     string `name:"started_at"`
-	Status        string `name:"status"`
+	Actions           []internal.JSONObject `name:"actions"`
+	Antiope           bool                  `required:"" name:"antiope-preview"`
+	CheckRunId        int64                 `required:"" name:"check_run_id"`
+	CompletedAt       string                `name:"completed_at"`
+	Conclusion        string                `name:"conclusion"`
+	DetailsUrl        string                `name:"details_url"`
+	ExternalId        string                `name:"external_id"`
+	Name              string                `name:"name"`
+	OutputAnnotations []internal.JSONObject `name:"output.annotations"`
+	OutputImages      []internal.JSONObject `name:"output.images"`
+	OutputSummary     string                `name:"output.summary"`
+	OutputText        string                `name:"output.text"`
+	OutputTitle       string                `name:"output.title"`
+	Owner             string                `name:"owner"`
+	Repo              string                `required:"" name:"repo"`
+	StartedAt         string                `name:"started_at"`
+	Status            string                `name:"status"`
 	internal.BaseCmd
 }
 
 func (c *ChecksUpdateCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/check-runs/{check_run_id}")
+	c.UpdateBody("actions", c.Actions)
 	c.UpdatePreview("antiope", c.Antiope)
 	c.UpdateURLPath("check_run_id", c.CheckRunId)
 	c.UpdateBody("completed_at", c.CompletedAt)
@@ -276,6 +288,8 @@ func (c *ChecksUpdateCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateBody("details_url", c.DetailsUrl)
 	c.UpdateBody("external_id", c.ExternalId)
 	c.UpdateBody("name", c.Name)
+	c.UpdateBody("output.annotations", c.OutputAnnotations)
+	c.UpdateBody("output.images", c.OutputImages)
 	c.UpdateBody("output.summary", c.OutputSummary)
 	c.UpdateBody("output.text", c.OutputText)
 	c.UpdateBody("output.title", c.OutputTitle)
