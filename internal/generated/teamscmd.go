@@ -5,69 +5,71 @@ package generated
 import "github.com/octo-cli/octo-cli/internal"
 
 type TeamsCmd struct {
-	AddMemberLegacy               TeamsAddMemberLegacyCmd               `cmd:""`
-	AddOrUpdateMembershipInOrg    TeamsAddOrUpdateMembershipInOrgCmd    `cmd:""`
-	AddOrUpdateMembershipLegacy   TeamsAddOrUpdateMembershipLegacyCmd   `cmd:""`
-	AddOrUpdateProjectInOrg       TeamsAddOrUpdateProjectInOrgCmd       `cmd:""`
-	AddOrUpdateProjectLegacy      TeamsAddOrUpdateProjectLegacyCmd      `cmd:""`
-	AddOrUpdateRepoInOrg          TeamsAddOrUpdateRepoInOrgCmd          `cmd:""`
-	AddOrUpdateRepoLegacy         TeamsAddOrUpdateRepoLegacyCmd         `cmd:""`
-	CheckManagesRepoInOrg         TeamsCheckManagesRepoInOrgCmd         `cmd:""`
-	CheckManagesRepoLegacy        TeamsCheckManagesRepoLegacyCmd        `cmd:""`
-	Create                        TeamsCreateCmd                        `cmd:""`
-	CreateDiscussionCommentInOrg  TeamsCreateDiscussionCommentInOrgCmd  `cmd:""`
-	CreateDiscussionCommentLegacy TeamsCreateDiscussionCommentLegacyCmd `cmd:""`
-	CreateDiscussionInOrg         TeamsCreateDiscussionInOrgCmd         `cmd:""`
-	CreateDiscussionLegacy        TeamsCreateDiscussionLegacyCmd        `cmd:""`
-	DeleteDiscussionCommentInOrg  TeamsDeleteDiscussionCommentInOrgCmd  `cmd:""`
-	DeleteDiscussionCommentLegacy TeamsDeleteDiscussionCommentLegacyCmd `cmd:""`
-	DeleteDiscussionInOrg         TeamsDeleteDiscussionInOrgCmd         `cmd:""`
-	DeleteDiscussionLegacy        TeamsDeleteDiscussionLegacyCmd        `cmd:""`
-	DeleteInOrg                   TeamsDeleteInOrgCmd                   `cmd:""`
-	DeleteLegacy                  TeamsDeleteLegacyCmd                  `cmd:""`
-	GetByName                     TeamsGetByNameCmd                     `cmd:""`
-	GetDiscussionCommentInOrg     TeamsGetDiscussionCommentInOrgCmd     `cmd:""`
-	GetDiscussionCommentLegacy    TeamsGetDiscussionCommentLegacyCmd    `cmd:""`
-	GetDiscussionInOrg            TeamsGetDiscussionInOrgCmd            `cmd:""`
-	GetDiscussionLegacy           TeamsGetDiscussionLegacyCmd           `cmd:""`
-	GetLegacy                     TeamsGetLegacyCmd                     `cmd:""`
-	GetMemberLegacy               TeamsGetMemberLegacyCmd               `cmd:""`
-	GetMembershipInOrg            TeamsGetMembershipInOrgCmd            `cmd:""`
-	GetMembershipLegacy           TeamsGetMembershipLegacyCmd           `cmd:""`
-	List                          TeamsListCmd                          `cmd:""`
-	ListChildInOrg                TeamsListChildInOrgCmd                `cmd:""`
-	ListChildLegacy               TeamsListChildLegacyCmd               `cmd:""`
-	ListDiscussionCommentsInOrg   TeamsListDiscussionCommentsInOrgCmd   `cmd:""`
-	ListDiscussionCommentsLegacy  TeamsListDiscussionCommentsLegacyCmd  `cmd:""`
-	ListDiscussionsInOrg          TeamsListDiscussionsInOrgCmd          `cmd:""`
-	ListDiscussionsLegacy         TeamsListDiscussionsLegacyCmd         `cmd:""`
-	ListForAuthenticatedUser      TeamsListForAuthenticatedUserCmd      `cmd:""`
-	ListIdPGroupsForLegacy        TeamsListIdPGroupsForLegacyCmd        `cmd:""`
-	ListIdPGroupsForOrg           TeamsListIdPGroupsForOrgCmd           `cmd:""`
-	ListIdPGroupsInOrg            TeamsListIdPGroupsInOrgCmd            `cmd:""`
-	ListMembersInOrg              TeamsListMembersInOrgCmd              `cmd:""`
-	ListMembersLegacy             TeamsListMembersLegacyCmd             `cmd:""`
-	ListPendingInvitationsInOrg   TeamsListPendingInvitationsInOrgCmd   `cmd:""`
-	ListPendingInvitationsLegacy  TeamsListPendingInvitationsLegacyCmd  `cmd:""`
-	ListProjectsInOrg             TeamsListProjectsInOrgCmd             `cmd:""`
-	ListProjectsLegacy            TeamsListProjectsLegacyCmd            `cmd:""`
-	ListReposInOrg                TeamsListReposInOrgCmd                `cmd:""`
-	ListReposLegacy               TeamsListReposLegacyCmd               `cmd:""`
-	RemoveMemberLegacy            TeamsRemoveMemberLegacyCmd            `cmd:""`
-	RemoveMembershipInOrg         TeamsRemoveMembershipInOrgCmd         `cmd:""`
-	RemoveMembershipLegacy        TeamsRemoveMembershipLegacyCmd        `cmd:""`
-	RemoveProjectInOrg            TeamsRemoveProjectInOrgCmd            `cmd:""`
-	RemoveProjectLegacy           TeamsRemoveProjectLegacyCmd           `cmd:""`
-	RemoveRepoInOrg               TeamsRemoveRepoInOrgCmd               `cmd:""`
-	RemoveRepoLegacy              TeamsRemoveRepoLegacyCmd              `cmd:""`
-	ReviewProjectInOrg            TeamsReviewProjectInOrgCmd            `cmd:""`
-	ReviewProjectLegacy           TeamsReviewProjectLegacyCmd           `cmd:""`
-	UpdateDiscussionCommentInOrg  TeamsUpdateDiscussionCommentInOrgCmd  `cmd:""`
-	UpdateDiscussionCommentLegacy TeamsUpdateDiscussionCommentLegacyCmd `cmd:""`
-	UpdateDiscussionInOrg         TeamsUpdateDiscussionInOrgCmd         `cmd:""`
-	UpdateDiscussionLegacy        TeamsUpdateDiscussionLegacyCmd        `cmd:""`
-	UpdateInOrg                   TeamsUpdateInOrgCmd                   `cmd:""`
-	UpdateLegacy                  TeamsUpdateLegacyCmd                  `cmd:""`
+	AddMemberLegacy                         TeamsAddMemberLegacyCmd                         `cmd:""`
+	AddOrUpdateMembershipInOrg              TeamsAddOrUpdateMembershipInOrgCmd              `cmd:""`
+	AddOrUpdateMembershipLegacy             TeamsAddOrUpdateMembershipLegacyCmd             `cmd:""`
+	AddOrUpdateProjectInOrg                 TeamsAddOrUpdateProjectInOrgCmd                 `cmd:""`
+	AddOrUpdateProjectLegacy                TeamsAddOrUpdateProjectLegacyCmd                `cmd:""`
+	AddOrUpdateRepoInOrg                    TeamsAddOrUpdateRepoInOrgCmd                    `cmd:""`
+	AddOrUpdateRepoLegacy                   TeamsAddOrUpdateRepoLegacyCmd                   `cmd:""`
+	CheckManagesRepoInOrg                   TeamsCheckManagesRepoInOrgCmd                   `cmd:""`
+	CheckManagesRepoLegacy                  TeamsCheckManagesRepoLegacyCmd                  `cmd:""`
+	Create                                  TeamsCreateCmd                                  `cmd:""`
+	CreateDiscussionCommentInOrg            TeamsCreateDiscussionCommentInOrgCmd            `cmd:""`
+	CreateDiscussionCommentLegacy           TeamsCreateDiscussionCommentLegacyCmd           `cmd:""`
+	CreateDiscussionInOrg                   TeamsCreateDiscussionInOrgCmd                   `cmd:""`
+	CreateDiscussionLegacy                  TeamsCreateDiscussionLegacyCmd                  `cmd:""`
+	CreateOrUpdateIdPGroupConnectionsInOrg  TeamsCreateOrUpdateIdPGroupConnectionsInOrgCmd  `cmd:""`
+	CreateOrUpdateIdPGroupConnectionsLegacy TeamsCreateOrUpdateIdPGroupConnectionsLegacyCmd `cmd:""`
+	DeleteDiscussionCommentInOrg            TeamsDeleteDiscussionCommentInOrgCmd            `cmd:""`
+	DeleteDiscussionCommentLegacy           TeamsDeleteDiscussionCommentLegacyCmd           `cmd:""`
+	DeleteDiscussionInOrg                   TeamsDeleteDiscussionInOrgCmd                   `cmd:""`
+	DeleteDiscussionLegacy                  TeamsDeleteDiscussionLegacyCmd                  `cmd:""`
+	DeleteInOrg                             TeamsDeleteInOrgCmd                             `cmd:""`
+	DeleteLegacy                            TeamsDeleteLegacyCmd                            `cmd:""`
+	GetByName                               TeamsGetByNameCmd                               `cmd:""`
+	GetDiscussionCommentInOrg               TeamsGetDiscussionCommentInOrgCmd               `cmd:""`
+	GetDiscussionCommentLegacy              TeamsGetDiscussionCommentLegacyCmd              `cmd:""`
+	GetDiscussionInOrg                      TeamsGetDiscussionInOrgCmd                      `cmd:""`
+	GetDiscussionLegacy                     TeamsGetDiscussionLegacyCmd                     `cmd:""`
+	GetLegacy                               TeamsGetLegacyCmd                               `cmd:""`
+	GetMemberLegacy                         TeamsGetMemberLegacyCmd                         `cmd:""`
+	GetMembershipInOrg                      TeamsGetMembershipInOrgCmd                      `cmd:""`
+	GetMembershipLegacy                     TeamsGetMembershipLegacyCmd                     `cmd:""`
+	List                                    TeamsListCmd                                    `cmd:""`
+	ListChildInOrg                          TeamsListChildInOrgCmd                          `cmd:""`
+	ListChildLegacy                         TeamsListChildLegacyCmd                         `cmd:""`
+	ListDiscussionCommentsInOrg             TeamsListDiscussionCommentsInOrgCmd             `cmd:""`
+	ListDiscussionCommentsLegacy            TeamsListDiscussionCommentsLegacyCmd            `cmd:""`
+	ListDiscussionsInOrg                    TeamsListDiscussionsInOrgCmd                    `cmd:""`
+	ListDiscussionsLegacy                   TeamsListDiscussionsLegacyCmd                   `cmd:""`
+	ListForAuthenticatedUser                TeamsListForAuthenticatedUserCmd                `cmd:""`
+	ListIdPGroupsForLegacy                  TeamsListIdPGroupsForLegacyCmd                  `cmd:""`
+	ListIdPGroupsForOrg                     TeamsListIdPGroupsForOrgCmd                     `cmd:""`
+	ListIdPGroupsInOrg                      TeamsListIdPGroupsInOrgCmd                      `cmd:""`
+	ListMembersInOrg                        TeamsListMembersInOrgCmd                        `cmd:""`
+	ListMembersLegacy                       TeamsListMembersLegacyCmd                       `cmd:""`
+	ListPendingInvitationsInOrg             TeamsListPendingInvitationsInOrgCmd             `cmd:""`
+	ListPendingInvitationsLegacy            TeamsListPendingInvitationsLegacyCmd            `cmd:""`
+	ListProjectsInOrg                       TeamsListProjectsInOrgCmd                       `cmd:""`
+	ListProjectsLegacy                      TeamsListProjectsLegacyCmd                      `cmd:""`
+	ListReposInOrg                          TeamsListReposInOrgCmd                          `cmd:""`
+	ListReposLegacy                         TeamsListReposLegacyCmd                         `cmd:""`
+	RemoveMemberLegacy                      TeamsRemoveMemberLegacyCmd                      `cmd:""`
+	RemoveMembershipInOrg                   TeamsRemoveMembershipInOrgCmd                   `cmd:""`
+	RemoveMembershipLegacy                  TeamsRemoveMembershipLegacyCmd                  `cmd:""`
+	RemoveProjectInOrg                      TeamsRemoveProjectInOrgCmd                      `cmd:""`
+	RemoveProjectLegacy                     TeamsRemoveProjectLegacyCmd                     `cmd:""`
+	RemoveRepoInOrg                         TeamsRemoveRepoInOrgCmd                         `cmd:""`
+	RemoveRepoLegacy                        TeamsRemoveRepoLegacyCmd                        `cmd:""`
+	ReviewProjectInOrg                      TeamsReviewProjectInOrgCmd                      `cmd:""`
+	ReviewProjectLegacy                     TeamsReviewProjectLegacyCmd                     `cmd:""`
+	UpdateDiscussionCommentInOrg            TeamsUpdateDiscussionCommentInOrgCmd            `cmd:""`
+	UpdateDiscussionCommentLegacy           TeamsUpdateDiscussionCommentLegacyCmd           `cmd:""`
+	UpdateDiscussionInOrg                   TeamsUpdateDiscussionInOrgCmd                   `cmd:""`
+	UpdateDiscussionLegacy                  TeamsUpdateDiscussionLegacyCmd                  `cmd:""`
+	UpdateInOrg                             TeamsUpdateInOrgCmd                             `cmd:""`
+	UpdateLegacy                            TeamsUpdateLegacyCmd                            `cmd:""`
 }
 
 type TeamsAddMemberLegacyCmd struct {
@@ -332,6 +334,36 @@ func (c *TeamsCreateDiscussionLegacyCmd) Run(isValueSetMap map[string]bool) erro
 	c.UpdateURLPath("team_id", c.TeamId)
 	c.UpdateBody("title", c.Title)
 	return c.DoRequest("POST")
+}
+
+type TeamsCreateOrUpdateIdPGroupConnectionsInOrgCmd struct {
+	Groups   []internal.JSONObject `required:"" name:"groups"`
+	Org      string                `required:"" name:"org"`
+	TeamSlug string                `required:"" name:"team_slug"`
+	internal.BaseCmd
+}
+
+func (c *TeamsCreateOrUpdateIdPGroupConnectionsInOrgCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/{org}/teams/{team_slug}/team-sync/group-mappings")
+	c.UpdateBody("groups", c.Groups)
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("team_slug", c.TeamSlug)
+	return c.DoRequest("PATCH")
+}
+
+type TeamsCreateOrUpdateIdPGroupConnectionsLegacyCmd struct {
+	Groups []internal.JSONObject `required:"" name:"groups"`
+	TeamId int64                 `required:"" name:"team_id"`
+	internal.BaseCmd
+}
+
+func (c *TeamsCreateOrUpdateIdPGroupConnectionsLegacyCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/{team_id}/team-sync/group-mappings")
+	c.UpdateBody("groups", c.Groups)
+	c.UpdateURLPath("team_id", c.TeamId)
+	return c.DoRequest("PATCH")
 }
 
 type TeamsDeleteDiscussionCommentInOrgCmd struct {

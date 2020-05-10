@@ -87,11 +87,24 @@ func (c *BaseCmd) UpdateBody(flagName string, value interface{}) {
 	}
 }
 
+type JSONObject string
+
 func setBodyValue(body map[string]interface{}, key []string, value interface{}) {
 	if len(key) == 1 {
+		switch val := value.(type) {
+		case JSONObject:
+			value = json.RawMessage(val)
+		case []JSONObject:
+			rawVals := make([]json.RawMessage, len(val))
+			for i, v := range val {
+				rawVals[i] = json.RawMessage(v)
+			}
+			value = rawVals
+		}
 		body[key[0]] = value
 		return
 	}
+
 	var nextMap map[string]interface{}
 	switch currentVal := body[key[0]].(type) {
 	case map[string]interface{}:

@@ -137,6 +137,7 @@ type ReposCmd struct {
 	TestPushHook                                       ReposTestPushHookCmd                                       `cmd:""`
 	Transfer                                           ReposTransferCmd                                           `cmd:""`
 	Update                                             ReposUpdateCmd                                             `cmd:""`
+	UpdateBranchProtection                             ReposUpdateBranchProtectionCmd                             `cmd:""`
 	UpdateCommitComment                                ReposUpdateCommitCommentCmd                                `cmd:""`
 	UpdateHook                                         ReposUpdateHookCmd                                         `cmd:""`
 	UpdateInformationAboutPagesSite                    ReposUpdateInformationAboutPagesSiteCmd                    `cmd:""`
@@ -438,15 +439,17 @@ func (c *ReposCreateDeploymentStatusCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type ReposCreateDispatchEventCmd struct {
-	EventType string `name:"event_type"`
-	Owner     string `name:"owner"`
-	Repo      string `required:"" name:"repo"`
+	ClientPayload internal.JSONObject `name:"client_payload"`
+	EventType     string              `name:"event_type"`
+	Owner         string              `name:"owner"`
+	Repo          string              `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposCreateDispatchEventCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/dispatches")
+	c.UpdateBody("client_payload", c.ClientPayload)
 	c.UpdateBody("event_type", c.EventType)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
@@ -2543,6 +2546,52 @@ func (c *ReposTransferCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateBody("team_ids", c.TeamIds)
 	return c.DoRequest("POST")
+}
+
+type ReposUpdateBranchProtectionCmd struct {
+	AllowDeletions                                         bool     `name:"allow_deletions"`
+	AllowForcePushes                                       bool     `name:"allow_force_pushes"`
+	Branch                                                 string   `required:"" name:"branch"`
+	EnforceAdmins                                          bool     `required:"" name:"enforce_admins"`
+	LukeCage                                               bool     `name:"luke-cage-preview"`
+	Owner                                                  string   `name:"owner"`
+	Repo                                                   string   `required:"" name:"repo"`
+	RequiredLinearHistory                                  bool     `name:"required_linear_history"`
+	RequiredPullRequestReviewsDismissStaleReviews          bool     `name:"required_pull_request_reviews.dismiss_stale_reviews"`
+	RequiredPullRequestReviewsDismissalRestrictionsTeams   []string `name:"required_pull_request_reviews.dismissal_restrictions.teams"`
+	RequiredPullRequestReviewsDismissalRestrictionsUsers   []string `name:"required_pull_request_reviews.dismissal_restrictions.users"`
+	RequiredPullRequestReviewsRequireCodeOwnerReviews      bool     `name:"required_pull_request_reviews.require_code_owner_reviews"`
+	RequiredPullRequestReviewsRequiredApprovingReviewCount int64    `name:"required_pull_request_reviews.required_approving_review_count"`
+	RequiredStatusChecksContexts                           []string `required:"" name:"required_status_checks.contexts"`
+	RequiredStatusChecksStrict                             bool     `required:"" name:"required_status_checks.strict"`
+	RestrictionsApps                                       []string `name:"restrictions.apps"`
+	RestrictionsTeams                                      []string `required:"" name:"restrictions.teams"`
+	RestrictionsUsers                                      []string `required:"" name:"restrictions.users"`
+	internal.BaseCmd
+}
+
+func (c *ReposUpdateBranchProtectionCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection")
+	c.UpdateBody("allow_deletions", c.AllowDeletions)
+	c.UpdateBody("allow_force_pushes", c.AllowForcePushes)
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateBody("enforce_admins", c.EnforceAdmins)
+	c.UpdatePreview("luke-cage", c.LukeCage)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("required_linear_history", c.RequiredLinearHistory)
+	c.UpdateBody("required_pull_request_reviews.dismiss_stale_reviews", c.RequiredPullRequestReviewsDismissStaleReviews)
+	c.UpdateBody("required_pull_request_reviews.dismissal_restrictions.teams", c.RequiredPullRequestReviewsDismissalRestrictionsTeams)
+	c.UpdateBody("required_pull_request_reviews.dismissal_restrictions.users", c.RequiredPullRequestReviewsDismissalRestrictionsUsers)
+	c.UpdateBody("required_pull_request_reviews.require_code_owner_reviews", c.RequiredPullRequestReviewsRequireCodeOwnerReviews)
+	c.UpdateBody("required_pull_request_reviews.required_approving_review_count", c.RequiredPullRequestReviewsRequiredApprovingReviewCount)
+	c.UpdateBody("required_status_checks.contexts", c.RequiredStatusChecksContexts)
+	c.UpdateBody("required_status_checks.strict", c.RequiredStatusChecksStrict)
+	c.UpdateBody("restrictions.apps", c.RestrictionsApps)
+	c.UpdateBody("restrictions.teams", c.RestrictionsTeams)
+	c.UpdateBody("restrictions.users", c.RestrictionsUsers)
+	return c.DoRequest("PUT")
 }
 
 type ReposUpdateCmd struct {

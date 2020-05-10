@@ -9,6 +9,7 @@ type GitCmd struct {
 	CreateCommit     GitCreateCommitCmd     `cmd:""`
 	CreateRef        GitCreateRefCmd        `cmd:""`
 	CreateTag        GitCreateTagCmd        `cmd:""`
+	CreateTree       GitCreateTreeCmd       `cmd:""`
 	DeleteRef        GitDeleteRefCmd        `cmd:""`
 	GetBlob          GitGetBlobCmd          `cmd:""`
 	GetCommit        GitGetCommitCmd        `cmd:""`
@@ -114,6 +115,24 @@ func (c *GitCreateTagCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateBody("tagger.email", c.TaggerEmail)
 	c.UpdateBody("tagger.name", c.TaggerName)
 	c.UpdateBody("type", c.Type)
+	return c.DoRequest("POST")
+}
+
+type GitCreateTreeCmd struct {
+	BaseTree string                `name:"base_tree"`
+	Owner    string                `name:"owner"`
+	Repo     string                `required:"" name:"repo"`
+	Tree     []internal.JSONObject `required:"" name:"tree"`
+	internal.BaseCmd
+}
+
+func (c *GitCreateTreeCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{owner}/{repo}/git/trees")
+	c.UpdateBody("base_tree", c.BaseTree)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("tree", c.Tree)
 	return c.DoRequest("POST")
 }
 

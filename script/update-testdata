@@ -7,7 +7,11 @@ CDPATH="" cd -- "$(dirname -- "$(dirname -- "$0")")"
 mkdir -p ./internal/generator/testdata/generated
 
 cp ./api.github.com.json ./internal/generator/testdata/routes.json
-script/generate \
-  --routes-path ./internal/generator/testdata/routes.json \
-  --output-path ./internal/generator/testdata/generated \
-  --docs-path ./internal/generator/testdata/docs
+
+go run ./codegen.go \
+  -schema ./internal/generator/testdata/routes.json \
+  -out ./internal/generator/testdata/generated
+
+go run ./docgen.go \
+ -schema ./internal/generator/testdata/routes.json \
+ -out ./internal/generator/testdata/docs

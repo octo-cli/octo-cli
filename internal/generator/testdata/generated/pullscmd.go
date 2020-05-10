@@ -113,12 +113,13 @@ func (c *PullsCreateCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsCreateReviewCmd struct {
-	Body       string `name:"body"`
-	CommitId   string `name:"commit_id"`
-	Event      string `name:"event"`
-	Owner      string `name:"owner"`
-	PullNumber int64  `required:"" name:"pull_number"`
-	Repo       string `required:"" name:"repo"`
+	Body       string                `name:"body"`
+	Comments   []internal.JSONObject `name:"comments"`
+	CommitId   string                `name:"commit_id"`
+	Event      string                `name:"event"`
+	Owner      string                `name:"owner"`
+	PullNumber int64                 `required:"" name:"pull_number"`
+	Repo       string                `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -126,6 +127,7 @@ func (c *PullsCreateReviewCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/reviews")
 	c.UpdateBody("body", c.Body)
+	c.UpdateBody("comments", c.Comments)
 	c.UpdateBody("commit_id", c.CommitId)
 	c.UpdateBody("event", c.Event)
 	c.UpdateURLPath("owner", c.Owner)

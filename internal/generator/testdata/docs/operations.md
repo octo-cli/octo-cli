@@ -1152,6 +1152,7 @@ This example grants the token "Read and write" permission to `issues` and "Read"
 |------|-------------|
 | installation_id | __Required__ installation_id parameter |
 | machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br><br> |
+| permissions | The permissions granted to the access token. The permissions object includes the permission names and their access type. For a complete list of permissions and allowable values, see "[GitHub App permissions](https://developer.github.com/apps/building-github-apps/creating-github-apps-using-url-parameters/#github-app-permissions)." |
 | repository_ids | The `id`s of the repositories that the installation token can access. Providing repository `id`s restricts the access of an installation token to specific repositories. You can use the "[List repositories](https://developer.github.com/v3/apps/installations/#list-repositories)" endpoint to get the `id` of all repositories that an installation can access. For example, you can select specific repositories when creating an installation token to restrict the number of repositories that can be cloned using the token. |
 
 ## apps delete-authorization
@@ -1649,11 +1650,13 @@ Creates a new check run for a specific commit in a repository. Your GitHub App m
 | head_sha | __Required__ The SHA of the commit. |
 | name | __Required__ The name of the check. For example, "code-coverage". |
 | repo | __Required__ repo parameter |
-| ~~actions~~ | __unsupported by octo-cli__ Displays a button on GitHub that can be clicked to alert your app to do additional tasks. For example, a code linting app can display a button that automatically fixes detected errors. The button created in this object is displayed after the check run completes. When a user clicks the button, GitHub sends the [`check_run.requested_action` webhook](https://developer.github.com/v3/activity/events/types/#checkrunevent) to your app. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://developer.github.com/v3/checks/runs/#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://developer.github.com/v3/checks/runs/#check-runs-and-requested-actions)." To learn more about check runs and requested actions, see "[Check runs and requested actions](https://developer.github.com/v3/checks/runs/#check-runs-and-requested-actions)." |
+| actions | Displays a button on GitHub that can be clicked to alert your app to do additional tasks. For example, a code linting app can display a button that automatically fixes detected errors. The button created in this object is displayed after the check run completes. When a user clicks the button, GitHub sends the [`check_run.requested_action` webhook](https://developer.github.com/v3/activity/events/types/#checkrunevent) to your app. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://developer.github.com/v3/checks/runs/#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://developer.github.com/v3/checks/runs/#check-runs-and-requested-actions)." To learn more about check runs and requested actions, see "[Check runs and requested actions](https://developer.github.com/v3/checks/runs/#check-runs-and-requested-actions)." |
 | completed_at | The time the check completed. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
-| conclusion | **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `success`, `failure`, `neutral`, `cancelled`, `timed_out`, or `action_required`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.  <br>**Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. Only GitHub can change a check run conclusion to `stale`. |
+| conclusion | **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `success`, `failure`, `neutral`, `cancelled`, `skipped`, `timed_out`, or `action_required`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.  <br>**Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. Only GitHub can change a check run conclusion to `stale`. |
 | details_url | The URL of the integrator's site that has the full details of the check. If the integrator does not provide this, then the homepage of the GitHub app is used. |
 | external_id | A reference for the run on the integrator's system. |
+| output.annotations | Adds information from your analysis to specific lines of code. Annotations are visible on GitHub in the **Checks** and **Files changed** tab of the pull request. The Checks API limits the number of annotations to a maximum of 50 per API request. To create more than 50 annotations, you have to make multiple requests to the [Update a check run](https://developer.github.com/v3/checks/runs/#update-a-check-run) endpoint. Each time you update the check run, annotations are appended to the list of annotations that already exist for the check run. For details about how you can view annotations on GitHub, see "[About status checks](https://help.github.com/articles/about-status-checks#checks)". See the [`annotations` object](https://developer.github.com/v3/checks/runs/#annotations-object) description for details about how to use this parameter. |
+| output.images | Adds images to the output displayed in the GitHub pull request UI. See the [`images` object](https://developer.github.com/v3/checks/runs/#images-object) description for details. |
 | output.summary | The summary of the check run. This parameter supports Markdown. |
 | output.text | The details of the check run. This parameter supports Markdown. |
 | output.title | The title of the check run. |
@@ -1823,7 +1826,7 @@ Changes the default automatic flow when creating check suites. By default, the C
 |------|-------------|
 | antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
 | repo | __Required__ repo parameter |
-| ~~auto_trigger_checks~~ | __unsupported by octo-cli__ Enables or disables automatic creation of CheckSuite events upon pushes to the repository. Enabled by default. See the [`auto_trigger_checks` object](https://developer.github.com/v3/checks/suites/#auto_trigger_checks-object) description for details. |
+| auto_trigger_checks | Enables or disables automatic creation of CheckSuite events upon pushes to the repository. Enabled by default. See the [`auto_trigger_checks` object](https://developer.github.com/v3/checks/suites/#auto_trigger_checks-object) description for details. |
 
 ## checks update
 
@@ -1841,12 +1844,14 @@ Updates a check run for a specific commit in a repository. Your GitHub App must 
 | antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
 | check_run_id | __Required__ check_run_id parameter |
 | repo | __Required__ repo parameter |
-| ~~actions~~ | __unsupported by octo-cli__ Possible further actions the integrator can perform, which a user may trigger. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://developer.github.com/v3/checks/runs/#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://developer.github.com/v3/checks/runs/#check-runs-and-requested-actions)." |
+| actions | Possible further actions the integrator can perform, which a user may trigger. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://developer.github.com/v3/checks/runs/#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://developer.github.com/v3/checks/runs/#check-runs-and-requested-actions)." |
 | completed_at | The time the check completed. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
-| conclusion | **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `success`, `failure`, `neutral`, `cancelled`, `timed_out`, or `action_required`.  <br>**Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. Only GitHub can change a check run conclusion to `stale`. |
+| conclusion | **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `success`, `failure`, `neutral`, `cancelled`, `skipped`, `timed_out`, or `action_required`.  <br>**Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. Only GitHub can change a check run conclusion to `stale`. |
 | details_url | The URL of the integrator's site that has the full details of the check. |
 | external_id | A reference for the run on the integrator's system. |
 | name | The name of the check. For example, "code-coverage". |
+| output.annotations | Adds information from your analysis to specific lines of code. Annotations are visible in GitHub's pull request UI. Annotations are visible in GitHub's pull request UI. The Checks API limits the number of annotations to a maximum of 50 per API request. To create more than 50 annotations, you have to make multiple requests to the [Update a check run](https://developer.github.com/v3/checks/runs/#update-a-check-run) endpoint. Each time you update the check run, annotations are appended to the list of annotations that already exist for the check run. For details about annotations in the UI, see "[About status checks](https://help.github.com/articles/about-status-checks#checks)". See the [`annotations` object](https://developer.github.com/v3/checks/runs/#annotations-object-1) description for details. |
+| output.images | Adds images to the output displayed in the GitHub pull request UI. See the [`images` object](https://developer.github.com/v3/checks/runs/#annotations-object-1) description for details. |
 | output.summary | Can contain Markdown. |
 | output.text | Can contain Markdown. |
 | output.title | **Required**. |
@@ -2355,6 +2360,23 @@ These are the possible values for `reason` in the `verification` object:
 | tagger.date | When this object was tagged. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 | tagger.email | The email of the author of the tag |
 | tagger.name | The name of the author of the tag |
+
+## git create-tree
+
+https://developer.github.com/v3/git/trees/#create-a-tree
+
+The tree creation API accepts nested entries. If you specify both a tree and a nested path modifying that tree, this endpoint will overwrite the contents of the tree with the new path contents, and create a new tree structure.
+
+If you use this endpoint to add, delete, or modify the file contents in a tree, you will need to commit the tree and then update a branch to point to the commit. For more information see "[Create a commit](https://developer.github.com/v3/git/commits/#create-a-commit)" and "[Update a reference](https://developer.github.com/v3/git/refs/#update-a-reference)."
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| repo | __Required__ repo parameter |
+| tree | __Required__ Objects (of `path`, `mode`, `type`, and `sha`) specifying a tree structure. |
+| base_tree | The SHA1 of the tree you want to update with new data. If you don't set this, the commit will be created on top of everything; however, it will only contain your change, the rest of your files will show up as deleted. |
 
 ## git delete-ref
 
@@ -5087,7 +5109,7 @@ The `position` value equals the number of lines down from the first "@@" hunk he
 | pull_number | __Required__ pull_number parameter |
 | repo | __Required__ repo parameter |
 | body | **Required** when using `REQUEST_CHANGES` or `COMMENT` for the `event` parameter. The body text of the pull request review. |
-| ~~comments~~ | __unsupported by octo-cli__ Use the following table to specify the location, destination, and contents of the draft review comment. |
+| comments | Use the following table to specify the location, destination, and contents of the draft review comment. |
 | commit_id | The SHA of the commit that needs a review. Not using the latest commit SHA may render your review comment outdated if a subsequent commit modifies the line you specify as the `position`. Defaults to the most recent commit in the pull request when you do not specify a value. |
 | event | The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. By leaving this blank, you set the review action state to `PENDING`, which means you will need to [submit the pull request review](https://developer.github.com/v3/pulls/reviews/#submit-a-pull-request-review) when you are ready. |
 
@@ -6381,6 +6403,7 @@ This input example shows how you can use the `client_payload` as a test to debug
 | name | description |
 |------|-------------|
 | repo | __Required__ repo parameter |
+| client_payload | JSON payload with extra information about the webhook event that your action or worklow may use. |
 | event_type | **Required:** A custom webhook event name. |
 
 ## repos create-for-authenticated-user
@@ -8377,6 +8400,41 @@ https://developer.github.com/v3/repos/#update-a-repository
 | private | Either `true` to make the repository private or `false` to make it public. Default: `false`.  <br>**Note**: You will get a `422` error if the organization restricts [changing repository visibility](https://help.github.com/articles/repository-permission-levels-for-an-organization#changing-the-visibility-of-repositories) to organization owners and a non-owner tries to change the value of private. **Note**: You will get a `422` error if the organization restricts [changing repository visibility](https://help.github.com/articles/repository-permission-levels-for-an-organization#changing-the-visibility-of-repositories) to organization owners and a non-owner tries to change the value of private. |
 | visibility | Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. The `visibility` parameter overrides the `private` parameter when you use both along with the `nebula-preview` preview header. |
 
+## repos update-branch-protection
+
+https://developer.github.com/v3/repos/branches/#update-branch-protection
+
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+
+Protecting a branch requires admin or owner permissions to the repository.
+
+**Note**: Passing new arrays of `users` and `teams` replaces their previous values.
+
+**Note**: The list of users, apps, and teams in total is limited to 100 items.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| branch | __Required__ branch parameter |
+| enforce_admins | __Required__ Enforce all configured restrictions for administrators. Set to `true` to enforce required status checks for repository administrators. Set to `null` to disable. |
+| repo | __Required__ repo parameter |
+| required_status_checks.contexts | __Required__ The list of status checks to require in order to merge into this branch |
+| required_status_checks.strict | __Required__ Require branches to be up to date before merging. |
+| restrictions.teams | __Required__ The list of team `slug`s with push access |
+| restrictions.users | __Required__ The list of user `login`s with push access |
+| allow_deletions | Allows deletion of the protected branch by anyone with write access to the repository. Set to `false` to prevent deletion of the protected branch. Default: `false`. For more information, see "[Enabling force pushes to a protected branch](https://help.github.com/en/github/administering-a-repository/enabling-force-pushes-to-a-protected-branch)" in the GitHub Help documentation. |
+| allow_force_pushes | Permits force pushes to the protected branch by anyone with write access to the repository. Set to `true` to allow force pushes. Set to `false` or `null` to block force pushes. Default: `false`. For more information, see "[Enabling force pushes to a protected branch](https://help.github.com/en/github/administering-a-repository/enabling-force-pushes-to-a-protected-branch)" in the GitHub Help documentation." |
+| luke-cage-preview | The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| required_linear_history | Enforces a linear commit Git history, which prevents anyone from pushing merge commits to a branch. Set to `true` to enforce a linear commit history. Set to `false` to disable a linear commit Git history. Your repository must allow squash merging or rebase merging before you can enable a linear commit history. Default: `false`. For more information, see "[Requiring a linear commit history](https://help.github.com/github/administering-a-repository/requiring-a-linear-commit-history)" in the GitHub Help documentation. |
+| required_pull_request_reviews.dismiss_stale_reviews | Set to `true` if you want to automatically dismiss approving reviews when someone pushes a new commit. |
+| required_pull_request_reviews.dismissal_restrictions.teams | The list of team `slug`s with dismissal access |
+| required_pull_request_reviews.dismissal_restrictions.users | The list of user `login`s with dismissal access |
+| required_pull_request_reviews.require_code_owner_reviews | Blocks merging pull requests until [code owners](https://help.github.com/articles/about-code-owners/) review them. |
+| required_pull_request_reviews.required_approving_review_count | Specify the number of reviewers required to approve pull requests. Use a number between 1 and 6. |
+| restrictions.apps | The list of app `slug`s with push access |
+
 ## repos update-commit-comment
 
 https://developer.github.com/v3/repos/comments/#update-a-commit-comment
@@ -9177,6 +9235,43 @@ This endpoint triggers [notifications](https://help.github.com/articles/about-no
 | title | __Required__ The discussion post's title. |
 | private | Private posts are only visible to team members, organization owners, and team maintainers. Public posts are visible to all members of the organization. Set to `true` to create a private post. |
 | squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+
+## teams create-or-update-id-p-group-connections-in-org
+
+https://developer.github.com/v3/teams/team_sync/#create-or-update-idp-group-connections
+
+Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+
+Creates, updates, or removes a connection between a team and an IdP group. When adding groups to a team, you must include all new and existing groups to avoid replacing existing groups with the new ones. Specifying an empty `groups` array will remove all connections for a team.
+
+**Note:** You can also specify a team by `org_id` and `team_id` using the route `PATCH /organizations/:org_id/team/:team_id/team-sync/group-mappings`.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| groups | __Required__ The IdP groups you want to connect to a GitHub team. When updating, the new `groups` object will replace the original one. You must include any existing groups that you don't want to remove. |
+| org | __Required__ org parameter |
+| team_slug | __Required__ team_slug parameter |
+
+## teams create-or-update-id-p-group-connections-legacy
+
+https://developer.github.com/v3/teams/team_sync/#create-or-update-idp-group-connections-legacy
+
+**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Create or update IdP group connections`](https://developer.github.com/v3/teams/team_sync/#create-or-update-idp-group-connections) endpoint.
+
+Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+
+Creates, updates, or removes a connection between a team and an IdP group. When adding groups to a team, you must include all new and existing groups to avoid replacing existing groups with the new ones. Specifying an empty `groups` array will remove all connections for a team.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| groups | __Required__ The IdP groups you want to connect to a GitHub team. When updating, the new `groups` object will replace the original one. You must include any existing groups that you don't want to remove. |
+| team_id | __Required__ team_id parameter |
 
 ## teams delete-discussion-comment-in-org
 
