@@ -1064,6 +1064,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 		"create-installation-token": {
 			"installation_id":     "installation_id parameter",
 			"machine-man-preview": "To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```",
+			"permissions":         "The permissions granted to the access token. The permissions object includes the permission names and their access type. For a complete list of permissions and allowable values, see \"[GitHub App permissions](https://developer.github.com/apps/building-github-apps/creating-github-apps-using-url-parameters/#github-app-permissions).\"",
 			"repository_ids":      "The `id`s of the repositories that the installation token can access. Providing repository `id`s restricts the access of an installation token to specific repositories. You can use the \"[List repositories](https://developer.github.com/v3/apps/installations/#list-repositories)\" endpoint to get the `id` of all repositories that an installation can access. For example, you can select specific repositories when creating an installation token to restrict the number of repositories that can be cloned using the token.",
 		},
 		"delete-authorization": {
@@ -1194,7 +1195,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 		"create": {
 			"antiope-preview": "The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.antiope-preview+json\n```",
 			"completed_at":    "The time the check completed. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.",
-			"conclusion":      "**Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `success`, `failure`, `neutral`, `cancelled`, `timed_out`, or `action_required`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.  \n**Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. Only GitHub can change a check run conclusion to `stale`.",
+			"conclusion":      "**Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `success`, `failure`, `neutral`, `cancelled`, `skipped`, `timed_out`, or `action_required`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.  \n**Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. Only GitHub can change a check run conclusion to `stale`.",
 			"details_url":     "The URL of the integrator's site that has the full details of the check. If the integrator does not provide this, then the homepage of the GitHub app is used.",
 			"external_id":     "A reference for the run on the integrator's system.",
 			"head_sha":        "The SHA of the commit.",
@@ -1280,7 +1281,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"antiope-preview": "The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.antiope-preview+json\n```",
 			"check_run_id":    "check_run_id parameter",
 			"completed_at":    "The time the check completed. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.",
-			"conclusion":      "**Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `success`, `failure`, `neutral`, `cancelled`, `timed_out`, or `action_required`.  \n**Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. Only GitHub can change a check run conclusion to `stale`.",
+			"conclusion":      "**Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `success`, `failure`, `neutral`, `cancelled`, `skipped`, `timed_out`, or `action_required`.  \n**Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. Only GitHub can change a check run conclusion to `stale`.",
 			"details_url":     "The URL of the integrator's site that has the full details of the check.",
 			"external_id":     "A reference for the run on the integrator's system.",
 			"name":            "The name of the check. For example, \"code-coverage\".",
@@ -2860,9 +2861,10 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"target_url":      "The target URL to associate with this status. This URL should contain output to keep the user updated while the task is running or serve as historical information for what happened in the deployment. **Note:** It's recommended to use the `log_url` parameter, which replaces `target_url`.",
 		},
 		"create-dispatch-event": {
-			"event_type": "**Required:** A custom webhook event name.",
-			"owner":      "owner parameter",
-			"repo":       "repo parameter",
+			"client_payload": "JSON payload with extra information about the webhook event that your action or worklow may use.",
+			"event_type":     "**Required:** A custom webhook event name.",
+			"owner":          "owner parameter",
+			"repo":           "repo parameter",
 		},
 		"create-for-authenticated-user": {
 			"allow_merge_commit":     "Either `true` to allow merging pull requests with a merge commit, or `false` to prevent merging pull requests with merge commits.",

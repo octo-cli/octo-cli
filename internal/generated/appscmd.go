@@ -117,9 +117,10 @@ func (c *AppsCreateFromManifestCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsCreateInstallationTokenCmd struct {
-	InstallationId int64   `required:"" name:"installation_id"`
-	MachineMan     bool    `required:"" name:"machine-man-preview"`
-	RepositoryIds  []int64 `name:"repository_ids"`
+	InstallationId int64               `required:"" name:"installation_id"`
+	MachineMan     bool                `required:"" name:"machine-man-preview"`
+	Permissions    internal.JSONObject `name:"permissions"`
+	RepositoryIds  []int64             `name:"repository_ids"`
 	internal.BaseCmd
 }
 
@@ -128,6 +129,7 @@ func (c *AppsCreateInstallationTokenCmd) Run(isValueSetMap map[string]bool) erro
 	c.SetURLPath("/app/installations/{installation_id}/access_tokens")
 	c.UpdateURLPath("installation_id", c.InstallationId)
 	c.UpdatePreview("machine-man", c.MachineMan)
+	c.UpdateBody("permissions", c.Permissions)
 	c.UpdateBody("repository_ids", c.RepositoryIds)
 	return c.DoRequest("POST")
 }

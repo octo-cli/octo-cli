@@ -438,15 +438,17 @@ func (c *ReposCreateDeploymentStatusCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type ReposCreateDispatchEventCmd struct {
-	EventType string `name:"event_type"`
-	Owner     string `name:"owner"`
-	Repo      string `required:"" name:"repo"`
+	ClientPayload internal.JSONObject `name:"client_payload"`
+	EventType     string              `name:"event_type"`
+	Owner         string              `name:"owner"`
+	Repo          string              `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposCreateDispatchEventCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/dispatches")
+	c.UpdateBody("client_payload", c.ClientPayload)
 	c.UpdateBody("event_type", c.EventType)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)

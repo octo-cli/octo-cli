@@ -1152,6 +1152,7 @@ This example grants the token "Read and write" permission to `issues` and "Read"
 |------|-------------|
 | installation_id | __Required__ installation_id parameter |
 | machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br><br> |
+| permissions | The permissions granted to the access token. The permissions object includes the permission names and their access type. For a complete list of permissions and allowable values, see "[GitHub App permissions](https://developer.github.com/apps/building-github-apps/creating-github-apps-using-url-parameters/#github-app-permissions)." |
 | repository_ids | The `id`s of the repositories that the installation token can access. Providing repository `id`s restricts the access of an installation token to specific repositories. You can use the "[List repositories](https://developer.github.com/v3/apps/installations/#list-repositories)" endpoint to get the `id` of all repositories that an installation can access. For example, you can select specific repositories when creating an installation token to restrict the number of repositories that can be cloned using the token. |
 
 ## apps delete-authorization
@@ -6381,6 +6382,7 @@ This input example shows how you can use the `client_payload` as a test to debug
 | name | description |
 |------|-------------|
 | repo | __Required__ repo parameter |
+| client_payload | JSON payload with extra information about the webhook event that your action or worklow may use. |
 | event_type | **Required:** A custom webhook event name. |
 
 ## repos create-for-authenticated-user
