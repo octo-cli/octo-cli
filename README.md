@@ -2036,6 +2036,10 @@ Commands:
     Update a repository -
     https://developer.github.com/v3/repos/#update-a-repository
 
+  repos update-branch-protection --branch=STRING --enforce_admins --repo=STRING --required_status_checks.contexts=REQUIRED_STATUS_CHECKS.CONTEXTS,... --required_status_checks.strict --restrictions.teams=RESTRICTIONS.TEAMS,... --restrictions.users=RESTRICTIONS.USERS,...
+    Update branch protection -
+    https://developer.github.com/v3/repos/branches/#update-branch-protection
+
   repos update-commit-comment --body=STRING --comment_id=INT-64 --repo=STRING
     Update a commit comment -
     https://developer.github.com/v3/repos/comments/#update-a-commit-comment

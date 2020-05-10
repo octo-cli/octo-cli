@@ -96,10 +96,7 @@ var unsupportedChecks = []unsupportedCheck{
 
 func isSupportedParamType(tp string) bool {
 	_, ok := util.ParamTypes[tp]
-	if ok {
-		return true
-	}
-	return tp == "object"
+	return ok
 }
 
 func IsSupportedParam(ref *openapi3.SchemaRef) bool {
@@ -119,9 +116,6 @@ func IsSupportedParam(ref *openapi3.SchemaRef) bool {
 		}
 		subTp := util.GetPropType(subRef.Value)
 		if !isSupportedParamType(subTp) {
-			return false
-		}
-		if subTp == "object" {
 			return false
 		}
 	}
