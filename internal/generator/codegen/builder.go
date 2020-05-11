@@ -25,12 +25,12 @@ func Generate(routesPath, outputPath string, fs afero.Fs) error {
 }
 
 var UpdateMethodMap = map[string]string{
-	"url":     "UpdateURLPath",
-	"path":    "UpdateURLPath",
-	"body":    "UpdateBody",
-	"query":   "UpdateURLQuery",
-	"header":  "AddRequestHeader",
-	"preview": "UpdatePreview",
+	"url":     "c.UpdateURLPath",
+	"path":    "c.UpdateURLPath",
+	"body":    "c.UpdateBody",
+	"query":   "c.UpdateURLQuery",
+	"header":  "c.AddRequestHeader",
+	"preview": "c.UpdatePreview",
 }
 
 func cliTmpl(swagger *openapi3.Swagger) StructTmplHelper {

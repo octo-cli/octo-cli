@@ -28,7 +28,7 @@ func TestTemplate(t *testing.T) {
 		data := RunMethodParam{
 			Name:         "name",
 			ValueField:   "valueField",
-			UpdateMethod: "updateMethod",
+			UpdateMethod: "c.updateMethod",
 		}
 		want := `
 c.updateMethod("name", c.valueField)`
@@ -47,12 +47,12 @@ c.updateMethod("name", c.valueField)`
 					{
 						Name:         "param1",
 						ValueField:   "valueField1",
-						UpdateMethod: "updateMethod1",
+						UpdateMethod: "c.updateMethod1",
 					},
 					{
 						Name:         "param2",
 						ValueField:   "valueField2",
-						UpdateMethod: "updateMethod2",
+						UpdateMethod: "c.updateMethod2",
 					},
 				},
 			}
@@ -235,7 +235,7 @@ func Test_generateGoFile(t *testing.T) {
 									{
 										Name:         "license",
 										ValueField:   "License",
-										UpdateMethod: "UpdateURLPath",
+										UpdateMethod: "c.UpdateURLPath",
 									},
 								},
 							},
@@ -268,12 +268,12 @@ func Test_generateGoFile(t *testing.T) {
 									{
 										Name:         "owner",
 										ValueField:   "Owner",
-										UpdateMethod: "UpdateURLPath",
+										UpdateMethod: "c.UpdateURLPath",
 									},
 									{
 										Name:         "repo",
 										ValueField:   "Repo",
-										UpdateMethod: "UpdateURLPath",
+										UpdateMethod: "c.UpdateURLPath",
 									},
 								},
 							},

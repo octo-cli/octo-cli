@@ -30,7 +30,7 @@ type RunMethodParam struct {
 
 // language=GoTemplate
 const tmplRunMethodParam = `
-c.{{.UpdateMethod}}("{{.Name}}", c.{{.ValueField}})`
+{{.UpdateMethod}}("{{.Name}}", c.{{.ValueField}})`
 
 type RunMethod struct {
 	ReceiverName string
