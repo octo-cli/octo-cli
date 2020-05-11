@@ -71,11 +71,11 @@ type ActionsCreateOrUpdateSecretForRepoCmd struct {
 func (c *ActionsCreateOrUpdateSecretForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/actions/secrets/{name}")
-	c.UpdateBody("encrypted_value", c.EncryptedValue)
-	c.UpdateBody("key_id", c.KeyId)
-	c.UpdateURLPath("name", c.Name)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("name", c.Name)
+	c.UpdateBody("encrypted_value", c.EncryptedValue)
+	c.UpdateBody("key_id", c.KeyId)
 	return c.DoRequest("PUT")
 }
 
@@ -141,9 +141,9 @@ type ActionsDeleteArtifactCmd struct {
 func (c *ActionsDeleteArtifactCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/actions/artifacts/{artifact_id}")
-	c.UpdateURLPath("artifact_id", c.ArtifactId)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("artifact_id", c.ArtifactId)
 	return c.DoRequest("DELETE")
 }
 
@@ -157,9 +157,9 @@ type ActionsDeleteSecretFromRepoCmd struct {
 func (c *ActionsDeleteSecretFromRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/actions/secrets/{name}")
-	c.UpdateURLPath("name", c.Name)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("name", c.Name)
 	return c.DoRequest("DELETE")
 }
 
@@ -220,10 +220,10 @@ type ActionsDownloadArtifactCmd struct {
 func (c *ActionsDownloadArtifactCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/actions/artifacts/{artifact_id}/{archive_format}")
-	c.UpdateURLPath("archive_format", c.ArchiveFormat)
-	c.UpdateURLPath("artifact_id", c.ArtifactId)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("artifact_id", c.ArtifactId)
+	c.UpdateURLPath("archive_format", c.ArchiveFormat)
 	return c.DoRequest("GET")
 }
 
@@ -237,9 +237,9 @@ type ActionsDownloadWorkflowJobLogsCmd struct {
 func (c *ActionsDownloadWorkflowJobLogsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/actions/jobs/{job_id}/logs")
-	c.UpdateURLPath("job_id", c.JobId)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("job_id", c.JobId)
 	return c.DoRequest("GET")
 }
 
@@ -269,9 +269,9 @@ type ActionsGetArtifactCmd struct {
 func (c *ActionsGetArtifactCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/actions/artifacts/{artifact_id}")
-	c.UpdateURLPath("artifact_id", c.ArtifactId)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("artifact_id", c.ArtifactId)
 	return c.DoRequest("GET")
 }
 
@@ -299,9 +299,9 @@ type ActionsGetSecretCmd struct {
 func (c *ActionsGetSecretCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/actions/secrets/{name}")
-	c.UpdateURLPath("name", c.Name)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("name", c.Name)
 	return c.DoRequest("GET")
 }
 
@@ -361,9 +361,9 @@ type ActionsGetWorkflowJobCmd struct {
 func (c *ActionsGetWorkflowJobCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/actions/jobs/{job_id}")
-	c.UpdateURLPath("job_id", c.JobId)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("job_id", c.JobId)
 	return c.DoRequest("GET")
 }
 
@@ -395,9 +395,9 @@ func (c *ActionsListArtifactsForRepoCmd) Run(isValueSetMap map[string]bool) erro
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/actions/artifacts")
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -414,12 +414,12 @@ type ActionsListJobsForWorkflowRunCmd struct {
 func (c *ActionsListJobsForWorkflowRunCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/actions/runs/{run_id}/jobs")
-	c.UpdateURLQuery("filter", c.Filter)
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("run_id", c.RunId)
+	c.UpdateURLQuery("filter", c.Filter)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -438,14 +438,14 @@ type ActionsListRepoWorkflowRunsCmd struct {
 func (c *ActionsListRepoWorkflowRunsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/actions/runs")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("actor", c.Actor)
 	c.UpdateURLQuery("branch", c.Branch)
 	c.UpdateURLQuery("event", c.Event)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("status", c.Status)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -461,9 +461,9 @@ func (c *ActionsListRepoWorkflowsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/actions/workflows")
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -505,9 +505,9 @@ func (c *ActionsListSecretsForRepoCmd) Run(isValueSetMap map[string]bool) error 
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/actions/secrets")
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -522,8 +522,8 @@ func (c *ActionsListSelfHostedRunnersForOrgCmd) Run(isValueSetMap map[string]boo
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/actions/runners")
 	c.UpdateURLPath("org", c.Org)
-	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -539,9 +539,9 @@ func (c *ActionsListSelfHostedRunnersForRepoCmd) Run(isValueSetMap map[string]bo
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/actions/runners")
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -558,10 +558,10 @@ func (c *ActionsListWorkflowRunArtifactsCmd) Run(isValueSetMap map[string]bool) 
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/actions/runs/{run_id}/artifacts")
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("run_id", c.RunId)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -581,15 +581,15 @@ type ActionsListWorkflowRunsCmd struct {
 func (c *ActionsListWorkflowRunsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("workflow_id", c.WorkflowId)
 	c.UpdateURLQuery("actor", c.Actor)
 	c.UpdateURLQuery("branch", c.Branch)
 	c.UpdateURLQuery("event", c.Event)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("status", c.Status)
-	c.UpdateURLPath("workflow_id", c.WorkflowId)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 

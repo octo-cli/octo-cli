@@ -40,10 +40,10 @@ type ScimListProvisionedIdentitiesCmd struct {
 func (c *ScimListProvisionedIdentitiesCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/scim/v2/organizations/{org}/Users")
-	c.UpdateURLQuery("count", c.Count)
-	c.UpdateURLQuery("filter", c.Filter)
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLQuery("startIndex", c.StartIndex)
+	c.UpdateURLQuery("count", c.Count)
+	c.UpdateURLQuery("filter", c.Filter)
 	return c.DoRequest("GET")
 }
 

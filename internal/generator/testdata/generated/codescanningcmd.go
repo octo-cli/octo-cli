@@ -21,9 +21,9 @@ type CodeScanningGetAlertCmd struct {
 func (c *CodeScanningGetAlertCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/code-scanning/alerts/{alert_id}")
-	c.UpdateURLPath("alert_id", c.AlertId)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("alert_id", c.AlertId)
 	return c.DoRequest("GET")
 }
 

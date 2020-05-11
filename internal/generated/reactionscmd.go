@@ -44,11 +44,11 @@ type ReactionsCreateForCommitCommentCmd struct {
 func (c *ReactionsCreateForCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/comments/{comment_id}/reactions")
-	c.UpdateURLPath("comment_id", c.CommentId)
-	c.UpdateBody("content", c.Content)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("comment_id", c.CommentId)
 	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateBody("content", c.Content)
 	return c.DoRequest("POST")
 }
 
@@ -64,11 +64,11 @@ type ReactionsCreateForIssueCmd struct {
 func (c *ReactionsCreateForIssueCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/issues/{issue_number}/reactions")
-	c.UpdateBody("content", c.Content)
-	c.UpdateURLPath("issue_number", c.IssueNumber)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("issue_number", c.IssueNumber)
 	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateBody("content", c.Content)
 	return c.DoRequest("POST")
 }
 
@@ -84,11 +84,11 @@ type ReactionsCreateForIssueCommentCmd struct {
 func (c *ReactionsCreateForIssueCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/issues/comments/{comment_id}/reactions")
-	c.UpdateURLPath("comment_id", c.CommentId)
-	c.UpdateBody("content", c.Content)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("comment_id", c.CommentId)
 	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateBody("content", c.Content)
 	return c.DoRequest("POST")
 }
 
@@ -104,11 +104,11 @@ type ReactionsCreateForPullRequestReviewCommentCmd struct {
 func (c *ReactionsCreateForPullRequestReviewCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions")
-	c.UpdateURLPath("comment_id", c.CommentId)
-	c.UpdateBody("content", c.Content)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("comment_id", c.CommentId)
 	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateBody("content", c.Content)
 	return c.DoRequest("POST")
 }
 
@@ -125,12 +125,12 @@ type ReactionsCreateForTeamDiscussionCommentInOrgCmd struct {
 func (c *ReactionsCreateForTeamDiscussionCommentInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions")
-	c.UpdateURLPath("comment_number", c.CommentNumber)
-	c.UpdateBody("content", c.Content)
-	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
 	c.UpdateURLPath("org", c.Org)
-	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	c.UpdateURLPath("team_slug", c.TeamSlug)
+	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
+	c.UpdateURLPath("comment_number", c.CommentNumber)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateBody("content", c.Content)
 	return c.DoRequest("POST")
 }
 
@@ -146,11 +146,11 @@ type ReactionsCreateForTeamDiscussionCommentLegacyCmd struct {
 func (c *ReactionsCreateForTeamDiscussionCommentLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}/reactions")
-	c.UpdateURLPath("comment_number", c.CommentNumber)
-	c.UpdateBody("content", c.Content)
-	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
-	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
+	c.UpdateURLPath("comment_number", c.CommentNumber)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateBody("content", c.Content)
 	return c.DoRequest("POST")
 }
 
@@ -166,11 +166,11 @@ type ReactionsCreateForTeamDiscussionInOrgCmd struct {
 func (c *ReactionsCreateForTeamDiscussionInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions")
-	c.UpdateBody("content", c.Content)
-	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
 	c.UpdateURLPath("org", c.Org)
-	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	c.UpdateURLPath("team_slug", c.TeamSlug)
+	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateBody("content", c.Content)
 	return c.DoRequest("POST")
 }
 
@@ -185,10 +185,10 @@ type ReactionsCreateForTeamDiscussionLegacyCmd struct {
 func (c *ReactionsCreateForTeamDiscussionLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/discussions/{discussion_number}/reactions")
-	c.UpdateBody("content", c.Content)
+	c.UpdateURLPath("team_id", c.TeamId)
 	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
 	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
-	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateBody("content", c.Content)
 	return c.DoRequest("POST")
 }
 
@@ -204,10 +204,10 @@ type ReactionsDeleteForCommitCommentCmd struct {
 func (c *ReactionsDeleteForCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/comments/{comment_id}/reactions/{reaction_id}")
-	c.UpdateURLPath("comment_id", c.CommentId)
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("reaction_id", c.ReactionId)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("comment_id", c.CommentId)
+	c.UpdateURLPath("reaction_id", c.ReactionId)
 	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	return c.DoRequest("DELETE")
 }
@@ -224,10 +224,10 @@ type ReactionsDeleteForIssueCmd struct {
 func (c *ReactionsDeleteForIssueCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/issues/{issue_number}/reactions/{reaction_id}")
-	c.UpdateURLPath("issue_number", c.IssueNumber)
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("reaction_id", c.ReactionId)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("issue_number", c.IssueNumber)
+	c.UpdateURLPath("reaction_id", c.ReactionId)
 	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	return c.DoRequest("DELETE")
 }
@@ -244,10 +244,10 @@ type ReactionsDeleteForIssueCommentCmd struct {
 func (c *ReactionsDeleteForIssueCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/issues/comments/{comment_id}/reactions/{reaction_id}")
-	c.UpdateURLPath("comment_id", c.CommentId)
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("reaction_id", c.ReactionId)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("comment_id", c.CommentId)
+	c.UpdateURLPath("reaction_id", c.ReactionId)
 	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	return c.DoRequest("DELETE")
 }
@@ -264,10 +264,10 @@ type ReactionsDeleteForPullRequestCommentCmd struct {
 func (c *ReactionsDeleteForPullRequestCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions/{reaction_id}")
-	c.UpdateURLPath("comment_id", c.CommentId)
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("reaction_id", c.ReactionId)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("comment_id", c.CommentId)
+	c.UpdateURLPath("reaction_id", c.ReactionId)
 	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	return c.DoRequest("DELETE")
 }
@@ -284,11 +284,11 @@ type ReactionsDeleteForTeamDiscussionCmd struct {
 func (c *ReactionsDeleteForTeamDiscussionCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions/{reaction_id}")
-	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
 	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("team_slug", c.TeamSlug)
+	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
 	c.UpdateURLPath("reaction_id", c.ReactionId)
 	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
-	c.UpdateURLPath("team_slug", c.TeamSlug)
 	return c.DoRequest("DELETE")
 }
 
@@ -305,12 +305,12 @@ type ReactionsDeleteForTeamDiscussionCommentCmd struct {
 func (c *ReactionsDeleteForTeamDiscussionCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions/{reaction_id}")
-	c.UpdateURLPath("comment_number", c.CommentNumber)
-	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
 	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("team_slug", c.TeamSlug)
+	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
+	c.UpdateURLPath("comment_number", c.CommentNumber)
 	c.UpdateURLPath("reaction_id", c.ReactionId)
 	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
-	c.UpdateURLPath("team_slug", c.TeamSlug)
 	return c.DoRequest("DELETE")
 }
 
@@ -342,12 +342,12 @@ type ReactionsListForCommitCommentCmd struct {
 func (c *ReactionsListForCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/comments/{comment_id}/reactions")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("comment_id", c.CommentId)
 	c.UpdateURLQuery("content", c.Content)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("page", c.Page)
 	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	return c.DoRequest("GET")
 }
@@ -366,12 +366,12 @@ type ReactionsListForIssueCmd struct {
 func (c *ReactionsListForIssueCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/issues/{issue_number}/reactions")
-	c.UpdateURLQuery("content", c.Content)
-	c.UpdateURLPath("issue_number", c.IssueNumber)
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("issue_number", c.IssueNumber)
+	c.UpdateURLQuery("content", c.Content)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	return c.DoRequest("GET")
 }
@@ -390,12 +390,12 @@ type ReactionsListForIssueCommentCmd struct {
 func (c *ReactionsListForIssueCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/issues/comments/{comment_id}/reactions")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("comment_id", c.CommentId)
 	c.UpdateURLQuery("content", c.Content)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("page", c.Page)
 	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	return c.DoRequest("GET")
 }
@@ -414,12 +414,12 @@ type ReactionsListForPullRequestReviewCommentCmd struct {
 func (c *ReactionsListForPullRequestReviewCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("comment_id", c.CommentId)
 	c.UpdateURLQuery("content", c.Content)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("page", c.Page)
 	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	return c.DoRequest("GET")
 }
@@ -439,14 +439,14 @@ type ReactionsListForTeamDiscussionCommentInOrgCmd struct {
 func (c *ReactionsListForTeamDiscussionCommentInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("team_slug", c.TeamSlug)
+	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
 	c.UpdateURLPath("comment_number", c.CommentNumber)
 	c.UpdateURLQuery("content", c.Content)
-	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
-	c.UpdateURLPath("org", c.Org)
-	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
-	c.UpdateURLPath("team_slug", c.TeamSlug)
 	return c.DoRequest("GET")
 }
 
@@ -464,13 +464,13 @@ type ReactionsListForTeamDiscussionCommentLegacyCmd struct {
 func (c *ReactionsListForTeamDiscussionCommentLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}/reactions")
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
 	c.UpdateURLPath("comment_number", c.CommentNumber)
 	c.UpdateURLQuery("content", c.Content)
-	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
-	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
-	c.UpdateURLPath("team_id", c.TeamId)
 	return c.DoRequest("GET")
 }
 
@@ -488,13 +488,13 @@ type ReactionsListForTeamDiscussionInOrgCmd struct {
 func (c *ReactionsListForTeamDiscussionInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions")
-	c.UpdateURLQuery("content", c.Content)
-	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
 	c.UpdateURLPath("org", c.Org)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	c.UpdateURLPath("team_slug", c.TeamSlug)
+	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
+	c.UpdateURLQuery("content", c.Content)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	return c.DoRequest("GET")
 }
 
@@ -511,11 +511,11 @@ type ReactionsListForTeamDiscussionLegacyCmd struct {
 func (c *ReactionsListForTeamDiscussionLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/discussions/{discussion_number}/reactions")
-	c.UpdateURLQuery("content", c.Content)
-	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
+	c.UpdateURLQuery("content", c.Content)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	return c.DoRequest("GET")
 }

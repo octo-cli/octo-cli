@@ -45,10 +45,10 @@ type ProjectsAddCollaboratorCmd struct {
 func (c *ProjectsAddCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/projects/{project_id}/collaborators/{username}")
-	c.UpdatePreview("inertia", c.Inertia)
-	c.UpdateBody("permission", c.Permission)
 	c.UpdateURLPath("project_id", c.ProjectId)
 	c.UpdateURLPath("username", c.Username)
+	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdateBody("permission", c.Permission)
 	return c.DoRequest("PUT")
 }
 
@@ -65,9 +65,9 @@ func (c *ProjectsCreateCardCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/projects/columns/{column_id}/cards")
 	c.UpdateURLPath("column_id", c.ColumnId)
+	c.UpdatePreview("inertia", c.Inertia)
 	c.UpdateBody("content_id", c.ContentId)
 	c.UpdateBody("content_type", c.ContentType)
-	c.UpdatePreview("inertia", c.Inertia)
 	c.UpdateBody("note", c.Note)
 	return c.DoRequest("POST")
 }
@@ -82,9 +82,9 @@ type ProjectsCreateColumnCmd struct {
 func (c *ProjectsCreateColumnCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/projects/{project_id}/columns")
+	c.UpdateURLPath("project_id", c.ProjectId)
 	c.UpdatePreview("inertia", c.Inertia)
 	c.UpdateBody("name", c.Name)
-	c.UpdateURLPath("project_id", c.ProjectId)
 	return c.DoRequest("POST")
 }
 
@@ -98,8 +98,8 @@ type ProjectsCreateForAuthenticatedUserCmd struct {
 func (c *ProjectsCreateForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/projects")
-	c.UpdateBody("body", c.Body)
 	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdateBody("body", c.Body)
 	c.UpdateBody("name", c.Name)
 	return c.DoRequest("POST")
 }
@@ -115,10 +115,10 @@ type ProjectsCreateForOrgCmd struct {
 func (c *ProjectsCreateForOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/projects")
-	c.UpdateBody("body", c.Body)
-	c.UpdatePreview("inertia", c.Inertia)
-	c.UpdateBody("name", c.Name)
 	c.UpdateURLPath("org", c.Org)
+	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdateBody("body", c.Body)
+	c.UpdateBody("name", c.Name)
 	return c.DoRequest("POST")
 }
 
@@ -134,11 +134,11 @@ type ProjectsCreateForRepoCmd struct {
 func (c *ProjectsCreateForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/projects")
-	c.UpdateBody("body", c.Body)
-	c.UpdatePreview("inertia", c.Inertia)
-	c.UpdateBody("name", c.Name)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdateBody("body", c.Body)
+	c.UpdateBody("name", c.Name)
 	return c.DoRequest("POST")
 }
 
@@ -165,8 +165,8 @@ type ProjectsDeleteCmd struct {
 func (c *ProjectsDeleteCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/projects/{project_id}")
-	c.UpdatePreview("inertia", c.Inertia)
 	c.UpdateURLPath("project_id", c.ProjectId)
+	c.UpdatePreview("inertia", c.Inertia)
 	return c.DoRequest("DELETE")
 }
 
@@ -207,8 +207,8 @@ type ProjectsGetCmd struct {
 func (c *ProjectsGetCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/projects/{project_id}")
-	c.UpdatePreview("inertia", c.Inertia)
 	c.UpdateURLPath("project_id", c.ProjectId)
+	c.UpdatePreview("inertia", c.Inertia)
 	return c.DoRequest("GET")
 }
 
@@ -238,11 +238,11 @@ type ProjectsListCardsCmd struct {
 func (c *ProjectsListCardsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/projects/columns/{column_id}/cards")
-	c.UpdateURLQuery("archived_state", c.ArchivedState)
 	c.UpdateURLPath("column_id", c.ColumnId)
-	c.UpdatePreview("inertia", c.Inertia)
-	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("archived_state", c.ArchivedState)
 	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdatePreview("inertia", c.Inertia)
 	return c.DoRequest("GET")
 }
 
@@ -258,11 +258,11 @@ type ProjectsListCollaboratorsCmd struct {
 func (c *ProjectsListCollaboratorsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/projects/{project_id}/collaborators")
-	c.UpdateURLQuery("affiliation", c.Affiliation)
-	c.UpdatePreview("inertia", c.Inertia)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLPath("project_id", c.ProjectId)
+	c.UpdateURLQuery("affiliation", c.Affiliation)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdatePreview("inertia", c.Inertia)
 	return c.DoRequest("GET")
 }
 
@@ -277,10 +277,10 @@ type ProjectsListColumnsCmd struct {
 func (c *ProjectsListColumnsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/projects/{project_id}/columns")
-	c.UpdatePreview("inertia", c.Inertia)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLPath("project_id", c.ProjectId)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdatePreview("inertia", c.Inertia)
 	return c.DoRequest("GET")
 }
 
@@ -296,11 +296,11 @@ type ProjectsListForOrgCmd struct {
 func (c *ProjectsListForOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/projects")
-	c.UpdatePreview("inertia", c.Inertia)
 	c.UpdateURLPath("org", c.Org)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("state", c.State)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdatePreview("inertia", c.Inertia)
 	return c.DoRequest("GET")
 }
 
@@ -317,12 +317,12 @@ type ProjectsListForRepoCmd struct {
 func (c *ProjectsListForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/projects")
-	c.UpdatePreview("inertia", c.Inertia)
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("state", c.State)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdatePreview("inertia", c.Inertia)
 	return c.DoRequest("GET")
 }
 
@@ -338,11 +338,11 @@ type ProjectsListForUserCmd struct {
 func (c *ProjectsListForUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/users/{username}/projects")
-	c.UpdatePreview("inertia", c.Inertia)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("state", c.State)
 	c.UpdateURLPath("username", c.Username)
+	c.UpdateURLQuery("state", c.State)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdatePreview("inertia", c.Inertia)
 	return c.DoRequest("GET")
 }
 
@@ -358,8 +358,8 @@ func (c *ProjectsMoveCardCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/projects/columns/cards/{card_id}/moves")
 	c.UpdateURLPath("card_id", c.CardId)
-	c.UpdateBody("column_id", c.ColumnId)
 	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdateBody("column_id", c.ColumnId)
 	c.UpdateBody("position", c.Position)
 	return c.DoRequest("POST")
 }
@@ -390,9 +390,9 @@ type ProjectsRemoveCollaboratorCmd struct {
 func (c *ProjectsRemoveCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/projects/{project_id}/collaborators/{username}")
-	c.UpdatePreview("inertia", c.Inertia)
 	c.UpdateURLPath("project_id", c.ProjectId)
 	c.UpdateURLPath("username", c.Username)
+	c.UpdatePreview("inertia", c.Inertia)
 	return c.DoRequest("DELETE")
 }
 
@@ -406,9 +406,9 @@ type ProjectsReviewUserPermissionLevelCmd struct {
 func (c *ProjectsReviewUserPermissionLevelCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/projects/{project_id}/collaborators/{username}/permission")
-	c.UpdatePreview("inertia", c.Inertia)
 	c.UpdateURLPath("project_id", c.ProjectId)
 	c.UpdateURLPath("username", c.Username)
+	c.UpdatePreview("inertia", c.Inertia)
 	return c.DoRequest("GET")
 }
 
@@ -423,9 +423,9 @@ type ProjectsUpdateCardCmd struct {
 func (c *ProjectsUpdateCardCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/projects/columns/cards/{card_id}")
-	c.UpdateBody("archived", c.Archived)
 	c.UpdateURLPath("card_id", c.CardId)
 	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdateBody("archived", c.Archived)
 	c.UpdateBody("note", c.Note)
 	return c.DoRequest("PATCH")
 }
@@ -444,12 +444,12 @@ type ProjectsUpdateCmd struct {
 func (c *ProjectsUpdateCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/projects/{project_id}")
-	c.UpdateBody("body", c.Body)
+	c.UpdateURLPath("project_id", c.ProjectId)
 	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdateBody("body", c.Body)
 	c.UpdateBody("name", c.Name)
 	c.UpdateBody("organization_permission", c.OrganizationPermission)
 	c.UpdateBody("private", c.Private)
-	c.UpdateURLPath("project_id", c.ProjectId)
 	c.UpdateBody("state", c.State)
 	return c.DoRequest("PATCH")
 }

@@ -98,8 +98,8 @@ type UsersCheckFollowingForUserCmd struct {
 func (c *UsersCheckFollowingForUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/users/{username}/following/{target_user}")
-	c.UpdateURLPath("target_user", c.TargetUser)
 	c.UpdateURLPath("username", c.Username)
+	c.UpdateURLPath("target_user", c.TargetUser)
 	return c.DoRequest("GET")
 }
 
@@ -209,9 +209,9 @@ type UsersGetContextForUserCmd struct {
 func (c *UsersGetContextForUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/users/{username}/hovercard")
-	c.UpdateURLQuery("subject_id", c.SubjectId)
-	c.UpdateURLQuery("subject_type", c.SubjectType)
 	c.UpdateURLPath("username", c.Username)
+	c.UpdateURLQuery("subject_type", c.SubjectType)
+	c.UpdateURLQuery("subject_id", c.SubjectId)
 	return c.DoRequest("GET")
 }
 
@@ -270,8 +270,8 @@ type UsersListEmailsCmd struct {
 func (c *UsersListEmailsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/emails")
-	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -284,8 +284,8 @@ type UsersListFollowedByAuthenticatedCmd struct {
 func (c *UsersListFollowedByAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/following")
-	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -298,8 +298,8 @@ type UsersListFollowersForAuthenticatedUserCmd struct {
 func (c *UsersListFollowersForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/followers")
-	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -313,9 +313,9 @@ type UsersListFollowersForUserCmd struct {
 func (c *UsersListFollowersForUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/users/{username}/followers")
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLPath("username", c.Username)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -329,9 +329,9 @@ type UsersListFollowingForUserCmd struct {
 func (c *UsersListFollowingForUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/users/{username}/following")
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLPath("username", c.Username)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -344,8 +344,8 @@ type UsersListGpgKeysCmd struct {
 func (c *UsersListGpgKeysCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/gpg_keys")
-	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -359,9 +359,9 @@ type UsersListGpgKeysForUserCmd struct {
 func (c *UsersListGpgKeysForUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/users/{username}/gpg_keys")
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLPath("username", c.Username)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -374,8 +374,8 @@ type UsersListPublicEmailsCmd struct {
 func (c *UsersListPublicEmailsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/public_emails")
-	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -388,8 +388,8 @@ type UsersListPublicKeysCmd struct {
 func (c *UsersListPublicKeysCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/keys")
-	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -403,9 +403,9 @@ type UsersListPublicKeysForUserCmd struct {
 func (c *UsersListPublicKeysForUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/users/{username}/keys")
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLPath("username", c.Username)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 

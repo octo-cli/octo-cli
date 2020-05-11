@@ -66,8 +66,8 @@ type GistsCreateCommentCmd struct {
 func (c *GistsCreateCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/gists/{gist_id}/comments")
-	c.UpdateBody("body", c.Body)
 	c.UpdateURLPath("gist_id", c.GistId)
+	c.UpdateBody("body", c.Body)
 	return c.DoRequest("POST")
 }
 
@@ -92,8 +92,8 @@ type GistsDeleteCommentCmd struct {
 func (c *GistsDeleteCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/gists/{gist_id}/comments/{comment_id}")
-	c.UpdateURLPath("comment_id", c.CommentId)
 	c.UpdateURLPath("gist_id", c.GistId)
+	c.UpdateURLPath("comment_id", c.CommentId)
 	return c.DoRequest("DELETE")
 }
 
@@ -130,8 +130,8 @@ type GistsGetCommentCmd struct {
 func (c *GistsGetCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/gists/{gist_id}/comments/{comment_id}")
-	c.UpdateURLPath("comment_id", c.CommentId)
 	c.UpdateURLPath("gist_id", c.GistId)
+	c.UpdateURLPath("comment_id", c.CommentId)
 	return c.DoRequest("GET")
 }
 
@@ -159,9 +159,9 @@ type GistsListCmd struct {
 func (c *GistsListCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/gists")
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -176,8 +176,8 @@ func (c *GistsListCommentsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/gists/{gist_id}/comments")
 	c.UpdateURLPath("gist_id", c.GistId)
-	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -192,8 +192,8 @@ func (c *GistsListCommitsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/gists/{gist_id}/commits")
 	c.UpdateURLPath("gist_id", c.GistId)
-	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -208,10 +208,10 @@ type GistsListForUserCmd struct {
 func (c *GistsListForUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/users/{username}/gists")
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("since", c.Since)
 	c.UpdateURLPath("username", c.Username)
+	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -226,8 +226,8 @@ func (c *GistsListForksCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/gists/{gist_id}/forks")
 	c.UpdateURLPath("gist_id", c.GistId)
-	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -241,9 +241,9 @@ type GistsListPublicCmd struct {
 func (c *GistsListPublicCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/gists/public")
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -257,9 +257,9 @@ type GistsListStarredCmd struct {
 func (c *GistsListStarredCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/gists/starred")
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -298,10 +298,10 @@ type GistsUpdateCmd struct {
 func (c *GistsUpdateCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/gists/{gist_id}")
+	c.UpdateURLPath("gist_id", c.GistId)
 	c.UpdateBody("description", c.Description)
 	c.UpdateBody("files.content", c.FilesContent)
 	c.UpdateBody("files.filename", c.FilesFilename)
-	c.UpdateURLPath("gist_id", c.GistId)
 	return c.DoRequest("PATCH")
 }
 
@@ -315,8 +315,8 @@ type GistsUpdateCommentCmd struct {
 func (c *GistsUpdateCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/gists/{gist_id}/comments/{comment_id}")
-	c.UpdateBody("body", c.Body)
-	c.UpdateURLPath("comment_id", c.CommentId)
 	c.UpdateURLPath("gist_id", c.GistId)
+	c.UpdateURLPath("comment_id", c.CommentId)
+	c.UpdateBody("body", c.Body)
 	return c.DoRequest("PATCH")
 }
