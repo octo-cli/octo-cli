@@ -264,7 +264,10 @@ func operationCmdStruct(op *openapi3.Operation) (*StructTmplHelper, error) {
 	tmplHelper := StructTmplHelper{
 		Name: operationCmdStructName(op),
 		Fields: []StructField{
-			{Type: "internal.BaseCmd"},
+			{
+				Type:   "internal.BaseCmd",
+				Import: "github.com/octo-cli/octo-cli/internal",
+			},
 		},
 	}
 	previewFields, err := previewCmdFields(op)

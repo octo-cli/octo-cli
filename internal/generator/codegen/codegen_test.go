@@ -221,7 +221,10 @@ func Test_generateGoFile(t *testing.T) {
 										Type: "string",
 										Tags: util.NewTags(util.NewTag("required", ""), util.NewTag("name", "license")),
 									},
-									{Type: "internal.BaseCmd"},
+									{
+										Type:   "internal.BaseCmd",
+										Import: "github.com/octo-cli/octo-cli/internal",
+									},
 								},
 							},
 							RunMethod: RunMethod{
@@ -251,7 +254,10 @@ func Test_generateGoFile(t *testing.T) {
 										Type: "string",
 										Tags: util.NewTags(util.NewTag("required", ""), util.NewTag("name", "repo")),
 									},
-									{Type: "internal.BaseCmd"},
+									{
+										Type:   "internal.BaseCmd",
+										Import: "github.com/octo-cli/octo-cli/internal",
+									},
 								},
 							},
 							RunMethod: RunMethod{
@@ -276,7 +282,10 @@ func Test_generateGoFile(t *testing.T) {
 							CmdStruct: StructTmplHelper{
 								Name: "LicensesListCommonlyUsedCmd",
 								Fields: []StructField{
-									{Type: "internal.BaseCmd"},
+									{
+										Type:   "internal.BaseCmd",
+										Import: "github.com/octo-cli/octo-cli/internal",
+									},
 								},
 							},
 							RunMethod: RunMethod{
