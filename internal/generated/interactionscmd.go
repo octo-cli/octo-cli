@@ -2,7 +2,9 @@
 
 package generated
 
-import "github.com/octo-cli/octo-cli/internal"
+import (
+	"github.com/octo-cli/octo-cli/internal"
+)
 
 type InteractionsCmd struct {
 	AddOrUpdateRestrictionsForOrg  InteractionsAddOrUpdateRestrictionsForOrgCmd  `cmd:""`
