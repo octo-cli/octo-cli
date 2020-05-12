@@ -130,6 +130,24 @@ type ManualParamInfo struct {
 
 func GetManualParamInfo(op *openapi3.Operation) []ManualParamInfo {
 	overrides := map[string][]ManualParamInfo{
+		"markdown/render-raw": {
+			{
+				Name:        "file",
+				Type:        "string",
+				Tags:        util.NewTags(util.NewTag("type", "existingfile")),
+				Required:    true,
+				CodeImports: []string{"github.com/octo-cli/octo-cli/internal"},
+				Description: "the file to upload",
+				RunCode: `
+internal.MarkdownRenderRawOverride(&c.BaseCmd, c.File)`,
+			},
+			{
+				Name:   "content-type",
+				Type:   "string",
+				Tags:   util.NewTags(util.NewTag("hidden", "")),
+				Hidden: true,
+			},
+		},
 		"repos/upload-release-asset": {
 			{
 				Name:        "file",
@@ -144,15 +162,13 @@ internal.ReposUploadReleaseAssetOverride(&c.BaseCmd, c.File)`,
 			{
 				Name:        "content-type",
 				Type:        "string",
-				Required:    false,
 				Description: "override the Content-Type header",
 			},
 			{
-				Name:     "content-length",
-				Type:     "string",
-				Required: false,
-				Tags:     util.NewTags(util.NewTag("hidden", "")),
-				Hidden:   true,
+				Name:   "content-length",
+				Type:   "string",
+				Tags:   util.NewTags(util.NewTag("hidden", "")),
+				Hidden: true,
 			},
 		},
 	}

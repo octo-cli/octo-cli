@@ -949,6 +949,10 @@ Commands:
     Render an arbitrary Markdown document -
     https://developer.github.com/v3/markdown/#render-an-arbitrary-markdown-document
 
+  markdown render-raw --file=STRING
+    Render a Markdown document in raw mode -
+    https://developer.github.com/v3/markdown/#render-a-markdown-document-in-raw-mode
+
   meta get
     Get - https://developer.github.com/v3/meta/#meta
 

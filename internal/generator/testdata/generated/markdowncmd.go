@@ -7,7 +7,8 @@ import (
 )
 
 type MarkdownCmd struct {
-	Render MarkdownRenderCmd `cmd:""`
+	Render    MarkdownRenderCmd    `cmd:""`
+	RenderRaw MarkdownRenderRawCmd `cmd:""`
 }
 
 type MarkdownRenderCmd struct {
@@ -23,5 +24,19 @@ func (c *MarkdownRenderCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateBody("context", c.Context)
 	c.UpdateBody("mode", c.Mode)
 	c.UpdateBody("text", c.Text)
+	return c.DoRequest("POST")
+}
+
+type MarkdownRenderRawCmd struct {
+	ContentType string `name:"content-type" hidden:""`
+	File        string `required:"" name:"file" type:"existingfile"`
+	internal.BaseCmd
+}
+
+func (c *MarkdownRenderRawCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/markdown/raw")
+	internal.MarkdownRenderRawOverride(&c.BaseCmd, c.File)
+	c.AddRequestHeader("content-type", c.ContentType)
 	return c.DoRequest("POST")
 }

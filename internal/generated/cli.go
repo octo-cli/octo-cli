@@ -263,7 +263,8 @@ var CmdHelps = map[string]map[string]string{
 		"list-commonly-used": "List commonly used licenses - https://developer.github.com/v3/licenses/#list-commonly-used-licenses",
 	},
 	"markdown": {
-		"render": "Render an arbitrary Markdown document - https://developer.github.com/v3/markdown/#render-an-arbitrary-markdown-document",
+		"render":     "Render an arbitrary Markdown document - https://developer.github.com/v3/markdown/#render-an-arbitrary-markdown-document",
+		"render-raw": "Render a Markdown document in raw mode - https://developer.github.com/v3/markdown/#render-a-markdown-document-in-raw-mode",
 	},
 	"meta": {
 		"get": "Get - https://developer.github.com/v3/meta/#meta",
@@ -1866,6 +1867,10 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"context": "The repository context to use when creating references in `gfm` mode. Omit this parameter when using `markdown` mode.",
 			"mode":    "The rendering mode. Can be either:  \n\\* `markdown` to render a document in plain Markdown, just like README.md files are rendered.  \n\\* `gfm` to render a document in [GitHub Flavored Markdown](https://github.github.com/gfm/), which creates links for user mentions as well as references to SHA-1 hashes, issues, and pull requests.",
 			"text":    "The Markdown text to render in HTML. Markdown content must be 400 KB or less.",
+		},
+		"render-raw": {
+			"content-type": "",
+			"file":         "the file to upload",
 		},
 	},
 	"meta": {

@@ -9,6 +9,27 @@ import (
 	"github.com/gabriel-vasile/mimetype"
 )
 
+func MarkdownRenderRawOverride(c *BaseCmd, filename string) error {
+	if c.reqHeader == nil {
+		c.reqHeader = http.Header{}
+	}
+	c.reqHeader.Set("content-type", "text/plain")
+	err := c.UseFileBody(filename)
+	if err != nil {
+		return err
+	}
+	c.curler = func(req *http.Request) (string, error) {
+		req.Body = nil
+		curl, err := defaultCurl(req)
+		if err != nil {
+			return "", err
+		}
+		*curl = append(*curl, "--data-binary", fmt.Sprintf("@%s", filename))
+		return curl.String(), nil
+	}
+	return nil
+}
+
 func ReposUploadReleaseAssetOverride(c *BaseCmd, filename string) error {
 	if c.reqHeader == nil {
 		c.reqHeader = http.Header{}
