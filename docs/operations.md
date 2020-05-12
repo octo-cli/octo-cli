@@ -1067,7 +1067,7 @@ You must use a personal access token (which you can create via the [command line
 | name | description |
 |------|-------------|
 | installation_id | __Required__ installation_id parameter |
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br> |
+| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
 | repository_id | __Required__ repository_id parameter |
 
 ## apps check-authorization
@@ -1119,7 +1119,7 @@ This example creates a content attachment for the domain `https://errors.ai/`.
 |------|-------------|
 | body | __Required__ The body text of the content attachment displayed in the body or comment of an issue or pull request. This parameter supports markdown. |
 | content_reference_id | __Required__ content_reference_id parameter |
-| corsair-preview | __Required__ To access the Content Attachments API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| corsair-preview | __Required__ To access the Content Attachments API during the preview period, you must set this flag. |
 | title | __Required__ The title of the content attachment displayed in the body or comment of an issue or pull request. |
 
 ## apps create-from-manifest
@@ -1151,7 +1151,7 @@ This example grants the token "Read and write" permission to `issues` and "Read"
 | name | description |
 |------|-------------|
 | installation_id | __Required__ installation_id parameter |
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br> |
+| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
 | permissions | The permissions granted to the access token. The permissions object includes the permission names and their access type. For a complete list of permissions and allowable values, see "[GitHub App permissions](https://developer.github.com/apps/building-github-apps/creating-github-apps-using-url-parameters/#github-app-permissions)." |
 | repository_ids | The `id`s of the repositories that the installation token can access. Providing repository `id`s restricts the access of an installation token to specific repositories. You can use the "[List repositories](https://developer.github.com/v3/apps/installations/#list-repositories)" endpoint to get the `id` of all repositories that an installation can access. For example, you can select specific repositories when creating an installation token to restrict the number of repositories that can be cloned using the token. |
 
@@ -1185,7 +1185,7 @@ You must use a [JWT](https://developer.github.com/apps/building-github-apps/auth
 | name | description |
 |------|-------------|
 | installation_id | __Required__ installation_id parameter |
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br> |
+| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
 
 ## apps delete-token
 
@@ -1214,7 +1214,7 @@ You must use a [JWT](https://developer.github.com/apps/building-github-apps/auth
 
 | name | description |
 |------|-------------|
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br> |
+| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
 
 ## apps get-by-slug
 
@@ -1230,7 +1230,7 @@ If the GitHub App you specify is public, you can access this endpoint without au
 | name | description |
 |------|-------------|
 | app_slug | __Required__ app_slug parameter |
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br> |
+| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
 
 ## apps get-installation
 
@@ -1244,7 +1244,7 @@ You must use a [JWT](https://developer.github.com/apps/building-github-apps/auth
 | name | description |
 |------|-------------|
 | installation_id | __Required__ installation_id parameter |
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br> |
+| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
 
 ## apps get-org-installation
 
@@ -1259,7 +1259,7 @@ You must use a [JWT](https://developer.github.com/apps/building-github-apps/auth
 
 | name | description |
 |------|-------------|
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br> |
+| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
 | org | __Required__ org parameter |
 
 ## apps get-repo-installation
@@ -1275,7 +1275,7 @@ You must use a [JWT](https://developer.github.com/apps/building-github-apps/auth
 
 | name | description |
 |------|-------------|
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br> |
+| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
 | repo | __Required__ repo parameter |
 
 ## apps get-subscription-plan-for-account
@@ -1321,7 +1321,7 @@ You must use a [JWT](https://developer.github.com/apps/building-github-apps/auth
 
 | name | description |
 |------|-------------|
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br> |
+| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
 | username | __Required__ username parameter |
 
 ## apps list-accounts-for-plan
@@ -1380,8 +1380,8 @@ The access the user has to each repository is included in the hash under the `pe
 | name | description |
 |------|-------------|
 | installation_id | __Required__ installation_id parameter |
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br> |
-| mercy-preview | The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
+| mercy-preview | The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must set this flag. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -1398,7 +1398,7 @@ The permissions the installation has are included under the `permissions` key.
 
 | name | description |
 |------|-------------|
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br> |
+| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -1419,7 +1419,7 @@ You can find the permissions for the installation under the `permissions` key.
 
 | name | description |
 |------|-------------|
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br> |
+| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -1468,8 +1468,8 @@ You must use an [installation access token](https://developer.github.com/apps/bu
 
 | name | description |
 |------|-------------|
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br> |
-| mercy-preview | The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
+| mercy-preview | The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must set this flag. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -1515,7 +1515,7 @@ You must use a personal access token (which you can create via the [command line
 | name | description |
 |------|-------------|
 | installation_id | __Required__ installation_id parameter |
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br> |
+| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
 | repository_id | __Required__ repository_id parameter |
 
 ## apps reset-authorization
@@ -1646,7 +1646,7 @@ Creates a new check run for a specific commit in a repository. Your GitHub App m
 
 | name | description |
 |------|-------------|
-| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | head_sha | __Required__ The SHA of the commit. |
 | name | __Required__ The name of the check. For example, "code-coverage". |
 | repo | __Required__ repo parameter |
@@ -1676,7 +1676,7 @@ By default, check suites are automatically created when you create a [check run]
 
 | name | description |
 |------|-------------|
-| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | head_sha | __Required__ The sha of the head commit. |
 | repo | __Required__ repo parameter |
 
@@ -1693,7 +1693,7 @@ Gets a single check run using its `id`. GitHub Apps must have the `checks:read` 
 
 | name | description |
 |------|-------------|
-| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | check_run_id | __Required__ check_run_id parameter |
 | repo | __Required__ repo parameter |
 
@@ -1710,7 +1710,7 @@ Gets a single check suite using its `id`. GitHub Apps must have the `checks:read
 
 | name | description |
 |------|-------------|
-| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | check_suite_id | __Required__ check_suite_id parameter |
 | repo | __Required__ repo parameter |
 
@@ -1725,7 +1725,7 @@ Lists annotations for a check run using the annotation `id`. GitHub Apps must ha
 
 | name | description |
 |------|-------------|
-| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | check_run_id | __Required__ check_run_id parameter |
 | repo | __Required__ repo parameter |
 | page | Page number of the results to fetch. |
@@ -1744,7 +1744,7 @@ Lists check runs for a commit ref. The `ref` can be a SHA, branch name, or a tag
 
 | name | description |
 |------|-------------|
-| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | ref | __Required__ ref parameter |
 | repo | __Required__ repo parameter |
 | check_name | Returns check runs with the specified `name`. |
@@ -1766,7 +1766,7 @@ Lists check runs for a check suite using its `id`. GitHub Apps must have the `ch
 
 | name | description |
 |------|-------------|
-| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | check_suite_id | __Required__ check_suite_id parameter |
 | repo | __Required__ repo parameter |
 | check_name | Returns check runs with the specified `name`. |
@@ -1788,7 +1788,7 @@ Lists check suites for a commit `ref`. The `ref` can be a SHA, branch name, or a
 
 | name | description |
 |------|-------------|
-| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | ref | __Required__ ref parameter |
 | repo | __Required__ repo parameter |
 | app_id | Filters check suites by GitHub App `id`. |
@@ -1809,7 +1809,7 @@ To rerequest a check suite, your GitHub App must have the `checks:read` permissi
 
 | name | description |
 |------|-------------|
-| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | check_suite_id | __Required__ check_suite_id parameter |
 | repo | __Required__ repo parameter |
 
@@ -1824,7 +1824,7 @@ Changes the default automatic flow when creating check suites. By default, the C
 
 | name | description |
 |------|-------------|
-| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | repo | __Required__ repo parameter |
 | auto_trigger_checks | Enables or disables automatic creation of CheckSuite events upon pushes to the repository. Enabled by default. See the [`auto_trigger_checks` object](https://developer.github.com/v3/checks/suites/#auto_trigger_checks-object) description for details. |
 
@@ -1841,7 +1841,7 @@ Updates a check run for a specific commit in a repository. Your GitHub App must 
 
 | name | description |
 |------|-------------|
-| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | check_run_id | __Required__ check_run_id parameter |
 | repo | __Required__ repo parameter |
 | actions | Possible further actions the integrator can perform, which a user may trigger. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://developer.github.com/v3/checks/runs/#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://developer.github.com/v3/checks/runs/#check-runs-and-requested-actions)." |
@@ -1906,7 +1906,7 @@ https://developer.github.com/v3/codes_of_conduct/#list-all-codes-of-conduct
 
 | name | description |
 |------|-------------|
-| scarlet-witch-preview | __Required__ The Codes of Conduct API is currently available for developers to preview.<br><br>To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| scarlet-witch-preview | __Required__ The Codes of Conduct API is currently available for developers to preview.<br><br>To access the API during the preview period, you must set this flag. |
 
 ## codes-of-conduct get-conduct-code
 
@@ -1920,7 +1920,7 @@ https://developer.github.com/v3/codes_of_conduct/#get-an-individual-code-of-cond
 | name | description |
 |------|-------------|
 | key | __Required__ key parameter |
-| scarlet-witch-preview | __Required__ The Codes of Conduct API is currently available for developers to preview.<br><br>To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| scarlet-witch-preview | __Required__ The Codes of Conduct API is currently available for developers to preview.<br><br>To access the API during the preview period, you must set this flag. |
 
 ## codes-of-conduct get-for-repo
 
@@ -1934,7 +1934,7 @@ This method returns the contents of the repository's code of conduct file, if on
 | name | description |
 |------|-------------|
 | repo | __Required__ repo parameter |
-| scarlet-witch-preview | __Required__ The Codes of Conduct API is currently available for developers to preview.<br><br>To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| scarlet-witch-preview | __Required__ The Codes of Conduct API is currently available for developers to preview.<br><br>To access the API during the preview period, you must set this flag. |
 
 # emojis
 
@@ -2592,7 +2592,7 @@ Temporarily restricts interactions to certain GitHub users in any public reposit
 |------|-------------|
 | limit | __Required__ Specifies the group of GitHub users who can comment, open issues, or create pull requests in public repositories for the given organization. Must be one of: `existing_users`, `contributors_only`, or `collaborators_only`. |
 | org | __Required__ org parameter |
-| sombra-preview | __Required__ The Interactions API is currently in public preview. See the [blog post](https://developer.github.com/changes/2018-12-18-interactions-preview) preview for more details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| sombra-preview | __Required__ The Interactions API is currently in public preview. See the [blog post](https://developer.github.com/changes/2018-12-18-interactions-preview) preview for more details. To access the API during the preview period, you must set this flag. |
 
 ## interactions add-or-update-restrictions-for-repo
 
@@ -2607,7 +2607,7 @@ Temporarily restricts interactions to certain GitHub users within the given repo
 |------|-------------|
 | limit | __Required__ Specifies the group of GitHub users who can comment, open issues, or create pull requests for the given repository. Must be one of: `existing_users`, `contributors_only`, or `collaborators_only`. |
 | repo | __Required__ repo parameter |
-| sombra-preview | __Required__ The Interactions API is currently in public preview. See the [blog post](https://developer.github.com/changes/2018-12-18-interactions-preview) preview for more details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| sombra-preview | __Required__ The Interactions API is currently in public preview. See the [blog post](https://developer.github.com/changes/2018-12-18-interactions-preview) preview for more details. To access the API during the preview period, you must set this flag. |
 
 ## interactions get-restrictions-for-org
 
@@ -2621,7 +2621,7 @@ Shows which group of GitHub users can interact with this organization and when t
 | name | description |
 |------|-------------|
 | org | __Required__ org parameter |
-| sombra-preview | __Required__ The Interactions API is currently in public preview. See the [blog post](https://developer.github.com/changes/2018-12-18-interactions-preview) preview for more details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| sombra-preview | __Required__ The Interactions API is currently in public preview. See the [blog post](https://developer.github.com/changes/2018-12-18-interactions-preview) preview for more details. To access the API during the preview period, you must set this flag. |
 
 ## interactions get-restrictions-for-repo
 
@@ -2635,7 +2635,7 @@ Shows which group of GitHub users can interact with this repository and when the
 | name | description |
 |------|-------------|
 | repo | __Required__ repo parameter |
-| sombra-preview | __Required__ The Interactions API is currently in public preview. See the [blog post](https://developer.github.com/changes/2018-12-18-interactions-preview) preview for more details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| sombra-preview | __Required__ The Interactions API is currently in public preview. See the [blog post](https://developer.github.com/changes/2018-12-18-interactions-preview) preview for more details. To access the API during the preview period, you must set this flag. |
 
 ## interactions remove-restrictions-for-org
 
@@ -2649,7 +2649,7 @@ Removes all interaction restrictions from public repositories in the given organ
 | name | description |
 |------|-------------|
 | org | __Required__ org parameter |
-| sombra-preview | __Required__ The Interactions API is currently in public preview. See the [blog post](https://developer.github.com/changes/2018-12-18-interactions-preview) preview for more details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| sombra-preview | __Required__ The Interactions API is currently in public preview. See the [blog post](https://developer.github.com/changes/2018-12-18-interactions-preview) preview for more details. To access the API during the preview period, you must set this flag. |
 
 ## interactions remove-restrictions-for-repo
 
@@ -2663,7 +2663,7 @@ Removes all interaction restrictions from the given repository. You must have ow
 | name | description |
 |------|-------------|
 | repo | __Required__ repo parameter |
-| sombra-preview | __Required__ The Interactions API is currently in public preview. See the [blog post](https://developer.github.com/changes/2018-12-18-interactions-preview) preview for more details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| sombra-preview | __Required__ The Interactions API is currently in public preview. See the [blog post](https://developer.github.com/changes/2018-12-18-interactions-preview) preview for more details. To access the API during the preview period, you must set this flag. |
 
 # issues
 
@@ -2846,7 +2846,7 @@ Be aware that the `id` of a pull request returned from "Issues" endpoints will b
 |------|-------------|
 | issue_number | __Required__ issue_number parameter |
 | repo | __Required__ repo parameter |
-| squirrel-girl-preview | An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## issues get-comment
 
@@ -2861,8 +2861,8 @@ https://developer.github.com/v3/issues/comments/#get-a-single-comment
 |------|-------------|
 | comment_id | __Required__ comment_id parameter |
 | repo | __Required__ repo parameter |
-| machine-man-preview | If an issue comment is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).<br><br>To receive the `performed_via_github_app` object in the response, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| machine-man-preview | If an issue comment is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).<br><br>To receive the `performed_via_github_app` object in the response, you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## issues get-event
 
@@ -2877,9 +2877,9 @@ https://developer.github.com/v3/issues/events/#get-a-single-event
 |------|-------------|
 | event_id | __Required__ event_id parameter |
 | repo | __Required__ repo parameter |
-| machine-man-preview | If an issue event is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).<br><br>To receive the `performed_via_github_app` object in the response, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
-| sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
-| starfox-preview | Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](https://developer.github.com/changes/2018-09-05-project-card-events).<br><br>To receive the `project_card` attribute, project boards must be [enabled](https://help.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| machine-man-preview | If an issue event is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).<br><br>To receive the `performed_via_github_app` object in the response, you must set this flag. |
+| sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must set this flag. |
+| starfox-preview | Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](https://developer.github.com/changes/2018-09-05-project-card-events).<br><br>To receive the `project_card` attribute, project boards must be [enabled](https://help.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must set this flag. |
 
 ## issues get-label
 
@@ -2927,12 +2927,12 @@ Be aware that the `id` of a pull request returned from "Issues" endpoints will b
 | direction | The direction of the sort. Can be either `asc` or `desc`. |
 | filter | Indicates which sorts of issues to return. Can be one of:  <br>\* `assigned`: Issues assigned to you  <br>\* `created`: Issues created by you  <br>\* `mentioned`: Issues mentioning you  <br>\* `subscribed`: Issues you're subscribed to updates for  <br>\* `all`: All issues the authenticated user can see, regardless of participation or creation |
 | labels | A list of comma separated label names. Example: `bug,ui,@high` |
-| machine-man-preview | If an issue is opened via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).<br><br>To receive the `performed_via_github_app` object in the response, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| machine-man-preview | If an issue is opened via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).<br><br>To receive the `performed_via_github_app` object in the response, you must set this flag. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | since | Only issues updated at or after this time are returned. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 | sort | What to sort results by. Can be either `created`, `updated`, `comments`. |
-| squirrel-girl-preview | An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | state | Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`. |
 
 ## issues list-assignees
@@ -2966,7 +2966,7 @@ Issue Comments are ordered by ascending ID.
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | since | Only comments updated at or after this time are returned. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## issues list-comments-for-repo
 
@@ -2985,7 +2985,7 @@ By default, Issue Comments are ordered by ascending ID.
 | per_page | Results per page (max 100) |
 | since | Only comments updated at or after this time are returned. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 | sort | Either `created` or `updated`. |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## issues list-events
 
@@ -3002,8 +3002,8 @@ https://developer.github.com/v3/issues/events/#list-events-for-an-issue
 | repo | __Required__ repo parameter |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
-| starfox-preview | Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](https://developer.github.com/changes/2018-09-05-project-card-events).<br><br>To receive the `project_card` attribute, project boards must be [enabled](https://help.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must set this flag. |
+| starfox-preview | Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](https://developer.github.com/changes/2018-09-05-project-card-events).<br><br>To receive the `project_card` attribute, project boards must be [enabled](https://help.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must set this flag. |
 
 ## issues list-events-for-repo
 
@@ -3019,8 +3019,8 @@ https://developer.github.com/v3/issues/events/#list-events-for-a-repository
 | repo | __Required__ repo parameter |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
-| starfox-preview | Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](https://developer.github.com/changes/2018-09-05-project-card-events).<br><br>To receive the `project_card` attribute, project boards must be [enabled](https://help.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must set this flag. |
+| starfox-preview | Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](https://developer.github.com/changes/2018-09-05-project-card-events).<br><br>To receive the `project_card` attribute, project boards must be [enabled](https://help.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must set this flag. |
 
 ## issues list-events-for-timeline
 
@@ -3034,11 +3034,11 @@ https://developer.github.com/v3/issues/timeline/#list-events-for-an-issue
 | name | description |
 |------|-------------|
 | issue_number | __Required__ issue_number parameter |
-| mockingbird-preview | __Required__ The API to get issue timeline events is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-23-timeline-preview-api/) for full details. To access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| mockingbird-preview | __Required__ The API to get issue timeline events is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-23-timeline-preview-api/) for full details. To access the API you must set this flag. |
 | repo | __Required__ repo parameter |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| starfox-preview | Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](https://developer.github.com/changes/2018-09-05-project-card-events).<br><br>To receive the `project_card` attribute, project boards must be [enabled](https://help.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| starfox-preview | Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](https://developer.github.com/changes/2018-09-05-project-card-events).<br><br>To receive the `project_card` attribute, project boards must be [enabled](https://help.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must set this flag. |
 
 ## issues list-for-authenticated-user
 
@@ -3058,12 +3058,12 @@ Be aware that the `id` of a pull request returned from "Issues" endpoints will b
 | direction | The direction of the sort. Can be either `asc` or `desc`. |
 | filter | Indicates which sorts of issues to return. Can be one of:  <br>\* `assigned`: Issues assigned to you  <br>\* `created`: Issues created by you  <br>\* `mentioned`: Issues mentioning you  <br>\* `subscribed`: Issues you're subscribed to updates for  <br>\* `all`: All issues the authenticated user can see, regardless of participation or creation |
 | labels | A list of comma separated label names. Example: `bug,ui,@high` |
-| machine-man-preview | If an issue is opened via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).<br><br>To receive the `performed_via_github_app` object in the response, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| machine-man-preview | If an issue is opened via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).<br><br>To receive the `performed_via_github_app` object in the response, you must set this flag. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | since | Only issues updated at or after this time are returned. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 | sort | What to sort results by. Can be either `created`, `updated`, `comments`. |
-| squirrel-girl-preview | An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | state | Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`. |
 
 ## issues list-for-org
@@ -3085,12 +3085,12 @@ Be aware that the `id` of a pull request returned from "Issues" endpoints will b
 | direction | The direction of the sort. Can be either `asc` or `desc`. |
 | filter | Indicates which sorts of issues to return. Can be one of:  <br>\* `assigned`: Issues assigned to you  <br>\* `created`: Issues created by you  <br>\* `mentioned`: Issues mentioning you  <br>\* `subscribed`: Issues you're subscribed to updates for  <br>\* `all`: All issues the authenticated user can see, regardless of participation or creation |
 | labels | A list of comma separated label names. Example: `bug,ui,@high` |
-| machine-man-preview | If an issue is opened via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).<br><br>To receive the `performed_via_github_app` object in the response, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| machine-man-preview | If an issue is opened via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).<br><br>To receive the `performed_via_github_app` object in the response, you must set this flag. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | since | Only issues updated at or after this time are returned. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 | sort | What to sort results by. Can be either `created`, `updated`, `comments`. |
-| squirrel-girl-preview | An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | state | Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`. |
 
 ## issues list-for-repo
@@ -3113,14 +3113,14 @@ Be aware that the `id` of a pull request returned from "Issues" endpoints will b
 | creator | The user that created the issue. |
 | direction | The direction of the sort. Can be either `asc` or `desc`. |
 | labels | A list of comma separated label names. Example: `bug,ui,@high` |
-| machine-man-preview | If an issue is opened via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).<br><br>To receive the `performed_via_github_app` object in the response, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| machine-man-preview | If an issue is opened via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).<br><br>To receive the `performed_via_github_app` object in the response, you must set this flag. |
 | mentioned | A user that's mentioned in the issue. |
 | milestone | If an `integer` is passed, it should refer to a milestone by its `number` field. If the string `*` is passed, issues with any milestone are accepted. If the string `none` is passed, issues without milestones are returned. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | since | Only issues updated at or after this time are returned. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 | sort | What to sort results by. Can be either `created`, `updated`, `comments`. |
-| squirrel-girl-preview | An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | state | Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`. |
 
 ## issues list-labels-for-milestone
@@ -3204,7 +3204,7 @@ Note that, if you choose not to pass any parameters, you'll need to set `Content
 | issue_number | __Required__ issue_number parameter |
 | repo | __Required__ repo parameter |
 | lock_reason | The reason for locking the issue or pull request conversation. Lock will fail if you don't use one of these reasons:  <br>\* `off-topic`  <br>\* `too heated`  <br>\* `resolved`  <br>\* `spam` |
-| sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must set this flag. |
 
 ## issues remove-all-labels
 
@@ -3457,7 +3457,7 @@ Deletes a previous migration archive. Downloadable migration archives are automa
 | name | description |
 |------|-------------|
 | migration_id | __Required__ migration_id parameter |
-| wyandotte-preview | __Required__ To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| wyandotte-preview | __Required__ To access the Migrations API, you must set this flag. |
 
 ## migrations delete-archive-for-org
 
@@ -3472,7 +3472,7 @@ Deletes a previous migration archive. Migration archives are automatically delet
 |------|-------------|
 | migration_id | __Required__ migration_id parameter |
 | org | __Required__ org parameter |
-| wyandotte-preview | __Required__ To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| wyandotte-preview | __Required__ To access the Migrations API, you must set this flag. |
 
 ## migrations download-archive-for-org
 
@@ -3487,7 +3487,7 @@ Fetches the URL to a migration archive.
 |------|-------------|
 | migration_id | __Required__ migration_id parameter |
 | org | __Required__ org parameter |
-| wyandotte-preview | __Required__ To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| wyandotte-preview | __Required__ To access the Migrations API, you must set this flag. |
 
 ## migrations get-archive-for-authenticated-user
 
@@ -3521,7 +3521,7 @@ The archive will also contain an `attachments` directory that includes all attac
 | name | description |
 |------|-------------|
 | migration_id | __Required__ migration_id parameter |
-| wyandotte-preview | __Required__ To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| wyandotte-preview | __Required__ To access the Migrations API, you must set this flag. |
 
 ## migrations get-commit-authors
 
@@ -3617,7 +3617,7 @@ Once the migration has been `exported` you can [download the migration archive](
 | name | description |
 |------|-------------|
 | migration_id | __Required__ migration_id parameter |
-| wyandotte-preview | __Required__ To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| wyandotte-preview | __Required__ To access the Migrations API, you must set this flag. |
 
 ## migrations get-status-for-org
 
@@ -3639,7 +3639,7 @@ The `state` of a migration can be one of the following values:
 |------|-------------|
 | migration_id | __Required__ migration_id parameter |
 | org | __Required__ org parameter |
-| wyandotte-preview | __Required__ To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| wyandotte-preview | __Required__ To access the Migrations API, you must set this flag. |
 
 ## migrations list-for-authenticated-user
 
@@ -3652,7 +3652,7 @@ Lists all migrations a user has started.
 
 | name | description |
 |------|-------------|
-| wyandotte-preview | __Required__ To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| wyandotte-preview | __Required__ To access the Migrations API, you must set this flag. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -3668,7 +3668,7 @@ Lists the most recent migrations.
 | name | description |
 |------|-------------|
 | org | __Required__ org parameter |
-| wyandotte-preview | __Required__ To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| wyandotte-preview | __Required__ To access the Migrations API, you must set this flag. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -3685,7 +3685,7 @@ List all the repositories for this organization migration.
 |------|-------------|
 | migration_id | __Required__ migration_id parameter |
 | org | __Required__ org parameter |
-| wyandotte-preview | __Required__ To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| wyandotte-preview | __Required__ To access the Migrations API, you must set this flag. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -3701,7 +3701,7 @@ Lists all the repositories for this user migration.
 | name | description |
 |------|-------------|
 | migration_id | __Required__ migration_id parameter |
-| wyandotte-preview | __Required__ To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| wyandotte-preview | __Required__ To access the Migrations API, you must set this flag. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -3797,7 +3797,7 @@ Unlocks a repository. You can lock repositories when you [start a user migration
 |------|-------------|
 | migration_id | __Required__ migration_id parameter |
 | repo_name | __Required__ repo_name parameter |
-| wyandotte-preview | __Required__ To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| wyandotte-preview | __Required__ To access the Migrations API, you must set this flag. |
 
 ## migrations unlock-repo-for-org
 
@@ -3813,7 +3813,7 @@ Unlocks a repository that was locked for migration. You should unlock each migra
 | migration_id | __Required__ migration_id parameter |
 | org | __Required__ org parameter |
 | repo_name | __Required__ repo_name parameter |
-| wyandotte-preview | __Required__ To access the Migrations API, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| wyandotte-preview | __Required__ To access the Migrations API, you must set this flag. |
 
 ## migrations update-import
 
@@ -4203,7 +4203,7 @@ GitHub Apps with the `Organization plan` permission can use this endpoint to ret
 | name | description |
 |------|-------------|
 | org | __Required__ org parameter |
-| surtur-preview | New repository creation permissions are available to preview. You can now use `members_can_create_public_repositories`, `members_can_create_private_repositories`, and `members_can_create_internal_repositories`. You can only allow members to create internal repositories if your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+. These parameters provide more granular permissions to configure the type of repositories organization members can create.<br><br>To access these new parameters during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| surtur-preview | New repository creation permissions are available to preview. You can now use `members_can_create_public_repositories`, `members_can_create_private_repositories`, and `members_can_create_internal_repositories`. You can only allow members to create internal repositories if your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+. These parameters provide more granular permissions to configure the type of repositories organization members can create.<br><br>To access these new parameters during the preview period, you must set this flag. |
 
 ## orgs get-hook
 
@@ -4350,7 +4350,7 @@ Lists all GitHub Apps in an organization. The installation count includes all Gi
 
 | name | description |
 |------|-------------|
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br> |
+| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
 | org | __Required__ org parameter |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -4581,7 +4581,7 @@ Enables an authenticated organization owner with the `admin:org` scope to update
 | members_can_create_public_repositories | Toggles whether organization members can create public repositories, which are visible to anyone. Can be one of:  <br>\* `true` - all organization members can create public repositories.  <br>\* `false` - only organization owners can create public repositories.  <br>Default: `true`. For more information, see "[Restricting repository creation in your organization](https://help.github.com/github/setting-up-and-managing-organizations-and-teams/restricting-repository-creation-in-your-organization)" in the GitHub Help documentation. |
 | members_can_create_repositories | Toggles the ability of non-admin organization members to create repositories. Can be one of:  <br>\* `true` - all organization members can create repositories.  <br>\* `false` - only organization owners can create repositories.  <br>Default: `true`  <br>**Note:** A parameter can override this parameter. See `members_allowed_repository_creation_type` in this table for details. **Note:** A parameter can override this parameter. See `members_allowed_repository_creation_type` in this table for details. |
 | name | The shorthand name of the company. |
-| surtur-preview | New repository creation permissions are available to preview. You can now use `members_can_create_public_repositories`, `members_can_create_private_repositories`, and `members_can_create_internal_repositories`. You can only allow members to create internal repositories if your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+. These parameters provide more granular permissions to configure the type of repositories organization members can create.<br><br>To access these new parameters during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| surtur-preview | New repository creation permissions are available to preview. You can now use `members_can_create_public_repositories`, `members_can_create_private_repositories`, and `members_can_create_internal_repositories`. You can only allow members to create internal repositories if your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+. These parameters provide more granular permissions to configure the type of repositories organization members can create.<br><br>To access these new parameters during the preview period, you must set this flag. |
 
 ## orgs update-hook
 
@@ -4631,7 +4631,7 @@ Adds a collaborator to a an organization project and sets their permission level
 
 | name | description |
 |------|-------------|
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | project_id | __Required__ project_id parameter |
 | username | __Required__ username parameter |
 | permission | The permission to grant the collaborator. Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://developer.github.com/v3/#http-verbs)." Can be one of:  <br>\* `read` - can read, but not write to or administer this project.  <br>\* `write` - can read and write, but not administer this project.  <br>\* `admin` - can read, write and administer this project. |
@@ -4650,7 +4650,7 @@ Be aware that the `id` of a pull request returned from "Issues" endpoints will b
 | name | description |
 |------|-------------|
 | column_id | __Required__ column_id parameter |
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | content_id | The issue or pull request id you want to associate with this card. You can use the [List repository issues](https://developer.github.com/v3/issues/#list-repository-issues) and [List pull requests](https://developer.github.com/v3/pulls/#list-pull-requests) endpoints to find this id.  <br>**Note:** Depending on whether you use the issue id or pull request id, you will need to specify `Issue` or `PullRequest` as the `content_type`. |
 | content_type | **Required if you provide `content_id`**. The type of content you want to associate with this card. Use `Issue` when `content_id` is an issue id and use `PullRequest` when `content_id` is a pull request id. |
 | note | The card's note content. Only valid for cards without another type of content, so you must omit when specifying `content_id` and `content_type`. |
@@ -4666,7 +4666,7 @@ https://developer.github.com/v3/projects/columns/#create-a-project-column
 
 | name | description |
 |------|-------------|
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | name | __Required__ The name of the column. |
 | project_id | __Required__ project_id parameter |
 
@@ -4681,7 +4681,7 @@ https://developer.github.com/v3/projects/#create-a-user-project
 
 | name | description |
 |------|-------------|
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | name | __Required__ The name of the project. |
 | body | The description of the project. |
 
@@ -4696,7 +4696,7 @@ Creates an organization project board. Returns a `404 Not Found` status if proje
 
 | name | description |
 |------|-------------|
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | name | __Required__ The name of the project. |
 | org | __Required__ org parameter |
 | body | The description of the project. |
@@ -4712,7 +4712,7 @@ Creates a repository project board. Returns a `404 Not Found` status if projects
 
 | name | description |
 |------|-------------|
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | name | __Required__ The name of the project. |
 | repo | __Required__ repo parameter |
 | body | The description of the project. |
@@ -4728,7 +4728,7 @@ Deletes a project board. Returns a `404 Not Found` status if projects are disabl
 
 | name | description |
 |------|-------------|
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | project_id | __Required__ project_id parameter |
 
 ## projects delete-card
@@ -4743,7 +4743,7 @@ https://developer.github.com/v3/projects/cards/#delete-a-project-card
 | name | description |
 |------|-------------|
 | card_id | __Required__ card_id parameter |
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 
 ## projects delete-column
 
@@ -4757,7 +4757,7 @@ https://developer.github.com/v3/projects/columns/#delete-a-project-column
 | name | description |
 |------|-------------|
 | column_id | __Required__ column_id parameter |
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 
 ## projects get
 
@@ -4770,7 +4770,7 @@ Gets a project by its `id`. Returns a `404 Not Found` status if projects are dis
 
 | name | description |
 |------|-------------|
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | project_id | __Required__ project_id parameter |
 
 ## projects get-card
@@ -4785,7 +4785,7 @@ https://developer.github.com/v3/projects/cards/#get-a-project-card
 | name | description |
 |------|-------------|
 | card_id | __Required__ card_id parameter |
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 
 ## projects get-column
 
@@ -4799,7 +4799,7 @@ https://developer.github.com/v3/projects/columns/#get-a-project-column
 | name | description |
 |------|-------------|
 | column_id | __Required__ column_id parameter |
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 
 ## projects list-cards
 
@@ -4813,7 +4813,7 @@ https://developer.github.com/v3/projects/cards/#list-project-cards
 | name | description |
 |------|-------------|
 | column_id | __Required__ column_id parameter |
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | archived_state | Filters the project cards that are returned by the card's state. Can be one of `all`,`archived`, or `not_archived`. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -4829,7 +4829,7 @@ Lists the collaborators for an organization project. For a project, the list of 
 
 | name | description |
 |------|-------------|
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | project_id | __Required__ project_id parameter |
 | affiliation | Filters the collaborators by their affiliation. Can be one of:  <br>\* `outside`: Outside collaborators of a project that are not a member of the project's organization.  <br>\* `direct`: Collaborators with permissions to a project, regardless of organization membership status.  <br>\* `all`: All collaborators the authenticated user can see. |
 | page | Page number of the results to fetch. |
@@ -4846,7 +4846,7 @@ https://developer.github.com/v3/projects/columns/#list-project-columns
 
 | name | description |
 |------|-------------|
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | project_id | __Required__ project_id parameter |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -4864,7 +4864,7 @@ s
 
 | name | description |
 |------|-------------|
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | org | __Required__ org parameter |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -4881,7 +4881,7 @@ Lists the projects in a repository. Returns a `404 Not Found` status if projects
 
 | name | description |
 |------|-------------|
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | repo | __Required__ repo parameter |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -4898,7 +4898,7 @@ https://developer.github.com/v3/projects/#list-user-projects
 
 | name | description |
 |------|-------------|
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | username | __Required__ username parameter |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -4916,7 +4916,7 @@ https://developer.github.com/v3/projects/cards/#move-a-project-card
 | name | description |
 |------|-------------|
 | card_id | __Required__ card_id parameter |
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | position | __Required__ Can be one of `top`, `bottom`, or `after:<card_id>`, where `<card_id>` is the `id` value of a card in the same column, or in the new column specified by `column_id`. |
 | column_id | The `id` value of a column in the same project. |
 
@@ -4932,7 +4932,7 @@ https://developer.github.com/v3/projects/columns/#move-a-project-column
 | name | description |
 |------|-------------|
 | column_id | __Required__ column_id parameter |
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | position | __Required__ Can be one of `first`, `last`, or `after:<column_id>`, where `<column_id>` is the `id` value of a column in the same project. |
 
 ## projects remove-collaborator
@@ -4946,7 +4946,7 @@ Removes a collaborator from an organization project. You must be an organization
 
 | name | description |
 |------|-------------|
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | project_id | __Required__ project_id parameter |
 | username | __Required__ username parameter |
 
@@ -4961,7 +4961,7 @@ Returns the collaborator's permission level for an organization project. Possibl
 
 | name | description |
 |------|-------------|
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | project_id | __Required__ project_id parameter |
 | username | __Required__ username parameter |
 
@@ -4976,7 +4976,7 @@ Updates a project board's information. Returns a `404 Not Found` status if proje
 
 | name | description |
 |------|-------------|
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | project_id | __Required__ project_id parameter |
 | body | The description of the project. |
 | name | The name of the project. |
@@ -4996,7 +4996,7 @@ https://developer.github.com/v3/projects/cards/#update-a-project-card
 | name | description |
 |------|-------------|
 | card_id | __Required__ card_id parameter |
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | archived | Use `true` to archive a project card. Specify `false` if you need to restore a previously archived project card. |
 | note | The card's note content. Only valid for cards without another type of content, so this cannot be specified if the card already has a `content_id` and `content_type`. |
 
@@ -5012,7 +5012,7 @@ https://developer.github.com/v3/projects/columns/#update-a-project-column
 | name | description |
 |------|-------------|
 | column_id | __Required__ column_id parameter |
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | name | __Required__ The new name of the column. |
 
 # pulls
@@ -5056,7 +5056,7 @@ This endpoint triggers [notifications](https://help.github.com/articles/about-no
 | body | The contents of the pull request. |
 | draft | Indicates whether the pull request is a draft. See "[Draft Pull Requests](https://help.github.com/en/articles/about-pull-requests#draft-pull-requests)" in the GitHub Help documentation to learn more. |
 | maintainer_can_modify | Indicates whether [maintainers can modify](https://help.github.com/articles/allowing-changes-to-a-pull-request-branch-created-from-a-fork/) the pull request. |
-| sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must set this flag. |
 
 ## pulls create-comment
 
@@ -5098,7 +5098,7 @@ If you don't use the `comfort-fade` preview header, multi-line and single-line c
 | path | __Required__ The relative path to the file that necessitates a comment. |
 | pull_number | __Required__ pull_number parameter |
 | repo | __Required__ repo parameter |
-| comfort-fade-preview | Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| comfort-fade-preview | Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must set this flag. |
 | line | **Required with `comfort-fade` preview**. The line of the blob in the pull request diff that the comment applies to. For a multi-line comment, the last line of the range that your comment applies to. |
 | position | **Required without `comfort-fade` preview**. The position in the diff where you want to add a review comment. Note this value is not the same as the line number in the file. For help finding the position value, read the note above. |
 | side | **Required with `comfort-fade` preview**. In a split diff view, the side of the diff that the pull request's changes appear on. Can be `LEFT` or `RIGHT`. Use `LEFT` for deletions that appear in red. Use `RIGHT` for additions that appear in green or unchanged lines that appear in white and are shown for context. For a multi-line comment, side represents whether the last line of the comment range is a deletion or addition. For more information, see "[Diff view options](https://help.github.com/en/articles/about-comparing-branches-in-pull-requests#diff-view-options)" in the GitHub Help documentation. |
@@ -5249,7 +5249,7 @@ Pass the appropriate [media type](https://developer.github.com/v3/media/#commits
 |------|-------------|
 | pull_number | __Required__ pull_number parameter |
 | repo | __Required__ repo parameter |
-| sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must set this flag. |
 
 ## pulls get-comment
 
@@ -5284,8 +5284,8 @@ The `reactions` key will have the following payload where `url` can be used to c
 |------|-------------|
 | comment_id | __Required__ comment_id parameter |
 | repo | __Required__ repo parameter |
-| comfort-fade-preview | Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
-| squirrel-girl-preview | An additional `reactions` object in the review comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| comfort-fade-preview | Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the review comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## pulls get-comments-for-review
 
@@ -5336,7 +5336,7 @@ Draft pull requests are available in public repositories with GitHub Free and Gi
 | head | Filter pulls by head user or head organization and branch name in the format of `user:ref-name` or `organization:ref-name`. For example: `github:new-script-format` or `octocat:test-branch`. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must set this flag. |
 | sort | What to sort results by. Can be either `created`, `updated`, `popularity` (comment count) or `long-running` (age, filtering by pulls updated in the last month). |
 | state | Either `open`, `closed`, or `all` to filter by state. |
 
@@ -5373,13 +5373,13 @@ The `reactions` key will have the following payload where `url` can be used to c
 |------|-------------|
 | pull_number | __Required__ pull_number parameter |
 | repo | __Required__ repo parameter |
-| comfort-fade-preview | Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| comfort-fade-preview | Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must set this flag. |
 | direction | Can be either `asc` or `desc`. Ignored without `sort` parameter. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | since | This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. Only returns comments `updated` at or after this time. |
 | sort | Can be either `created` or `updated` comments. |
-| squirrel-girl-preview | An additional `reactions` object in the review comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | An additional `reactions` object in the review comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## pulls list-comments-for-repo
 
@@ -5413,13 +5413,13 @@ The `reactions` key will have the following payload where `url` can be used to c
 | name | description |
 |------|-------------|
 | repo | __Required__ repo parameter |
-| comfort-fade-preview | Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| comfort-fade-preview | Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must set this flag. |
 | direction | Can be either `asc` or `desc`. Ignored without `sort` parameter. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | since | This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. Only returns comments `updated` at or after this time. |
 | sort | Can be either `created` or `updated` comments. |
-| squirrel-girl-preview | An additional `reactions` object in the review comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | An additional `reactions` object in the review comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## pulls list-commits
 
@@ -5538,7 +5538,7 @@ To open or update a pull request in a public repository, you must have write acc
 | base | The name of the branch you want your changes pulled into. This should be an existing branch on the current repository. You cannot update the base branch on a pull request to point to another repository. |
 | body | The contents of the pull request. |
 | maintainer_can_modify | Indicates whether [maintainers can modify](https://help.github.com/articles/allowing-changes-to-a-pull-request-branch-created-from-a-fork/) the pull request. |
-| sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must set this flag. |
 | state | State of this Pull Request. Either `open` or `closed`. |
 | title | The title of the pull request. |
 
@@ -5553,7 +5553,7 @@ Updates the pull request branch with the latest upstream changes by merging HEAD
 
 | name | description |
 |------|-------------|
-| lydian-preview | __Required__ Updating the pull request branch with latest upstream changes is currently available for developers to preview. To access this new endpoint during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| lydian-preview | __Required__ Updating the pull request branch with latest upstream changes is currently available for developers to preview. To access this new endpoint during the preview period, you must set this flag. |
 | pull_number | __Required__ pull_number parameter |
 | repo | __Required__ repo parameter |
 | expected_head_sha | The expected SHA of the pull request's HEAD ref. This is the most recent commit on the pull request's branch. If the expected SHA does not match the pull request's HEAD, you will receive a `422 Unprocessable Entity` status. You can use the "[List commits on a repository](https://developer.github.com/v3/repos/commits/#list-commits-on-a-repository)" endpoint to find the most recent commit SHA. Default: SHA of the pull request's current HEAD ref. |
@@ -5590,7 +5590,7 @@ If you don't use the `comfort-fade` preview header, multi-line and single-line c
 | body | __Required__ The text of the reply to the review comment. |
 | comment_id | __Required__ comment_id parameter |
 | repo | __Required__ repo parameter |
-| comfort-fade-preview | Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| comfort-fade-preview | Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must set this flag. |
 
 ## pulls update-review
 
@@ -5651,7 +5651,7 @@ Create a reaction to a [commit comment](https://developer.github.com/v3/repos/co
 | comment_id | __Required__ comment_id parameter |
 | content | __Required__ The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the commit comment. |
 | repo | __Required__ repo parameter |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 
 ## reactions create-for-issue
 
@@ -5667,7 +5667,7 @@ Create a reaction to an [issue](https://developer.github.com/v3/issues/). A resp
 | content | __Required__ The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the issue. |
 | issue_number | __Required__ issue_number parameter |
 | repo | __Required__ repo parameter |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 
 ## reactions create-for-issue-comment
 
@@ -5683,7 +5683,7 @@ Create a reaction to an [issue comment](https://developer.github.com/v3/issues/c
 | comment_id | __Required__ comment_id parameter |
 | content | __Required__ The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the issue comment. |
 | repo | __Required__ repo parameter |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 
 ## reactions create-for-pull-request-review-comment
 
@@ -5699,7 +5699,7 @@ Create a reaction to a [pull request review comment](https://developer.github.co
 | comment_id | __Required__ comment_id parameter |
 | content | __Required__ The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the pull request review comment. |
 | repo | __Required__ repo parameter |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 
 ## reactions create-for-team-discussion-comment-in-org
 
@@ -5718,7 +5718,7 @@ Create a reaction to a [team discussion comment](https://developer.github.com/v3
 | content | __Required__ The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the team discussion comment. |
 | discussion_number | __Required__ discussion_number parameter |
 | org | __Required__ org parameter |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 | team_slug | __Required__ team_slug parameter |
 
 ## reactions create-for-team-discussion-comment-legacy
@@ -5737,7 +5737,7 @@ Create a reaction to a [team discussion comment](https://developer.github.com/v3
 | comment_number | __Required__ comment_number parameter |
 | content | __Required__ The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the team discussion comment. |
 | discussion_number | __Required__ discussion_number parameter |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 | team_id | __Required__ team_id parameter |
 
 ## reactions create-for-team-discussion-in-org
@@ -5756,7 +5756,7 @@ Create a reaction to a [team discussion](https://developer.github.com/v3/teams/d
 | content | __Required__ The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the team discussion. |
 | discussion_number | __Required__ discussion_number parameter |
 | org | __Required__ org parameter |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 | team_slug | __Required__ team_slug parameter |
 
 ## reactions create-for-team-discussion-legacy
@@ -5774,7 +5774,7 @@ Create a reaction to a [team discussion](https://developer.github.com/v3/teams/d
 |------|-------------|
 | content | __Required__ The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the team discussion. |
 | discussion_number | __Required__ discussion_number parameter |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 | team_id | __Required__ team_id parameter |
 
 ## reactions delete-for-commit-comment
@@ -5793,7 +5793,7 @@ Delete a reaction to a [commit comment](https://developer.github.com/v3/repos/co
 | comment_id | __Required__ comment_id parameter |
 | reaction_id | __Required__ reaction_id parameter |
 | repo | __Required__ repo parameter |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 
 ## reactions delete-for-issue
 
@@ -5811,7 +5811,7 @@ Delete a reaction to an [issue](https://developer.github.com/v3/issues/).
 | issue_number | __Required__ issue_number parameter |
 | reaction_id | __Required__ reaction_id parameter |
 | repo | __Required__ repo parameter |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 
 ## reactions delete-for-issue-comment
 
@@ -5829,7 +5829,7 @@ Delete a reaction to an [issue comment](https://developer.github.com/v3/issues/c
 | comment_id | __Required__ comment_id parameter |
 | reaction_id | __Required__ reaction_id parameter |
 | repo | __Required__ repo parameter |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 
 ## reactions delete-for-pull-request-comment
 
@@ -5847,7 +5847,7 @@ Delete a reaction to a [pull request review comment](https://developer.github.co
 | comment_id | __Required__ comment_id parameter |
 | reaction_id | __Required__ reaction_id parameter |
 | repo | __Required__ repo parameter |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 
 ## reactions delete-for-team-discussion
 
@@ -5865,7 +5865,7 @@ Delete a reaction to a [team discussion](https://developer.github.com/v3/teams/d
 | discussion_number | __Required__ discussion_number parameter |
 | org | __Required__ org parameter |
 | reaction_id | __Required__ reaction_id parameter |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 | team_slug | __Required__ team_slug parameter |
 
 ## reactions delete-for-team-discussion-comment
@@ -5885,7 +5885,7 @@ Delete a reaction to a [team discussion comment](https://developer.github.com/v3
 | discussion_number | __Required__ discussion_number parameter |
 | org | __Required__ org parameter |
 | reaction_id | __Required__ reaction_id parameter |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 | team_slug | __Required__ team_slug parameter |
 
 ## reactions delete-legacy
@@ -5902,7 +5902,7 @@ OAuth access tokens require the `write:discussion` [scope](https://developer.git
 | name | description |
 |------|-------------|
 | reaction_id | __Required__ reaction_id parameter |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 
 ## reactions list-for-commit-comment
 
@@ -5917,7 +5917,7 @@ List the reactions to a [commit comment](https://developer.github.com/v3/repos/c
 |------|-------------|
 | comment_id | __Required__ comment_id parameter |
 | repo | __Required__ repo parameter |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 | content | Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to a commit comment. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -5935,7 +5935,7 @@ List the reactions to an [issue](https://developer.github.com/v3/issues/).
 |------|-------------|
 | issue_number | __Required__ issue_number parameter |
 | repo | __Required__ repo parameter |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 | content | Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to an issue. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -5953,7 +5953,7 @@ List the reactions to an [issue comment](https://developer.github.com/v3/issues/
 |------|-------------|
 | comment_id | __Required__ comment_id parameter |
 | repo | __Required__ repo parameter |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 | content | Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to an issue comment. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -5971,7 +5971,7 @@ List the reactions to a [pull request review comment](https://developer.github.c
 |------|-------------|
 | comment_id | __Required__ comment_id parameter |
 | repo | __Required__ repo parameter |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 | content | Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to a pull request review comment. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -5992,7 +5992,7 @@ List the reactions to a [team discussion comment](https://developer.github.com/v
 | comment_number | __Required__ comment_number parameter |
 | discussion_number | __Required__ discussion_number parameter |
 | org | __Required__ org parameter |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 | team_slug | __Required__ team_slug parameter |
 | content | Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to a team discussion comment. |
 | page | Page number of the results to fetch. |
@@ -6013,7 +6013,7 @@ List the reactions to a [team discussion comment](https://developer.github.com/v
 |------|-------------|
 | comment_number | __Required__ comment_number parameter |
 | discussion_number | __Required__ discussion_number parameter |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 | team_id | __Required__ team_id parameter |
 | content | Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to a team discussion comment. |
 | page | Page number of the results to fetch. |
@@ -6034,7 +6034,7 @@ List the reactions to a [team discussion](https://developer.github.com/v3/teams/
 |------|-------------|
 | discussion_number | __Required__ discussion_number parameter |
 | org | __Required__ org parameter |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 | team_slug | __Required__ team_slug parameter |
 | content | Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to a team discussion. |
 | page | Page number of the results to fetch. |
@@ -6054,7 +6054,7 @@ List the reactions to a [team discussion](https://developer.github.com/v3/teams/
 | name | description |
 |------|-------------|
 | discussion_number | __Required__ discussion_number parameter |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 | team_id | __Required__ team_id parameter |
 | content | Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to a team discussion. |
 | page | Page number of the results to fetch. |
@@ -6168,7 +6168,7 @@ When authenticated with admin or owner permissions to the repository, you can us
 |------|-------------|
 | branch | __Required__ branch parameter |
 | repo | __Required__ repo parameter |
-| zzzax-preview | __Required__ Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| zzzax-preview | __Required__ Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must set this flag. |
 
 ## repos add-protected-branch-required-status-checks-contexts
 
@@ -6251,7 +6251,7 @@ Shows whether vulnerability alerts are enabled or disabled for a repository. The
 
 | name | description |
 |------|-------------|
-| dorian-preview | __Required__ Enabling and disabling vulnerability alerts for a repository using the REST API is currently available for developers to preview. To access these new endpoints during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| dorian-preview | __Required__ Enabling and disabling vulnerability alerts for a repository using the REST API is currently available for developers to preview. To access these new endpoints during the preview period, you must set this flag. |
 | repo | __Required__ repo parameter |
 
 ## repos compare-commits
@@ -6364,7 +6364,7 @@ This error happens when the `required_contexts` parameter indicates that one or 
 |------|-------------|
 | ref | __Required__ The ref to deploy. This can be a branch, tag, or SHA. |
 | repo | __Required__ repo parameter |
-| ant-man-preview | The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| ant-man-preview | The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must set this flag. |
 | auto_merge | Attempts to automatically merge the default branch into the requested ref, if it's behind the default branch. |
 | description | Short description of the deployment. |
 | environment | Name for the target deployment environment (e.g., `production`, `staging`, `qa`). |
@@ -6390,12 +6390,12 @@ GitHub Apps require `read & write` access to "Deployments" and `read-only` acces
 | deployment_id | __Required__ deployment_id parameter |
 | repo | __Required__ repo parameter |
 | state | __Required__ The state of the status. Can be one of `error`, `failure`, `inactive`, `in_progress`, `queued` `pending`, or `success`. **Note:** To use the `inactive` state, you must provide the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. To use the `in_progress` and `queued` states, you must provide the [`application/vnd.github.flash-preview+json`](https://developer.github.com/v3/previews/#deployment-statuses) custom media type. |
-| ant-man-preview | The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| ant-man-preview | The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must set this flag. |
 | auto_inactive | Adds a new `inactive` status to all prior non-transient, non-production environment deployments with the same repository and `environment` name as the created status's deployment. An `inactive` status is only added to deployments that had a `success` state. Default: `true`  <br>**Note:** To add an `inactive` status to `production` environments, you must use the [`application/vnd.github.flash-preview+json`](https://developer.github.com/v3/previews/#deployment-statuses) custom media type.  <br>**Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. |
 | description | A short description of the status. The maximum description length is 140 characters. |
 | environment | Name for the target deployment environment, which can be changed when setting a deploy status. For example, `production`, `staging`, or `qa`. **Note:** This parameter requires you to use the [`application/vnd.github.flash-preview+json`](https://developer.github.com/v3/previews/#deployment-statuses) custom media type. |
 | environment_url | Sets the URL for accessing your environment. Default: `""`  <br>**Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. **Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. |
-| flash-preview | New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](https://developer.github.com/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.<br><br>To access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must provide the following custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| flash-preview | New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](https://developer.github.com/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.<br><br>To access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must set this flag. |
 | log_url | The full URL of the deployment's output. This parameter replaces `target_url`. We will continue to accept `target_url` to support legacy uses, but we recommend replacing `target_url` with `log_url`. Setting `log_url` will automatically set `target_url` to the same value. Default: `""`  <br>**Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. **Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. |
 | target_url | The target URL to associate with this status. This URL should contain output to keep the user updated while the task is running or serve as historical information for what happened in the deployment. **Note:** It's recommended to use the `log_url` parameter, which replaces `target_url`. |
 
@@ -6443,7 +6443,7 @@ When using [OAuth](https://developer.github.com/apps/building-oauth-apps/underst
 | allow_rebase_merge | Either `true` to allow rebase-merging pull requests, or `false` to prevent rebase-merging. |
 | allow_squash_merge | Either `true` to allow squash-merging pull requests, or `false` to prevent squash-merging. |
 | auto_init | Pass `true` to create an initial commit with empty README. |
-| baptiste-preview | The `is_template` and `template_repository` keys are currently available for developer to preview. See [Create a repository using a template](https://developer.github.com/v3/repos/#create-a-repository-using-a-template) to learn how to create template repositories. To access these new response keys during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| baptiste-preview | The `is_template` and `template_repository` keys are currently available for developer to preview. See [Create a repository using a template](https://developer.github.com/v3/repos/#create-a-repository-using-a-template) to learn how to create template repositories. To access these new response keys during the preview period, you must set this flag. |
 | delete_branch_on_merge | Either `true` to allow automatically deleting head branches when pull requests are merged, or `false` to prevent automatic deletion. |
 | description | A short description of the repository. |
 | gitignore_template | Desired language or platform [.gitignore template](https://github.com/github/gitignore) to apply. Use the name of the template without the extension. For example, "Haskell". |
@@ -6453,7 +6453,7 @@ When using [OAuth](https://developer.github.com/apps/building-oauth-apps/underst
 | homepage | A URL with more information about the repository. |
 | is_template | Either `true` to make this repo available as a template repository or `false` to prevent it. |
 | license_template | Choose an [open source license template](https://choosealicense.com/) that best suits your needs, and then use the [license keyword](https://help.github.com/articles/licensing-a-repository/#searching-github-by-license-type) as the `license_template` string. For example, "mit" or "mpl-2.0". |
-| nebula-preview | You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).<br><br>To access repository visibility during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| nebula-preview | You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).<br><br>To access repository visibility during the preview period, you must set this flag. |
 | private | Either `true` to create a private repository or `false` to create a public one. |
 | team_id | The id of the team that will be granted access to this repository. This is only valid when creating a repository in an organization. |
 | visibility | Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. For more information, see "[Creating an internal repository](https://help.github.com/github/creating-cloning-and-archiving-repositories/creating-an-internal-repository)" in the GitHub Help documentation.  <br>The `visibility` parameter overrides the `private` parameter when you use both parameters with the `nebula-preview` preview header. |
@@ -6520,7 +6520,7 @@ When using [OAuth](https://developer.github.com/apps/building-oauth-apps/underst
 | allow_rebase_merge | Either `true` to allow rebase-merging pull requests, or `false` to prevent rebase-merging. |
 | allow_squash_merge | Either `true` to allow squash-merging pull requests, or `false` to prevent squash-merging. |
 | auto_init | Pass `true` to create an initial commit with empty README. |
-| baptiste-preview | The `is_template` and `template_repository` keys are currently available for developer to preview. See [Create a repository using a template](https://developer.github.com/v3/repos/#create-a-repository-using-a-template) to learn how to create template repositories. To access these new response keys during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| baptiste-preview | The `is_template` and `template_repository` keys are currently available for developer to preview. See [Create a repository using a template](https://developer.github.com/v3/repos/#create-a-repository-using-a-template) to learn how to create template repositories. To access these new response keys during the preview period, you must set this flag. |
 | delete_branch_on_merge | Either `true` to allow automatically deleting head branches when pull requests are merged, or `false` to prevent automatic deletion. |
 | description | A short description of the repository. |
 | gitignore_template | Desired language or platform [.gitignore template](https://github.com/github/gitignore) to apply. Use the name of the template without the extension. For example, "Haskell". |
@@ -6530,7 +6530,7 @@ When using [OAuth](https://developer.github.com/apps/building-oauth-apps/underst
 | homepage | A URL with more information about the repository. |
 | is_template | Either `true` to make this repo available as a template repository or `false` to prevent it. |
 | license_template | Choose an [open source license template](https://choosealicense.com/) that best suits your needs, and then use the [license keyword](https://help.github.com/articles/licensing-a-repository/#searching-github-by-license-type) as the `license_template` string. For example, "mit" or "mpl-2.0". |
-| nebula-preview | You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).<br><br>To access repository visibility during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| nebula-preview | You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).<br><br>To access repository visibility during the preview period, you must set this flag. |
 | private | Either `true` to create a private repository or `false` to create a public one. |
 | team_id | The id of the team that will be granted access to this repository. This is only valid when creating a repository in an organization. |
 | visibility | Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. For more information, see "[Creating an internal repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-repository-visibility#about-internal-repositories)" in the GitHub Help documentation.  <br>The `visibility` parameter overrides the `private` parameter when you use both parameters with the `nebula-preview` preview header. |
@@ -6616,7 +6616,7 @@ When using [OAuth](https://developer.github.com/apps/building-oauth-apps/underst
 
 | name | description |
 |------|-------------|
-| baptiste-preview | __Required__ Creating and using repository templates is currently available for developers to preview. To access this new endpoint during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| baptiste-preview | __Required__ Creating and using repository templates is currently available for developers to preview. To access this new endpoint during the preview period, you must set this flag. |
 | name | __Required__ The name of the new repository. |
 | template_owner | __Required__ template_owner parameter |
 | template_repo | __Required__ template_repo parameter |
@@ -6795,7 +6795,7 @@ Disables automated security fixes for a repository. The authenticated user must 
 
 | name | description |
 |------|-------------|
-| london-preview | __Required__ Enabling or disabling automated security fixes is currently available for developers to preview. To access this new endpoint during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| london-preview | __Required__ Enabling or disabling automated security fixes is currently available for developers to preview. To access this new endpoint during the preview period, you must set this flag. |
 | repo | __Required__ repo parameter |
 
 ## repos disable-pages-site
@@ -6810,7 +6810,7 @@ https://developer.github.com/v3/repos/pages/#disable-a-pages-site
 | name | description |
 |------|-------------|
 | repo | __Required__ repo parameter |
-| switcheroo-preview | __Required__ Enabling and disabling Pages in the Pages API is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2019-03-14-enabling-disabling-pages/) preview for more details. To access the new endpoints during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| switcheroo-preview | __Required__ Enabling and disabling Pages in the Pages API is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2019-03-14-enabling-disabling-pages/) preview for more details. To access the new endpoints during the preview period, you must set this flag. |
 
 ## repos disable-vulnerability-alerts
 
@@ -6823,7 +6823,7 @@ Disables vulnerability alerts and the dependency graph for a repository. The aut
 
 | name | description |
 |------|-------------|
-| dorian-preview | __Required__ Enabling and disabling vulnerability alerts for a repository using the REST API is currently available for developers to preview. To access these new endpoints during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| dorian-preview | __Required__ Enabling and disabling vulnerability alerts for a repository using the REST API is currently available for developers to preview. To access these new endpoints during the preview period, you must set this flag. |
 | repo | __Required__ repo parameter |
 
 ## repos enable-automated-security-fixes
@@ -6837,7 +6837,7 @@ Enables automated security fixes for a repository. The authenticated user must h
 
 | name | description |
 |------|-------------|
-| london-preview | __Required__ Enabling or disabling automated security fixes is currently available for developers to preview. To access this new endpoint during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| london-preview | __Required__ Enabling or disabling automated security fixes is currently available for developers to preview. To access this new endpoint during the preview period, you must set this flag. |
 | repo | __Required__ repo parameter |
 
 ## repos enable-pages-site
@@ -6852,7 +6852,7 @@ https://developer.github.com/v3/repos/pages/#enable-a-pages-site
 | name | description |
 |------|-------------|
 | repo | __Required__ repo parameter |
-| switcheroo-preview | __Required__ Enabling and disabling Pages in the Pages API is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2019-03-14-enabling-disabling-pages/) preview for more details. To access the new endpoints during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| switcheroo-preview | __Required__ Enabling and disabling Pages in the Pages API is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2019-03-14-enabling-disabling-pages/) preview for more details. To access the new endpoints during the preview period, you must set this flag. |
 | source.branch | The repository branch used to publish your [site's source files](https://help.github.com/articles/configuring-a-publishing-source-for-github-pages/). Can be either `master` or `gh-pages`. |
 | source.path | The repository directory that includes the source files for the Pages site. When `branch` is `master`, you can change `path` to `/docs`. When `branch` is `gh-pages`, you are unable to specify a `path` other than `/`. |
 
@@ -6867,7 +6867,7 @@ Enables vulnerability alerts and the dependency graph for a repository. The auth
 
 | name | description |
 |------|-------------|
-| dorian-preview | __Required__ Enabling and disabling vulnerability alerts for a repository using the REST API is currently available for developers to preview. To access these new endpoints during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| dorian-preview | __Required__ Enabling and disabling vulnerability alerts for a repository using the REST API is currently available for developers to preview. To access these new endpoints during the preview period, you must set this flag. |
 | repo | __Required__ repo parameter |
 
 ## repos get
@@ -6884,8 +6884,8 @@ The `parent` and `source` objects are present when the repository is a fork. `pa
 | name | description |
 |------|-------------|
 | repo | __Required__ repo parameter |
-| nebula-preview | You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).<br><br>To access repository visibility during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
-| scarlet-witch-preview | Developers can preview a new `code_of_conduct` key in responses. For more information, see [Codes of Conduct API](https://developer.github.com/v3/codes_of_conduct/).<br><br>To access this new response key during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| nebula-preview | You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).<br><br>To access repository visibility during the preview period, you must set this flag. |
+| scarlet-witch-preview | Developers can preview a new `code_of_conduct` key in responses. For more information, see [Codes of Conduct API](https://developer.github.com/v3/codes_of_conduct/).<br><br>To access this new response key during the preview period, you must set this flag. |
 
 ## repos get-all-topics
 
@@ -6898,7 +6898,7 @@ https://developer.github.com/v3/repos/#get-all-repository-topics
 
 | name | description |
 |------|-------------|
-| mercy-preview | __Required__ The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| mercy-preview | __Required__ The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must set this flag. |
 | repo | __Required__ repo parameter |
 
 ## repos get-apps-with-access-to-protected-branch
@@ -6963,7 +6963,7 @@ Protected branches are available in public repositories with GitHub Free and Git
 |------|-------------|
 | branch | __Required__ branch parameter |
 | repo | __Required__ repo parameter |
-| luke-cage-preview | The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| luke-cage-preview | The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must set this flag. |
 
 ## repos get-clones
 
@@ -7094,7 +7094,7 @@ https://developer.github.com/v3/repos/comments/#get-a-single-commit-comment
 |------|-------------|
 | comment_id | __Required__ comment_id parameter |
 | repo | __Required__ repo parameter |
-| squirrel-girl-preview | An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## repos get-contents
 
@@ -7178,8 +7178,8 @@ https://developer.github.com/v3/repos/deployments/#get-a-single-deployment
 |------|-------------|
 | deployment_id | __Required__ deployment_id parameter |
 | repo | __Required__ repo parameter |
-| ant-man-preview | The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
-| machine-man-preview | If a deployment is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).<br><br>To receive the `performed_via_github_app` object in the response, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| ant-man-preview | The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must set this flag. |
+| machine-man-preview | If a deployment is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).<br><br>To receive the `performed_via_github_app` object in the response, you must set this flag. |
 
 ## repos get-deployment-status
 
@@ -7195,9 +7195,9 @@ Users with pull access can view a deployment status for a deployment:
 | deployment_id | __Required__ deployment_id parameter |
 | repo | __Required__ repo parameter |
 | status_id | __Required__ status_id parameter |
-| ant-man-preview | The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
-| flash-preview | New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](https://developer.github.com/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.<br><br>To access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must provide the following custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
-| machine-man-preview | If a deployment is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).<br><br>To receive the `performed_via_github_app` object in the response, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| ant-man-preview | The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must set this flag. |
+| flash-preview | New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](https://developer.github.com/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.<br><br>To access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must set this flag. |
+| machine-man-preview | If a deployment is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).<br><br>To receive the `performed_via_github_app` object in the response, you must set this flag. |
 
 ## repos get-download
 
@@ -7324,7 +7324,7 @@ Protected branches are available in public repositories with GitHub Free and Git
 |------|-------------|
 | branch | __Required__ branch parameter |
 | repo | __Required__ repo parameter |
-| luke-cage-preview | The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| luke-cage-preview | The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must set this flag. |
 
 ## repos get-protected-branch-required-signatures
 
@@ -7343,7 +7343,7 @@ When authenticated with admin or owner permissions to the repository, you can us
 |------|-------------|
 | branch | __Required__ branch parameter |
 | repo | __Required__ repo parameter |
-| zzzax-preview | __Required__ Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| zzzax-preview | __Required__ Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must set this flag. |
 
 ## repos get-protected-branch-required-status-checks
 
@@ -7572,7 +7572,7 @@ Returns all branches where the given commit SHA is the HEAD, or latest commit fo
 | name | description |
 |------|-------------|
 | commit_sha | __Required__ commit_sha parameter |
-| groot-preview | __Required__ Listing branches or pull requests for a commit in the Commits API is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2019-04-11-pulls-branches-for-commit/) for more details. To access the new endpoints during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| groot-preview | __Required__ Listing branches or pull requests for a commit in the Commits API is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2019-04-11-pulls-branches-for-commit/) for more details. To access the new endpoints during the preview period, you must set this flag. |
 | repo | __Required__ repo parameter |
 
 ## repos list-collaborators
@@ -7608,7 +7608,7 @@ Use the `:commit_sha` to specify the commit that will have its comments listed.
 | repo | __Required__ repo parameter |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| squirrel-girl-preview | An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## repos list-commit-comments
 
@@ -7626,7 +7626,7 @@ Comments are ordered by ascending ID.
 | repo | __Required__ repo parameter |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| squirrel-girl-preview | An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## repos list-commits
 
@@ -7714,8 +7714,8 @@ Users with pull access can view deployment statuses for a deployment:
 |------|-------------|
 | deployment_id | __Required__ deployment_id parameter |
 | repo | __Required__ repo parameter |
-| ant-man-preview | The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
-| flash-preview | New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](https://developer.github.com/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.<br><br>To access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must provide the following custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| ant-man-preview | The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must set this flag. |
+| flash-preview | New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](https://developer.github.com/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.<br><br>To access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must set this flag. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -7731,7 +7731,7 @@ Simple filtering of deployments is available via query parameters:
 | name | description |
 |------|-------------|
 | repo | __Required__ repo parameter |
-| ant-man-preview | The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| ant-man-preview | The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must set this flag. |
 | environment | The name of the environment that was deployed to (e.g., `staging` or `production`). |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -7787,9 +7787,9 @@ Lists repositories for the specified organization.
 | name | description |
 |------|-------------|
 | org | __Required__ org parameter |
-| baptiste-preview | The `is_template` and `template_repository` keys are currently available for developer to preview. See [Create a repository using a template](https://developer.github.com/v3/repos/#create-a-repository-using-a-template) to learn how to create template repositories. To access these new response keys during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| baptiste-preview | The `is_template` and `template_repository` keys are currently available for developer to preview. See [Create a repository using a template](https://developer.github.com/v3/repos/#create-a-repository-using-a-template) to learn how to create template repositories. To access these new response keys during the preview period, you must set this flag. |
 | direction | Can be one of `asc` or `desc`. Default: when using `full_name`: `asc`, otherwise `desc` |
-| nebula-preview | You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).<br><br>To access repository visibility during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| nebula-preview | You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).<br><br>To access repository visibility during the preview period, you must set this flag. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | sort | Can be one of `created`, `updated`, `pushed`, `full_name`. |
@@ -7808,7 +7808,7 @@ Lists public repositories for the specified user.
 |------|-------------|
 | username | __Required__ username parameter |
 | direction | Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc` |
-| nebula-preview | You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).<br><br>To access repository visibility during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| nebula-preview | You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).<br><br>To access repository visibility during the preview period, you must set this flag. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | sort | Can be one of `created`, `updated`, `pushed`, `full_name`. |
@@ -7943,7 +7943,7 @@ Lists all pull requests containing the provided commit SHA, which can be from an
 | name | description |
 |------|-------------|
 | commit_sha | __Required__ commit_sha parameter |
-| groot-preview | __Required__ Listing branches or pull requests for a commit in the Commits API is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2019-04-11-pulls-branches-for-commit/) for more details. To access the new endpoints during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| groot-preview | __Required__ Listing branches or pull requests for a commit in the Commits API is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2019-04-11-pulls-branches-for-commit/) for more details. To access the new endpoints during the preview period, you must set this flag. |
 | repo | __Required__ repo parameter |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -8150,7 +8150,7 @@ When authenticated with admin or owner permissions to the repository, you can us
 |------|-------------|
 | branch | __Required__ branch parameter |
 | repo | __Required__ repo parameter |
-| zzzax-preview | __Required__ Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| zzzax-preview | __Required__ Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must set this flag. |
 
 ## repos remove-protected-branch-required-status-checks
 
@@ -8247,7 +8247,7 @@ https://developer.github.com/v3/repos/#replace-all-repository-topics
 
 | name | description |
 |------|-------------|
-| mercy-preview | __Required__ Repository topics on GitHub are currently available for developers to preview. To use this endpoint, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| mercy-preview | __Required__ Repository topics on GitHub are currently available for developers to preview. To use this endpoint, you must set this flag. |
 | names | __Required__ An array of topics to add to the repository. Pass one or more topics to _replace_ the set of existing topics. Send an empty array (`[]`) to clear all topics from the repository. **Note:** Topic `names` cannot contain uppercase letters. |
 | repo | __Required__ repo parameter |
 
@@ -8400,7 +8400,7 @@ https://developer.github.com/v3/repos/#update-a-repository
 | allow_rebase_merge | Either `true` to allow rebase-merging pull requests, or `false` to prevent rebase-merging. |
 | allow_squash_merge | Either `true` to allow squash-merging pull requests, or `false` to prevent squash-merging. |
 | archived | `true` to archive this repository. **Note**: You cannot unarchive repositories through the API. |
-| baptiste-preview | The `is_template` and `template_repository` keys are currently available for developer to preview. See [Create a repository using a template](https://developer.github.com/v3/repos/#create-a-repository-using-a-template) to learn how to create template repositories. To access these new response keys during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| baptiste-preview | The `is_template` and `template_repository` keys are currently available for developer to preview. See [Create a repository using a template](https://developer.github.com/v3/repos/#create-a-repository-using-a-template) to learn how to create template repositories. To access these new response keys during the preview period, you must set this flag. |
 | default_branch | Updates the default branch for this repository. |
 | delete_branch_on_merge | Either `true` to allow automatically deleting head branches when pull requests are merged, or `false` to prevent automatic deletion. |
 | description | A short description of the repository. |
@@ -8410,7 +8410,7 @@ https://developer.github.com/v3/repos/#update-a-repository
 | homepage | A URL with more information about the repository. |
 | is_template | Either `true` to make this repo available as a template repository or `false` to prevent it. |
 | name | The name of the repository. |
-| nebula-preview | You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).<br><br>To access repository visibility during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| nebula-preview | You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).<br><br>To access repository visibility during the preview period, you must set this flag. |
 | private | Either `true` to make the repository private or `false` to make it public. Default: `false`.  <br>**Note**: You will get a `422` error if the organization restricts [changing repository visibility](https://help.github.com/articles/repository-permission-levels-for-an-organization#changing-the-visibility-of-repositories) to organization owners and a non-owner tries to change the value of private. **Note**: You will get a `422` error if the organization restricts [changing repository visibility](https://help.github.com/articles/repository-permission-levels-for-an-organization#changing-the-visibility-of-repositories) to organization owners and a non-owner tries to change the value of private. |
 | visibility | Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. The `visibility` parameter overrides the `private` parameter when you use both along with the `nebula-preview` preview header. |
 
@@ -8440,7 +8440,7 @@ Protecting a branch requires admin or owner permissions to the repository.
 | restrictions.users | __Required__ The list of user `login`s with push access |
 | allow_deletions | Allows deletion of the protected branch by anyone with write access to the repository. Set to `false` to prevent deletion of the protected branch. Default: `false`. For more information, see "[Enabling force pushes to a protected branch](https://help.github.com/en/github/administering-a-repository/enabling-force-pushes-to-a-protected-branch)" in the GitHub Help documentation. |
 | allow_force_pushes | Permits force pushes to the protected branch by anyone with write access to the repository. Set to `true` to allow force pushes. Set to `false` or `null` to block force pushes. Default: `false`. For more information, see "[Enabling force pushes to a protected branch](https://help.github.com/en/github/administering-a-repository/enabling-force-pushes-to-a-protected-branch)" in the GitHub Help documentation." |
-| luke-cage-preview | The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| luke-cage-preview | The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must set this flag. |
 | required_linear_history | Enforces a linear commit Git history, which prevents anyone from pushing merge commits to a branch. Set to `true` to enforce a linear commit history. Set to `false` to disable a linear commit Git history. Your repository must allow squash merging or rebase merging before you can enable a linear commit history. Default: `false`. For more information, see "[Requiring a linear commit history](https://help.github.com/github/administering-a-repository/requiring-a-linear-commit-history)" in the GitHub Help documentation. |
 | required_pull_request_reviews.dismiss_stale_reviews | Set to `true` if you want to automatically dismiss approving reviews when someone pushes a new commit. |
 | required_pull_request_reviews.dismissal_restrictions.teams | The list of team `slug`s with dismissal access |
@@ -8536,7 +8536,7 @@ Updating pull request review enforcement requires admin or owner permissions to 
 | dismiss_stale_reviews | Set to `true` if you want to automatically dismiss approving reviews when someone pushes a new commit. |
 | dismissal_restrictions.teams | The list of team `slug`s with dismissal access |
 | dismissal_restrictions.users | The list of user `login`s with dismissal access |
-| luke-cage-preview | The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| luke-cage-preview | The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must set this flag. |
 | require_code_owner_reviews | Blocks merging pull requests until [code owners](https://help.github.com/articles/about-code-owners/) have reviewed. |
 | required_approving_review_count | Specifies the number of reviewers required to approve pull requests. Use a number between 1 and 6. |
 
@@ -8799,7 +8799,7 @@ Suppose you want to find commits related to CSS in the [octocat/Spoon-Knife](htt
 
 | name | description |
 |------|-------------|
-| cloak-preview | __Required__ The Commit Search API is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2017-01-05-commit-search-api/) for full details.<br><br>To access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| cloak-preview | __Required__ The Commit Search API is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2017-01-05-commit-search-api/) for full details.<br><br>To access the API you must set this flag. |
 | q | __Required__ The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://developer.github.com/v3/search/#constructing-a-search-query). See "[Searching commits](https://help.github.com/articles/searching-commits/)" for a detailed list of qualifiers. |
 | order | Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`. |
 | page | Page number of the results to fetch. |
@@ -8900,7 +8900,7 @@ In this request, we're searching for repositories with the word `tetris` in the 
 | name | description |
 |------|-------------|
 | q | __Required__ The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://developer.github.com/v3/search/#constructing-a-search-query). See "[Searching for repositories](https://help.github.com/articles/searching-for-repositories/)" for a detailed list of qualifiers. |
-| mercy-preview | The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| mercy-preview | The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must set this flag. |
 | order | Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -8945,7 +8945,7 @@ In this request, we're searching for topics with the keyword `ruby`, and we're l
 | name | description |
 |------|-------------|
 | q | __Required__ The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://developer.github.com/v3/search/#constructing-a-search-query). |
-| mercy-preview | The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| mercy-preview | The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must set this flag. |
 
 ## search users
 
@@ -9077,7 +9077,7 @@ Adds an organization project to a team. To add a project to a team or update the
 
 | name | description |
 |------|-------------|
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | org | __Required__ org parameter |
 | project_id | __Required__ project_id parameter |
 | team_slug | __Required__ team_slug parameter |
@@ -9096,7 +9096,7 @@ Adds an organization project to a team. To add a project to a team or update the
 
 | name | description |
 |------|-------------|
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | project_id | __Required__ project_id parameter |
 | team_id | __Required__ team_id parameter |
 | permission | The permission to grant to the team for this project. Can be one of:  <br>\* `read` - team members can read, but not write to or administer this project.  <br>\* `write` - team members can read and write, but not administer this project.  <br>\* `admin` - team members can read, write and administer this project.  <br>Default: the team's `permission` attribute will be used to determine what permission to grant the team on this project. Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://developer.github.com/v3/#http-verbs)." |
@@ -9218,7 +9218,7 @@ This endpoint triggers [notifications](https://help.github.com/articles/about-no
 | discussion_number | __Required__ discussion_number parameter |
 | org | __Required__ org parameter |
 | team_slug | __Required__ team_slug parameter |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
 
 ## teams create-discussion-comment-legacy
 
@@ -9238,7 +9238,7 @@ This endpoint triggers [notifications](https://help.github.com/articles/about-no
 | body | __Required__ The discussion comment's body text. |
 | discussion_number | __Required__ discussion_number parameter |
 | team_id | __Required__ team_id parameter |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
 
 ## teams create-discussion-in-org
 
@@ -9260,7 +9260,7 @@ This endpoint triggers [notifications](https://help.github.com/articles/about-no
 | team_slug | __Required__ team_slug parameter |
 | title | __Required__ The discussion post's title. |
 | private | Private posts are only visible to team members, organization owners, and team maintainers. Public posts are visible to all members of the organization. Set to `true` to create a private post. |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
 
 ## teams create-discussion-legacy
 
@@ -9281,7 +9281,7 @@ This endpoint triggers [notifications](https://help.github.com/articles/about-no
 | team_id | __Required__ team_id parameter |
 | title | __Required__ The discussion post's title. |
 | private | Private posts are only visible to team members, organization owners, and team maintainers. Public posts are visible to all members of the organization. Set to `true` to create a private post. |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
 
 ## teams create-or-update-id-p-group-connections-in-org
 
@@ -9456,7 +9456,7 @@ Get a specific comment on a team discussion. OAuth access tokens require the `re
 | discussion_number | __Required__ discussion_number parameter |
 | org | __Required__ org parameter |
 | team_slug | __Required__ team_slug parameter |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
 
 ## teams get-discussion-comment-legacy
 
@@ -9474,7 +9474,7 @@ Get a specific comment on a team discussion. OAuth access tokens require the `re
 | comment_number | __Required__ comment_number parameter |
 | discussion_number | __Required__ discussion_number parameter |
 | team_id | __Required__ team_id parameter |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
 
 ## teams get-discussion-in-org
 
@@ -9492,7 +9492,7 @@ Get a specific discussion on a team's page. OAuth access tokens require the `rea
 | discussion_number | __Required__ discussion_number parameter |
 | org | __Required__ org parameter |
 | team_slug | __Required__ team_slug parameter |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
 
 ## teams get-discussion-legacy
 
@@ -9509,7 +9509,7 @@ Get a specific discussion on a team's page. OAuth access tokens require the `rea
 |------|-------------|
 | discussion_number | __Required__ discussion_number parameter |
 | team_id | __Required__ team_id parameter |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
 
 ## teams get-legacy
 
@@ -9650,7 +9650,7 @@ List all comments on a team discussion. OAuth access tokens require the `read:di
 | direction | Sorts the discussion comments by the date they were created. To return the oldest comments first, set to `asc`. Can be one of `asc` or `desc`. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
 
 ## teams list-discussion-comments-legacy
 
@@ -9670,7 +9670,7 @@ List all comments on a team discussion. OAuth access tokens require the `read:di
 | direction | Sorts the discussion comments by the date they were created. To return the oldest comments first, set to `asc`. Can be one of `asc` or `desc`. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
 
 ## teams list-discussions-in-org
 
@@ -9690,7 +9690,7 @@ List all discussions on a team's page. OAuth access tokens require the `read:dis
 | direction | Sorts the discussion comments by the date they were created. To return the oldest comments first, set to `asc`. Can be one of `asc` or `desc`. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
 
 ## teams list-discussions-legacy
 
@@ -9709,7 +9709,7 @@ List all discussions on a team's page. OAuth access tokens require the `read:dis
 | direction | Sorts the discussion comments by the date they were created. To return the oldest comments first, set to `asc`. Can be one of `asc` or `desc`. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
 
 ## teams list-for-authenticated-user
 
@@ -9864,7 +9864,7 @@ Lists the organization projects for a team.
 
 | name | description |
 |------|-------------|
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | org | __Required__ org parameter |
 | team_slug | __Required__ team_slug parameter |
 | page | Page number of the results to fetch. |
@@ -9883,7 +9883,7 @@ Lists the organization projects for a team.
 
 | name | description |
 |------|-------------|
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | team_id | __Required__ team_id parameter |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -10063,7 +10063,7 @@ Checks whether a team has `read`, `write`, or `admin` permissions for an organiz
 
 | name | description |
 |------|-------------|
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | org | __Required__ org parameter |
 | project_id | __Required__ project_id parameter |
 | team_slug | __Required__ team_slug parameter |
@@ -10081,7 +10081,7 @@ Checks whether a team has `read`, `write`, or `admin` permissions for an organiz
 
 | name | description |
 |------|-------------|
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | project_id | __Required__ project_id parameter |
 | team_id | __Required__ team_id parameter |
 
@@ -10103,7 +10103,7 @@ Edits the body text of a discussion comment. OAuth access tokens require the `wr
 | discussion_number | __Required__ discussion_number parameter |
 | org | __Required__ org parameter |
 | team_slug | __Required__ team_slug parameter |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
 
 ## teams update-discussion-comment-legacy
 
@@ -10122,7 +10122,7 @@ Edits the body text of a discussion comment. OAuth access tokens require the `wr
 | comment_number | __Required__ comment_number parameter |
 | discussion_number | __Required__ discussion_number parameter |
 | team_id | __Required__ team_id parameter |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
 
 ## teams update-discussion-in-org
 
@@ -10141,7 +10141,7 @@ Edits the title and body text of a discussion post. Only the parameters you prov
 | org | __Required__ org parameter |
 | team_slug | __Required__ team_slug parameter |
 | body | The discussion post's body text. |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
 | title | The discussion post's title. |
 
 ## teams update-discussion-legacy
@@ -10160,7 +10160,7 @@ Edits the title and body text of a discussion post. Only the parameters you prov
 | discussion_number | __Required__ discussion_number parameter |
 | team_id | __Required__ team_id parameter |
 | body | The discussion post's body text. |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
+| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
 | title | The discussion post's title. |
 
 ## teams update-in-org

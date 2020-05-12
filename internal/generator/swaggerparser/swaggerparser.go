@@ -59,6 +59,23 @@ func OperationPreviews(op *openapi3.Operation) ([]Preview, error) {
 	if err != nil {
 		return nil, err
 	}
+	for i := range xg.Previews {
+		xg.Previews[i].Note = strings.TrimSpace(xg.Previews[i].Note)
+		xg.Previews[i].Note = strings.Split(xg.Previews[i].Note, "```")[0]
+		xg.Previews[i].Note = strings.TrimSpace(xg.Previews[i].Note)
+		setThisFlagPhrases := []string{
+			"provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header",
+			"provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header",
+			"provide the following custom [media type](https://developer.github.com/v3/media) in the `Accept` header",
+		}
+		for _, phrase := range setThisFlagPhrases {
+			xg.Previews[i].Note = strings.ReplaceAll(xg.Previews[i].Note, phrase, "set this flag")
+		}
+		xg.Previews[i].Note = strings.TrimSpace(xg.Previews[i].Note)
+		xg.Previews[i].Note = strings.TrimSuffix(xg.Previews[i].Note, ":")
+		xg.Previews[i].Note = strings.TrimSpace(xg.Previews[i].Note)
+		xg.Previews[i].Note = strings.TrimSuffix(xg.Previews[i].Note, ".") + "."
+	}
 	return xg.Previews, nil
 }
 
