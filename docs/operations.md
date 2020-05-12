@@ -1067,7 +1067,7 @@ You must use a personal access token (which you can create via the [command line
 | name | description |
 |------|-------------|
 | installation_id | __Required__ installation_id parameter |
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br><br> |
+| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br> |
 | repository_id | __Required__ repository_id parameter |
 
 ## apps check-authorization
@@ -1151,7 +1151,7 @@ This example grants the token "Read and write" permission to `issues` and "Read"
 | name | description |
 |------|-------------|
 | installation_id | __Required__ installation_id parameter |
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br><br> |
+| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br> |
 | permissions | The permissions granted to the access token. The permissions object includes the permission names and their access type. For a complete list of permissions and allowable values, see "[GitHub App permissions](https://developer.github.com/apps/building-github-apps/creating-github-apps-using-url-parameters/#github-app-permissions)." |
 | repository_ids | The `id`s of the repositories that the installation token can access. Providing repository `id`s restricts the access of an installation token to specific repositories. You can use the "[List repositories](https://developer.github.com/v3/apps/installations/#list-repositories)" endpoint to get the `id` of all repositories that an installation can access. For example, you can select specific repositories when creating an installation token to restrict the number of repositories that can be cloned using the token. |
 
@@ -1185,7 +1185,7 @@ You must use a [JWT](https://developer.github.com/apps/building-github-apps/auth
 | name | description |
 |------|-------------|
 | installation_id | __Required__ installation_id parameter |
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br><br> |
+| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br> |
 
 ## apps delete-token
 
@@ -1214,7 +1214,7 @@ You must use a [JWT](https://developer.github.com/apps/building-github-apps/auth
 
 | name | description |
 |------|-------------|
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br><br> |
+| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br> |
 
 ## apps get-by-slug
 
@@ -1230,7 +1230,7 @@ If the GitHub App you specify is public, you can access this endpoint without au
 | name | description |
 |------|-------------|
 | app_slug | __Required__ app_slug parameter |
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br><br> |
+| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br> |
 
 ## apps get-installation
 
@@ -1244,7 +1244,7 @@ You must use a [JWT](https://developer.github.com/apps/building-github-apps/auth
 | name | description |
 |------|-------------|
 | installation_id | __Required__ installation_id parameter |
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br><br> |
+| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br> |
 
 ## apps get-org-installation
 
@@ -1259,7 +1259,7 @@ You must use a [JWT](https://developer.github.com/apps/building-github-apps/auth
 
 | name | description |
 |------|-------------|
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br><br> |
+| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br> |
 | org | __Required__ org parameter |
 
 ## apps get-repo-installation
@@ -1275,7 +1275,7 @@ You must use a [JWT](https://developer.github.com/apps/building-github-apps/auth
 
 | name | description |
 |------|-------------|
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br><br> |
+| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br> |
 | repo | __Required__ repo parameter |
 
 ## apps get-subscription-plan-for-account
@@ -1321,7 +1321,7 @@ You must use a [JWT](https://developer.github.com/apps/building-github-apps/auth
 
 | name | description |
 |------|-------------|
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br><br> |
+| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br> |
 | username | __Required__ username parameter |
 
 ## apps list-accounts-for-plan
@@ -1380,7 +1380,7 @@ The access the user has to each repository is included in the hash under the `pe
 | name | description |
 |------|-------------|
 | installation_id | __Required__ installation_id parameter |
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br><br> |
+| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br> |
 | mercy-preview | The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -1398,7 +1398,7 @@ The permissions the installation has are included under the `permissions` key.
 
 | name | description |
 |------|-------------|
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br><br> |
+| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br> |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -1419,7 +1419,7 @@ You can find the permissions for the installation under the `permissions` key.
 
 | name | description |
 |------|-------------|
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br><br> |
+| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br> |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -1468,7 +1468,7 @@ You must use an [installation access token](https://developer.github.com/apps/bu
 
 | name | description |
 |------|-------------|
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br><br> |
+| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br> |
 | mercy-preview | The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:<br> |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -1515,7 +1515,7 @@ You must use a personal access token (which you can create via the [command line
 | name | description |
 |------|-------------|
 | installation_id | __Required__ installation_id parameter |
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br><br> |
+| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br> |
 | repository_id | __Required__ repository_id parameter |
 
 ## apps reset-authorization
@@ -1881,7 +1881,7 @@ The security `alert_id` is found at the end of the security alert's URL. For exa
 
 https://developer.github.com/v3/code-scanning/#list-code-scanning-alerts-for-a-repository
 
-Lists all open code scanning alerts for a repository. You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` read permission to use this endpoint.
+Lists all open code scanning alerts for the default branch (usually `master`) and protected branches in a repository. You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` read permission to use this endpoint.
 
 ### parameters
 
@@ -1889,6 +1889,7 @@ Lists all open code scanning alerts for a repository. You must use an access tok
 | name | description |
 |------|-------------|
 | repo | __Required__ repo parameter |
+| ref | Returns a list of code scanning alerts for a specific brach reference. The `ref` must be formatted as `heads/<branch name>`. |
 | state | Set to `closed` to list only closed code scanning alerts. |
 
 # codes-of-conduct
@@ -4336,7 +4337,7 @@ Lists all GitHub Apps in an organization. The installation count includes all Gi
 
 | name | description |
 |------|-------------|
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br><br> |
+| machine-man-preview | __Required__ To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.<br> |
 | org | __Required__ org parameter |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |

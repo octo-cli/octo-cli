@@ -1046,7 +1046,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 	"apps": {
 		"add-repo-to-installation": {
 			"installation_id":     "installation_id parameter",
-			"machine-man-preview": "To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```",
+			"machine-man-preview": "To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n```shell\napplication/vnd.github.machine-man-preview+json\n```",
 			"repository_id":       "repository_id parameter",
 		},
 		"check-authorization": {
@@ -1068,7 +1068,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 		},
 		"create-installation-token": {
 			"installation_id":     "installation_id parameter",
-			"machine-man-preview": "To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```",
+			"machine-man-preview": "To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n```shell\napplication/vnd.github.machine-man-preview+json\n```",
 			"permissions":         "The permissions granted to the access token. The permissions object includes the permission names and their access type. For a complete list of permissions and allowable values, see \"[GitHub App permissions](https://developer.github.com/apps/building-github-apps/creating-github-apps-using-url-parameters/#github-app-permissions).\"",
 			"repository_ids":      "The `id`s of the repositories that the installation token can access. Providing repository `id`s restricts the access of an installation token to specific repositories. You can use the \"[List repositories](https://developer.github.com/v3/apps/installations/#list-repositories)\" endpoint to get the `id` of all repositories that an installation can access. For example, you can select specific repositories when creating an installation token to restrict the number of repositories that can be cloned using the token.",
 		},
@@ -1078,29 +1078,29 @@ var FlagHelps = map[string]map[string]map[string]string{
 		},
 		"delete-installation": {
 			"installation_id":     "installation_id parameter",
-			"machine-man-preview": "To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```",
+			"machine-man-preview": "To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n```shell\napplication/vnd.github.machine-man-preview+json\n```",
 		},
 		"delete-token": {
 			"access_token": "The OAuth access token used to authenticate to the GitHub API.",
 			"client_id":    "client_id parameter",
 		},
 		"get-authenticated": {
-			"machine-man-preview": "To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```",
+			"machine-man-preview": "To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n```shell\napplication/vnd.github.machine-man-preview+json\n```",
 		},
 		"get-by-slug": {
 			"app_slug":            "app_slug parameter",
-			"machine-man-preview": "To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```",
+			"machine-man-preview": "To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n```shell\napplication/vnd.github.machine-man-preview+json\n```",
 		},
 		"get-installation": {
 			"installation_id":     "installation_id parameter",
-			"machine-man-preview": "To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```",
+			"machine-man-preview": "To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n```shell\napplication/vnd.github.machine-man-preview+json\n```",
 		},
 		"get-org-installation": {
-			"machine-man-preview": "To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```",
+			"machine-man-preview": "To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n```shell\napplication/vnd.github.machine-man-preview+json\n```",
 			"org":                 "org parameter",
 		},
 		"get-repo-installation": {
-			"machine-man-preview": "To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```",
+			"machine-man-preview": "To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n```shell\napplication/vnd.github.machine-man-preview+json\n```",
 			"owner":               "owner parameter",
 			"repo":                "repo parameter",
 		},
@@ -1111,7 +1111,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"account_id": "account_id parameter",
 		},
 		"get-user-installation": {
-			"machine-man-preview": "To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```",
+			"machine-man-preview": "To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n```shell\napplication/vnd.github.machine-man-preview+json\n```",
 			"username":            "username parameter",
 		},
 		"list-accounts-for-plan": {
@@ -1130,18 +1130,18 @@ var FlagHelps = map[string]map[string]map[string]string{
 		},
 		"list-installation-repos-for-authenticated-user": {
 			"installation_id":     "installation_id parameter",
-			"machine-man-preview": "To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```",
+			"machine-man-preview": "To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n```shell\napplication/vnd.github.machine-man-preview+json\n```",
 			"mercy-preview":       "The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.mercy-preview+json\n```",
 			"page":                "Page number of the results to fetch.",
 			"per_page":            "Results per page (max 100)",
 		},
 		"list-installations": {
-			"machine-man-preview": "To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```",
+			"machine-man-preview": "To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n```shell\napplication/vnd.github.machine-man-preview+json\n```",
 			"page":                "Page number of the results to fetch.",
 			"per_page":            "Results per page (max 100)",
 		},
 		"list-installations-for-authenticated-user": {
-			"machine-man-preview": "To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```",
+			"machine-man-preview": "To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n```shell\napplication/vnd.github.machine-man-preview+json\n```",
 			"page":                "Page number of the results to fetch.",
 			"per_page":            "Results per page (max 100)",
 		},
@@ -1154,7 +1154,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"per_page": "Results per page (max 100)",
 		},
 		"list-repos": {
-			"machine-man-preview": "To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```",
+			"machine-man-preview": "To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n```shell\napplication/vnd.github.machine-man-preview+json\n```",
 			"mercy-preview":       "The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.mercy-preview+json\n```",
 			"page":                "Page number of the results to fetch.",
 			"per_page":            "Results per page (max 100)",
@@ -1169,7 +1169,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 		},
 		"remove-repo-from-installation": {
 			"installation_id":     "installation_id parameter",
-			"machine-man-preview": "To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```",
+			"machine-man-preview": "To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n```shell\napplication/vnd.github.machine-man-preview+json\n```",
 			"repository_id":       "repository_id parameter",
 		},
 		"reset-authorization": {
@@ -1314,6 +1314,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 		},
 		"list-alerts-for-repo": {
 			"owner": "owner parameter",
+			"ref":   "Returns a list of code scanning alerts for a specific brach reference. The `ref` must be formatted as `heads/<branch name>`.",
 			"repo":  "repo parameter",
 			"state": "Set to `closed` to list only closed code scanning alerts.",
 		},
@@ -1618,14 +1619,14 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"issue_number":          "issue_number parameter",
 			"owner":                 "owner parameter",
 			"repo":                  "repo parameter",
-			"squirrel-girl-preview": "An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.",
+			"squirrel-girl-preview": "An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.",
 		},
 		"get-comment": {
 			"comment_id":            "comment_id parameter",
 			"machine-man-preview":   "If an issue comment is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).\n\nTo receive the `performed_via_github_app` object in the response, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.machine-man-preview\n```",
 			"owner":                 "owner parameter",
 			"repo":                  "repo parameter",
-			"squirrel-girl-preview": "An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.",
+			"squirrel-girl-preview": "An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.",
 		},
 		"get-event": {
 			"event_id":            "event_id parameter",
@@ -1654,7 +1655,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"per_page":              "Results per page (max 100)",
 			"since":                 "Only issues updated at or after this time are returned. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.",
 			"sort":                  "What to sort results by. Can be either `created`, `updated`, `comments`.",
-			"squirrel-girl-preview": "An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.",
+			"squirrel-girl-preview": "An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.",
 			"state":                 "Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.",
 		},
 		"list-assignees": {
@@ -1670,7 +1671,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"per_page":              "Results per page (max 100)",
 			"repo":                  "repo parameter",
 			"since":                 "Only comments updated at or after this time are returned. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.",
-			"squirrel-girl-preview": "An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.",
+			"squirrel-girl-preview": "An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.",
 		},
 		"list-comments-for-repo": {
 			"direction":             "Either `asc` or `desc`. Ignored without the `sort` parameter.",
@@ -1680,7 +1681,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"repo":                  "repo parameter",
 			"since":                 "Only comments updated at or after this time are returned. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.",
 			"sort":                  "Either `created` or `updated`.",
-			"squirrel-girl-preview": "An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.",
+			"squirrel-girl-preview": "An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.",
 		},
 		"list-events": {
 			"issue_number":     "issue_number parameter",
@@ -1717,7 +1718,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"per_page":              "Results per page (max 100)",
 			"since":                 "Only issues updated at or after this time are returned. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.",
 			"sort":                  "What to sort results by. Can be either `created`, `updated`, `comments`.",
-			"squirrel-girl-preview": "An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.",
+			"squirrel-girl-preview": "An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.",
 			"state":                 "Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.",
 		},
 		"list-for-org": {
@@ -1730,7 +1731,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"per_page":              "Results per page (max 100)",
 			"since":                 "Only issues updated at or after this time are returned. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.",
 			"sort":                  "What to sort results by. Can be either `created`, `updated`, `comments`.",
-			"squirrel-girl-preview": "An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.",
+			"squirrel-girl-preview": "An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.",
 			"state":                 "Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.",
 		},
 		"list-for-repo": {
@@ -1747,7 +1748,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"repo":                  "repo parameter",
 			"since":                 "Only issues updated at or after this time are returned. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.",
 			"sort":                  "What to sort results by. Can be either `created`, `updated`, `comments`.",
-			"squirrel-girl-preview": "An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.",
+			"squirrel-girl-preview": "An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.",
 			"state":                 "Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.",
 		},
 		"list-labels-for-milestone": {
@@ -2134,7 +2135,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"per_page": "Results per page (max 100)",
 		},
 		"list-installations": {
-			"machine-man-preview": "To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n\n```\napplication/vnd.github.machine-man-preview+json\n```",
+			"machine-man-preview": "To access the API with your GitHub App, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` Header for your requests.\n```shell\napplication/vnd.github.machine-man-preview+json\n```",
 			"org":                 "org parameter",
 			"page":                "Page number of the results to fetch.",
 			"per_page":            "Results per page (max 100)",
@@ -2607,55 +2608,55 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"content":               "The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the commit comment.",
 			"owner":                 "owner parameter",
 			"repo":                  "repo parameter",
-			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```",
+			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview+json\n```",
 		},
 		"create-for-issue": {
 			"content":               "The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the issue.",
 			"issue_number":          "issue_number parameter",
 			"owner":                 "owner parameter",
 			"repo":                  "repo parameter",
-			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```",
+			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview+json\n```",
 		},
 		"create-for-issue-comment": {
 			"comment_id":            "comment_id parameter",
 			"content":               "The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the issue comment.",
 			"owner":                 "owner parameter",
 			"repo":                  "repo parameter",
-			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```",
+			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview+json\n```",
 		},
 		"create-for-pull-request-review-comment": {
 			"comment_id":            "comment_id parameter",
 			"content":               "The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the pull request review comment.",
 			"owner":                 "owner parameter",
 			"repo":                  "repo parameter",
-			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```",
+			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview+json\n```",
 		},
 		"create-for-team-discussion-comment-in-org": {
 			"comment_number":        "comment_number parameter",
 			"content":               "The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the team discussion comment.",
 			"discussion_number":     "discussion_number parameter",
 			"org":                   "org parameter",
-			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```",
+			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview+json\n```",
 			"team_slug":             "team_slug parameter",
 		},
 		"create-for-team-discussion-comment-legacy": {
 			"comment_number":        "comment_number parameter",
 			"content":               "The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the team discussion comment.",
 			"discussion_number":     "discussion_number parameter",
-			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```",
+			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview+json\n```",
 			"team_id":               "team_id parameter",
 		},
 		"create-for-team-discussion-in-org": {
 			"content":               "The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the team discussion.",
 			"discussion_number":     "discussion_number parameter",
 			"org":                   "org parameter",
-			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```",
+			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview+json\n```",
 			"team_slug":             "team_slug parameter",
 		},
 		"create-for-team-discussion-legacy": {
 			"content":               "The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the team discussion.",
 			"discussion_number":     "discussion_number parameter",
-			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```",
+			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview+json\n```",
 			"team_id":               "team_id parameter",
 		},
 		"delete-for-commit-comment": {
@@ -2663,34 +2664,34 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"owner":                 "owner parameter",
 			"reaction_id":           "reaction_id parameter",
 			"repo":                  "repo parameter",
-			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```",
+			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview+json\n```",
 		},
 		"delete-for-issue": {
 			"issue_number":          "issue_number parameter",
 			"owner":                 "owner parameter",
 			"reaction_id":           "reaction_id parameter",
 			"repo":                  "repo parameter",
-			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```",
+			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview+json\n```",
 		},
 		"delete-for-issue-comment": {
 			"comment_id":            "comment_id parameter",
 			"owner":                 "owner parameter",
 			"reaction_id":           "reaction_id parameter",
 			"repo":                  "repo parameter",
-			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```",
+			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview+json\n```",
 		},
 		"delete-for-pull-request-comment": {
 			"comment_id":            "comment_id parameter",
 			"owner":                 "owner parameter",
 			"reaction_id":           "reaction_id parameter",
 			"repo":                  "repo parameter",
-			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```",
+			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview+json\n```",
 		},
 		"delete-for-team-discussion": {
 			"discussion_number":     "discussion_number parameter",
 			"org":                   "org parameter",
 			"reaction_id":           "reaction_id parameter",
-			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```",
+			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview+json\n```",
 			"team_slug":             "team_slug parameter",
 		},
 		"delete-for-team-discussion-comment": {
@@ -2698,12 +2699,12 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"discussion_number":     "discussion_number parameter",
 			"org":                   "org parameter",
 			"reaction_id":           "reaction_id parameter",
-			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```",
+			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview+json\n```",
 			"team_slug":             "team_slug parameter",
 		},
 		"delete-legacy": {
 			"reaction_id":           "reaction_id parameter",
-			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```",
+			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview+json\n```",
 		},
 		"list-for-commit-comment": {
 			"comment_id":            "comment_id parameter",
@@ -2712,7 +2713,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"page":                  "Page number of the results to fetch.",
 			"per_page":              "Results per page (max 100)",
 			"repo":                  "repo parameter",
-			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```",
+			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview+json\n```",
 		},
 		"list-for-issue": {
 			"content":               "Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to an issue.",
@@ -2721,7 +2722,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"page":                  "Page number of the results to fetch.",
 			"per_page":              "Results per page (max 100)",
 			"repo":                  "repo parameter",
-			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```",
+			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview+json\n```",
 		},
 		"list-for-issue-comment": {
 			"comment_id":            "comment_id parameter",
@@ -2730,7 +2731,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"page":                  "Page number of the results to fetch.",
 			"per_page":              "Results per page (max 100)",
 			"repo":                  "repo parameter",
-			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```",
+			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview+json\n```",
 		},
 		"list-for-pull-request-review-comment": {
 			"comment_id":            "comment_id parameter",
@@ -2739,7 +2740,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"page":                  "Page number of the results to fetch.",
 			"per_page":              "Results per page (max 100)",
 			"repo":                  "repo parameter",
-			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```",
+			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview+json\n```",
 		},
 		"list-for-team-discussion-comment-in-org": {
 			"comment_number":        "comment_number parameter",
@@ -2748,7 +2749,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"org":                   "org parameter",
 			"page":                  "Page number of the results to fetch.",
 			"per_page":              "Results per page (max 100)",
-			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```",
+			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview+json\n```",
 			"team_slug":             "team_slug parameter",
 		},
 		"list-for-team-discussion-comment-legacy": {
@@ -2757,7 +2758,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"discussion_number":     "discussion_number parameter",
 			"page":                  "Page number of the results to fetch.",
 			"per_page":              "Results per page (max 100)",
-			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```",
+			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview+json\n```",
 			"team_id":               "team_id parameter",
 		},
 		"list-for-team-discussion-in-org": {
@@ -2766,7 +2767,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"org":                   "org parameter",
 			"page":                  "Page number of the results to fetch.",
 			"per_page":              "Results per page (max 100)",
-			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```",
+			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview+json\n```",
 			"team_slug":             "team_slug parameter",
 		},
 		"list-for-team-discussion-legacy": {
@@ -2774,7 +2775,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"discussion_number":     "discussion_number parameter",
 			"page":                  "Page number of the results to fetch.",
 			"per_page":              "Results per page (max 100)",
-			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview+json\n```",
+			"squirrel-girl-preview": "APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview+json\n```",
 			"team_id":               "team_id parameter",
 		},
 	},
@@ -3136,7 +3137,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"comment_id":            "comment_id parameter",
 			"owner":                 "owner parameter",
 			"repo":                  "repo parameter",
-			"squirrel-girl-preview": "An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.",
+			"squirrel-girl-preview": "An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.",
 		},
 		"get-contents": {
 			"owner": "owner parameter",
@@ -3307,14 +3308,14 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"page":                  "Page number of the results to fetch.",
 			"per_page":              "Results per page (max 100)",
 			"repo":                  "repo parameter",
-			"squirrel-girl-preview": "An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.",
+			"squirrel-girl-preview": "An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.",
 		},
 		"list-commit-comments": {
 			"owner":                 "owner parameter",
 			"page":                  "Page number of the results to fetch.",
 			"per_page":              "Results per page (max 100)",
 			"repo":                  "repo parameter",
-			"squirrel-girl-preview": "An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\n  application/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.",
+			"squirrel-girl-preview": "An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.\n\nTo access the API you must provide a custom [media type](https://developer.github.com/v3/media) in the `Accept` header:\n```shell\napplication/vnd.github.squirrel-girl-preview\n```\nThe `reactions` key will have the following payload where `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions.",
 		},
 		"list-commits": {
 			"author":   "GitHub login or email address by which to filter by commit author.",
