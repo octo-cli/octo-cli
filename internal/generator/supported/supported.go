@@ -25,20 +25,6 @@ type unsupportedCheck struct {
 
 var unsupportedChecks = []unsupportedCheck{
 	{
-		reason: "manually set to unsupported",
-		check: func(op *openapi3.Operation, routePath, method string) bool {
-			disList := []string{
-				"markdown/render-raw",
-			}
-			for _, dissed := range disList {
-				if op.OperationID == dissed {
-					return true
-				}
-			}
-			return false
-		},
-	},
-	{
 		reason: "contains required body parameters of an unsupported type",
 		check: func(op *openapi3.Operation, _, _ string) bool {
 			if op.RequestBody == nil || op.RequestBody.Value.Content.Get("application/json") == nil {
