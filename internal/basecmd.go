@@ -24,9 +24,6 @@ var (
 	// Stdout is where to write output
 	Stdout io.Writer = os.Stdout
 
-	// Stderr is where to write error output
-	Stderr io.Writer = os.Stderr
-
 	// TransportWrapper is a wrapper for the http transport that we use for go-vcr tests
 	TransportWrapper interface {
 		SetTransport(t http.RoundTripper)
@@ -39,6 +36,7 @@ type BaseCmd struct {
 	isValueSetMap map[string]bool
 	url           url.URL
 	reqBody       map[string]interface{}
+	reqBodyReader io.Reader
 	acceptHeaders []string
 	reqHeader     http.Header
 	Token         string `env:"GITHUB_TOKEN" hidden:""`
@@ -46,6 +44,7 @@ type BaseCmd struct {
 	RawOutput     bool   `help:"don't format json output."`
 	Format        string `help:"format json output with a go template"`
 	Curl          bool   `help:"returns a corresponding curl request"`
+	curler        func(req *http.Request) (string, error)
 }
 
 func (c *BaseCmd) AfterApply() error {
@@ -70,6 +69,9 @@ func (c *BaseCmd) isValueSet(valueName string) bool {
 }
 
 func (c *BaseCmd) AddRequestHeader(headerName, value string) {
+	if !c.isValueSet(headerName) {
+		return
+	}
 	if c.reqHeader == nil {
 		c.reqHeader = http.Header{}
 	}
@@ -154,23 +156,49 @@ func (c *BaseCmd) UpdateURLQuery(paramName string, value interface{}) {
 	}
 }
 
+func (c *BaseCmd) UseFileBody(fileName string) error {
+	file, err := os.Open(fileName)
+	if err != nil {
+		return err
+	}
+	var buf bytes.Buffer
+	_, err = io.Copy(&buf, file)
+	if err != nil {
+		return err
+	}
+	c.reqBodyReader = &buf
+	return nil
+}
+
+func (c *BaseCmd) bodyReader() (io.Reader, error) {
+	if c.reqBodyReader != nil {
+		return c.reqBodyReader, nil
+	}
+	if c.reqBody == nil {
+		return nil, nil
+	}
+	var buf bytes.Buffer
+
+	enc := json.NewEncoder(&buf)
+	enc.SetEscapeHTML(false)
+	err := enc.Encode(c.reqBody)
+	if err != nil {
+		return nil, err
+	}
+	return &buf, nil
+}
+
 func (c *BaseCmd) newRequest(method string) (*http.Request, error) {
 	c.url.Path = strings.Replace(c.url.Path, "//", "/", -1)
 	u := strings.Join([]string{
 		strings.TrimSuffix(c.APIBaseURL, "/"),
 		strings.TrimPrefix(c.url.String(), "/"),
 	}, "/")
-	var buf io.ReadWriter
-	if c.reqBody != nil {
-		buf = new(bytes.Buffer)
-		enc := json.NewEncoder(buf)
-		enc.SetEscapeHTML(false)
-		err := enc.Encode(c.reqBody)
-		if err != nil {
-			return nil, err
-		}
+	body, err := c.bodyReader()
+	if err != nil {
+		return nil, err
 	}
-	req, err := http.NewRequest(method, u, buf)
+	req, err := http.NewRequest(method, u, body)
 	if err != nil {
 		return nil, err
 	}
@@ -197,6 +225,37 @@ func (c *BaseCmd) httpClient() *http.Client {
 	return tc
 }
 
+func (c *BaseCmd) curlCmd(req *http.Request) (string, error) {
+	if c.curler != nil {
+		return c.curler(req)
+	}
+	curl, err := defaultCurl(req)
+	if err != nil {
+		return "", err
+	}
+	return curl.String(), nil
+}
+
+func defaultCurl(req *http.Request) (*http2curl.CurlCommand, error) {
+	var curl *http2curl.CurlCommand
+	curl, err := http2curl.GetCurlCommand(req)
+	if err != nil {
+		return nil, err
+	}
+	for i, curler := range *curl {
+		if i == 0 || (*curl)[i-1] != "-d" {
+			continue
+		}
+		(*curl)[i] = regexp.MustCompile(`\s*'\s*$`).ReplaceAllString(curler, "'")
+	}
+	*curl = append((*curl)[:len(*curl)-1],
+		"-H",
+		`"Authorization: token $GITHUB_TOKEN"`,
+		(*curl)[len(*curl)-1],
+	)
+	return curl, nil
+}
+
 //DoRequest performs a request
 func (c *BaseCmd) DoRequest(method string) error {
 	req, err := c.newRequest(method)
@@ -205,23 +264,12 @@ func (c *BaseCmd) DoRequest(method string) error {
 	}
 
 	if c.Curl {
-		var curl *http2curl.CurlCommand
-		curl, err = http2curl.GetCurlCommand(req)
+		var cc string
+		cc, err = c.curlCmd(req)
 		if err != nil {
 			return err
 		}
-		for i, curler := range *curl {
-			if i == 0 || (*curl)[i-1] != "-d" {
-				continue
-			}
-			(*curl)[i] = regexp.MustCompile(`\s*'\s*$`).ReplaceAllString(curler, "'")
-		}
-		*curl = append((*curl)[:len(*curl)-1],
-			"-H",
-			`"Authorization: token $GITHUB_TOKEN"`,
-			(*curl)[len(*curl)-1],
-		)
-		fmt.Fprintln(Stdout, curl.String())
+		fmt.Fprintln(Stdout, cc)
 		return nil
 	}
 

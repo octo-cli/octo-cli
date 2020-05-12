@@ -2071,6 +2071,10 @@ Commands:
     Edit a release asset -
     https://developer.github.com/v3/repos/releases/#edit-a-release-asset
 
+  repos upload-release-asset --file=STRING --release_id=INT-64 --repo=STRING
+    Upload a release asset -
+    https://developer.github.com/v3/repos/releases/#upload-a-release-asset
+
   scim get-provisioning-details-for-user --org=STRING --scim_user_id=INT-64
     Get provisioning details for a single user -
     https://developer.github.com/v3/scim/#get-provisioning-details-for-a-single-user

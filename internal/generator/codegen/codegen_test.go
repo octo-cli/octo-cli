@@ -43,16 +43,14 @@ c.updateMethod("name", c.valueField)`
 				ReceiverName: "receiverName",
 				Method:       "mymethod",
 				URLPath:      "urlPath",
-				Params: []RunMethodParam{
+				CodeBlocks: []CodeBlock{
 					{
-						Name:         "param1",
-						ValueField:   "valueField1",
-						UpdateMethod: "c.updateMethod1",
+						Code: `
+	c.updateMethod1("param1", c.valueField1)`,
 					},
 					{
-						Name:         "param2",
-						ValueField:   "valueField2",
-						UpdateMethod: "c.updateMethod2",
+						Code: `
+	c.updateMethod2("param2", c.valueField2)`,
 					},
 				},
 			}
@@ -231,11 +229,10 @@ func Test_generateGoFile(t *testing.T) {
 								ReceiverName: "LicensesGetCmd",
 								Method:       "GET",
 								URLPath:      "/licenses/{license}",
-								Params: []RunMethodParam{
+								CodeBlocks: []CodeBlock{
 									{
-										Name:         "license",
-										ValueField:   "License",
-										UpdateMethod: "c.UpdateURLPath",
+										Code: `
+c.UpdateURLPath("license", c.License)`,
 									},
 								},
 							},
@@ -264,16 +261,14 @@ func Test_generateGoFile(t *testing.T) {
 								ReceiverName: "LicensesGetForRepoCmd",
 								Method:       "GET",
 								URLPath:      "/repos/{owner}/{repo}/license",
-								Params: []RunMethodParam{
+								CodeBlocks: []CodeBlock{
 									{
-										Name:         "owner",
-										ValueField:   "Owner",
-										UpdateMethod: "c.UpdateURLPath",
+										Code: `
+c.UpdateURLPath("owner", c.Owner)`,
 									},
 									{
-										Name:         "repo",
-										ValueField:   "Repo",
-										UpdateMethod: "c.UpdateURLPath",
+										Code: `
+c.UpdateURLPath("repo", c.Repo)`,
 									},
 								},
 							},

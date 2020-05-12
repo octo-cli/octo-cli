@@ -569,6 +569,7 @@ var CmdHelps = map[string]map[string]string{
 		"update-protected-branch-required-status-checks":           "Update required status checks of protected branch - https://developer.github.com/v3/repos/branches/#update-required-status-checks-of-protected-branch",
 		"update-release":                                           "Edit a release - https://developer.github.com/v3/repos/releases/#edit-a-release",
 		"update-release-asset":                                     "Edit a release asset - https://developer.github.com/v3/repos/releases/#edit-a-release-asset",
+		"upload-release-asset":                                     "Upload a release asset - https://developer.github.com/v3/repos/releases/#upload-a-release-asset",
 	},
 	"scim": {
 		"get-provisioning-details-for-user":    "Get provisioning details for a single user - https://developer.github.com/v3/scim/#get-provisioning-details-for-a-single-user",
@@ -3692,6 +3693,16 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"name":     "The file name of the asset.",
 			"owner":    "owner parameter",
 			"repo":     "repo parameter",
+		},
+		"upload-release-asset": {
+			"content-length": "",
+			"content-type":   "override the Content-Type header",
+			"file":           "the file to upload",
+			"label":          "label parameter",
+			"name":           "name parameter",
+			"owner":          "owner parameter",
+			"release_id":     "release_id parameter",
+			"repo":           "repo parameter",
 		},
 	},
 	"scim": {

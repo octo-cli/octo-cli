@@ -6,6 +6,7 @@ require (
 	github.com/alecthomas/kong v0.2.5-0.20200316010313-509fd46c42d7
 	github.com/dnaeon/go-vcr v1.0.1
 	github.com/fatih/structtag v1.0.0
+	github.com/gabriel-vasile/mimetype v1.1.0
 	github.com/getkin/kin-openapi v0.8.0
 	github.com/joho/godotenv v1.3.0
 	github.com/kr/pretty v0.1.0 // indirect

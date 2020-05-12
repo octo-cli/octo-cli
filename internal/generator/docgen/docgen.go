@@ -176,6 +176,21 @@ func operationsHelp(swagger *openapi3.Swagger) ([]byte, error) {
 	return buf.Bytes(), nil
 }
 
+func removeHelpsWithName(helps []paramHelp, name string) []paramHelp {
+	for {
+		i := 0
+		for ; i < len(helps); i++ {
+			if helps[i].name == name {
+				break
+			}
+		}
+		if i == len(helps) {
+			return helps
+		}
+		helps = append(helps[:i], helps[i+1:]...)
+	}
+}
+
 func paramHelps(path, method string, op *openapi3.Operation, uops []unsupportedOptionalParam) []paramHelp {
 	var result []paramHelp
 	for i, parameter := range op.Parameters {
@@ -209,6 +224,17 @@ func paramHelps(path, method string, op *openapi3.Operation, uops []unsupportedO
 		if uop.routePath == path && uop.method == method {
 			myUops = append(myUops, uop)
 		}
+	}
+	for _, m := range swaggerparser.GetManualParamInfo(op) {
+		result = removeHelpsWithName(result, m.Name)
+		if m.Hidden {
+			continue
+		}
+		result = append(result, paramHelp{
+			name:        m.Name,
+			required:    m.Required,
+			description: m.Description,
+		})
 	}
 	for _, bpi := range swaggerparser.GetBodyParamInfo(op, supported.RefFilter) {
 		ph := paramHelp{

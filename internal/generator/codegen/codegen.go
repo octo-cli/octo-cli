@@ -22,10 +22,16 @@ func init() {
 	template.Must(tmpl.New("FlagHelps").Parse(tmplFlagHelps))
 }
 
+type CodeBlock struct {
+	Code    string
+	Imports []string
+}
+
 type RunMethodParam struct {
 	Name         string
 	ValueField   string
 	UpdateMethod string
+	Import       string
 }
 
 // language=GoTemplate
@@ -36,14 +42,22 @@ type RunMethod struct {
 	ReceiverName string
 	Method       string
 	URLPath      string
-	Params       []RunMethodParam
+	CodeBlocks   []CodeBlock
+}
+
+func (r *RunMethod) imports() []string {
+	var imps []string
+	for _, block := range r.CodeBlocks {
+		imps = append(imps, block.Imports...)
+	}
+	return uniqueSortedStrings(imps)
 }
 
 // language=GoTemplate
 const tmplRunMethod = `
 func (c *{{.ReceiverName}}) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("{{.URLPath}}"){{range .Params}}{{template "RunMethodParam" .}}{{end}}
+	c.SetURLPath("{{.URLPath}}"){{range .CodeBlocks}}{{.Code}}{{end}}
 	return c.DoRequest("{{.Method}}")
 }
 
@@ -84,7 +98,8 @@ type CmdStructAndMethod struct {
 }
 
 func (s *CmdStructAndMethod) imports() []string {
-	return s.CmdStruct.imports()
+	imps := append(s.CmdStruct.imports(), s.RunMethod.imports()...)
+	return uniqueSortedStrings(imps)
 }
 
 type SvcTmpl struct {
@@ -243,10 +258,6 @@ func tmplSorting(svcTmpl *SvcTmpl) {
 	})
 	for _, csm := range svcTmpl.CmdStructAndMethods {
 		sortCmdStructFields(csm.CmdStruct.Fields)
-
-		sort.Slice(csm.RunMethod.Params, func(i, j int) bool {
-			return csm.RunMethod.Params[i].Name < csm.RunMethod.Params[j].Name
-		})
 	}
 	sort.Slice(svcTmpl.CmdStructAndMethods, func(i, j int) bool {
 		return svcTmpl.CmdStructAndMethods[i].CmdStruct.Name < svcTmpl.CmdStructAndMethods[j].CmdStruct.Name

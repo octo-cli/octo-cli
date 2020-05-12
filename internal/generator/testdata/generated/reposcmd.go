@@ -148,6 +148,7 @@ type ReposCmd struct {
 	UpdateProtectedBranchRequiredStatusChecks          ReposUpdateProtectedBranchRequiredStatusChecksCmd          `cmd:""`
 	UpdateRelease                                      ReposUpdateReleaseCmd                                      `cmd:""`
 	UpdateReleaseAsset                                 ReposUpdateReleaseAssetCmd                                 `cmd:""`
+	UploadReleaseAsset                                 ReposUploadReleaseAssetCmd                                 `cmd:""`
 }
 
 type ReposAcceptInvitationCmd struct {
@@ -2824,4 +2825,30 @@ func (c *ReposUpdateReleaseCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateBody("tag_name", c.TagName)
 	c.UpdateBody("target_commitish", c.TargetCommitish)
 	return c.DoRequest("PATCH")
+}
+
+type ReposUploadReleaseAssetCmd struct {
+	ContentLength string `name:"content-length" hidden:""`
+	ContentType   string `name:"content-type"`
+	File          string `required:"" name:"file" type:"existingfile"`
+	Label         string `name:"label"`
+	Name          string `name:"name"`
+	Owner         string `name:"owner"`
+	ReleaseId     int64  `required:"" name:"release_id"`
+	Repo          string `required:"" name:"repo"`
+	internal.BaseCmd
+}
+
+func (c *ReposUploadReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{owner}/{repo}/releases/{release_id}/assets")
+	internal.ReposUploadReleaseAssetOverride(&c.BaseCmd, c.File)
+	c.AddRequestHeader("content-length", c.ContentLength)
+	c.AddRequestHeader("content-type", c.ContentType)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("release_id", c.ReleaseId)
+	c.UpdateURLQuery("name", c.Name)
+	c.UpdateURLQuery("label", c.Label)
+	return c.DoRequest("POST")
 }
