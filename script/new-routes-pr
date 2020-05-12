@@ -36,7 +36,7 @@ url="https://github.com/octokit/routes/releases/download/$latest_tag/api.github.
 curl -sOL "$url"
 printf "%s" "$latest_tag" >./current-schema-tag.txt
 script/generate
-script/update-readme
+script/update-docs
 
 git add README.md api.github.com.json current-schema-tag.txt docs/ internal/generated/
 
