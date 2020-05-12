@@ -29,6 +29,7 @@ func (c *CodeScanningGetAlertCmd) Run(isValueSetMap map[string]bool) error {
 
 type CodeScanningListAlertsForRepoCmd struct {
 	Owner string `name:"owner"`
+	Ref   string `name:"ref"`
 	Repo  string `required:"" name:"repo"`
 	State string `name:"state"`
 	internal.BaseCmd
@@ -40,5 +41,6 @@ func (c *CodeScanningListAlertsForRepoCmd) Run(isValueSetMap map[string]bool) er
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("state", c.State)
+	c.UpdateURLQuery("ref", c.Ref)
 	return c.DoRequest("GET")
 }
