@@ -2,7 +2,9 @@
 
 package generated
 
-import "github.com/octo-cli/octo-cli/internal"
+import (
+	"github.com/octo-cli/octo-cli/internal"
+)
 
 type PullsCmd struct {
 	CheckIfMerged            PullsCheckIfMergedCmd            `cmd:""`
@@ -45,8 +47,8 @@ func (c *PullsCheckIfMergedCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/merge")
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("pull_number", c.PullNumber)
 	return c.DoRequest("GET")
 }
 
@@ -66,14 +68,14 @@ type PullsCreateCmd struct {
 func (c *PullsCreateCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/pulls")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdatePreview("sailor-v", c.SailorV)
 	c.UpdateBody("base", c.Base)
 	c.UpdateBody("body", c.Body)
 	c.UpdateBody("draft", c.Draft)
 	c.UpdateBody("head", c.Head)
 	c.UpdateBody("maintainer_can_modify", c.MaintainerCanModify)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdatePreview("sailor-v", c.SailorV)
 	c.UpdateBody("title", c.Title)
 	return c.DoRequest("POST")
 }
@@ -97,15 +99,15 @@ type PullsCreateCommentCmd struct {
 func (c *PullsCreateCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/comments")
-	c.UpdateBody("body", c.Body)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdatePreview("comfort-fade", c.ComfortFade)
+	c.UpdateBody("body", c.Body)
 	c.UpdateBody("commit_id", c.CommitId)
 	c.UpdateBody("line", c.Line)
-	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateBody("path", c.Path)
 	c.UpdateBody("position", c.Position)
-	c.UpdateURLPath("pull_number", c.PullNumber)
-	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateBody("side", c.Side)
 	c.UpdateBody("start_line", c.StartLine)
 	c.UpdateBody("start_side", c.StartSide)
@@ -126,13 +128,13 @@ type PullsCreateReviewCmd struct {
 func (c *PullsCreateReviewCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/reviews")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateBody("body", c.Body)
 	c.UpdateBody("comments", c.Comments)
 	c.UpdateBody("commit_id", c.CommitId)
 	c.UpdateBody("event", c.Event)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("pull_number", c.PullNumber)
-	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("POST")
 }
 
@@ -148,11 +150,11 @@ type PullsCreateReviewCommentReplyCmd struct {
 func (c *PullsCreateReviewCommentReplyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/comments/{comment_id}/replies")
-	c.UpdateBody("body", c.Body)
-	c.UpdateURLPath("comment_id", c.CommentId)
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("pull_number", c.PullNumber)
+	c.UpdateURLPath("comment_id", c.CommentId)
+	c.UpdateBody("body", c.Body)
 	return c.DoRequest("POST")
 }
 
@@ -169,8 +171,8 @@ func (c *PullsCreateReviewRequestCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers")
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateBody("reviewers", c.Reviewers)
 	c.UpdateBody("team_reviewers", c.TeamReviewers)
 	return c.DoRequest("POST")
@@ -186,9 +188,9 @@ type PullsDeleteCommentCmd struct {
 func (c *PullsDeleteCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/pulls/comments/{comment_id}")
-	c.UpdateURLPath("comment_id", c.CommentId)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("comment_id", c.CommentId)
 	return c.DoRequest("DELETE")
 }
 
@@ -204,8 +206,8 @@ func (c *PullsDeletePendingReviewCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}")
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLPath("review_id", c.ReviewId)
 	return c.DoRequest("DELETE")
 }
@@ -223,8 +225,8 @@ func (c *PullsDeleteReviewRequestCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers")
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateBody("reviewers", c.Reviewers)
 	c.UpdateBody("team_reviewers", c.TeamReviewers)
 	return c.DoRequest("DELETE")
@@ -242,11 +244,11 @@ type PullsDismissReviewCmd struct {
 func (c *PullsDismissReviewCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/dismissals")
-	c.UpdateBody("message", c.Message)
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLPath("review_id", c.ReviewId)
+	c.UpdateBody("message", c.Message)
 	return c.DoRequest("PUT")
 }
 
@@ -262,8 +264,8 @@ func (c *PullsGetCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}")
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdatePreview("sailor-v", c.SailorV)
 	return c.DoRequest("GET")
 }
@@ -280,10 +282,10 @@ type PullsGetCommentCmd struct {
 func (c *PullsGetCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/pulls/comments/{comment_id}")
-	c.UpdatePreview("comfort-fade", c.ComfortFade)
-	c.UpdateURLPath("comment_id", c.CommentId)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("comment_id", c.CommentId)
+	c.UpdatePreview("comfort-fade", c.ComfortFade)
 	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	return c.DoRequest("GET")
 }
@@ -302,11 +304,11 @@ func (c *PullsGetCommentsForReviewCmd) Run(isValueSetMap map[string]bool) error 
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/comments")
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLPath("review_id", c.ReviewId)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -322,8 +324,8 @@ func (c *PullsGetReviewCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}")
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLPath("review_id", c.ReviewId)
 	return c.DoRequest("GET")
 }
@@ -345,16 +347,16 @@ type PullsListCmd struct {
 func (c *PullsListCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/pulls")
-	c.UpdateURLQuery("base", c.Base)
-	c.UpdateURLQuery("direction", c.Direction)
-	c.UpdateURLQuery("head", c.Head)
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdatePreview("sailor-v", c.SailorV)
-	c.UpdateURLQuery("sort", c.Sort)
 	c.UpdateURLQuery("state", c.State)
+	c.UpdateURLQuery("head", c.Head)
+	c.UpdateURLQuery("base", c.Base)
+	c.UpdateURLQuery("sort", c.Sort)
+	c.UpdateURLQuery("direction", c.Direction)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdatePreview("sailor-v", c.SailorV)
 	return c.DoRequest("GET")
 }
 
@@ -375,15 +377,15 @@ type PullsListCommentsCmd struct {
 func (c *PullsListCommentsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/comments")
-	c.UpdatePreview("comfort-fade", c.ComfortFade)
-	c.UpdateURLQuery("direction", c.Direction)
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLQuery("sort", c.Sort)
+	c.UpdateURLQuery("direction", c.Direction)
+	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdatePreview("comfort-fade", c.ComfortFade)
 	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	return c.DoRequest("GET")
 }
@@ -404,14 +406,14 @@ type PullsListCommentsForRepoCmd struct {
 func (c *PullsListCommentsForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/pulls/comments")
-	c.UpdatePreview("comfort-fade", c.ComfortFade)
-	c.UpdateURLQuery("direction", c.Direction)
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLQuery("since", c.Since)
 	c.UpdateURLQuery("sort", c.Sort)
+	c.UpdateURLQuery("direction", c.Direction)
+	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdatePreview("comfort-fade", c.ComfortFade)
 	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	return c.DoRequest("GET")
 }
@@ -429,10 +431,10 @@ func (c *PullsListCommitsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/commits")
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("pull_number", c.PullNumber)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -449,10 +451,10 @@ func (c *PullsListFilesCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/files")
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("pull_number", c.PullNumber)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -469,10 +471,10 @@ func (c *PullsListReviewRequestsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers")
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("pull_number", c.PullNumber)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -489,10 +491,10 @@ func (c *PullsListReviewsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/reviews")
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("pull_number", c.PullNumber)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -510,12 +512,12 @@ type PullsMergeCmd struct {
 func (c *PullsMergeCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/merge")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateBody("commit_message", c.CommitMessage)
 	c.UpdateBody("commit_title", c.CommitTitle)
 	c.UpdateBody("merge_method", c.MergeMethod)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("pull_number", c.PullNumber)
-	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateBody("sha", c.Sha)
 	return c.DoRequest("PUT")
 }
@@ -533,12 +535,12 @@ type PullsSubmitReviewCmd struct {
 func (c *PullsSubmitReviewCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/events")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("pull_number", c.PullNumber)
+	c.UpdateURLPath("review_id", c.ReviewId)
 	c.UpdateBody("body", c.Body)
 	c.UpdateBody("event", c.Event)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("pull_number", c.PullNumber)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("review_id", c.ReviewId)
 	return c.DoRequest("POST")
 }
 
@@ -554,11 +556,11 @@ type PullsUpdateBranchCmd struct {
 func (c *PullsUpdateBranchCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/update-branch")
-	c.UpdateBody("expected_head_sha", c.ExpectedHeadSha)
-	c.UpdatePreview("lydian", c.Lydian)
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("pull_number", c.PullNumber)
+	c.UpdatePreview("lydian", c.Lydian)
+	c.UpdateBody("expected_head_sha", c.ExpectedHeadSha)
 	return c.DoRequest("PUT")
 }
 
@@ -578,13 +580,13 @@ type PullsUpdateCmd struct {
 func (c *PullsUpdateCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("pull_number", c.PullNumber)
+	c.UpdatePreview("sailor-v", c.SailorV)
 	c.UpdateBody("base", c.Base)
 	c.UpdateBody("body", c.Body)
 	c.UpdateBody("maintainer_can_modify", c.MaintainerCanModify)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("pull_number", c.PullNumber)
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdatePreview("sailor-v", c.SailorV)
 	c.UpdateBody("state", c.State)
 	c.UpdateBody("title", c.Title)
 	return c.DoRequest("PATCH")
@@ -602,11 +604,11 @@ type PullsUpdateCommentCmd struct {
 func (c *PullsUpdateCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/pulls/comments/{comment_id}")
-	c.UpdateBody("body", c.Body)
-	c.UpdatePreview("comfort-fade", c.ComfortFade)
-	c.UpdateURLPath("comment_id", c.CommentId)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("comment_id", c.CommentId)
+	c.UpdatePreview("comfort-fade", c.ComfortFade)
+	c.UpdateBody("body", c.Body)
 	return c.DoRequest("PATCH")
 }
 
@@ -622,10 +624,10 @@ type PullsUpdateReviewCmd struct {
 func (c *PullsUpdateReviewCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}")
-	c.UpdateBody("body", c.Body)
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLPath("review_id", c.ReviewId)
+	c.UpdateBody("body", c.Body)
 	return c.DoRequest("PUT")
 }

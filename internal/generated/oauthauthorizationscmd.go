@@ -2,7 +2,9 @@
 
 package generated
 
-import "github.com/octo-cli/octo-cli/internal"
+import (
+	"github.com/octo-cli/octo-cli/internal"
+)
 
 type OauthAuthorizationsCmd struct {
 	CreateAuthorization                          OauthAuthorizationsCreateAuthorizationCmd                          `cmd:""`
@@ -101,8 +103,8 @@ func (c *OauthAuthorizationsGetOrCreateAuthorizationForAppAndFingerprintCmd) Run
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/authorizations/clients/{client_id}/{fingerprint}")
 	c.UpdateURLPath("client_id", c.ClientId)
-	c.UpdateBody("client_secret", c.ClientSecret)
 	c.UpdateURLPath("fingerprint", c.Fingerprint)
+	c.UpdateBody("client_secret", c.ClientSecret)
 	c.UpdateBody("note", c.Note)
 	c.UpdateBody("note_url", c.NoteUrl)
 	c.UpdateBody("scopes", c.Scopes)
@@ -140,8 +142,8 @@ type OauthAuthorizationsListAuthorizationsCmd struct {
 func (c *OauthAuthorizationsListAuthorizationsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/authorizations")
-	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -154,8 +156,8 @@ type OauthAuthorizationsListGrantsCmd struct {
 func (c *OauthAuthorizationsListGrantsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/applications/grants")
-	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -173,8 +175,8 @@ type OauthAuthorizationsUpdateAuthorizationCmd struct {
 func (c *OauthAuthorizationsUpdateAuthorizationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/authorizations/{authorization_id}")
-	c.UpdateBody("add_scopes", c.AddScopes)
 	c.UpdateURLPath("authorization_id", c.AuthorizationId)
+	c.UpdateBody("add_scopes", c.AddScopes)
 	c.UpdateBody("fingerprint", c.Fingerprint)
 	c.UpdateBody("note", c.Note)
 	c.UpdateBody("note_url", c.NoteUrl)

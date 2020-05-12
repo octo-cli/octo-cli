@@ -5,7 +5,9 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/fatih/structtag"
 	"github.com/getkin/kin-openapi/openapi3"
+	"github.com/octo-cli/octo-cli/internal/generator/util"
 )
 
 func ForEachOperation(swagger *openapi3.Swagger, fn func(path, method string, op *openapi3.Operation)) {
@@ -114,6 +116,49 @@ func GetObjParamInfo(ref *openapi3.SchemaRef, names []string, parentRequired boo
 	return result
 }
 
+type ManualParamInfo struct {
+	Name        string
+	Type        string
+	RunCode     string
+	CodeImports []string
+	FieldImport string
+	Required    bool
+	Description string
+	Tags        *structtag.Tags
+	Hidden      bool
+}
+
+func GetManualParamInfo(op *openapi3.Operation) []ManualParamInfo {
+	overrides := map[string][]ManualParamInfo{
+		"repos/upload-release-asset": {
+			{
+				Name:        "file",
+				Type:        "string",
+				Tags:        util.NewTags(util.NewTag("type", "existingfile")),
+				Required:    true,
+				CodeImports: []string{"github.com/octo-cli/octo-cli/internal"},
+				Description: "the file to upload",
+				RunCode: `
+internal.ReposUploadReleaseAssetOverride(&c.BaseCmd, c.File)`,
+			},
+			{
+				Name:        "content-type",
+				Type:        "string",
+				Required:    false,
+				Description: "override the Content-Type header",
+			},
+			{
+				Name:     "content-length",
+				Type:     "string",
+				Required: false,
+				Tags:     util.NewTags(util.NewTag("hidden", "")),
+				Hidden:   true,
+			},
+		},
+	}
+	return overrides[op.OperationID]
+}
+
 func GetBodyParamInfo(op *openapi3.Operation, filter func(ref *openapi3.SchemaRef) bool) []BodyParamInfo {
 	if op.RequestBody == nil {
 		return nil
@@ -143,6 +188,9 @@ func GetBodyParamInfo(op *openapi3.Operation, filter func(ref *openapi3.SchemaRe
 		}
 		result = append(result, GetObjParamInfo(ref, []string{name}, required, filter)...)
 	}
+	sort.Slice(result, func(i, j int) bool {
+		return result[i].Name < result[j].Name
+	})
 	return result
 }
 

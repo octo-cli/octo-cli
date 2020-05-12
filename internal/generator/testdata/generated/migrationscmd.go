@@ -2,7 +2,9 @@
 
 package generated
 
-import "github.com/octo-cli/octo-cli/internal"
+import (
+	"github.com/octo-cli/octo-cli/internal"
+)
 
 type MigrationsCmd struct {
 	CancelImport                      MigrationsCancelImportCmd                      `cmd:""`
@@ -67,8 +69,8 @@ type MigrationsDeleteArchiveForOrgCmd struct {
 func (c *MigrationsDeleteArchiveForOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/migrations/{migration_id}/archive")
-	c.UpdateURLPath("migration_id", c.MigrationId)
 	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("migration_id", c.MigrationId)
 	c.UpdatePreview("wyandotte", c.Wyandotte)
 	return c.DoRequest("DELETE")
 }
@@ -83,8 +85,8 @@ type MigrationsDownloadArchiveForOrgCmd struct {
 func (c *MigrationsDownloadArchiveForOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/migrations/{migration_id}/archive")
-	c.UpdateURLPath("migration_id", c.MigrationId)
 	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("migration_id", c.MigrationId)
 	c.UpdatePreview("wyandotte", c.Wyandotte)
 	return c.DoRequest("GET")
 }
@@ -171,8 +173,8 @@ type MigrationsGetStatusForOrgCmd struct {
 func (c *MigrationsGetStatusForOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/migrations/{migration_id}")
-	c.UpdateURLPath("migration_id", c.MigrationId)
 	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("migration_id", c.MigrationId)
 	c.UpdatePreview("wyandotte", c.Wyandotte)
 	return c.DoRequest("GET")
 }
@@ -187,8 +189,8 @@ type MigrationsListForAuthenticatedUserCmd struct {
 func (c *MigrationsListForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/migrations")
-	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	c.UpdatePreview("wyandotte", c.Wyandotte)
 	return c.DoRequest("GET")
 }
@@ -205,8 +207,8 @@ func (c *MigrationsListForOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/migrations")
 	c.UpdateURLPath("org", c.Org)
-	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	c.UpdatePreview("wyandotte", c.Wyandotte)
 	return c.DoRequest("GET")
 }
@@ -223,10 +225,10 @@ type MigrationsListReposForOrgCmd struct {
 func (c *MigrationsListReposForOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/migrations/{migration_id}/repositories")
-	c.UpdateURLPath("migration_id", c.MigrationId)
 	c.UpdateURLPath("org", c.Org)
-	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLPath("migration_id", c.MigrationId)
 	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	c.UpdatePreview("wyandotte", c.Wyandotte)
 	return c.DoRequest("GET")
 }
@@ -243,8 +245,8 @@ func (c *MigrationsListReposForUserCmd) Run(isValueSetMap map[string]bool) error
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/{migration_id}/repositories")
 	c.UpdateURLPath("migration_id", c.MigrationId)
-	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	c.UpdatePreview("wyandotte", c.Wyandotte)
 	return c.DoRequest("GET")
 }
@@ -261,11 +263,11 @@ type MigrationsMapCommitAuthorCmd struct {
 func (c *MigrationsMapCommitAuthorCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/import/authors/{author_id}")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("author_id", c.AuthorId)
 	c.UpdateBody("email", c.Email)
 	c.UpdateBody("name", c.Name)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("PATCH")
 }
 
@@ -312,9 +314,9 @@ type MigrationsStartForOrgCmd struct {
 func (c *MigrationsStartForOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/migrations")
+	c.UpdateURLPath("org", c.Org)
 	c.UpdateBody("exclude_attachments", c.ExcludeAttachments)
 	c.UpdateBody("lock_repositories", c.LockRepositories)
-	c.UpdateURLPath("org", c.Org)
 	c.UpdateBody("repositories", c.Repositories)
 	return c.DoRequest("POST")
 }
@@ -370,8 +372,8 @@ type MigrationsUnlockRepoForOrgCmd struct {
 func (c *MigrationsUnlockRepoForOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/migrations/{migration_id}/repos/{repo_name}/lock")
-	c.UpdateURLPath("migration_id", c.MigrationId)
 	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("migration_id", c.MigrationId)
 	c.UpdateURLPath("repo_name", c.RepoName)
 	c.UpdatePreview("wyandotte", c.Wyandotte)
 	return c.DoRequest("DELETE")

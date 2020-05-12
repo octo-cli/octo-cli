@@ -2,7 +2,9 @@
 
 package generated
 
-import "github.com/octo-cli/octo-cli/internal"
+import (
+	"github.com/octo-cli/octo-cli/internal"
+)
 
 type InteractionsCmd struct {
 	AddOrUpdateRestrictionsForOrg  InteractionsAddOrUpdateRestrictionsForOrgCmd  `cmd:""`
@@ -23,9 +25,9 @@ type InteractionsAddOrUpdateRestrictionsForOrgCmd struct {
 func (c *InteractionsAddOrUpdateRestrictionsForOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/interaction-limits")
-	c.UpdateBody("limit", c.Limit)
 	c.UpdateURLPath("org", c.Org)
 	c.UpdatePreview("sombra", c.Sombra)
+	c.UpdateBody("limit", c.Limit)
 	return c.DoRequest("PUT")
 }
 
@@ -40,10 +42,10 @@ type InteractionsAddOrUpdateRestrictionsForRepoCmd struct {
 func (c *InteractionsAddOrUpdateRestrictionsForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/interaction-limits")
-	c.UpdateBody("limit", c.Limit)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdatePreview("sombra", c.Sombra)
+	c.UpdateBody("limit", c.Limit)
 	return c.DoRequest("PUT")
 }
 

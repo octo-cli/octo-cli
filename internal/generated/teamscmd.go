@@ -2,7 +2,9 @@
 
 package generated
 
-import "github.com/octo-cli/octo-cli/internal"
+import (
+	"github.com/octo-cli/octo-cli/internal"
+)
 
 type TeamsCmd struct {
 	AddMemberLegacy                         TeamsAddMemberLegacyCmd                         `cmd:""`
@@ -98,9 +100,9 @@ func (c *TeamsAddOrUpdateMembershipInOrgCmd) Run(isValueSetMap map[string]bool) 
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/memberships/{username}")
 	c.UpdateURLPath("org", c.Org)
-	c.UpdateBody("role", c.Role)
 	c.UpdateURLPath("team_slug", c.TeamSlug)
 	c.UpdateURLPath("username", c.Username)
+	c.UpdateBody("role", c.Role)
 	return c.DoRequest("PUT")
 }
 
@@ -114,9 +116,9 @@ type TeamsAddOrUpdateMembershipLegacyCmd struct {
 func (c *TeamsAddOrUpdateMembershipLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/memberships/{username}")
-	c.UpdateBody("role", c.Role)
 	c.UpdateURLPath("team_id", c.TeamId)
 	c.UpdateURLPath("username", c.Username)
+	c.UpdateBody("role", c.Role)
 	return c.DoRequest("PUT")
 }
 
@@ -132,11 +134,11 @@ type TeamsAddOrUpdateProjectInOrgCmd struct {
 func (c *TeamsAddOrUpdateProjectInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/projects/{project_id}")
-	c.UpdatePreview("inertia", c.Inertia)
 	c.UpdateURLPath("org", c.Org)
-	c.UpdateBody("permission", c.Permission)
-	c.UpdateURLPath("project_id", c.ProjectId)
 	c.UpdateURLPath("team_slug", c.TeamSlug)
+	c.UpdateURLPath("project_id", c.ProjectId)
+	c.UpdatePreview("inertia", c.Inertia)
+	c.UpdateBody("permission", c.Permission)
 	return c.DoRequest("PUT")
 }
 
@@ -151,10 +153,10 @@ type TeamsAddOrUpdateProjectLegacyCmd struct {
 func (c *TeamsAddOrUpdateProjectLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/projects/{project_id}")
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("project_id", c.ProjectId)
 	c.UpdatePreview("inertia", c.Inertia)
 	c.UpdateBody("permission", c.Permission)
-	c.UpdateURLPath("project_id", c.ProjectId)
-	c.UpdateURLPath("team_id", c.TeamId)
 	return c.DoRequest("PUT")
 }
 
@@ -171,10 +173,10 @@ func (c *TeamsAddOrUpdateRepoInOrgCmd) Run(isValueSetMap map[string]bool) error 
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}")
 	c.UpdateURLPath("org", c.Org)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateBody("permission", c.Permission)
-	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("team_slug", c.TeamSlug)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("permission", c.Permission)
 	return c.DoRequest("PUT")
 }
 
@@ -189,10 +191,10 @@ type TeamsAddOrUpdateRepoLegacyCmd struct {
 func (c *TeamsAddOrUpdateRepoLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/repos/{owner}/{repo}")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateBody("permission", c.Permission)
-	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("permission", c.Permission)
 	return c.DoRequest("PUT")
 }
 
@@ -208,9 +210,9 @@ func (c *TeamsCheckManagesRepoInOrgCmd) Run(isValueSetMap map[string]bool) error
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}")
 	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("team_slug", c.TeamSlug)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("team_slug", c.TeamSlug)
 	return c.DoRequest("GET")
 }
 
@@ -224,9 +226,9 @@ type TeamsCheckManagesRepoLegacyCmd struct {
 func (c *TeamsCheckManagesRepoLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/repos/{owner}/{repo}")
+	c.UpdateURLPath("team_id", c.TeamId)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("team_id", c.TeamId)
 	return c.DoRequest("GET")
 }
 
@@ -245,10 +247,10 @@ type TeamsCreateCmd struct {
 func (c *TeamsCreateCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams")
+	c.UpdateURLPath("org", c.Org)
 	c.UpdateBody("description", c.Description)
 	c.UpdateBody("maintainers", c.Maintainers)
 	c.UpdateBody("name", c.Name)
-	c.UpdateURLPath("org", c.Org)
 	c.UpdateBody("parent_team_id", c.ParentTeamId)
 	c.UpdateBody("permission", c.Permission)
 	c.UpdateBody("privacy", c.Privacy)
@@ -268,11 +270,11 @@ type TeamsCreateDiscussionCommentInOrgCmd struct {
 func (c *TeamsCreateDiscussionCommentInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments")
-	c.UpdateBody("body", c.Body)
-	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
 	c.UpdateURLPath("org", c.Org)
-	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	c.UpdateURLPath("team_slug", c.TeamSlug)
+	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateBody("body", c.Body)
 	return c.DoRequest("POST")
 }
 
@@ -287,10 +289,10 @@ type TeamsCreateDiscussionCommentLegacyCmd struct {
 func (c *TeamsCreateDiscussionCommentLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/discussions/{discussion_number}/comments")
-	c.UpdateBody("body", c.Body)
+	c.UpdateURLPath("team_id", c.TeamId)
 	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
 	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
-	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateBody("body", c.Body)
 	return c.DoRequest("POST")
 }
 
@@ -307,11 +309,11 @@ type TeamsCreateDiscussionInOrgCmd struct {
 func (c *TeamsCreateDiscussionInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/discussions")
-	c.UpdateBody("body", c.Body)
 	c.UpdateURLPath("org", c.Org)
-	c.UpdateBody("private", c.Private)
-	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	c.UpdateURLPath("team_slug", c.TeamSlug)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateBody("body", c.Body)
+	c.UpdateBody("private", c.Private)
 	c.UpdateBody("title", c.Title)
 	return c.DoRequest("POST")
 }
@@ -328,10 +330,10 @@ type TeamsCreateDiscussionLegacyCmd struct {
 func (c *TeamsCreateDiscussionLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/discussions")
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	c.UpdateBody("body", c.Body)
 	c.UpdateBody("private", c.Private)
-	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
-	c.UpdateURLPath("team_id", c.TeamId)
 	c.UpdateBody("title", c.Title)
 	return c.DoRequest("POST")
 }
@@ -346,9 +348,9 @@ type TeamsCreateOrUpdateIdPGroupConnectionsInOrgCmd struct {
 func (c *TeamsCreateOrUpdateIdPGroupConnectionsInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/team-sync/group-mappings")
-	c.UpdateBody("groups", c.Groups)
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLPath("team_slug", c.TeamSlug)
+	c.UpdateBody("groups", c.Groups)
 	return c.DoRequest("PATCH")
 }
 
@@ -361,8 +363,8 @@ type TeamsCreateOrUpdateIdPGroupConnectionsLegacyCmd struct {
 func (c *TeamsCreateOrUpdateIdPGroupConnectionsLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/team-sync/group-mappings")
-	c.UpdateBody("groups", c.Groups)
 	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateBody("groups", c.Groups)
 	return c.DoRequest("PATCH")
 }
 
@@ -377,10 +379,10 @@ type TeamsDeleteDiscussionCommentInOrgCmd struct {
 func (c *TeamsDeleteDiscussionCommentInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}")
-	c.UpdateURLPath("comment_number", c.CommentNumber)
-	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLPath("team_slug", c.TeamSlug)
+	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
+	c.UpdateURLPath("comment_number", c.CommentNumber)
 	return c.DoRequest("DELETE")
 }
 
@@ -394,9 +396,9 @@ type TeamsDeleteDiscussionCommentLegacyCmd struct {
 func (c *TeamsDeleteDiscussionCommentLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}")
-	c.UpdateURLPath("comment_number", c.CommentNumber)
-	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
 	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
+	c.UpdateURLPath("comment_number", c.CommentNumber)
 	return c.DoRequest("DELETE")
 }
 
@@ -410,9 +412,9 @@ type TeamsDeleteDiscussionInOrgCmd struct {
 func (c *TeamsDeleteDiscussionInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}")
-	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLPath("team_slug", c.TeamSlug)
+	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
 	return c.DoRequest("DELETE")
 }
 
@@ -425,8 +427,8 @@ type TeamsDeleteDiscussionLegacyCmd struct {
 func (c *TeamsDeleteDiscussionLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/discussions/{discussion_number}")
-	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
 	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
 	return c.DoRequest("DELETE")
 }
 
@@ -482,11 +484,11 @@ type TeamsGetDiscussionCommentInOrgCmd struct {
 func (c *TeamsGetDiscussionCommentInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}")
-	c.UpdateURLPath("comment_number", c.CommentNumber)
-	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
 	c.UpdateURLPath("org", c.Org)
-	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	c.UpdateURLPath("team_slug", c.TeamSlug)
+	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
+	c.UpdateURLPath("comment_number", c.CommentNumber)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	return c.DoRequest("GET")
 }
 
@@ -501,10 +503,10 @@ type TeamsGetDiscussionCommentLegacyCmd struct {
 func (c *TeamsGetDiscussionCommentLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}")
-	c.UpdateURLPath("comment_number", c.CommentNumber)
-	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
-	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
+	c.UpdateURLPath("comment_number", c.CommentNumber)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	return c.DoRequest("GET")
 }
 
@@ -519,10 +521,10 @@ type TeamsGetDiscussionInOrgCmd struct {
 func (c *TeamsGetDiscussionInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}")
-	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
 	c.UpdateURLPath("org", c.Org)
-	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	c.UpdateURLPath("team_slug", c.TeamSlug)
+	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	return c.DoRequest("GET")
 }
 
@@ -536,9 +538,9 @@ type TeamsGetDiscussionLegacyCmd struct {
 func (c *TeamsGetDiscussionLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/discussions/{discussion_number}")
+	c.UpdateURLPath("team_id", c.TeamId)
 	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
 	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
-	c.UpdateURLPath("team_id", c.TeamId)
 	return c.DoRequest("GET")
 }
 
@@ -610,9 +612,9 @@ func (c *TeamsListChildInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/teams")
 	c.UpdateURLPath("org", c.Org)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLPath("team_slug", c.TeamSlug)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -626,9 +628,9 @@ type TeamsListChildLegacyCmd struct {
 func (c *TeamsListChildLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/teams")
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -643,8 +645,8 @@ func (c *TeamsListCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams")
 	c.UpdateURLPath("org", c.Org)
-	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -662,13 +664,13 @@ type TeamsListDiscussionCommentsInOrgCmd struct {
 func (c *TeamsListDiscussionCommentsInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments")
-	c.UpdateURLQuery("direction", c.Direction)
-	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
 	c.UpdateURLPath("org", c.Org)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	c.UpdateURLPath("team_slug", c.TeamSlug)
+	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
+	c.UpdateURLQuery("direction", c.Direction)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	return c.DoRequest("GET")
 }
 
@@ -685,12 +687,12 @@ type TeamsListDiscussionCommentsLegacyCmd struct {
 func (c *TeamsListDiscussionCommentsLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/discussions/{discussion_number}/comments")
-	c.UpdateURLQuery("direction", c.Direction)
-	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
+	c.UpdateURLQuery("direction", c.Direction)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	return c.DoRequest("GET")
 }
 
@@ -707,12 +709,12 @@ type TeamsListDiscussionsInOrgCmd struct {
 func (c *TeamsListDiscussionsInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/discussions")
-	c.UpdateURLQuery("direction", c.Direction)
 	c.UpdateURLPath("org", c.Org)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	c.UpdateURLPath("team_slug", c.TeamSlug)
+	c.UpdateURLQuery("direction", c.Direction)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	return c.DoRequest("GET")
 }
 
@@ -728,11 +730,11 @@ type TeamsListDiscussionsLegacyCmd struct {
 func (c *TeamsListDiscussionsLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/discussions")
-	c.UpdateURLQuery("direction", c.Direction)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLQuery("direction", c.Direction)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	return c.DoRequest("GET")
 }
 
@@ -745,8 +747,8 @@ type TeamsListForAuthenticatedUserCmd struct {
 func (c *TeamsListForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/teams")
-	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -773,8 +775,8 @@ func (c *TeamsListIdPGroupsForOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/team-sync/groups")
 	c.UpdateURLPath("org", c.Org)
-	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -805,10 +807,10 @@ func (c *TeamsListMembersInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/members")
 	c.UpdateURLPath("org", c.Org)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("role", c.Role)
 	c.UpdateURLPath("team_slug", c.TeamSlug)
+	c.UpdateURLQuery("role", c.Role)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -823,10 +825,10 @@ type TeamsListMembersLegacyCmd struct {
 func (c *TeamsListMembersLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/members")
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("role", c.Role)
 	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLQuery("role", c.Role)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -842,9 +844,9 @@ func (c *TeamsListPendingInvitationsInOrgCmd) Run(isValueSetMap map[string]bool)
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/invitations")
 	c.UpdateURLPath("org", c.Org)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLPath("team_slug", c.TeamSlug)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -858,9 +860,9 @@ type TeamsListPendingInvitationsLegacyCmd struct {
 func (c *TeamsListPendingInvitationsLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/invitations")
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -876,11 +878,11 @@ type TeamsListProjectsInOrgCmd struct {
 func (c *TeamsListProjectsInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/projects")
-	c.UpdatePreview("inertia", c.Inertia)
 	c.UpdateURLPath("org", c.Org)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLPath("team_slug", c.TeamSlug)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdatePreview("inertia", c.Inertia)
 	return c.DoRequest("GET")
 }
 
@@ -895,10 +897,10 @@ type TeamsListProjectsLegacyCmd struct {
 func (c *TeamsListProjectsLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/projects")
-	c.UpdatePreview("inertia", c.Inertia)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdatePreview("inertia", c.Inertia)
 	return c.DoRequest("GET")
 }
 
@@ -914,9 +916,9 @@ func (c *TeamsListReposInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/repos")
 	c.UpdateURLPath("org", c.Org)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLPath("team_slug", c.TeamSlug)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -930,9 +932,9 @@ type TeamsListReposLegacyCmd struct {
 func (c *TeamsListReposLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/repos")
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -991,8 +993,8 @@ func (c *TeamsRemoveProjectInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/projects/{project_id}")
 	c.UpdateURLPath("org", c.Org)
-	c.UpdateURLPath("project_id", c.ProjectId)
 	c.UpdateURLPath("team_slug", c.TeamSlug)
+	c.UpdateURLPath("project_id", c.ProjectId)
 	return c.DoRequest("DELETE")
 }
 
@@ -1005,8 +1007,8 @@ type TeamsRemoveProjectLegacyCmd struct {
 func (c *TeamsRemoveProjectLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/projects/{project_id}")
-	c.UpdateURLPath("project_id", c.ProjectId)
 	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("project_id", c.ProjectId)
 	return c.DoRequest("DELETE")
 }
 
@@ -1022,9 +1024,9 @@ func (c *TeamsRemoveRepoInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}")
 	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("team_slug", c.TeamSlug)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("team_slug", c.TeamSlug)
 	return c.DoRequest("DELETE")
 }
 
@@ -1038,9 +1040,9 @@ type TeamsRemoveRepoLegacyCmd struct {
 func (c *TeamsRemoveRepoLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/repos/{owner}/{repo}")
+	c.UpdateURLPath("team_id", c.TeamId)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("team_id", c.TeamId)
 	return c.DoRequest("DELETE")
 }
 
@@ -1055,10 +1057,10 @@ type TeamsReviewProjectInOrgCmd struct {
 func (c *TeamsReviewProjectInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/projects/{project_id}")
-	c.UpdatePreview("inertia", c.Inertia)
 	c.UpdateURLPath("org", c.Org)
-	c.UpdateURLPath("project_id", c.ProjectId)
 	c.UpdateURLPath("team_slug", c.TeamSlug)
+	c.UpdateURLPath("project_id", c.ProjectId)
+	c.UpdatePreview("inertia", c.Inertia)
 	return c.DoRequest("GET")
 }
 
@@ -1072,9 +1074,9 @@ type TeamsReviewProjectLegacyCmd struct {
 func (c *TeamsReviewProjectLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/projects/{project_id}")
-	c.UpdatePreview("inertia", c.Inertia)
-	c.UpdateURLPath("project_id", c.ProjectId)
 	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("project_id", c.ProjectId)
+	c.UpdatePreview("inertia", c.Inertia)
 	return c.DoRequest("GET")
 }
 
@@ -1091,12 +1093,12 @@ type TeamsUpdateDiscussionCommentInOrgCmd struct {
 func (c *TeamsUpdateDiscussionCommentInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}")
-	c.UpdateBody("body", c.Body)
-	c.UpdateURLPath("comment_number", c.CommentNumber)
-	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
 	c.UpdateURLPath("org", c.Org)
-	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	c.UpdateURLPath("team_slug", c.TeamSlug)
+	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
+	c.UpdateURLPath("comment_number", c.CommentNumber)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateBody("body", c.Body)
 	return c.DoRequest("PATCH")
 }
 
@@ -1112,11 +1114,11 @@ type TeamsUpdateDiscussionCommentLegacyCmd struct {
 func (c *TeamsUpdateDiscussionCommentLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}")
-	c.UpdateBody("body", c.Body)
-	c.UpdateURLPath("comment_number", c.CommentNumber)
-	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
-	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
+	c.UpdateURLPath("comment_number", c.CommentNumber)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateBody("body", c.Body)
 	return c.DoRequest("PATCH")
 }
 
@@ -1133,11 +1135,11 @@ type TeamsUpdateDiscussionInOrgCmd struct {
 func (c *TeamsUpdateDiscussionInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/discussions/{discussion_number}")
-	c.UpdateBody("body", c.Body)
-	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
 	c.UpdateURLPath("org", c.Org)
-	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	c.UpdateURLPath("team_slug", c.TeamSlug)
+	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	c.UpdateBody("body", c.Body)
 	c.UpdateBody("title", c.Title)
 	return c.DoRequest("PATCH")
 }
@@ -1154,10 +1156,10 @@ type TeamsUpdateDiscussionLegacyCmd struct {
 func (c *TeamsUpdateDiscussionLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/discussions/{discussion_number}")
-	c.UpdateBody("body", c.Body)
+	c.UpdateURLPath("team_id", c.TeamId)
 	c.UpdateURLPath("discussion_number", c.DiscussionNumber)
 	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
-	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateBody("body", c.Body)
 	c.UpdateBody("title", c.Title)
 	return c.DoRequest("PATCH")
 }
@@ -1176,13 +1178,13 @@ type TeamsUpdateInOrgCmd struct {
 func (c *TeamsUpdateInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("team_slug", c.TeamSlug)
 	c.UpdateBody("description", c.Description)
 	c.UpdateBody("name", c.Name)
-	c.UpdateURLPath("org", c.Org)
 	c.UpdateBody("parent_team_id", c.ParentTeamId)
 	c.UpdateBody("permission", c.Permission)
 	c.UpdateBody("privacy", c.Privacy)
-	c.UpdateURLPath("team_slug", c.TeamSlug)
 	return c.DoRequest("PATCH")
 }
 
@@ -1199,11 +1201,11 @@ type TeamsUpdateLegacyCmd struct {
 func (c *TeamsUpdateLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}")
+	c.UpdateURLPath("team_id", c.TeamId)
 	c.UpdateBody("description", c.Description)
 	c.UpdateBody("name", c.Name)
 	c.UpdateBody("parent_team_id", c.ParentTeamId)
 	c.UpdateBody("permission", c.Permission)
 	c.UpdateBody("privacy", c.Privacy)
-	c.UpdateURLPath("team_id", c.TeamId)
 	return c.DoRequest("PATCH")
 }

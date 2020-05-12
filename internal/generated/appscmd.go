@@ -2,7 +2,9 @@
 
 package generated
 
-import "github.com/octo-cli/octo-cli/internal"
+import (
+	"github.com/octo-cli/octo-cli/internal"
+)
 
 type AppsCmd struct {
 	AddRepoToInstallation                        AppsAddRepoToInstallationCmd                        `cmd:""`
@@ -53,8 +55,8 @@ func (c *AppsAddRepoToInstallationCmd) Run(isValueSetMap map[string]bool) error 
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/installations/{installation_id}/repositories/{repository_id}")
 	c.UpdateURLPath("installation_id", c.InstallationId)
-	c.UpdatePreview("machine-man", c.MachineMan)
 	c.UpdateURLPath("repository_id", c.RepositoryId)
+	c.UpdatePreview("machine-man", c.MachineMan)
 	return c.DoRequest("PUT")
 }
 
@@ -67,8 +69,8 @@ type AppsCheckAuthorizationCmd struct {
 func (c *AppsCheckAuthorizationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/applications/{client_id}/tokens/{access_token}")
-	c.UpdateURLPath("access_token", c.AccessToken)
 	c.UpdateURLPath("client_id", c.ClientId)
+	c.UpdateURLPath("access_token", c.AccessToken)
 	return c.DoRequest("GET")
 }
 
@@ -81,8 +83,8 @@ type AppsCheckTokenCmd struct {
 func (c *AppsCheckTokenCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/applications/{client_id}/token")
-	c.UpdateBody("access_token", c.AccessToken)
 	c.UpdateURLPath("client_id", c.ClientId)
+	c.UpdateBody("access_token", c.AccessToken)
 	return c.DoRequest("POST")
 }
 
@@ -97,9 +99,9 @@ type AppsCreateContentAttachmentCmd struct {
 func (c *AppsCreateContentAttachmentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/content_references/{content_reference_id}/attachments")
-	c.UpdateBody("body", c.Body)
 	c.UpdateURLPath("content_reference_id", c.ContentReferenceId)
 	c.UpdatePreview("corsair", c.Corsair)
+	c.UpdateBody("body", c.Body)
 	c.UpdateBody("title", c.Title)
 	return c.DoRequest("POST")
 }
@@ -143,8 +145,8 @@ type AppsDeleteAuthorizationCmd struct {
 func (c *AppsDeleteAuthorizationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/applications/{client_id}/grant")
-	c.UpdateBody("access_token", c.AccessToken)
 	c.UpdateURLPath("client_id", c.ClientId)
+	c.UpdateBody("access_token", c.AccessToken)
 	return c.DoRequest("DELETE")
 }
 
@@ -171,8 +173,8 @@ type AppsDeleteTokenCmd struct {
 func (c *AppsDeleteTokenCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/applications/{client_id}/token")
-	c.UpdateBody("access_token", c.AccessToken)
 	c.UpdateURLPath("client_id", c.ClientId)
+	c.UpdateBody("access_token", c.AccessToken)
 	return c.DoRequest("DELETE")
 }
 
@@ -225,8 +227,8 @@ type AppsGetOrgInstallationCmd struct {
 func (c *AppsGetOrgInstallationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/installation")
-	c.UpdatePreview("machine-man", c.MachineMan)
 	c.UpdateURLPath("org", c.Org)
+	c.UpdatePreview("machine-man", c.MachineMan)
 	return c.DoRequest("GET")
 }
 
@@ -240,9 +242,9 @@ type AppsGetRepoInstallationCmd struct {
 func (c *AppsGetRepoInstallationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/installation")
-	c.UpdatePreview("machine-man", c.MachineMan)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdatePreview("machine-man", c.MachineMan)
 	return c.DoRequest("GET")
 }
 
@@ -279,8 +281,8 @@ type AppsGetUserInstallationCmd struct {
 func (c *AppsGetUserInstallationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/users/{username}/installation")
-	c.UpdatePreview("machine-man", c.MachineMan)
 	c.UpdateURLPath("username", c.Username)
+	c.UpdatePreview("machine-man", c.MachineMan)
 	return c.DoRequest("GET")
 }
 
@@ -296,11 +298,11 @@ type AppsListAccountsForPlanCmd struct {
 func (c *AppsListAccountsForPlanCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/marketplace_listing/plans/{plan_id}/accounts")
-	c.UpdateURLQuery("direction", c.Direction)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLPath("plan_id", c.PlanId)
 	c.UpdateURLQuery("sort", c.Sort)
+	c.UpdateURLQuery("direction", c.Direction)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -316,11 +318,11 @@ type AppsListAccountsForPlanStubbedCmd struct {
 func (c *AppsListAccountsForPlanStubbedCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/marketplace_listing/stubbed/plans/{plan_id}/accounts")
-	c.UpdateURLQuery("direction", c.Direction)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLPath("plan_id", c.PlanId)
 	c.UpdateURLQuery("sort", c.Sort)
+	c.UpdateURLQuery("direction", c.Direction)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -337,10 +339,10 @@ func (c *AppsListInstallationReposForAuthenticatedUserCmd) Run(isValueSetMap map
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/installations/{installation_id}/repositories")
 	c.UpdateURLPath("installation_id", c.InstallationId)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	c.UpdatePreview("machine-man", c.MachineMan)
 	c.UpdatePreview("mercy", c.Mercy)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	return c.DoRequest("GET")
 }
 
@@ -354,9 +356,9 @@ type AppsListInstallationsCmd struct {
 func (c *AppsListInstallationsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/app/installations")
-	c.UpdatePreview("machine-man", c.MachineMan)
-	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdatePreview("machine-man", c.MachineMan)
 	return c.DoRequest("GET")
 }
 
@@ -370,9 +372,9 @@ type AppsListInstallationsForAuthenticatedUserCmd struct {
 func (c *AppsListInstallationsForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/installations")
-	c.UpdatePreview("machine-man", c.MachineMan)
-	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdatePreview("machine-man", c.MachineMan)
 	return c.DoRequest("GET")
 }
 
@@ -385,8 +387,8 @@ type AppsListPlansCmd struct {
 func (c *AppsListPlansCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/marketplace_listing/plans")
-	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -399,8 +401,8 @@ type AppsListPlansStubbedCmd struct {
 func (c *AppsListPlansStubbedCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/marketplace_listing/stubbed/plans")
-	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -415,10 +417,10 @@ type AppsListReposCmd struct {
 func (c *AppsListReposCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/installation/repositories")
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	c.UpdatePreview("machine-man", c.MachineMan)
 	c.UpdatePreview("mercy", c.Mercy)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	return c.DoRequest("GET")
 }
 
@@ -431,8 +433,8 @@ type AppsListSubscriptionsForAuthenticatedUserCmd struct {
 func (c *AppsListSubscriptionsForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/marketplace_purchases")
-	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -445,8 +447,8 @@ type AppsListSubscriptionsForAuthenticatedUserStubbedCmd struct {
 func (c *AppsListSubscriptionsForAuthenticatedUserStubbedCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/marketplace_purchases/stubbed")
-	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -461,8 +463,8 @@ func (c *AppsRemoveRepoFromInstallationCmd) Run(isValueSetMap map[string]bool) e
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/installations/{installation_id}/repositories/{repository_id}")
 	c.UpdateURLPath("installation_id", c.InstallationId)
-	c.UpdatePreview("machine-man", c.MachineMan)
 	c.UpdateURLPath("repository_id", c.RepositoryId)
+	c.UpdatePreview("machine-man", c.MachineMan)
 	return c.DoRequest("DELETE")
 }
 
@@ -475,8 +477,8 @@ type AppsResetAuthorizationCmd struct {
 func (c *AppsResetAuthorizationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/applications/{client_id}/tokens/{access_token}")
-	c.UpdateURLPath("access_token", c.AccessToken)
 	c.UpdateURLPath("client_id", c.ClientId)
+	c.UpdateURLPath("access_token", c.AccessToken)
 	return c.DoRequest("POST")
 }
 
@@ -489,8 +491,8 @@ type AppsResetTokenCmd struct {
 func (c *AppsResetTokenCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/applications/{client_id}/token")
-	c.UpdateBody("access_token", c.AccessToken)
 	c.UpdateURLPath("client_id", c.ClientId)
+	c.UpdateBody("access_token", c.AccessToken)
 	return c.DoRequest("PATCH")
 }
 
@@ -503,8 +505,8 @@ type AppsRevokeAuthorizationForApplicationCmd struct {
 func (c *AppsRevokeAuthorizationForApplicationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/applications/{client_id}/tokens/{access_token}")
-	c.UpdateURLPath("access_token", c.AccessToken)
 	c.UpdateURLPath("client_id", c.ClientId)
+	c.UpdateURLPath("access_token", c.AccessToken)
 	return c.DoRequest("DELETE")
 }
 
@@ -517,8 +519,8 @@ type AppsRevokeGrantForApplicationCmd struct {
 func (c *AppsRevokeGrantForApplicationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/applications/{client_id}/grants/{access_token}")
-	c.UpdateURLPath("access_token", c.AccessToken)
 	c.UpdateURLPath("client_id", c.ClientId)
+	c.UpdateURLPath("access_token", c.AccessToken)
 	return c.DoRequest("DELETE")
 }
 

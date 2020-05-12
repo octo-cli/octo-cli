@@ -28,7 +28,7 @@ func TestTemplate(t *testing.T) {
 		data := RunMethodParam{
 			Name:         "name",
 			ValueField:   "valueField",
-			UpdateMethod: "updateMethod",
+			UpdateMethod: "c.updateMethod",
 		}
 		want := `
 c.updateMethod("name", c.valueField)`
@@ -43,16 +43,14 @@ c.updateMethod("name", c.valueField)`
 				ReceiverName: "receiverName",
 				Method:       "mymethod",
 				URLPath:      "urlPath",
-				Params: []RunMethodParam{
+				CodeBlocks: []CodeBlock{
 					{
-						Name:         "param1",
-						ValueField:   "valueField1",
-						UpdateMethod: "updateMethod1",
+						Code: `
+	c.updateMethod1("param1", c.valueField1)`,
 					},
 					{
-						Name:         "param2",
-						ValueField:   "valueField2",
-						UpdateMethod: "updateMethod2",
+						Code: `
+	c.updateMethod2("param2", c.valueField2)`,
 					},
 				},
 			}
@@ -221,18 +219,20 @@ func Test_generateGoFile(t *testing.T) {
 										Type: "string",
 										Tags: util.NewTags(util.NewTag("required", ""), util.NewTag("name", "license")),
 									},
-									{Type: "internal.BaseCmd"},
+									{
+										Type:   "internal.BaseCmd",
+										Import: "github.com/octo-cli/octo-cli/internal",
+									},
 								},
 							},
 							RunMethod: RunMethod{
 								ReceiverName: "LicensesGetCmd",
 								Method:       "GET",
 								URLPath:      "/licenses/{license}",
-								Params: []RunMethodParam{
+								CodeBlocks: []CodeBlock{
 									{
-										Name:         "license",
-										ValueField:   "License",
-										UpdateMethod: "UpdateURLPath",
+										Code: `
+c.UpdateURLPath("license", c.License)`,
 									},
 								},
 							},
@@ -251,23 +251,24 @@ func Test_generateGoFile(t *testing.T) {
 										Type: "string",
 										Tags: util.NewTags(util.NewTag("required", ""), util.NewTag("name", "repo")),
 									},
-									{Type: "internal.BaseCmd"},
+									{
+										Type:   "internal.BaseCmd",
+										Import: "github.com/octo-cli/octo-cli/internal",
+									},
 								},
 							},
 							RunMethod: RunMethod{
 								ReceiverName: "LicensesGetForRepoCmd",
 								Method:       "GET",
 								URLPath:      "/repos/{owner}/{repo}/license",
-								Params: []RunMethodParam{
+								CodeBlocks: []CodeBlock{
 									{
-										Name:         "owner",
-										ValueField:   "Owner",
-										UpdateMethod: "UpdateURLPath",
+										Code: `
+c.UpdateURLPath("owner", c.Owner)`,
 									},
 									{
-										Name:         "repo",
-										ValueField:   "Repo",
-										UpdateMethod: "UpdateURLPath",
+										Code: `
+c.UpdateURLPath("repo", c.Repo)`,
 									},
 								},
 							},
@@ -276,7 +277,10 @@ func Test_generateGoFile(t *testing.T) {
 							CmdStruct: StructTmplHelper{
 								Name: "LicensesListCommonlyUsedCmd",
 								Fields: []StructField{
-									{Type: "internal.BaseCmd"},
+									{
+										Type:   "internal.BaseCmd",
+										Import: "github.com/octo-cli/octo-cli/internal",
+									},
 								},
 							},
 							RunMethod: RunMethod{

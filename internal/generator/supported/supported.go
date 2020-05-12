@@ -61,20 +61,6 @@ var unsupportedChecks = []unsupportedCheck{
 		},
 	},
 	{
-		reason: "accepts non-json body",
-		check: func(op *openapi3.Operation, routePath, method string) bool {
-			if op.RequestBody == nil || op.RequestBody.Value == nil {
-				return false
-			}
-			for tp := range op.RequestBody.Value.Content {
-				if tp != "application/json" {
-					return true
-				}
-			}
-			return false
-		},
-	},
-	{
 		reason: "invalid response code",
 		check: func(op *openapi3.Operation, routePath, method string) bool {
 			for code := range op.Responses {
@@ -84,12 +70,6 @@ var unsupportedChecks = []unsupportedCheck{
 				}
 			}
 			return false
-		},
-	},
-	{
-		reason: "unhandled server in openapi spec",
-		check: func(op *openapi3.Operation, routePath, method string) bool {
-			return op.Servers != nil
 		},
 	},
 }

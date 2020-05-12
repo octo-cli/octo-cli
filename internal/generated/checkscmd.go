@@ -2,7 +2,9 @@
 
 package generated
 
-import "github.com/octo-cli/octo-cli/internal"
+import (
+	"github.com/octo-cli/octo-cli/internal"
+)
 
 type ChecksCmd struct {
 	Create               ChecksCreateCmd               `cmd:""`
@@ -42,8 +44,10 @@ type ChecksCreateCmd struct {
 func (c *ChecksCreateCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/check-runs")
-	c.UpdateBody("actions", c.Actions)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
 	c.UpdatePreview("antiope", c.Antiope)
+	c.UpdateBody("actions", c.Actions)
 	c.UpdateBody("completed_at", c.CompletedAt)
 	c.UpdateBody("conclusion", c.Conclusion)
 	c.UpdateBody("details_url", c.DetailsUrl)
@@ -55,8 +59,6 @@ func (c *ChecksCreateCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateBody("output.summary", c.OutputSummary)
 	c.UpdateBody("output.text", c.OutputText)
 	c.UpdateBody("output.title", c.OutputTitle)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateBody("started_at", c.StartedAt)
 	c.UpdateBody("status", c.Status)
 	return c.DoRequest("POST")
@@ -73,10 +75,10 @@ type ChecksCreateSuiteCmd struct {
 func (c *ChecksCreateSuiteCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/check-suites")
-	c.UpdatePreview("antiope", c.Antiope)
-	c.UpdateBody("head_sha", c.HeadSha)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdatePreview("antiope", c.Antiope)
+	c.UpdateBody("head_sha", c.HeadSha)
 	return c.DoRequest("POST")
 }
 
@@ -91,10 +93,10 @@ type ChecksGetCmd struct {
 func (c *ChecksGetCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/check-runs/{check_run_id}")
-	c.UpdatePreview("antiope", c.Antiope)
-	c.UpdateURLPath("check_run_id", c.CheckRunId)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("check_run_id", c.CheckRunId)
+	c.UpdatePreview("antiope", c.Antiope)
 	return c.DoRequest("GET")
 }
 
@@ -109,10 +111,10 @@ type ChecksGetSuiteCmd struct {
 func (c *ChecksGetSuiteCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/check-suites/{check_suite_id}")
-	c.UpdatePreview("antiope", c.Antiope)
-	c.UpdateURLPath("check_suite_id", c.CheckSuiteId)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("check_suite_id", c.CheckSuiteId)
+	c.UpdatePreview("antiope", c.Antiope)
 	return c.DoRequest("GET")
 }
 
@@ -129,12 +131,12 @@ type ChecksListAnnotationsCmd struct {
 func (c *ChecksListAnnotationsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/check-runs/{check_run_id}/annotations")
-	c.UpdatePreview("antiope", c.Antiope)
-	c.UpdateURLPath("check_run_id", c.CheckRunId)
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("check_run_id", c.CheckRunId)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdatePreview("antiope", c.Antiope)
 	return c.DoRequest("GET")
 }
 
@@ -154,15 +156,15 @@ type ChecksListForRefCmd struct {
 func (c *ChecksListForRefCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/commits/{ref}/check-runs")
-	c.UpdatePreview("antiope", c.Antiope)
-	c.UpdateURLQuery("check_name", c.CheckName)
-	c.UpdateURLQuery("filter", c.Filter)
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLPath("ref", c.Ref)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("ref", c.Ref)
+	c.UpdateURLQuery("check_name", c.CheckName)
 	c.UpdateURLQuery("status", c.Status)
+	c.UpdateURLQuery("filter", c.Filter)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdatePreview("antiope", c.Antiope)
 	return c.DoRequest("GET")
 }
 
@@ -182,15 +184,15 @@ type ChecksListForSuiteCmd struct {
 func (c *ChecksListForSuiteCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/check-suites/{check_suite_id}/check-runs")
-	c.UpdatePreview("antiope", c.Antiope)
-	c.UpdateURLQuery("check_name", c.CheckName)
-	c.UpdateURLPath("check_suite_id", c.CheckSuiteId)
-	c.UpdateURLQuery("filter", c.Filter)
 	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("check_suite_id", c.CheckSuiteId)
+	c.UpdateURLQuery("check_name", c.CheckName)
 	c.UpdateURLQuery("status", c.Status)
+	c.UpdateURLQuery("filter", c.Filter)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdatePreview("antiope", c.Antiope)
 	return c.DoRequest("GET")
 }
 
@@ -209,14 +211,14 @@ type ChecksListSuitesForRefCmd struct {
 func (c *ChecksListSuitesForRefCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/commits/{ref}/check-suites")
-	c.UpdatePreview("antiope", c.Antiope)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("ref", c.Ref)
 	c.UpdateURLQuery("app_id", c.AppId)
 	c.UpdateURLQuery("check_name", c.CheckName)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLPath("ref", c.Ref)
-	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdatePreview("antiope", c.Antiope)
 	return c.DoRequest("GET")
 }
 
@@ -231,10 +233,10 @@ type ChecksRerequestSuiteCmd struct {
 func (c *ChecksRerequestSuiteCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/check-suites/{check_suite_id}/rerequest")
-	c.UpdatePreview("antiope", c.Antiope)
-	c.UpdateURLPath("check_suite_id", c.CheckSuiteId)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("check_suite_id", c.CheckSuiteId)
+	c.UpdatePreview("antiope", c.Antiope)
 	return c.DoRequest("POST")
 }
 
@@ -249,10 +251,10 @@ type ChecksSetSuitesPreferencesCmd struct {
 func (c *ChecksSetSuitesPreferencesCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/check-suites/preferences")
-	c.UpdatePreview("antiope", c.Antiope)
-	c.UpdateBody("auto_trigger_checks", c.AutoTriggerChecks)
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdatePreview("antiope", c.Antiope)
+	c.UpdateBody("auto_trigger_checks", c.AutoTriggerChecks)
 	return c.DoRequest("PATCH")
 }
 
@@ -280,9 +282,11 @@ type ChecksUpdateCmd struct {
 func (c *ChecksUpdateCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{owner}/{repo}/check-runs/{check_run_id}")
-	c.UpdateBody("actions", c.Actions)
-	c.UpdatePreview("antiope", c.Antiope)
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("check_run_id", c.CheckRunId)
+	c.UpdatePreview("antiope", c.Antiope)
+	c.UpdateBody("actions", c.Actions)
 	c.UpdateBody("completed_at", c.CompletedAt)
 	c.UpdateBody("conclusion", c.Conclusion)
 	c.UpdateBody("details_url", c.DetailsUrl)
@@ -293,8 +297,6 @@ func (c *ChecksUpdateCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateBody("output.summary", c.OutputSummary)
 	c.UpdateBody("output.text", c.OutputText)
 	c.UpdateBody("output.title", c.OutputTitle)
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateBody("started_at", c.StartedAt)
 	c.UpdateBody("status", c.Status)
 	return c.DoRequest("PATCH")
