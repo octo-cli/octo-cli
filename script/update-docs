@@ -20,5 +20,4 @@ if [ "$1" = "--check" ]; then
   exit 0
 fi
 
-go run ./readmegen.go
 go run ./docgen.go -schema api.github.com.json -out ./docs
