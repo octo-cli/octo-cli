@@ -8,7 +8,6 @@ import (
 
 type ActivityCmd struct {
 	CheckRepoIsStarredByAuthenticatedUser     ActivityCheckRepoIsStarredByAuthenticatedUserCmd     `cmd:""`
-	CheckWatchingRepoLegacy                   ActivityCheckWatchingRepoLegacyCmd                   `cmd:""`
 	DeleteRepoSubscription                    ActivityDeleteRepoSubscriptionCmd                    `cmd:""`
 	DeleteThreadSubscription                  ActivityDeleteThreadSubscriptionCmd                  `cmd:""`
 	GetFeeds                                  ActivityGetFeedsCmd                                  `cmd:""`
@@ -38,9 +37,7 @@ type ActivityCmd struct {
 	SetRepoSubscription                       ActivitySetRepoSubscriptionCmd                       `cmd:""`
 	SetThreadSubscription                     ActivitySetThreadSubscriptionCmd                     `cmd:""`
 	StarRepoForAuthenticatedUser              ActivityStarRepoForAuthenticatedUserCmd              `cmd:""`
-	StopWatchingRepoLegacy                    ActivityStopWatchingRepoLegacyCmd                    `cmd:""`
 	UnstarRepoForAuthenticatedUser            ActivityUnstarRepoForAuthenticatedUserCmd            `cmd:""`
-	WatchRepoLegacy                           ActivityWatchRepoLegacyCmd                           `cmd:""`
 }
 
 type ActivityCheckRepoIsStarredByAuthenticatedUserCmd struct {
@@ -52,20 +49,6 @@ type ActivityCheckRepoIsStarredByAuthenticatedUserCmd struct {
 func (c *ActivityCheckRepoIsStarredByAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/starred/{owner}/{repo}")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	return c.DoRequest("GET")
-}
-
-type ActivityCheckWatchingRepoLegacyCmd struct {
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
-	internal.BaseCmd
-}
-
-func (c *ActivityCheckWatchingRepoLegacyCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/subscriptions/{owner}/{repo}")
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
@@ -531,20 +514,6 @@ func (c *ActivityStarRepoForAuthenticatedUserCmd) Run(isValueSetMap map[string]b
 	return c.DoRequest("PUT")
 }
 
-type ActivityStopWatchingRepoLegacyCmd struct {
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
-	internal.BaseCmd
-}
-
-func (c *ActivityStopWatchingRepoLegacyCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/subscriptions/{owner}/{repo}")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	return c.DoRequest("DELETE")
-}
-
 type ActivityUnstarRepoForAuthenticatedUserCmd struct {
 	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
@@ -557,18 +526,4 @@ func (c *ActivityUnstarRepoForAuthenticatedUserCmd) Run(isValueSetMap map[string
 	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("DELETE")
-}
-
-type ActivityWatchRepoLegacyCmd struct {
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
-	internal.BaseCmd
-}
-
-func (c *ActivityWatchRepoLegacyCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/subscriptions/{owner}/{repo}")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repo", c.Repo)
-	return c.DoRequest("PUT")
 }

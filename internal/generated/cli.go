@@ -71,7 +71,6 @@ var CmdHelps = map[string]map[string]string{
 	},
 	"activity": {
 		"check-repo-is-starred-by-authenticated-user":    "Check if a repository is starred by the authenticated user - https://developer.github.com/v3/activity/starring/#check-if-a-repository-is-starred-by-the-authenticated-user",
-		"check-watching-repo-legacy":                     "Check if you are watching a repository (LEGACY) - https://developer.github.com/v3/activity/watching/#check-if-you-are-watching-a-repository-legacy",
 		"delete-repo-subscription":                       "Delete a repository subscription - https://developer.github.com/v3/activity/watching/#delete-a-repository-subscription",
 		"delete-thread-subscription":                     "Delete a thread subscription - https://developer.github.com/v3/activity/notifications/#delete-a-thread-subscription",
 		"get-feeds":                                      "Get feeds - https://developer.github.com/v3/activity/feeds/#get-feeds",
@@ -101,9 +100,7 @@ var CmdHelps = map[string]map[string]string{
 		"set-repo-subscription":                          "Set a repository subscription - https://developer.github.com/v3/activity/watching/#set-a-repository-subscription",
 		"set-thread-subscription":                        "Set a thread subscription - https://developer.github.com/v3/activity/notifications/#set-a-thread-subscription",
 		"star-repo-for-authenticated-user":               "Star a repository for the authenticated user - https://developer.github.com/v3/activity/starring/#star-a-repository-for-the-authenticated-user",
-		"stop-watching-repo-legacy":                      "Stop watching a repository (LEGACY) - https://developer.github.com/v3/activity/watching/#stop-watching-a-repository-legacy",
 		"unstar-repo-for-authenticated-user":             "Unstar a repository for the authenticated user - https://developer.github.com/v3/activity/starring/#unstar-a-repository-for-the-authenticated-user",
-		"watch-repo-legacy":                              "Watch a repository (LEGACY) - https://developer.github.com/v3/activity/watching/#watch-a-repository-legacy",
 	},
 	"apps": {
 		"add-repo-to-installation":                          "Add repository to installation - https://developer.github.com/v3/apps/installations/#add-repository-to-installation",
@@ -583,15 +580,11 @@ var CmdHelps = map[string]map[string]string{
 	"search": {
 		"code":                     "Search code - https://developer.github.com/v3/search/#search-code",
 		"commits":                  "Search commits - https://developer.github.com/v3/search/#search-commits",
-		"email-legacy":             "Email search - https://developer.github.com/v3/search/legacy/#email-search",
 		"issues-and-pull-requests": "Search issues and pull requests - https://developer.github.com/v3/search/#search-issues-and-pull-requests",
-		"issues-legacy":            "Search issues - https://developer.github.com/v3/search/legacy/#search-issues",
 		"labels":                   "Search labels - https://developer.github.com/v3/search/#search-labels",
 		"repos":                    "Search repositories - https://developer.github.com/v3/search/#search-repositories",
-		"repos-legacy":             "Search repositories - https://developer.github.com/v3/search/legacy/#search-repositories",
 		"topics":                   "Search topics - https://developer.github.com/v3/search/#search-topics",
 		"users":                    "Search users - https://developer.github.com/v3/search/#search-users",
-		"users-legacy":             "Search users - https://developer.github.com/v3/search/legacy/#search-users",
 	},
 	"teams": {
 		"add-member-legacy":                              "Add team member (Legacy) - https://developer.github.com/v3/teams/members/#add-team-member-legacy",
@@ -885,10 +878,6 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"owner": "owner parameter",
 			"repo":  "repo parameter",
 		},
-		"check-watching-repo-legacy": {
-			"owner": "owner parameter",
-			"repo":  "repo parameter",
-		},
 		"delete-repo-subscription": {
 			"owner": "owner parameter",
 			"repo":  "repo parameter",
@@ -1031,15 +1020,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"owner": "owner parameter",
 			"repo":  "repo parameter",
 		},
-		"stop-watching-repo-legacy": {
-			"owner": "owner parameter",
-			"repo":  "repo parameter",
-		},
 		"unstar-repo-for-authenticated-user": {
-			"owner": "owner parameter",
-			"repo":  "repo parameter",
-		},
-		"watch-repo-legacy": {
 			"owner": "owner parameter",
 			"repo":  "repo parameter",
 		},
@@ -3754,21 +3735,12 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"q":             "The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://developer.github.com/v3/search/#constructing-a-search-query). See \"[Searching commits](https://help.github.com/articles/searching-commits/)\" for a detailed list of qualifiers.",
 			"sort":          "Sorts the results of your query by `author-date` or `committer-date`. Default: [best match](https://developer.github.com/v3/search/#ranking-search-results)",
 		},
-		"email-legacy": {
-			"email": "The email address.",
-		},
 		"issues-and-pull-requests": {
 			"order":    "Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.",
 			"page":     "Page number of the results to fetch.",
 			"per_page": "Results per page (max 100)",
 			"q":        "The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://developer.github.com/v3/search/#constructing-a-search-query). See \"[Searching issues and pull requests](https://help.github.com/articles/searching-issues-and-pull-requests/)\" for a detailed list of qualifiers.",
 			"sort":     "Sorts the results of your query by the number of `comments`, `reactions`, `reactions-+1`, `reactions--1`, `reactions-smile`, `reactions-thinking_face`, `reactions-heart`, `reactions-tada`, or `interactions`. You can also sort results by how recently the items were `created` or `updated`, Default: [best match](https://developer.github.com/v3/search/#ranking-search-results)",
-		},
-		"issues-legacy": {
-			"keyword":    "The search term.",
-			"owner":      "owner parameter",
-			"repository": "repository parameter",
-			"state":      "Indicates the state of the issues to return. Can be either `open` or `closed`.",
 		},
 		"labels": {
 			"order":         "Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.",
@@ -3784,13 +3756,6 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"q":             "The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://developer.github.com/v3/search/#constructing-a-search-query). See \"[Searching for repositories](https://help.github.com/articles/searching-for-repositories/)\" for a detailed list of qualifiers.",
 			"sort":          "Sorts the results of your query by number of `stars`, `forks`, or `help-wanted-issues` or how recently the items were `updated`. Default: [best match](https://developer.github.com/v3/search/#ranking-search-results)",
 		},
-		"repos-legacy": {
-			"keyword":    "The search term.",
-			"language":   "Filter results by language.",
-			"order":      "The sort field. if `sort` param is provided. Can be either `asc` or `desc`.",
-			"sort":       "The sort field. One of `stars`, `forks`, or `updated`. Default: results are sorted by best match.",
-			"start_page": "The page number to fetch.",
-		},
 		"topics": {
 			"mercy-preview": "The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must set this flag.",
 			"q":             "The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://developer.github.com/v3/search/#constructing-a-search-query).",
@@ -3801,12 +3766,6 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"per_page": "Results per page (max 100)",
 			"q":        "The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://developer.github.com/v3/search/#constructing-a-search-query). See \"[Searching users](https://help.github.com/articles/searching-users/)\" for a detailed list of qualifiers.",
 			"sort":     "Sorts the results of your query by number of `followers` or `repositories`, or when the person `joined` GitHub. Default: [best match](https://developer.github.com/v3/search/#ranking-search-results)",
-		},
-		"users-legacy": {
-			"keyword":    "The search term.",
-			"order":      "The sort field. if `sort` param is provided. Can be either `asc` or `desc`.",
-			"sort":       "The sort field. One of `stars`, `forks`, or `updated`. Default: results are sorted by best match.",
-			"start_page": "The page number to fetch.",
 		},
 	},
 	"teams": {
