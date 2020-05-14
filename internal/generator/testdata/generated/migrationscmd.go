@@ -32,15 +32,13 @@ type MigrationsCmd struct {
 }
 
 type MigrationsCancelImportCmd struct {
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *MigrationsCancelImportCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/import")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/import")
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("DELETE")
 }
@@ -106,7 +104,6 @@ func (c *MigrationsGetArchiveForAuthenticatedUserCmd) Run(isValueSetMap map[stri
 }
 
 type MigrationsGetCommitAuthorsCmd struct {
-	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	Since string `name:"since"`
 	internal.BaseCmd
@@ -114,37 +111,32 @@ type MigrationsGetCommitAuthorsCmd struct {
 
 func (c *MigrationsGetCommitAuthorsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/import/authors")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/import/authors")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("since", c.Since)
 	return c.DoRequest("GET")
 }
 
 type MigrationsGetImportProgressCmd struct {
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *MigrationsGetImportProgressCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/import")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/import")
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
 }
 
 type MigrationsGetLargeFilesCmd struct {
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *MigrationsGetLargeFilesCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/import/large_files")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/import/large_files")
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
 }
@@ -255,15 +247,13 @@ type MigrationsMapCommitAuthorCmd struct {
 	AuthorId int64  `required:"" name:"author_id"`
 	Email    string `name:"email"`
 	Name     string `name:"name"`
-	Owner    string `name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *MigrationsMapCommitAuthorCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/import/authors/{author_id}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/import/authors/{author_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("author_id", c.AuthorId)
 	c.UpdateBody("email", c.Email)
@@ -272,7 +262,6 @@ func (c *MigrationsMapCommitAuthorCmd) Run(isValueSetMap map[string]bool) error 
 }
 
 type MigrationsSetLfsPreferenceCmd struct {
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	UseLfs string `required:"" name:"use_lfs"`
 	internal.BaseCmd
@@ -280,8 +269,7 @@ type MigrationsSetLfsPreferenceCmd struct {
 
 func (c *MigrationsSetLfsPreferenceCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/import/lfs")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/import/lfs")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateBody("use_lfs", c.UseLfs)
 	return c.DoRequest("PATCH")
@@ -322,7 +310,6 @@ func (c *MigrationsStartForOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type MigrationsStartImportCmd struct {
-	Owner       string `name:"owner"`
 	Repo        string `required:"" name:"repo"`
 	TfvcProject string `name:"tfvc_project"`
 	Vcs         string `name:"vcs"`
@@ -334,8 +321,7 @@ type MigrationsStartImportCmd struct {
 
 func (c *MigrationsStartImportCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/import")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/import")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateBody("tfvc_project", c.TfvcProject)
 	c.UpdateBody("vcs", c.Vcs)
@@ -380,7 +366,6 @@ func (c *MigrationsUnlockRepoForOrgCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type MigrationsUpdateImportCmd struct {
-	Owner       string `name:"owner"`
 	Repo        string `required:"" name:"repo"`
 	VcsPassword string `name:"vcs_password"`
 	VcsUsername string `name:"vcs_username"`
@@ -389,8 +374,7 @@ type MigrationsUpdateImportCmd struct {
 
 func (c *MigrationsUpdateImportCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/import")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/import")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateBody("vcs_password", c.VcsPassword)
 	c.UpdateBody("vcs_username", c.VcsUsername)

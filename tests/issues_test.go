@@ -17,8 +17,7 @@ func TestIssues(t *testing.T) {
 		format := `{{.state}} : {{.title}} : {{.body}}`
 		newCmdLine(`issues`,
 			`create`,
-			`--owner=octo-cli-testorg`,
-			`--repo=test-create-issue`,
+			`--repo=octo-cli-testorg/test-create-issue`,
 			`--title=test this`,
 			`--body=test this body`,
 			`--labels=label1`,
@@ -34,8 +33,7 @@ func TestIssues(t *testing.T) {
 		format := `{{.state}} : {{.title}} : {{.body}}`
 		newCmdLine(`issues`,
 			`get`,
-			`--owner=octo-cli-testorg`,
-			`--repo=test-create-issue`,
+			`--repo=octo-cli-testorg/test-create-issue`,
 			`--issue_number=1`,
 			`--format`, format,
 		).test(t, "test_issues_get", "open : \"test this\" : \"test this body\"\n", "", false)
@@ -68,8 +66,7 @@ func TestIssues(t *testing.T) {
 		// just keeping this here until I put it somewhere else because I don't want to forget how it works.
 		stdout, stderr, err := runCmdLine(t, "test_issues_create", &generated.IssuesCmd{},
 			`create`,
-			`--owner=octo-cli-testorg`,
-			`--repo=test-create-issue`,
+			`--repo=octo-cli-testorg/test-create-issue`,
 			`--title=test this`,
 			`--body=test this body`,
 			`--labels=label1`,

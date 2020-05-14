@@ -126,15 +126,13 @@ type ProjectsCreateForRepoCmd struct {
 	Body    string `name:"body"`
 	Inertia bool   `required:"" name:"inertia-preview"`
 	Name    string `required:"" name:"name"`
-	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ProjectsCreateForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/projects")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/projects")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdatePreview("inertia", c.Inertia)
 	c.UpdateBody("body", c.Body)
@@ -306,7 +304,6 @@ func (c *ProjectsListForOrgCmd) Run(isValueSetMap map[string]bool) error {
 
 type ProjectsListForRepoCmd struct {
 	Inertia bool   `required:"" name:"inertia-preview"`
-	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
@@ -316,8 +313,7 @@ type ProjectsListForRepoCmd struct {
 
 func (c *ProjectsListForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/projects")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/projects")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("state", c.State)
 	c.UpdateURLQuery("per_page", c.PerPage)

@@ -189,6 +189,10 @@ func swSvcTmpls(swagger *openapi3.Swagger) (map[string]*SvcTmpl, error) {
 }
 
 func GenFileTmpls(swagger *openapi3.Swagger) (map[string]FileTmpl, error) {
+	err := swaggerparser.RemoveOwnerParams(swagger)
+	if err != nil {
+		return nil, err
+	}
 	CLITmpl := cliTmpl(swagger)
 	cmdHelps := swCmdHelps(swagger)
 	flagHelps := swFlagHelps(swagger)

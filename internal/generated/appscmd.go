@@ -234,15 +234,13 @@ func (c *AppsGetOrgInstallationCmd) Run(isValueSetMap map[string]bool) error {
 
 type AppsGetRepoInstallationCmd struct {
 	MachineMan bool   `required:"" name:"machine-man-preview"`
-	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *AppsGetRepoInstallationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/installation")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/installation")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdatePreview("machine-man", c.MachineMan)
 	return c.DoRequest("GET")

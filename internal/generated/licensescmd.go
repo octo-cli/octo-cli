@@ -25,15 +25,13 @@ func (c *LicensesGetCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type LicensesGetForRepoCmd struct {
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *LicensesGetForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/license")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/license")
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
 }

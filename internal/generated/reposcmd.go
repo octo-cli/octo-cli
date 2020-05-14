@@ -164,7 +164,6 @@ func (c *ReposAcceptInvitationCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposAddCollaboratorCmd struct {
-	Owner      string `name:"owner"`
 	Permission string `name:"permission"`
 	Repo       string `required:"" name:"repo"`
 	Username   string `required:"" name:"username"`
@@ -173,8 +172,7 @@ type ReposAddCollaboratorCmd struct {
 
 func (c *ReposAddCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/collaborators/{username}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/collaborators/{username}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("username", c.Username)
 	c.UpdateBody("permission", c.Permission)
@@ -183,7 +181,6 @@ func (c *ReposAddCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposAddDeployKeyCmd struct {
 	Key      string `required:"" name:"key"`
-	Owner    string `name:"owner"`
 	ReadOnly bool   `name:"read_only"`
 	Repo     string `required:"" name:"repo"`
 	Title    string `name:"title"`
@@ -192,8 +189,7 @@ type ReposAddDeployKeyCmd struct {
 
 func (c *ReposAddDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/keys")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/keys")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateBody("key", c.Key)
 	c.UpdateBody("read_only", c.ReadOnly)
@@ -203,15 +199,13 @@ func (c *ReposAddDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposAddProtectedBranchAdminEnforcementCmd struct {
 	Branch string `required:"" name:"branch"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposAddProtectedBranchAdminEnforcementCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/enforce_admins")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("POST")
@@ -219,15 +213,13 @@ func (c *ReposAddProtectedBranchAdminEnforcementCmd) Run(isValueSetMap map[strin
 
 type ReposAddProtectedBranchAppRestrictionsCmd struct {
 	Branch string `required:"" name:"branch"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposAddProtectedBranchAppRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/restrictions/apps")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("POST")
@@ -235,7 +227,6 @@ func (c *ReposAddProtectedBranchAppRestrictionsCmd) Run(isValueSetMap map[string
 
 type ReposAddProtectedBranchRequiredSignaturesCmd struct {
 	Branch string `required:"" name:"branch"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Zzzax  bool   `required:"" name:"zzzax-preview"`
 	internal.BaseCmd
@@ -243,8 +234,7 @@ type ReposAddProtectedBranchRequiredSignaturesCmd struct {
 
 func (c *ReposAddProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection/required_signatures")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_signatures")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	c.UpdatePreview("zzzax", c.Zzzax)
@@ -253,15 +243,13 @@ func (c *ReposAddProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[str
 
 type ReposAddProtectedBranchRequiredStatusChecksContextsCmd struct {
 	Branch string `required:"" name:"branch"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposAddProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_status_checks/contexts")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("POST")
@@ -269,15 +257,13 @@ func (c *ReposAddProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueSetM
 
 type ReposAddProtectedBranchTeamRestrictionsCmd struct {
 	Branch string `required:"" name:"branch"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposAddProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/restrictions/teams")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("POST")
@@ -285,22 +271,19 @@ func (c *ReposAddProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[strin
 
 type ReposAddProtectedBranchUserRestrictionsCmd struct {
 	Branch string `required:"" name:"branch"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposAddProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/restrictions/users")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("POST")
 }
 
 type ReposCheckCollaboratorCmd struct {
-	Owner    string `name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	Username string `required:"" name:"username"`
 	internal.BaseCmd
@@ -308,8 +291,7 @@ type ReposCheckCollaboratorCmd struct {
 
 func (c *ReposCheckCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/collaborators/{username}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/collaborators/{username}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("username", c.Username)
 	return c.DoRequest("GET")
@@ -317,32 +299,28 @@ func (c *ReposCheckCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposCheckVulnerabilityAlertsCmd struct {
 	Dorian bool   `required:"" name:"dorian-preview"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposCheckVulnerabilityAlertsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/vulnerability-alerts")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/vulnerability-alerts")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdatePreview("dorian", c.Dorian)
 	return c.DoRequest("GET")
 }
 
 type ReposCompareCommitsCmd struct {
-	Base  string `required:"" name:"base"`
-	Head  string `required:"" name:"head"`
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	Base string `required:"" name:"base"`
+	Head string `required:"" name:"head"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposCompareCommitsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/compare/{base}...{head}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/compare/{base}...{head}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("base", c.Base)
 	c.UpdateURLPath("head", c.Head)
@@ -353,7 +331,6 @@ type ReposCreateCommitCommentCmd struct {
 	Body      string `required:"" name:"body"`
 	CommitSha string `required:"" name:"commit_sha"`
 	Line      int64  `name:"line"`
-	Owner     string `name:"owner"`
 	Path      string `name:"path"`
 	Position  int64  `name:"position"`
 	Repo      string `required:"" name:"repo"`
@@ -362,8 +339,7 @@ type ReposCreateCommitCommentCmd struct {
 
 func (c *ReposCreateCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/commits/{commit_sha}/comments")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/commits/{commit_sha}/comments")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("commit_sha", c.CommitSha)
 	c.UpdateBody("body", c.Body)
@@ -378,7 +354,6 @@ type ReposCreateDeploymentCmd struct {
 	AutoMerge             bool     `name:"auto_merge"`
 	Description           string   `name:"description"`
 	Environment           string   `name:"environment"`
-	Owner                 string   `name:"owner"`
 	Payload               string   `name:"payload"`
 	ProductionEnvironment bool     `name:"production_environment"`
 	Ref                   string   `required:"" name:"ref"`
@@ -391,8 +366,7 @@ type ReposCreateDeploymentCmd struct {
 
 func (c *ReposCreateDeploymentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/deployments")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/deployments")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdatePreview("ant-man", c.AntMan)
 	c.UpdateBody("auto_merge", c.AutoMerge)
@@ -416,7 +390,6 @@ type ReposCreateDeploymentStatusCmd struct {
 	EnvironmentUrl string `name:"environment_url"`
 	Flash          bool   `name:"flash-preview"`
 	LogUrl         string `name:"log_url"`
-	Owner          string `name:"owner"`
 	Repo           string `required:"" name:"repo"`
 	State          string `required:"" name:"state"`
 	TargetUrl      string `name:"target_url"`
@@ -425,8 +398,7 @@ type ReposCreateDeploymentStatusCmd struct {
 
 func (c *ReposCreateDeploymentStatusCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/deployments/{deployment_id}/statuses")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/deployments/{deployment_id}/statuses")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("deployment_id", c.DeploymentId)
 	c.UpdatePreview("flash", c.Flash)
@@ -444,15 +416,13 @@ func (c *ReposCreateDeploymentStatusCmd) Run(isValueSetMap map[string]bool) erro
 type ReposCreateDispatchEventCmd struct {
 	ClientPayload internal.JSONObject `name:"client_payload"`
 	EventType     string              `name:"event_type"`
-	Owner         string              `name:"owner"`
 	Repo          string              `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposCreateDispatchEventCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/dispatches")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/dispatches")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateBody("client_payload", c.ClientPayload)
 	c.UpdateBody("event_type", c.EventType)
@@ -509,15 +479,13 @@ func (c *ReposCreateForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) 
 
 type ReposCreateForkCmd struct {
 	Organization string `name:"organization"`
-	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposCreateForkCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/forks")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/forks")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateBody("organization", c.Organization)
 	return c.DoRequest("POST")
@@ -531,15 +499,13 @@ type ReposCreateHookCmd struct {
 	ConfigUrl         string   `required:"" name:"config.url"`
 	Events            []string `name:"events"`
 	Name              string   `name:"name"`
-	Owner             string   `name:"owner"`
 	Repo              string   `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposCreateHookCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/hooks")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/hooks")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateBody("active", c.Active)
 	c.UpdateBody("config.content_type", c.ConfigContentType)
@@ -609,7 +575,6 @@ type ReposCreateOrUpdateFileCmd struct {
 	CommitterName  string `name:"committer.name"`
 	Content        string `required:"" name:"content"`
 	Message        string `required:"" name:"message"`
-	Owner          string `name:"owner"`
 	Path           string `required:"" name:"path"`
 	Repo           string `required:"" name:"repo"`
 	Sha            string `name:"sha"`
@@ -618,8 +583,7 @@ type ReposCreateOrUpdateFileCmd struct {
 
 func (c *ReposCreateOrUpdateFileCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/contents/{path}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/contents/{path}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("path", c.Path)
 	c.UpdateBody("author.email", c.AuthorEmail)
@@ -637,7 +601,6 @@ type ReposCreateReleaseCmd struct {
 	Body            string `name:"body"`
 	Draft           bool   `name:"draft"`
 	Name            string `name:"name"`
-	Owner           string `name:"owner"`
 	Prerelease      bool   `name:"prerelease"`
 	Repo            string `required:"" name:"repo"`
 	TagName         string `required:"" name:"tag_name"`
@@ -647,8 +610,7 @@ type ReposCreateReleaseCmd struct {
 
 func (c *ReposCreateReleaseCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/releases")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/releases")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateBody("body", c.Body)
 	c.UpdateBody("draft", c.Draft)
@@ -662,7 +624,6 @@ func (c *ReposCreateReleaseCmd) Run(isValueSetMap map[string]bool) error {
 type ReposCreateStatusCmd struct {
 	Context     string `name:"context"`
 	Description string `name:"description"`
-	Owner       string `name:"owner"`
 	Repo        string `required:"" name:"repo"`
 	Sha         string `required:"" name:"sha"`
 	State       string `required:"" name:"state"`
@@ -672,8 +633,7 @@ type ReposCreateStatusCmd struct {
 
 func (c *ReposCreateStatusCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/statuses/{sha}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/statuses/{sha}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("sha", c.Sha)
 	c.UpdateBody("context", c.Context)
@@ -720,30 +680,26 @@ func (c *ReposDeclineInvitationCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposDeleteCmd struct {
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposDeleteCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}")
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("DELETE")
 }
 
 type ReposDeleteCommitCommentCmd struct {
 	CommentId int64  `required:"" name:"comment_id"`
-	Owner     string `name:"owner"`
 	Repo      string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposDeleteCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/comments/{comment_id}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/comments/{comment_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("comment_id", c.CommentId)
 	return c.DoRequest("DELETE")
@@ -751,15 +707,13 @@ func (c *ReposDeleteCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposDeleteDeploymentCmd struct {
 	DeploymentId int64  `required:"" name:"deployment_id"`
-	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposDeleteDeploymentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/deployments/{deployment_id}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/deployments/{deployment_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("deployment_id", c.DeploymentId)
 	return c.DoRequest("DELETE")
@@ -767,15 +721,13 @@ func (c *ReposDeleteDeploymentCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposDeleteDownloadCmd struct {
 	DownloadId int64  `required:"" name:"download_id"`
-	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposDeleteDownloadCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/downloads/{download_id}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/downloads/{download_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("download_id", c.DownloadId)
 	return c.DoRequest("DELETE")
@@ -788,7 +740,6 @@ type ReposDeleteFileCmd struct {
 	CommitterEmail string `name:"committer.email"`
 	CommitterName  string `name:"committer.name"`
 	Message        string `required:"" name:"message"`
-	Owner          string `name:"owner"`
 	Path           string `required:"" name:"path"`
 	Repo           string `required:"" name:"repo"`
 	Sha            string `required:"" name:"sha"`
@@ -797,8 +748,7 @@ type ReposDeleteFileCmd struct {
 
 func (c *ReposDeleteFileCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/contents/{path}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/contents/{path}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("path", c.Path)
 	c.UpdateBody("author.email", c.AuthorEmail)
@@ -813,15 +763,13 @@ func (c *ReposDeleteFileCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposDeleteHookCmd struct {
 	HookId int64  `required:"" name:"hook_id"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposDeleteHookCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/hooks/{hook_id}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/hooks/{hook_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("hook_id", c.HookId)
 	return c.DoRequest("DELETE")
@@ -829,15 +777,13 @@ func (c *ReposDeleteHookCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposDeleteInvitationCmd struct {
 	InvitationId int64  `required:"" name:"invitation_id"`
-	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposDeleteInvitationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/invitations/{invitation_id}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/invitations/{invitation_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("invitation_id", c.InvitationId)
 	return c.DoRequest("DELETE")
@@ -845,22 +791,19 @@ func (c *ReposDeleteInvitationCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposDeleteReleaseAssetCmd struct {
 	AssetId int64  `required:"" name:"asset_id"`
-	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposDeleteReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/releases/assets/{asset_id}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/releases/assets/{asset_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("asset_id", c.AssetId)
 	return c.DoRequest("DELETE")
 }
 
 type ReposDeleteReleaseCmd struct {
-	Owner     string `name:"owner"`
 	ReleaseId int64  `required:"" name:"release_id"`
 	Repo      string `required:"" name:"repo"`
 	internal.BaseCmd
@@ -868,8 +811,7 @@ type ReposDeleteReleaseCmd struct {
 
 func (c *ReposDeleteReleaseCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/releases/{release_id}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/releases/{release_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("release_id", c.ReleaseId)
 	return c.DoRequest("DELETE")
@@ -877,22 +819,19 @@ func (c *ReposDeleteReleaseCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposDisableAutomatedSecurityFixesCmd struct {
 	London bool   `required:"" name:"london-preview"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposDisableAutomatedSecurityFixesCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/automated-security-fixes")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/automated-security-fixes")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdatePreview("london", c.London)
 	return c.DoRequest("DELETE")
 }
 
 type ReposDisablePagesSiteCmd struct {
-	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
 	Switcheroo bool   `required:"" name:"switcheroo-preview"`
 	internal.BaseCmd
@@ -900,8 +839,7 @@ type ReposDisablePagesSiteCmd struct {
 
 func (c *ReposDisablePagesSiteCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pages")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pages")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdatePreview("switcheroo", c.Switcheroo)
 	return c.DoRequest("DELETE")
@@ -909,15 +847,13 @@ func (c *ReposDisablePagesSiteCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposDisableVulnerabilityAlertsCmd struct {
 	Dorian bool   `required:"" name:"dorian-preview"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposDisableVulnerabilityAlertsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/vulnerability-alerts")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/vulnerability-alerts")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdatePreview("dorian", c.Dorian)
 	return c.DoRequest("DELETE")
@@ -925,22 +861,19 @@ func (c *ReposDisableVulnerabilityAlertsCmd) Run(isValueSetMap map[string]bool) 
 
 type ReposEnableAutomatedSecurityFixesCmd struct {
 	London bool   `required:"" name:"london-preview"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposEnableAutomatedSecurityFixesCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/automated-security-fixes")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/automated-security-fixes")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdatePreview("london", c.London)
 	return c.DoRequest("PUT")
 }
 
 type ReposEnablePagesSiteCmd struct {
-	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	SourceBranch string `name:"source.branch"`
 	SourcePath   string `name:"source.path"`
@@ -950,8 +883,7 @@ type ReposEnablePagesSiteCmd struct {
 
 func (c *ReposEnablePagesSiteCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pages")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pages")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdatePreview("switcheroo", c.Switcheroo)
 	c.UpdateBody("source.branch", c.SourceBranch)
@@ -961,15 +893,13 @@ func (c *ReposEnablePagesSiteCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposEnableVulnerabilityAlertsCmd struct {
 	Dorian bool   `required:"" name:"dorian-preview"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposEnableVulnerabilityAlertsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/vulnerability-alerts")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/vulnerability-alerts")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdatePreview("dorian", c.Dorian)
 	return c.DoRequest("PUT")
@@ -977,15 +907,13 @@ func (c *ReposEnableVulnerabilityAlertsCmd) Run(isValueSetMap map[string]bool) e
 
 type ReposGetAllTopicsCmd struct {
 	Mercy bool   `required:"" name:"mercy-preview"`
-	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetAllTopicsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/topics")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/topics")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdatePreview("mercy", c.Mercy)
 	return c.DoRequest("GET")
@@ -993,15 +921,13 @@ func (c *ReposGetAllTopicsCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetAppsWithAccessToProtectedBranchCmd struct {
 	Branch string `required:"" name:"branch"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetAppsWithAccessToProtectedBranchCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/restrictions/apps")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("GET")
@@ -1009,7 +935,6 @@ func (c *ReposGetAppsWithAccessToProtectedBranchCmd) Run(isValueSetMap map[strin
 
 type ReposGetArchiveLinkCmd struct {
 	ArchiveFormat string `required:"" name:"archive_format"`
-	Owner         string `name:"owner"`
 	Ref           string `required:"" name:"ref"`
 	Repo          string `required:"" name:"repo"`
 	internal.BaseCmd
@@ -1017,8 +942,7 @@ type ReposGetArchiveLinkCmd struct {
 
 func (c *ReposGetArchiveLinkCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/{archive_format}/{ref}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/{archive_format}/{ref}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("archive_format", c.ArchiveFormat)
 	c.UpdateURLPath("ref", c.Ref)
@@ -1027,15 +951,13 @@ func (c *ReposGetArchiveLinkCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetBranchCmd struct {
 	Branch string `required:"" name:"branch"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetBranchCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("GET")
@@ -1044,15 +966,13 @@ func (c *ReposGetBranchCmd) Run(isValueSetMap map[string]bool) error {
 type ReposGetBranchProtectionCmd struct {
 	Branch   string `required:"" name:"branch"`
 	LukeCage bool   `name:"luke-cage-preview"`
-	Owner    string `name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetBranchProtectionCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	c.UpdatePreview("luke-cage", c.LukeCage)
@@ -1060,16 +980,14 @@ func (c *ReposGetBranchProtectionCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetClonesCmd struct {
-	Owner string `name:"owner"`
-	Per   string `name:"per"`
-	Repo  string `required:"" name:"repo"`
+	Per  string `name:"per"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetClonesCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/traffic/clones")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/traffic/clones")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("per", c.Per)
 	return c.DoRequest("GET")
@@ -1077,7 +995,6 @@ func (c *ReposGetClonesCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetCmd struct {
 	Nebula       bool   `name:"nebula-preview"`
-	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	ScarletWitch bool   `name:"scarlet-witch-preview"`
 	internal.BaseCmd
@@ -1085,8 +1002,7 @@ type ReposGetCmd struct {
 
 func (c *ReposGetCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdatePreview("nebula", c.Nebula)
 	c.UpdatePreview("scarlet-witch", c.ScarletWitch)
@@ -1094,21 +1010,18 @@ func (c *ReposGetCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetCodeFrequencyStatsCmd struct {
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetCodeFrequencyStatsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/stats/code_frequency")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/stats/code_frequency")
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
 }
 
 type ReposGetCollaboratorPermissionLevelCmd struct {
-	Owner    string `name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	Username string `required:"" name:"username"`
 	internal.BaseCmd
@@ -1116,54 +1029,47 @@ type ReposGetCollaboratorPermissionLevelCmd struct {
 
 func (c *ReposGetCollaboratorPermissionLevelCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/collaborators/{username}/permission")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/collaborators/{username}/permission")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("username", c.Username)
 	return c.DoRequest("GET")
 }
 
 type ReposGetCombinedStatusForRefCmd struct {
-	Owner string `name:"owner"`
-	Ref   string `required:"" name:"ref"`
-	Repo  string `required:"" name:"repo"`
+	Ref  string `required:"" name:"ref"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetCombinedStatusForRefCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/commits/{ref}/status")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/commits/{ref}/status")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("ref", c.Ref)
 	return c.DoRequest("GET")
 }
 
 type ReposGetCommitActivityStatsCmd struct {
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetCommitActivityStatsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/stats/commit_activity")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/stats/commit_activity")
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
 }
 
 type ReposGetCommitCmd struct {
-	Owner string `name:"owner"`
-	Ref   string `required:"" name:"ref"`
-	Repo  string `required:"" name:"repo"`
+	Ref  string `required:"" name:"ref"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetCommitCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/commits/{ref}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/commits/{ref}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("ref", c.Ref)
 	return c.DoRequest("GET")
@@ -1171,7 +1077,6 @@ func (c *ReposGetCommitCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetCommitCommentCmd struct {
 	CommentId    int64  `required:"" name:"comment_id"`
-	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	SquirrelGirl bool   `name:"squirrel-girl-preview"`
 	internal.BaseCmd
@@ -1179,8 +1084,7 @@ type ReposGetCommitCommentCmd struct {
 
 func (c *ReposGetCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/comments/{comment_id}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/comments/{comment_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("comment_id", c.CommentId)
 	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
@@ -1188,17 +1092,15 @@ func (c *ReposGetCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetContentsCmd struct {
-	Owner string `name:"owner"`
-	Path  string `required:"" name:"path"`
-	Ref   string `name:"ref"`
-	Repo  string `required:"" name:"repo"`
+	Path string `required:"" name:"path"`
+	Ref  string `name:"ref"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetContentsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/contents/{path}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/contents/{path}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("path", c.Path)
 	c.UpdateURLQuery("ref", c.Ref)
@@ -1206,30 +1108,26 @@ func (c *ReposGetContentsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetContributorsStatsCmd struct {
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetContributorsStatsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/stats/contributors")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/stats/contributors")
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
 }
 
 type ReposGetDeployKeyCmd struct {
 	KeyId int64  `required:"" name:"key_id"`
-	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/keys/{key_id}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/keys/{key_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("key_id", c.KeyId)
 	return c.DoRequest("GET")
@@ -1239,15 +1137,13 @@ type ReposGetDeploymentCmd struct {
 	AntMan       bool   `name:"ant-man-preview"`
 	DeploymentId int64  `required:"" name:"deployment_id"`
 	MachineMan   bool   `name:"machine-man-preview"`
-	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetDeploymentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/deployments/{deployment_id}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/deployments/{deployment_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("deployment_id", c.DeploymentId)
 	c.UpdatePreview("machine-man", c.MachineMan)
@@ -1260,7 +1156,6 @@ type ReposGetDeploymentStatusCmd struct {
 	DeploymentId int64  `required:"" name:"deployment_id"`
 	Flash        bool   `name:"flash-preview"`
 	MachineMan   bool   `name:"machine-man-preview"`
-	Owner        string `name:"owner"`
 	Repo         string `required:"" name:"repo"`
 	StatusId     int64  `required:"" name:"status_id"`
 	internal.BaseCmd
@@ -1268,8 +1163,7 @@ type ReposGetDeploymentStatusCmd struct {
 
 func (c *ReposGetDeploymentStatusCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/deployments/{deployment_id}/statuses/{status_id}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/deployments/{deployment_id}/statuses/{status_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("deployment_id", c.DeploymentId)
 	c.UpdateURLPath("status_id", c.StatusId)
@@ -1281,15 +1175,13 @@ func (c *ReposGetDeploymentStatusCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetDownloadCmd struct {
 	DownloadId int64  `required:"" name:"download_id"`
-	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetDownloadCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/downloads/{download_id}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/downloads/{download_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("download_id", c.DownloadId)
 	return c.DoRequest("GET")
@@ -1297,103 +1189,89 @@ func (c *ReposGetDownloadCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetHookCmd struct {
 	HookId int64  `required:"" name:"hook_id"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetHookCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/hooks/{hook_id}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/hooks/{hook_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("hook_id", c.HookId)
 	return c.DoRequest("GET")
 }
 
 type ReposGetLatestPagesBuildCmd struct {
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetLatestPagesBuildCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pages/builds/latest")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pages/builds/latest")
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
 }
 
 type ReposGetLatestReleaseCmd struct {
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetLatestReleaseCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/releases/latest")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/releases/latest")
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
 }
 
 type ReposGetPagesBuildCmd struct {
 	BuildId int64  `required:"" name:"build_id"`
-	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetPagesBuildCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pages/builds/{build_id}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pages/builds/{build_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("build_id", c.BuildId)
 	return c.DoRequest("GET")
 }
 
 type ReposGetPagesCmd struct {
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetPagesCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pages")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pages")
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
 }
 
 type ReposGetParticipationStatsCmd struct {
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetParticipationStatsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/stats/participation")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/stats/participation")
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
 }
 
 type ReposGetProtectedBranchAdminEnforcementCmd struct {
 	Branch string `required:"" name:"branch"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetProtectedBranchAdminEnforcementCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/enforce_admins")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("GET")
@@ -1402,15 +1280,13 @@ func (c *ReposGetProtectedBranchAdminEnforcementCmd) Run(isValueSetMap map[strin
 type ReposGetProtectedBranchPullRequestReviewEnforcementCmd struct {
 	Branch   string `required:"" name:"branch"`
 	LukeCage bool   `name:"luke-cage-preview"`
-	Owner    string `name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetProtectedBranchPullRequestReviewEnforcementCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_pull_request_reviews")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	c.UpdatePreview("luke-cage", c.LukeCage)
@@ -1419,7 +1295,6 @@ func (c *ReposGetProtectedBranchPullRequestReviewEnforcementCmd) Run(isValueSetM
 
 type ReposGetProtectedBranchRequiredSignaturesCmd struct {
 	Branch string `required:"" name:"branch"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Zzzax  bool   `required:"" name:"zzzax-preview"`
 	internal.BaseCmd
@@ -1427,8 +1302,7 @@ type ReposGetProtectedBranchRequiredSignaturesCmd struct {
 
 func (c *ReposGetProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection/required_signatures")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_signatures")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	c.UpdatePreview("zzzax", c.Zzzax)
@@ -1437,15 +1311,13 @@ func (c *ReposGetProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[str
 
 type ReposGetProtectedBranchRequiredStatusChecksCmd struct {
 	Branch string `required:"" name:"branch"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetProtectedBranchRequiredStatusChecksCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_status_checks")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("GET")
@@ -1453,45 +1325,39 @@ func (c *ReposGetProtectedBranchRequiredStatusChecksCmd) Run(isValueSetMap map[s
 
 type ReposGetProtectedBranchRestrictionsCmd struct {
 	Branch string `required:"" name:"branch"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetProtectedBranchRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection/restrictions")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/restrictions")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("GET")
 }
 
 type ReposGetPunchCardStatsCmd struct {
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetPunchCardStatsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/stats/punch_card")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/stats/punch_card")
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
 }
 
 type ReposGetReadmeCmd struct {
-	Owner string `name:"owner"`
-	Ref   string `name:"ref"`
-	Repo  string `required:"" name:"repo"`
+	Ref  string `name:"ref"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetReadmeCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/readme")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/readme")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("ref", c.Ref)
 	return c.DoRequest("GET")
@@ -1499,38 +1365,33 @@ func (c *ReposGetReadmeCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetReleaseAssetCmd struct {
 	AssetId int64  `required:"" name:"asset_id"`
-	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/releases/assets/{asset_id}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/releases/assets/{asset_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("asset_id", c.AssetId)
 	return c.DoRequest("GET")
 }
 
 type ReposGetReleaseByTagCmd struct {
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
-	Tag   string `required:"" name:"tag"`
+	Repo string `required:"" name:"repo"`
+	Tag  string `required:"" name:"tag"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetReleaseByTagCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/releases/tags/{tag}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/releases/tags/{tag}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("tag", c.Tag)
 	return c.DoRequest("GET")
 }
 
 type ReposGetReleaseCmd struct {
-	Owner     string `name:"owner"`
 	ReleaseId int64  `required:"" name:"release_id"`
 	Repo      string `required:"" name:"repo"`
 	internal.BaseCmd
@@ -1538,8 +1399,7 @@ type ReposGetReleaseCmd struct {
 
 func (c *ReposGetReleaseCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/releases/{release_id}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/releases/{release_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("release_id", c.ReleaseId)
 	return c.DoRequest("GET")
@@ -1547,82 +1407,71 @@ func (c *ReposGetReleaseCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetTeamsWithAccessToProtectedBranchCmd struct {
 	Branch string `required:"" name:"branch"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetTeamsWithAccessToProtectedBranchCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/restrictions/teams")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("GET")
 }
 
 type ReposGetTopPathsCmd struct {
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetTopPathsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/traffic/popular/paths")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/traffic/popular/paths")
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
 }
 
 type ReposGetTopReferrersCmd struct {
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetTopReferrersCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/traffic/popular/referrers")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/traffic/popular/referrers")
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
 }
 
 type ReposGetUsersWithAccessToProtectedBranchCmd struct {
 	Branch string `required:"" name:"branch"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetUsersWithAccessToProtectedBranchCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/restrictions/users")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("GET")
 }
 
 type ReposGetViewsCmd struct {
-	Owner string `name:"owner"`
-	Per   string `name:"per"`
-	Repo  string `required:"" name:"repo"`
+	Per  string `name:"per"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposGetViewsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/traffic/views")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/traffic/views")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("per", c.Per)
 	return c.DoRequest("GET")
 }
 
 type ReposListAssetsForReleaseCmd struct {
-	Owner     string `name:"owner"`
 	Page      int64  `name:"page"`
 	PerPage   int64  `name:"per_page"`
 	ReleaseId int64  `required:"" name:"release_id"`
@@ -1632,8 +1481,7 @@ type ReposListAssetsForReleaseCmd struct {
 
 func (c *ReposListAssetsForReleaseCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/releases/{release_id}/assets")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/releases/{release_id}/assets")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("release_id", c.ReleaseId)
 	c.UpdateURLQuery("per_page", c.PerPage)
@@ -1642,7 +1490,6 @@ func (c *ReposListAssetsForReleaseCmd) Run(isValueSetMap map[string]bool) error 
 }
 
 type ReposListBranchesCmd struct {
-	Owner     string `name:"owner"`
 	Page      int64  `name:"page"`
 	PerPage   int64  `name:"per_page"`
 	Protected bool   `name:"protected"`
@@ -1652,8 +1499,7 @@ type ReposListBranchesCmd struct {
 
 func (c *ReposListBranchesCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("protected", c.Protected)
 	c.UpdateURLQuery("per_page", c.PerPage)
@@ -1664,15 +1510,13 @@ func (c *ReposListBranchesCmd) Run(isValueSetMap map[string]bool) error {
 type ReposListBranchesForHeadCommitCmd struct {
 	CommitSha string `required:"" name:"commit_sha"`
 	Groot     bool   `required:"" name:"groot-preview"`
-	Owner     string `name:"owner"`
 	Repo      string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposListBranchesForHeadCommitCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/commits/{commit_sha}/branches-where-head")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/commits/{commit_sha}/branches-where-head")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("commit_sha", c.CommitSha)
 	c.UpdatePreview("groot", c.Groot)
@@ -1681,7 +1525,6 @@ func (c *ReposListBranchesForHeadCommitCmd) Run(isValueSetMap map[string]bool) e
 
 type ReposListCollaboratorsCmd struct {
 	Affiliation string `name:"affiliation"`
-	Owner       string `name:"owner"`
 	Page        int64  `name:"page"`
 	PerPage     int64  `name:"per_page"`
 	Repo        string `required:"" name:"repo"`
@@ -1690,8 +1533,7 @@ type ReposListCollaboratorsCmd struct {
 
 func (c *ReposListCollaboratorsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/collaborators")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/collaborators")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("affiliation", c.Affiliation)
 	c.UpdateURLQuery("per_page", c.PerPage)
@@ -1701,7 +1543,6 @@ func (c *ReposListCollaboratorsCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposListCommentsForCommitCmd struct {
 	CommitSha    string `required:"" name:"commit_sha"`
-	Owner        string `name:"owner"`
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
 	Repo         string `required:"" name:"repo"`
@@ -1711,8 +1552,7 @@ type ReposListCommentsForCommitCmd struct {
 
 func (c *ReposListCommentsForCommitCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/commits/{commit_sha}/comments")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/commits/{commit_sha}/comments")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("commit_sha", c.CommitSha)
 	c.UpdateURLQuery("per_page", c.PerPage)
@@ -1722,7 +1562,6 @@ func (c *ReposListCommentsForCommitCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type ReposListCommitCommentsCmd struct {
-	Owner        string `name:"owner"`
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
 	Repo         string `required:"" name:"repo"`
@@ -1732,8 +1571,7 @@ type ReposListCommitCommentsCmd struct {
 
 func (c *ReposListCommitCommentsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/comments")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/comments")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
@@ -1743,7 +1581,6 @@ func (c *ReposListCommitCommentsCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposListCommitsCmd struct {
 	Author  string `name:"author"`
-	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	Path    string `name:"path"`
 	PerPage int64  `name:"per_page"`
@@ -1756,8 +1593,7 @@ type ReposListCommitsCmd struct {
 
 func (c *ReposListCommitsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/commits")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/commits")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("sha", c.Sha)
 	c.UpdateURLQuery("path", c.Path)
@@ -1771,7 +1607,6 @@ func (c *ReposListCommitsCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposListContributorsCmd struct {
 	Anon    string `name:"anon"`
-	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
@@ -1780,8 +1615,7 @@ type ReposListContributorsCmd struct {
 
 func (c *ReposListContributorsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/contributors")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/contributors")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("anon", c.Anon)
 	c.UpdateURLQuery("per_page", c.PerPage)
@@ -1790,7 +1624,6 @@ func (c *ReposListContributorsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListDeployKeysCmd struct {
-	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
@@ -1799,8 +1632,7 @@ type ReposListDeployKeysCmd struct {
 
 func (c *ReposListDeployKeysCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/keys")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/keys")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
@@ -1811,7 +1643,6 @@ type ReposListDeploymentStatusesCmd struct {
 	AntMan       bool   `name:"ant-man-preview"`
 	DeploymentId int64  `required:"" name:"deployment_id"`
 	Flash        bool   `name:"flash-preview"`
-	Owner        string `name:"owner"`
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
 	Repo         string `required:"" name:"repo"`
@@ -1820,8 +1651,7 @@ type ReposListDeploymentStatusesCmd struct {
 
 func (c *ReposListDeploymentStatusesCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/deployments/{deployment_id}/statuses")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/deployments/{deployment_id}/statuses")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("deployment_id", c.DeploymentId)
 	c.UpdateURLQuery("per_page", c.PerPage)
@@ -1834,7 +1664,6 @@ func (c *ReposListDeploymentStatusesCmd) Run(isValueSetMap map[string]bool) erro
 type ReposListDeploymentsCmd struct {
 	AntMan      bool   `name:"ant-man-preview"`
 	Environment string `name:"environment"`
-	Owner       string `name:"owner"`
 	Page        int64  `name:"page"`
 	PerPage     int64  `name:"per_page"`
 	Ref         string `name:"ref"`
@@ -1846,8 +1675,7 @@ type ReposListDeploymentsCmd struct {
 
 func (c *ReposListDeploymentsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/deployments")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/deployments")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("sha", c.Sha)
 	c.UpdateURLQuery("ref", c.Ref)
@@ -1860,7 +1688,6 @@ func (c *ReposListDeploymentsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListDownloadsCmd struct {
-	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
@@ -1869,8 +1696,7 @@ type ReposListDownloadsCmd struct {
 
 func (c *ReposListDownloadsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/downloads")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/downloads")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
@@ -1952,7 +1778,6 @@ func (c *ReposListForUserCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListForksCmd struct {
-	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
@@ -1962,8 +1787,7 @@ type ReposListForksCmd struct {
 
 func (c *ReposListForksCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/forks")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/forks")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("sort", c.Sort)
 	c.UpdateURLQuery("per_page", c.PerPage)
@@ -1972,7 +1796,6 @@ func (c *ReposListForksCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListHooksCmd struct {
-	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
@@ -1981,8 +1804,7 @@ type ReposListHooksCmd struct {
 
 func (c *ReposListHooksCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/hooks")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/hooks")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
@@ -1990,7 +1812,6 @@ func (c *ReposListHooksCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListInvitationsCmd struct {
-	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
@@ -1999,8 +1820,7 @@ type ReposListInvitationsCmd struct {
 
 func (c *ReposListInvitationsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/invitations")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/invitations")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
@@ -2022,21 +1842,18 @@ func (c *ReposListInvitationsForAuthenticatedUserCmd) Run(isValueSetMap map[stri
 }
 
 type ReposListLanguagesCmd struct {
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposListLanguagesCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/languages")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/languages")
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
 }
 
 type ReposListPagesBuildsCmd struct {
-	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
@@ -2045,8 +1862,7 @@ type ReposListPagesBuildsCmd struct {
 
 func (c *ReposListPagesBuildsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pages/builds")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pages/builds")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
@@ -2055,15 +1871,13 @@ func (c *ReposListPagesBuildsCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposListProtectedBranchRequiredStatusChecksContextsCmd struct {
 	Branch string `required:"" name:"branch"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposListProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_status_checks/contexts")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("GET")
@@ -2084,7 +1898,6 @@ func (c *ReposListPublicCmd) Run(isValueSetMap map[string]bool) error {
 type ReposListPullRequestsAssociatedWithCommitCmd struct {
 	CommitSha string `required:"" name:"commit_sha"`
 	Groot     bool   `required:"" name:"groot-preview"`
-	Owner     string `name:"owner"`
 	Page      int64  `name:"page"`
 	PerPage   int64  `name:"per_page"`
 	Repo      string `required:"" name:"repo"`
@@ -2093,8 +1906,7 @@ type ReposListPullRequestsAssociatedWithCommitCmd struct {
 
 func (c *ReposListPullRequestsAssociatedWithCommitCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/commits/{commit_sha}/pulls")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/commits/{commit_sha}/pulls")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("commit_sha", c.CommitSha)
 	c.UpdateURLQuery("per_page", c.PerPage)
@@ -2104,7 +1916,6 @@ func (c *ReposListPullRequestsAssociatedWithCommitCmd) Run(isValueSetMap map[str
 }
 
 type ReposListReleasesCmd struct {
-	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
@@ -2113,8 +1924,7 @@ type ReposListReleasesCmd struct {
 
 func (c *ReposListReleasesCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/releases")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/releases")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
@@ -2122,7 +1932,6 @@ func (c *ReposListReleasesCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListStatusesForRefCmd struct {
-	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Ref     string `required:"" name:"ref"`
@@ -2132,8 +1941,7 @@ type ReposListStatusesForRefCmd struct {
 
 func (c *ReposListStatusesForRefCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/commits/{ref}/statuses")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/commits/{ref}/statuses")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("ref", c.Ref)
 	c.UpdateURLQuery("per_page", c.PerPage)
@@ -2142,7 +1950,6 @@ func (c *ReposListStatusesForRefCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListTagsCmd struct {
-	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
@@ -2151,8 +1958,7 @@ type ReposListTagsCmd struct {
 
 func (c *ReposListTagsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/tags")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/tags")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
@@ -2160,7 +1966,6 @@ func (c *ReposListTagsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListTeamsCmd struct {
-	Owner   string `name:"owner"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
@@ -2169,8 +1974,7 @@ type ReposListTeamsCmd struct {
 
 func (c *ReposListTeamsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/teams")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/teams")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
@@ -2181,15 +1985,13 @@ type ReposMergeCmd struct {
 	Base          string `required:"" name:"base"`
 	CommitMessage string `name:"commit_message"`
 	Head          string `required:"" name:"head"`
-	Owner         string `name:"owner"`
 	Repo          string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposMergeCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/merges")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/merges")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateBody("base", c.Base)
 	c.UpdateBody("commit_message", c.CommitMessage)
@@ -2199,15 +2001,13 @@ func (c *ReposMergeCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposPingHookCmd struct {
 	HookId int64  `required:"" name:"hook_id"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposPingHookCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/hooks/{hook_id}/pings")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/hooks/{hook_id}/pings")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("hook_id", c.HookId)
 	return c.DoRequest("POST")
@@ -2215,22 +2015,19 @@ func (c *ReposPingHookCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposRemoveBranchProtectionCmd struct {
 	Branch string `required:"" name:"branch"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposRemoveBranchProtectionCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("DELETE")
 }
 
 type ReposRemoveCollaboratorCmd struct {
-	Owner    string `name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	Username string `required:"" name:"username"`
 	internal.BaseCmd
@@ -2238,8 +2035,7 @@ type ReposRemoveCollaboratorCmd struct {
 
 func (c *ReposRemoveCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/collaborators/{username}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/collaborators/{username}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("username", c.Username)
 	return c.DoRequest("DELETE")
@@ -2247,15 +2043,13 @@ func (c *ReposRemoveCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposRemoveDeployKeyCmd struct {
 	KeyId int64  `required:"" name:"key_id"`
-	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposRemoveDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/keys/{key_id}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/keys/{key_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("key_id", c.KeyId)
 	return c.DoRequest("DELETE")
@@ -2263,15 +2057,13 @@ func (c *ReposRemoveDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposRemoveProtectedBranchAdminEnforcementCmd struct {
 	Branch string `required:"" name:"branch"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposRemoveProtectedBranchAdminEnforcementCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection/enforce_admins")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/enforce_admins")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("DELETE")
@@ -2279,15 +2071,13 @@ func (c *ReposRemoveProtectedBranchAdminEnforcementCmd) Run(isValueSetMap map[st
 
 type ReposRemoveProtectedBranchAppRestrictionsCmd struct {
 	Branch string `required:"" name:"branch"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposRemoveProtectedBranchAppRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/restrictions/apps")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("DELETE")
@@ -2295,15 +2085,13 @@ func (c *ReposRemoveProtectedBranchAppRestrictionsCmd) Run(isValueSetMap map[str
 
 type ReposRemoveProtectedBranchPullRequestReviewEnforcementCmd struct {
 	Branch string `required:"" name:"branch"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposRemoveProtectedBranchPullRequestReviewEnforcementCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_pull_request_reviews")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("DELETE")
@@ -2311,7 +2099,6 @@ func (c *ReposRemoveProtectedBranchPullRequestReviewEnforcementCmd) Run(isValueS
 
 type ReposRemoveProtectedBranchRequiredSignaturesCmd struct {
 	Branch string `required:"" name:"branch"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Zzzax  bool   `required:"" name:"zzzax-preview"`
 	internal.BaseCmd
@@ -2319,8 +2106,7 @@ type ReposRemoveProtectedBranchRequiredSignaturesCmd struct {
 
 func (c *ReposRemoveProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection/required_signatures")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_signatures")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	c.UpdatePreview("zzzax", c.Zzzax)
@@ -2329,15 +2115,13 @@ func (c *ReposRemoveProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[
 
 type ReposRemoveProtectedBranchRequiredStatusChecksCmd struct {
 	Branch string `required:"" name:"branch"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposRemoveProtectedBranchRequiredStatusChecksCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_status_checks")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("DELETE")
@@ -2345,15 +2129,13 @@ func (c *ReposRemoveProtectedBranchRequiredStatusChecksCmd) Run(isValueSetMap ma
 
 type ReposRemoveProtectedBranchRequiredStatusChecksContextsCmd struct {
 	Branch string `required:"" name:"branch"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposRemoveProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_status_checks/contexts")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("DELETE")
@@ -2361,15 +2143,13 @@ func (c *ReposRemoveProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueS
 
 type ReposRemoveProtectedBranchRestrictionsCmd struct {
 	Branch string `required:"" name:"branch"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposRemoveProtectedBranchRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection/restrictions")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/restrictions")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("DELETE")
@@ -2377,15 +2157,13 @@ func (c *ReposRemoveProtectedBranchRestrictionsCmd) Run(isValueSetMap map[string
 
 type ReposRemoveProtectedBranchTeamRestrictionsCmd struct {
 	Branch string `required:"" name:"branch"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposRemoveProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/restrictions/teams")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("DELETE")
@@ -2393,15 +2171,13 @@ func (c *ReposRemoveProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[st
 
 type ReposRemoveProtectedBranchUserRestrictionsCmd struct {
 	Branch string `required:"" name:"branch"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposRemoveProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/restrictions/users")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("DELETE")
@@ -2410,15 +2186,13 @@ func (c *ReposRemoveProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[st
 type ReposReplaceAllTopicsCmd struct {
 	Mercy bool     `required:"" name:"mercy-preview"`
 	Names []string `required:"" name:"names"`
-	Owner string   `name:"owner"`
 	Repo  string   `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposReplaceAllTopicsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/topics")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/topics")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdatePreview("mercy", c.Mercy)
 	c.UpdateBody("names", c.Names)
@@ -2427,15 +2201,13 @@ func (c *ReposReplaceAllTopicsCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposReplaceProtectedBranchAppRestrictionsCmd struct {
 	Branch string `required:"" name:"branch"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposReplaceProtectedBranchAppRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/apps")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/restrictions/apps")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("PUT")
@@ -2443,15 +2215,13 @@ func (c *ReposReplaceProtectedBranchAppRestrictionsCmd) Run(isValueSetMap map[st
 
 type ReposReplaceProtectedBranchRequiredStatusChecksContextsCmd struct {
 	Branch string `required:"" name:"branch"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposReplaceProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks/contexts")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_status_checks/contexts")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("PUT")
@@ -2459,15 +2229,13 @@ func (c *ReposReplaceProtectedBranchRequiredStatusChecksContextsCmd) Run(isValue
 
 type ReposReplaceProtectedBranchTeamRestrictionsCmd struct {
 	Branch string `required:"" name:"branch"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposReplaceProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/teams")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/restrictions/teams")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("PUT")
@@ -2475,59 +2243,51 @@ func (c *ReposReplaceProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[s
 
 type ReposReplaceProtectedBranchUserRestrictionsCmd struct {
 	Branch string `required:"" name:"branch"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposReplaceProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection/restrictions/users")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/restrictions/users")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("PUT")
 }
 
 type ReposRequestPageBuildCmd struct {
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposRequestPageBuildCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pages/builds")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pages/builds")
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("POST")
 }
 
 type ReposRetrieveCommunityProfileMetricsCmd struct {
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposRetrieveCommunityProfileMetricsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/community/profile")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/community/profile")
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
 }
 
 type ReposTestPushHookCmd struct {
 	HookId int64  `required:"" name:"hook_id"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposTestPushHookCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/hooks/{hook_id}/tests")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/hooks/{hook_id}/tests")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("hook_id", c.HookId)
 	return c.DoRequest("POST")
@@ -2535,7 +2295,6 @@ func (c *ReposTestPushHookCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposTransferCmd struct {
 	NewOwner string  `name:"new_owner"`
-	Owner    string  `name:"owner"`
 	Repo     string  `required:"" name:"repo"`
 	TeamIds  []int64 `name:"team_ids"`
 	internal.BaseCmd
@@ -2543,8 +2302,7 @@ type ReposTransferCmd struct {
 
 func (c *ReposTransferCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/transfer")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/transfer")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateBody("new_owner", c.NewOwner)
 	c.UpdateBody("team_ids", c.TeamIds)
@@ -2557,7 +2315,6 @@ type ReposUpdateBranchProtectionCmd struct {
 	Branch                                                 string   `required:"" name:"branch"`
 	EnforceAdmins                                          bool     `required:"" name:"enforce_admins"`
 	LukeCage                                               bool     `name:"luke-cage-preview"`
-	Owner                                                  string   `name:"owner"`
 	Repo                                                   string   `required:"" name:"repo"`
 	RequiredLinearHistory                                  bool     `name:"required_linear_history"`
 	RequiredPullRequestReviewsDismissStaleReviews          bool     `name:"required_pull_request_reviews.dismiss_stale_reviews"`
@@ -2575,8 +2332,7 @@ type ReposUpdateBranchProtectionCmd struct {
 
 func (c *ReposUpdateBranchProtectionCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	c.UpdatePreview("luke-cage", c.LukeCage)
@@ -2613,7 +2369,6 @@ type ReposUpdateCmd struct {
 	IsTemplate          bool   `name:"is_template"`
 	Name                string `name:"name"`
 	Nebula              bool   `name:"nebula-preview"`
-	Owner               string `name:"owner"`
 	Private             bool   `name:"private"`
 	Repo                string `required:"" name:"repo"`
 	Visibility          string `name:"visibility"`
@@ -2622,8 +2377,7 @@ type ReposUpdateCmd struct {
 
 func (c *ReposUpdateCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdatePreview("nebula", c.Nebula)
 	c.UpdatePreview("baptiste", c.Baptiste)
@@ -2648,15 +2402,13 @@ func (c *ReposUpdateCmd) Run(isValueSetMap map[string]bool) error {
 type ReposUpdateCommitCommentCmd struct {
 	Body      string `required:"" name:"body"`
 	CommentId int64  `required:"" name:"comment_id"`
-	Owner     string `name:"owner"`
 	Repo      string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposUpdateCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/comments/{comment_id}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/comments/{comment_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("comment_id", c.CommentId)
 	c.UpdateBody("body", c.Body)
@@ -2672,7 +2424,6 @@ type ReposUpdateHookCmd struct {
 	ConfigUrl         string   `name:"config.url"`
 	Events            []string `name:"events"`
 	HookId            int64    `required:"" name:"hook_id"`
-	Owner             string   `name:"owner"`
 	RemoveEvents      []string `name:"remove_events"`
 	Repo              string   `required:"" name:"repo"`
 	internal.BaseCmd
@@ -2680,8 +2431,7 @@ type ReposUpdateHookCmd struct {
 
 func (c *ReposUpdateHookCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/hooks/{hook_id}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/hooks/{hook_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("hook_id", c.HookId)
 	c.UpdateBody("active", c.Active)
@@ -2697,7 +2447,6 @@ func (c *ReposUpdateHookCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposUpdateInformationAboutPagesSiteCmd struct {
 	Cname  string `name:"cname"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Source string `name:"source"`
 	internal.BaseCmd
@@ -2705,8 +2454,7 @@ type ReposUpdateInformationAboutPagesSiteCmd struct {
 
 func (c *ReposUpdateInformationAboutPagesSiteCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pages")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pages")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateBody("cname", c.Cname)
 	c.UpdateBody("source", c.Source)
@@ -2715,7 +2463,6 @@ func (c *ReposUpdateInformationAboutPagesSiteCmd) Run(isValueSetMap map[string]b
 
 type ReposUpdateInvitationCmd struct {
 	InvitationId int64  `required:"" name:"invitation_id"`
-	Owner        string `name:"owner"`
 	Permissions  string `name:"permissions"`
 	Repo         string `required:"" name:"repo"`
 	internal.BaseCmd
@@ -2723,8 +2470,7 @@ type ReposUpdateInvitationCmd struct {
 
 func (c *ReposUpdateInvitationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/invitations/{invitation_id}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/invitations/{invitation_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("invitation_id", c.InvitationId)
 	c.UpdateBody("permissions", c.Permissions)
@@ -2737,7 +2483,6 @@ type ReposUpdateProtectedBranchPullRequestReviewEnforcementCmd struct {
 	DismissalRestrictionsTeams   []string `name:"dismissal_restrictions.teams"`
 	DismissalRestrictionsUsers   []string `name:"dismissal_restrictions.users"`
 	LukeCage                     bool     `name:"luke-cage-preview"`
-	Owner                        string   `name:"owner"`
 	Repo                         string   `required:"" name:"repo"`
 	RequireCodeOwnerReviews      bool     `name:"require_code_owner_reviews"`
 	RequiredApprovingReviewCount int64    `name:"required_approving_review_count"`
@@ -2746,8 +2491,7 @@ type ReposUpdateProtectedBranchPullRequestReviewEnforcementCmd struct {
 
 func (c *ReposUpdateProtectedBranchPullRequestReviewEnforcementCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection/required_pull_request_reviews")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_pull_request_reviews")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	c.UpdatePreview("luke-cage", c.LukeCage)
@@ -2762,7 +2506,6 @@ func (c *ReposUpdateProtectedBranchPullRequestReviewEnforcementCmd) Run(isValueS
 type ReposUpdateProtectedBranchRequiredStatusChecksCmd struct {
 	Branch   string   `required:"" name:"branch"`
 	Contexts []string `name:"contexts"`
-	Owner    string   `name:"owner"`
 	Repo     string   `required:"" name:"repo"`
 	Strict   bool     `name:"strict"`
 	internal.BaseCmd
@@ -2770,8 +2513,7 @@ type ReposUpdateProtectedBranchRequiredStatusChecksCmd struct {
 
 func (c *ReposUpdateProtectedBranchRequiredStatusChecksCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/branches/{branch}/protection/required_status_checks")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_status_checks")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	c.UpdateBody("contexts", c.Contexts)
@@ -2783,15 +2525,13 @@ type ReposUpdateReleaseAssetCmd struct {
 	AssetId int64  `required:"" name:"asset_id"`
 	Label   string `name:"label"`
 	Name    string `name:"name"`
-	Owner   string `name:"owner"`
 	Repo    string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ReposUpdateReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/releases/assets/{asset_id}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/releases/assets/{asset_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("asset_id", c.AssetId)
 	c.UpdateBody("label", c.Label)
@@ -2803,7 +2543,6 @@ type ReposUpdateReleaseCmd struct {
 	Body            string `name:"body"`
 	Draft           bool   `name:"draft"`
 	Name            string `name:"name"`
-	Owner           string `name:"owner"`
 	Prerelease      bool   `name:"prerelease"`
 	ReleaseId       int64  `required:"" name:"release_id"`
 	Repo            string `required:"" name:"repo"`
@@ -2814,8 +2553,7 @@ type ReposUpdateReleaseCmd struct {
 
 func (c *ReposUpdateReleaseCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/releases/{release_id}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/releases/{release_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("release_id", c.ReleaseId)
 	c.UpdateBody("body", c.Body)
@@ -2833,7 +2571,6 @@ type ReposUploadReleaseAssetCmd struct {
 	File          string `required:"" name:"file" type:"existingfile"`
 	Label         string `name:"label"`
 	Name          string `name:"name"`
-	Owner         string `name:"owner"`
 	ReleaseId     int64  `required:"" name:"release_id"`
 	Repo          string `required:"" name:"repo"`
 	internal.BaseCmd
@@ -2841,11 +2578,10 @@ type ReposUploadReleaseAssetCmd struct {
 
 func (c *ReposUploadReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/releases/{release_id}/assets")
+	c.SetURLPath("/repos/{repo}/releases/{release_id}/assets")
 	internal.ReposUploadReleaseAssetOverride(&c.BaseCmd, c.File)
 	c.AddRequestHeader("content-length", c.ContentLength)
 	c.AddRequestHeader("content-type", c.ContentType)
-	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("release_id", c.ReleaseId)
 	c.UpdateURLQuery("name", c.Name)

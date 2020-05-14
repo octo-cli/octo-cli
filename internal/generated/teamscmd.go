@@ -162,7 +162,6 @@ func (c *TeamsAddOrUpdateProjectLegacyCmd) Run(isValueSetMap map[string]bool) er
 
 type TeamsAddOrUpdateRepoInOrgCmd struct {
 	Org        string `required:"" name:"org"`
-	Owner      string `name:"owner"`
 	Permission string `name:"permission"`
 	Repo       string `required:"" name:"repo"`
 	TeamSlug   string `required:"" name:"team_slug"`
@@ -171,17 +170,15 @@ type TeamsAddOrUpdateRepoInOrgCmd struct {
 
 func (c *TeamsAddOrUpdateRepoInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}")
+	c.SetURLPath("/orgs/{org}/teams/{team_slug}/repos/{repo}")
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLPath("team_slug", c.TeamSlug)
-	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateBody("permission", c.Permission)
 	return c.DoRequest("PUT")
 }
 
 type TeamsAddOrUpdateRepoLegacyCmd struct {
-	Owner      string `name:"owner"`
 	Permission string `name:"permission"`
 	Repo       string `required:"" name:"repo"`
 	TeamId     int64  `required:"" name:"team_id"`
@@ -190,9 +187,8 @@ type TeamsAddOrUpdateRepoLegacyCmd struct {
 
 func (c *TeamsAddOrUpdateRepoLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/teams/{team_id}/repos/{owner}/{repo}")
+	c.SetURLPath("/teams/{team_id}/repos/{repo}")
 	c.UpdateURLPath("team_id", c.TeamId)
-	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateBody("permission", c.Permission)
 	return c.DoRequest("PUT")
@@ -200,7 +196,6 @@ func (c *TeamsAddOrUpdateRepoLegacyCmd) Run(isValueSetMap map[string]bool) error
 
 type TeamsCheckManagesRepoInOrgCmd struct {
 	Org      string `required:"" name:"org"`
-	Owner    string `name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	TeamSlug string `required:"" name:"team_slug"`
 	internal.BaseCmd
@@ -208,16 +203,14 @@ type TeamsCheckManagesRepoInOrgCmd struct {
 
 func (c *TeamsCheckManagesRepoInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}")
+	c.SetURLPath("/orgs/{org}/teams/{team_slug}/repos/{repo}")
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLPath("team_slug", c.TeamSlug)
-	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
 }
 
 type TeamsCheckManagesRepoLegacyCmd struct {
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	TeamId int64  `required:"" name:"team_id"`
 	internal.BaseCmd
@@ -225,9 +218,8 @@ type TeamsCheckManagesRepoLegacyCmd struct {
 
 func (c *TeamsCheckManagesRepoLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/teams/{team_id}/repos/{owner}/{repo}")
+	c.SetURLPath("/teams/{team_id}/repos/{repo}")
 	c.UpdateURLPath("team_id", c.TeamId)
-	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
 }
@@ -1014,7 +1006,6 @@ func (c *TeamsRemoveProjectLegacyCmd) Run(isValueSetMap map[string]bool) error {
 
 type TeamsRemoveRepoInOrgCmd struct {
 	Org      string `required:"" name:"org"`
-	Owner    string `name:"owner"`
 	Repo     string `required:"" name:"repo"`
 	TeamSlug string `required:"" name:"team_slug"`
 	internal.BaseCmd
@@ -1022,16 +1013,14 @@ type TeamsRemoveRepoInOrgCmd struct {
 
 func (c *TeamsRemoveRepoInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/{org}/teams/{team_slug}/repos/{owner}/{repo}")
+	c.SetURLPath("/orgs/{org}/teams/{team_slug}/repos/{repo}")
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLPath("team_slug", c.TeamSlug)
-	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("DELETE")
 }
 
 type TeamsRemoveRepoLegacyCmd struct {
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	TeamId int64  `required:"" name:"team_id"`
 	internal.BaseCmd
@@ -1039,9 +1028,8 @@ type TeamsRemoveRepoLegacyCmd struct {
 
 func (c *TeamsRemoveRepoLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/teams/{team_id}/repos/{owner}/{repo}")
+	c.SetURLPath("/teams/{team_id}/repos/{repo}")
 	c.UpdateURLPath("team_id", c.TeamId)
-	c.UpdateURLPath("owner", c.Owner)
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("DELETE")
 }

@@ -86,6 +86,10 @@ func WriteDocs(routesPath, docsPath string, fs afero.Fs) error {
 	if err != nil {
 		return err
 	}
+	err = swaggerparser.RemoveOwnerParams(swagger)
+	if err != nil {
+		return err
+	}
 	opDoc, err := operationsHelp(swagger)
 	if err != nil {
 		return err

@@ -33,7 +33,6 @@ func (c *InteractionsAddOrUpdateRestrictionsForOrgCmd) Run(isValueSetMap map[str
 
 type InteractionsAddOrUpdateRestrictionsForRepoCmd struct {
 	Limit  string `required:"" name:"limit"`
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Sombra bool   `required:"" name:"sombra-preview"`
 	internal.BaseCmd
@@ -41,8 +40,7 @@ type InteractionsAddOrUpdateRestrictionsForRepoCmd struct {
 
 func (c *InteractionsAddOrUpdateRestrictionsForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/interaction-limits")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/interaction-limits")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdatePreview("sombra", c.Sombra)
 	c.UpdateBody("limit", c.Limit)
@@ -64,7 +62,6 @@ func (c *InteractionsGetRestrictionsForOrgCmd) Run(isValueSetMap map[string]bool
 }
 
 type InteractionsGetRestrictionsForRepoCmd struct {
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Sombra bool   `required:"" name:"sombra-preview"`
 	internal.BaseCmd
@@ -72,8 +69,7 @@ type InteractionsGetRestrictionsForRepoCmd struct {
 
 func (c *InteractionsGetRestrictionsForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/interaction-limits")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/interaction-limits")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdatePreview("sombra", c.Sombra)
 	return c.DoRequest("GET")
@@ -94,7 +90,6 @@ func (c *InteractionsRemoveRestrictionsForOrgCmd) Run(isValueSetMap map[string]b
 }
 
 type InteractionsRemoveRestrictionsForRepoCmd struct {
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	Sombra bool   `required:"" name:"sombra-preview"`
 	internal.BaseCmd
@@ -102,8 +97,7 @@ type InteractionsRemoveRestrictionsForRepoCmd struct {
 
 func (c *InteractionsRemoveRestrictionsForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/interaction-limits")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/interaction-limits")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdatePreview("sombra", c.Sombra)
 	return c.DoRequest("DELETE")

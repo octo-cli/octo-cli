@@ -555,19 +555,6 @@ https://developer.github.com/v3/activity/starring/#check-if-a-repository-is-star
 |------|-------------|
 | repo | __Required__ repo parameter |
 
-## activity check-watching-repo-legacy
-
-https://developer.github.com/v3/activity/watching/#check-if-you-are-watching-a-repository-legacy
-
-Requires for the user to be authenticated.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| repo | __Required__ repo parameter |
-
 ## activity delete-repo-subscription
 
 https://developer.github.com/v3/activity/watching/#delete-a-repository-subscription
@@ -1009,39 +996,11 @@ Note that you'll need to set `Content-Length` to zero when calling out to this e
 |------|-------------|
 | repo | __Required__ repo parameter |
 
-## activity stop-watching-repo-legacy
-
-https://developer.github.com/v3/activity/watching/#stop-watching-a-repository-legacy
-
-Requires for the user to be authenticated.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| repo | __Required__ repo parameter |
-
 ## activity unstar-repo-for-authenticated-user
 
 https://developer.github.com/v3/activity/starring/#unstar-a-repository-for-the-authenticated-user
 
 
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| repo | __Required__ repo parameter |
-
-## activity watch-repo-legacy
-
-https://developer.github.com/v3/activity/watching/#watch-a-repository-legacy
-
-Requires the user to be authenticated.
-
-Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://developer.github.com/v3/#http-verbs)."
 
 ### parameters
 
@@ -8806,19 +8765,6 @@ Suppose you want to find commits related to CSS in the [octocat/Spoon-Knife](htt
 | per_page | Results per page (max 100) |
 | sort | Sorts the results of your query by `author-date` or `committer-date`. Default: [best match](https://developer.github.com/v3/search/#ranking-search-results) |
 
-## search email-legacy
-
-https://developer.github.com/v3/search/legacy/#email-search
-
-This API call is added for compatibility reasons only. There's no guarantee that full email searches will always be available. The `@` character in the address must be left unencoded. Searches only against public email addresses (as configured on the user's GitHub profile).
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| email | __Required__ The email address. |
-
 ## search issues-and-pull-requests
 
 https://developer.github.com/v3/search/#search-issues-and-pull-requests
@@ -8841,22 +8787,6 @@ In this query, we're searching for the keyword `windows`, within any open issue 
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | sort | Sorts the results of your query by the number of `comments`, `reactions`, `reactions-+1`, `reactions--1`, `reactions-smile`, `reactions-thinking_face`, `reactions-heart`, `reactions-tada`, or `interactions`. You can also sort results by how recently the items were `created` or `updated`, Default: [best match](https://developer.github.com/v3/search/#ranking-search-results) |
-
-## search issues-legacy
-
-https://developer.github.com/v3/search/legacy/#search-issues
-
-Find issues by state and keyword.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| keyword | __Required__ The search term. |
-| owner | __Required__ owner parameter |
-| repository | __Required__ repository parameter |
-| state | __Required__ Indicates the state of the issues to return. Can be either `open` or `closed`. |
 
 ## search labels
 
@@ -8906,23 +8836,6 @@ In this request, we're searching for repositories with the word `tetris` in the 
 | per_page | Results per page (max 100) |
 | sort | Sorts the results of your query by number of `stars`, `forks`, or `help-wanted-issues` or how recently the items were `updated`. Default: [best match](https://developer.github.com/v3/search/#ranking-search-results) |
 
-## search repos-legacy
-
-https://developer.github.com/v3/search/legacy/#search-repositories
-
-Find repositories by keyword. Note, this legacy method does not follow the v3 pagination pattern. This method returns up to 100 results per page and pages can be fetched using the `start_page` parameter.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| keyword | __Required__ The search term. |
-| language | Filter results by language. |
-| order | The sort field. if `sort` param is provided. Can be either `asc` or `desc`. |
-| sort | The sort field. One of `stars`, `forks`, or `updated`. Default: results are sorted by best match. |
-| start_page | The page number to fetch. |
-
 ## search topics
 
 https://developer.github.com/v3/search/#search-topics
@@ -8969,22 +8882,6 @@ Here, we're looking at users with the name Tom. We're only interested in those w
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | sort | Sorts the results of your query by number of `followers` or `repositories`, or when the person `joined` GitHub. Default: [best match](https://developer.github.com/v3/search/#ranking-search-results) |
-
-## search users-legacy
-
-https://developer.github.com/v3/search/legacy/#search-users
-
-Find users by keyword.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| keyword | __Required__ The search term. |
-| order | The sort field. if `sort` param is provided. Can be either `asc` or `desc`. |
-| sort | The sort field. One of `stars`, `forks`, or `updated`. Default: results are sorted by best match. |
-| start_page | The page number to fetch. |
 
 # teams
 
