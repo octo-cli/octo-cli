@@ -148,11 +148,10 @@ We did it! Scratch v0.0.2 is available for download.
 
 #### Homebrew
 
-To install with [homebrew](https://brew.sh/):
+To install with [Homebrew](https://brew.sh/) on macOS or Linux:
 
 ```
-brew tap octo-cli/octo
-brew install octo
+brew install octo-cli/octo/octo
 ```
 
 #### The easy and overly trusting way
