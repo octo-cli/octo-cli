@@ -37,38 +37,34 @@ type PullsCmd struct {
 }
 
 type PullsCheckIfMergedCmd struct {
-	Owner      string `name:"owner"`
-	PullNumber int64  `required:"" name:"pull_number"`
 	Repo       string `required:"" name:"repo"`
+	PullNumber int64  `required:"" name:"pull_number"`
 	internal.BaseCmd
 }
 
 func (c *PullsCheckIfMergedCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/merge")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/merge")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("pull_number", c.PullNumber)
 	return c.DoRequest("GET")
 }
 
 type PullsCreateCmd struct {
+	SailorV             bool   `name:"sailor-v-preview"`
+	Repo                string `required:"" name:"repo"`
 	Base                string `required:"" name:"base"`
+	Head                string `required:"" name:"head"`
+	Title               string `required:"" name:"title"`
 	Body                string `name:"body"`
 	Draft               bool   `name:"draft"`
-	Head                string `required:"" name:"head"`
 	MaintainerCanModify bool   `name:"maintainer_can_modify"`
-	Owner               string `name:"owner"`
-	Repo                string `required:"" name:"repo"`
-	SailorV             bool   `name:"sailor-v-preview"`
-	Title               string `required:"" name:"title"`
 	internal.BaseCmd
 }
 
 func (c *PullsCreateCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pulls")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pulls")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdatePreview("sailor-v", c.SailorV)
 	c.UpdateBody("base", c.Base)
@@ -81,15 +77,14 @@ func (c *PullsCreateCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsCreateCommentCmd struct {
-	Body        string `required:"" name:"body"`
 	ComfortFade bool   `name:"comfort-fade-preview"`
-	CommitId    string `required:"" name:"commit_id"`
-	Line        int64  `name:"line"`
-	Owner       string `name:"owner"`
-	Path        string `required:"" name:"path"`
-	Position    int64  `name:"position"`
-	PullNumber  int64  `required:"" name:"pull_number"`
 	Repo        string `required:"" name:"repo"`
+	PullNumber  int64  `required:"" name:"pull_number"`
+	Body        string `required:"" name:"body"`
+	CommitId    string `required:"" name:"commit_id"`
+	Path        string `required:"" name:"path"`
+	Line        int64  `name:"line"`
+	Position    int64  `name:"position"`
 	Side        string `name:"side"`
 	StartLine   int64  `name:"start_line"`
 	StartSide   string `name:"start_side"`
@@ -98,8 +93,7 @@ type PullsCreateCommentCmd struct {
 
 func (c *PullsCreateCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/comments")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/comments")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdatePreview("comfort-fade", c.ComfortFade)
@@ -115,20 +109,18 @@ func (c *PullsCreateCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsCreateReviewCmd struct {
+	Repo       string                `required:"" name:"repo"`
+	PullNumber int64                 `required:"" name:"pull_number"`
 	Body       string                `name:"body"`
 	Comments   []internal.JSONObject `name:"comments"`
 	CommitId   string                `name:"commit_id"`
 	Event      string                `name:"event"`
-	Owner      string                `name:"owner"`
-	PullNumber int64                 `required:"" name:"pull_number"`
-	Repo       string                `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *PullsCreateReviewCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/reviews")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/reviews")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateBody("body", c.Body)
@@ -139,18 +131,16 @@ func (c *PullsCreateReviewCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsCreateReviewCommentReplyCmd struct {
-	Body       string `required:"" name:"body"`
-	CommentId  int64  `required:"" name:"comment_id"`
-	Owner      string `name:"owner"`
-	PullNumber int64  `required:"" name:"pull_number"`
 	Repo       string `required:"" name:"repo"`
+	PullNumber int64  `required:"" name:"pull_number"`
+	CommentId  int64  `required:"" name:"comment_id"`
+	Body       string `required:"" name:"body"`
 	internal.BaseCmd
 }
 
 func (c *PullsCreateReviewCommentReplyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/comments/{comment_id}/replies")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/comments/{comment_id}/replies")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLPath("comment_id", c.CommentId)
@@ -159,9 +149,8 @@ func (c *PullsCreateReviewCommentReplyCmd) Run(isValueSetMap map[string]bool) er
 }
 
 type PullsCreateReviewRequestCmd struct {
-	Owner         string   `name:"owner"`
-	PullNumber    int64    `required:"" name:"pull_number"`
 	Repo          string   `required:"" name:"repo"`
+	PullNumber    int64    `required:"" name:"pull_number"`
 	Reviewers     []string `name:"reviewers"`
 	TeamReviewers []string `name:"team_reviewers"`
 	internal.BaseCmd
@@ -169,8 +158,7 @@ type PullsCreateReviewRequestCmd struct {
 
 func (c *PullsCreateReviewRequestCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/requested_reviewers")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateBody("reviewers", c.Reviewers)
@@ -179,33 +167,29 @@ func (c *PullsCreateReviewRequestCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsDeleteCommentCmd struct {
-	CommentId int64  `required:"" name:"comment_id"`
-	Owner     string `name:"owner"`
 	Repo      string `required:"" name:"repo"`
+	CommentId int64  `required:"" name:"comment_id"`
 	internal.BaseCmd
 }
 
 func (c *PullsDeleteCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pulls/comments/{comment_id}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pulls/comments/{comment_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("comment_id", c.CommentId)
 	return c.DoRequest("DELETE")
 }
 
 type PullsDeletePendingReviewCmd struct {
-	Owner      string `name:"owner"`
-	PullNumber int64  `required:"" name:"pull_number"`
 	Repo       string `required:"" name:"repo"`
+	PullNumber int64  `required:"" name:"pull_number"`
 	ReviewId   int64  `required:"" name:"review_id"`
 	internal.BaseCmd
 }
 
 func (c *PullsDeletePendingReviewCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/reviews/{review_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLPath("review_id", c.ReviewId)
@@ -213,9 +197,8 @@ func (c *PullsDeletePendingReviewCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsDeleteReviewRequestCmd struct {
-	Owner         string   `name:"owner"`
-	PullNumber    int64    `required:"" name:"pull_number"`
 	Repo          string   `required:"" name:"repo"`
+	PullNumber    int64    `required:"" name:"pull_number"`
 	Reviewers     []string `name:"reviewers"`
 	TeamReviewers []string `name:"team_reviewers"`
 	internal.BaseCmd
@@ -223,8 +206,7 @@ type PullsDeleteReviewRequestCmd struct {
 
 func (c *PullsDeleteReviewRequestCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/requested_reviewers")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateBody("reviewers", c.Reviewers)
@@ -233,18 +215,16 @@ func (c *PullsDeleteReviewRequestCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsDismissReviewCmd struct {
-	Message    string `required:"" name:"message"`
-	Owner      string `name:"owner"`
-	PullNumber int64  `required:"" name:"pull_number"`
 	Repo       string `required:"" name:"repo"`
+	PullNumber int64  `required:"" name:"pull_number"`
 	ReviewId   int64  `required:"" name:"review_id"`
+	Message    string `required:"" name:"message"`
 	internal.BaseCmd
 }
 
 func (c *PullsDismissReviewCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/dismissals")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/reviews/{review_id}/dismissals")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLPath("review_id", c.ReviewId)
@@ -253,17 +233,15 @@ func (c *PullsDismissReviewCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsGetCmd struct {
-	Owner      string `name:"owner"`
-	PullNumber int64  `required:"" name:"pull_number"`
-	Repo       string `required:"" name:"repo"`
 	SailorV    bool   `name:"sailor-v-preview"`
+	Repo       string `required:"" name:"repo"`
+	PullNumber int64  `required:"" name:"pull_number"`
 	internal.BaseCmd
 }
 
 func (c *PullsGetCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pulls/{pull_number}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdatePreview("sailor-v", c.SailorV)
@@ -272,17 +250,15 @@ func (c *PullsGetCmd) Run(isValueSetMap map[string]bool) error {
 
 type PullsGetCommentCmd struct {
 	ComfortFade  bool   `name:"comfort-fade-preview"`
-	CommentId    int64  `required:"" name:"comment_id"`
-	Owner        string `name:"owner"`
-	Repo         string `required:"" name:"repo"`
 	SquirrelGirl bool   `name:"squirrel-girl-preview"`
+	Repo         string `required:"" name:"repo"`
+	CommentId    int64  `required:"" name:"comment_id"`
 	internal.BaseCmd
 }
 
 func (c *PullsGetCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pulls/comments/{comment_id}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pulls/comments/{comment_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("comment_id", c.CommentId)
 	c.UpdatePreview("comfort-fade", c.ComfortFade)
@@ -291,19 +267,17 @@ func (c *PullsGetCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsGetCommentsForReviewCmd struct {
-	Owner      string `name:"owner"`
+	Repo       string `required:"" name:"repo"`
+	PullNumber int64  `required:"" name:"pull_number"`
+	ReviewId   int64  `required:"" name:"review_id"`
 	Page       int64  `name:"page"`
 	PerPage    int64  `name:"per_page"`
-	PullNumber int64  `required:"" name:"pull_number"`
-	Repo       string `required:"" name:"repo"`
-	ReviewId   int64  `required:"" name:"review_id"`
 	internal.BaseCmd
 }
 
 func (c *PullsGetCommentsForReviewCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/comments")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/reviews/{review_id}/comments")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLPath("review_id", c.ReviewId)
@@ -313,17 +287,15 @@ func (c *PullsGetCommentsForReviewCmd) Run(isValueSetMap map[string]bool) error 
 }
 
 type PullsGetReviewCmd struct {
-	Owner      string `name:"owner"`
-	PullNumber int64  `required:"" name:"pull_number"`
 	Repo       string `required:"" name:"repo"`
+	PullNumber int64  `required:"" name:"pull_number"`
 	ReviewId   int64  `required:"" name:"review_id"`
 	internal.BaseCmd
 }
 
 func (c *PullsGetReviewCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/reviews/{review_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLPath("review_id", c.ReviewId)
@@ -331,14 +303,13 @@ func (c *PullsGetReviewCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsListCmd struct {
+	SailorV   bool   `name:"sailor-v-preview"`
+	Repo      string `required:"" name:"repo"`
 	Base      string `name:"base"`
 	Direction string `name:"direction"`
 	Head      string `name:"head"`
-	Owner     string `name:"owner"`
 	Page      int64  `name:"page"`
 	PerPage   int64  `name:"per_page"`
-	Repo      string `required:"" name:"repo"`
-	SailorV   bool   `name:"sailor-v-preview"`
 	Sort      string `name:"sort"`
 	State     string `name:"state"`
 	internal.BaseCmd
@@ -346,8 +317,7 @@ type PullsListCmd struct {
 
 func (c *PullsListCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pulls")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pulls")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("state", c.State)
 	c.UpdateURLQuery("head", c.Head)
@@ -362,22 +332,20 @@ func (c *PullsListCmd) Run(isValueSetMap map[string]bool) error {
 
 type PullsListCommentsCmd struct {
 	ComfortFade  bool   `name:"comfort-fade-preview"`
+	SquirrelGirl bool   `name:"squirrel-girl-preview"`
+	Repo         string `required:"" name:"repo"`
+	PullNumber   int64  `required:"" name:"pull_number"`
 	Direction    string `name:"direction"`
-	Owner        string `name:"owner"`
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
-	PullNumber   int64  `required:"" name:"pull_number"`
-	Repo         string `required:"" name:"repo"`
 	Since        string `name:"since"`
 	Sort         string `name:"sort"`
-	SquirrelGirl bool   `name:"squirrel-girl-preview"`
 	internal.BaseCmd
 }
 
 func (c *PullsListCommentsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/comments")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/comments")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLQuery("sort", c.Sort)
@@ -392,21 +360,19 @@ func (c *PullsListCommentsCmd) Run(isValueSetMap map[string]bool) error {
 
 type PullsListCommentsForRepoCmd struct {
 	ComfortFade  bool   `name:"comfort-fade-preview"`
+	SquirrelGirl bool   `name:"squirrel-girl-preview"`
+	Repo         string `required:"" name:"repo"`
 	Direction    string `name:"direction"`
-	Owner        string `name:"owner"`
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
-	Repo         string `required:"" name:"repo"`
 	Since        string `name:"since"`
 	Sort         string `name:"sort"`
-	SquirrelGirl bool   `name:"squirrel-girl-preview"`
 	internal.BaseCmd
 }
 
 func (c *PullsListCommentsForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pulls/comments")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pulls/comments")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("sort", c.Sort)
 	c.UpdateURLQuery("direction", c.Direction)
@@ -419,18 +385,16 @@ func (c *PullsListCommentsForRepoCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsListCommitsCmd struct {
-	Owner      string `name:"owner"`
+	Repo       string `required:"" name:"repo"`
+	PullNumber int64  `required:"" name:"pull_number"`
 	Page       int64  `name:"page"`
 	PerPage    int64  `name:"per_page"`
-	PullNumber int64  `required:"" name:"pull_number"`
-	Repo       string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *PullsListCommitsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/commits")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/commits")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLQuery("per_page", c.PerPage)
@@ -439,18 +403,16 @@ func (c *PullsListCommitsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsListFilesCmd struct {
-	Owner      string `name:"owner"`
+	Repo       string `required:"" name:"repo"`
+	PullNumber int64  `required:"" name:"pull_number"`
 	Page       int64  `name:"page"`
 	PerPage    int64  `name:"per_page"`
-	PullNumber int64  `required:"" name:"pull_number"`
-	Repo       string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *PullsListFilesCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/files")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/files")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLQuery("per_page", c.PerPage)
@@ -459,18 +421,16 @@ func (c *PullsListFilesCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsListReviewRequestsCmd struct {
-	Owner      string `name:"owner"`
+	Repo       string `required:"" name:"repo"`
+	PullNumber int64  `required:"" name:"pull_number"`
 	Page       int64  `name:"page"`
 	PerPage    int64  `name:"per_page"`
-	PullNumber int64  `required:"" name:"pull_number"`
-	Repo       string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *PullsListReviewRequestsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/requested_reviewers")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLQuery("per_page", c.PerPage)
@@ -479,18 +439,16 @@ func (c *PullsListReviewRequestsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsListReviewsCmd struct {
-	Owner      string `name:"owner"`
+	Repo       string `required:"" name:"repo"`
+	PullNumber int64  `required:"" name:"pull_number"`
 	Page       int64  `name:"page"`
 	PerPage    int64  `name:"per_page"`
-	PullNumber int64  `required:"" name:"pull_number"`
-	Repo       string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *PullsListReviewsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/reviews")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/reviews")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLQuery("per_page", c.PerPage)
@@ -499,20 +457,18 @@ func (c *PullsListReviewsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsMergeCmd struct {
+	Repo          string `required:"" name:"repo"`
+	PullNumber    int64  `required:"" name:"pull_number"`
 	CommitMessage string `name:"commit_message"`
 	CommitTitle   string `name:"commit_title"`
 	MergeMethod   string `name:"merge_method"`
-	Owner         string `name:"owner"`
-	PullNumber    int64  `required:"" name:"pull_number"`
-	Repo          string `required:"" name:"repo"`
 	Sha           string `name:"sha"`
 	internal.BaseCmd
 }
 
 func (c *PullsMergeCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/merge")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/merge")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateBody("commit_message", c.CommitMessage)
@@ -523,19 +479,17 @@ func (c *PullsMergeCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsSubmitReviewCmd struct {
-	Body       string `name:"body"`
-	Event      string `required:"" name:"event"`
-	Owner      string `name:"owner"`
-	PullNumber int64  `required:"" name:"pull_number"`
 	Repo       string `required:"" name:"repo"`
+	PullNumber int64  `required:"" name:"pull_number"`
 	ReviewId   int64  `required:"" name:"review_id"`
+	Event      string `required:"" name:"event"`
+	Body       string `name:"body"`
 	internal.BaseCmd
 }
 
 func (c *PullsSubmitReviewCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/events")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/reviews/{review_id}/events")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLPath("review_id", c.ReviewId)
@@ -545,18 +499,16 @@ func (c *PullsSubmitReviewCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsUpdateBranchCmd struct {
-	ExpectedHeadSha string `name:"expected_head_sha"`
 	Lydian          bool   `required:"" name:"lydian-preview"`
-	Owner           string `name:"owner"`
-	PullNumber      int64  `required:"" name:"pull_number"`
 	Repo            string `required:"" name:"repo"`
+	PullNumber      int64  `required:"" name:"pull_number"`
+	ExpectedHeadSha string `name:"expected_head_sha"`
 	internal.BaseCmd
 }
 
 func (c *PullsUpdateBranchCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/update-branch")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/update-branch")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdatePreview("lydian", c.Lydian)
@@ -565,13 +517,12 @@ func (c *PullsUpdateBranchCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsUpdateCmd struct {
+	SailorV             bool   `name:"sailor-v-preview"`
+	Repo                string `required:"" name:"repo"`
+	PullNumber          int64  `required:"" name:"pull_number"`
 	Base                string `name:"base"`
 	Body                string `name:"body"`
 	MaintainerCanModify bool   `name:"maintainer_can_modify"`
-	Owner               string `name:"owner"`
-	PullNumber          int64  `required:"" name:"pull_number"`
-	Repo                string `required:"" name:"repo"`
-	SailorV             bool   `name:"sailor-v-preview"`
 	State               string `name:"state"`
 	Title               string `name:"title"`
 	internal.BaseCmd
@@ -579,8 +530,7 @@ type PullsUpdateCmd struct {
 
 func (c *PullsUpdateCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pulls/{pull_number}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdatePreview("sailor-v", c.SailorV)
@@ -593,18 +543,16 @@ func (c *PullsUpdateCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsUpdateCommentCmd struct {
-	Body        string `required:"" name:"body"`
 	ComfortFade bool   `name:"comfort-fade-preview"`
-	CommentId   int64  `required:"" name:"comment_id"`
-	Owner       string `name:"owner"`
 	Repo        string `required:"" name:"repo"`
+	CommentId   int64  `required:"" name:"comment_id"`
+	Body        string `required:"" name:"body"`
 	internal.BaseCmd
 }
 
 func (c *PullsUpdateCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pulls/comments/{comment_id}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pulls/comments/{comment_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("comment_id", c.CommentId)
 	c.UpdatePreview("comfort-fade", c.ComfortFade)
@@ -613,18 +561,16 @@ func (c *PullsUpdateCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsUpdateReviewCmd struct {
-	Body       string `required:"" name:"body"`
-	Owner      string `name:"owner"`
-	PullNumber int64  `required:"" name:"pull_number"`
 	Repo       string `required:"" name:"repo"`
+	PullNumber int64  `required:"" name:"pull_number"`
 	ReviewId   int64  `required:"" name:"review_id"`
+	Body       string `required:"" name:"body"`
 	internal.BaseCmd
 }
 
 func (c *PullsUpdateReviewCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/reviews/{review_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLPath("review_id", c.ReviewId)

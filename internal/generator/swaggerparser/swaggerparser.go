@@ -2,6 +2,7 @@ package swaggerparser
 
 import (
 	"encoding/json"
+	"fmt"
 	"sort"
 	"strings"
 
@@ -9,6 +10,18 @@ import (
 	"github.com/getkin/kin-openapi/openapi3"
 	"github.com/octo-cli/octo-cli/internal/generator/util"
 )
+
+func UpdateSwaggerPath(swagger *openapi3.Swagger, oldPath, newPath string) error {
+	if swagger.Paths.Find(oldPath) == nil {
+		return fmt.Errorf("path doesn't exist: %s", oldPath)
+	}
+	if swagger.Paths.Find(newPath) != nil {
+		return fmt.Errorf("path already exists: %s", newPath)
+	}
+	swagger.Paths[newPath] = swagger.Paths[oldPath]
+	delete(swagger.Paths, oldPath)
+	return nil
+}
 
 func ForEachOperation(swagger *openapi3.Swagger, fn func(path, method string, op *openapi3.Operation)) {
 	//nolint:errcheck
@@ -234,4 +247,37 @@ func ParamRequired(parameters openapi3.Parameters, idx int) bool {
 	}
 	nextParam := parameters[idx+1].Value
 	return nextParam.Name != "repo" || nextParam.In != "path"
+}
+
+func RemoveOwnerParams(swagger *openapi3.Swagger) error {
+	pathReplacements := map[string]string{}
+	ForEachOperation(swagger, func(path, _ string, op *openapi3.Operation) {
+		var ownerIdx int
+		var ownerRef *openapi3.ParameterRef
+		for i, parameter := range op.Parameters {
+			if parameter.Value.In == openapi3.ParameterInPath && parameter.Value.Name == "owner" {
+				ownerIdx = i
+				ownerRef = parameter
+				break
+			}
+		}
+		if ownerRef == nil || ownerIdx == len(op.Parameters)-1 {
+			return
+		}
+		repoRef := op.Parameters[ownerIdx+1]
+		if repoRef.Value.In != openapi3.ParameterInPath || repoRef.Value.Name != "repo" {
+			return
+		}
+		repoRef.Value.Description = "repository in OWNER/REPO form"
+		op.Parameters = append(op.Parameters[:ownerIdx], op.Parameters[ownerIdx+1:]...)
+		newPath := strings.Replace(path, `/{owner}/{repo}`, `/{repo}`, 1)
+		pathReplacements[path] = newPath
+	})
+	for op, np := range pathReplacements {
+		err := UpdateSwaggerPath(swagger, op, np)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
 }

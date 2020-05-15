@@ -20,10 +20,10 @@ type OauthAuthorizationsCmd struct {
 }
 
 type OauthAuthorizationsCreateAuthorizationCmd struct {
+	Note         string   `required:"" name:"note"`
 	ClientId     string   `name:"client_id"`
 	ClientSecret string   `name:"client_secret"`
 	Fingerprint  string   `name:"fingerprint"`
-	Note         string   `required:"" name:"note"`
 	NoteUrl      string   `name:"note_url"`
 	Scopes       []string `name:"scopes"`
 	internal.BaseCmd
@@ -91,8 +91,8 @@ func (c *OauthAuthorizationsGetGrantCmd) Run(isValueSetMap map[string]bool) erro
 
 type OauthAuthorizationsGetOrCreateAuthorizationForAppAndFingerprintCmd struct {
 	ClientId     string   `required:"" name:"client_id"`
-	ClientSecret string   `required:"" name:"client_secret"`
 	Fingerprint  string   `required:"" name:"fingerprint"`
+	ClientSecret string   `required:"" name:"client_secret"`
 	Note         string   `name:"note"`
 	NoteUrl      string   `name:"note_url"`
 	Scopes       []string `name:"scopes"`
@@ -162,8 +162,8 @@ func (c *OauthAuthorizationsListGrantsCmd) Run(isValueSetMap map[string]bool) er
 }
 
 type OauthAuthorizationsUpdateAuthorizationCmd struct {
-	AddScopes       []string `name:"add_scopes"`
 	AuthorizationId int64    `required:"" name:"authorization_id"`
+	AddScopes       []string `name:"add_scopes"`
 	Fingerprint     string   `name:"fingerprint"`
 	Note            string   `name:"note"`
 	NoteUrl         string   `name:"note_url"`

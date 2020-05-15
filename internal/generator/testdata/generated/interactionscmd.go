@@ -16,9 +16,9 @@ type InteractionsCmd struct {
 }
 
 type InteractionsAddOrUpdateRestrictionsForOrgCmd struct {
-	Limit  string `required:"" name:"limit"`
-	Org    string `required:"" name:"org"`
 	Sombra bool   `required:"" name:"sombra-preview"`
+	Org    string `required:"" name:"org"`
+	Limit  string `required:"" name:"limit"`
 	internal.BaseCmd
 }
 
@@ -32,17 +32,15 @@ func (c *InteractionsAddOrUpdateRestrictionsForOrgCmd) Run(isValueSetMap map[str
 }
 
 type InteractionsAddOrUpdateRestrictionsForRepoCmd struct {
-	Limit  string `required:"" name:"limit"`
-	Owner  string `name:"owner"`
-	Repo   string `required:"" name:"repo"`
 	Sombra bool   `required:"" name:"sombra-preview"`
+	Repo   string `required:"" name:"repo"`
+	Limit  string `required:"" name:"limit"`
 	internal.BaseCmd
 }
 
 func (c *InteractionsAddOrUpdateRestrictionsForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/interaction-limits")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/interaction-limits")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdatePreview("sombra", c.Sombra)
 	c.UpdateBody("limit", c.Limit)
@@ -50,8 +48,8 @@ func (c *InteractionsAddOrUpdateRestrictionsForRepoCmd) Run(isValueSetMap map[st
 }
 
 type InteractionsGetRestrictionsForOrgCmd struct {
-	Org    string `required:"" name:"org"`
 	Sombra bool   `required:"" name:"sombra-preview"`
+	Org    string `required:"" name:"org"`
 	internal.BaseCmd
 }
 
@@ -64,24 +62,22 @@ func (c *InteractionsGetRestrictionsForOrgCmd) Run(isValueSetMap map[string]bool
 }
 
 type InteractionsGetRestrictionsForRepoCmd struct {
-	Owner  string `name:"owner"`
-	Repo   string `required:"" name:"repo"`
 	Sombra bool   `required:"" name:"sombra-preview"`
+	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *InteractionsGetRestrictionsForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/interaction-limits")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/interaction-limits")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdatePreview("sombra", c.Sombra)
 	return c.DoRequest("GET")
 }
 
 type InteractionsRemoveRestrictionsForOrgCmd struct {
-	Org    string `required:"" name:"org"`
 	Sombra bool   `required:"" name:"sombra-preview"`
+	Org    string `required:"" name:"org"`
 	internal.BaseCmd
 }
 
@@ -94,16 +90,14 @@ func (c *InteractionsRemoveRestrictionsForOrgCmd) Run(isValueSetMap map[string]b
 }
 
 type InteractionsRemoveRestrictionsForRepoCmd struct {
-	Owner  string `name:"owner"`
-	Repo   string `required:"" name:"repo"`
 	Sombra bool   `required:"" name:"sombra-preview"`
+	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *InteractionsRemoveRestrictionsForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/interaction-limits")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/interaction-limits")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdatePreview("sombra", c.Sombra)
 	return c.DoRequest("DELETE")

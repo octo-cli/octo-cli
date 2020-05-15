@@ -33,3 +33,15 @@ func NewTags(tag ...*structtag.Tag) *structtag.Tags {
 	}
 	return tags
 }
+
+func TagsHasKey(tags *structtag.Tags, key string) bool {
+	if tags == nil {
+		return false
+	}
+	for _, s := range tags.Keys() {
+		if s == key {
+			return true
+		}
+	}
+	return false
+}

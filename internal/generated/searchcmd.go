@@ -17,10 +17,10 @@ type SearchCmd struct {
 }
 
 type SearchCodeCmd struct {
+	Q       string `required:"" name:"q"`
 	Order   string `name:"order"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Q       string `required:"" name:"q"`
 	Sort    string `name:"sort"`
 	internal.BaseCmd
 }
@@ -38,10 +38,10 @@ func (c *SearchCodeCmd) Run(isValueSetMap map[string]bool) error {
 
 type SearchCommitsCmd struct {
 	Cloak   bool   `required:"" name:"cloak-preview"`
+	Q       string `required:"" name:"q"`
 	Order   string `name:"order"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Q       string `required:"" name:"q"`
 	Sort    string `name:"sort"`
 	internal.BaseCmd
 }
@@ -59,10 +59,10 @@ func (c *SearchCommitsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type SearchIssuesAndPullRequestsCmd struct {
+	Q       string `required:"" name:"q"`
 	Order   string `name:"order"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Q       string `required:"" name:"q"`
 	Sort    string `name:"sort"`
 	internal.BaseCmd
 }
@@ -79,9 +79,9 @@ func (c *SearchIssuesAndPullRequestsCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type SearchLabelsCmd struct {
-	Order        string `name:"order"`
 	Q            string `required:"" name:"q"`
 	RepositoryId int64  `required:"" name:"repository_id"`
+	Order        string `name:"order"`
 	Sort         string `name:"sort"`
 	internal.BaseCmd
 }
@@ -98,10 +98,10 @@ func (c *SearchLabelsCmd) Run(isValueSetMap map[string]bool) error {
 
 type SearchReposCmd struct {
 	Mercy   bool   `name:"mercy-preview"`
+	Q       string `required:"" name:"q"`
 	Order   string `name:"order"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Q       string `required:"" name:"q"`
 	Sort    string `name:"sort"`
 	internal.BaseCmd
 }
@@ -133,10 +133,10 @@ func (c *SearchTopicsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type SearchUsersCmd struct {
+	Q       string `required:"" name:"q"`
 	Order   string `name:"order"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Q       string `required:"" name:"q"`
 	Sort    string `name:"sort"`
 	internal.BaseCmd
 }

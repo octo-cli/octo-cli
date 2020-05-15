@@ -8,6 +8,7 @@ import (
 	"text/template"
 
 	"github.com/fatih/structtag"
+	"github.com/octo-cli/octo-cli/internal/generator/util"
 	"github.com/spf13/afero"
 )
 
@@ -63,12 +64,45 @@ func (c *{{.ReceiverName}}) Run(isValueSetMap map[string]bool) error {
 
 `
 
+type paramLocation int
+
+//nolint:deadcode,varcheck
+const (
+	locInvalid paramLocation = iota
+	locPath
+	locQuery
+	locBody
+	locHeader
+	locPreview
+)
+
 // StructField is one field in a StructTmplHelper
 type StructField struct {
-	Name   string
-	Type   string
-	Tags   *structtag.Tags
-	Import string
+	Name          string
+	Type          string
+	Tags          *structtag.Tags
+	Import        string
+	ParamLocation paramLocation
+	ParamOrder    int
+}
+
+func (s StructField) less(o StructField) bool {
+	if s.ParamLocation < o.ParamLocation {
+		return true
+	}
+	if s.ParamLocation > o.ParamLocation {
+		return false
+	}
+	if s.ParamOrder < o.ParamOrder {
+		return true
+	}
+	if s.ParamOrder > o.ParamOrder {
+		return false
+	}
+	if util.TagsHasKey(s.Tags, "required") != util.TagsHasKey(o.Tags, "required") {
+		return util.TagsHasKey(s.Tags, "required")
+	}
+	return s.Name < o.Name
 }
 
 type StructTmplHelper struct {
@@ -243,7 +277,7 @@ func sortCmdStructFields(fields []StructField) {
 		newFields = append(newFields, field)
 	}
 	sort.Slice(newFields, func(i, j int) bool {
-		return newFields[i].Name < newFields[j].Name
+		return newFields[i].less(newFields[j])
 	})
 	sort.Slice(holdouts, func(i, j int) bool {
 		return holdouts[i].Type < holdouts[j].Type

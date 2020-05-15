@@ -90,8 +90,8 @@ func (c *UsersCheckFollowingCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersCheckFollowingForUserCmd struct {
-	TargetUser string `required:"" name:"target_user"`
 	Username   string `required:"" name:"username"`
+	TargetUser string `required:"" name:"target_user"`
 	internal.BaseCmd
 }
 
@@ -200,9 +200,9 @@ func (c *UsersGetByUsernameCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersGetContextForUserCmd struct {
+	Username    string `required:"" name:"username"`
 	SubjectId   string `name:"subject_id"`
 	SubjectType string `name:"subject_type"`
-	Username    string `required:"" name:"username"`
 	internal.BaseCmd
 }
 
@@ -304,9 +304,9 @@ func (c *UsersListFollowersForAuthenticatedUserCmd) Run(isValueSetMap map[string
 }
 
 type UsersListFollowersForUserCmd struct {
+	Username string `required:"" name:"username"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
-	Username string `required:"" name:"username"`
 	internal.BaseCmd
 }
 
@@ -320,9 +320,9 @@ func (c *UsersListFollowersForUserCmd) Run(isValueSetMap map[string]bool) error 
 }
 
 type UsersListFollowingForUserCmd struct {
+	Username string `required:"" name:"username"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
-	Username string `required:"" name:"username"`
 	internal.BaseCmd
 }
 
@@ -350,9 +350,9 @@ func (c *UsersListGpgKeysCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersListGpgKeysForUserCmd struct {
+	Username string `required:"" name:"username"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
-	Username string `required:"" name:"username"`
 	internal.BaseCmd
 }
 
@@ -394,9 +394,9 @@ func (c *UsersListPublicKeysCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersListPublicKeysForUserCmd struct {
+	Username string `required:"" name:"username"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
-	Username string `required:"" name:"username"`
 	internal.BaseCmd
 }
 

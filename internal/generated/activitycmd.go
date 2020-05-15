@@ -41,29 +41,25 @@ type ActivityCmd struct {
 }
 
 type ActivityCheckRepoIsStarredByAuthenticatedUserCmd struct {
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ActivityCheckRepoIsStarredByAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/starred/{owner}/{repo}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/user/starred/{repo}")
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
 }
 
 type ActivityDeleteRepoSubscriptionCmd struct {
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ActivityDeleteRepoSubscriptionCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/subscription")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/subscription")
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("DELETE")
 }
@@ -91,15 +87,13 @@ func (c *ActivityGetFeedsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActivityGetRepoSubscriptionCmd struct {
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ActivityGetRepoSubscriptionCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/subscription")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/subscription")
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
 }
@@ -129,9 +123,9 @@ func (c *ActivityGetThreadSubscriptionForAuthenticatedUserCmd) Run(isValueSetMap
 }
 
 type ActivityListEventsForAuthenticatedUserCmd struct {
+	Username string `required:"" name:"username"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
-	Username string `required:"" name:"username"`
 	internal.BaseCmd
 }
 
@@ -167,10 +161,10 @@ func (c *ActivityListNotificationsForAuthenticatedUserCmd) Run(isValueSetMap map
 }
 
 type ActivityListOrgEventsForAuthenticatedUserCmd struct {
+	Username string `required:"" name:"username"`
 	Org      string `required:"" name:"org"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
-	Username string `required:"" name:"username"`
 	internal.BaseCmd
 }
 
@@ -199,17 +193,15 @@ func (c *ActivityListPublicEventsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActivityListPublicEventsForRepoNetworkCmd struct {
-	Owner   string `name:"owner"`
+	Repo    string `required:"" name:"repo"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Repo    string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ActivityListPublicEventsForRepoNetworkCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/networks/{owner}/{repo}/events")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/networks/{repo}/events")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
@@ -217,9 +209,9 @@ func (c *ActivityListPublicEventsForRepoNetworkCmd) Run(isValueSetMap map[string
 }
 
 type ActivityListPublicEventsForUserCmd struct {
+	Username string `required:"" name:"username"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
-	Username string `required:"" name:"username"`
 	internal.BaseCmd
 }
 
@@ -249,9 +241,9 @@ func (c *ActivityListPublicOrgEventsCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type ActivityListReceivedEventsForUserCmd struct {
+	Username string `required:"" name:"username"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
-	Username string `required:"" name:"username"`
 	internal.BaseCmd
 }
 
@@ -265,9 +257,9 @@ func (c *ActivityListReceivedEventsForUserCmd) Run(isValueSetMap map[string]bool
 }
 
 type ActivityListReceivedPublicEventsForUserCmd struct {
+	Username string `required:"" name:"username"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
-	Username string `required:"" name:"username"`
 	internal.BaseCmd
 }
 
@@ -281,17 +273,15 @@ func (c *ActivityListReceivedPublicEventsForUserCmd) Run(isValueSetMap map[strin
 }
 
 type ActivityListRepoEventsCmd struct {
-	Owner   string `name:"owner"`
+	Repo    string `required:"" name:"repo"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Repo    string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ActivityListRepoEventsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/events")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/events")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
@@ -299,21 +289,19 @@ func (c *ActivityListRepoEventsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActivityListRepoNotificationsForAuthenticatedUserCmd struct {
+	Repo          string `required:"" name:"repo"`
 	All           bool   `name:"all"`
 	Before        string `name:"before"`
-	Owner         string `name:"owner"`
 	Page          int64  `name:"page"`
 	Participating bool   `name:"participating"`
 	PerPage       int64  `name:"per_page"`
-	Repo          string `required:"" name:"repo"`
 	Since         string `name:"since"`
 	internal.BaseCmd
 }
 
 func (c *ActivityListRepoNotificationsForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/notifications")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/notifications")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("all", c.All)
 	c.UpdateURLQuery("participating", c.Participating)
@@ -343,11 +331,11 @@ func (c *ActivityListReposStarredByAuthenticatedUserCmd) Run(isValueSetMap map[s
 }
 
 type ActivityListReposStarredByUserCmd struct {
+	Username  string `required:"" name:"username"`
 	Direction string `name:"direction"`
 	Page      int64  `name:"page"`
 	PerPage   int64  `name:"per_page"`
 	Sort      string `name:"sort"`
-	Username  string `required:"" name:"username"`
 	internal.BaseCmd
 }
 
@@ -363,9 +351,9 @@ func (c *ActivityListReposStarredByUserCmd) Run(isValueSetMap map[string]bool) e
 }
 
 type ActivityListReposWatchedByUserCmd struct {
+	Username string `required:"" name:"username"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
-	Username string `required:"" name:"username"`
 	internal.BaseCmd
 }
 
@@ -379,17 +367,15 @@ func (c *ActivityListReposWatchedByUserCmd) Run(isValueSetMap map[string]bool) e
 }
 
 type ActivityListStargazersForRepoCmd struct {
-	Owner   string `name:"owner"`
+	Repo    string `required:"" name:"repo"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Repo    string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ActivityListStargazersForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/stargazers")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/stargazers")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
@@ -411,17 +397,15 @@ func (c *ActivityListWatchedReposForAuthenticatedUserCmd) Run(isValueSetMap map[
 }
 
 type ActivityListWatchersForRepoCmd struct {
-	Owner   string `name:"owner"`
+	Repo    string `required:"" name:"repo"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Repo    string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ActivityListWatchersForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/subscribers")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/subscribers")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
@@ -441,16 +425,14 @@ func (c *ActivityMarkNotificationsAsReadCmd) Run(isValueSetMap map[string]bool) 
 }
 
 type ActivityMarkRepoNotificationsAsReadCmd struct {
-	LastReadAt string `name:"last_read_at"`
-	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
+	LastReadAt string `name:"last_read_at"`
 	internal.BaseCmd
 }
 
 func (c *ActivityMarkRepoNotificationsAsReadCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/notifications")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/notifications")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateBody("last_read_at", c.LastReadAt)
 	return c.DoRequest("PUT")
@@ -469,17 +451,15 @@ func (c *ActivityMarkThreadAsReadCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActivitySetRepoSubscriptionCmd struct {
-	Ignored    bool   `name:"ignored"`
-	Owner      string `name:"owner"`
 	Repo       string `required:"" name:"repo"`
+	Ignored    bool   `name:"ignored"`
 	Subscribed bool   `name:"subscribed"`
 	internal.BaseCmd
 }
 
 func (c *ActivitySetRepoSubscriptionCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/subscription")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/subscription")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateBody("ignored", c.Ignored)
 	c.UpdateBody("subscribed", c.Subscribed)
@@ -487,8 +467,8 @@ func (c *ActivitySetRepoSubscriptionCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type ActivitySetThreadSubscriptionCmd struct {
-	Ignored  bool  `name:"ignored"`
 	ThreadId int64 `required:"" name:"thread_id"`
+	Ignored  bool  `name:"ignored"`
 	internal.BaseCmd
 }
 
@@ -501,29 +481,25 @@ func (c *ActivitySetThreadSubscriptionCmd) Run(isValueSetMap map[string]bool) er
 }
 
 type ActivityStarRepoForAuthenticatedUserCmd struct {
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ActivityStarRepoForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/starred/{owner}/{repo}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/user/starred/{repo}")
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("PUT")
 }
 
 type ActivityUnstarRepoForAuthenticatedUserCmd struct {
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *ActivityUnstarRepoForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/starred/{owner}/{repo}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/user/starred/{repo}")
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("DELETE")
 }

@@ -32,22 +32,20 @@ type MigrationsCmd struct {
 }
 
 type MigrationsCancelImportCmd struct {
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *MigrationsCancelImportCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/import")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/import")
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("DELETE")
 }
 
 type MigrationsDeleteArchiveForAuthenticatedUserCmd struct {
-	MigrationId int64 `required:"" name:"migration_id"`
 	Wyandotte   bool  `required:"" name:"wyandotte-preview"`
+	MigrationId int64 `required:"" name:"migration_id"`
 	internal.BaseCmd
 }
 
@@ -60,9 +58,9 @@ func (c *MigrationsDeleteArchiveForAuthenticatedUserCmd) Run(isValueSetMap map[s
 }
 
 type MigrationsDeleteArchiveForOrgCmd struct {
-	MigrationId int64  `required:"" name:"migration_id"`
-	Org         string `required:"" name:"org"`
 	Wyandotte   bool   `required:"" name:"wyandotte-preview"`
+	Org         string `required:"" name:"org"`
+	MigrationId int64  `required:"" name:"migration_id"`
 	internal.BaseCmd
 }
 
@@ -76,9 +74,9 @@ func (c *MigrationsDeleteArchiveForOrgCmd) Run(isValueSetMap map[string]bool) er
 }
 
 type MigrationsDownloadArchiveForOrgCmd struct {
-	MigrationId int64  `required:"" name:"migration_id"`
-	Org         string `required:"" name:"org"`
 	Wyandotte   bool   `required:"" name:"wyandotte-preview"`
+	Org         string `required:"" name:"org"`
+	MigrationId int64  `required:"" name:"migration_id"`
 	internal.BaseCmd
 }
 
@@ -92,8 +90,8 @@ func (c *MigrationsDownloadArchiveForOrgCmd) Run(isValueSetMap map[string]bool) 
 }
 
 type MigrationsGetArchiveForAuthenticatedUserCmd struct {
-	MigrationId int64 `required:"" name:"migration_id"`
 	Wyandotte   bool  `required:"" name:"wyandotte-preview"`
+	MigrationId int64 `required:"" name:"migration_id"`
 	internal.BaseCmd
 }
 
@@ -106,7 +104,6 @@ func (c *MigrationsGetArchiveForAuthenticatedUserCmd) Run(isValueSetMap map[stri
 }
 
 type MigrationsGetCommitAuthorsCmd struct {
-	Owner string `name:"owner"`
 	Repo  string `required:"" name:"repo"`
 	Since string `name:"since"`
 	internal.BaseCmd
@@ -114,44 +111,39 @@ type MigrationsGetCommitAuthorsCmd struct {
 
 func (c *MigrationsGetCommitAuthorsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/import/authors")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/import/authors")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("since", c.Since)
 	return c.DoRequest("GET")
 }
 
 type MigrationsGetImportProgressCmd struct {
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *MigrationsGetImportProgressCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/import")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/import")
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
 }
 
 type MigrationsGetLargeFilesCmd struct {
-	Owner string `name:"owner"`
-	Repo  string `required:"" name:"repo"`
+	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *MigrationsGetLargeFilesCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/import/large_files")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/import/large_files")
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
 }
 
 type MigrationsGetStatusForAuthenticatedUserCmd struct {
-	MigrationId int64 `required:"" name:"migration_id"`
 	Wyandotte   bool  `required:"" name:"wyandotte-preview"`
+	MigrationId int64 `required:"" name:"migration_id"`
 	internal.BaseCmd
 }
 
@@ -164,9 +156,9 @@ func (c *MigrationsGetStatusForAuthenticatedUserCmd) Run(isValueSetMap map[strin
 }
 
 type MigrationsGetStatusForOrgCmd struct {
-	MigrationId int64  `required:"" name:"migration_id"`
-	Org         string `required:"" name:"org"`
 	Wyandotte   bool   `required:"" name:"wyandotte-preview"`
+	Org         string `required:"" name:"org"`
+	MigrationId int64  `required:"" name:"migration_id"`
 	internal.BaseCmd
 }
 
@@ -180,9 +172,9 @@ func (c *MigrationsGetStatusForOrgCmd) Run(isValueSetMap map[string]bool) error 
 }
 
 type MigrationsListForAuthenticatedUserCmd struct {
+	Wyandotte bool  `required:"" name:"wyandotte-preview"`
 	Page      int64 `name:"page"`
 	PerPage   int64 `name:"per_page"`
-	Wyandotte bool  `required:"" name:"wyandotte-preview"`
 	internal.BaseCmd
 }
 
@@ -196,10 +188,10 @@ func (c *MigrationsListForAuthenticatedUserCmd) Run(isValueSetMap map[string]boo
 }
 
 type MigrationsListForOrgCmd struct {
+	Wyandotte bool   `required:"" name:"wyandotte-preview"`
 	Org       string `required:"" name:"org"`
 	Page      int64  `name:"page"`
 	PerPage   int64  `name:"per_page"`
-	Wyandotte bool   `required:"" name:"wyandotte-preview"`
 	internal.BaseCmd
 }
 
@@ -214,11 +206,11 @@ func (c *MigrationsListForOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type MigrationsListReposForOrgCmd struct {
-	MigrationId int64  `required:"" name:"migration_id"`
+	Wyandotte   bool   `required:"" name:"wyandotte-preview"`
 	Org         string `required:"" name:"org"`
+	MigrationId int64  `required:"" name:"migration_id"`
 	Page        int64  `name:"page"`
 	PerPage     int64  `name:"per_page"`
-	Wyandotte   bool   `required:"" name:"wyandotte-preview"`
 	internal.BaseCmd
 }
 
@@ -234,10 +226,10 @@ func (c *MigrationsListReposForOrgCmd) Run(isValueSetMap map[string]bool) error 
 }
 
 type MigrationsListReposForUserCmd struct {
+	Wyandotte   bool  `required:"" name:"wyandotte-preview"`
 	MigrationId int64 `required:"" name:"migration_id"`
 	Page        int64 `name:"page"`
 	PerPage     int64 `name:"per_page"`
-	Wyandotte   bool  `required:"" name:"wyandotte-preview"`
 	internal.BaseCmd
 }
 
@@ -252,18 +244,16 @@ func (c *MigrationsListReposForUserCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type MigrationsMapCommitAuthorCmd struct {
+	Repo     string `required:"" name:"repo"`
 	AuthorId int64  `required:"" name:"author_id"`
 	Email    string `name:"email"`
 	Name     string `name:"name"`
-	Owner    string `name:"owner"`
-	Repo     string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *MigrationsMapCommitAuthorCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/import/authors/{author_id}")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/import/authors/{author_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("author_id", c.AuthorId)
 	c.UpdateBody("email", c.Email)
@@ -272,7 +262,6 @@ func (c *MigrationsMapCommitAuthorCmd) Run(isValueSetMap map[string]bool) error 
 }
 
 type MigrationsSetLfsPreferenceCmd struct {
-	Owner  string `name:"owner"`
 	Repo   string `required:"" name:"repo"`
 	UseLfs string `required:"" name:"use_lfs"`
 	internal.BaseCmd
@@ -280,17 +269,16 @@ type MigrationsSetLfsPreferenceCmd struct {
 
 func (c *MigrationsSetLfsPreferenceCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/import/lfs")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/import/lfs")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateBody("use_lfs", c.UseLfs)
 	return c.DoRequest("PATCH")
 }
 
 type MigrationsStartForAuthenticatedUserCmd struct {
+	Repositories       []string `required:"" name:"repositories"`
 	ExcludeAttachments bool     `name:"exclude_attachments"`
 	LockRepositories   bool     `name:"lock_repositories"`
-	Repositories       []string `required:"" name:"repositories"`
 	internal.BaseCmd
 }
 
@@ -304,10 +292,10 @@ func (c *MigrationsStartForAuthenticatedUserCmd) Run(isValueSetMap map[string]bo
 }
 
 type MigrationsStartForOrgCmd struct {
-	ExcludeAttachments bool     `name:"exclude_attachments"`
-	LockRepositories   bool     `name:"lock_repositories"`
 	Org                string   `required:"" name:"org"`
 	Repositories       []string `required:"" name:"repositories"`
+	ExcludeAttachments bool     `name:"exclude_attachments"`
+	LockRepositories   bool     `name:"lock_repositories"`
 	internal.BaseCmd
 }
 
@@ -322,20 +310,18 @@ func (c *MigrationsStartForOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type MigrationsStartImportCmd struct {
-	Owner       string `name:"owner"`
 	Repo        string `required:"" name:"repo"`
+	VcsUrl      string `required:"" name:"vcs_url"`
 	TfvcProject string `name:"tfvc_project"`
 	Vcs         string `name:"vcs"`
 	VcsPassword string `name:"vcs_password"`
-	VcsUrl      string `required:"" name:"vcs_url"`
 	VcsUsername string `name:"vcs_username"`
 	internal.BaseCmd
 }
 
 func (c *MigrationsStartImportCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/import")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/import")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateBody("tfvc_project", c.TfvcProject)
 	c.UpdateBody("vcs", c.Vcs)
@@ -346,9 +332,9 @@ func (c *MigrationsStartImportCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type MigrationsUnlockRepoForAuthenticatedUserCmd struct {
+	Wyandotte   bool   `required:"" name:"wyandotte-preview"`
 	MigrationId int64  `required:"" name:"migration_id"`
 	RepoName    string `required:"" name:"repo_name"`
-	Wyandotte   bool   `required:"" name:"wyandotte-preview"`
 	internal.BaseCmd
 }
 
@@ -362,10 +348,10 @@ func (c *MigrationsUnlockRepoForAuthenticatedUserCmd) Run(isValueSetMap map[stri
 }
 
 type MigrationsUnlockRepoForOrgCmd struct {
-	MigrationId int64  `required:"" name:"migration_id"`
-	Org         string `required:"" name:"org"`
-	RepoName    string `required:"" name:"repo_name"`
 	Wyandotte   bool   `required:"" name:"wyandotte-preview"`
+	Org         string `required:"" name:"org"`
+	MigrationId int64  `required:"" name:"migration_id"`
+	RepoName    string `required:"" name:"repo_name"`
 	internal.BaseCmd
 }
 
@@ -380,7 +366,6 @@ func (c *MigrationsUnlockRepoForOrgCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type MigrationsUpdateImportCmd struct {
-	Owner       string `name:"owner"`
 	Repo        string `required:"" name:"repo"`
 	VcsPassword string `name:"vcs_password"`
 	VcsUsername string `name:"vcs_username"`
@@ -389,8 +374,7 @@ type MigrationsUpdateImportCmd struct {
 
 func (c *MigrationsUpdateImportCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/import")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/import")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateBody("vcs_password", c.VcsPassword)
 	c.UpdateBody("vcs_username", c.VcsUsername)

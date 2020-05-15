@@ -25,8 +25,8 @@ func (c *CodesOfConductGetAllCodesOfConductCmd) Run(isValueSetMap map[string]boo
 }
 
 type CodesOfConductGetConductCodeCmd struct {
-	Key          string `required:"" name:"key"`
 	ScarletWitch bool   `required:"" name:"scarlet-witch-preview"`
+	Key          string `required:"" name:"key"`
 	internal.BaseCmd
 }
 
@@ -39,16 +39,14 @@ func (c *CodesOfConductGetConductCodeCmd) Run(isValueSetMap map[string]bool) err
 }
 
 type CodesOfConductGetForRepoCmd struct {
-	Owner        string `name:"owner"`
-	Repo         string `required:"" name:"repo"`
 	ScarletWitch bool   `required:"" name:"scarlet-witch-preview"`
+	Repo         string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
 func (c *CodesOfConductGetForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{owner}/{repo}/community/code_of_conduct")
-	c.UpdateURLPath("owner", c.Owner)
+	c.SetURLPath("/repos/{repo}/community/code_of_conduct")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdatePreview("scarlet-witch", c.ScarletWitch)
 	return c.DoRequest("GET")

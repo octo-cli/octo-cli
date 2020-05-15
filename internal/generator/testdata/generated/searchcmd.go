@@ -9,22 +9,18 @@ import (
 type SearchCmd struct {
 	Code                  SearchCodeCmd                  `cmd:""`
 	Commits               SearchCommitsCmd               `cmd:""`
-	EmailLegacy           SearchEmailLegacyCmd           `cmd:""`
 	IssuesAndPullRequests SearchIssuesAndPullRequestsCmd `cmd:""`
-	IssuesLegacy          SearchIssuesLegacyCmd          `cmd:""`
 	Labels                SearchLabelsCmd                `cmd:""`
 	Repos                 SearchReposCmd                 `cmd:""`
-	ReposLegacy           SearchReposLegacyCmd           `cmd:""`
 	Topics                SearchTopicsCmd                `cmd:""`
 	Users                 SearchUsersCmd                 `cmd:""`
-	UsersLegacy           SearchUsersLegacyCmd           `cmd:""`
 }
 
 type SearchCodeCmd struct {
+	Q       string `required:"" name:"q"`
 	Order   string `name:"order"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Q       string `required:"" name:"q"`
 	Sort    string `name:"sort"`
 	internal.BaseCmd
 }
@@ -42,10 +38,10 @@ func (c *SearchCodeCmd) Run(isValueSetMap map[string]bool) error {
 
 type SearchCommitsCmd struct {
 	Cloak   bool   `required:"" name:"cloak-preview"`
+	Q       string `required:"" name:"q"`
 	Order   string `name:"order"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Q       string `required:"" name:"q"`
 	Sort    string `name:"sort"`
 	internal.BaseCmd
 }
@@ -62,23 +58,11 @@ func (c *SearchCommitsCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
-type SearchEmailLegacyCmd struct {
-	Email string `required:"" name:"email"`
-	internal.BaseCmd
-}
-
-func (c *SearchEmailLegacyCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/legacy/user/email/{email}")
-	c.UpdateURLPath("email", c.Email)
-	return c.DoRequest("GET")
-}
-
 type SearchIssuesAndPullRequestsCmd struct {
+	Q       string `required:"" name:"q"`
 	Order   string `name:"order"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Q       string `required:"" name:"q"`
 	Sort    string `name:"sort"`
 	internal.BaseCmd
 }
@@ -94,28 +78,10 @@ func (c *SearchIssuesAndPullRequestsCmd) Run(isValueSetMap map[string]bool) erro
 	return c.DoRequest("GET")
 }
 
-type SearchIssuesLegacyCmd struct {
-	Keyword    string `required:"" name:"keyword"`
-	Owner      string `required:"" name:"owner"`
-	Repository string `required:"" name:"repository"`
-	State      string `required:"" name:"state"`
-	internal.BaseCmd
-}
-
-func (c *SearchIssuesLegacyCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/legacy/issues/search/{owner}/{repository}/{state}/{keyword}")
-	c.UpdateURLPath("owner", c.Owner)
-	c.UpdateURLPath("repository", c.Repository)
-	c.UpdateURLPath("state", c.State)
-	c.UpdateURLPath("keyword", c.Keyword)
-	return c.DoRequest("GET")
-}
-
 type SearchLabelsCmd struct {
-	Order        string `name:"order"`
 	Q            string `required:"" name:"q"`
 	RepositoryId int64  `required:"" name:"repository_id"`
+	Order        string `name:"order"`
 	Sort         string `name:"sort"`
 	internal.BaseCmd
 }
@@ -132,10 +98,10 @@ func (c *SearchLabelsCmd) Run(isValueSetMap map[string]bool) error {
 
 type SearchReposCmd struct {
 	Mercy   bool   `name:"mercy-preview"`
+	Q       string `required:"" name:"q"`
 	Order   string `name:"order"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Q       string `required:"" name:"q"`
 	Sort    string `name:"sort"`
 	internal.BaseCmd
 }
@@ -149,26 +115,6 @@ func (c *SearchReposCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
 	c.UpdatePreview("mercy", c.Mercy)
-	return c.DoRequest("GET")
-}
-
-type SearchReposLegacyCmd struct {
-	Keyword   string `required:"" name:"keyword"`
-	Language  string `name:"language"`
-	Order     string `name:"order"`
-	Sort      string `name:"sort"`
-	StartPage string `name:"start_page"`
-	internal.BaseCmd
-}
-
-func (c *SearchReposLegacyCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/legacy/repos/search/{keyword}")
-	c.UpdateURLPath("keyword", c.Keyword)
-	c.UpdateURLQuery("language", c.Language)
-	c.UpdateURLQuery("start_page", c.StartPage)
-	c.UpdateURLQuery("sort", c.Sort)
-	c.UpdateURLQuery("order", c.Order)
 	return c.DoRequest("GET")
 }
 
@@ -187,10 +133,10 @@ func (c *SearchTopicsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type SearchUsersCmd struct {
+	Q       string `required:"" name:"q"`
 	Order   string `name:"order"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Q       string `required:"" name:"q"`
 	Sort    string `name:"sort"`
 	internal.BaseCmd
 }
@@ -203,23 +149,5 @@ func (c *SearchUsersCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLQuery("order", c.Order)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type SearchUsersLegacyCmd struct {
-	Keyword   string `required:"" name:"keyword"`
-	Order     string `name:"order"`
-	Sort      string `name:"sort"`
-	StartPage string `name:"start_page"`
-	internal.BaseCmd
-}
-
-func (c *SearchUsersLegacyCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/legacy/user/search/{keyword}")
-	c.UpdateURLPath("keyword", c.Keyword)
-	c.UpdateURLQuery("start_page", c.StartPage)
-	c.UpdateURLQuery("sort", c.Sort)
-	c.UpdateURLQuery("order", c.Order)
 	return c.DoRequest("GET")
 }
