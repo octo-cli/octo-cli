@@ -242,11 +242,6 @@ c.UpdateURLPath("license", c.License)`,
 								Name: "LicensesGetForRepoCmd",
 								Fields: []StructField{
 									{
-										Name: "Owner",
-										Type: "string",
-										Tags: util.NewTags(util.NewTag("name", "owner")),
-									},
-									{
 										Name: "Repo",
 										Type: "string",
 										Tags: util.NewTags(util.NewTag("required", ""), util.NewTag("name", "repo")),
@@ -260,12 +255,8 @@ c.UpdateURLPath("license", c.License)`,
 							RunMethod: RunMethod{
 								ReceiverName: "LicensesGetForRepoCmd",
 								Method:       "GET",
-								URLPath:      "/repos/{owner}/{repo}/license",
+								URLPath:      "/repos/{repo}/license",
 								CodeBlocks: []CodeBlock{
-									{
-										Code: `
-c.UpdateURLPath("owner", c.Owner)`,
-									},
 									{
 										Code: `
 c.UpdateURLPath("repo", c.Repo)`,

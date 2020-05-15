@@ -252,9 +252,10 @@ func bodyCmdFields(op *openapi3.Operation) []StructField {
 			continue
 		}
 		result = append(result, StructField{
-			Name: util.ToArgName(pi.Name),
-			Type: tp,
-			Tags: util.FieldTags(pi.Name, pi.Required),
+			Name:          util.ToArgName(pi.Name),
+			Type:          tp,
+			Tags:          util.FieldTags(pi.Name, pi.Required),
+			ParamLocation: locBody,
 		})
 	}
 	return result
@@ -274,10 +275,11 @@ func manualCmdFields(op *openapi3.Operation) ([]StructField, error) {
 			}
 		}
 		result = append(result, StructField{
-			Name:   util.ToArgName(info.Name),
-			Type:   info.Type,
-			Tags:   tags,
-			Import: info.FieldImport,
+			Name:          util.ToArgName(info.Name),
+			Type:          info.Type,
+			Tags:          tags,
+			Import:        info.FieldImport,
+			ParamLocation: locBody,
 		})
 	}
 	return result, nil
@@ -295,10 +297,25 @@ func paramCmdFields(op *openapi3.Operation) []StructField {
 			continue
 		}
 		required := swaggerparser.ParamRequired(op.Parameters, i)
+		var loc paramLocation
+		switch param.In {
+		case openapi3.ParameterInPath:
+			loc = locPath
+		case openapi3.ParameterInHeader:
+			loc = locHeader
+		case openapi3.ParameterInQuery:
+			loc = locQuery
+		}
+		var paramOrder int
+		if loc == locPath {
+			paramOrder = i
+		}
 		result = append(result, StructField{
-			Name: util.ToArgName(param.Name),
-			Type: paramType,
-			Tags: util.FieldTags(param.Name, required),
+			Name:          util.ToArgName(param.Name),
+			Type:          paramType,
+			Tags:          util.FieldTags(param.Name, required),
+			ParamLocation: loc,
+			ParamOrder:    paramOrder,
 		})
 	}
 	return result
