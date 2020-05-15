@@ -23,9 +23,9 @@ type GitCmd struct {
 }
 
 type GitCreateBlobCmd struct {
+	Repo     string `required:"" name:"repo"`
 	Content  string `required:"" name:"content"`
 	Encoding string `name:"encoding"`
-	Repo     string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -39,17 +39,17 @@ func (c *GitCreateBlobCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GitCreateCommitCmd struct {
+	Repo           string   `required:"" name:"repo"`
+	Message        string   `required:"" name:"message"`
+	Parents        []string `required:"" name:"parents"`
+	Tree           string   `required:"" name:"tree"`
 	AuthorDate     string   `name:"author.date"`
 	AuthorEmail    string   `name:"author.email"`
 	AuthorName     string   `name:"author.name"`
 	CommitterDate  string   `name:"committer.date"`
 	CommitterEmail string   `name:"committer.email"`
 	CommitterName  string   `name:"committer.name"`
-	Message        string   `required:"" name:"message"`
-	Parents        []string `required:"" name:"parents"`
-	Repo           string   `required:"" name:"repo"`
 	Signature      string   `name:"signature"`
-	Tree           string   `required:"" name:"tree"`
 	internal.BaseCmd
 }
 
@@ -71,8 +71,8 @@ func (c *GitCreateCommitCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GitCreateRefCmd struct {
-	Ref  string `required:"" name:"ref"`
 	Repo string `required:"" name:"repo"`
+	Ref  string `required:"" name:"ref"`
 	Sha  string `required:"" name:"sha"`
 	internal.BaseCmd
 }
@@ -87,14 +87,14 @@ func (c *GitCreateRefCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GitCreateTagCmd struct {
+	Repo        string `required:"" name:"repo"`
 	Message     string `required:"" name:"message"`
 	Object      string `required:"" name:"object"`
-	Repo        string `required:"" name:"repo"`
 	Tag         string `required:"" name:"tag"`
+	Type        string `required:"" name:"type"`
 	TaggerDate  string `name:"tagger.date"`
 	TaggerEmail string `name:"tagger.email"`
 	TaggerName  string `name:"tagger.name"`
-	Type        string `required:"" name:"type"`
 	internal.BaseCmd
 }
 
@@ -113,9 +113,9 @@ func (c *GitCreateTagCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GitCreateTreeCmd struct {
-	BaseTree string                `name:"base_tree"`
 	Repo     string                `required:"" name:"repo"`
 	Tree     []internal.JSONObject `required:"" name:"tree"`
+	BaseTree string                `name:"base_tree"`
 	internal.BaseCmd
 }
 
@@ -129,8 +129,8 @@ func (c *GitCreateTreeCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GitDeleteRefCmd struct {
-	Ref  string `required:"" name:"ref"`
 	Repo string `required:"" name:"repo"`
+	Ref  string `required:"" name:"ref"`
 	internal.BaseCmd
 }
 
@@ -143,8 +143,8 @@ func (c *GitDeleteRefCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GitGetBlobCmd struct {
-	FileSha string `required:"" name:"file_sha"`
 	Repo    string `required:"" name:"repo"`
+	FileSha string `required:"" name:"file_sha"`
 	internal.BaseCmd
 }
 
@@ -157,8 +157,8 @@ func (c *GitGetBlobCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GitGetCommitCmd struct {
-	CommitSha string `required:"" name:"commit_sha"`
 	Repo      string `required:"" name:"repo"`
+	CommitSha string `required:"" name:"commit_sha"`
 	internal.BaseCmd
 }
 
@@ -171,8 +171,8 @@ func (c *GitGetCommitCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GitGetRefCmd struct {
-	Ref  string `required:"" name:"ref"`
 	Repo string `required:"" name:"repo"`
+	Ref  string `required:"" name:"ref"`
 	internal.BaseCmd
 }
 
@@ -199,9 +199,9 @@ func (c *GitGetTagCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GitGetTreeCmd struct {
-	Recursive int64  `name:"recursive"`
 	Repo      string `required:"" name:"repo"`
 	TreeSha   string `required:"" name:"tree_sha"`
+	Recursive int64  `name:"recursive"`
 	internal.BaseCmd
 }
 
@@ -215,10 +215,10 @@ func (c *GitGetTreeCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GitListMatchingRefsCmd struct {
+	Repo    string `required:"" name:"repo"`
+	Ref     string `required:"" name:"ref"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Ref     string `required:"" name:"ref"`
-	Repo    string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -233,10 +233,10 @@ func (c *GitListMatchingRefsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GitUpdateRefCmd struct {
-	Force bool   `name:"force"`
-	Ref   string `required:"" name:"ref"`
 	Repo  string `required:"" name:"repo"`
+	Ref   string `required:"" name:"ref"`
 	Sha   string `required:"" name:"sha"`
+	Force bool   `name:"force"`
 	internal.BaseCmd
 }
 

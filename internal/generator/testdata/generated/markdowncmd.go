@@ -12,9 +12,9 @@ type MarkdownCmd struct {
 }
 
 type MarkdownRenderCmd struct {
+	Text    string `required:"" name:"text"`
 	Context string `name:"context"`
 	Mode    string `name:"mode"`
-	Text    string `required:"" name:"text"`
 	internal.BaseCmd
 }
 
@@ -28,8 +28,8 @@ func (c *MarkdownRenderCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type MarkdownRenderRawCmd struct {
-	ContentType string `name:"content-type" hidden:""`
 	File        string `required:"" name:"file" type:"existingfile"`
+	ContentType string `name:"content-type" hidden:""`
 	internal.BaseCmd
 }
 

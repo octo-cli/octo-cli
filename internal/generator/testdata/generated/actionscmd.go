@@ -58,10 +58,10 @@ func (c *ActionsCancelWorkflowRunCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsCreateOrUpdateSecretForRepoCmd struct {
+	Repo           string `required:"" name:"repo"`
+	Name           string `required:"" name:"name"`
 	EncryptedValue string `name:"encrypted_value"`
 	KeyId          string `name:"key_id"`
-	Name           string `required:"" name:"name"`
-	Repo           string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -124,8 +124,8 @@ func (c *ActionsCreateRemoveTokenForRepoCmd) Run(isValueSetMap map[string]bool) 
 }
 
 type ActionsDeleteArtifactCmd struct {
-	ArtifactId int64  `required:"" name:"artifact_id"`
 	Repo       string `required:"" name:"repo"`
+	ArtifactId int64  `required:"" name:"artifact_id"`
 	internal.BaseCmd
 }
 
@@ -138,8 +138,8 @@ func (c *ActionsDeleteArtifactCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsDeleteSecretFromRepoCmd struct {
-	Name string `required:"" name:"name"`
 	Repo string `required:"" name:"repo"`
+	Name string `required:"" name:"name"`
 	internal.BaseCmd
 }
 
@@ -194,9 +194,9 @@ func (c *ActionsDeleteWorkflowRunLogsCmd) Run(isValueSetMap map[string]bool) err
 }
 
 type ActionsDownloadArtifactCmd struct {
-	ArchiveFormat string `required:"" name:"archive_format"`
-	ArtifactId    int64  `required:"" name:"artifact_id"`
 	Repo          string `required:"" name:"repo"`
+	ArtifactId    int64  `required:"" name:"artifact_id"`
+	ArchiveFormat string `required:"" name:"archive_format"`
 	internal.BaseCmd
 }
 
@@ -210,8 +210,8 @@ func (c *ActionsDownloadArtifactCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsDownloadWorkflowJobLogsCmd struct {
-	JobId int64  `required:"" name:"job_id"`
 	Repo  string `required:"" name:"repo"`
+	JobId int64  `required:"" name:"job_id"`
 	internal.BaseCmd
 }
 
@@ -238,8 +238,8 @@ func (c *ActionsDownloadWorkflowRunLogsCmd) Run(isValueSetMap map[string]bool) e
 }
 
 type ActionsGetArtifactCmd struct {
-	ArtifactId int64  `required:"" name:"artifact_id"`
 	Repo       string `required:"" name:"repo"`
+	ArtifactId int64  `required:"" name:"artifact_id"`
 	internal.BaseCmd
 }
 
@@ -264,8 +264,8 @@ func (c *ActionsGetPublicKeyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsGetSecretCmd struct {
-	Name string `required:"" name:"name"`
 	Repo string `required:"" name:"repo"`
+	Name string `required:"" name:"name"`
 	internal.BaseCmd
 }
 
@@ -320,8 +320,8 @@ func (c *ActionsGetWorkflowCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsGetWorkflowJobCmd struct {
-	JobId int64  `required:"" name:"job_id"`
 	Repo  string `required:"" name:"repo"`
+	JobId int64  `required:"" name:"job_id"`
 	internal.BaseCmd
 }
 
@@ -348,9 +348,9 @@ func (c *ActionsGetWorkflowRunCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsListArtifactsForRepoCmd struct {
+	Repo    string `required:"" name:"repo"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Repo    string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -364,11 +364,11 @@ func (c *ActionsListArtifactsForRepoCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type ActionsListJobsForWorkflowRunCmd struct {
+	Repo    string `required:"" name:"repo"`
+	RunId   int64  `required:"" name:"run_id"`
 	Filter  string `name:"filter"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Repo    string `required:"" name:"repo"`
-	RunId   int64  `required:"" name:"run_id"`
 	internal.BaseCmd
 }
 
@@ -384,12 +384,12 @@ func (c *ActionsListJobsForWorkflowRunCmd) Run(isValueSetMap map[string]bool) er
 }
 
 type ActionsListRepoWorkflowRunsCmd struct {
+	Repo    string `required:"" name:"repo"`
 	Actor   string `name:"actor"`
 	Branch  string `name:"branch"`
 	Event   string `name:"event"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Repo    string `required:"" name:"repo"`
 	Status  string `name:"status"`
 	internal.BaseCmd
 }
@@ -408,9 +408,9 @@ func (c *ActionsListRepoWorkflowRunsCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type ActionsListRepoWorkflowsCmd struct {
+	Repo    string `required:"" name:"repo"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Repo    string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -448,9 +448,9 @@ func (c *ActionsListRunnerApplicationsForRepoCmd) Run(isValueSetMap map[string]b
 }
 
 type ActionsListSecretsForRepoCmd struct {
+	Repo    string `required:"" name:"repo"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Repo    string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -480,9 +480,9 @@ func (c *ActionsListSelfHostedRunnersForOrgCmd) Run(isValueSetMap map[string]boo
 }
 
 type ActionsListSelfHostedRunnersForRepoCmd struct {
+	Repo    string `required:"" name:"repo"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Repo    string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -496,10 +496,10 @@ func (c *ActionsListSelfHostedRunnersForRepoCmd) Run(isValueSetMap map[string]bo
 }
 
 type ActionsListWorkflowRunArtifactsCmd struct {
-	Page    int64  `name:"page"`
-	PerPage int64  `name:"per_page"`
 	Repo    string `required:"" name:"repo"`
 	RunId   int64  `required:"" name:"run_id"`
+	Page    int64  `name:"page"`
+	PerPage int64  `name:"per_page"`
 	internal.BaseCmd
 }
 
@@ -514,14 +514,14 @@ func (c *ActionsListWorkflowRunArtifactsCmd) Run(isValueSetMap map[string]bool) 
 }
 
 type ActionsListWorkflowRunsCmd struct {
+	Repo       string `required:"" name:"repo"`
+	WorkflowId int64  `required:"" name:"workflow_id"`
 	Actor      string `name:"actor"`
 	Branch     string `name:"branch"`
 	Event      string `name:"event"`
 	Page       int64  `name:"page"`
 	PerPage    int64  `name:"per_page"`
-	Repo       string `required:"" name:"repo"`
 	Status     string `name:"status"`
-	WorkflowId int64  `required:"" name:"workflow_id"`
 	internal.BaseCmd
 }
 

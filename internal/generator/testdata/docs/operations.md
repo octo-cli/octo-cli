@@ -13,7 +13,7 @@ Cancels a workflow run using its `id`. Anyone with write access to the repositor
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | run_id | __Required__ run_id parameter |
 
 ## actions create-or-update-secret-for-repo
@@ -42,7 +42,7 @@ Encrypt your secret using the [rbnacl](https://github.com/RubyCrypto/rbnacl) gem
 | name | description |
 |------|-------------|
 | name | __Required__ name parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | encrypted_value | Value for your secret, encrypted with [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages) using the public key retrieved from the [Get your public key](https://developer.github.com/v3/actions/secrets/#get-your-public-key) endpoint. |
 | key_id | ID of the key you used to encrypt the secret. |
 
@@ -76,7 +76,7 @@ Configure your self-hosted runner, replacing TOKEN with the registration token p
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## actions create-remove-token-for-org
 
@@ -108,7 +108,7 @@ Remove your self-hosted runner from a repository, replacing TOKEN with the remov
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## actions delete-artifact
 
@@ -122,7 +122,7 @@ Deletes an artifact for a workflow run. Anyone with write access to the reposito
 | name | description |
 |------|-------------|
 | artifact_id | __Required__ artifact_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## actions delete-secret-from-repo
 
@@ -136,7 +136,7 @@ Deletes a secret in a repository using the secret name. Anyone with write access
 | name | description |
 |------|-------------|
 | name | __Required__ name parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## actions delete-self-hosted-runner-from-org
 
@@ -165,7 +165,7 @@ Forces the removal of a self-hosted runner from a repository. You can use this e
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | runner_id | __Required__ runner_id parameter |
 
 ## actions delete-workflow-run-logs
@@ -179,7 +179,7 @@ Deletes all logs for a workflow run. Anyone with write access to the repository 
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | run_id | __Required__ run_id parameter |
 
 ## actions download-artifact
@@ -197,7 +197,7 @@ Call this endpoint using the `-v` flag, which enables verbose output and allows 
 |------|-------------|
 | archive_format | __Required__ archive_format parameter |
 | artifact_id | __Required__ artifact_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## actions download-workflow-job-logs
 
@@ -213,7 +213,7 @@ Call this endpoint using the `-v` flag, which enables verbose output and allows 
 | name | description |
 |------|-------------|
 | job_id | __Required__ job_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## actions download-workflow-run-logs
 
@@ -228,7 +228,7 @@ Call this endpoint using the `-v` flag, which enables verbose output and allows 
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | run_id | __Required__ run_id parameter |
 
 ## actions get-artifact
@@ -243,7 +243,7 @@ Gets a specific artifact for a workflow run. Anyone with read access to the repo
 | name | description |
 |------|-------------|
 | artifact_id | __Required__ artifact_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## actions get-public-key
 
@@ -256,7 +256,7 @@ Gets your public key, which you must store. You need your public key to use othe
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## actions get-secret
 
@@ -270,7 +270,7 @@ Gets a single secret without revealing its encrypted value. Anyone with write ac
 | name | description |
 |------|-------------|
 | name | __Required__ name parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## actions get-self-hosted-runner-for-org
 
@@ -299,7 +299,7 @@ Gets a specific self-hosted runner. Anyone with admin access to the repository a
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | runner_id | __Required__ runner_id parameter |
 
 ## actions get-workflow
@@ -313,7 +313,7 @@ Gets a specific workflow. You can also replace `:workflow_id` with `:workflow_fi
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | workflow_id | __Required__ workflow_id parameter |
 
 ## actions get-workflow-job
@@ -328,7 +328,7 @@ Gets a specific job in a workflow run. Anyone with read access to the repository
 | name | description |
 |------|-------------|
 | job_id | __Required__ job_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## actions get-workflow-run
 
@@ -341,7 +341,7 @@ Gets a specific workflow run. Anyone with read access to the repository can use 
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | run_id | __Required__ run_id parameter |
 
 ## actions list-artifacts-for-repo
@@ -355,7 +355,7 @@ Lists all artifacts for a repository. Anyone with read access to the repository 
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -370,7 +370,7 @@ Lists jobs for a workflow run. Anyone with read access to the repository can use
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | run_id | __Required__ run_id parameter |
 | filter | Filters jobs by their `completed_at` timestamp. Can be one of:  <br>\* `latest`: Returns jobs from the most recent execution of the workflow run.  <br>\* `all`: Returns all jobs for a workflow run, including from old executions of the workflow run. |
 | page | Page number of the results to fetch. |
@@ -389,7 +389,7 @@ Anyone with read access to the repository can use this endpoint. If the reposito
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | actor | Returns someone's workflow runs. Use the login for the user who created the `push` associated with the check suite or workflow run. |
 | branch | Returns workflow runs associated with a branch. Use the name of the branch of the `push`. |
 | event | Returns workflow run triggered by the event you specify. For example, `push`, `pull_request` or `issue`. For more information, see "[Events that trigger workflows](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/events-that-trigger-workflows)" in the GitHub Help documentation. |
@@ -408,7 +408,7 @@ Lists the workflows in a repository. Anyone with read access to the repository c
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -438,7 +438,7 @@ Lists binaries for the runner application that you can download and run. Anyone 
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## actions list-secrets-for-repo
 
@@ -451,7 +451,7 @@ Lists all secrets available in a repository without revealing their encrypted va
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -483,7 +483,7 @@ Lists all self-hosted runners for a repository. Anyone with admin access to the 
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -498,7 +498,7 @@ Lists artifacts for a workflow run. Anyone with read access to the repository ca
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | run_id | __Required__ run_id parameter |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -516,7 +516,7 @@ Anyone with read access to the repository can use this endpoint. If the reposito
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | workflow_id | __Required__ workflow_id parameter |
 | actor | Returns someone's workflow runs. Use the login for the user who created the `push` associated with the check suite or workflow run. |
 | branch | Returns workflow runs associated with a branch. Use the name of the branch of the `push`. |
@@ -536,7 +536,7 @@ Re-runs your workflow run using its `id`. Anyone with write access to the reposi
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | run_id | __Required__ run_id parameter |
 
 # activity
@@ -553,7 +553,7 @@ https://developer.github.com/v3/activity/starring/#check-if-a-repository-is-star
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## activity delete-repo-subscription
 
@@ -566,7 +566,7 @@ This endpoint should only be used to stop watching a repository. To control whet
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## activity delete-thread-subscription
 
@@ -608,7 +608,7 @@ https://developer.github.com/v3/activity/watching/#get-a-repository-subscription
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## activity get-thread
 
@@ -714,7 +714,7 @@ https://developer.github.com/v3/activity/events/#list-public-events-for-a-networ
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -789,7 +789,7 @@ https://developer.github.com/v3/activity/events/#list-repository-events
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -804,7 +804,7 @@ List all notifications for the current user.
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | all | If `true`, show notifications marked as read. |
 | before | Only show notifications updated before the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 | page | Page number of the results to fetch. |
@@ -877,7 +877,7 @@ You can also find out _when_ stars were created by passing the following custom 
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -906,7 +906,7 @@ Lists the people watching the specified repository.
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -934,7 +934,7 @@ Marks all notifications in a repository as "read" removes them from the [default
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | last_read_at | Describes the last point that notifications were checked. Anything updated since this time will not be marked as read. If you omit this parameter, all notifications are marked as read. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. Default: The current timestamp. |
 
 ## activity mark-thread-as-read
@@ -961,7 +961,7 @@ If you would like to watch a repository, set `subscribed` to `true`. If you woul
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | ignored | Determines if all notifications should be blocked from this repository. |
 | subscribed | Determines if notifications should be received from this repository. |
 
@@ -994,7 +994,7 @@ Note that you'll need to set `Content-Length` to zero when calling out to this e
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## activity unstar-repo-for-authenticated-user
 
@@ -1007,7 +1007,7 @@ https://developer.github.com/v3/activity/starring/#unstar-a-repository-for-the-a
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 # apps
 
@@ -1235,7 +1235,7 @@ You must use a [JWT](https://developer.github.com/apps/building-github-apps/auth
 | name | description |
 |------|-------------|
 | machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## apps get-subscription-plan-for-account
 
@@ -1608,7 +1608,7 @@ Creates a new check run for a specific commit in a repository. Your GitHub App m
 | antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | head_sha | __Required__ The SHA of the commit. |
 | name | __Required__ The name of the check. For example, "code-coverage". |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | actions | Displays a button on GitHub that can be clicked to alert your app to do additional tasks. For example, a code linting app can display a button that automatically fixes detected errors. The button created in this object is displayed after the check run completes. When a user clicks the button, GitHub sends the [`check_run.requested_action` webhook](https://developer.github.com/v3/activity/events/types/#checkrunevent) to your app. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://developer.github.com/v3/checks/runs/#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://developer.github.com/v3/checks/runs/#check-runs-and-requested-actions)." To learn more about check runs and requested actions, see "[Check runs and requested actions](https://developer.github.com/v3/checks/runs/#check-runs-and-requested-actions)." |
 | completed_at | The time the check completed. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 | conclusion | **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `success`, `failure`, `neutral`, `cancelled`, `skipped`, `timed_out`, or `action_required`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.  <br>**Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. Only GitHub can change a check run conclusion to `stale`. |
@@ -1637,7 +1637,7 @@ By default, check suites are automatically created when you create a [check run]
 |------|-------------|
 | antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | head_sha | __Required__ The sha of the head commit. |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## checks get
 
@@ -1654,7 +1654,7 @@ Gets a single check run using its `id`. GitHub Apps must have the `checks:read` 
 |------|-------------|
 | antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | check_run_id | __Required__ check_run_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## checks get-suite
 
@@ -1671,7 +1671,7 @@ Gets a single check suite using its `id`. GitHub Apps must have the `checks:read
 |------|-------------|
 | antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | check_suite_id | __Required__ check_suite_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## checks list-annotations
 
@@ -1686,7 +1686,7 @@ Lists annotations for a check run using the annotation `id`. GitHub Apps must ha
 |------|-------------|
 | antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | check_run_id | __Required__ check_run_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -1705,7 +1705,7 @@ Lists check runs for a commit ref. The `ref` can be a SHA, branch name, or a tag
 |------|-------------|
 | antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | ref | __Required__ ref parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | check_name | Returns check runs with the specified `name`. |
 | filter | Filters check runs by their `completed_at` timestamp. Can be one of `latest` (returning the most recent check runs) or `all`. |
 | page | Page number of the results to fetch. |
@@ -1727,7 +1727,7 @@ Lists check runs for a check suite using its `id`. GitHub Apps must have the `ch
 |------|-------------|
 | antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | check_suite_id | __Required__ check_suite_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | check_name | Returns check runs with the specified `name`. |
 | filter | Filters check runs by their `completed_at` timestamp. Can be one of `latest` (returning the most recent check runs) or `all`. |
 | page | Page number of the results to fetch. |
@@ -1749,7 +1749,7 @@ Lists check suites for a commit `ref`. The `ref` can be a SHA, branch name, or a
 |------|-------------|
 | antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | ref | __Required__ ref parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | app_id | Filters check suites by GitHub App `id`. |
 | check_name | Filters checks suites by the name of the [check run](https://developer.github.com/v3/checks/runs/). |
 | page | Page number of the results to fetch. |
@@ -1770,7 +1770,7 @@ To rerequest a check suite, your GitHub App must have the `checks:read` permissi
 |------|-------------|
 | antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | check_suite_id | __Required__ check_suite_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## checks set-suites-preferences
 
@@ -1784,7 +1784,7 @@ Changes the default automatic flow when creating check suites. By default, the C
 | name | description |
 |------|-------------|
 | antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | auto_trigger_checks | Enables or disables automatic creation of CheckSuite events upon pushes to the repository. Enabled by default. See the [`auto_trigger_checks` object](https://developer.github.com/v3/checks/suites/#auto_trigger_checks-object) description for details. |
 
 ## checks update
@@ -1802,7 +1802,7 @@ Updates a check run for a specific commit in a repository. Your GitHub App must 
 |------|-------------|
 | antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | check_run_id | __Required__ check_run_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | actions | Possible further actions the integrator can perform, which a user may trigger. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://developer.github.com/v3/checks/runs/#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://developer.github.com/v3/checks/runs/#check-runs-and-requested-actions)." |
 | completed_at | The time the check completed. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 | conclusion | **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `success`, `failure`, `neutral`, `cancelled`, `skipped`, `timed_out`, or `action_required`.  <br>**Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. Only GitHub can change a check run conclusion to `stale`. |
@@ -1834,7 +1834,7 @@ The security `alert_id` is found at the end of the security alert's URL. For exa
 | name | description |
 |------|-------------|
 | alert_id | __Required__ alert_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## code-scanning list-alerts-for-repo
 
@@ -1847,7 +1847,7 @@ Lists all open code scanning alerts for the default branch (usually `master`) an
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | ref | Returns a list of code scanning alerts for a specific brach reference. The `ref` must be formatted as `heads/<branch name>`. |
 | state | Set to `closed` to list only closed code scanning alerts. |
 
@@ -1892,7 +1892,7 @@ This method returns the contents of the repository's code of conduct file, if on
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | scarlet-witch-preview | __Required__ The Codes of Conduct API is currently available for developers to preview.<br><br>To access the API during the preview period, you must set this flag. |
 
 # emojis
@@ -2212,7 +2212,7 @@ https://developer.github.com/v3/git/blobs/#create-a-blob
 | name | description |
 |------|-------------|
 | content | __Required__ The new blob's content. |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | encoding | The encoding used for `content`. Currently, `"utf-8"` and `"base64"` are supported. |
 
 ## git create-commit
@@ -2254,7 +2254,7 @@ These are the possible values for `reason` in the `verification` object:
 |------|-------------|
 | message | __Required__ The commit message |
 | parents | __Required__ The SHAs of the commits that were the parents of this commit. If omitted or empty, the commit will be written as a root commit. For a single parent, an array of one SHA should be provided; for a merge commit, an array of more than one should be provided. |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | tree | __Required__ The SHA of the tree object this commit points to |
 | author.date | Indicates when this commit was authored (or committed). This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 | author.email | The email of the author (or committer) of the commit |
@@ -2276,7 +2276,7 @@ Creates a reference for your repository. You are unable to create new references
 | name | description |
 |------|-------------|
 | ref | __Required__ The name of the fully qualified reference (ie: `refs/heads/master`). If it doesn't start with 'refs' and have at least two slashes, it will be rejected. |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | sha | __Required__ The SHA1 value for this reference. |
 
 ## git create-tag
@@ -2314,7 +2314,7 @@ These are the possible values for `reason` in the `verification` object:
 |------|-------------|
 | message | __Required__ The tag message. |
 | object | __Required__ The SHA of the git object this is tagging. |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | tag | __Required__ The tag's name. This is typically a version (e.g., "v0.0.1"). |
 | type | __Required__ The type of the object we're tagging. Normally this is a `commit` but it can also be a `tree` or a `blob`. |
 | tagger.date | When this object was tagged. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
@@ -2334,7 +2334,7 @@ If you use this endpoint to add, delete, or modify the file contents in a tree, 
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | tree | __Required__ Objects (of `path`, `mode`, `type`, and `sha`) specifying a tree structure. |
 | base_tree | The SHA1 of the tree you want to update with new data. If you don't set this, the commit will be created on top of everything; however, it will only contain your change, the rest of your files will show up as deleted. |
 
@@ -2350,7 +2350,7 @@ https://developer.github.com/v3/git/refs/#delete-a-reference
 | name | description |
 |------|-------------|
 | ref | __Required__ ref parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## git get-blob
 
@@ -2366,7 +2366,7 @@ _Note_: This API supports blobs up to 100 megabytes in size.
 | name | description |
 |------|-------------|
 | file_sha | __Required__ file_sha parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## git get-commit
 
@@ -2402,7 +2402,7 @@ These are the possible values for `reason` in the `verification` object:
 | name | description |
 |------|-------------|
 | commit_sha | __Required__ commit_sha parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## git get-ref
 
@@ -2420,7 +2420,7 @@ To get the reference for a branch named `skunkworkz/featureA`, the endpoint rout
 | name | description |
 |------|-------------|
 | ref | __Required__ ref parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## git get-tag
 
@@ -2453,7 +2453,7 @@ These are the possible values for `reason` in the `verification` object:
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | tag_sha | __Required__ tag_sha parameter |
 
 ## git get-tree
@@ -2469,7 +2469,7 @@ If `truncated` is `true` in the response then the number of items in the `tree` 
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | tree_sha | __Required__ tree_sha parameter |
 | recursive | recursive parameter |
 
@@ -2491,7 +2491,7 @@ If you request matching references for a branch named `feature` but the branch `
 | name | description |
 |------|-------------|
 | ref | __Required__ ref parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -2507,7 +2507,7 @@ https://developer.github.com/v3/git/refs/#update-a-reference
 | name | description |
 |------|-------------|
 | ref | __Required__ ref parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | sha | __Required__ The SHA1 value to set this reference to |
 | force | Indicates whether to force the update or to make sure the update is a fast-forward update. Leaving this out or setting it to `false` will make sure you're not overwriting work. |
 
@@ -2565,7 +2565,7 @@ Temporarily restricts interactions to certain GitHub users within the given repo
 | name | description |
 |------|-------------|
 | limit | __Required__ Specifies the group of GitHub users who can comment, open issues, or create pull requests for the given repository. Must be one of: `existing_users`, `contributors_only`, or `collaborators_only`. |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | sombra-preview | __Required__ The Interactions API is currently in public preview. See the [blog post](https://developer.github.com/changes/2018-12-18-interactions-preview) preview for more details. To access the API during the preview period, you must set this flag. |
 
 ## interactions get-restrictions-for-org
@@ -2593,7 +2593,7 @@ Shows which group of GitHub users can interact with this repository and when the
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | sombra-preview | __Required__ The Interactions API is currently in public preview. See the [blog post](https://developer.github.com/changes/2018-12-18-interactions-preview) preview for more details. To access the API during the preview period, you must set this flag. |
 
 ## interactions remove-restrictions-for-org
@@ -2621,7 +2621,7 @@ Removes all interaction restrictions from the given repository. You must have ow
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | sombra-preview | __Required__ The Interactions API is currently in public preview. See the [blog post](https://developer.github.com/changes/2018-12-18-interactions-preview) preview for more details. To access the API during the preview period, you must set this flag. |
 
 # issues
@@ -2641,7 +2641,7 @@ This example adds two assignees to the existing `octocat` assignee.
 | name | description |
 |------|-------------|
 | issue_number | __Required__ issue_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | assignees | Usernames of people to assign this issue to. _NOTE: Only users with push access can add assignees to an issue. Assignees are silently ignored otherwise._ |
 
 ## issues add-labels
@@ -2657,7 +2657,7 @@ https://developer.github.com/v3/issues/labels/#add-labels-to-an-issue
 |------|-------------|
 | issue_number | __Required__ issue_number parameter |
 | labels | __Required__ The name of the label to add to the issue. Must contain at least one label. **Note:** Alternatively, you can pass a single label as a `string` or an `array` of labels directly, but GitHub recommends passing an object with the `labels` key. |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## issues check-assignee
 
@@ -2675,7 +2675,7 @@ Otherwise a `404` status code is returned.
 | name | description |
 |------|-------------|
 | assignee | __Required__ assignee parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## issues create
 
@@ -2690,7 +2690,7 @@ This endpoint triggers [notifications](https://help.github.com/articles/about-no
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | title | __Required__ The title of the issue. |
 | assignee | Login for the user that this issue should be assigned to. _NOTE: Only users with push access can set the assignee for new issues. The assignee is silently dropped otherwise. **This field is deprecated.**_ |
 | assignees | Logins for Users to assign to this issue. _NOTE: Only users with push access can set assignees for new issues. Assignees are silently dropped otherwise._ |
@@ -2711,7 +2711,7 @@ This endpoint triggers [notifications](https://help.github.com/articles/about-no
 |------|-------------|
 | body | __Required__ The contents of the comment. |
 | issue_number | __Required__ issue_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## issues create-label
 
@@ -2726,7 +2726,7 @@ https://developer.github.com/v3/issues/labels/#create-a-label
 |------|-------------|
 | color | __Required__ The [hexadecimal color code](http://www.color-hex.com/) for the label, without the leading `#`. |
 | name | __Required__ The name of the label. Emoji can be added to label names, using either native emoji or colon-style markup. For example, typing `:strawberry:` will render the emoji ![:strawberry:](https://github.githubassets.com/images/icons/emoji/unicode/1f353.png ":strawberry:"). For a full list of available emoji and codes, see [emoji-cheat-sheet.com](http://emoji-cheat-sheet.com/). |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | description | A short description of the label. |
 
 ## issues create-milestone
@@ -2740,7 +2740,7 @@ https://developer.github.com/v3/issues/milestones/#create-a-milestone
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | title | __Required__ The title of the milestone. |
 | description | A description of the milestone. |
 | due_on | The milestone due date. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
@@ -2758,7 +2758,7 @@ https://developer.github.com/v3/issues/comments/#delete-a-comment
 | name | description |
 |------|-------------|
 | comment_id | __Required__ comment_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## issues delete-label
 
@@ -2772,7 +2772,7 @@ https://developer.github.com/v3/issues/labels/#delete-a-label
 | name | description |
 |------|-------------|
 | name | __Required__ name parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## issues delete-milestone
 
@@ -2786,7 +2786,7 @@ https://developer.github.com/v3/issues/milestones/#delete-a-milestone
 | name | description |
 |------|-------------|
 | milestone_number | __Required__ milestone_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## issues get
 
@@ -2804,7 +2804,7 @@ Be aware that the `id` of a pull request returned from "Issues" endpoints will b
 | name | description |
 |------|-------------|
 | issue_number | __Required__ issue_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | squirrel-girl-preview | An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## issues get-comment
@@ -2819,7 +2819,7 @@ https://developer.github.com/v3/issues/comments/#get-a-single-comment
 | name | description |
 |------|-------------|
 | comment_id | __Required__ comment_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | machine-man-preview | If an issue comment is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).<br><br>To receive the `performed_via_github_app` object in the response, you must set this flag. |
 | squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
@@ -2835,7 +2835,7 @@ https://developer.github.com/v3/issues/events/#get-a-single-event
 | name | description |
 |------|-------------|
 | event_id | __Required__ event_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | machine-man-preview | If an issue event is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).<br><br>To receive the `performed_via_github_app` object in the response, you must set this flag. |
 | sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must set this flag. |
 | starfox-preview | Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](https://developer.github.com/changes/2018-09-05-project-card-events).<br><br>To receive the `project_card` attribute, project boards must be [enabled](https://help.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must set this flag. |
@@ -2852,7 +2852,7 @@ https://developer.github.com/v3/issues/labels/#get-a-single-label
 | name | description |
 |------|-------------|
 | name | __Required__ name parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## issues get-milestone
 
@@ -2866,7 +2866,7 @@ https://developer.github.com/v3/issues/milestones/#get-a-single-milestone
 | name | description |
 |------|-------------|
 | milestone_number | __Required__ milestone_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## issues list
 
@@ -2905,7 +2905,7 @@ Lists the [available assignees](https://help.github.com/articles/assigning-issue
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -2921,7 +2921,7 @@ Issue Comments are ordered by ascending ID.
 | name | description |
 |------|-------------|
 | issue_number | __Required__ issue_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | since | Only comments updated at or after this time are returned. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
@@ -2938,7 +2938,7 @@ By default, Issue Comments are ordered by ascending ID.
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | direction | Either `asc` or `desc`. Ignored without the `sort` parameter. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -2958,7 +2958,7 @@ https://developer.github.com/v3/issues/events/#list-events-for-an-issue
 | name | description |
 |------|-------------|
 | issue_number | __Required__ issue_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must set this flag. |
@@ -2975,7 +2975,7 @@ https://developer.github.com/v3/issues/events/#list-events-for-a-repository
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must set this flag. |
@@ -2994,7 +2994,7 @@ https://developer.github.com/v3/issues/timeline/#list-events-for-an-issue
 |------|-------------|
 | issue_number | __Required__ issue_number parameter |
 | mockingbird-preview | __Required__ The API to get issue timeline events is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-23-timeline-preview-api/) for full details. To access the API you must set this flag. |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | starfox-preview | Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](https://developer.github.com/changes/2018-09-05-project-card-events).<br><br>To receive the `project_card` attribute, project boards must be [enabled](https://help.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must set this flag. |
@@ -3067,7 +3067,7 @@ Be aware that the `id` of a pull request returned from "Issues" endpoints will b
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | assignee | Can be the name of a user. Pass in `none` for issues with no assigned user, and `*` for issues assigned to any user. |
 | creator | The user that created the issue. |
 | direction | The direction of the sort. Can be either `asc` or `desc`. |
@@ -3094,7 +3094,7 @@ https://developer.github.com/v3/issues/labels/#get-labels-for-every-issue-in-a-m
 | name | description |
 |------|-------------|
 | milestone_number | __Required__ milestone_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -3109,7 +3109,7 @@ https://developer.github.com/v3/issues/labels/#list-all-labels-for-this-reposito
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -3125,7 +3125,7 @@ https://developer.github.com/v3/issues/labels/#list-labels-on-an-issue
 | name | description |
 |------|-------------|
 | issue_number | __Required__ issue_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -3140,7 +3140,7 @@ https://developer.github.com/v3/issues/milestones/#list-milestones-for-a-reposit
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | direction | The direction of the sort. Either `asc` or `desc`. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -3161,7 +3161,7 @@ Note that, if you choose not to pass any parameters, you'll need to set `Content
 | name | description |
 |------|-------------|
 | issue_number | __Required__ issue_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | lock_reason | The reason for locking the issue or pull request conversation. Lock will fail if you don't use one of these reasons:  <br>\* `off-topic`  <br>\* `too heated`  <br>\* `resolved`  <br>\* `spam` |
 | sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must set this flag. |
 
@@ -3177,7 +3177,7 @@ https://developer.github.com/v3/issues/labels/#remove-all-labels-from-an-issue
 | name | description |
 |------|-------------|
 | issue_number | __Required__ issue_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## issues remove-assignees
 
@@ -3193,7 +3193,7 @@ This example removes two of three assignees, leaving the `octocat` assignee.
 | name | description |
 |------|-------------|
 | issue_number | __Required__ issue_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | assignees | Usernames of assignees to remove from an issue. _NOTE: Only users with push access can remove assignees from an issue. Assignees are silently ignored otherwise._ |
 
 ## issues remove-label
@@ -3209,7 +3209,7 @@ Removes the specified label from the issue, and returns the remaining labels on 
 |------|-------------|
 | issue_number | __Required__ issue_number parameter |
 | name | __Required__ name parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## issues replace-all-labels
 
@@ -3223,7 +3223,7 @@ https://developer.github.com/v3/issues/labels/#replace-all-labels-for-an-issue
 | name | description |
 |------|-------------|
 | issue_number | __Required__ issue_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | labels | The names of the labels to add to the issue. You can pass an empty array to remove all labels. **Note:** Alternatively, you can pass a single label as a `string` or an `array` of labels directly, but GitHub recommends passing an object with the `labels` key. |
 
 ## issues unlock
@@ -3238,7 +3238,7 @@ Users with push access can unlock an issue's conversation.
 | name | description |
 |------|-------------|
 | issue_number | __Required__ issue_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## issues update
 
@@ -3252,7 +3252,7 @@ Issue owners and users with push access can edit an issue.
 | name | description |
 |------|-------------|
 | issue_number | __Required__ issue_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | assignee | Login for the user that this issue should be assigned to. **This field is deprecated.** |
 | assignees | Logins for Users to assign to this issue. Pass one or more user logins to _replace_ the set of assignees on this Issue. Send an empty array (`[]`) to clear all assignees from the Issue. _NOTE: Only users with push access can set assignees for new issues. Assignees are silently dropped otherwise._ |
 | body | The contents of the issue. |
@@ -3274,7 +3274,7 @@ https://developer.github.com/v3/issues/comments/#edit-a-comment
 |------|-------------|
 | body | __Required__ The contents of the comment. |
 | comment_id | __Required__ comment_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## issues update-label
 
@@ -3288,7 +3288,7 @@ https://developer.github.com/v3/issues/labels/#update-a-label
 | name | description |
 |------|-------------|
 | name | __Required__ name parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | color | The [hexadecimal color code](http://www.color-hex.com/) for the label, without the leading `#`. |
 | description | A short description of the label. |
 | new_name | The new name of the label. Emoji can be added to label names, using either native emoji or colon-style markup. For example, typing `:strawberry:` will render the emoji ![:strawberry:](https://github.githubassets.com/images/icons/emoji/unicode/1f353.png ":strawberry:"). For a full list of available emoji and codes, see [emoji-cheat-sheet.com](http://emoji-cheat-sheet.com/). |
@@ -3305,7 +3305,7 @@ https://developer.github.com/v3/issues/milestones/#update-a-milestone
 | name | description |
 |------|-------------|
 | milestone_number | __Required__ milestone_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | description | A description of the milestone. |
 | due_on | The milestone due date. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 | state | The state of the milestone. Either `open` or `closed`. |
@@ -3340,7 +3340,7 @@ Similar to [the repository contents API](https://developer.github.com/v3/repos/c
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## licenses list-commonly-used
 
@@ -3402,7 +3402,7 @@ Stop an import for a repository.
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## migrations delete-archive-for-authenticated-user
 
@@ -3495,7 +3495,7 @@ This API method and the "Map a commit author" method allow you to provide correc
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | since | Only authors found after this id are returned. Provide the highest author ID you've seen so far. New authors may be added to the list at any point while the importer is performing the `raw` step. |
 
 ## migrations get-import-progress
@@ -3542,7 +3542,7 @@ This section includes details about Git LFS related fields that may be present i
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## migrations get-large-files
 
@@ -3555,7 +3555,7 @@ List files larger than 100MB found during the import
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## migrations get-status-for-authenticated-user
 
@@ -3676,7 +3676,7 @@ Update an author's identity for the import. Your application can continue updati
 | name | description |
 |------|-------------|
 | author_id | __Required__ author_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | email | The new Git author email. |
 | name | The new Git author name. |
 
@@ -3691,7 +3691,7 @@ You can import repositories from Subversion, Mercurial, and TFS that include fil
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | use_lfs | __Required__ Can be one of `opt_in` (large files will be stored using Git LFS) or `opt_out` (large files will be removed during the import). |
 
 ## migrations start-for-authenticated-user
@@ -3736,7 +3736,7 @@ Start a source import to a GitHub repository using GitHub Importer.
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | vcs_url | __Required__ The URL of the originating repository. |
 | tfvc_project | For a tfvc import, the name of the project that is being imported. |
 | vcs | The originating VCS type. Can be one of `subversion`, `git`, `mercurial`, or `tfvc`. Please be aware that without this parameter, the import job will take additional time to detect the VCS type before beginning the import. This detection step will be reflected in the response. |
@@ -3791,7 +3791,7 @@ To restart an import, no parameters are provided in the update request.
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | vcs_password | The password to provide to the originating repository. |
 | vcs_username | The username to provide to the originating repository. |
 
@@ -4673,7 +4673,7 @@ Creates a repository project board. Returns a `404 Not Found` status if projects
 |------|-------------|
 | inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | name | __Required__ The name of the project. |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | body | The description of the project. |
 
 ## projects delete
@@ -4841,7 +4841,7 @@ Lists the projects in a repository. Returns a `404 Not Found` status if projects
 | name | description |
 |------|-------------|
 | inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | state | Indicates the state of the projects to return. Can be either `open`, `closed`, or `all`. |
@@ -4989,7 +4989,7 @@ https://developer.github.com/v3/pulls/#get-if-a-pull-request-has-been-merged
 | name | description |
 |------|-------------|
 | pull_number | __Required__ pull_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## pulls create
 
@@ -5010,7 +5010,7 @@ This endpoint triggers [notifications](https://help.github.com/articles/about-no
 |------|-------------|
 | base | __Required__ The name of the branch you want the changes pulled into. This should be an existing branch on the current repository. You cannot submit a pull request to one repository that requests a merge to a base of another repository. |
 | head | __Required__ The name of the branch where your changes are implemented. For cross-repository pull requests in the same network, namespace `head` with a user like this: `username:branch`. |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | title | __Required__ The title of the new pull request. |
 | body | The contents of the pull request. |
 | draft | Indicates whether the pull request is a draft. See "[Draft Pull Requests](https://help.github.com/en/articles/about-pull-requests#draft-pull-requests)" in the GitHub Help documentation to learn more. |
@@ -5056,7 +5056,7 @@ If you don't use the `comfort-fade` preview header, multi-line and single-line c
 | commit_id | __Required__ The SHA of the commit needing a comment. Not using the latest commit SHA may render your comment outdated if a subsequent commit modifies the line you specify as the `position`. |
 | path | __Required__ The relative path to the file that necessitates a comment. |
 | pull_number | __Required__ pull_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | comfort-fade-preview | Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must set this flag. |
 | line | **Required with `comfort-fade` preview**. The line of the blob in the pull request diff that the comment applies to. For a multi-line comment, the last line of the range that your comment applies to. |
 | position | **Required without `comfort-fade` preview**. The position in the diff where you want to add a review comment. Note this value is not the same as the line number in the file. For help finding the position value, read the note above. |
@@ -5080,7 +5080,7 @@ The `position` value equals the number of lines down from the first "@@" hunk he
 | name | description |
 |------|-------------|
 | pull_number | __Required__ pull_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | body | **Required** when using `REQUEST_CHANGES` or `COMMENT` for the `event` parameter. The body text of the pull request review. |
 | comments | Use the following table to specify the location, destination, and contents of the draft review comment. |
 | commit_id | The SHA of the commit that needs a review. Not using the latest commit SHA may render your review comment outdated if a subsequent commit modifies the line you specify as the `position`. Defaults to the most recent commit in the pull request when you do not specify a value. |
@@ -5102,7 +5102,7 @@ This endpoint triggers [notifications](https://help.github.com/articles/about-no
 | body | __Required__ The text of the review comment. |
 | comment_id | __Required__ comment_id parameter |
 | pull_number | __Required__ pull_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## pulls create-review-request
 
@@ -5116,7 +5116,7 @@ This endpoint triggers [notifications](https://help.github.com/articles/about-no
 | name | description |
 |------|-------------|
 | pull_number | __Required__ pull_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | reviewers | An array of user `login`s that will be requested. |
 | team_reviewers | An array of team `slug`s that will be requested. |
 
@@ -5132,7 +5132,7 @@ Deletes a review comment.
 | name | description |
 |------|-------------|
 | comment_id | __Required__ comment_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## pulls delete-pending-review
 
@@ -5146,7 +5146,7 @@ https://developer.github.com/v3/pulls/reviews/#delete-a-pending-review
 | name | description |
 |------|-------------|
 | pull_number | __Required__ pull_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | review_id | __Required__ review_id parameter |
 
 ## pulls delete-review-request
@@ -5161,7 +5161,7 @@ https://developer.github.com/v3/pulls/review_requests/#delete-a-review-request
 | name | description |
 |------|-------------|
 | pull_number | __Required__ pull_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | reviewers | An array of user `login`s that will be removed. |
 | team_reviewers | An array of team `slug`s that will be removed. |
 
@@ -5178,7 +5178,7 @@ https://developer.github.com/v3/pulls/reviews/#dismiss-a-pull-request-review
 |------|-------------|
 | message | __Required__ The message for the pull request review dismissal |
 | pull_number | __Required__ pull_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | review_id | __Required__ review_id parameter |
 
 ## pulls get
@@ -5207,7 +5207,7 @@ Pass the appropriate [media type](https://developer.github.com/v3/media/#commits
 | name | description |
 |------|-------------|
 | pull_number | __Required__ pull_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must set this flag. |
 
 ## pulls get-comment
@@ -5242,7 +5242,7 @@ The `reactions` key will have the following payload where `url` can be used to c
 | name | description |
 |------|-------------|
 | comment_id | __Required__ comment_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | comfort-fade-preview | Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must set this flag. |
 | squirrel-girl-preview | An additional `reactions` object in the review comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
@@ -5258,7 +5258,7 @@ https://developer.github.com/v3/pulls/reviews/#get-comments-for-a-single-review
 | name | description |
 |------|-------------|
 | pull_number | __Required__ pull_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | review_id | __Required__ review_id parameter |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -5275,7 +5275,7 @@ https://developer.github.com/v3/pulls/reviews/#get-a-single-review
 | name | description |
 |------|-------------|
 | pull_number | __Required__ pull_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | review_id | __Required__ review_id parameter |
 
 ## pulls list
@@ -5289,7 +5289,7 @@ Draft pull requests are available in public repositories with GitHub Free and Gi
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | base | Filter pulls by base branch name. Example: `gh-pages`. |
 | direction | The direction of the sort. Can be either `asc` or `desc`. Default: `desc` when sort is `created` or sort is not specified, otherwise `asc`. |
 | head | Filter pulls by head user or head organization and branch name in the format of `user:ref-name` or `organization:ref-name`. For example: `github:new-script-format` or `octocat:test-branch`. |
@@ -5331,7 +5331,7 @@ The `reactions` key will have the following payload where `url` can be used to c
 | name | description |
 |------|-------------|
 | pull_number | __Required__ pull_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | comfort-fade-preview | Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must set this flag. |
 | direction | Can be either `asc` or `desc`. Ignored without `sort` parameter. |
 | page | Page number of the results to fetch. |
@@ -5371,7 +5371,7 @@ The `reactions` key will have the following payload where `url` can be used to c
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | comfort-fade-preview | Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must set this flag. |
 | direction | Can be either `asc` or `desc`. Ignored without `sort` parameter. |
 | page | Page number of the results to fetch. |
@@ -5392,7 +5392,7 @@ Lists a maximum of 250 commits for a pull request. To receive a complete commit 
 | name | description |
 |------|-------------|
 | pull_number | __Required__ pull_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -5408,7 +5408,7 @@ https://developer.github.com/v3/pulls/#list-pull-requests-files
 | name | description |
 |------|-------------|
 | pull_number | __Required__ pull_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -5424,7 +5424,7 @@ https://developer.github.com/v3/pulls/review_requests/#list-review-requests
 | name | description |
 |------|-------------|
 | pull_number | __Required__ pull_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -5440,7 +5440,7 @@ The list of reviews returns in chronological order.
 | name | description |
 |------|-------------|
 | pull_number | __Required__ pull_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -5456,7 +5456,7 @@ This endpoint triggers [notifications](https://help.github.com/articles/about-no
 | name | description |
 |------|-------------|
 | pull_number | __Required__ pull_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | commit_message | Extra detail to append to automatic commit message. |
 | commit_title | Title for the automatic commit message. |
 | merge_method | Merge method to use. Possible values are `merge`, `squash` or `rebase`. Default is `merge`. |
@@ -5475,7 +5475,7 @@ https://developer.github.com/v3/pulls/reviews/#submit-a-pull-request-review
 |------|-------------|
 | event | __Required__ The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. When you leave this blank, the API returns _HTTP 422 (Unrecognizable entity)_ and sets the review action state to `PENDING`, which means you will need to re-submit the pull request review using a review action. |
 | pull_number | __Required__ pull_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | review_id | __Required__ review_id parameter |
 | body | The body text of the pull request review |
 
@@ -5493,7 +5493,7 @@ To open or update a pull request in a public repository, you must have write acc
 | name | description |
 |------|-------------|
 | pull_number | __Required__ pull_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | base | The name of the branch you want your changes pulled into. This should be an existing branch on the current repository. You cannot update the base branch on a pull request to point to another repository. |
 | body | The contents of the pull request. |
 | maintainer_can_modify | Indicates whether [maintainers can modify](https://help.github.com/articles/allowing-changes-to-a-pull-request-branch-created-from-a-fork/) the pull request. |
@@ -5514,7 +5514,7 @@ Updates the pull request branch with the latest upstream changes by merging HEAD
 |------|-------------|
 | lydian-preview | __Required__ Updating the pull request branch with latest upstream changes is currently available for developers to preview. To access this new endpoint during the preview period, you must set this flag. |
 | pull_number | __Required__ pull_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | expected_head_sha | The expected SHA of the pull request's HEAD ref. This is the most recent commit on the pull request's branch. If the expected SHA does not match the pull request's HEAD, you will receive a `422 Unprocessable Entity` status. You can use the "[List commits on a repository](https://developer.github.com/v3/repos/commits/#list-commits-on-a-repository)" endpoint to find the most recent commit SHA. Default: SHA of the pull request's current HEAD ref. |
 
 ## pulls update-comment
@@ -5548,7 +5548,7 @@ If you don't use the `comfort-fade` preview header, multi-line and single-line c
 |------|-------------|
 | body | __Required__ The text of the reply to the review comment. |
 | comment_id | __Required__ comment_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | comfort-fade-preview | Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must set this flag. |
 
 ## pulls update-review
@@ -5564,7 +5564,7 @@ Update the review summary comment with new text.
 |------|-------------|
 | body | __Required__ The body text of the pull request review. |
 | pull_number | __Required__ pull_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | review_id | __Required__ review_id parameter |
 
 # rate-limit
@@ -5609,7 +5609,7 @@ Create a reaction to a [commit comment](https://developer.github.com/v3/repos/co
 |------|-------------|
 | comment_id | __Required__ comment_id parameter |
 | content | __Required__ The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the commit comment. |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 
 ## reactions create-for-issue
@@ -5625,7 +5625,7 @@ Create a reaction to an [issue](https://developer.github.com/v3/issues/). A resp
 |------|-------------|
 | content | __Required__ The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the issue. |
 | issue_number | __Required__ issue_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 
 ## reactions create-for-issue-comment
@@ -5641,7 +5641,7 @@ Create a reaction to an [issue comment](https://developer.github.com/v3/issues/c
 |------|-------------|
 | comment_id | __Required__ comment_id parameter |
 | content | __Required__ The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the issue comment. |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 
 ## reactions create-for-pull-request-review-comment
@@ -5657,7 +5657,7 @@ Create a reaction to a [pull request review comment](https://developer.github.co
 |------|-------------|
 | comment_id | __Required__ comment_id parameter |
 | content | __Required__ The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the pull request review comment. |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 
 ## reactions create-for-team-discussion-comment-in-org
@@ -5751,7 +5751,7 @@ Delete a reaction to a [commit comment](https://developer.github.com/v3/repos/co
 |------|-------------|
 | comment_id | __Required__ comment_id parameter |
 | reaction_id | __Required__ reaction_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 
 ## reactions delete-for-issue
@@ -5769,7 +5769,7 @@ Delete a reaction to an [issue](https://developer.github.com/v3/issues/).
 |------|-------------|
 | issue_number | __Required__ issue_number parameter |
 | reaction_id | __Required__ reaction_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 
 ## reactions delete-for-issue-comment
@@ -5787,7 +5787,7 @@ Delete a reaction to an [issue comment](https://developer.github.com/v3/issues/c
 |------|-------------|
 | comment_id | __Required__ comment_id parameter |
 | reaction_id | __Required__ reaction_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 
 ## reactions delete-for-pull-request-comment
@@ -5805,7 +5805,7 @@ Delete a reaction to a [pull request review comment](https://developer.github.co
 |------|-------------|
 | comment_id | __Required__ comment_id parameter |
 | reaction_id | __Required__ reaction_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 
 ## reactions delete-for-team-discussion
@@ -5875,7 +5875,7 @@ List the reactions to a [commit comment](https://developer.github.com/v3/repos/c
 | name | description |
 |------|-------------|
 | comment_id | __Required__ comment_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 | content | Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to a commit comment. |
 | page | Page number of the results to fetch. |
@@ -5893,7 +5893,7 @@ List the reactions to an [issue](https://developer.github.com/v3/issues/).
 | name | description |
 |------|-------------|
 | issue_number | __Required__ issue_number parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 | content | Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to an issue. |
 | page | Page number of the results to fetch. |
@@ -5911,7 +5911,7 @@ List the reactions to an [issue comment](https://developer.github.com/v3/issues/
 | name | description |
 |------|-------------|
 | comment_id | __Required__ comment_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 | content | Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to an issue comment. |
 | page | Page number of the results to fetch. |
@@ -5929,7 +5929,7 @@ List the reactions to a [pull request review comment](https://developer.github.c
 | name | description |
 |------|-------------|
 | comment_id | __Required__ comment_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
 | content | Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to a pull request review comment. |
 | page | Page number of the results to fetch. |
@@ -6056,7 +6056,7 @@ To prevent abuse, you are limited to sending 50 invitations to a repository per 
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | username | __Required__ username parameter |
 | permission | The permission to grant the collaborator. **Only valid on organization-owned repositories.** Can be one of:  <br>\* `pull` - can pull, but not push to or administer this repository.  <br>\* `push` - can pull and push, but not administer this repository.  <br>\* `admin` - can pull, push and administer this repository.  <br>\* `maintain` - Recommended for project managers who need to manage the repository without access to sensitive or destructive actions.  <br>\* `triage` - Recommended for contributors who need to proactively manage issues and pull requests without write access. |
 
@@ -6072,7 +6072,7 @@ Here's how you can create a read-only deploy key:
 | name | description |
 |------|-------------|
 | key | __Required__ The contents of the key. |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | read_only | If `true`, the key will only be able to read repository contents. Otherwise, the key will be able to read and write.  <br>  <br>Deploy keys with write access can perform the same actions as an organization member with admin access, or a collaborator on a personal repository. For more information, see "[Repository permission levels for an organization](https://help.github.com/articles/repository-permission-levels-for-an-organization/)" and "[Permission levels for a user account repository](https://help.github.com/articles/permission-levels-for-a-user-account-repository/)." |
 | title | A name for the key. |
 
@@ -6090,7 +6090,7 @@ Adding admin enforcement requires admin or owner permissions to the repository a
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos add-protected-branch-app-restrictions
 
@@ -6110,7 +6110,7 @@ Grants the specified apps push access for this branch. Only installed GitHub App
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos add-protected-branch-required-signatures
 
@@ -6126,7 +6126,7 @@ When authenticated with admin or owner permissions to the repository, you can us
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | zzzax-preview | __Required__ Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must set this flag. |
 
 ## repos add-protected-branch-required-status-checks-contexts
@@ -6141,7 +6141,7 @@ Protected branches are available in public repositories with GitHub Free and Git
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos add-protected-branch-team-restrictions
 
@@ -6161,7 +6161,7 @@ Grants the specified teams push access for this branch. You can also give push a
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos add-protected-branch-user-restrictions
 
@@ -6181,7 +6181,7 @@ Grants the specified people push access for this branch.
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos check-collaborator
 
@@ -6196,7 +6196,7 @@ Team members will include the members of child teams.
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | username | __Required__ username parameter |
 
 ## repos check-vulnerability-alerts
@@ -6211,7 +6211,7 @@ Shows whether vulnerability alerts are enabled or disabled for a repository. The
 | name | description |
 |------|-------------|
 | dorian-preview | __Required__ Enabling and disabling vulnerability alerts for a repository using the REST API is currently available for developers to preview. To access these new endpoints during the preview period, you must set this flag. |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos compare-commits
 
@@ -6258,7 +6258,7 @@ These are the possible values for `reason` in the `verification` object:
 |------|-------------|
 | base | __Required__ base parameter |
 | head | __Required__ head parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos create-commit-comment
 
@@ -6275,7 +6275,7 @@ This endpoint triggers [notifications](https://help.github.com/articles/about-no
 |------|-------------|
 | body | __Required__ The contents of the comment. |
 | commit_sha | __Required__ commit_sha parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | line | **Deprecated**. Use **position** parameter instead. Line number in the file to comment on. |
 | path | Relative path of the file to comment on. |
 | position | Line index in the diff to comment on. |
@@ -6322,7 +6322,7 @@ This error happens when the `required_contexts` parameter indicates that one or 
 | name | description |
 |------|-------------|
 | ref | __Required__ The ref to deploy. This can be a branch, tag, or SHA. |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | ant-man-preview | The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must set this flag. |
 | auto_merge | Attempts to automatically merge the default branch into the requested ref, if it's behind the default branch. |
 | description | Short description of the deployment. |
@@ -6347,7 +6347,7 @@ GitHub Apps require `read & write` access to "Deployments" and `read-only` acces
 | name | description |
 |------|-------------|
 | deployment_id | __Required__ deployment_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | state | __Required__ The state of the status. Can be one of `error`, `failure`, `inactive`, `in_progress`, `queued` `pending`, or `success`. **Note:** To use the `inactive` state, you must provide the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. To use the `in_progress` and `queued` states, you must provide the [`application/vnd.github.flash-preview+json`](https://developer.github.com/v3/previews/#deployment-statuses) custom media type. |
 | ant-man-preview | The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must set this flag. |
 | auto_inactive | Adds a new `inactive` status to all prior non-transient, non-production environment deployments with the same repository and `environment` name as the created status's deployment. An `inactive` status is only added to deployments that had a `success` state. Default: `true`  <br>**Note:** To add an `inactive` status to `production` environments, you must use the [`application/vnd.github.flash-preview+json`](https://developer.github.com/v3/previews/#deployment-statuses) custom media type.  <br>**Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. |
@@ -6375,7 +6375,7 @@ This input example shows how you can use the `client_payload` as a test to debug
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | client_payload | JSON payload with extra information about the webhook event that your action or worklow may use. |
 | event_type | **Required:** A custom webhook event name. |
 
@@ -6430,7 +6430,7 @@ Create a fork for the authenticated user.
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | organization | Optional parameter to specify the organization name if forking into an organization. |
 
 ## repos create-hook
@@ -6447,7 +6447,7 @@ Here's how you can create a hook that posts payloads in JSON format:
 | name | description |
 |------|-------------|
 | config.url | __Required__ The URL to which the payloads will be delivered. |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | active | Determines if notifications are sent when the webhook is triggered. Set to `true` to send notifications. |
 | config.content_type | The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`. |
 | config.insecure_ssl | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. **We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.** |
@@ -6508,7 +6508,7 @@ Creates a new file or updates an existing file in a repository.
 | content | __Required__ The new file content, using Base64 encoding. |
 | message | __Required__ The commit message. |
 | path | __Required__ path parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | author.email | The email of the author or committer of the commit. You'll receive a `422` status code if `email` is omitted. |
 | author.name | The name of the author or committer of the commit. You'll receive a `422` status code if `name` is omitted. |
 | branch | The branch name. Default: the repository’s default branch (usually `master`) |
@@ -6529,7 +6529,7 @@ This endpoint triggers [notifications](https://help.github.com/articles/about-no
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | tag_name | __Required__ The name of the tag. |
 | body | Text describing the contents of the tag. |
 | draft | `true` to create a draft (unpublished) release, `false` to create a published one. |
@@ -6550,7 +6550,7 @@ Note: there is a limit of 1000 statuses per `sha` and `context` within a reposit
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | sha | __Required__ sha parameter |
 | state | __Required__ The state of the status. Can be one of `error`, `failure`, `pending`, or `success`. |
 | context | A string label to differentiate this status from the status of other systems. |
@@ -6609,7 +6609,7 @@ If an organization owner has configured the organization to prevent members from
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos delete-commit-comment
 
@@ -6623,7 +6623,7 @@ https://developer.github.com/v3/repos/comments/#delete-a-commit-comment
 | name | description |
 |------|-------------|
 | comment_id | __Required__ comment_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos delete-deployment
 
@@ -6644,7 +6644,7 @@ For more information, see "[Create a deployment](https://developer.github.com/v3
 | name | description |
 |------|-------------|
 | deployment_id | __Required__ deployment_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos delete-download
 
@@ -6658,7 +6658,7 @@ https://developer.github.com/v3/repos/downloads/#delete-a-download
 | name | description |
 |------|-------------|
 | download_id | __Required__ download_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos delete-file
 
@@ -6679,7 +6679,7 @@ You must provide values for both `name` and `email`, whether you choose to use `
 |------|-------------|
 | message | __Required__ The commit message. |
 | path | __Required__ path parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | sha | __Required__ The blob SHA of the file being replaced. |
 | author.email | The email of the author (or committer) of the commit |
 | author.name | The name of the author (or committer) of the commit |
@@ -6699,7 +6699,7 @@ https://developer.github.com/v3/repos/hooks/#delete-a-hook
 | name | description |
 |------|-------------|
 | hook_id | __Required__ hook_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos delete-invitation
 
@@ -6713,7 +6713,7 @@ https://developer.github.com/v3/repos/invitations/#delete-a-repository-invitatio
 | name | description |
 |------|-------------|
 | invitation_id | __Required__ invitation_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos delete-release
 
@@ -6727,7 +6727,7 @@ Users with push access to the repository can delete a release.
 | name | description |
 |------|-------------|
 | release_id | __Required__ release_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos delete-release-asset
 
@@ -6741,7 +6741,7 @@ https://developer.github.com/v3/repos/releases/#delete-a-release-asset
 | name | description |
 |------|-------------|
 | asset_id | __Required__ asset_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos disable-automated-security-fixes
 
@@ -6755,7 +6755,7 @@ Disables automated security fixes for a repository. The authenticated user must 
 | name | description |
 |------|-------------|
 | london-preview | __Required__ Enabling or disabling automated security fixes is currently available for developers to preview. To access this new endpoint during the preview period, you must set this flag. |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos disable-pages-site
 
@@ -6768,7 +6768,7 @@ https://developer.github.com/v3/repos/pages/#disable-a-pages-site
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | switcheroo-preview | __Required__ Enabling and disabling Pages in the Pages API is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2019-03-14-enabling-disabling-pages/) preview for more details. To access the new endpoints during the preview period, you must set this flag. |
 
 ## repos disable-vulnerability-alerts
@@ -6783,7 +6783,7 @@ Disables vulnerability alerts and the dependency graph for a repository. The aut
 | name | description |
 |------|-------------|
 | dorian-preview | __Required__ Enabling and disabling vulnerability alerts for a repository using the REST API is currently available for developers to preview. To access these new endpoints during the preview period, you must set this flag. |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos enable-automated-security-fixes
 
@@ -6797,7 +6797,7 @@ Enables automated security fixes for a repository. The authenticated user must h
 | name | description |
 |------|-------------|
 | london-preview | __Required__ Enabling or disabling automated security fixes is currently available for developers to preview. To access this new endpoint during the preview period, you must set this flag. |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos enable-pages-site
 
@@ -6810,7 +6810,7 @@ https://developer.github.com/v3/repos/pages/#enable-a-pages-site
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | switcheroo-preview | __Required__ Enabling and disabling Pages in the Pages API is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2019-03-14-enabling-disabling-pages/) preview for more details. To access the new endpoints during the preview period, you must set this flag. |
 | source.branch | The repository branch used to publish your [site's source files](https://help.github.com/articles/configuring-a-publishing-source-for-github-pages/). Can be either `master` or `gh-pages`. |
 | source.path | The repository directory that includes the source files for the Pages site. When `branch` is `master`, you can change `path` to `/docs`. When `branch` is `gh-pages`, you are unable to specify a `path` other than `/`. |
@@ -6827,7 +6827,7 @@ Enables vulnerability alerts and the dependency graph for a repository. The auth
 | name | description |
 |------|-------------|
 | dorian-preview | __Required__ Enabling and disabling vulnerability alerts for a repository using the REST API is currently available for developers to preview. To access these new endpoints during the preview period, you must set this flag. |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get
 
@@ -6842,7 +6842,7 @@ The `parent` and `source` objects are present when the repository is a fork. `pa
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | nebula-preview | You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).<br><br>To access repository visibility during the preview period, you must set this flag. |
 | scarlet-witch-preview | Developers can preview a new `code_of_conduct` key in responses. For more information, see [Codes of Conduct API](https://developer.github.com/v3/codes_of_conduct/).<br><br>To access this new response key during the preview period, you must set this flag. |
 
@@ -6858,7 +6858,7 @@ https://developer.github.com/v3/repos/#get-all-repository-topics
 | name | description |
 |------|-------------|
 | mercy-preview | __Required__ The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must set this flag. |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-apps-with-access-to-protected-branch
 
@@ -6874,7 +6874,7 @@ Lists the GitHub Apps that have push access to this branch. Only installed GitHu
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-archive-link
 
@@ -6893,7 +6893,7 @@ To follow redirects with curl, use the `-L` switch:
 |------|-------------|
 | archive_format | __Required__ archive_format parameter |
 | ref | __Required__ ref parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-branch
 
@@ -6907,7 +6907,7 @@ https://developer.github.com/v3/repos/branches/#get-branch
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-branch-protection
 
@@ -6921,7 +6921,7 @@ Protected branches are available in public repositories with GitHub Free and Git
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | luke-cage-preview | The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must set this flag. |
 
 ## repos get-clones
@@ -6935,7 +6935,7 @@ Get the total number of clones and breakdown per day or week for the last 14 day
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | per | Must be one of: `day`, `week`. |
 
 ## repos get-code-frequency-stats
@@ -6949,7 +6949,7 @@ Returns a weekly aggregate of the number of additions and deletions pushed to a 
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-collaborator-permission-level
 
@@ -6962,7 +6962,7 @@ Checks the repository permission of a collaborator. The possible repository perm
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | username | __Required__ username parameter |
 
 ## repos get-combined-status-for-ref
@@ -6985,7 +6985,7 @@ Additionally, a combined `state` is returned. The `state` is one of:
 | name | description |
 |------|-------------|
 | ref | __Required__ ref parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-commit
 
@@ -7025,7 +7025,7 @@ These are the possible values for `reason` in the `verification` object:
 | name | description |
 |------|-------------|
 | ref | __Required__ ref parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-commit-activity-stats
 
@@ -7038,7 +7038,7 @@ Returns the last year of commit activity grouped by week. The `days` array is a 
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-commit-comment
 
@@ -7052,7 +7052,7 @@ https://developer.github.com/v3/repos/comments/#get-a-single-commit-comment
 | name | description |
 |------|-------------|
 | comment_id | __Required__ comment_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | squirrel-girl-preview | An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## repos get-contents
@@ -7087,7 +7087,7 @@ If the submodule repository is not hosted on github.com, the Git URLs (`git_url`
 | name | description |
 |------|-------------|
 | path | __Required__ path parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | ref | The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`) |
 
 ## repos get-contributors-stats
@@ -7108,7 +7108,7 @@ Weekly Hash (`weeks` array):
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-deploy-key
 
@@ -7122,7 +7122,7 @@ https://developer.github.com/v3/repos/keys/#get-a-deploy-key
 | name | description |
 |------|-------------|
 | key_id | __Required__ key_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-deployment
 
@@ -7136,7 +7136,7 @@ https://developer.github.com/v3/repos/deployments/#get-a-single-deployment
 | name | description |
 |------|-------------|
 | deployment_id | __Required__ deployment_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | ant-man-preview | The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must set this flag. |
 | machine-man-preview | If a deployment is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).<br><br>To receive the `performed_via_github_app` object in the response, you must set this flag. |
 
@@ -7152,7 +7152,7 @@ Users with pull access can view a deployment status for a deployment:
 | name | description |
 |------|-------------|
 | deployment_id | __Required__ deployment_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | status_id | __Required__ status_id parameter |
 | ant-man-preview | The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must set this flag. |
 | flash-preview | New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](https://developer.github.com/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.<br><br>To access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must set this flag. |
@@ -7170,7 +7170,7 @@ https://developer.github.com/v3/repos/downloads/#get-a-single-download
 | name | description |
 |------|-------------|
 | download_id | __Required__ download_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-hook
 
@@ -7184,7 +7184,7 @@ https://developer.github.com/v3/repos/hooks/#get-single-hook
 | name | description |
 |------|-------------|
 | hook_id | __Required__ hook_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-latest-pages-build
 
@@ -7197,7 +7197,7 @@ https://developer.github.com/v3/repos/pages/#get-latest-pages-build
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-latest-release
 
@@ -7212,7 +7212,7 @@ The latest release is the most recent non-prerelease, non-draft release, sorted 
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-pages
 
@@ -7225,7 +7225,7 @@ https://developer.github.com/v3/repos/pages/#get-information-about-a-pages-site
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-pages-build
 
@@ -7239,7 +7239,7 @@ https://developer.github.com/v3/repos/pages/#get-a-specific-pages-build
 | name | description |
 |------|-------------|
 | build_id | __Required__ build_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-participation-stats
 
@@ -7254,7 +7254,7 @@ The array order is oldest week (index 0) to most recent week.
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-protected-branch-admin-enforcement
 
@@ -7268,7 +7268,7 @@ Protected branches are available in public repositories with GitHub Free and Git
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-protected-branch-pull-request-review-enforcement
 
@@ -7282,7 +7282,7 @@ Protected branches are available in public repositories with GitHub Free and Git
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | luke-cage-preview | The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must set this flag. |
 
 ## repos get-protected-branch-required-signatures
@@ -7301,7 +7301,7 @@ When authenticated with admin or owner permissions to the repository, you can us
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | zzzax-preview | __Required__ Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must set this flag. |
 
 ## repos get-protected-branch-required-status-checks
@@ -7316,7 +7316,7 @@ Protected branches are available in public repositories with GitHub Free and Git
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-protected-branch-restrictions
 
@@ -7334,7 +7334,7 @@ Lists who has access to this protected branch. {{#note}}
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-punch-card-stats
 
@@ -7353,7 +7353,7 @@ For example, `[2, 14, 25]` indicates that there were 25 total commits, during th
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-readme
 
@@ -7368,7 +7368,7 @@ READMEs support [custom media types](https://developer.github.com/v3/repos/conte
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | ref | The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`) |
 
 ## repos get-release
@@ -7383,7 +7383,7 @@ https://developer.github.com/v3/repos/releases/#get-a-single-release
 | name | description |
 |------|-------------|
 | release_id | __Required__ release_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-release-asset
 
@@ -7397,7 +7397,7 @@ To download the asset's binary content, set the `Accept` header of the request t
 | name | description |
 |------|-------------|
 | asset_id | __Required__ asset_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-release-by-tag
 
@@ -7410,7 +7410,7 @@ Get a published release with the specified tag.
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | tag | __Required__ tag parameter |
 
 ## repos get-teams-with-access-to-protected-branch
@@ -7427,7 +7427,7 @@ Lists the teams who have push access to this branch. The list includes child tea
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-top-paths
 
@@ -7440,7 +7440,7 @@ Get the top 10 popular contents over the last 14 days.
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-top-referrers
 
@@ -7453,7 +7453,7 @@ Get the top 10 referrers over the last 14 days.
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-users-with-access-to-protected-branch
 
@@ -7469,7 +7469,7 @@ Lists the people who have push access to this branch.
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-views
 
@@ -7482,7 +7482,7 @@ Get the total number of views and breakdown per day or week for the last 14 days
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | per | Must be one of: `day`, `week`. |
 
 ## repos list-assets-for-release
@@ -7497,7 +7497,7 @@ https://developer.github.com/v3/repos/releases/#list-assets-for-a-release
 | name | description |
 |------|-------------|
 | release_id | __Required__ release_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -7512,7 +7512,7 @@ https://developer.github.com/v3/repos/branches/#list-branches
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | protected | Setting to `true` returns only protected branches. When set to `false`, only unprotected branches are returned. Omitting this parameter returns all branches. |
@@ -7532,7 +7532,7 @@ Returns all branches where the given commit SHA is the HEAD, or latest commit fo
 |------|-------------|
 | commit_sha | __Required__ commit_sha parameter |
 | groot-preview | __Required__ Listing branches or pull requests for a commit in the Commits API is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2019-04-11-pulls-branches-for-commit/) for more details. To access the new endpoints during the preview period, you must set this flag. |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos list-collaborators
 
@@ -7547,7 +7547,7 @@ Team members will include the members of child teams.
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | affiliation | Filter collaborators returned by their affiliation. Can be one of:  <br>\* `outside`: All outside collaborators of an organization-owned repository.  <br>\* `direct`: All collaborators with permissions to an organization-owned repository, regardless of organization membership status.  <br>\* `all`: All collaborators the authenticated user can see. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -7564,7 +7564,7 @@ Use the `:commit_sha` to specify the commit that will have its comments listed.
 | name | description |
 |------|-------------|
 | commit_sha | __Required__ commit_sha parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | squirrel-girl-preview | An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
@@ -7582,7 +7582,7 @@ Comments are ordered by ascending ID.
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | squirrel-girl-preview | An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
@@ -7618,7 +7618,7 @@ These are the possible values for `reason` in the `verification` object:
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | author | GitHub login or email address by which to filter by commit author. |
 | page | Page number of the results to fetch. |
 | path | Only commits containing this file path will be returned. |
@@ -7640,7 +7640,7 @@ GitHub identifies contributors by author email address. This endpoint groups con
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | anon | Set to `1` or `true` to include anonymous contributors in results. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -7656,7 +7656,7 @@ https://developer.github.com/v3/repos/keys/#list-deploy-keys
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -7672,7 +7672,7 @@ Users with pull access can view deployment statuses for a deployment:
 | name | description |
 |------|-------------|
 | deployment_id | __Required__ deployment_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | ant-man-preview | The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must set this flag. |
 | flash-preview | New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](https://developer.github.com/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.<br><br>To access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must set this flag. |
 | page | Page number of the results to fetch. |
@@ -7689,7 +7689,7 @@ Simple filtering of deployments is available via query parameters:
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | ant-man-preview | The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must set this flag. |
 | environment | The name of the environment that was deployed to (e.g., `staging` or `production`). |
 | page | Page number of the results to fetch. |
@@ -7709,7 +7709,7 @@ https://developer.github.com/v3/repos/downloads/#list-downloads-for-a-repository
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -7784,7 +7784,7 @@ https://developer.github.com/v3/repos/forks/#list-forks
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | sort | The sort order. Can be either `newest`, `oldest`, or `stargazers`. |
@@ -7800,7 +7800,7 @@ https://developer.github.com/v3/repos/hooks/#list-hooks
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -7815,7 +7815,7 @@ When authenticating as a user with admin rights to a repository, this endpoint w
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -7844,7 +7844,7 @@ Lists languages for the specified repository. The value shown for each language 
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos list-pages-builds
 
@@ -7857,7 +7857,7 @@ https://developer.github.com/v3/repos/pages/#list-pages-builds
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -7873,7 +7873,7 @@ Protected branches are available in public repositories with GitHub Free and Git
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos list-public
 
@@ -7903,7 +7903,7 @@ Lists all pull requests containing the provided commit SHA, which can be from an
 |------|-------------|
 | commit_sha | __Required__ commit_sha parameter |
 | groot-preview | __Required__ Listing branches or pull requests for a commit in the Commits API is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2019-04-11-pulls-branches-for-commit/) for more details. To access the new endpoints during the preview period, you must set this flag. |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -7920,7 +7920,7 @@ Information about published releases are available to everyone. Only users with 
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -7938,7 +7938,7 @@ This resource is also available via a legacy route: `GET /repos/:owner/:repo/sta
 | name | description |
 |------|-------------|
 | ref | __Required__ ref parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -7953,7 +7953,7 @@ https://developer.github.com/v3/repos/#list-tags
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -7968,7 +7968,7 @@ https://developer.github.com/v3/repos/#list-teams
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -7985,7 +7985,7 @@ https://developer.github.com/v3/repos/merging/#perform-a-merge
 |------|-------------|
 | base | __Required__ The name of the base branch that the head will be merged into. |
 | head | __Required__ The head to merge. This can be a branch name or a commit SHA1. |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | commit_message | Commit message to use for the merge commit. If omitted, a default message will be used. |
 
 ## repos ping-hook
@@ -8000,7 +8000,7 @@ This will trigger a [ping event](https://developer.github.com/webhooks/#ping-eve
 | name | description |
 |------|-------------|
 | hook_id | __Required__ hook_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos remove-branch-protection
 
@@ -8014,7 +8014,7 @@ Protected branches are available in public repositories with GitHub Free and Git
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos remove-collaborator
 
@@ -8027,7 +8027,7 @@ https://developer.github.com/v3/repos/collaborators/#remove-user-as-a-collaborat
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | username | __Required__ username parameter |
 
 ## repos remove-deploy-key
@@ -8042,7 +8042,7 @@ https://developer.github.com/v3/repos/keys/#remove-a-deploy-key
 | name | description |
 |------|-------------|
 | key_id | __Required__ key_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos remove-protected-branch-admin-enforcement
 
@@ -8058,7 +8058,7 @@ Removing admin enforcement requires admin or owner permissions to the repository
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos remove-protected-branch-app-restrictions
 
@@ -8078,7 +8078,7 @@ Removes the ability of an app to push to this branch. Only installed GitHub Apps
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos remove-protected-branch-pull-request-review-enforcement
 
@@ -8092,7 +8092,7 @@ Protected branches are available in public repositories with GitHub Free and Git
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos remove-protected-branch-required-signatures
 
@@ -8108,7 +8108,7 @@ When authenticated with admin or owner permissions to the repository, you can us
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | zzzax-preview | __Required__ Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must set this flag. |
 
 ## repos remove-protected-branch-required-status-checks
@@ -8123,7 +8123,7 @@ Protected branches are available in public repositories with GitHub Free and Git
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos remove-protected-branch-required-status-checks-contexts
 
@@ -8137,7 +8137,7 @@ Protected branches are available in public repositories with GitHub Free and Git
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos remove-protected-branch-restrictions
 
@@ -8153,7 +8153,7 @@ Disables the ability to restrict who can push to this branch.
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos remove-protected-branch-team-restrictions
 
@@ -8173,7 +8173,7 @@ Removes the ability of a team to push to this branch. You can also remove push a
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos remove-protected-branch-user-restrictions
 
@@ -8193,7 +8193,7 @@ Removes the ability of a user to push to this branch.
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos replace-all-topics
 
@@ -8208,7 +8208,7 @@ https://developer.github.com/v3/repos/#replace-all-repository-topics
 |------|-------------|
 | mercy-preview | __Required__ Repository topics on GitHub are currently available for developers to preview. To use this endpoint, you must set this flag. |
 | names | __Required__ An array of topics to add to the repository. Pass one or more topics to _replace_ the set of existing topics. Send an empty array (`[]`) to clear all topics from the repository. **Note:** Topic `names` cannot contain uppercase letters. |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos replace-protected-branch-app-restrictions
 
@@ -8228,7 +8228,7 @@ Replaces the list of apps that have push access to this branch. This removes all
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos replace-protected-branch-required-status-checks-contexts
 
@@ -8242,7 +8242,7 @@ Protected branches are available in public repositories with GitHub Free and Git
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos replace-protected-branch-team-restrictions
 
@@ -8262,7 +8262,7 @@ Replaces the list of teams that have push access to this branch. This removes al
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos replace-protected-branch-user-restrictions
 
@@ -8282,7 +8282,7 @@ Replaces the list of people that have push access to this branch. This removes a
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos request-page-build
 
@@ -8297,7 +8297,7 @@ Build requests are limited to one concurrent build per repository and one concur
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos retrieve-community-profile-metrics
 
@@ -8310,7 +8310,7 @@ This endpoint will return all community profile metrics, including an overall he
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos test-push-hook
 
@@ -8326,7 +8326,7 @@ This will trigger the hook with the latest push to the current repository if the
 | name | description |
 |------|-------------|
 | hook_id | __Required__ hook_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos transfer
 
@@ -8339,7 +8339,7 @@ A transfer request will need to be accepted by the new owner when transferring a
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | new_owner | **Required:** The username or organization name the repository will be transferred to. |
 | team_ids | ID of the team or teams to add to the repository. Teams can only be added to organization-owned repositories. |
 
@@ -8354,7 +8354,7 @@ https://developer.github.com/v3/repos/#update-a-repository
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | allow_merge_commit | Either `true` to allow merging pull requests with a merge commit, or `false` to prevent merging pull requests with merge commits. |
 | allow_rebase_merge | Either `true` to allow rebase-merging pull requests, or `false` to prevent rebase-merging. |
 | allow_squash_merge | Either `true` to allow squash-merging pull requests, or `false` to prevent squash-merging. |
@@ -8392,7 +8392,7 @@ Protecting a branch requires admin or owner permissions to the repository.
 |------|-------------|
 | branch | __Required__ branch parameter |
 | enforce_admins | __Required__ Enforce all configured restrictions for administrators. Set to `true` to enforce required status checks for repository administrators. Set to `null` to disable. |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | required_status_checks.contexts | __Required__ The list of status checks to require in order to merge into this branch |
 | required_status_checks.strict | __Required__ Require branches to be up to date before merging. |
 | restrictions.teams | __Required__ The list of team `slug`s with push access |
@@ -8421,7 +8421,7 @@ https://developer.github.com/v3/repos/comments/#update-a-commit-comment
 |------|-------------|
 | body | __Required__ The contents of the comment |
 | comment_id | __Required__ comment_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos update-hook
 
@@ -8435,7 +8435,7 @@ https://developer.github.com/v3/repos/hooks/#edit-a-hook
 | name | description |
 |------|-------------|
 | hook_id | __Required__ hook_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | active | Determines if notifications are sent when the webhook is triggered. Set to `true` to send notifications. |
 | add_events | Determines a list of events to be added to the list of events that the Hook triggers for. |
 | config.content_type | The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`. |
@@ -8456,7 +8456,7 @@ https://developer.github.com/v3/repos/pages/#update-information-about-a-pages-si
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | cname | Specify a custom domain for the repository. Sending a `null` value will remove the custom domain. For more about custom domains, see "[Using a custom domain with GitHub Pages](https://help.github.com/articles/using-a-custom-domain-with-github-pages/)." |
 | source | Update the source for the repository. Must include the branch name, and may optionally specify the subdirectory `/docs`. Possible values are `"gh-pages"`, `"master"`, and `"master /docs"`. |
 
@@ -8472,7 +8472,7 @@ https://developer.github.com/v3/repos/invitations/#update-a-repository-invitatio
 | name | description |
 |------|-------------|
 | invitation_id | __Required__ invitation_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | permissions | The permissions that the associated user will have on the repository. Valid values are `read`, `write`, `maintain`, `triage`, and `admin`. |
 
 ## repos update-protected-branch-pull-request-review-enforcement
@@ -8491,7 +8491,7 @@ Updating pull request review enforcement requires admin or owner permissions to 
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | dismiss_stale_reviews | Set to `true` if you want to automatically dismiss approving reviews when someone pushes a new commit. |
 | dismissal_restrictions.teams | The list of team `slug`s with dismissal access |
 | dismissal_restrictions.users | The list of user `login`s with dismissal access |
@@ -8513,7 +8513,7 @@ Updating required status checks requires admin or owner permissions to the repos
 | name | description |
 |------|-------------|
 | branch | __Required__ branch parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | contexts | The list of status checks to require in order to merge into this branch |
 | strict | Require branches to be up to date before merging. |
 
@@ -8529,7 +8529,7 @@ Users with push access to the repository can edit a release.
 | name | description |
 |------|-------------|
 | release_id | __Required__ release_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | body | Text describing the contents of the tag. |
 | draft | `true` makes the release a draft, and `false` publishes the release. |
 | name | The name of the release. |
@@ -8549,7 +8549,7 @@ Users with push access to the repository can edit a release asset.
 | name | description |
 |------|-------------|
 | asset_id | __Required__ asset_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | label | An alternate short description of the asset. Used in place of the filename. |
 | name | The file name of the asset. |
 
@@ -8581,7 +8581,7 @@ This may leave an empty asset with a state of `starter`. It can be safely delete
 |------|-------------|
 | file | __Required__ the file to upload |
 | release_id | __Required__ release_id parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | content-type | override the Content-Type header |
 | label | label parameter |
 | name | name parameter |
@@ -9014,7 +9014,7 @@ For more information about the permission levels, see "[Repository permission le
 | name | description |
 |------|-------------|
 | org | __Required__ org parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | team_slug | __Required__ team_slug parameter |
 | permission | The permission to grant the team on this repository. Can be one of:  <br>\* `pull` - team members can pull, but not push to or administer this repository.  <br>\* `push` - team members can pull and push, but not administer this repository.  <br>\* `admin` - team members can pull, push and administer this repository.  <br>\* `maintain` - team members can manage the repository without access to sensitive or destructive actions. Recommended for project managers. Only applies to repositories owned by organizations.  <br>\* `triage` - team members can proactively manage issues and pull requests without write access. Recommended for contributors who triage a repository. Only applies to repositories owned by organizations.  <br>  <br>If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository. |
 
@@ -9033,7 +9033,7 @@ Note that, if you choose not to pass any parameters, you'll need to set `Content
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | team_id | __Required__ team_id parameter |
 | permission | The permission to grant the team on this repository. Can be one of:  <br>\* `pull` - team members can pull, but not push to or administer this repository.  <br>\* `push` - team members can pull and push, but not administer this repository.  <br>\* `admin` - team members can pull, push and administer this repository.  <br>  <br>If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository. |
 
@@ -9053,7 +9053,7 @@ You can also get information about the specified repository, including what perm
 | name | description |
 |------|-------------|
 | org | __Required__ org parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | team_slug | __Required__ team_slug parameter |
 
 ## teams check-manages-repo-legacy
@@ -9071,7 +9071,7 @@ You can also get information about the specified repository, including what perm
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | team_id | __Required__ team_id parameter |
 
 ## teams create
@@ -9928,7 +9928,7 @@ If the authenticated user is an organization owner or a team maintainer, they ca
 | name | description |
 |------|-------------|
 | org | __Required__ org parameter |
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | team_slug | __Required__ team_slug parameter |
 
 ## teams remove-repo-legacy
@@ -9944,7 +9944,7 @@ If the authenticated user is an organization owner or a team maintainer, they ca
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repo parameter |
+| repo | __Required__ repository in OWNER/REPO form |
 | team_id | __Required__ team_id parameter |
 
 ## teams review-project-in-org

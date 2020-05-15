@@ -164,9 +164,9 @@ func (c *ReposAcceptInvitationCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposAddCollaboratorCmd struct {
-	Permission string `name:"permission"`
 	Repo       string `required:"" name:"repo"`
 	Username   string `required:"" name:"username"`
+	Permission string `name:"permission"`
 	internal.BaseCmd
 }
 
@@ -180,9 +180,9 @@ func (c *ReposAddCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposAddDeployKeyCmd struct {
+	Repo     string `required:"" name:"repo"`
 	Key      string `required:"" name:"key"`
 	ReadOnly bool   `name:"read_only"`
-	Repo     string `required:"" name:"repo"`
 	Title    string `name:"title"`
 	internal.BaseCmd
 }
@@ -198,8 +198,8 @@ func (c *ReposAddDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposAddProtectedBranchAdminEnforcementCmd struct {
-	Branch string `required:"" name:"branch"`
 	Repo   string `required:"" name:"repo"`
+	Branch string `required:"" name:"branch"`
 	internal.BaseCmd
 }
 
@@ -212,8 +212,8 @@ func (c *ReposAddProtectedBranchAdminEnforcementCmd) Run(isValueSetMap map[strin
 }
 
 type ReposAddProtectedBranchAppRestrictionsCmd struct {
-	Branch string `required:"" name:"branch"`
 	Repo   string `required:"" name:"repo"`
+	Branch string `required:"" name:"branch"`
 	internal.BaseCmd
 }
 
@@ -226,9 +226,9 @@ func (c *ReposAddProtectedBranchAppRestrictionsCmd) Run(isValueSetMap map[string
 }
 
 type ReposAddProtectedBranchRequiredSignaturesCmd struct {
-	Branch string `required:"" name:"branch"`
-	Repo   string `required:"" name:"repo"`
 	Zzzax  bool   `required:"" name:"zzzax-preview"`
+	Repo   string `required:"" name:"repo"`
+	Branch string `required:"" name:"branch"`
 	internal.BaseCmd
 }
 
@@ -242,8 +242,8 @@ func (c *ReposAddProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[str
 }
 
 type ReposAddProtectedBranchRequiredStatusChecksContextsCmd struct {
-	Branch string `required:"" name:"branch"`
 	Repo   string `required:"" name:"repo"`
+	Branch string `required:"" name:"branch"`
 	internal.BaseCmd
 }
 
@@ -256,8 +256,8 @@ func (c *ReposAddProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueSetM
 }
 
 type ReposAddProtectedBranchTeamRestrictionsCmd struct {
-	Branch string `required:"" name:"branch"`
 	Repo   string `required:"" name:"repo"`
+	Branch string `required:"" name:"branch"`
 	internal.BaseCmd
 }
 
@@ -270,8 +270,8 @@ func (c *ReposAddProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[strin
 }
 
 type ReposAddProtectedBranchUserRestrictionsCmd struct {
-	Branch string `required:"" name:"branch"`
 	Repo   string `required:"" name:"repo"`
+	Branch string `required:"" name:"branch"`
 	internal.BaseCmd
 }
 
@@ -312,9 +312,9 @@ func (c *ReposCheckVulnerabilityAlertsCmd) Run(isValueSetMap map[string]bool) er
 }
 
 type ReposCompareCommitsCmd struct {
+	Repo string `required:"" name:"repo"`
 	Base string `required:"" name:"base"`
 	Head string `required:"" name:"head"`
-	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -328,12 +328,12 @@ func (c *ReposCompareCommitsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposCreateCommitCommentCmd struct {
-	Body      string `required:"" name:"body"`
+	Repo      string `required:"" name:"repo"`
 	CommitSha string `required:"" name:"commit_sha"`
+	Body      string `required:"" name:"body"`
 	Line      int64  `name:"line"`
 	Path      string `name:"path"`
 	Position  int64  `name:"position"`
-	Repo      string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -351,13 +351,13 @@ func (c *ReposCreateCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposCreateDeploymentCmd struct {
 	AntMan                bool     `name:"ant-man-preview"`
+	Repo                  string   `required:"" name:"repo"`
+	Ref                   string   `required:"" name:"ref"`
 	AutoMerge             bool     `name:"auto_merge"`
 	Description           string   `name:"description"`
 	Environment           string   `name:"environment"`
 	Payload               string   `name:"payload"`
 	ProductionEnvironment bool     `name:"production_environment"`
-	Ref                   string   `required:"" name:"ref"`
-	Repo                  string   `required:"" name:"repo"`
 	RequiredContexts      []string `name:"required_contexts"`
 	Task                  string   `name:"task"`
 	TransientEnvironment  bool     `name:"transient_environment"`
@@ -383,15 +383,15 @@ func (c *ReposCreateDeploymentCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposCreateDeploymentStatusCmd struct {
 	AntMan         bool   `name:"ant-man-preview"`
-	AutoInactive   bool   `name:"auto_inactive"`
+	Flash          bool   `name:"flash-preview"`
+	Repo           string `required:"" name:"repo"`
 	DeploymentId   int64  `required:"" name:"deployment_id"`
+	State          string `required:"" name:"state"`
+	AutoInactive   bool   `name:"auto_inactive"`
 	Description    string `name:"description"`
 	Environment    string `name:"environment"`
 	EnvironmentUrl string `name:"environment_url"`
-	Flash          bool   `name:"flash-preview"`
 	LogUrl         string `name:"log_url"`
-	Repo           string `required:"" name:"repo"`
-	State          string `required:"" name:"state"`
 	TargetUrl      string `name:"target_url"`
 	internal.BaseCmd
 }
@@ -414,9 +414,9 @@ func (c *ReposCreateDeploymentStatusCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type ReposCreateDispatchEventCmd struct {
+	Repo          string              `required:"" name:"repo"`
 	ClientPayload internal.JSONObject `name:"client_payload"`
 	EventType     string              `name:"event_type"`
-	Repo          string              `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -430,11 +430,13 @@ func (c *ReposCreateDispatchEventCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposCreateForAuthenticatedUserCmd struct {
+	Baptiste            bool   `name:"baptiste-preview"`
+	Nebula              bool   `name:"nebula-preview"`
+	Name                string `required:"" name:"name"`
 	AllowMergeCommit    bool   `name:"allow_merge_commit"`
 	AllowRebaseMerge    bool   `name:"allow_rebase_merge"`
 	AllowSquashMerge    bool   `name:"allow_squash_merge"`
 	AutoInit            bool   `name:"auto_init"`
-	Baptiste            bool   `name:"baptiste-preview"`
 	DeleteBranchOnMerge bool   `name:"delete_branch_on_merge"`
 	Description         string `name:"description"`
 	GitignoreTemplate   string `name:"gitignore_template"`
@@ -444,8 +446,6 @@ type ReposCreateForAuthenticatedUserCmd struct {
 	Homepage            string `name:"homepage"`
 	IsTemplate          bool   `name:"is_template"`
 	LicenseTemplate     string `name:"license_template"`
-	Name                string `required:"" name:"name"`
-	Nebula              bool   `name:"nebula-preview"`
 	Private             bool   `name:"private"`
 	TeamId              int64  `name:"team_id"`
 	Visibility          string `name:"visibility"`
@@ -478,8 +478,8 @@ func (c *ReposCreateForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) 
 }
 
 type ReposCreateForkCmd struct {
-	Organization string `name:"organization"`
 	Repo         string `required:"" name:"repo"`
+	Organization string `name:"organization"`
 	internal.BaseCmd
 }
 
@@ -492,14 +492,14 @@ func (c *ReposCreateForkCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposCreateHookCmd struct {
+	Repo              string   `required:"" name:"repo"`
+	ConfigUrl         string   `required:"" name:"config.url"`
 	Active            bool     `name:"active"`
 	ConfigContentType string   `name:"config.content_type"`
 	ConfigInsecureSsl string   `name:"config.insecure_ssl"`
 	ConfigSecret      string   `name:"config.secret"`
-	ConfigUrl         string   `required:"" name:"config.url"`
 	Events            []string `name:"events"`
 	Name              string   `name:"name"`
-	Repo              string   `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -518,11 +518,14 @@ func (c *ReposCreateHookCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposCreateInOrgCmd struct {
+	Baptiste            bool   `name:"baptiste-preview"`
+	Nebula              bool   `name:"nebula-preview"`
+	Org                 string `required:"" name:"org"`
+	Name                string `required:"" name:"name"`
 	AllowMergeCommit    bool   `name:"allow_merge_commit"`
 	AllowRebaseMerge    bool   `name:"allow_rebase_merge"`
 	AllowSquashMerge    bool   `name:"allow_squash_merge"`
 	AutoInit            bool   `name:"auto_init"`
-	Baptiste            bool   `name:"baptiste-preview"`
 	DeleteBranchOnMerge bool   `name:"delete_branch_on_merge"`
 	Description         string `name:"description"`
 	GitignoreTemplate   string `name:"gitignore_template"`
@@ -532,9 +535,6 @@ type ReposCreateInOrgCmd struct {
 	Homepage            string `name:"homepage"`
 	IsTemplate          bool   `name:"is_template"`
 	LicenseTemplate     string `name:"license_template"`
-	Name                string `required:"" name:"name"`
-	Nebula              bool   `name:"nebula-preview"`
-	Org                 string `required:"" name:"org"`
 	Private             bool   `name:"private"`
 	TeamId              int64  `name:"team_id"`
 	Visibility          string `name:"visibility"`
@@ -568,15 +568,15 @@ func (c *ReposCreateInOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposCreateOrUpdateFileCmd struct {
+	Repo           string `required:"" name:"repo"`
+	Path           string `required:"" name:"path"`
+	Content        string `required:"" name:"content"`
+	Message        string `required:"" name:"message"`
 	AuthorEmail    string `name:"author.email"`
 	AuthorName     string `name:"author.name"`
 	Branch         string `name:"branch"`
 	CommitterEmail string `name:"committer.email"`
 	CommitterName  string `name:"committer.name"`
-	Content        string `required:"" name:"content"`
-	Message        string `required:"" name:"message"`
-	Path           string `required:"" name:"path"`
-	Repo           string `required:"" name:"repo"`
 	Sha            string `name:"sha"`
 	internal.BaseCmd
 }
@@ -598,12 +598,12 @@ func (c *ReposCreateOrUpdateFileCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposCreateReleaseCmd struct {
+	Repo            string `required:"" name:"repo"`
+	TagName         string `required:"" name:"tag_name"`
 	Body            string `name:"body"`
 	Draft           bool   `name:"draft"`
 	Name            string `name:"name"`
 	Prerelease      bool   `name:"prerelease"`
-	Repo            string `required:"" name:"repo"`
-	TagName         string `required:"" name:"tag_name"`
 	TargetCommitish string `name:"target_commitish"`
 	internal.BaseCmd
 }
@@ -622,11 +622,11 @@ func (c *ReposCreateReleaseCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposCreateStatusCmd struct {
-	Context     string `name:"context"`
-	Description string `name:"description"`
 	Repo        string `required:"" name:"repo"`
 	Sha         string `required:"" name:"sha"`
 	State       string `required:"" name:"state"`
+	Context     string `name:"context"`
+	Description string `name:"description"`
 	TargetUrl   string `name:"target_url"`
 	internal.BaseCmd
 }
@@ -645,12 +645,12 @@ func (c *ReposCreateStatusCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposCreateUsingTemplateCmd struct {
 	Baptiste      bool   `required:"" name:"baptiste-preview"`
-	Description   string `name:"description"`
-	Name          string `required:"" name:"name"`
-	Owner         string `name:"owner"`
-	Private       bool   `name:"private"`
 	TemplateOwner string `required:"" name:"template_owner"`
 	TemplateRepo  string `required:"" name:"template_repo"`
+	Name          string `required:"" name:"name"`
+	Description   string `name:"description"`
+	Owner         string `name:"owner"`
+	Private       bool   `name:"private"`
 	internal.BaseCmd
 }
 
@@ -692,8 +692,8 @@ func (c *ReposDeleteCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposDeleteCommitCommentCmd struct {
-	CommentId int64  `required:"" name:"comment_id"`
 	Repo      string `required:"" name:"repo"`
+	CommentId int64  `required:"" name:"comment_id"`
 	internal.BaseCmd
 }
 
@@ -706,8 +706,8 @@ func (c *ReposDeleteCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposDeleteDeploymentCmd struct {
-	DeploymentId int64  `required:"" name:"deployment_id"`
 	Repo         string `required:"" name:"repo"`
+	DeploymentId int64  `required:"" name:"deployment_id"`
 	internal.BaseCmd
 }
 
@@ -720,8 +720,8 @@ func (c *ReposDeleteDeploymentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposDeleteDownloadCmd struct {
-	DownloadId int64  `required:"" name:"download_id"`
 	Repo       string `required:"" name:"repo"`
+	DownloadId int64  `required:"" name:"download_id"`
 	internal.BaseCmd
 }
 
@@ -734,15 +734,15 @@ func (c *ReposDeleteDownloadCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposDeleteFileCmd struct {
+	Repo           string `required:"" name:"repo"`
+	Path           string `required:"" name:"path"`
+	Message        string `required:"" name:"message"`
+	Sha            string `required:"" name:"sha"`
 	AuthorEmail    string `name:"author.email"`
 	AuthorName     string `name:"author.name"`
 	Branch         string `name:"branch"`
 	CommitterEmail string `name:"committer.email"`
 	CommitterName  string `name:"committer.name"`
-	Message        string `required:"" name:"message"`
-	Path           string `required:"" name:"path"`
-	Repo           string `required:"" name:"repo"`
-	Sha            string `required:"" name:"sha"`
 	internal.BaseCmd
 }
 
@@ -762,8 +762,8 @@ func (c *ReposDeleteFileCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposDeleteHookCmd struct {
-	HookId int64  `required:"" name:"hook_id"`
 	Repo   string `required:"" name:"repo"`
+	HookId int64  `required:"" name:"hook_id"`
 	internal.BaseCmd
 }
 
@@ -776,8 +776,8 @@ func (c *ReposDeleteHookCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposDeleteInvitationCmd struct {
-	InvitationId int64  `required:"" name:"invitation_id"`
 	Repo         string `required:"" name:"repo"`
+	InvitationId int64  `required:"" name:"invitation_id"`
 	internal.BaseCmd
 }
 
@@ -790,8 +790,8 @@ func (c *ReposDeleteInvitationCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposDeleteReleaseAssetCmd struct {
-	AssetId int64  `required:"" name:"asset_id"`
 	Repo    string `required:"" name:"repo"`
+	AssetId int64  `required:"" name:"asset_id"`
 	internal.BaseCmd
 }
 
@@ -804,8 +804,8 @@ func (c *ReposDeleteReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposDeleteReleaseCmd struct {
-	ReleaseId int64  `required:"" name:"release_id"`
 	Repo      string `required:"" name:"repo"`
+	ReleaseId int64  `required:"" name:"release_id"`
 	internal.BaseCmd
 }
 
@@ -832,8 +832,8 @@ func (c *ReposDisableAutomatedSecurityFixesCmd) Run(isValueSetMap map[string]boo
 }
 
 type ReposDisablePagesSiteCmd struct {
-	Repo       string `required:"" name:"repo"`
 	Switcheroo bool   `required:"" name:"switcheroo-preview"`
+	Repo       string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -874,10 +874,10 @@ func (c *ReposEnableAutomatedSecurityFixesCmd) Run(isValueSetMap map[string]bool
 }
 
 type ReposEnablePagesSiteCmd struct {
+	Switcheroo   bool   `required:"" name:"switcheroo-preview"`
 	Repo         string `required:"" name:"repo"`
 	SourceBranch string `name:"source.branch"`
 	SourcePath   string `name:"source.path"`
-	Switcheroo   bool   `required:"" name:"switcheroo-preview"`
 	internal.BaseCmd
 }
 
@@ -920,8 +920,8 @@ func (c *ReposGetAllTopicsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetAppsWithAccessToProtectedBranchCmd struct {
-	Branch string `required:"" name:"branch"`
 	Repo   string `required:"" name:"repo"`
+	Branch string `required:"" name:"branch"`
 	internal.BaseCmd
 }
 
@@ -934,9 +934,9 @@ func (c *ReposGetAppsWithAccessToProtectedBranchCmd) Run(isValueSetMap map[strin
 }
 
 type ReposGetArchiveLinkCmd struct {
+	Repo          string `required:"" name:"repo"`
 	ArchiveFormat string `required:"" name:"archive_format"`
 	Ref           string `required:"" name:"ref"`
-	Repo          string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -950,8 +950,8 @@ func (c *ReposGetArchiveLinkCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetBranchCmd struct {
-	Branch string `required:"" name:"branch"`
 	Repo   string `required:"" name:"repo"`
+	Branch string `required:"" name:"branch"`
 	internal.BaseCmd
 }
 
@@ -964,9 +964,9 @@ func (c *ReposGetBranchCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetBranchProtectionCmd struct {
-	Branch   string `required:"" name:"branch"`
 	LukeCage bool   `name:"luke-cage-preview"`
 	Repo     string `required:"" name:"repo"`
+	Branch   string `required:"" name:"branch"`
 	internal.BaseCmd
 }
 
@@ -980,8 +980,8 @@ func (c *ReposGetBranchProtectionCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetClonesCmd struct {
-	Per  string `name:"per"`
 	Repo string `required:"" name:"repo"`
+	Per  string `name:"per"`
 	internal.BaseCmd
 }
 
@@ -995,8 +995,8 @@ func (c *ReposGetClonesCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetCmd struct {
 	Nebula       bool   `name:"nebula-preview"`
-	Repo         string `required:"" name:"repo"`
 	ScarletWitch bool   `name:"scarlet-witch-preview"`
+	Repo         string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -1036,8 +1036,8 @@ func (c *ReposGetCollaboratorPermissionLevelCmd) Run(isValueSetMap map[string]bo
 }
 
 type ReposGetCombinedStatusForRefCmd struct {
-	Ref  string `required:"" name:"ref"`
 	Repo string `required:"" name:"repo"`
+	Ref  string `required:"" name:"ref"`
 	internal.BaseCmd
 }
 
@@ -1062,8 +1062,8 @@ func (c *ReposGetCommitActivityStatsCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type ReposGetCommitCmd struct {
-	Ref  string `required:"" name:"ref"`
 	Repo string `required:"" name:"repo"`
+	Ref  string `required:"" name:"ref"`
 	internal.BaseCmd
 }
 
@@ -1076,9 +1076,9 @@ func (c *ReposGetCommitCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetCommitCommentCmd struct {
-	CommentId    int64  `required:"" name:"comment_id"`
-	Repo         string `required:"" name:"repo"`
 	SquirrelGirl bool   `name:"squirrel-girl-preview"`
+	Repo         string `required:"" name:"repo"`
+	CommentId    int64  `required:"" name:"comment_id"`
 	internal.BaseCmd
 }
 
@@ -1092,9 +1092,9 @@ func (c *ReposGetCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetContentsCmd struct {
+	Repo string `required:"" name:"repo"`
 	Path string `required:"" name:"path"`
 	Ref  string `name:"ref"`
-	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -1120,8 +1120,8 @@ func (c *ReposGetContributorsStatsCmd) Run(isValueSetMap map[string]bool) error 
 }
 
 type ReposGetDeployKeyCmd struct {
-	KeyId int64  `required:"" name:"key_id"`
 	Repo  string `required:"" name:"repo"`
+	KeyId int64  `required:"" name:"key_id"`
 	internal.BaseCmd
 }
 
@@ -1135,9 +1135,9 @@ func (c *ReposGetDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetDeploymentCmd struct {
 	AntMan       bool   `name:"ant-man-preview"`
-	DeploymentId int64  `required:"" name:"deployment_id"`
 	MachineMan   bool   `name:"machine-man-preview"`
 	Repo         string `required:"" name:"repo"`
+	DeploymentId int64  `required:"" name:"deployment_id"`
 	internal.BaseCmd
 }
 
@@ -1153,10 +1153,10 @@ func (c *ReposGetDeploymentCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetDeploymentStatusCmd struct {
 	AntMan       bool   `name:"ant-man-preview"`
-	DeploymentId int64  `required:"" name:"deployment_id"`
 	Flash        bool   `name:"flash-preview"`
 	MachineMan   bool   `name:"machine-man-preview"`
 	Repo         string `required:"" name:"repo"`
+	DeploymentId int64  `required:"" name:"deployment_id"`
 	StatusId     int64  `required:"" name:"status_id"`
 	internal.BaseCmd
 }
@@ -1174,8 +1174,8 @@ func (c *ReposGetDeploymentStatusCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetDownloadCmd struct {
-	DownloadId int64  `required:"" name:"download_id"`
 	Repo       string `required:"" name:"repo"`
+	DownloadId int64  `required:"" name:"download_id"`
 	internal.BaseCmd
 }
 
@@ -1188,8 +1188,8 @@ func (c *ReposGetDownloadCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetHookCmd struct {
-	HookId int64  `required:"" name:"hook_id"`
 	Repo   string `required:"" name:"repo"`
+	HookId int64  `required:"" name:"hook_id"`
 	internal.BaseCmd
 }
 
@@ -1226,8 +1226,8 @@ func (c *ReposGetLatestReleaseCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetPagesBuildCmd struct {
-	BuildId int64  `required:"" name:"build_id"`
 	Repo    string `required:"" name:"repo"`
+	BuildId int64  `required:"" name:"build_id"`
 	internal.BaseCmd
 }
 
@@ -1264,8 +1264,8 @@ func (c *ReposGetParticipationStatsCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type ReposGetProtectedBranchAdminEnforcementCmd struct {
-	Branch string `required:"" name:"branch"`
 	Repo   string `required:"" name:"repo"`
+	Branch string `required:"" name:"branch"`
 	internal.BaseCmd
 }
 
@@ -1278,9 +1278,9 @@ func (c *ReposGetProtectedBranchAdminEnforcementCmd) Run(isValueSetMap map[strin
 }
 
 type ReposGetProtectedBranchPullRequestReviewEnforcementCmd struct {
-	Branch   string `required:"" name:"branch"`
 	LukeCage bool   `name:"luke-cage-preview"`
 	Repo     string `required:"" name:"repo"`
+	Branch   string `required:"" name:"branch"`
 	internal.BaseCmd
 }
 
@@ -1294,9 +1294,9 @@ func (c *ReposGetProtectedBranchPullRequestReviewEnforcementCmd) Run(isValueSetM
 }
 
 type ReposGetProtectedBranchRequiredSignaturesCmd struct {
-	Branch string `required:"" name:"branch"`
-	Repo   string `required:"" name:"repo"`
 	Zzzax  bool   `required:"" name:"zzzax-preview"`
+	Repo   string `required:"" name:"repo"`
+	Branch string `required:"" name:"branch"`
 	internal.BaseCmd
 }
 
@@ -1310,8 +1310,8 @@ func (c *ReposGetProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[str
 }
 
 type ReposGetProtectedBranchRequiredStatusChecksCmd struct {
-	Branch string `required:"" name:"branch"`
 	Repo   string `required:"" name:"repo"`
+	Branch string `required:"" name:"branch"`
 	internal.BaseCmd
 }
 
@@ -1324,8 +1324,8 @@ func (c *ReposGetProtectedBranchRequiredStatusChecksCmd) Run(isValueSetMap map[s
 }
 
 type ReposGetProtectedBranchRestrictionsCmd struct {
-	Branch string `required:"" name:"branch"`
 	Repo   string `required:"" name:"repo"`
+	Branch string `required:"" name:"branch"`
 	internal.BaseCmd
 }
 
@@ -1350,8 +1350,8 @@ func (c *ReposGetPunchCardStatsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetReadmeCmd struct {
-	Ref  string `name:"ref"`
 	Repo string `required:"" name:"repo"`
+	Ref  string `name:"ref"`
 	internal.BaseCmd
 }
 
@@ -1364,8 +1364,8 @@ func (c *ReposGetReadmeCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetReleaseAssetCmd struct {
-	AssetId int64  `required:"" name:"asset_id"`
 	Repo    string `required:"" name:"repo"`
+	AssetId int64  `required:"" name:"asset_id"`
 	internal.BaseCmd
 }
 
@@ -1392,8 +1392,8 @@ func (c *ReposGetReleaseByTagCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetReleaseCmd struct {
-	ReleaseId int64  `required:"" name:"release_id"`
 	Repo      string `required:"" name:"repo"`
+	ReleaseId int64  `required:"" name:"release_id"`
 	internal.BaseCmd
 }
 
@@ -1406,8 +1406,8 @@ func (c *ReposGetReleaseCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetTeamsWithAccessToProtectedBranchCmd struct {
-	Branch string `required:"" name:"branch"`
 	Repo   string `required:"" name:"repo"`
+	Branch string `required:"" name:"branch"`
 	internal.BaseCmd
 }
 
@@ -1444,8 +1444,8 @@ func (c *ReposGetTopReferrersCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposGetUsersWithAccessToProtectedBranchCmd struct {
-	Branch string `required:"" name:"branch"`
 	Repo   string `required:"" name:"repo"`
+	Branch string `required:"" name:"branch"`
 	internal.BaseCmd
 }
 
@@ -1458,8 +1458,8 @@ func (c *ReposGetUsersWithAccessToProtectedBranchCmd) Run(isValueSetMap map[stri
 }
 
 type ReposGetViewsCmd struct {
-	Per  string `name:"per"`
 	Repo string `required:"" name:"repo"`
+	Per  string `name:"per"`
 	internal.BaseCmd
 }
 
@@ -1472,10 +1472,10 @@ func (c *ReposGetViewsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListAssetsForReleaseCmd struct {
+	Repo      string `required:"" name:"repo"`
+	ReleaseId int64  `required:"" name:"release_id"`
 	Page      int64  `name:"page"`
 	PerPage   int64  `name:"per_page"`
-	ReleaseId int64  `required:"" name:"release_id"`
-	Repo      string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -1490,10 +1490,10 @@ func (c *ReposListAssetsForReleaseCmd) Run(isValueSetMap map[string]bool) error 
 }
 
 type ReposListBranchesCmd struct {
+	Repo      string `required:"" name:"repo"`
 	Page      int64  `name:"page"`
 	PerPage   int64  `name:"per_page"`
 	Protected bool   `name:"protected"`
-	Repo      string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -1508,9 +1508,9 @@ func (c *ReposListBranchesCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListBranchesForHeadCommitCmd struct {
-	CommitSha string `required:"" name:"commit_sha"`
 	Groot     bool   `required:"" name:"groot-preview"`
 	Repo      string `required:"" name:"repo"`
+	CommitSha string `required:"" name:"commit_sha"`
 	internal.BaseCmd
 }
 
@@ -1524,10 +1524,10 @@ func (c *ReposListBranchesForHeadCommitCmd) Run(isValueSetMap map[string]bool) e
 }
 
 type ReposListCollaboratorsCmd struct {
+	Repo        string `required:"" name:"repo"`
 	Affiliation string `name:"affiliation"`
 	Page        int64  `name:"page"`
 	PerPage     int64  `name:"per_page"`
-	Repo        string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -1542,11 +1542,11 @@ func (c *ReposListCollaboratorsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListCommentsForCommitCmd struct {
+	SquirrelGirl bool   `name:"squirrel-girl-preview"`
+	Repo         string `required:"" name:"repo"`
 	CommitSha    string `required:"" name:"commit_sha"`
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
-	Repo         string `required:"" name:"repo"`
-	SquirrelGirl bool   `name:"squirrel-girl-preview"`
 	internal.BaseCmd
 }
 
@@ -1562,10 +1562,10 @@ func (c *ReposListCommentsForCommitCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type ReposListCommitCommentsCmd struct {
+	SquirrelGirl bool   `name:"squirrel-girl-preview"`
+	Repo         string `required:"" name:"repo"`
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
-	Repo         string `required:"" name:"repo"`
-	SquirrelGirl bool   `name:"squirrel-girl-preview"`
 	internal.BaseCmd
 }
 
@@ -1580,11 +1580,11 @@ func (c *ReposListCommitCommentsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListCommitsCmd struct {
+	Repo    string `required:"" name:"repo"`
 	Author  string `name:"author"`
 	Page    int64  `name:"page"`
 	Path    string `name:"path"`
 	PerPage int64  `name:"per_page"`
-	Repo    string `required:"" name:"repo"`
 	Sha     string `name:"sha"`
 	Since   string `name:"since"`
 	Until   string `name:"until"`
@@ -1606,10 +1606,10 @@ func (c *ReposListCommitsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListContributorsCmd struct {
+	Repo    string `required:"" name:"repo"`
 	Anon    string `name:"anon"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Repo    string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -1624,9 +1624,9 @@ func (c *ReposListContributorsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListDeployKeysCmd struct {
+	Repo    string `required:"" name:"repo"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Repo    string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -1641,11 +1641,11 @@ func (c *ReposListDeployKeysCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposListDeploymentStatusesCmd struct {
 	AntMan       bool   `name:"ant-man-preview"`
-	DeploymentId int64  `required:"" name:"deployment_id"`
 	Flash        bool   `name:"flash-preview"`
+	Repo         string `required:"" name:"repo"`
+	DeploymentId int64  `required:"" name:"deployment_id"`
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
-	Repo         string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -1663,11 +1663,11 @@ func (c *ReposListDeploymentStatusesCmd) Run(isValueSetMap map[string]bool) erro
 
 type ReposListDeploymentsCmd struct {
 	AntMan      bool   `name:"ant-man-preview"`
+	Repo        string `required:"" name:"repo"`
 	Environment string `name:"environment"`
 	Page        int64  `name:"page"`
 	PerPage     int64  `name:"per_page"`
 	Ref         string `name:"ref"`
-	Repo        string `required:"" name:"repo"`
 	Sha         string `name:"sha"`
 	Task        string `name:"task"`
 	internal.BaseCmd
@@ -1688,9 +1688,9 @@ func (c *ReposListDeploymentsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListDownloadsCmd struct {
+	Repo    string `required:"" name:"repo"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Repo    string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -1729,9 +1729,9 @@ func (c *ReposListForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) er
 
 type ReposListForOrgCmd struct {
 	Baptiste  bool   `name:"baptiste-preview"`
-	Direction string `name:"direction"`
 	Nebula    bool   `name:"nebula-preview"`
 	Org       string `required:"" name:"org"`
+	Direction string `name:"direction"`
 	Page      int64  `name:"page"`
 	PerPage   int64  `name:"per_page"`
 	Sort      string `name:"sort"`
@@ -1754,13 +1754,13 @@ func (c *ReposListForOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListForUserCmd struct {
-	Direction string `name:"direction"`
 	Nebula    bool   `name:"nebula-preview"`
+	Username  string `required:"" name:"username"`
+	Direction string `name:"direction"`
 	Page      int64  `name:"page"`
 	PerPage   int64  `name:"per_page"`
 	Sort      string `name:"sort"`
 	Type      string `name:"type"`
-	Username  string `required:"" name:"username"`
 	internal.BaseCmd
 }
 
@@ -1778,9 +1778,9 @@ func (c *ReposListForUserCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListForksCmd struct {
+	Repo    string `required:"" name:"repo"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Repo    string `required:"" name:"repo"`
 	Sort    string `name:"sort"`
 	internal.BaseCmd
 }
@@ -1796,9 +1796,9 @@ func (c *ReposListForksCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListHooksCmd struct {
+	Repo    string `required:"" name:"repo"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Repo    string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -1812,9 +1812,9 @@ func (c *ReposListHooksCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListInvitationsCmd struct {
+	Repo    string `required:"" name:"repo"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Repo    string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -1854,9 +1854,9 @@ func (c *ReposListLanguagesCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListPagesBuildsCmd struct {
+	Repo    string `required:"" name:"repo"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Repo    string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -1870,8 +1870,8 @@ func (c *ReposListPagesBuildsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListProtectedBranchRequiredStatusChecksContextsCmd struct {
-	Branch string `required:"" name:"branch"`
 	Repo   string `required:"" name:"repo"`
+	Branch string `required:"" name:"branch"`
 	internal.BaseCmd
 }
 
@@ -1896,11 +1896,11 @@ func (c *ReposListPublicCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListPullRequestsAssociatedWithCommitCmd struct {
-	CommitSha string `required:"" name:"commit_sha"`
 	Groot     bool   `required:"" name:"groot-preview"`
+	Repo      string `required:"" name:"repo"`
+	CommitSha string `required:"" name:"commit_sha"`
 	Page      int64  `name:"page"`
 	PerPage   int64  `name:"per_page"`
-	Repo      string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -1916,9 +1916,9 @@ func (c *ReposListPullRequestsAssociatedWithCommitCmd) Run(isValueSetMap map[str
 }
 
 type ReposListReleasesCmd struct {
+	Repo    string `required:"" name:"repo"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Repo    string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -1932,10 +1932,10 @@ func (c *ReposListReleasesCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListStatusesForRefCmd struct {
+	Repo    string `required:"" name:"repo"`
+	Ref     string `required:"" name:"ref"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Ref     string `required:"" name:"ref"`
-	Repo    string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -1950,9 +1950,9 @@ func (c *ReposListStatusesForRefCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListTagsCmd struct {
+	Repo    string `required:"" name:"repo"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Repo    string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -1966,9 +1966,9 @@ func (c *ReposListTagsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListTeamsCmd struct {
+	Repo    string `required:"" name:"repo"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Repo    string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -1982,10 +1982,10 @@ func (c *ReposListTeamsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposMergeCmd struct {
-	Base          string `required:"" name:"base"`
-	CommitMessage string `name:"commit_message"`
-	Head          string `required:"" name:"head"`
 	Repo          string `required:"" name:"repo"`
+	Base          string `required:"" name:"base"`
+	Head          string `required:"" name:"head"`
+	CommitMessage string `name:"commit_message"`
 	internal.BaseCmd
 }
 
@@ -2000,8 +2000,8 @@ func (c *ReposMergeCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposPingHookCmd struct {
-	HookId int64  `required:"" name:"hook_id"`
 	Repo   string `required:"" name:"repo"`
+	HookId int64  `required:"" name:"hook_id"`
 	internal.BaseCmd
 }
 
@@ -2014,8 +2014,8 @@ func (c *ReposPingHookCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposRemoveBranchProtectionCmd struct {
-	Branch string `required:"" name:"branch"`
 	Repo   string `required:"" name:"repo"`
+	Branch string `required:"" name:"branch"`
 	internal.BaseCmd
 }
 
@@ -2042,8 +2042,8 @@ func (c *ReposRemoveCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposRemoveDeployKeyCmd struct {
-	KeyId int64  `required:"" name:"key_id"`
 	Repo  string `required:"" name:"repo"`
+	KeyId int64  `required:"" name:"key_id"`
 	internal.BaseCmd
 }
 
@@ -2056,8 +2056,8 @@ func (c *ReposRemoveDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposRemoveProtectedBranchAdminEnforcementCmd struct {
-	Branch string `required:"" name:"branch"`
 	Repo   string `required:"" name:"repo"`
+	Branch string `required:"" name:"branch"`
 	internal.BaseCmd
 }
 
@@ -2070,8 +2070,8 @@ func (c *ReposRemoveProtectedBranchAdminEnforcementCmd) Run(isValueSetMap map[st
 }
 
 type ReposRemoveProtectedBranchAppRestrictionsCmd struct {
-	Branch string `required:"" name:"branch"`
 	Repo   string `required:"" name:"repo"`
+	Branch string `required:"" name:"branch"`
 	internal.BaseCmd
 }
 
@@ -2084,8 +2084,8 @@ func (c *ReposRemoveProtectedBranchAppRestrictionsCmd) Run(isValueSetMap map[str
 }
 
 type ReposRemoveProtectedBranchPullRequestReviewEnforcementCmd struct {
-	Branch string `required:"" name:"branch"`
 	Repo   string `required:"" name:"repo"`
+	Branch string `required:"" name:"branch"`
 	internal.BaseCmd
 }
 
@@ -2098,9 +2098,9 @@ func (c *ReposRemoveProtectedBranchPullRequestReviewEnforcementCmd) Run(isValueS
 }
 
 type ReposRemoveProtectedBranchRequiredSignaturesCmd struct {
-	Branch string `required:"" name:"branch"`
-	Repo   string `required:"" name:"repo"`
 	Zzzax  bool   `required:"" name:"zzzax-preview"`
+	Repo   string `required:"" name:"repo"`
+	Branch string `required:"" name:"branch"`
 	internal.BaseCmd
 }
 
@@ -2114,8 +2114,8 @@ func (c *ReposRemoveProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[
 }
 
 type ReposRemoveProtectedBranchRequiredStatusChecksCmd struct {
-	Branch string `required:"" name:"branch"`
 	Repo   string `required:"" name:"repo"`
+	Branch string `required:"" name:"branch"`
 	internal.BaseCmd
 }
 
@@ -2128,8 +2128,8 @@ func (c *ReposRemoveProtectedBranchRequiredStatusChecksCmd) Run(isValueSetMap ma
 }
 
 type ReposRemoveProtectedBranchRequiredStatusChecksContextsCmd struct {
-	Branch string `required:"" name:"branch"`
 	Repo   string `required:"" name:"repo"`
+	Branch string `required:"" name:"branch"`
 	internal.BaseCmd
 }
 
@@ -2142,8 +2142,8 @@ func (c *ReposRemoveProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueS
 }
 
 type ReposRemoveProtectedBranchRestrictionsCmd struct {
-	Branch string `required:"" name:"branch"`
 	Repo   string `required:"" name:"repo"`
+	Branch string `required:"" name:"branch"`
 	internal.BaseCmd
 }
 
@@ -2156,8 +2156,8 @@ func (c *ReposRemoveProtectedBranchRestrictionsCmd) Run(isValueSetMap map[string
 }
 
 type ReposRemoveProtectedBranchTeamRestrictionsCmd struct {
-	Branch string `required:"" name:"branch"`
 	Repo   string `required:"" name:"repo"`
+	Branch string `required:"" name:"branch"`
 	internal.BaseCmd
 }
 
@@ -2170,8 +2170,8 @@ func (c *ReposRemoveProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[st
 }
 
 type ReposRemoveProtectedBranchUserRestrictionsCmd struct {
-	Branch string `required:"" name:"branch"`
 	Repo   string `required:"" name:"repo"`
+	Branch string `required:"" name:"branch"`
 	internal.BaseCmd
 }
 
@@ -2185,8 +2185,8 @@ func (c *ReposRemoveProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[st
 
 type ReposReplaceAllTopicsCmd struct {
 	Mercy bool     `required:"" name:"mercy-preview"`
-	Names []string `required:"" name:"names"`
 	Repo  string   `required:"" name:"repo"`
+	Names []string `required:"" name:"names"`
 	internal.BaseCmd
 }
 
@@ -2200,8 +2200,8 @@ func (c *ReposReplaceAllTopicsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposReplaceProtectedBranchAppRestrictionsCmd struct {
-	Branch string `required:"" name:"branch"`
 	Repo   string `required:"" name:"repo"`
+	Branch string `required:"" name:"branch"`
 	internal.BaseCmd
 }
 
@@ -2214,8 +2214,8 @@ func (c *ReposReplaceProtectedBranchAppRestrictionsCmd) Run(isValueSetMap map[st
 }
 
 type ReposReplaceProtectedBranchRequiredStatusChecksContextsCmd struct {
-	Branch string `required:"" name:"branch"`
 	Repo   string `required:"" name:"repo"`
+	Branch string `required:"" name:"branch"`
 	internal.BaseCmd
 }
 
@@ -2228,8 +2228,8 @@ func (c *ReposReplaceProtectedBranchRequiredStatusChecksContextsCmd) Run(isValue
 }
 
 type ReposReplaceProtectedBranchTeamRestrictionsCmd struct {
-	Branch string `required:"" name:"branch"`
 	Repo   string `required:"" name:"repo"`
+	Branch string `required:"" name:"branch"`
 	internal.BaseCmd
 }
 
@@ -2242,8 +2242,8 @@ func (c *ReposReplaceProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[s
 }
 
 type ReposReplaceProtectedBranchUserRestrictionsCmd struct {
-	Branch string `required:"" name:"branch"`
 	Repo   string `required:"" name:"repo"`
+	Branch string `required:"" name:"branch"`
 	internal.BaseCmd
 }
 
@@ -2280,8 +2280,8 @@ func (c *ReposRetrieveCommunityProfileMetricsCmd) Run(isValueSetMap map[string]b
 }
 
 type ReposTestPushHookCmd struct {
-	HookId int64  `required:"" name:"hook_id"`
 	Repo   string `required:"" name:"repo"`
+	HookId int64  `required:"" name:"hook_id"`
 	internal.BaseCmd
 }
 
@@ -2294,8 +2294,8 @@ func (c *ReposTestPushHookCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposTransferCmd struct {
-	NewOwner string  `name:"new_owner"`
 	Repo     string  `required:"" name:"repo"`
+	NewOwner string  `name:"new_owner"`
 	TeamIds  []int64 `name:"team_ids"`
 	internal.BaseCmd
 }
@@ -2310,23 +2310,23 @@ func (c *ReposTransferCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposUpdateBranchProtectionCmd struct {
-	AllowDeletions                                         bool     `name:"allow_deletions"`
-	AllowForcePushes                                       bool     `name:"allow_force_pushes"`
-	Branch                                                 string   `required:"" name:"branch"`
-	EnforceAdmins                                          bool     `required:"" name:"enforce_admins"`
 	LukeCage                                               bool     `name:"luke-cage-preview"`
 	Repo                                                   string   `required:"" name:"repo"`
+	Branch                                                 string   `required:"" name:"branch"`
+	EnforceAdmins                                          bool     `required:"" name:"enforce_admins"`
+	RequiredStatusChecksContexts                           []string `required:"" name:"required_status_checks.contexts"`
+	RequiredStatusChecksStrict                             bool     `required:"" name:"required_status_checks.strict"`
+	RestrictionsTeams                                      []string `required:"" name:"restrictions.teams"`
+	RestrictionsUsers                                      []string `required:"" name:"restrictions.users"`
+	AllowDeletions                                         bool     `name:"allow_deletions"`
+	AllowForcePushes                                       bool     `name:"allow_force_pushes"`
 	RequiredLinearHistory                                  bool     `name:"required_linear_history"`
 	RequiredPullRequestReviewsDismissStaleReviews          bool     `name:"required_pull_request_reviews.dismiss_stale_reviews"`
 	RequiredPullRequestReviewsDismissalRestrictionsTeams   []string `name:"required_pull_request_reviews.dismissal_restrictions.teams"`
 	RequiredPullRequestReviewsDismissalRestrictionsUsers   []string `name:"required_pull_request_reviews.dismissal_restrictions.users"`
 	RequiredPullRequestReviewsRequireCodeOwnerReviews      bool     `name:"required_pull_request_reviews.require_code_owner_reviews"`
 	RequiredPullRequestReviewsRequiredApprovingReviewCount int64    `name:"required_pull_request_reviews.required_approving_review_count"`
-	RequiredStatusChecksContexts                           []string `required:"" name:"required_status_checks.contexts"`
-	RequiredStatusChecksStrict                             bool     `required:"" name:"required_status_checks.strict"`
 	RestrictionsApps                                       []string `name:"restrictions.apps"`
-	RestrictionsTeams                                      []string `required:"" name:"restrictions.teams"`
-	RestrictionsUsers                                      []string `required:"" name:"restrictions.users"`
 	internal.BaseCmd
 }
 
@@ -2354,11 +2354,13 @@ func (c *ReposUpdateBranchProtectionCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type ReposUpdateCmd struct {
+	Baptiste            bool   `name:"baptiste-preview"`
+	Nebula              bool   `name:"nebula-preview"`
+	Repo                string `required:"" name:"repo"`
 	AllowMergeCommit    bool   `name:"allow_merge_commit"`
 	AllowRebaseMerge    bool   `name:"allow_rebase_merge"`
 	AllowSquashMerge    bool   `name:"allow_squash_merge"`
 	Archived            bool   `name:"archived"`
-	Baptiste            bool   `name:"baptiste-preview"`
 	DefaultBranch       string `name:"default_branch"`
 	DeleteBranchOnMerge bool   `name:"delete_branch_on_merge"`
 	Description         string `name:"description"`
@@ -2368,9 +2370,7 @@ type ReposUpdateCmd struct {
 	Homepage            string `name:"homepage"`
 	IsTemplate          bool   `name:"is_template"`
 	Name                string `name:"name"`
-	Nebula              bool   `name:"nebula-preview"`
 	Private             bool   `name:"private"`
-	Repo                string `required:"" name:"repo"`
 	Visibility          string `name:"visibility"`
 	internal.BaseCmd
 }
@@ -2400,9 +2400,9 @@ func (c *ReposUpdateCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposUpdateCommitCommentCmd struct {
-	Body      string `required:"" name:"body"`
-	CommentId int64  `required:"" name:"comment_id"`
 	Repo      string `required:"" name:"repo"`
+	CommentId int64  `required:"" name:"comment_id"`
+	Body      string `required:"" name:"body"`
 	internal.BaseCmd
 }
 
@@ -2416,6 +2416,8 @@ func (c *ReposUpdateCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposUpdateHookCmd struct {
+	Repo              string   `required:"" name:"repo"`
+	HookId            int64    `required:"" name:"hook_id"`
 	Active            bool     `name:"active"`
 	AddEvents         []string `name:"add_events"`
 	ConfigContentType string   `name:"config.content_type"`
@@ -2423,9 +2425,7 @@ type ReposUpdateHookCmd struct {
 	ConfigSecret      string   `name:"config.secret"`
 	ConfigUrl         string   `name:"config.url"`
 	Events            []string `name:"events"`
-	HookId            int64    `required:"" name:"hook_id"`
 	RemoveEvents      []string `name:"remove_events"`
-	Repo              string   `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -2446,8 +2446,8 @@ func (c *ReposUpdateHookCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposUpdateInformationAboutPagesSiteCmd struct {
-	Cname  string `name:"cname"`
 	Repo   string `required:"" name:"repo"`
+	Cname  string `name:"cname"`
 	Source string `name:"source"`
 	internal.BaseCmd
 }
@@ -2462,9 +2462,9 @@ func (c *ReposUpdateInformationAboutPagesSiteCmd) Run(isValueSetMap map[string]b
 }
 
 type ReposUpdateInvitationCmd struct {
+	Repo         string `required:"" name:"repo"`
 	InvitationId int64  `required:"" name:"invitation_id"`
 	Permissions  string `name:"permissions"`
-	Repo         string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -2478,12 +2478,12 @@ func (c *ReposUpdateInvitationCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposUpdateProtectedBranchPullRequestReviewEnforcementCmd struct {
+	LukeCage                     bool     `name:"luke-cage-preview"`
+	Repo                         string   `required:"" name:"repo"`
 	Branch                       string   `required:"" name:"branch"`
 	DismissStaleReviews          bool     `name:"dismiss_stale_reviews"`
 	DismissalRestrictionsTeams   []string `name:"dismissal_restrictions.teams"`
 	DismissalRestrictionsUsers   []string `name:"dismissal_restrictions.users"`
-	LukeCage                     bool     `name:"luke-cage-preview"`
-	Repo                         string   `required:"" name:"repo"`
 	RequireCodeOwnerReviews      bool     `name:"require_code_owner_reviews"`
 	RequiredApprovingReviewCount int64    `name:"required_approving_review_count"`
 	internal.BaseCmd
@@ -2504,9 +2504,9 @@ func (c *ReposUpdateProtectedBranchPullRequestReviewEnforcementCmd) Run(isValueS
 }
 
 type ReposUpdateProtectedBranchRequiredStatusChecksCmd struct {
+	Repo     string   `required:"" name:"repo"`
 	Branch   string   `required:"" name:"branch"`
 	Contexts []string `name:"contexts"`
-	Repo     string   `required:"" name:"repo"`
 	Strict   bool     `name:"strict"`
 	internal.BaseCmd
 }
@@ -2522,10 +2522,10 @@ func (c *ReposUpdateProtectedBranchRequiredStatusChecksCmd) Run(isValueSetMap ma
 }
 
 type ReposUpdateReleaseAssetCmd struct {
+	Repo    string `required:"" name:"repo"`
 	AssetId int64  `required:"" name:"asset_id"`
 	Label   string `name:"label"`
 	Name    string `name:"name"`
-	Repo    string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -2540,12 +2540,12 @@ func (c *ReposUpdateReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposUpdateReleaseCmd struct {
+	Repo            string `required:"" name:"repo"`
+	ReleaseId       int64  `required:"" name:"release_id"`
 	Body            string `name:"body"`
 	Draft           bool   `name:"draft"`
 	Name            string `name:"name"`
 	Prerelease      bool   `name:"prerelease"`
-	ReleaseId       int64  `required:"" name:"release_id"`
-	Repo            string `required:"" name:"repo"`
 	TagName         string `name:"tag_name"`
 	TargetCommitish string `name:"target_commitish"`
 	internal.BaseCmd
@@ -2566,13 +2566,13 @@ func (c *ReposUpdateReleaseCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposUploadReleaseAssetCmd struct {
-	ContentLength string `name:"content-length" hidden:""`
-	ContentType   string `name:"content-type"`
-	File          string `required:"" name:"file" type:"existingfile"`
+	Repo          string `required:"" name:"repo"`
+	ReleaseId     int64  `required:"" name:"release_id"`
 	Label         string `name:"label"`
 	Name          string `name:"name"`
-	ReleaseId     int64  `required:"" name:"release_id"`
-	Repo          string `required:"" name:"repo"`
+	File          string `required:"" name:"file" type:"existingfile"`
+	ContentLength string `name:"content-length" hidden:""`
+	ContentType   string `name:"content-type"`
 	internal.BaseCmd
 }
 

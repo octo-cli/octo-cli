@@ -25,8 +25,8 @@ func (c *CodesOfConductGetAllCodesOfConductCmd) Run(isValueSetMap map[string]boo
 }
 
 type CodesOfConductGetConductCodeCmd struct {
-	Key          string `required:"" name:"key"`
 	ScarletWitch bool   `required:"" name:"scarlet-witch-preview"`
+	Key          string `required:"" name:"key"`
 	internal.BaseCmd
 }
 
@@ -39,8 +39,8 @@ func (c *CodesOfConductGetConductCodeCmd) Run(isValueSetMap map[string]bool) err
 }
 
 type CodesOfConductGetForRepoCmd struct {
-	Repo         string `required:"" name:"repo"`
 	ScarletWitch bool   `required:"" name:"scarlet-witch-preview"`
+	Repo         string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 

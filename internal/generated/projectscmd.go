@@ -36,9 +36,9 @@ type ProjectsCmd struct {
 
 type ProjectsAddCollaboratorCmd struct {
 	Inertia    bool   `required:"" name:"inertia-preview"`
-	Permission string `name:"permission"`
 	ProjectId  int64  `required:"" name:"project_id"`
 	Username   string `required:"" name:"username"`
+	Permission string `name:"permission"`
 	internal.BaseCmd
 }
 
@@ -53,10 +53,10 @@ func (c *ProjectsAddCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ProjectsCreateCardCmd struct {
+	Inertia     bool   `required:"" name:"inertia-preview"`
 	ColumnId    int64  `required:"" name:"column_id"`
 	ContentId   int64  `name:"content_id"`
 	ContentType string `name:"content_type"`
-	Inertia     bool   `required:"" name:"inertia-preview"`
 	Note        string `name:"note"`
 	internal.BaseCmd
 }
@@ -74,8 +74,8 @@ func (c *ProjectsCreateCardCmd) Run(isValueSetMap map[string]bool) error {
 
 type ProjectsCreateColumnCmd struct {
 	Inertia   bool   `required:"" name:"inertia-preview"`
-	Name      string `required:"" name:"name"`
 	ProjectId int64  `required:"" name:"project_id"`
+	Name      string `required:"" name:"name"`
 	internal.BaseCmd
 }
 
@@ -89,9 +89,9 @@ func (c *ProjectsCreateColumnCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ProjectsCreateForAuthenticatedUserCmd struct {
-	Body    string `name:"body"`
 	Inertia bool   `required:"" name:"inertia-preview"`
 	Name    string `required:"" name:"name"`
+	Body    string `name:"body"`
 	internal.BaseCmd
 }
 
@@ -105,10 +105,10 @@ func (c *ProjectsCreateForAuthenticatedUserCmd) Run(isValueSetMap map[string]boo
 }
 
 type ProjectsCreateForOrgCmd struct {
-	Body    string `name:"body"`
 	Inertia bool   `required:"" name:"inertia-preview"`
-	Name    string `required:"" name:"name"`
 	Org     string `required:"" name:"org"`
+	Name    string `required:"" name:"name"`
+	Body    string `name:"body"`
 	internal.BaseCmd
 }
 
@@ -123,10 +123,10 @@ func (c *ProjectsCreateForOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ProjectsCreateForRepoCmd struct {
-	Body    string `name:"body"`
 	Inertia bool   `required:"" name:"inertia-preview"`
-	Name    string `required:"" name:"name"`
 	Repo    string `required:"" name:"repo"`
+	Name    string `required:"" name:"name"`
+	Body    string `name:"body"`
 	internal.BaseCmd
 }
 
@@ -141,8 +141,8 @@ func (c *ProjectsCreateForRepoCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ProjectsDeleteCardCmd struct {
-	CardId  int64 `required:"" name:"card_id"`
 	Inertia bool  `required:"" name:"inertia-preview"`
+	CardId  int64 `required:"" name:"card_id"`
 	internal.BaseCmd
 }
 
@@ -169,8 +169,8 @@ func (c *ProjectsDeleteCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ProjectsDeleteColumnCmd struct {
-	ColumnId int64 `required:"" name:"column_id"`
 	Inertia  bool  `required:"" name:"inertia-preview"`
+	ColumnId int64 `required:"" name:"column_id"`
 	internal.BaseCmd
 }
 
@@ -183,8 +183,8 @@ func (c *ProjectsDeleteColumnCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ProjectsGetCardCmd struct {
-	CardId  int64 `required:"" name:"card_id"`
 	Inertia bool  `required:"" name:"inertia-preview"`
+	CardId  int64 `required:"" name:"card_id"`
 	internal.BaseCmd
 }
 
@@ -211,8 +211,8 @@ func (c *ProjectsGetCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ProjectsGetColumnCmd struct {
-	ColumnId int64 `required:"" name:"column_id"`
 	Inertia  bool  `required:"" name:"inertia-preview"`
+	ColumnId int64 `required:"" name:"column_id"`
 	internal.BaseCmd
 }
 
@@ -225,9 +225,9 @@ func (c *ProjectsGetColumnCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ProjectsListCardsCmd struct {
-	ArchivedState string `name:"archived_state"`
-	ColumnId      int64  `required:"" name:"column_id"`
 	Inertia       bool   `required:"" name:"inertia-preview"`
+	ColumnId      int64  `required:"" name:"column_id"`
+	ArchivedState string `name:"archived_state"`
 	Page          int64  `name:"page"`
 	PerPage       int64  `name:"per_page"`
 	internal.BaseCmd
@@ -245,11 +245,11 @@ func (c *ProjectsListCardsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ProjectsListCollaboratorsCmd struct {
-	Affiliation string `name:"affiliation"`
 	Inertia     bool   `required:"" name:"inertia-preview"`
+	ProjectId   int64  `required:"" name:"project_id"`
+	Affiliation string `name:"affiliation"`
 	Page        int64  `name:"page"`
 	PerPage     int64  `name:"per_page"`
-	ProjectId   int64  `required:"" name:"project_id"`
 	internal.BaseCmd
 }
 
@@ -266,9 +266,9 @@ func (c *ProjectsListCollaboratorsCmd) Run(isValueSetMap map[string]bool) error 
 
 type ProjectsListColumnsCmd struct {
 	Inertia   bool  `required:"" name:"inertia-preview"`
+	ProjectId int64 `required:"" name:"project_id"`
 	Page      int64 `name:"page"`
 	PerPage   int64 `name:"per_page"`
-	ProjectId int64 `required:"" name:"project_id"`
 	internal.BaseCmd
 }
 
@@ -304,9 +304,9 @@ func (c *ProjectsListForOrgCmd) Run(isValueSetMap map[string]bool) error {
 
 type ProjectsListForRepoCmd struct {
 	Inertia bool   `required:"" name:"inertia-preview"`
+	Repo    string `required:"" name:"repo"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Repo    string `required:"" name:"repo"`
 	State   string `name:"state"`
 	internal.BaseCmd
 }
@@ -324,10 +324,10 @@ func (c *ProjectsListForRepoCmd) Run(isValueSetMap map[string]bool) error {
 
 type ProjectsListForUserCmd struct {
 	Inertia  bool   `required:"" name:"inertia-preview"`
+	Username string `required:"" name:"username"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
 	State    string `name:"state"`
-	Username string `required:"" name:"username"`
 	internal.BaseCmd
 }
 
@@ -343,10 +343,10 @@ func (c *ProjectsListForUserCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ProjectsMoveCardCmd struct {
-	CardId   int64  `required:"" name:"card_id"`
-	ColumnId int64  `name:"column_id"`
 	Inertia  bool   `required:"" name:"inertia-preview"`
+	CardId   int64  `required:"" name:"card_id"`
 	Position string `required:"" name:"position"`
+	ColumnId int64  `name:"column_id"`
 	internal.BaseCmd
 }
 
@@ -361,8 +361,8 @@ func (c *ProjectsMoveCardCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ProjectsMoveColumnCmd struct {
-	ColumnId int64  `required:"" name:"column_id"`
 	Inertia  bool   `required:"" name:"inertia-preview"`
+	ColumnId int64  `required:"" name:"column_id"`
 	Position string `required:"" name:"position"`
 	internal.BaseCmd
 }
@@ -409,9 +409,9 @@ func (c *ProjectsReviewUserPermissionLevelCmd) Run(isValueSetMap map[string]bool
 }
 
 type ProjectsUpdateCardCmd struct {
-	Archived bool   `name:"archived"`
-	CardId   int64  `required:"" name:"card_id"`
 	Inertia  bool   `required:"" name:"inertia-preview"`
+	CardId   int64  `required:"" name:"card_id"`
+	Archived bool   `name:"archived"`
 	Note     string `name:"note"`
 	internal.BaseCmd
 }
@@ -427,12 +427,12 @@ func (c *ProjectsUpdateCardCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ProjectsUpdateCmd struct {
-	Body                   string `name:"body"`
 	Inertia                bool   `required:"" name:"inertia-preview"`
+	ProjectId              int64  `required:"" name:"project_id"`
+	Body                   string `name:"body"`
 	Name                   string `name:"name"`
 	OrganizationPermission string `name:"organization_permission"`
 	Private                bool   `name:"private"`
-	ProjectId              int64  `required:"" name:"project_id"`
 	State                  string `name:"state"`
 	internal.BaseCmd
 }
@@ -451,8 +451,8 @@ func (c *ProjectsUpdateCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ProjectsUpdateColumnCmd struct {
-	ColumnId int64  `required:"" name:"column_id"`
 	Inertia  bool   `required:"" name:"inertia-preview"`
+	ColumnId int64  `required:"" name:"column_id"`
 	Name     string `required:"" name:"name"`
 	internal.BaseCmd
 }

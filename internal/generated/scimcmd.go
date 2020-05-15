@@ -30,9 +30,9 @@ func (c *ScimGetProvisioningDetailsForUserCmd) Run(isValueSetMap map[string]bool
 }
 
 type ScimListProvisionedIdentitiesCmd struct {
+	Org        string `required:"" name:"org"`
 	Count      int64  `name:"count"`
 	Filter     string `name:"filter"`
-	Org        string `required:"" name:"org"`
 	StartIndex int64  `name:"startIndex"`
 	internal.BaseCmd
 }

@@ -45,8 +45,8 @@ type AppsCmd struct {
 }
 
 type AppsAddRepoToInstallationCmd struct {
-	InstallationId int64 `required:"" name:"installation_id"`
 	MachineMan     bool  `required:"" name:"machine-man-preview"`
+	InstallationId int64 `required:"" name:"installation_id"`
 	RepositoryId   int64 `required:"" name:"repository_id"`
 	internal.BaseCmd
 }
@@ -61,8 +61,8 @@ func (c *AppsAddRepoToInstallationCmd) Run(isValueSetMap map[string]bool) error 
 }
 
 type AppsCheckAuthorizationCmd struct {
-	AccessToken string `required:"" name:"access_token"`
 	ClientId    string `required:"" name:"client_id"`
+	AccessToken string `required:"" name:"access_token"`
 	internal.BaseCmd
 }
 
@@ -75,8 +75,8 @@ func (c *AppsCheckAuthorizationCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsCheckTokenCmd struct {
-	AccessToken string `name:"access_token"`
 	ClientId    string `required:"" name:"client_id"`
+	AccessToken string `name:"access_token"`
 	internal.BaseCmd
 }
 
@@ -89,9 +89,9 @@ func (c *AppsCheckTokenCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsCreateContentAttachmentCmd struct {
-	Body               string `required:"" name:"body"`
-	ContentReferenceId int64  `required:"" name:"content_reference_id"`
 	Corsair            bool   `required:"" name:"corsair-preview"`
+	ContentReferenceId int64  `required:"" name:"content_reference_id"`
+	Body               string `required:"" name:"body"`
 	Title              string `required:"" name:"title"`
 	internal.BaseCmd
 }
@@ -119,8 +119,8 @@ func (c *AppsCreateFromManifestCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsCreateInstallationTokenCmd struct {
-	InstallationId int64               `required:"" name:"installation_id"`
 	MachineMan     bool                `required:"" name:"machine-man-preview"`
+	InstallationId int64               `required:"" name:"installation_id"`
 	Permissions    internal.JSONObject `name:"permissions"`
 	RepositoryIds  []int64             `name:"repository_ids"`
 	internal.BaseCmd
@@ -137,8 +137,8 @@ func (c *AppsCreateInstallationTokenCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type AppsDeleteAuthorizationCmd struct {
-	AccessToken string `name:"access_token"`
 	ClientId    string `required:"" name:"client_id"`
+	AccessToken string `name:"access_token"`
 	internal.BaseCmd
 }
 
@@ -151,8 +151,8 @@ func (c *AppsDeleteAuthorizationCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsDeleteInstallationCmd struct {
-	InstallationId int64 `required:"" name:"installation_id"`
 	MachineMan     bool  `required:"" name:"machine-man-preview"`
+	InstallationId int64 `required:"" name:"installation_id"`
 	internal.BaseCmd
 }
 
@@ -165,8 +165,8 @@ func (c *AppsDeleteInstallationCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsDeleteTokenCmd struct {
-	AccessToken string `name:"access_token"`
 	ClientId    string `required:"" name:"client_id"`
+	AccessToken string `name:"access_token"`
 	internal.BaseCmd
 }
 
@@ -191,8 +191,8 @@ func (c *AppsGetAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsGetBySlugCmd struct {
-	AppSlug    string `required:"" name:"app_slug"`
 	MachineMan bool   `required:"" name:"machine-man-preview"`
+	AppSlug    string `required:"" name:"app_slug"`
 	internal.BaseCmd
 }
 
@@ -205,8 +205,8 @@ func (c *AppsGetBySlugCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsGetInstallationCmd struct {
-	InstallationId int64 `required:"" name:"installation_id"`
 	MachineMan     bool  `required:"" name:"machine-man-preview"`
+	InstallationId int64 `required:"" name:"installation_id"`
 	internal.BaseCmd
 }
 
@@ -285,10 +285,10 @@ func (c *AppsGetUserInstallationCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsListAccountsForPlanCmd struct {
+	PlanId    int64  `required:"" name:"plan_id"`
 	Direction string `name:"direction"`
 	Page      int64  `name:"page"`
 	PerPage   int64  `name:"per_page"`
-	PlanId    int64  `required:"" name:"plan_id"`
 	Sort      string `name:"sort"`
 	internal.BaseCmd
 }
@@ -305,10 +305,10 @@ func (c *AppsListAccountsForPlanCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsListAccountsForPlanStubbedCmd struct {
+	PlanId    int64  `required:"" name:"plan_id"`
 	Direction string `name:"direction"`
 	Page      int64  `name:"page"`
 	PerPage   int64  `name:"per_page"`
-	PlanId    int64  `required:"" name:"plan_id"`
 	Sort      string `name:"sort"`
 	internal.BaseCmd
 }
@@ -325,9 +325,9 @@ func (c *AppsListAccountsForPlanStubbedCmd) Run(isValueSetMap map[string]bool) e
 }
 
 type AppsListInstallationReposForAuthenticatedUserCmd struct {
-	InstallationId int64 `required:"" name:"installation_id"`
 	MachineMan     bool  `required:"" name:"machine-man-preview"`
 	Mercy          bool  `name:"mercy-preview"`
+	InstallationId int64 `required:"" name:"installation_id"`
 	Page           int64 `name:"page"`
 	PerPage        int64 `name:"per_page"`
 	internal.BaseCmd
@@ -451,8 +451,8 @@ func (c *AppsListSubscriptionsForAuthenticatedUserStubbedCmd) Run(isValueSetMap 
 }
 
 type AppsRemoveRepoFromInstallationCmd struct {
-	InstallationId int64 `required:"" name:"installation_id"`
 	MachineMan     bool  `required:"" name:"machine-man-preview"`
+	InstallationId int64 `required:"" name:"installation_id"`
 	RepositoryId   int64 `required:"" name:"repository_id"`
 	internal.BaseCmd
 }
@@ -467,8 +467,8 @@ func (c *AppsRemoveRepoFromInstallationCmd) Run(isValueSetMap map[string]bool) e
 }
 
 type AppsResetAuthorizationCmd struct {
-	AccessToken string `required:"" name:"access_token"`
 	ClientId    string `required:"" name:"client_id"`
+	AccessToken string `required:"" name:"access_token"`
 	internal.BaseCmd
 }
 
@@ -481,8 +481,8 @@ func (c *AppsResetAuthorizationCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsResetTokenCmd struct {
-	AccessToken string `name:"access_token"`
 	ClientId    string `required:"" name:"client_id"`
+	AccessToken string `name:"access_token"`
 	internal.BaseCmd
 }
 
@@ -495,8 +495,8 @@ func (c *AppsResetTokenCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsRevokeAuthorizationForApplicationCmd struct {
-	AccessToken string `required:"" name:"access_token"`
 	ClientId    string `required:"" name:"client_id"`
+	AccessToken string `required:"" name:"access_token"`
 	internal.BaseCmd
 }
 
@@ -509,8 +509,8 @@ func (c *AppsRevokeAuthorizationForApplicationCmd) Run(isValueSetMap map[string]
 }
 
 type AppsRevokeGrantForApplicationCmd struct {
-	AccessToken string `required:"" name:"access_token"`
 	ClientId    string `required:"" name:"client_id"`
+	AccessToken string `required:"" name:"access_token"`
 	internal.BaseCmd
 }
 

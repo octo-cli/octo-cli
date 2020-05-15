@@ -123,9 +123,9 @@ func (c *ActivityGetThreadSubscriptionForAuthenticatedUserCmd) Run(isValueSetMap
 }
 
 type ActivityListEventsForAuthenticatedUserCmd struct {
+	Username string `required:"" name:"username"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
-	Username string `required:"" name:"username"`
 	internal.BaseCmd
 }
 
@@ -161,10 +161,10 @@ func (c *ActivityListNotificationsForAuthenticatedUserCmd) Run(isValueSetMap map
 }
 
 type ActivityListOrgEventsForAuthenticatedUserCmd struct {
+	Username string `required:"" name:"username"`
 	Org      string `required:"" name:"org"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
-	Username string `required:"" name:"username"`
 	internal.BaseCmd
 }
 
@@ -193,9 +193,9 @@ func (c *ActivityListPublicEventsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActivityListPublicEventsForRepoNetworkCmd struct {
+	Repo    string `required:"" name:"repo"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Repo    string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -209,9 +209,9 @@ func (c *ActivityListPublicEventsForRepoNetworkCmd) Run(isValueSetMap map[string
 }
 
 type ActivityListPublicEventsForUserCmd struct {
+	Username string `required:"" name:"username"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
-	Username string `required:"" name:"username"`
 	internal.BaseCmd
 }
 
@@ -241,9 +241,9 @@ func (c *ActivityListPublicOrgEventsCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type ActivityListReceivedEventsForUserCmd struct {
+	Username string `required:"" name:"username"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
-	Username string `required:"" name:"username"`
 	internal.BaseCmd
 }
 
@@ -257,9 +257,9 @@ func (c *ActivityListReceivedEventsForUserCmd) Run(isValueSetMap map[string]bool
 }
 
 type ActivityListReceivedPublicEventsForUserCmd struct {
+	Username string `required:"" name:"username"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
-	Username string `required:"" name:"username"`
 	internal.BaseCmd
 }
 
@@ -273,9 +273,9 @@ func (c *ActivityListReceivedPublicEventsForUserCmd) Run(isValueSetMap map[strin
 }
 
 type ActivityListRepoEventsCmd struct {
+	Repo    string `required:"" name:"repo"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Repo    string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -289,12 +289,12 @@ func (c *ActivityListRepoEventsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActivityListRepoNotificationsForAuthenticatedUserCmd struct {
+	Repo          string `required:"" name:"repo"`
 	All           bool   `name:"all"`
 	Before        string `name:"before"`
 	Page          int64  `name:"page"`
 	Participating bool   `name:"participating"`
 	PerPage       int64  `name:"per_page"`
-	Repo          string `required:"" name:"repo"`
 	Since         string `name:"since"`
 	internal.BaseCmd
 }
@@ -331,11 +331,11 @@ func (c *ActivityListReposStarredByAuthenticatedUserCmd) Run(isValueSetMap map[s
 }
 
 type ActivityListReposStarredByUserCmd struct {
+	Username  string `required:"" name:"username"`
 	Direction string `name:"direction"`
 	Page      int64  `name:"page"`
 	PerPage   int64  `name:"per_page"`
 	Sort      string `name:"sort"`
-	Username  string `required:"" name:"username"`
 	internal.BaseCmd
 }
 
@@ -351,9 +351,9 @@ func (c *ActivityListReposStarredByUserCmd) Run(isValueSetMap map[string]bool) e
 }
 
 type ActivityListReposWatchedByUserCmd struct {
+	Username string `required:"" name:"username"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
-	Username string `required:"" name:"username"`
 	internal.BaseCmd
 }
 
@@ -367,9 +367,9 @@ func (c *ActivityListReposWatchedByUserCmd) Run(isValueSetMap map[string]bool) e
 }
 
 type ActivityListStargazersForRepoCmd struct {
+	Repo    string `required:"" name:"repo"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Repo    string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -397,9 +397,9 @@ func (c *ActivityListWatchedReposForAuthenticatedUserCmd) Run(isValueSetMap map[
 }
 
 type ActivityListWatchersForRepoCmd struct {
+	Repo    string `required:"" name:"repo"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
-	Repo    string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -425,8 +425,8 @@ func (c *ActivityMarkNotificationsAsReadCmd) Run(isValueSetMap map[string]bool) 
 }
 
 type ActivityMarkRepoNotificationsAsReadCmd struct {
-	LastReadAt string `name:"last_read_at"`
 	Repo       string `required:"" name:"repo"`
+	LastReadAt string `name:"last_read_at"`
 	internal.BaseCmd
 }
 
@@ -451,8 +451,8 @@ func (c *ActivityMarkThreadAsReadCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActivitySetRepoSubscriptionCmd struct {
-	Ignored    bool   `name:"ignored"`
 	Repo       string `required:"" name:"repo"`
+	Ignored    bool   `name:"ignored"`
 	Subscribed bool   `name:"subscribed"`
 	internal.BaseCmd
 }
@@ -467,8 +467,8 @@ func (c *ActivitySetRepoSubscriptionCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type ActivitySetThreadSubscriptionCmd struct {
-	Ignored  bool  `name:"ignored"`
 	ThreadId int64 `required:"" name:"thread_id"`
+	Ignored  bool  `name:"ignored"`
 	internal.BaseCmd
 }
 

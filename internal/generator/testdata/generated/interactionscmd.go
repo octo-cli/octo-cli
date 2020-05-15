@@ -16,9 +16,9 @@ type InteractionsCmd struct {
 }
 
 type InteractionsAddOrUpdateRestrictionsForOrgCmd struct {
-	Limit  string `required:"" name:"limit"`
-	Org    string `required:"" name:"org"`
 	Sombra bool   `required:"" name:"sombra-preview"`
+	Org    string `required:"" name:"org"`
+	Limit  string `required:"" name:"limit"`
 	internal.BaseCmd
 }
 
@@ -32,9 +32,9 @@ func (c *InteractionsAddOrUpdateRestrictionsForOrgCmd) Run(isValueSetMap map[str
 }
 
 type InteractionsAddOrUpdateRestrictionsForRepoCmd struct {
-	Limit  string `required:"" name:"limit"`
-	Repo   string `required:"" name:"repo"`
 	Sombra bool   `required:"" name:"sombra-preview"`
+	Repo   string `required:"" name:"repo"`
+	Limit  string `required:"" name:"limit"`
 	internal.BaseCmd
 }
 
@@ -48,8 +48,8 @@ func (c *InteractionsAddOrUpdateRestrictionsForRepoCmd) Run(isValueSetMap map[st
 }
 
 type InteractionsGetRestrictionsForOrgCmd struct {
-	Org    string `required:"" name:"org"`
 	Sombra bool   `required:"" name:"sombra-preview"`
+	Org    string `required:"" name:"org"`
 	internal.BaseCmd
 }
 
@@ -62,8 +62,8 @@ func (c *InteractionsGetRestrictionsForOrgCmd) Run(isValueSetMap map[string]bool
 }
 
 type InteractionsGetRestrictionsForRepoCmd struct {
-	Repo   string `required:"" name:"repo"`
 	Sombra bool   `required:"" name:"sombra-preview"`
+	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
@@ -76,8 +76,8 @@ func (c *InteractionsGetRestrictionsForRepoCmd) Run(isValueSetMap map[string]boo
 }
 
 type InteractionsRemoveRestrictionsForOrgCmd struct {
-	Org    string `required:"" name:"org"`
 	Sombra bool   `required:"" name:"sombra-preview"`
+	Org    string `required:"" name:"org"`
 	internal.BaseCmd
 }
 
@@ -90,8 +90,8 @@ func (c *InteractionsRemoveRestrictionsForOrgCmd) Run(isValueSetMap map[string]b
 }
 
 type InteractionsRemoveRestrictionsForRepoCmd struct {
-	Repo   string `required:"" name:"repo"`
 	Sombra bool   `required:"" name:"sombra-preview"`
+	Repo   string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
