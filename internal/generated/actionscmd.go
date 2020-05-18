@@ -7,40 +7,67 @@ import (
 )
 
 type ActionsCmd struct {
-	CancelWorkflowRun              ActionsCancelWorkflowRunCmd              `cmd:""`
-	CreateOrUpdateSecretForRepo    ActionsCreateOrUpdateSecretForRepoCmd    `cmd:""`
-	CreateRegistrationTokenForOrg  ActionsCreateRegistrationTokenForOrgCmd  `cmd:""`
-	CreateRegistrationTokenForRepo ActionsCreateRegistrationTokenForRepoCmd `cmd:""`
-	CreateRemoveTokenForOrg        ActionsCreateRemoveTokenForOrgCmd        `cmd:""`
-	CreateRemoveTokenForRepo       ActionsCreateRemoveTokenForRepoCmd       `cmd:""`
-	DeleteArtifact                 ActionsDeleteArtifactCmd                 `cmd:""`
-	DeleteSecretFromRepo           ActionsDeleteSecretFromRepoCmd           `cmd:""`
-	DeleteSelfHostedRunnerFromOrg  ActionsDeleteSelfHostedRunnerFromOrgCmd  `cmd:""`
-	DeleteSelfHostedRunnerFromRepo ActionsDeleteSelfHostedRunnerFromRepoCmd `cmd:""`
-	DeleteWorkflowRunLogs          ActionsDeleteWorkflowRunLogsCmd          `cmd:""`
-	DownloadArtifact               ActionsDownloadArtifactCmd               `cmd:""`
-	DownloadWorkflowJobLogs        ActionsDownloadWorkflowJobLogsCmd        `cmd:""`
-	DownloadWorkflowRunLogs        ActionsDownloadWorkflowRunLogsCmd        `cmd:""`
-	GetArtifact                    ActionsGetArtifactCmd                    `cmd:""`
-	GetPublicKey                   ActionsGetPublicKeyCmd                   `cmd:""`
-	GetSecret                      ActionsGetSecretCmd                      `cmd:""`
-	GetSelfHostedRunnerForOrg      ActionsGetSelfHostedRunnerForOrgCmd      `cmd:""`
-	GetSelfHostedRunnerForRepo     ActionsGetSelfHostedRunnerForRepoCmd     `cmd:""`
-	GetWorkflow                    ActionsGetWorkflowCmd                    `cmd:""`
-	GetWorkflowJob                 ActionsGetWorkflowJobCmd                 `cmd:""`
-	GetWorkflowRun                 ActionsGetWorkflowRunCmd                 `cmd:""`
-	ListArtifactsForRepo           ActionsListArtifactsForRepoCmd           `cmd:""`
-	ListJobsForWorkflowRun         ActionsListJobsForWorkflowRunCmd         `cmd:""`
-	ListRepoWorkflowRuns           ActionsListRepoWorkflowRunsCmd           `cmd:""`
-	ListRepoWorkflows              ActionsListRepoWorkflowsCmd              `cmd:""`
-	ListRunnerApplicationsForOrg   ActionsListRunnerApplicationsForOrgCmd   `cmd:""`
-	ListRunnerApplicationsForRepo  ActionsListRunnerApplicationsForRepoCmd  `cmd:""`
-	ListSecretsForRepo             ActionsListSecretsForRepoCmd             `cmd:""`
-	ListSelfHostedRunnersForOrg    ActionsListSelfHostedRunnersForOrgCmd    `cmd:""`
-	ListSelfHostedRunnersForRepo   ActionsListSelfHostedRunnersForRepoCmd   `cmd:""`
-	ListWorkflowRunArtifacts       ActionsListWorkflowRunArtifactsCmd       `cmd:""`
-	ListWorkflowRuns               ActionsListWorkflowRunsCmd               `cmd:""`
-	ReRunWorkflow                  ActionsReRunWorkflowCmd                  `cmd:""`
+	AddSelectedRepoToOrgSecret      ActionsAddSelectedRepoToOrgSecretCmd      `cmd:""`
+	CancelWorkflowRun               ActionsCancelWorkflowRunCmd               `cmd:""`
+	CreateOrUpdateOrgSecret         ActionsCreateOrUpdateOrgSecretCmd         `cmd:""`
+	CreateOrUpdateRepoSecret        ActionsCreateOrUpdateRepoSecretCmd        `cmd:""`
+	CreateRegistrationTokenForOrg   ActionsCreateRegistrationTokenForOrgCmd   `cmd:""`
+	CreateRegistrationTokenForRepo  ActionsCreateRegistrationTokenForRepoCmd  `cmd:""`
+	CreateRemoveTokenForOrg         ActionsCreateRemoveTokenForOrgCmd         `cmd:""`
+	CreateRemoveTokenForRepo        ActionsCreateRemoveTokenForRepoCmd        `cmd:""`
+	DeleteArtifact                  ActionsDeleteArtifactCmd                  `cmd:""`
+	DeleteOrgSecret                 ActionsDeleteOrgSecretCmd                 `cmd:""`
+	DeleteRepoSecret                ActionsDeleteRepoSecretCmd                `cmd:""`
+	DeleteSelfHostedRunnerFromOrg   ActionsDeleteSelfHostedRunnerFromOrgCmd   `cmd:""`
+	DeleteSelfHostedRunnerFromRepo  ActionsDeleteSelfHostedRunnerFromRepoCmd  `cmd:""`
+	DeleteWorkflowRunLogs           ActionsDeleteWorkflowRunLogsCmd           `cmd:""`
+	DownloadArtifact                ActionsDownloadArtifactCmd                `cmd:""`
+	DownloadWorkflowJobLogs         ActionsDownloadWorkflowJobLogsCmd         `cmd:""`
+	DownloadWorkflowRunLogs         ActionsDownloadWorkflowRunLogsCmd         `cmd:""`
+	GetArtifact                     ActionsGetArtifactCmd                     `cmd:""`
+	GetOrgPublicKey                 ActionsGetOrgPublicKeyCmd                 `cmd:""`
+	GetOrgSecret                    ActionsGetOrgSecretCmd                    `cmd:""`
+	GetRepoPublicKey                ActionsGetRepoPublicKeyCmd                `cmd:""`
+	GetRepoSecret                   ActionsGetRepoSecretCmd                   `cmd:""`
+	GetSelfHostedRunnerForOrg       ActionsGetSelfHostedRunnerForOrgCmd       `cmd:""`
+	GetSelfHostedRunnerForRepo      ActionsGetSelfHostedRunnerForRepoCmd      `cmd:""`
+	GetWorkflow                     ActionsGetWorkflowCmd                     `cmd:""`
+	GetWorkflowJob                  ActionsGetWorkflowJobCmd                  `cmd:""`
+	GetWorkflowRun                  ActionsGetWorkflowRunCmd                  `cmd:""`
+	GetWorkflowRunUsage             ActionsGetWorkflowRunUsageCmd             `cmd:""`
+	GetWorkflowUsage                ActionsGetWorkflowUsageCmd                `cmd:""`
+	ListArtifactsForRepo            ActionsListArtifactsForRepoCmd            `cmd:""`
+	ListJobsForWorkflowRun          ActionsListJobsForWorkflowRunCmd          `cmd:""`
+	ListOrgSecrets                  ActionsListOrgSecretsCmd                  `cmd:""`
+	ListRepoSecrets                 ActionsListRepoSecretsCmd                 `cmd:""`
+	ListRepoWorkflowRuns            ActionsListRepoWorkflowRunsCmd            `cmd:""`
+	ListRepoWorkflows               ActionsListRepoWorkflowsCmd               `cmd:""`
+	ListRunnerApplicationsForOrg    ActionsListRunnerApplicationsForOrgCmd    `cmd:""`
+	ListRunnerApplicationsForRepo   ActionsListRunnerApplicationsForRepoCmd   `cmd:""`
+	ListSelectedReposForOrgSecret   ActionsListSelectedReposForOrgSecretCmd   `cmd:""`
+	ListSelfHostedRunnersForOrg     ActionsListSelfHostedRunnersForOrgCmd     `cmd:""`
+	ListSelfHostedRunnersForRepo    ActionsListSelfHostedRunnersForRepoCmd    `cmd:""`
+	ListWorkflowRunArtifacts        ActionsListWorkflowRunArtifactsCmd        `cmd:""`
+	ListWorkflowRuns                ActionsListWorkflowRunsCmd                `cmd:""`
+	ReRunWorkflow                   ActionsReRunWorkflowCmd                   `cmd:""`
+	RemoveSelectedRepoFromOrgSecret ActionsRemoveSelectedRepoFromOrgSecretCmd `cmd:""`
+	SetSelectedReposForOrgSecret    ActionsSetSelectedReposForOrgSecretCmd    `cmd:""`
+}
+
+type ActionsAddSelectedRepoToOrgSecretCmd struct {
+	Org          string `required:"" name:"org"`
+	SecretName   string `required:"" name:"secret_name"`
+	RepositoryId int64  `required:"" name:"repository_id"`
+	internal.BaseCmd
+}
+
+func (c *ActionsAddSelectedRepoToOrgSecretCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/{org}/actions/secrets/{secret_name}/repositories/{repository_id}")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("secret_name", c.SecretName)
+	c.UpdateURLPath("repository_id", c.RepositoryId)
+	return c.DoRequest("PUT")
 }
 
 type ActionsCancelWorkflowRunCmd struct {
@@ -57,19 +84,41 @@ func (c *ActionsCancelWorkflowRunCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("POST")
 }
 
-type ActionsCreateOrUpdateSecretForRepoCmd struct {
+type ActionsCreateOrUpdateOrgSecretCmd struct {
+	Org                   string   `required:"" name:"org"`
+	SecretName            string   `required:"" name:"secret_name"`
+	EncryptedValue        string   `name:"encrypted_value"`
+	KeyId                 string   `name:"key_id"`
+	SelectedRepositoryIds []string `name:"selected_repository_ids"`
+	Visibility            string   `name:"visibility"`
+	internal.BaseCmd
+}
+
+func (c *ActionsCreateOrUpdateOrgSecretCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/{org}/actions/secrets/{secret_name}")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("secret_name", c.SecretName)
+	c.UpdateBody("encrypted_value", c.EncryptedValue)
+	c.UpdateBody("key_id", c.KeyId)
+	c.UpdateBody("selected_repository_ids", c.SelectedRepositoryIds)
+	c.UpdateBody("visibility", c.Visibility)
+	return c.DoRequest("PUT")
+}
+
+type ActionsCreateOrUpdateRepoSecretCmd struct {
 	Repo           string `required:"" name:"repo"`
-	Name           string `required:"" name:"name"`
+	SecretName     string `required:"" name:"secret_name"`
 	EncryptedValue string `name:"encrypted_value"`
 	KeyId          string `name:"key_id"`
 	internal.BaseCmd
 }
 
-func (c *ActionsCreateOrUpdateSecretForRepoCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ActionsCreateOrUpdateRepoSecretCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/actions/secrets/{name}")
+	c.SetURLPath("/repos/{repo}/actions/secrets/{secret_name}")
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("name", c.Name)
+	c.UpdateURLPath("secret_name", c.SecretName)
 	c.UpdateBody("encrypted_value", c.EncryptedValue)
 	c.UpdateBody("key_id", c.KeyId)
 	return c.DoRequest("PUT")
@@ -137,17 +186,31 @@ func (c *ActionsDeleteArtifactCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("DELETE")
 }
 
-type ActionsDeleteSecretFromRepoCmd struct {
-	Repo string `required:"" name:"repo"`
-	Name string `required:"" name:"name"`
+type ActionsDeleteOrgSecretCmd struct {
+	Org        string `required:"" name:"org"`
+	SecretName string `required:"" name:"secret_name"`
 	internal.BaseCmd
 }
 
-func (c *ActionsDeleteSecretFromRepoCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ActionsDeleteOrgSecretCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/actions/secrets/{name}")
+	c.SetURLPath("/orgs/{org}/actions/secrets/{secret_name}")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("secret_name", c.SecretName)
+	return c.DoRequest("DELETE")
+}
+
+type ActionsDeleteRepoSecretCmd struct {
+	Repo       string `required:"" name:"repo"`
+	SecretName string `required:"" name:"secret_name"`
+	internal.BaseCmd
+}
+
+func (c *ActionsDeleteRepoSecretCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/actions/secrets/{secret_name}")
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("name", c.Name)
+	c.UpdateURLPath("secret_name", c.SecretName)
 	return c.DoRequest("DELETE")
 }
 
@@ -251,29 +314,55 @@ func (c *ActionsGetArtifactCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
-type ActionsGetPublicKeyCmd struct {
+type ActionsGetOrgPublicKeyCmd struct {
+	Org string `required:"" name:"org"`
+	internal.BaseCmd
+}
+
+func (c *ActionsGetOrgPublicKeyCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/{org}/actions/secrets/public-key")
+	c.UpdateURLPath("org", c.Org)
+	return c.DoRequest("GET")
+}
+
+type ActionsGetOrgSecretCmd struct {
+	Org        string `required:"" name:"org"`
+	SecretName string `required:"" name:"secret_name"`
+	internal.BaseCmd
+}
+
+func (c *ActionsGetOrgSecretCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/{org}/actions/secrets/{secret_name}")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("secret_name", c.SecretName)
+	return c.DoRequest("GET")
+}
+
+type ActionsGetRepoPublicKeyCmd struct {
 	Repo string `required:"" name:"repo"`
 	internal.BaseCmd
 }
 
-func (c *ActionsGetPublicKeyCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ActionsGetRepoPublicKeyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/actions/secrets/public-key")
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
 }
 
-type ActionsGetSecretCmd struct {
-	Repo string `required:"" name:"repo"`
-	Name string `required:"" name:"name"`
+type ActionsGetRepoSecretCmd struct {
+	Repo       string `required:"" name:"repo"`
+	SecretName string `required:"" name:"secret_name"`
 	internal.BaseCmd
 }
 
-func (c *ActionsGetSecretCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ActionsGetRepoSecretCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/actions/secrets/{name}")
+	c.SetURLPath("/repos/{repo}/actions/secrets/{secret_name}")
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("name", c.Name)
+	c.UpdateURLPath("secret_name", c.SecretName)
 	return c.DoRequest("GET")
 }
 
@@ -347,6 +436,34 @@ func (c *ActionsGetWorkflowRunCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
+type ActionsGetWorkflowRunUsageCmd struct {
+	Repo  string `required:"" name:"repo"`
+	RunId int64  `required:"" name:"run_id"`
+	internal.BaseCmd
+}
+
+func (c *ActionsGetWorkflowRunUsageCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/actions/runs/{run_id}/timing")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("run_id", c.RunId)
+	return c.DoRequest("GET")
+}
+
+type ActionsGetWorkflowUsageCmd struct {
+	Repo       string `required:"" name:"repo"`
+	WorkflowId int64  `required:"" name:"workflow_id"`
+	internal.BaseCmd
+}
+
+func (c *ActionsGetWorkflowUsageCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/actions/workflows/{workflow_id}/timing")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("workflow_id", c.WorkflowId)
+	return c.DoRequest("GET")
+}
+
 type ActionsListArtifactsForRepoCmd struct {
 	Repo    string `required:"" name:"repo"`
 	Page    int64  `name:"page"`
@@ -378,6 +495,38 @@ func (c *ActionsListJobsForWorkflowRunCmd) Run(isValueSetMap map[string]bool) er
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("run_id", c.RunId)
 	c.UpdateURLQuery("filter", c.Filter)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
+}
+
+type ActionsListOrgSecretsCmd struct {
+	Org     string `required:"" name:"org"`
+	Page    int64  `name:"page"`
+	PerPage int64  `name:"per_page"`
+	internal.BaseCmd
+}
+
+func (c *ActionsListOrgSecretsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/{org}/actions/secrets")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
+}
+
+type ActionsListRepoSecretsCmd struct {
+	Repo    string `required:"" name:"repo"`
+	Page    int64  `name:"page"`
+	PerPage int64  `name:"per_page"`
+	internal.BaseCmd
+}
+
+func (c *ActionsListRepoSecretsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/actions/secrets")
+	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
@@ -447,19 +596,17 @@ func (c *ActionsListRunnerApplicationsForRepoCmd) Run(isValueSetMap map[string]b
 	return c.DoRequest("GET")
 }
 
-type ActionsListSecretsForRepoCmd struct {
-	Repo    string `required:"" name:"repo"`
-	Page    int64  `name:"page"`
-	PerPage int64  `name:"per_page"`
+type ActionsListSelectedReposForOrgSecretCmd struct {
+	Org        string `required:"" name:"org"`
+	SecretName string `required:"" name:"secret_name"`
 	internal.BaseCmd
 }
 
-func (c *ActionsListSecretsForRepoCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ActionsListSelectedReposForOrgSecretCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/actions/secrets")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
+	c.SetURLPath("/orgs/{org}/actions/secrets/{secret_name}/repositories")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("secret_name", c.SecretName)
 	return c.DoRequest("GET")
 }
 
@@ -551,4 +698,36 @@ func (c *ActionsReRunWorkflowCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("run_id", c.RunId)
 	return c.DoRequest("POST")
+}
+
+type ActionsRemoveSelectedRepoFromOrgSecretCmd struct {
+	Org          string `required:"" name:"org"`
+	SecretName   string `required:"" name:"secret_name"`
+	RepositoryId int64  `required:"" name:"repository_id"`
+	internal.BaseCmd
+}
+
+func (c *ActionsRemoveSelectedRepoFromOrgSecretCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/{org}/actions/secrets/{secret_name}/repositories/{repository_id}")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("secret_name", c.SecretName)
+	c.UpdateURLPath("repository_id", c.RepositoryId)
+	return c.DoRequest("DELETE")
+}
+
+type ActionsSetSelectedReposForOrgSecretCmd struct {
+	Org                   string  `required:"" name:"org"`
+	SecretName            string  `required:"" name:"secret_name"`
+	SelectedRepositoryIds []int64 `name:"selected_repository_ids"`
+	internal.BaseCmd
+}
+
+func (c *ActionsSetSelectedReposForOrgSecretCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/{org}/actions/secrets/{secret_name}/repositories")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("secret_name", c.SecretName)
+	c.UpdateBody("selected_repository_ids", c.SelectedRepositoryIds)
+	return c.DoRequest("PUT")
 }
