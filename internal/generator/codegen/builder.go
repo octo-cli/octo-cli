@@ -1,7 +1,6 @@
 package codegen
 
 import (
-	"bytes"
 	"fmt"
 	"os"
 	"sort"
@@ -23,10 +22,7 @@ func Generate(routesPath, outputPath string, fs afero.Fs) error {
 	if err != nil {
 		return err
 	}
-	files, err := GenFileTmpls(endpoints)
-	if err != nil {
-		return err
-	}
+	files := genFileTmpls(endpoints)
 	return WriteFiles(files, outputPath, fs)
 }
 
@@ -118,7 +114,7 @@ func epFlagHelps(endpoints []model.Endpoint) map[string]map[string]map[string]st
 	return result
 }
 
-func epSvcTmpls(endpoints []model.Endpoint) (map[string]*SvcTmpl, error) {
+func epSvcTmpls(endpoints []model.Endpoint) map[string]*SvcTmpl {
 	result := map[string]*SvcTmpl{}
 	for _, concern := range util.AllConcerns(endpoints) {
 		svcName := util.ToArgName(concern)
@@ -134,10 +130,7 @@ func epSvcTmpls(endpoints []model.Endpoint) (map[string]*SvcTmpl, error) {
 		}
 		svcName := util.ToArgName(endpoint.Concern)
 		cmdStruct := endpointCmdStruct(endpoint)
-		runMethod, err := endpointRunMethod(endpoint)
-		if err != nil {
-			return nil, err
-		}
+		runMethod := endpointRunMethod(endpoint)
 		result[svcName].CmdStructAndMethods = append(result[svcName].CmdStructAndMethods, CmdStructAndMethod{
 			CmdStruct: *cmdStruct,
 			RunMethod: runMethod,
@@ -149,18 +142,15 @@ func epSvcTmpls(endpoints []model.Endpoint) (map[string]*SvcTmpl, error) {
 			Tags: util.NewTags(util.NewTag("cmd", "")),
 		})
 	}
-	return result, nil
+	return result
 }
 
-func GenFileTmpls(endpoints []model.Endpoint) (map[string]FileTmpl, error) {
+func genFileTmpls(endpoints []model.Endpoint) map[string]FileTmpl {
 	util.RemoveOwnerParams(endpoints)
 	CLITmpl := cliTmpl(endpoints)
 	cmdHelps := epCmdHelps(endpoints)
 	flagHelps := epFlagHelps(endpoints)
-	svcTmpls, err := epSvcTmpls(endpoints)
-	if err != nil {
-		return nil, err
-	}
+	svcTmpls := epSvcTmpls(endpoints)
 	files := map[string]FileTmpl{
 		"cli.go": {
 			CmdHelps:  cmdHelps,
@@ -182,7 +172,7 @@ func GenFileTmpls(endpoints []model.Endpoint) (map[string]FileTmpl, error) {
 			SvcTmpls: []SvcTmpl{*svcTmpl},
 		}
 	}
-	return files, nil
+	return files
 }
 
 func epPreviewCmdFields(endpoint model.Endpoint) []StructField {
@@ -296,118 +286,44 @@ func endpointCmdStructName(endpoint model.Endpoint) string {
 	return util.ToArgName(endpoint.Concern) + util.ToArgName(endpoint.Name) + "Cmd"
 }
 
-func bodyCodeBlocks(endpoint model.Endpoint) ([]CodeBlock, error) {
-	if endpoint.JSONBodySchema == nil {
-		return nil, nil
-	}
-	bodyParams := util.FlattenParams(endpoint.JSONBodySchema.ObjectParams)
-	return paramsCodeBlocks(bodyParams, "c.UpdateBody")
-}
-
-func manualCodeBlocks(opID string) []CodeBlock {
-	mpi := overrides.GetManualParamInfo(opID)
-	result := make([]CodeBlock, 0, len(mpi))
-	for _, info := range mpi {
-		result = append(result, CodeBlock{
+func endpointRunMethod(endpoint model.Endpoint) RunMethod {
+	var blocks []CodeBlock
+	for _, info := range overrides.GetManualParamInfo(endpoint.ID) {
+		blocks = append(blocks, CodeBlock{
 			Code:    info.RunCode,
 			Imports: info.CodeImports,
 		})
 	}
-	return result
-}
 
-func pathCodeBlocks(endpoint model.Endpoint) ([]CodeBlock, error) {
-	var result []CodeBlock
-	headers := make(model.Params, 0, len(endpoint.Headers))
 	for _, header := range endpoint.Headers {
 		if header.Name == "accept" {
 			continue
 		}
-		headers = append(headers, header.Clone())
+		blocks = append(blocks, newRunMethodCodeBlock(header.Name, "c.AddRequestHeader"))
 	}
-	endpoint.Headers = headers
 
-	blocks, err := paramsCodeBlocks(endpoint.Headers, "c.AddRequestHeader")
-	if err != nil {
-		return nil, err
+	for _, param := range endpoint.PathParams {
+		blocks = append(blocks, newRunMethodCodeBlock(param.Name, "c.UpdateURLPath"))
 	}
-	result = append(result, blocks...)
-	blocks, err = paramsCodeBlocks(endpoint.PathParams, "c.UpdateURLPath")
-	if err != nil {
-		return nil, err
-	}
-	result = append(result, blocks...)
-	blocks, err = paramsCodeBlocks(endpoint.QueryParams, "c.UpdateURLQuery")
-	if err != nil {
-		return nil, err
-	}
-	result = append(result, blocks...)
 
-	return result, nil
-}
+	for _, param := range endpoint.QueryParams {
+		blocks = append(blocks, newRunMethodCodeBlock(param.Name, "c.UpdateURLQuery"))
+	}
 
-func paramsCodeBlocks(params model.Params, updateMethod string) ([]CodeBlock, error) {
-	result := make([]CodeBlock, 0, len(params))
-	for _, param := range params {
-		var buf bytes.Buffer
-		err := tmpl.ExecuteTemplate(&buf, "RunMethodParam", RunMethodParam{
-			Name:         param.Name,
-			ValueField:   util.ToArgName(param.Name),
-			UpdateMethod: updateMethod,
-		})
-		if err != nil {
-			return nil, err
+	for _, preview := range endpoint.Previews {
+		blocks = append(blocks, newRunMethodCodeBlock(preview.Name, UpdateMethodMap["preview"]))
+	}
+
+	if endpoint.JSONBodySchema != nil {
+		for _, param := range util.FlattenParams(endpoint.JSONBodySchema.ObjectParams) {
+			blocks = append(blocks, newRunMethodCodeBlock(param.Name, "c.UpdateBody"))
 		}
-		result = append(result, CodeBlock{
-			Code: buf.String(),
-		})
 	}
-	return result, nil
-}
 
-func previewCodeBlocks(previews []model.Preview) ([]CodeBlock, error) {
-	result := make([]CodeBlock, 0, len(previews))
-	var buf bytes.Buffer
-	for _, preview := range previews {
-		buf.Reset()
-		err := tmpl.ExecuteTemplate(&buf, "RunMethodParam", RunMethodParam{
-			Name:         preview.Name,
-			UpdateMethod: UpdateMethodMap["preview"],
-			ValueField:   util.ToArgName(preview.Name),
-		})
-		if err != nil {
-			return nil, err
-		}
-		result = append(result, CodeBlock{
-			Code: buf.String(),
-		})
-	}
-	return result, nil
-}
-
-func endpointRunMethod(endpoint model.Endpoint) (RunMethod, error) {
-	runMethod := RunMethod{
+	return RunMethod{
 		ReceiverName: endpointCmdStructName(endpoint),
 		Method:       strings.ToUpper(endpoint.Method),
 		URLPath:      endpoint.Path,
-		CodeBlocks:   manualCodeBlocks(endpoint.ID),
+		CodeBlocks:   blocks,
 	}
-	pathBlocks, err := pathCodeBlocks(endpoint)
-	if err != nil {
-		return runMethod, err
-	}
-	runMethod.CodeBlocks = append(runMethod.CodeBlocks, pathBlocks...)
-
-	previewBlocks, err := previewCodeBlocks(endpoint.Previews)
-	if err != nil {
-		return runMethod, err
-	}
-	runMethod.CodeBlocks = append(runMethod.CodeBlocks, previewBlocks...)
-
-	bodyBlocks, err := bodyCodeBlocks(endpoint)
-	if err != nil {
-		return runMethod, err
-	}
-	runMethod.CodeBlocks = append(runMethod.CodeBlocks, bodyBlocks...)
-	return runMethod, nil
 }

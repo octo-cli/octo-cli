@@ -24,18 +24,6 @@ func execAndFormatTmpl(t *testing.T, tm *template.Template, data interface{}) st
 }
 
 func TestTemplate(t *testing.T) {
-	t.Run("RunMethodParam", func(t *testing.T) {
-		data := RunMethodParam{
-			Name:         "name",
-			ValueField:   "valueField",
-			UpdateMethod: "c.updateMethod",
-		}
-		want := `
-c.updateMethod("name", c.valueField)`
-		got := execAndFormatTmpl(t, tmpl.Lookup("RunMethodParam"), data)
-		require.Equal(t, want, got)
-	})
-
 	t.Run("RunMethod", func(t *testing.T) {
 
 		t.Run("with params", func(t *testing.T) {

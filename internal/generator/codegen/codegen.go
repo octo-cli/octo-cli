@@ -2,6 +2,7 @@ package codegen
 
 import (
 	"bytes"
+	"fmt"
 	"go/format"
 	"path/filepath"
 	"sort"
@@ -15,7 +16,6 @@ import (
 var tmpl = template.Must(template.New("").Parse(tmplFileTmpl))
 
 func init() {
-	template.Must(tmpl.New("RunMethodParam").Parse(tmplRunMethodParam))
 	template.Must(tmpl.New("RunMethod").Parse(tmplRunMethod))
 	template.Must(tmpl.New("StructType").Parse(tmplStructType))
 	template.Must(tmpl.New("SvcTmpl").Parse(tmplSvcTmpl))
@@ -23,21 +23,16 @@ func init() {
 	template.Must(tmpl.New("FlagHelps").Parse(tmplFlagHelps))
 }
 
+func newRunMethodCodeBlock(name, updateMethod string) CodeBlock {
+	return CodeBlock{
+		Code: fmt.Sprintf("\n%s(%q, c.%s)", updateMethod, name, util.ToArgName(name)),
+	}
+}
+
 type CodeBlock struct {
 	Code    string
 	Imports []string
 }
-
-type RunMethodParam struct {
-	Name         string
-	ValueField   string
-	UpdateMethod string
-	Import       string
-}
-
-// language=GoTemplate
-const tmplRunMethodParam = `
-{{.UpdateMethod}}("{{.Name}}", c.{{.ValueField}})`
 
 type RunMethod struct {
 	ReceiverName string
