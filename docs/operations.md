@@ -2,11 +2,26 @@
 # actions
 
 
+## actions add-selected-repo-to-org-secret
+
+https://developer.github.com/v3/actions/secrets/#add-selected-repository-to-an-organization-secret
+
+Adds a repository to an organization secret when the `visibility` for repository access is set to `selected`. The visibility is set when you [Create or update an organization secret](https://developer.github.com/v3/actions/secrets/#create-or-update-an-organization-secret). You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| org | __Required__  |
+| repository_id | __Required__  |
+| secret_name | __Required__  |
+
 ## actions cancel-workflow-run
 
 https://developer.github.com/v3/actions/workflow-runs/#cancel-a-workflow-run
 
-Cancels a workflow run using its `id`. Anyone with write access to the repository and an access token with the `repo` scope can use this endpoint. GitHub Apps must have the `actions` permission to use this endpoint.
+Cancels a workflow run using its `id`. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
 
 ### parameters
 
@@ -16,13 +31,13 @@ Cancels a workflow run using its `id`. Anyone with write access to the repositor
 | repo | __Required__ repository in OWNER/REPO form |
 | run_id | __Required__  |
 
-## actions create-or-update-secret-for-repo
+## actions create-or-update-org-secret
 
-https://developer.github.com/v3/actions/secrets/#create-or-update-a-secret-for-a-repository
+https://developer.github.com/v3/actions/secrets/#create-or-update-an-organization-secret
 
-Creates or updates a secret with an encrypted value. Encrypt your secret using [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages). Anyone with write access to the repository and an access token with the `repo` scope can use this endpoint. GitHub Apps must have the `secrets` permission to use this endpoint.
+Creates or updates an organization secret with an encrypted value. Encrypt your secret using [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages). You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
 
-Encrypt your secret using the [tweetsodium](https://github.com/mastahyeti/tweetsodium) library.
+Encrypt your secret using the [tweetsodium](https://github.com/github/tweetsodium) library.
 
 
 
@@ -41,9 +56,41 @@ Encrypt your secret using the [rbnacl](https://github.com/RubyCrypto/rbnacl) gem
 
 | name | description |
 |------|-------------|
-| name | __Required__  |
+| org | __Required__  |
+| secret_name | __Required__  |
+| encrypted_value | Value for your secret, encrypted with [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages) using the public key retrieved from the [Get an organization public key](https://developer.github.com/v3/actions/secrets/#get-an-organization-public-key) endpoint. |
+| key_id | ID of the key you used to encrypt the secret. |
+| selected_repository_ids | An array of repository ids that can access the organization secret. You can only provide a list of repository ids when the `visibility` is set to `selected`. You can manage the list of selected repositories using the [List selected repositories for an organization secret](https://developer.github.com/v3/actions/secrets/#list-selected-repositories-for-an-organization-secret), [Set selected repositories for an organization secret](https://developer.github.com/v3/actions/secrets/#set-selected-repositories-for-an-organization-secret), and [Remove selected repository from an organization secret](https://developer.github.com/v3/actions/secrets/#remove-selected-repository-from-an-organization-secret) endpoints. |
+| visibility | Configures the access that repositories have to the organization secret. Can be one of:  <br>\- `all` - All repositories in an organization can access the secret.  <br>\- `private` - Private repositories in an organization can access the secret.  <br>\- `selected` - Only specific repositories can access the secret. |
+
+## actions create-or-update-repo-secret
+
+https://developer.github.com/v3/actions/secrets/#create-or-update-a-repository-secret
+
+Creates or updates a repository secret with an encrypted value. Encrypt your secret using [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages). You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
+
+Encrypt your secret using the [tweetsodium](https://github.com/github/tweetsodium) library.
+
+
+
+Encrypt your secret using [pynacl](https://pynacl.readthedocs.io/en/stable/public/#nacl-public-sealedbox) with Python 3.
+
+
+
+Encrypt your secret using the [Sodium.Core](https://www.nuget.org/packages/Sodium.Core/) package.
+
+
+
+Encrypt your secret using the [rbnacl](https://github.com/RubyCrypto/rbnacl) gem.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
-| encrypted_value | Value for your secret, encrypted with [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages) using the public key retrieved from the [Get your public key](https://developer.github.com/v3/actions/secrets/#get-your-public-key) endpoint. |
+| secret_name | __Required__  |
+| encrypted_value | Value for your secret, encrypted with [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages) using the public key retrieved from the [Get a repository public key](https://developer.github.com/v3/actions/secrets/#get-a-repository-public-key) endpoint. |
 | key_id | ID of the key you used to encrypt the secret. |
 
 ## actions create-registration-token-for-org
@@ -52,7 +99,7 @@ https://developer.github.com/v3/actions/self-hosted-runners/#create-a-registrati
 
 **Warning:** The self-hosted runners API for organizations is currently in public beta and subject to change.
 
-Returns a token that you can pass to the `config` script. The token expires after one hour. Anyone with admin access to the organization can use this endpoint.
+Returns a token that you can pass to the `config` script. The token expires after one hour. You must authenticate using an access token with the `admin:org` scope to use this endpoint.
 
 Configure your self-hosted runner, replacing `TOKEN` with the registration token provided by this endpoint.
 
@@ -67,7 +114,7 @@ Configure your self-hosted runner, replacing `TOKEN` with the registration token
 
 https://developer.github.com/v3/actions/self-hosted-runners/#create-a-registration-token-for-a-repository
 
-Returns a token that you can pass to the `config` script. The token expires after one hour. Anyone with admin access to the repository and an access token with the `repo` scope can use this endpoint.
+Returns a token that you can pass to the `config` script. The token expires after one hour. You must authenticate using an access token with the `repo` scope to use this endpoint.
 
 Configure your self-hosted runner, replacing TOKEN with the registration token provided by this endpoint.
 
@@ -84,7 +131,7 @@ https://developer.github.com/v3/actions/self-hosted-runners/#create-a-remove-tok
 
 **Warning:** The self-hosted runners API for organizations is currently in public beta and subject to change.
 
-Returns a token that you can pass to the `config` script to remove a self-hosted runner from an organization. The token expires after one hour. Anyone with admin access to the organization can use this endpoint.
+Returns a token that you can pass to the `config` script to remove a self-hosted runner from an organization. The token expires after one hour. You must authenticate using an access token with the `admin:org` scope to use this endpoint.
 
 To remove your self-hosted runner from an organization, replace `TOKEN` with the remove token provided by this endpoint.
 
@@ -99,7 +146,7 @@ To remove your self-hosted runner from an organization, replace `TOKEN` with the
 
 https://developer.github.com/v3/actions/self-hosted-runners/#create-a-remove-token-for-a-repository
 
-Returns a token that you can pass to remove a self-hosted runner from a repository. The token expires after one hour. Anyone with admin access to the repository and an access token with the `repo` scope can use this endpoint.
+Returns a token that you can pass to remove a self-hosted runner from a repository. The token expires after one hour. You must authenticate using an access token with the `repo` scope to use this endpoint.
 
 Remove your self-hosted runner from a repository, replacing TOKEN with the remove token provided by this endpoint.
 
@@ -114,7 +161,7 @@ Remove your self-hosted runner from a repository, replacing TOKEN with the remov
 
 https://developer.github.com/v3/actions/artifacts/#delete-an-artifact
 
-Deletes an artifact for a workflow run. Anyone with write access to the repository and an access token with the `repo` scope can use this endpoint. GitHub Apps must have the `actions` permission to use this endpoint.
+Deletes an artifact for a workflow run. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
 
 ### parameters
 
@@ -124,19 +171,33 @@ Deletes an artifact for a workflow run. Anyone with write access to the reposito
 | artifact_id | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
-## actions delete-secret-from-repo
+## actions delete-org-secret
 
-https://developer.github.com/v3/actions/secrets/#delete-a-secret-from-a-repository
+https://developer.github.com/v3/actions/secrets/#delete-an-organization-secret
 
-Deletes a secret in a repository using the secret name. Anyone with write access to the repository and an access token with the `repo` scope can use this endpoint. GitHub Apps must have the `secrets` permission to use this endpoint.
+Deletes a secret in an organization using the secret name. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
 
 ### parameters
 
 
 | name | description |
 |------|-------------|
-| name | __Required__  |
+| org | __Required__  |
+| secret_name | __Required__  |
+
+## actions delete-repo-secret
+
+https://developer.github.com/v3/actions/secrets/#delete-a-repository-secret
+
+Deletes a secret in a repository using the secret name. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
+| secret_name | __Required__  |
 
 ## actions delete-self-hosted-runner-from-org
 
@@ -144,7 +205,7 @@ https://developer.github.com/v3/actions/self-hosted-runners/#delete-a-self-hoste
 
 **Warning:** The self-hosted runners API for organizations is currently in public beta and subject to change.
 
-Forces the removal of a self-hosted runner from an organization. You can use this endpoint to completely remove the runner when the machine you were using no longer exists. Anyone with admin access to the organization can use this endpoint.
+Forces the removal of a self-hosted runner from an organization. You can use this endpoint to completely remove the runner when the machine you were using no longer exists. You must authenticate using an access token with the `admin:org` scope to use this endpoint.
 
 ### parameters
 
@@ -158,7 +219,7 @@ Forces the removal of a self-hosted runner from an organization. You can use thi
 
 https://developer.github.com/v3/actions/self-hosted-runners/#delete-a-self-hosted-runner-from-a-repository
 
-Forces the removal of a self-hosted runner from a repository. You can use this endpoint to completely remove the runner when the machine you were using no longer exists. Anyone with admin access to the repository and an access token with the `repo` scope can use this endpoint.
+Forces the removal of a self-hosted runner from a repository. You can use this endpoint to completely remove the runner when the machine you were using no longer exists. You must authenticate using an access token with the `repo` scope to use this endpoint.
 
 ### parameters
 
@@ -172,7 +233,7 @@ Forces the removal of a self-hosted runner from a repository. You can use this e
 
 https://developer.github.com/v3/actions/workflow-runs/#delete-workflow-run-logs
 
-Deletes all logs for a workflow run. Anyone with write access to the repository and an access token with the `repo` scope can use this endpoint. GitHub Apps must have the `actions` permission to use this endpoint.
+Deletes all logs for a workflow run. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
 
 ### parameters
 
@@ -186,7 +247,7 @@ Deletes all logs for a workflow run. Anyone with write access to the repository 
 
 https://developer.github.com/v3/actions/artifacts/#download-an-artifact
 
-Gets a redirect URL to download an archive for a repository. This URL expires after 1 minute. Look for `Location:` in the response header to find the URL for the download. The `:archive_format` must be `zip`. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions` permission to use this endpoint.
+Gets a redirect URL to download an archive for a repository. This URL expires after 1 minute. Look for `Location:` in the response header to find the URL for the download. The `:archive_format` must be `zip`. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
 
 Call this endpoint using the `-v` flag, which enables verbose output and allows you to see the download URL in the header. To download the file into the current working directory, specify the filename using the `-o` flag.
 
@@ -203,7 +264,7 @@ Call this endpoint using the `-v` flag, which enables verbose output and allows 
 
 https://developer.github.com/v3/actions/workflow-jobs/#download-workflow-job-logs
 
-Gets a redirect URL to download a plain text file of logs for a workflow job. This link expires after 1 minute. Look for `Location:` in the response header to find the URL for the download. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions` permission to use this endpoint.
+Gets a redirect URL to download a plain text file of logs for a workflow job. This link expires after 1 minute. Look for `Location:` in the response header to find the URL for the download. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
 
 Call this endpoint using the `-v` flag, which enables verbose output and allows you to see the download URL in the header. To download the file into the current working directory, specify the filename using the `-o` flag.
 
@@ -219,7 +280,7 @@ Call this endpoint using the `-v` flag, which enables verbose output and allows 
 
 https://developer.github.com/v3/actions/workflow-runs/#download-workflow-run-logs
 
-Gets a redirect URL to download an archive of log files for a workflow run. This link expires after 1 minute. Look for `Location:` in the response header to find the URL for the download. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions` permission to use this endpoint.
+Gets a redirect URL to download an archive of log files for a workflow run. This link expires after 1 minute. Look for `Location:` in the response header to find the URL for the download. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
 
 Call this endpoint using the `-v` flag, which enables verbose output and allows you to see the download URL in the header. To download the file into the current working directory, specify the filename using the `-o` flag.
 
@@ -235,7 +296,7 @@ Call this endpoint using the `-v` flag, which enables verbose output and allows 
 
 https://developer.github.com/v3/actions/artifacts/#get-an-artifact
 
-Gets a specific artifact for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions` permission to use this endpoint.
+Gets a specific artifact for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
 
 ### parameters
 
@@ -245,11 +306,38 @@ Gets a specific artifact for a workflow run. Anyone with read access to the repo
 | artifact_id | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
-## actions get-public-key
+## actions get-org-public-key
 
-https://developer.github.com/v3/actions/secrets/#get-your-public-key
+https://developer.github.com/v3/actions/secrets/#get-an-organization-public-key
 
-Gets your public key, which you must store. You need your public key to use other secrets endpoints. Use the returned `key` to encrypt your secrets. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `secrets` permission to use this endpoint.
+Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or update secrets. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| org | __Required__  |
+
+## actions get-org-secret
+
+https://developer.github.com/v3/actions/secrets/#get-an-organization-secret
+
+Gets a single organization secret without revealing its encrypted value. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| org | __Required__  |
+| secret_name | __Required__  |
+
+## actions get-repo-public-key
+
+https://developer.github.com/v3/actions/secrets/#get-a-repository-public-key
+
+Gets your public key, which you need to encrypt secrets. You need to encrypt a secret before you can create or update secrets. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `secrets` repository permission to use this endpoint.
 
 ### parameters
 
@@ -258,19 +346,19 @@ Gets your public key, which you must store. You need your public key to use othe
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
 
-## actions get-secret
+## actions get-repo-secret
 
-https://developer.github.com/v3/actions/secrets/#get-a-secret
+https://developer.github.com/v3/actions/secrets/#get-a-repository-secret
 
-Gets a single secret without revealing its encrypted value. Anyone with write access to the repository and an access token with the `repo` scope can use this endpoint. GitHub Apps must have the `secrets` permission to use this endpoint.
+Gets a single repository secret without revealing its encrypted value. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
 
 ### parameters
 
 
 | name | description |
 |------|-------------|
-| name | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
+| secret_name | __Required__  |
 
 ## actions get-self-hosted-runner-for-org
 
@@ -278,7 +366,7 @@ https://developer.github.com/v3/actions/self-hosted-runners/#get-a-self-hosted-r
 
 **Warning:** The self-hosted runners API for organizations is currently in public beta and subject to change.
 
-Gets a specific self-hosted runner for an organization. Anyone with admin access to the organization can use this endpoint.
+Gets a specific self-hosted runner for an organization. You must authenticate using an access token with the `admin:org` scope to use this endpoint.
 
 ### parameters
 
@@ -292,7 +380,7 @@ Gets a specific self-hosted runner for an organization. Anyone with admin access
 
 https://developer.github.com/v3/actions/self-hosted-runners/#get-a-self-hosted-runner-for-a-repository
 
-Gets a specific self-hosted runner. Anyone with admin access to the repository and an access token with the `repo` scope can use this endpoint.
+Gets a specific self-hosted runner. You must authenticate using an access token with the `repo` scope to use this endpoint.
 
 ### parameters
 
@@ -306,7 +394,7 @@ Gets a specific self-hosted runner. Anyone with admin access to the repository a
 
 https://developer.github.com/v3/actions/workflows/#get-a-workflow
 
-Gets a specific workflow. You can also replace `:workflow_id` with `:workflow_file_name`. For example, you could use `main.yml`. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions` permission to use this endpoint.
+Gets a specific workflow. You can also replace `:workflow_id` with `:workflow_file_name`. For example, you could use `main.yml`. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
 
 ### parameters
 
@@ -320,7 +408,7 @@ Gets a specific workflow. You can also replace `:workflow_id` with `:workflow_fi
 
 https://developer.github.com/v3/actions/workflow-jobs/#get-a-workflow-job
 
-Gets a specific job in a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions` permission to use this endpoint.
+Gets a specific job in a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
 
 ### parameters
 
@@ -334,7 +422,7 @@ Gets a specific job in a workflow run. Anyone with read access to the repository
 
 https://developer.github.com/v3/actions/workflow-runs/#get-a-workflow-run
 
-Gets a specific workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions` permission to use this endpoint.
+Gets a specific workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
 
 ### parameters
 
@@ -344,11 +432,47 @@ Gets a specific workflow run. Anyone with read access to the repository can use 
 | repo | __Required__ repository in OWNER/REPO form |
 | run_id | __Required__  |
 
+## actions get-workflow-run-usage
+
+https://developer.github.com/v3/actions/workflow-runs/#get-workflow-run-usage
+
+**Warning:** This GitHub Actions usage endpoint is currently in public beta and subject to change. For more information, see "[GitHub Actions API workflow usage](https://developer.github.com/changes/2020-05-15-actions-api-workflow-usage)."
+
+Gets the number of billable minutes and total run time for a specific workflow run. Billable minutes only apply to workflows in private repositories that use GitHub-hosted runners. Usage is listed for each GitHub-hosted runner operating system in milliseconds. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)" in the GitHub Help documentation.
+
+Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| repo | __Required__ repository in OWNER/REPO form |
+| run_id | __Required__  |
+
+## actions get-workflow-usage
+
+https://developer.github.com/v3/actions/workflows/#get-workflow-usage
+
+**Warning:** This GitHub Actions usage endpoint is currently in public beta and subject to change. For more information, see "[GitHub Actions API workflow usage](https://developer.github.com/changes/2020-05-15-actions-api-workflow-usage)."
+
+Gets the number of billable minutes used by a specific workflow during the current billing cycle. Billable minutes only apply to workflows in private repositories that use GitHub-hosted runners. Usage is listed for each GitHub-hosted runner operating system in milliseconds. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)" in the GitHub Help documentation.
+
+You can also replace `:workflow_id` with `:workflow_file_name`. For example, you could use `main.yml`. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| repo | __Required__ repository in OWNER/REPO form |
+| workflow_id | __Required__  |
+
 ## actions list-artifacts-for-repo
 
 https://developer.github.com/v3/actions/artifacts/#list-artifacts-for-a-repository
 
-Lists all artifacts for a repository. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions` permission to use this endpoint.
+Lists all artifacts for a repository. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
 
 ### parameters
 
@@ -363,7 +487,7 @@ Lists all artifacts for a repository. Anyone with read access to the repository 
 
 https://developer.github.com/v3/actions/workflow-jobs/#list-jobs-for-a-workflow-run
 
-Lists jobs for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions` permission to use this endpoint. You can use parameters to narrow the list of results. For more information about using parameters, see [Parameters](https://developer.github.com/v3/#parameters).
+Lists jobs for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint. You can use parameters to narrow the list of results. For more information about using parameters, see [Parameters](https://developer.github.com/v3/#parameters).
 
 ### parameters
 
@@ -376,13 +500,43 @@ Lists jobs for a workflow run. Anyone with read access to the repository can use
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
+## actions list-org-secrets
+
+https://developer.github.com/v3/actions/secrets/#list-organization-secrets
+
+Lists all secrets available in an organization without revealing their encrypted values. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| org | __Required__  |
+| page | Page number of the results to fetch. |
+| per_page | Results per page (max 100) |
+
+## actions list-repo-secrets
+
+https://developer.github.com/v3/actions/secrets/#list-repository-secrets
+
+Lists all secrets available in a repository without revealing their encrypted values. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `secrets` repository permission to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| repo | __Required__ repository in OWNER/REPO form |
+| page | Page number of the results to fetch. |
+| per_page | Results per page (max 100) |
+
 ## actions list-repo-workflow-runs
 
 https://developer.github.com/v3/actions/workflow-runs/#list-repository-workflow-runs
 
 Lists all workflow runs for a repository. You can use parameters to narrow the list of results. For more information about using parameters, see [Parameters](https://developer.github.com/v3/#parameters).
 
-Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions` permission to use this endpoint.
+Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
 
 ### parameters
 
@@ -401,7 +555,7 @@ Anyone with read access to the repository can use this endpoint. If the reposito
 
 https://developer.github.com/v3/actions/workflows/#list-repository-workflows
 
-Lists the workflows in a repository. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions` permission to use this endpoint.
+Lists the workflows in a repository. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
 
 ### parameters
 
@@ -418,7 +572,7 @@ https://developer.github.com/v3/actions/self-hosted-runners/#list-runner-applica
 
 **Warning:** The self-hosted runners API for organizations is currently in public beta and subject to change.
 
-Lists binaries for the runner application that you can download and run. Anyone with admin access to the organization can use this endpoint.
+Lists binaries for the runner application that you can download and run. You must authenticate using an access token with the `admin:org` scope to use this endpoint.
 
 ### parameters
 
@@ -431,7 +585,7 @@ Lists binaries for the runner application that you can download and run. Anyone 
 
 https://developer.github.com/v3/actions/self-hosted-runners/#list-runner-applications-for-a-repository
 
-Lists binaries for the runner application that you can download and run. Anyone with admin access to the repository and an access token with the `repo` scope can use this endpoint.
+Lists binaries for the runner application that you can download and run. You must authenticate using an access token with the `repo` scope to use this endpoint.
 
 ### parameters
 
@@ -440,20 +594,19 @@ Lists binaries for the runner application that you can download and run. Anyone 
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
 
-## actions list-secrets-for-repo
+## actions list-selected-repos-for-org-secret
 
-https://developer.github.com/v3/actions/secrets/#list-secrets-for-a-repository
+https://developer.github.com/v3/actions/secrets/#list-selected-repositories-for-an-organization-secret
 
-Lists all secrets available in a repository without revealing their encrypted values. Anyone with write access to the repository and an access token with the `repo` scope can use this endpoint. GitHub Apps must have the `secrets` permission to use this endpoint.
+Lists all repositories that have been selected when the `visibility` for repository access to a secret is set to `selected`. You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
 
 ### parameters
 
 
 | name | description |
 |------|-------------|
-| repo | __Required__ repository in OWNER/REPO form |
-| page | Page number of the results to fetch. |
-| per_page | Results per page (max 100) |
+| org | __Required__  |
+| secret_name | __Required__  |
 
 ## actions list-self-hosted-runners-for-org
 
@@ -461,7 +614,7 @@ https://developer.github.com/v3/actions/self-hosted-runners/#list-self-hosted-ru
 
 **Warning:** The self-hosted runners API for organizations is currently in public beta and subject to change.
 
-Lists all self-hosted runners for an organization. Anyone with admin access to the organization can use this endpoint.
+Lists all self-hosted runners for an organization. You must authenticate using an access token with the `admin:org` scope to use this endpoint.
 
 ### parameters
 
@@ -476,7 +629,7 @@ Lists all self-hosted runners for an organization. Anyone with admin access to t
 
 https://developer.github.com/v3/actions/self-hosted-runners/#list-self-hosted-runners-for-a-repository
 
-Lists all self-hosted runners for a repository. Anyone with admin access to the repository and an access token with the `repo` scope can use this endpoint.
+Lists all self-hosted runners for a repository. You must authenticate using an access token with the `repo` scope to use this endpoint.
 
 ### parameters
 
@@ -491,7 +644,7 @@ Lists all self-hosted runners for a repository. Anyone with admin access to the 
 
 https://developer.github.com/v3/actions/artifacts/#list-workflow-run-artifacts
 
-Lists artifacts for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions` permission to use this endpoint.
+Lists artifacts for a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
 
 ### parameters
 
@@ -529,7 +682,7 @@ Anyone with read access to the repository can use this endpoint. If the reposito
 
 https://developer.github.com/v3/actions/workflow-runs/#re-run-a-workflow
 
-Re-runs your workflow run using its `id`. Anyone with write access to the repository and an access token with the `repo` scope can use this endpoint. GitHub Apps must have the `actions` permission to use this endpoint.
+Re-runs your workflow run using its `id`. You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint.
 
 ### parameters
 
@@ -538,6 +691,36 @@ Re-runs your workflow run using its `id`. Anyone with write access to the reposi
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
 | run_id | __Required__  |
+
+## actions remove-selected-repo-from-org-secret
+
+https://developer.github.com/v3/actions/secrets/#remove-selected-repository-from-an-organization-secret
+
+Removes a repository from an organization secret when the `visibility` for repository access is set to `selected`. The visibility is set when you [Create or update an organization secret](https://developer.github.com/v3/actions/secrets/#create-or-update-an-organization-secret). You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| org | __Required__  |
+| repository_id | __Required__  |
+| secret_name | __Required__  |
+
+## actions set-selected-repos-for-org-secret
+
+https://developer.github.com/v3/actions/secrets/#set-selected-repositories-for-an-organization-secret
+
+Replaces all repositories for an organization secret when the `visibility` for repository access is set to `selected`. The visibility is set when you [Create or update an organization secret](https://developer.github.com/v3/actions/secrets/#create-or-update-an-organization-secret). You must authenticate using an access token with the `admin:org` scope to use this endpoint. GitHub Apps must have the `secrets` organization permission to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| org | __Required__  |
+| secret_name | __Required__  |
+| selected_repository_ids | An array of repository ids that can access the organization secret. You can only provide a list of repository ids when the `visibility` is set to `selected`. You can add and remove individual repositories using the [Set selected repositories for an organization secret](https://developer.github.com/v3/actions/secrets/#set-selected-repositories-for-an-organization-secret) and [Remove selected repository from an organization secret](https://developer.github.com/v3/actions/secrets/#remove-selected-repository-from-an-organization-secret) endpoints. |
 
 # activity
 
@@ -1063,7 +1246,7 @@ OAuth applications can use a special API method for checking OAuth token validit
 
 https://developer.github.com/v3/apps/installations/#create-a-content-attachment
 
-Creates an attachment under a content reference URL in the body or comment of an issue or pull request. Use the `id` of the content reference from the [`content_reference` event](https://developer.github.com/v3/activity/events/types/#contentreferenceevent) to create an attachment.
+Creates an attachment under a content reference URL in the body or comment of an issue or pull request. Use the `id` of the content reference from the [`content_reference` event](https://developer.github.com/webhooks/event-payloads/#content_reference) to create an attachment.
 
 The app must create a content attachment within six hours of the content reference URL being posted. See "[Using content attachments](https://developer.github.com/apps/using-content-attachments/)" for details about content attachments.
 
@@ -1609,7 +1792,7 @@ Creates a new check run for a specific commit in a repository. Your GitHub App m
 | head_sha | __Required__ The SHA of the commit. |
 | name | __Required__ The name of the check. For example, "code-coverage". |
 | repo | __Required__ repository in OWNER/REPO form |
-| actions | Displays a button on GitHub that can be clicked to alert your app to do additional tasks. For example, a code linting app can display a button that automatically fixes detected errors. The button created in this object is displayed after the check run completes. When a user clicks the button, GitHub sends the [`check_run.requested_action` webhook](https://developer.github.com/v3/activity/events/types/#checkrunevent) to your app. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://developer.github.com/v3/checks/runs/#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://developer.github.com/v3/checks/runs/#check-runs-and-requested-actions)." To learn more about check runs and requested actions, see "[Check runs and requested actions](https://developer.github.com/v3/checks/runs/#check-runs-and-requested-actions)." |
+| actions | Displays a button on GitHub that can be clicked to alert your app to do additional tasks. For example, a code linting app can display a button that automatically fixes detected errors. The button created in this object is displayed after the check run completes. When a user clicks the button, GitHub sends the [`check_run.requested_action` webhook](https://developer.github.com/webhooks/event-payloads/#check_run) to your app. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://developer.github.com/v3/checks/runs/#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://developer.github.com/v3/checks/runs/#check-runs-and-requested-actions)." To learn more about check runs and requested actions, see "[Check runs and requested actions](https://developer.github.com/v3/checks/runs/#check-runs-and-requested-actions)." |
 | completed_at | The time the check completed. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 | conclusion | **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `success`, `failure`, `neutral`, `cancelled`, `skipped`, `timed_out`, or `action_required`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.  <br>**Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. Only GitHub can change a check run conclusion to `stale`. |
 | details_url | The URL of the integrator's site that has the full details of the check. If the integrator does not provide this, then the homepage of the GitHub app is used. |
@@ -1759,7 +1942,7 @@ Lists check suites for a commit `ref`. The `ref` can be a SHA, branch name, or a
 
 https://developer.github.com/v3/checks/suites/#rerequest-a-check-suite
 
-Triggers GitHub to rerequest an existing check suite, without pushing new code to a repository. This endpoint will trigger the [`check_suite` webhook](https://developer.github.com/v3/activity/events/types/#checksuiteevent) event with the action `rerequested`. When a check suite is `rerequested`, its `status` is reset to `queued` and the `conclusion` is cleared.
+Triggers GitHub to rerequest an existing check suite, without pushing new code to a repository. This endpoint will trigger the [`check_suite` webhook](https://developer.github.com/webhooks/event-payloads/#check_suite) event with the action `rerequested`. When a check suite is `rerequested`, its `status` is reset to `queued` and the `conclusion` is cleared.
 
 To rerequest a check suite, your GitHub App must have the `checks:read` permission on a private repository or pull access to a public repository.
 
@@ -1776,7 +1959,7 @@ To rerequest a check suite, your GitHub App must have the `checks:read` permissi
 
 https://developer.github.com/v3/checks/suites/#update-repository-preferences-for-check-suites
 
-Changes the default automatic flow when creating check suites. By default, the CheckSuiteEvent is automatically created each time code is pushed to a repository. When you disable the automatic creation of check suites, you can manually [Create a check suite](https://developer.github.com/v3/checks/suites/#create-a-check-suite). You must have admin permissions in the repository to set preferences for check suites.
+Changes the default automatic flow when creating check suites. By default, a check suite is automatically created each time code is pushed to a repository. When you disable the automatic creation of check suites, you can manually [Create a check suite](https://developer.github.com/v3/checks/suites/#create-a-check-suite). You must have admin permissions in the repository to set preferences for check suites.
 
 ### parameters
 
@@ -2791,7 +2974,7 @@ https://developer.github.com/v3/issues/milestones/#delete-a-milestone
 
 https://developer.github.com/v3/issues/#get-an-issue
 
-The API returns a [`301 Moved Permanently` status](https://developer.github.com/v3/#http-redirects) if the issue was [transferred](https://help.github.com/articles/transferring-an-issue-to-another-repository/) to another repository. If the issue was transferred to or deleted from a repository where the authenticated user lacks read access, the API returns a `404 Not Found` status. If the issue was deleted from a repository where the authenticated user has read access, the API returns a `410 Gone` status. To receive webhook events for transferred and deleted issues, subscribe to the [`issues`](https://developer.github.com/v3/activity/events/types/#issuesevent) webhook.
+The API returns a [`301 Moved Permanently` status](https://developer.github.com/v3/#http-redirects) if the issue was [transferred](https://help.github.com/articles/transferring-an-issue-to-another-repository/) to another repository. If the issue was transferred to or deleted from a repository where the authenticated user lacks read access, the API returns a `404 Not Found` status. If the issue was deleted from a repository where the authenticated user has read access, the API returns a `410 Gone` status. To receive webhook events for transferred and deleted issues, subscribe to the [`issues`](https://developer.github.com/webhooks/event-payloads/#issues) webhook.
 
 **Note**: GitHub's REST API v3 considers every pull request an issue, but not every issue is a pull request. For this reason, "Issues" endpoints may return both issues and pull requests in the response. You can identify pull requests by the `pull_request` key.
 
@@ -4111,8 +4294,8 @@ Here's how you can create a hook that posts payloads in JSON format:
 | active | Determines if notifications are sent when the webhook is triggered. Set to `true` to send notifications. |
 | config.content_type | The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`. |
 | config.insecure_ssl | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. **We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.** |
-| config.secret | If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value in the [`X-Hub-Signature`](https://developer.github.com/webhooks/#delivery-headers) header. |
-| events | Determines what [events](https://developer.github.com/v3/activity/events/types/) the hook is triggered for. |
+| config.secret | If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value in the [`X-Hub-Signature`](https://developer.github.com/webhooks/event-payloads/#delivery-headers) header. |
+| events | Determines what [events](https://developer.github.com/webhooks/event-payloads) the hook is triggered for. |
 
 ## orgs create-invitation
 
@@ -4557,9 +4740,9 @@ https://developer.github.com/v3/orgs/hooks/#edit-a-hook
 | active | Determines if notifications are sent when the webhook is triggered. Set to `true` to send notifications. |
 | config.content_type | The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`. |
 | config.insecure_ssl | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. **We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.** |
-| config.secret | If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value in the [`X-Hub-Signature`](https://developer.github.com/webhooks/#delivery-headers) header. |
+| config.secret | If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value in the [`X-Hub-Signature`](https://developer.github.com/webhooks/event-payloads/#delivery-headers) header. |
 | config.url | The URL to which the payloads will be delivered. |
-| events | Determines what [events](https://developer.github.com/v3/activity/events/types/) the hook is triggered for. |
+| events | Determines what [events](https://developer.github.com/webhooks/event-payloads) the hook is triggered for. |
 
 ## orgs update-membership
 
@@ -6361,7 +6544,7 @@ GitHub Apps require `read & write` access to "Deployments" and `read-only` acces
 
 https://developer.github.com/v3/repos/#create-a-repository-dispatch-event
 
-You can use this endpoint to trigger a webhook event called `repository_dispatch` when you want activity that happens outside of GitHub to trigger a GitHub Actions workflow or GitHub App webhook. You must configure your GitHub Actions workflow or GitHub App to run when the `repository_dispatch` event occurs. For an example `repository_dispatch` webhook payload, see "[RepositoryDispatchEvent](https://developer.github.com/v3/activity/events/types/#repositorydispatchevent)."
+You can use this endpoint to trigger a webhook event called `repository_dispatch` when you want activity that happens outside of GitHub to trigger a GitHub Actions workflow or GitHub App webhook. You must configure your GitHub Actions workflow or GitHub App to run when the `repository_dispatch` event occurs. For an example `repository_dispatch` webhook payload, see "[RepositoryDispatchEvent](https://developer.github.com/webhooks/event-payloads/#repository_dispatch)."
 
 The `client_payload` parameter is available for any extra information that your workflow might need. This parameter is a JSON payload that will be passed on when the webhook event is dispatched. For example, the `client_payload` can include a message that a user would like to send using a GitHub Actions workflow. Or the `client_payload` can be used as a test to debug your workflow. For a test example, see the [input example](https://developer.github.com/v3/repos/#example-4).
 
@@ -6450,8 +6633,8 @@ Here's how you can create a hook that posts payloads in JSON format:
 | active | Determines if notifications are sent when the webhook is triggered. Set to `true` to send notifications. |
 | config.content_type | The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`. |
 | config.insecure_ssl | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. **We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.** |
-| config.secret | If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value in the [`X-Hub-Signature`](https://developer.github.com/webhooks/#delivery-headers) header. |
-| events | Determines what [events](https://developer.github.com/v3/activity/events/types/) the hook is triggered for. |
+| config.secret | If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value in the [`X-Hub-Signature`](https://developer.github.com/webhooks/event-payloads/#delivery-headers) header. |
+| events | Determines what [events](https://developer.github.com/webhooks/event-payloads) the hook is triggered for. |
 | name | Use `web` to create a webhook. Default: `web`. This parameter only accepts the value `web`. |
 
 ## repos create-in-org
@@ -8439,9 +8622,9 @@ https://developer.github.com/v3/repos/hooks/#edit-a-hook
 | add_events | Determines a list of events to be added to the list of events that the Hook triggers for. |
 | config.content_type | The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`. |
 | config.insecure_ssl | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. **We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.** |
-| config.secret | If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value in the [`X-Hub-Signature`](https://developer.github.com/webhooks/#delivery-headers) header. |
+| config.secret | If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value in the [`X-Hub-Signature`](https://developer.github.com/webhooks/event-payloads/#delivery-headers) header. |
 | config.url | The URL to which the payloads will be delivered. |
-| events | Determines what [events](https://developer.github.com/v3/activity/events/types/) the hook is triggered for. This replaces the entire array of events. |
+| events | Determines what [events](https://developer.github.com/webhooks/event-payloads) the hook is triggered for. This replaces the entire array of events. |
 | remove_events | Determines a list of events to be removed from the list of events that the Hook triggers for. |
 
 ## repos update-information-about-pages-site
