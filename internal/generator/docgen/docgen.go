@@ -4,14 +4,15 @@ import (
 	"bytes"
 	"fmt"
 	"io"
+	"os"
 	"path/filepath"
 	"sort"
 	"strings"
 
-	"github.com/getkin/kin-openapi/openapi3"
-	"github.com/octo-cli/octo-cli/internal/generator/supported"
-	"github.com/octo-cli/octo-cli/internal/generator/swaggerparser"
+	"github.com/octo-cli/octo-cli/internal/generator/overrides"
 	"github.com/octo-cli/octo-cli/internal/generator/util"
+	"github.com/octo-cli/octo-cli/internal/model"
+	"github.com/octo-cli/octo-cli/internal/model/openapi"
 	"github.com/spf13/afero"
 )
 
@@ -23,10 +24,10 @@ type paramHelp struct {
 }
 
 type unsupportedOptionalParam struct {
-	operation *openapi3.Operation
-	routePath string
-	method    string
-	paramName string
+	operationID string
+	routePath   string
+	method      string
+	paramName   string
 }
 
 func writeMarkdownHeader(w io.Writer, level int, val string) (int, error) {
@@ -42,55 +43,52 @@ func writerMust(_ int, err error) {
 
 func sortUnsupportedOptionalParams(vals []unsupportedOptionalParam) {
 	sort.Slice(vals, func(i, j int) bool {
-		if vals[i].operation.OperationID < vals[j].operation.OperationID {
+		if vals[i].operationID < vals[j].operationID {
 			return true
 		}
-		if vals[i].operation.OperationID > vals[j].operation.OperationID {
+		if vals[i].operationID > vals[j].operationID {
 			return false
 		}
 		return vals[i].paramName < vals[j].paramName
 	})
 }
 
-func getUnsupportedOptionalParams(swagger *openapi3.Swagger) []unsupportedOptionalParam {
+func getUnsupportedOptionalParams2(endpoints []model.Endpoint) []unsupportedOptionalParam {
 	var result []unsupportedOptionalParam
-	swaggerparser.ForEachOperation(swagger, func(path, method string, op *openapi3.Operation) {
-		if supported.OperationIsUnsupported(op, path, method) {
-			return
+	for _, endpoint := range endpoints {
+		if util.EndpointIsUnsupported(endpoint) {
+			continue
 		}
-		if op.RequestBody == nil {
-			return
+		if endpoint.JSONBodySchema == nil {
+			continue
 		}
-		content := op.RequestBody.Value.Content.Get("application/json")
-		if content == nil {
-			return
-		}
-		for name, ref := range content.Schema.Value.Properties {
-			if supported.IsSupportedParam(ref) {
+		for _, param := range endpoint.JSONBodySchema.ObjectParams {
+			if util.IsSupportedModelParam(param) {
 				continue
 			}
 			result = append(result, unsupportedOptionalParam{
-				operation: op,
-				routePath: path,
-				method:    method,
-				paramName: name,
+				routePath:   endpoint.Path,
+				method:      endpoint.Method,
+				paramName:   param.Name,
+				operationID: endpoint.ID,
 			})
 		}
-	})
+	}
 	sortUnsupportedOptionalParams(result)
 	return result
 }
 
-func WriteDocs(routesPath, docsPath string, fs afero.Fs) error {
-	swagger, err := openapi3.NewSwaggerLoader().LoadSwaggerFromFile(routesPath)
+func WriteDocs(schemaPath, docsPath string, fs afero.Fs) error {
+	schemaFile, err := os.Open(schemaPath)
 	if err != nil {
 		return err
 	}
-	err = swaggerparser.RemoveOwnerParams(swagger)
+	endpoints, err := openapi.EndpointsFromSchema(schemaFile)
 	if err != nil {
 		return err
 	}
-	opDoc, err := operationsHelp(swagger)
+	util.RemoveOwnerParams(endpoints)
+	opDoc, err := operationsHelp(endpoints)
 	if err != nil {
 		return err
 	}
@@ -98,43 +96,46 @@ func WriteDocs(routesPath, docsPath string, fs afero.Fs) error {
 	if err != nil {
 		return err
 	}
-	unsupDoc, err := unsupportedHelp(swagger)
-	if err != nil {
-		return err
-	}
-	err = afero.WriteFile(fs, filepath.Join(docsPath, "unsupported.md"), unsupDoc, 0640)
-	if err != nil {
-		return err
-	}
 	return nil
 }
 
-func operationsHelp(swagger *openapi3.Swagger) ([]byte, error) {
-	var buf bytes.Buffer
-
-	uops := getUnsupportedOptionalParams(swagger)
-
-	for _, svcName := range swaggerparser.AllServiceNames(swagger) {
-		svcOps := supported.SvcOperations(swagger, svcName)
-		if len(svcOps) == 0 {
+func svcEndpoints(svc string, endpoints []model.Endpoint) []model.Endpoint {
+	result := make([]model.Endpoint, 0, len(endpoints))
+	for _, endpoint := range endpoints {
+		if endpoint.Concern != svc {
 			continue
 		}
-		sort.Slice(svcOps, func(i, j int) bool {
-			return svcOps[i].Op.OperationID < svcOps[j].Op.OperationID
+		if util.EndpointIsUnsupported(endpoint) {
+			continue
+		}
+		result = append(result, endpoint)
+	}
+	return result
+}
+
+func operationsHelp(endpoints []model.Endpoint) ([]byte, error) {
+	var buf bytes.Buffer
+	uops := getUnsupportedOptionalParams2(endpoints)
+	for _, concern := range util.AllConcerns(endpoints) {
+		eps := svcEndpoints(concern, endpoints)
+		if len(eps) == 0 {
+			continue
+		}
+		sort.Slice(eps, func(i, j int) bool {
+			return eps[i].ID < eps[j].ID
 		})
 		writerMust(
-			writeMarkdownHeader(&buf, 1, svcName),
+			writeMarkdownHeader(&buf, 1, concern),
 		)
-		for _, opInfo := range svcOps {
-			writerMust(writeMarkdownHeader(&buf, 2, fmt.Sprintf("%s %s", svcName, swaggerparser.GetOperationName(opInfo.Op))))
-			writerMust(buf.WriteString(opInfo.Op.ExternalDocs.URL + "\n\n"))
-			writerMust(buf.WriteString(opInfo.Op.Description + "\n"))
-			helps := paramHelps(opInfo.Path, opInfo.Method, opInfo.Op, uops)
+		for _, opInfo := range eps {
+			writerMust(writeMarkdownHeader(&buf, 2, fmt.Sprintf("%s %s", concern, opInfo.Name)))
+			writerMust(buf.WriteString(opInfo.DocsURL + "\n\n"))
+			writerMust(buf.WriteString(opInfo.HelpText + "\n"))
+			helps := paramHelps(opInfo, uops)
 			if len(helps) == 0 {
 				continue
 			}
 			writerMust(writeMarkdownHeader(&buf, 3, "parameters"))
-
 			writerMust(buf.WriteString(`
 | name | description |
 |------|-------------|
@@ -176,7 +177,6 @@ func operationsHelp(swagger *openapi3.Swagger) ([]byte, error) {
 			}
 		}
 	}
-
 	return buf.Bytes(), nil
 }
 
@@ -195,26 +195,34 @@ func removeHelpsWithName(helps []paramHelp, name string) []paramHelp {
 	}
 }
 
-func paramHelps(path, method string, op *openapi3.Operation, uops []unsupportedOptionalParam) []paramHelp {
+func paramHelps(endpoint model.Endpoint, uops []unsupportedOptionalParam) []paramHelp {
 	var result []paramHelp
-	for i, parameter := range op.Parameters {
-		if parameter.Value.Name == "accept" {
+	for _, param := range endpoint.PathParams {
+		result = append(result, paramHelp{
+			name:        param.Name,
+			required:    param.Required,
+			description: param.HelpText,
+		})
+	}
+	for _, param := range endpoint.QueryParams {
+		result = append(result, paramHelp{
+			name:        param.Name,
+			required:    param.Required,
+			description: param.HelpText,
+		})
+	}
+	for _, param := range endpoint.Headers {
+		if param.Name == "accept" {
 			continue
 		}
 		result = append(result, paramHelp{
-			name:        parameter.Value.Name,
-			required:    swaggerparser.ParamRequired(op.Parameters, i),
-			description: parameter.Value.Description,
+			name:        param.Name,
+			required:    param.Required,
+			description: param.HelpText,
 		})
 	}
-
-	previews, err := swaggerparser.OperationPreviews(op)
-	if err != nil {
-		panic(err)
-	}
-
-	for _, preview := range previews {
-		note := preview.Note
+	for _, preview := range endpoint.Previews {
+		note := util.FixPreviewNote(preview.Note)
 		note = strings.Split(note, "```")[0]
 		result = append(result, paramHelp{
 			name:        preview.Name + "-preview",
@@ -222,14 +230,13 @@ func paramHelps(path, method string, op *openapi3.Operation, uops []unsupportedO
 			description: note,
 		})
 	}
-
 	var myUops []unsupportedOptionalParam
 	for _, uop := range uops {
-		if uop.routePath == path && uop.method == method {
+		if uop.routePath == endpoint.Path && uop.method == endpoint.Method {
 			myUops = append(myUops, uop)
 		}
 	}
-	for _, m := range swaggerparser.GetManualParamInfo(op) {
+	for _, m := range overrides.GetManualParamInfo(endpoint.ID) {
 		result = removeHelpsWithName(result, m.Name)
 		if m.Hidden {
 			continue
@@ -240,57 +247,23 @@ func paramHelps(path, method string, op *openapi3.Operation, uops []unsupportedO
 			description: m.Description,
 		})
 	}
-	for _, bpi := range swaggerparser.GetBodyParamInfo(op, supported.RefFilter) {
+	if endpoint.JSONBodySchema == nil {
+		return result
+	}
+	bodyParams := util.FlattenParams(endpoint.JSONBodySchema.ObjectParams)
+	for _, param := range bodyParams {
 		ph := paramHelp{
-			name:        bpi.Name,
-			required:    bpi.Required,
-			description: bpi.Ref.Value.Description,
+			name:        param.Name,
+			required:    param.Required,
+			description: param.HelpText,
 		}
 		for _, uop := range myUops {
-			if uop.paramName == bpi.Name {
+			if uop.paramName == param.Name {
 				ph.unsupported = true
 				break
 			}
 		}
-
 		result = append(result, ph)
 	}
 	return result
-}
-
-func unsupportedHelp(swagger *openapi3.Swagger) ([]byte, error) {
-	var buf bytes.Buffer
-
-	svcData := map[string][]supported.UnsupportedOperation{}
-
-	unsupOps := supported.GetUnsupportedOperations(swagger)
-	for _, unsupOp := range unsupOps {
-		opID := strings.Split(unsupOp.Operation.OperationID, "/")
-		if len(opID) != 2 {
-			return nil, fmt.Errorf("invalid OperationID")
-		}
-		svcName := util.ToArgName(opID[0])
-		svcData[svcName] = append(svcData[svcName], unsupOp)
-	}
-	svcNames := make([]string, 0, len(svcData))
-	for n := range svcData {
-		svcNames = append(svcNames, n)
-	}
-	sort.Strings(svcNames)
-
-	writerMust(writeMarkdownHeader(&buf, 1, "Unsupported Operations"))
-
-	for _, svcName := range svcNames {
-		for _, unsupOp := range svcData[svcName] {
-			out := fmt.Sprintf(" - `%s %s` - %s\n",
-				swaggerparser.GetOperationSvcName(unsupOp.Operation),
-				swaggerparser.GetOperationName(unsupOp.Operation),
-				unsupOp.Reason,
-			)
-			writerMust(
-				buf.WriteString(out),
-			)
-		}
-	}
-	return buf.Bytes(), nil
 }

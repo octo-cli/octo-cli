@@ -3,22 +3,27 @@ package codegen
 import (
 	"bytes"
 	"fmt"
+	"os"
 	"sort"
 	"strings"
 
-	"github.com/getkin/kin-openapi/openapi3"
-	"github.com/octo-cli/octo-cli/internal/generator/supported"
-	"github.com/octo-cli/octo-cli/internal/generator/swaggerparser"
+	"github.com/octo-cli/octo-cli/internal/generator/overrides"
 	"github.com/octo-cli/octo-cli/internal/generator/util"
+	"github.com/octo-cli/octo-cli/internal/model"
+	"github.com/octo-cli/octo-cli/internal/model/openapi"
 	"github.com/spf13/afero"
 )
 
 func Generate(routesPath, outputPath string, fs afero.Fs) error {
-	swagger, err := openapi3.NewSwaggerLoader().LoadSwaggerFromFile(routesPath)
+	schemaFile, err := os.Open(routesPath)
 	if err != nil {
 		return err
 	}
-	files, err := GenFileTmpls(swagger)
+	endpoints, err := openapi.EndpointsFromSchema(schemaFile)
+	if err != nil {
+		return err
+	}
+	files, err := GenFileTmpls(endpoints)
 	if err != nil {
 		return err
 	}
@@ -34,169 +39,125 @@ var UpdateMethodMap = map[string]string{
 	"preview": "c.UpdatePreview",
 }
 
-func cliTmpl(swagger *openapi3.Swagger) StructTmplHelper {
+func cliTmpl(endpoints []model.Endpoint) StructTmplHelper {
 	result := StructTmplHelper{
 		Name: "CLI",
 	}
-	for _, svcName := range swaggerparser.AllServiceNames(swagger) {
-		if len(supported.SvcOperations(swagger, svcName)) == 0 {
-			continue
-		}
+	for _, concern := range util.AllConcerns(endpoints) {
 		result.Fields = append(result.Fields, StructField{
-			Name: util.ToArgName(svcName),
-			Type: util.ToArgName(svcName) + "Cmd",
+			Name: util.ToArgName(concern),
+			Type: util.ToArgName(concern) + "Cmd",
 			Tags: util.NewTags(util.NewTag("cmd", "")),
 		})
 	}
 	return result
 }
 
-func operationCmdHelp(op *openapi3.Operation) string {
-	if op.ExternalDocs.URL == "" {
-		return op.Summary
+func endpointCmdHelp(endpoint model.Endpoint) string {
+	if endpoint.DocsURL == "" {
+		return endpoint.Summary
 	}
-	return fmt.Sprintf("%v - %v", op.Summary, op.ExternalDocs.URL)
+	return fmt.Sprintf("%v - %v", endpoint.Summary, endpoint.DocsURL)
 }
 
-func swCmdHelps(swagger *openapi3.Swagger) map[string]map[string]string {
+func epCmdHelps(endpoints []model.Endpoint) map[string]map[string]string {
 	result := map[string]map[string]string{}
-	swaggerparser.ForEachOperation(swagger, func(path, method string, op *openapi3.Operation) {
-		if supported.OperationIsUnsupported(op, path, method) {
-			return
+	for _, concern := range util.AllConcerns(endpoints) {
+		result[concern] = map[string]string{}
+	}
+	for _, endpoint := range endpoints {
+		if util.EndpointIsUnsupported(endpoint) {
+			continue
 		}
-		idName := swaggerparser.GetOperationName(op)
-		svcNodeName := swaggerparser.GetOperationSvcName(op)
-		if result[svcNodeName] == nil {
-			result[svcNodeName] = map[string]string{}
-		}
-		result[svcNodeName][idName] = operationCmdHelp(op)
-	})
+		result[endpoint.Concern][endpoint.Name] = endpointCmdHelp(endpoint)
+	}
 	return result
 }
 
-func manualFieldHelp(op *openapi3.Operation) map[string]string {
-	mpi := swaggerparser.GetManualParamInfo(op)
-	result := make(map[string]string, len(mpi))
+func endpointFieldHelp(endpoint model.Endpoint) map[string]string {
+	result := map[string]string{}
+	for _, param := range endpoint.PathParams {
+		result[param.Name] = param.HelpText
+	}
+	for _, param := range endpoint.QueryParams {
+		result[param.Name] = param.HelpText
+	}
+	for _, param := range endpoint.Headers {
+		if param.Name == "accept" {
+			continue
+		}
+		result[param.Name] = param.HelpText
+	}
+	for _, preview := range endpoint.Previews {
+		result[preview.Name+"-preview"] = util.FixPreviewNote(preview.Note)
+	}
+	if endpoint.JSONBodySchema != nil {
+		bodyParams := util.FlattenParams(endpoint.JSONBodySchema.ObjectParams)
+		for _, param := range bodyParams {
+			result[param.Name] = param.HelpText
+		}
+	}
+	mpi := overrides.GetManualParamInfo(endpoint.ID)
 	for _, info := range mpi {
 		result[info.Name] = info.Description
 	}
 	return result
 }
 
-func bodyFieldHelp(op *openapi3.Operation) map[string]string {
-	bpi := swaggerparser.GetBodyParamInfo(op, supported.RefFilter)
-	result := make(map[string]string, len(bpi))
-	for _, info := range bpi {
-		if !supported.IsSupportedParam(info.Ref) {
-			continue
-		}
-		result[info.Name] = info.Ref.Value.Description
-	}
-	return result
-}
-
-func paramFieldHelp(op *openapi3.Operation) map[string]string {
-	result := make(map[string]string, len(op.Parameters))
-	for _, pRef := range op.Parameters {
-		param := pRef.Value
-		if param.Name == "accept" {
-			continue
-		}
-		result[param.Name] = param.Description
-	}
-	return result
-}
-
-func previewFieldHelp(op *openapi3.Operation) map[string]string {
-	previews, err := swaggerparser.OperationPreviews(op)
-	if err != nil {
-		return nil
-	}
-	result := make(map[string]string, len(previews))
-	for _, preview := range previews {
-		result[preview.Name+"-preview"] = preview.Note
-	}
-	return result
-}
-
-func operationFieldHelp(op *openapi3.Operation) map[string]string {
-	result := bodyFieldHelp(op)
-	for k, v := range paramFieldHelp(op) {
-		result[k] = v
-	}
-	for k, v := range previewFieldHelp(op) {
-		result[k] = v
-	}
-	for k, v := range manualFieldHelp(op) {
-		result[k] = v
-	}
-	return result
-}
-
-func swFlagHelps(swagger *openapi3.Swagger) map[string]map[string]map[string]string {
+func epFlagHelps(endpoints []model.Endpoint) map[string]map[string]map[string]string {
 	result := map[string]map[string]map[string]string{}
-	swaggerparser.ForEachOperation(swagger, func(path, method string, op *openapi3.Operation) {
-		if supported.OperationIsUnsupported(op, path, method) {
-			return
+	for _, concern := range util.AllConcerns(endpoints) {
+		result[concern] = map[string]map[string]string{}
+	}
+	for _, endpoint := range endpoints {
+		if util.EndpointIsUnsupported(endpoint) {
+			continue
 		}
-		idName := swaggerparser.GetOperationName(op)
-		svcNodeName := swaggerparser.GetOperationSvcName(op)
-		if result[svcNodeName] == nil {
-			result[svcNodeName] = map[string]map[string]string{}
-		}
-		result[svcNodeName][idName] = operationFieldHelp(op)
-	})
+		result[endpoint.Concern][endpoint.Name] = endpointFieldHelp(endpoint)
+	}
 	return result
 }
 
-func swSvcTmpls(swagger *openapi3.Swagger) (map[string]*SvcTmpl, error) {
+func epSvcTmpls(endpoints []model.Endpoint) (map[string]*SvcTmpl, error) {
 	result := map[string]*SvcTmpl{}
-	err := swaggerparser.ForEachOperationErr(swagger, func(path, method string, op *openapi3.Operation) error {
-		if supported.OperationIsUnsupported(op, path, method) {
-			return nil
+	for _, concern := range util.AllConcerns(endpoints) {
+		svcName := util.ToArgName(concern)
+		result[svcName] = &SvcTmpl{
+			SvcStruct: StructTmplHelper{
+				Name: svcName + "Cmd",
+			},
 		}
-		idName := swaggerparser.GetOperationName(op)
-		svcName := util.ToArgName(swaggerparser.GetOperationSvcName(op))
-		if result[svcName] == nil {
-			result[svcName] = &SvcTmpl{
-				SvcStruct: StructTmplHelper{
-					Name: svcName + "Cmd",
-				},
-			}
+	}
+	for _, endpoint := range endpoints {
+		if util.EndpointIsUnsupported(endpoint) {
+			continue
 		}
-
-		cmdStruct, err := operationCmdStruct(op)
+		svcName := util.ToArgName(endpoint.Concern)
+		cmdStruct := endpointCmdStruct(endpoint)
+		runMethod, err := endpointRunMethod(endpoint)
 		if err != nil {
-			return err
-		}
-		runMethod, err := operationRunMethod(op, method, path)
-		if err != nil {
-			return err
+			return nil, err
 		}
 		result[svcName].CmdStructAndMethods = append(result[svcName].CmdStructAndMethods, CmdStructAndMethod{
 			CmdStruct: *cmdStruct,
 			RunMethod: runMethod,
 		})
-		structName := svcName + util.ToArgName(idName) + "Cmd"
+		structName := svcName + util.ToArgName(endpoint.Name) + "Cmd"
 		result[svcName].SvcStruct.Fields = append(result[svcName].SvcStruct.Fields, StructField{
-			Name: util.ToArgName(idName),
+			Name: util.ToArgName(endpoint.Name),
 			Type: structName,
 			Tags: util.NewTags(util.NewTag("cmd", "")),
 		})
-		return nil
-	})
-	return result, err
+	}
+	return result, nil
 }
 
-func GenFileTmpls(swagger *openapi3.Swagger) (map[string]FileTmpl, error) {
-	err := swaggerparser.RemoveOwnerParams(swagger)
-	if err != nil {
-		return nil, err
-	}
-	CLITmpl := cliTmpl(swagger)
-	cmdHelps := swCmdHelps(swagger)
-	flagHelps := swFlagHelps(swagger)
-	svcTmpls, err := swSvcTmpls(swagger)
+func GenFileTmpls(endpoints []model.Endpoint) (map[string]FileTmpl, error) {
+	util.RemoveOwnerParams(endpoints)
+	CLITmpl := cliTmpl(endpoints)
+	cmdHelps := epCmdHelps(endpoints)
+	flagHelps := epFlagHelps(endpoints)
+	svcTmpls, err := epSvcTmpls(endpoints)
 	if err != nil {
 		return nil, err
 	}
@@ -224,45 +185,20 @@ func GenFileTmpls(swagger *openapi3.Swagger) (map[string]FileTmpl, error) {
 	return files, nil
 }
 
-func previewCmdFields(op *openapi3.Operation) ([]StructField, error) {
-	previews, err := swaggerparser.OperationPreviews(op)
-	if err != nil {
-		return nil, err
-	}
-	result := make([]StructField, 0, len(previews))
-	for _, preview := range previews {
+func epPreviewCmdFields(endpoint model.Endpoint) []StructField {
+	result := make([]StructField, 0, len(endpoint.Previews))
+	for _, preview := range endpoint.Previews {
 		result = append(result, StructField{
 			Name: util.ToArgName(preview.Name),
 			Type: "bool",
 			Tags: util.FieldTags(preview.Name+"-preview", preview.Required),
 		})
 	}
-	return result, nil
-}
-
-func bodyCmdFields(op *openapi3.Operation) []StructField {
-	if op.RequestBody == nil {
-		return nil
-	}
-	pis := swaggerparser.GetBodyParamInfo(op, supported.RefFilter)
-	result := make([]StructField, 0, len(pis))
-	for _, pi := range pis {
-		tp, ok := util.ParamTypes[util.GetPropType(pi.Ref.Value)]
-		if !ok {
-			continue
-		}
-		result = append(result, StructField{
-			Name:          util.ToArgName(pi.Name),
-			Type:          tp,
-			Tags:          util.FieldTags(pi.Name, pi.Required),
-			ParamLocation: locBody,
-		})
-	}
 	return result
 }
 
-func manualCmdFields(op *openapi3.Operation) ([]StructField, error) {
-	mpi := swaggerparser.GetManualParamInfo(op)
+func manualCmdFields(opID string) []StructField {
+	mpi := overrides.GetManualParamInfo(opID)
 	result := make([]StructField, 0, len(mpi))
 	for _, info := range mpi {
 		tags := util.FieldTags(info.Name, info.Required)
@@ -270,7 +206,7 @@ func manualCmdFields(op *openapi3.Operation) ([]StructField, error) {
 			for _, infoTag := range info.Tags.Tags() {
 				err := tags.Set(infoTag)
 				if err != nil {
-					return nil, err
+					panic(err)
 				}
 			}
 		}
@@ -282,29 +218,26 @@ func manualCmdFields(op *openapi3.Operation) ([]StructField, error) {
 			ParamLocation: locBody,
 		})
 	}
-	return result, nil
+	return result
 }
 
-func paramCmdFields(op *openapi3.Operation) []StructField {
-	result := make([]StructField, 0, len(op.Parameters))
-	for i, pRef := range op.Parameters {
-		param := pRef.Value
+func epBodyCmdFields(endpoint model.Endpoint) []StructField {
+	if endpoint.JSONBodySchema == nil {
+		return nil
+	}
+	bodyParams := util.FlattenParams(endpoint.JSONBodySchema.ObjectParams)
+	return paramsCmdFields(locBody, bodyParams)
+}
+
+func paramsCmdFields(loc paramLocation, params model.Params) []StructField {
+	result := make([]StructField, 0, len(params))
+	for i, param := range params {
 		if param.Name == "accept" {
 			continue
 		}
-		paramType, ok := util.ParamTypes[param.Schema.Value.Type]
-		if !ok {
+		paramType := util.SchemaParamType(param.Schema)
+		if paramType == "" || paramType == "[]" {
 			continue
-		}
-		required := swaggerparser.ParamRequired(op.Parameters, i)
-		var loc paramLocation
-		switch param.In {
-		case openapi3.ParameterInPath:
-			loc = locPath
-		case openapi3.ParameterInHeader:
-			loc = locHeader
-		case openapi3.ParameterInQuery:
-			loc = locQuery
 		}
 		var paramOrder int
 		if loc == locPath {
@@ -313,7 +246,7 @@ func paramCmdFields(op *openapi3.Operation) []StructField {
 		result = append(result, StructField{
 			Name:          util.ToArgName(param.Name),
 			Type:          paramType,
-			Tags:          util.FieldTags(param.Name, required),
+			Tags:          util.FieldTags(param.Name, param.Required),
 			ParamLocation: loc,
 			ParamOrder:    paramOrder,
 		})
@@ -321,9 +254,9 @@ func paramCmdFields(op *openapi3.Operation) []StructField {
 	return result
 }
 
-func operationCmdStruct(op *openapi3.Operation) (*StructTmplHelper, error) {
+func endpointCmdStruct(endpoint model.Endpoint) *StructTmplHelper {
 	tmplHelper := StructTmplHelper{
-		Name: operationCmdStructName(op),
+		Name: endpointCmdStructName(endpoint),
 		Fields: []StructField{
 			{
 				Type:   "internal.BaseCmd",
@@ -331,22 +264,17 @@ func operationCmdStruct(op *openapi3.Operation) (*StructTmplHelper, error) {
 			},
 		},
 	}
-	previewFields, err := previewCmdFields(op)
-	if err != nil {
-		return nil, err
-	}
-	tmplHelper.Fields = append(tmplHelper.Fields, previewFields...)
-	tmplHelper.Fields = append(tmplHelper.Fields, bodyCmdFields(op)...)
-	tmplHelper.Fields = append(tmplHelper.Fields, paramCmdFields(op)...)
-	mcf, err := manualCmdFields(op)
-	if err != nil {
-		return nil, err
-	}
+	tmplHelper.Fields = append(tmplHelper.Fields, epPreviewCmdFields(endpoint)...)
+	tmplHelper.Fields = append(tmplHelper.Fields, epBodyCmdFields(endpoint)...)
+	tmplHelper.Fields = append(tmplHelper.Fields, paramsCmdFields(locPath, endpoint.PathParams)...)
+	tmplHelper.Fields = append(tmplHelper.Fields, paramsCmdFields(locQuery, endpoint.QueryParams)...)
+	tmplHelper.Fields = append(tmplHelper.Fields, paramsCmdFields(locHeader, endpoint.Headers)...)
+	mcf := manualCmdFields(endpoint.ID)
 	for _, mField := range mcf {
 		tmplHelper.Fields = removeFieldsWithName(tmplHelper.Fields, mField.Name)
 	}
 	tmplHelper.Fields = append(tmplHelper.Fields, mcf...)
-	return &tmplHelper, nil
+	return &tmplHelper
 }
 
 func removeFieldsWithName(fields []StructField, name string) []StructField {
@@ -364,41 +292,20 @@ func removeFieldsWithName(fields []StructField, name string) []StructField {
 	}
 }
 
-func operationCmdStructName(op *openapi3.Operation) string {
-	svcName := util.ToArgName(swaggerparser.GetOperationSvcName(op))
-	idName := swaggerparser.GetOperationName(op)
-	return svcName + util.ToArgName(idName) + "Cmd"
+func endpointCmdStructName(endpoint model.Endpoint) string {
+	return util.ToArgName(endpoint.Concern) + util.ToArgName(endpoint.Name) + "Cmd"
 }
 
-func bodyCodeBlocks(op *openapi3.Operation) ([]CodeBlock, error) {
-	if op.RequestBody == nil {
+func bodyCodeBlocks(endpoint model.Endpoint) ([]CodeBlock, error) {
+	if endpoint.JSONBodySchema == nil {
 		return nil, nil
 	}
-	pis := swaggerparser.GetBodyParamInfo(op, supported.RefFilter)
-	result := make([]CodeBlock, 0, len(pis))
-	var buf bytes.Buffer
-	for _, pi := range pis {
-		if !supported.IsSupportedParam(pi.Ref) {
-			continue
-		}
-		buf.Reset()
-		err := tmpl.ExecuteTemplate(&buf, "RunMethodParam", RunMethodParam{
-			Name:         pi.Name,
-			ValueField:   util.ToArgName(pi.Name),
-			UpdateMethod: UpdateMethodMap["body"],
-		})
-		if err != nil {
-			return nil, err
-		}
-		result = append(result, CodeBlock{
-			Code: buf.String(),
-		})
-	}
-	return result, nil
+	bodyParams := util.FlattenParams(endpoint.JSONBodySchema.ObjectParams)
+	return paramsCodeBlocks(bodyParams, "c.UpdateBody")
 }
 
-func manualCodeBlocks(op *openapi3.Operation) []CodeBlock {
-	mpi := swaggerparser.GetManualParamInfo(op)
+func manualCodeBlocks(opID string) []CodeBlock {
+	mpi := overrides.GetManualParamInfo(opID)
 	result := make([]CodeBlock, 0, len(mpi))
 	for _, info := range mpi {
 		result = append(result, CodeBlock{
@@ -409,19 +316,44 @@ func manualCodeBlocks(op *openapi3.Operation) []CodeBlock {
 	return result
 }
 
-func pathCodeBlocks(op *openapi3.Operation) ([]CodeBlock, error) {
-	result := make([]CodeBlock, 0, len(op.Parameters))
-	var buf bytes.Buffer
-	for _, pRef := range op.Parameters {
-		param := pRef.Value
-		if param.Name == "accept" {
+func pathCodeBlocks(endpoint model.Endpoint) ([]CodeBlock, error) {
+	var result []CodeBlock
+	headers := make(model.Params, 0, len(endpoint.Headers))
+	for _, header := range endpoint.Headers {
+		if header.Name == "accept" {
 			continue
 		}
-		buf.Reset()
+		headers = append(headers, header.Clone())
+	}
+	endpoint.Headers = headers
+
+	blocks, err := paramsCodeBlocks(endpoint.Headers, "c.AddRequestHeader")
+	if err != nil {
+		return nil, err
+	}
+	result = append(result, blocks...)
+	blocks, err = paramsCodeBlocks(endpoint.PathParams, "c.UpdateURLPath")
+	if err != nil {
+		return nil, err
+	}
+	result = append(result, blocks...)
+	blocks, err = paramsCodeBlocks(endpoint.QueryParams, "c.UpdateURLQuery")
+	if err != nil {
+		return nil, err
+	}
+	result = append(result, blocks...)
+
+	return result, nil
+}
+
+func paramsCodeBlocks(params model.Params, updateMethod string) ([]CodeBlock, error) {
+	result := make([]CodeBlock, 0, len(params))
+	for _, param := range params {
+		var buf bytes.Buffer
 		err := tmpl.ExecuteTemplate(&buf, "RunMethodParam", RunMethodParam{
 			Name:         param.Name,
 			ValueField:   util.ToArgName(param.Name),
-			UpdateMethod: UpdateMethodMap[param.In],
+			UpdateMethod: updateMethod,
 		})
 		if err != nil {
 			return nil, err
@@ -433,11 +365,7 @@ func pathCodeBlocks(op *openapi3.Operation) ([]CodeBlock, error) {
 	return result, nil
 }
 
-func previewCodeBlocks(op *openapi3.Operation) ([]CodeBlock, error) {
-	previews, err := swaggerparser.OperationPreviews(op)
-	if err != nil {
-		return nil, nil
-	}
+func previewCodeBlocks(previews []model.Preview) ([]CodeBlock, error) {
 	result := make([]CodeBlock, 0, len(previews))
 	var buf bytes.Buffer
 	for _, preview := range previews {
@@ -457,32 +385,29 @@ func previewCodeBlocks(op *openapi3.Operation) ([]CodeBlock, error) {
 	return result, nil
 }
 
-func operationRunMethod(op *openapi3.Operation, method, path string) (RunMethod, error) {
+func endpointRunMethod(endpoint model.Endpoint) (RunMethod, error) {
 	runMethod := RunMethod{
-		ReceiverName: operationCmdStructName(op),
-		Method:       strings.ToUpper(method),
-		URLPath:      path,
+		ReceiverName: endpointCmdStructName(endpoint),
+		Method:       strings.ToUpper(endpoint.Method),
+		URLPath:      endpoint.Path,
+		CodeBlocks:   manualCodeBlocks(endpoint.ID),
 	}
-
-	runMethod.CodeBlocks = manualCodeBlocks(op)
-
-	pathBlocks, err := pathCodeBlocks(op)
+	pathBlocks, err := pathCodeBlocks(endpoint)
 	if err != nil {
 		return runMethod, err
 	}
 	runMethod.CodeBlocks = append(runMethod.CodeBlocks, pathBlocks...)
 
-	previewBlocks, err := previewCodeBlocks(op)
+	previewBlocks, err := previewCodeBlocks(endpoint.Previews)
 	if err != nil {
 		return runMethod, err
 	}
 	runMethod.CodeBlocks = append(runMethod.CodeBlocks, previewBlocks...)
 
-	bodyBlocks, err := bodyCodeBlocks(op)
+	bodyBlocks, err := bodyCodeBlocks(endpoint)
 	if err != nil {
 		return runMethod, err
 	}
 	runMethod.CodeBlocks = append(runMethod.CodeBlocks, bodyBlocks...)
-
 	return runMethod, nil
 }
