@@ -1933,8 +1933,8 @@ Allows you to add a new gist with one or more files.
 
 | name | description |
 |------|-------------|
+| files | __Required__ The filenames and content of each file in the gist. The keys in the `files` object represent the filename and have the type `string`. |
 | description | A descriptive name for this gist. |
-| files.content | The content of the file. |
 | public | When `true`, the gist will be public and available for anyone to see. |
 
 ## gists create-comment
@@ -2179,8 +2179,7 @@ Allows you to update or delete a gist file and rename gist files. Files from the
 |------|-------------|
 | gist_id | __Required__  |
 | description | A descriptive name for this gist. |
-| files.content | The updated content of the file. |
-| files.filename | The new name for this file. To delete a file, set the value of the filename to `null`. |
+| files | The filenames and content that make up this gist. |
 
 ## gists update-comment
 

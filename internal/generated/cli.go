@@ -1268,9 +1268,9 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"gist_id": "",
 		},
 		"create": {
-			"description":   "A descriptive name for this gist.",
-			"files.content": "The content of the file.",
-			"public":        "When `true`, the gist will be public and available for anyone to see.",
+			"description": "A descriptive name for this gist.",
+			"files":       "The filenames and content of each file in the gist. The keys in the `files` object represent the filename and have the type `string`.",
+			"public":      "When `true`, the gist will be public and available for anyone to see.",
 		},
 		"create-comment": {
 			"body":    "The comment text.",
@@ -1340,10 +1340,9 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"gist_id": "",
 		},
 		"update": {
-			"description":    "A descriptive name for this gist.",
-			"files.content":  "The updated content of the file.",
-			"files.filename": "The new name for this file. To delete a file, set the value of the filename to `null`.",
-			"gist_id":        "",
+			"description": "A descriptive name for this gist.",
+			"files":       "The filenames and content that make up this gist.",
+			"gist_id":     "",
 		},
 		"update-comment": {
 			"body":       "The comment text.",
