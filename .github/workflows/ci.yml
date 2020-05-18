@@ -7,8 +7,15 @@ jobs:
   cibuild:
     name: cibuild
     runs-on: ubuntu-18.04
+    env:
+      CI_REF: ${{ github.ref }}
     steps:
+      - name: set ref
+        if: ${{ github.event_name == "repository_dispatch" && github.event.event_type == "trigger_ci" }}
+        run: echo '::set-env name=CI_REF::${{ github.event.client_payload.ref }}'
       - uses: actions/checkout@v2
+        with:
+          ref: ${{ env.CI_REF }}
       - uses: actions/setup-go@v2
         with:
           go-version: '~1.14.0'
