@@ -42,9 +42,9 @@ func (c *GistsCheckIsStarredCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsCreateCmd struct {
-	Description  string `name:"description"`
-	FilesContent string `name:"files.content"`
-	Public       bool   `name:"public"`
+	Files       internal.JSONObject `required:"" name:"files"`
+	Description string              `name:"description"`
+	Public      bool                `name:"public"`
 	internal.BaseCmd
 }
 
@@ -52,7 +52,7 @@ func (c *GistsCreateCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/gists")
 	c.UpdateBody("description", c.Description)
-	c.UpdateBody("files.content", c.FilesContent)
+	c.UpdateBody("files", c.Files)
 	c.UpdateBody("public", c.Public)
 	return c.DoRequest("POST")
 }
@@ -288,10 +288,9 @@ func (c *GistsUnstarCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsUpdateCmd struct {
-	GistId        string `required:"" name:"gist_id"`
-	Description   string `name:"description"`
-	FilesContent  string `name:"files.content"`
-	FilesFilename string `name:"files.filename"`
+	GistId      string              `required:"" name:"gist_id"`
+	Description string              `name:"description"`
+	Files       internal.JSONObject `name:"files"`
 	internal.BaseCmd
 }
 
@@ -300,8 +299,7 @@ func (c *GistsUpdateCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetURLPath("/gists/{gist_id}")
 	c.UpdateURLPath("gist_id", c.GistId)
 	c.UpdateBody("description", c.Description)
-	c.UpdateBody("files.content", c.FilesContent)
-	c.UpdateBody("files.filename", c.FilesFilename)
+	c.UpdateBody("files", c.Files)
 	return c.DoRequest("PATCH")
 }
 
