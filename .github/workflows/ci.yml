@@ -11,7 +11,7 @@ jobs:
       CI_REF: ${{ github.ref }}
     steps:
       - name: set ref
-        if: ${{ github.event_name == "repository_dispatch" && github.event.event_type == "trigger_ci" }}
+        if: github.event_name == "repository_dispatch" && github.event.event_type == "trigger_ci"
         run: echo '::set-env name=CI_REF::${{ github.event.client_payload.ref }}'
       - uses: actions/checkout@v2
         with:
