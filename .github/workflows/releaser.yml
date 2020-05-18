@@ -1,8 +1,7 @@
 name: releaser
 on:
-  push:
-    branches:
-      - master
+  repository_dispatch:
+    types: [trigger_releaser]
 jobs:
   tag:
     runs-on: ubuntu-18.04
