@@ -1,5 +1,8 @@
 name: ci
-on: [push]
+on:
+  push: {}
+  repository_dispatch:
+    types: [trigger_ci]
 jobs:
   cibuild:
     name: cibuild
