@@ -2,9 +2,7 @@
 
 package generated
 
-import (
-	"github.com/octo-cli/octo-cli/internal"
-)
+import internal "github.com/octo-cli/octo-cli/internal"
 
 type MarkdownCmd struct {
 	Render    MarkdownRenderCmd    `cmd:""`
@@ -12,9 +10,9 @@ type MarkdownCmd struct {
 }
 
 type MarkdownRenderCmd struct {
-	Text    string `required:"" name:"text"`
 	Context string `name:"context"`
 	Mode    string `name:"mode"`
+	Text    string `name:"text" required:"true"`
 	internal.BaseCmd
 }
 
@@ -28,8 +26,8 @@ func (c *MarkdownRenderCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type MarkdownRenderRawCmd struct {
-	File        string `required:"" name:"file" type:"existingfile"`
-	ContentType string `name:"content-type" hidden:""`
+	ContentType string `hidden:"" name:"content-type"`
+	File        string `name:"file" required:"true" type:"existingfile"`
 	internal.BaseCmd
 }
 

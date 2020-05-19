@@ -23,27 +23,18 @@ func Generate(routesPath, outputPath string, fs afero.Fs) error {
 		return err
 	}
 	files := genFileTmpls(endpoints)
-	return WriteFiles(files, outputPath, fs)
+	return writeFiles(files, outputPath, fs)
 }
 
-var UpdateMethodMap = map[string]string{
-	"url":     "c.UpdateURLPath",
-	"path":    "c.UpdateURLPath",
-	"body":    "c.UpdateBody",
-	"query":   "c.UpdateURLQuery",
-	"header":  "c.AddRequestHeader",
-	"preview": "c.UpdatePreview",
-}
-
-func cliTmpl(endpoints []model.Endpoint) StructTmplHelper {
-	result := StructTmplHelper{
-		Name: "CLI",
+func cliTmpl(endpoints []model.Endpoint) structTmplHelper {
+	result := structTmplHelper{
+		name: "CLI",
 	}
 	for _, concern := range util.AllConcerns(endpoints) {
-		result.Fields = append(result.Fields, StructField{
-			Name: util.ToArgName(concern),
-			Type: util.ToArgName(concern) + "Cmd",
-			Tags: util.NewTags(util.NewTag("cmd", "")),
+		result.fields = append(result.fields, structField{
+			name:      util.ToArgName(concern),
+			fieldType: util.ToArgName(concern) + "Cmd",
+			tags:      map[string]string{"cmd": ""},
 		})
 	}
 	return result
@@ -73,16 +64,22 @@ func epCmdHelps(endpoints []model.Endpoint) map[string]map[string]string {
 func endpointFieldHelp(endpoint model.Endpoint) map[string]string {
 	result := map[string]string{}
 	for _, param := range endpoint.PathParams {
-		result[param.Name] = param.HelpText
+		if param.HelpText != "" {
+			result[param.Name] = param.HelpText
+		}
 	}
 	for _, param := range endpoint.QueryParams {
-		result[param.Name] = param.HelpText
+		if param.HelpText != "" {
+			result[param.Name] = param.HelpText
+		}
 	}
 	for _, param := range endpoint.Headers {
 		if param.Name == "accept" {
 			continue
 		}
-		result[param.Name] = param.HelpText
+		if param.HelpText != "" {
+			result[param.Name] = param.HelpText
+		}
 	}
 	for _, preview := range endpoint.Previews {
 		result[preview.Name+"-preview"] = util.FixPreviewNote(preview.Note)
@@ -90,37 +87,46 @@ func endpointFieldHelp(endpoint model.Endpoint) map[string]string {
 	if endpoint.JSONBodySchema != nil {
 		bodyParams := util.FlattenParams(endpoint.JSONBodySchema.ObjectParams)
 		for _, param := range bodyParams {
-			result[param.Name] = param.HelpText
+			if param.HelpText != "" {
+				result[param.Name] = param.HelpText
+			}
 		}
 	}
 	mpi := overrides.GetManualParamInfo(endpoint.ID)
 	for _, info := range mpi {
-		result[info.Name] = info.Description
+		delete(result, info.Name)
+		if info.Description != "" {
+			result[info.Name] = info.Description
+		}
 	}
 	return result
 }
 
 func epFlagHelps(endpoints []model.Endpoint) map[string]map[string]map[string]string {
 	result := map[string]map[string]map[string]string{}
-	for _, concern := range util.AllConcerns(endpoints) {
-		result[concern] = map[string]map[string]string{}
-	}
 	for _, endpoint := range endpoints {
 		if util.EndpointIsUnsupported(endpoint) {
 			continue
 		}
-		result[endpoint.Concern][endpoint.Name] = endpointFieldHelp(endpoint)
+		helps := endpointFieldHelp(endpoint)
+		if len(helps) == 0 {
+			continue
+		}
+		if result[endpoint.Concern] == nil {
+			result[endpoint.Concern] = map[string]map[string]string{}
+		}
+		result[endpoint.Concern][endpoint.Name] = helps
 	}
 	return result
 }
 
-func epSvcTmpls(endpoints []model.Endpoint) map[string]*SvcTmpl {
-	result := map[string]*SvcTmpl{}
+func epSvcTmpls(endpoints []model.Endpoint) map[string]*svcTmpl {
+	result := map[string]*svcTmpl{}
 	for _, concern := range util.AllConcerns(endpoints) {
 		svcName := util.ToArgName(concern)
-		result[svcName] = &SvcTmpl{
-			SvcStruct: StructTmplHelper{
-				Name: svcName + "Cmd",
+		result[svcName] = &svcTmpl{
+			svcStruct: &structTmplHelper{
+				name: svcName + "Cmd",
 			},
 		}
 	}
@@ -131,31 +137,31 @@ func epSvcTmpls(endpoints []model.Endpoint) map[string]*SvcTmpl {
 		svcName := util.ToArgName(endpoint.Concern)
 		cmdStruct := endpointCmdStruct(endpoint)
 		runMethod := endpointRunMethod(endpoint)
-		result[svcName].CmdStructAndMethods = append(result[svcName].CmdStructAndMethods, CmdStructAndMethod{
-			CmdStruct: *cmdStruct,
-			RunMethod: runMethod,
+		result[svcName].cmdStructAndMethods = append(result[svcName].cmdStructAndMethods, cmdStructAndMethod{
+			cmdStruct: cmdStruct,
+			runMethod: &runMethod,
 		})
 		structName := svcName + util.ToArgName(endpoint.Name) + "Cmd"
-		result[svcName].SvcStruct.Fields = append(result[svcName].SvcStruct.Fields, StructField{
-			Name: util.ToArgName(endpoint.Name),
-			Type: structName,
-			Tags: util.NewTags(util.NewTag("cmd", "")),
+		result[svcName].svcStruct.fields = append(result[svcName].svcStruct.fields, structField{
+			name:      util.ToArgName(endpoint.Name),
+			fieldType: structName,
+			tags:      map[string]string{"cmd": ""},
 		})
 	}
 	return result
 }
 
-func genFileTmpls(endpoints []model.Endpoint) map[string]FileTmpl {
+func genFileTmpls(endpoints []model.Endpoint) map[string]fileTmpl {
 	util.RemoveOwnerParams(endpoints)
 	CLITmpl := cliTmpl(endpoints)
 	cmdHelps := epCmdHelps(endpoints)
 	flagHelps := epFlagHelps(endpoints)
 	svcTmpls := epSvcTmpls(endpoints)
-	files := map[string]FileTmpl{
+	files := map[string]fileTmpl{
 		"cli.go": {
-			CmdHelps:  cmdHelps,
-			FlagHelps: flagHelps,
-			PrimaryStructs: []StructTmplHelper{
+			cmdHelps:  cmdHelps,
+			flagHelps: flagHelps,
+			primaryStructs: []structTmplHelper{
 				CLITmpl,
 			},
 		},
@@ -166,52 +172,48 @@ func genFileTmpls(endpoints []model.Endpoint) map[string]FileTmpl {
 	}
 	sort.Strings(svcTmplsKeys)
 	for _, key := range svcTmplsKeys {
-		svcTmpl := svcTmpls[key]
-		filename := strings.ToLower(svcTmpl.SvcStruct.Name) + ".go"
-		files[filename] = FileTmpl{
-			SvcTmpls: []SvcTmpl{*svcTmpl},
+		st := svcTmpls[key]
+		filename := strings.ToLower(st.svcStruct.name) + ".go"
+		files[filename] = fileTmpl{
+			svcTmpls: []svcTmpl{*st},
 		}
 	}
 	return files
 }
 
-func epPreviewCmdFields(endpoint model.Endpoint) []StructField {
-	result := make([]StructField, 0, len(endpoint.Previews))
+func epPreviewCmdFields(endpoint model.Endpoint) []structField {
+	result := make([]structField, 0, len(endpoint.Previews))
 	for _, preview := range endpoint.Previews {
-		result = append(result, StructField{
-			Name: util.ToArgName(preview.Name),
-			Type: "bool",
-			Tags: util.FieldTags(preview.Name+"-preview", preview.Required),
+		result = append(result, structField{
+			name:      util.ToArgName(preview.Name),
+			fieldType: "bool",
+			tags:      util.FieldTags(preview.Name+"-preview", preview.Required),
 		})
 	}
 	return result
 }
 
-func manualCmdFields(opID string) []StructField {
+func manualCmdFields(opID string) []structField {
 	mpi := overrides.GetManualParamInfo(opID)
-	result := make([]StructField, 0, len(mpi))
+	result := make([]structField, 0, len(mpi))
 	for _, info := range mpi {
 		tags := util.FieldTags(info.Name, info.Required)
 		if info.Tags != nil {
-			for _, infoTag := range info.Tags.Tags() {
-				err := tags.Set(infoTag)
-				if err != nil {
-					panic(err)
-				}
+			for k, v := range info.Tags {
+				tags[k] = v
 			}
 		}
-		result = append(result, StructField{
-			Name:          util.ToArgName(info.Name),
-			Type:          info.Type,
-			Tags:          tags,
-			Import:        info.FieldImport,
-			ParamLocation: locBody,
+		result = append(result, structField{
+			name:          util.ToArgName(info.Name),
+			fieldType:     info.Type,
+			tags:          tags,
+			paramLocation: locBody,
 		})
 	}
 	return result
 }
 
-func epBodyCmdFields(endpoint model.Endpoint) []StructField {
+func epBodyCmdFields(endpoint model.Endpoint) []structField {
 	if endpoint.JSONBodySchema == nil {
 		return nil
 	}
@@ -219,8 +221,8 @@ func epBodyCmdFields(endpoint model.Endpoint) []StructField {
 	return paramsCmdFields(locBody, bodyParams)
 }
 
-func paramsCmdFields(loc paramLocation, params model.Params) []StructField {
-	result := make([]StructField, 0, len(params))
+func paramsCmdFields(loc paramLocation, params model.Params) []structField {
+	result := make([]structField, 0, len(params))
 	for i, param := range params {
 		if param.Name == "accept" {
 			continue
@@ -233,45 +235,44 @@ func paramsCmdFields(loc paramLocation, params model.Params) []StructField {
 		if loc == locPath {
 			paramOrder = i
 		}
-		result = append(result, StructField{
-			Name:          util.ToArgName(param.Name),
-			Type:          paramType,
-			Tags:          util.FieldTags(param.Name, param.Required),
-			ParamLocation: loc,
-			ParamOrder:    paramOrder,
+		result = append(result, structField{
+			name:          util.ToArgName(param.Name),
+			fieldType:     paramType,
+			tags:          util.FieldTags(param.Name, param.Required),
+			paramLocation: loc,
+			paramOrder:    paramOrder,
 		})
 	}
 	return result
 }
 
-func endpointCmdStruct(endpoint model.Endpoint) *StructTmplHelper {
-	tmplHelper := StructTmplHelper{
-		Name: endpointCmdStructName(endpoint),
-		Fields: []StructField{
+func endpointCmdStruct(endpoint model.Endpoint) *structTmplHelper {
+	tmplHelper := structTmplHelper{
+		name: endpointCmdStructName(endpoint),
+		fields: []structField{
 			{
-				Type:   "internal.BaseCmd",
-				Import: "github.com/octo-cli/octo-cli/internal",
+				fieldType: "internal.BaseCmd",
 			},
 		},
 	}
-	tmplHelper.Fields = append(tmplHelper.Fields, epPreviewCmdFields(endpoint)...)
-	tmplHelper.Fields = append(tmplHelper.Fields, epBodyCmdFields(endpoint)...)
-	tmplHelper.Fields = append(tmplHelper.Fields, paramsCmdFields(locPath, endpoint.PathParams)...)
-	tmplHelper.Fields = append(tmplHelper.Fields, paramsCmdFields(locQuery, endpoint.QueryParams)...)
-	tmplHelper.Fields = append(tmplHelper.Fields, paramsCmdFields(locHeader, endpoint.Headers)...)
+	tmplHelper.fields = append(tmplHelper.fields, epPreviewCmdFields(endpoint)...)
+	tmplHelper.fields = append(tmplHelper.fields, epBodyCmdFields(endpoint)...)
+	tmplHelper.fields = append(tmplHelper.fields, paramsCmdFields(locPath, endpoint.PathParams)...)
+	tmplHelper.fields = append(tmplHelper.fields, paramsCmdFields(locQuery, endpoint.QueryParams)...)
+	tmplHelper.fields = append(tmplHelper.fields, paramsCmdFields(locHeader, endpoint.Headers)...)
 	mcf := manualCmdFields(endpoint.ID)
 	for _, mField := range mcf {
-		tmplHelper.Fields = removeFieldsWithName(tmplHelper.Fields, mField.Name)
+		tmplHelper.fields = removeFieldsWithName(tmplHelper.fields, mField.name)
 	}
-	tmplHelper.Fields = append(tmplHelper.Fields, mcf...)
+	tmplHelper.fields = append(tmplHelper.fields, mcf...)
 	return &tmplHelper
 }
 
-func removeFieldsWithName(fields []StructField, name string) []StructField {
+func removeFieldsWithName(fields []structField, name string) []structField {
 	for {
 		i := 0
 		for ; i < len(fields); i++ {
-			if fields[i].Name == name {
+			if fields[i].name == name {
 				break
 			}
 		}
@@ -286,44 +287,41 @@ func endpointCmdStructName(endpoint model.Endpoint) string {
 	return util.ToArgName(endpoint.Concern) + util.ToArgName(endpoint.Name) + "Cmd"
 }
 
-func endpointRunMethod(endpoint model.Endpoint) RunMethod {
-	var blocks []CodeBlock
+func endpointRunMethod(endpoint model.Endpoint) runMethod {
+	var cgas []codeGroupAdder
 	for _, info := range overrides.GetManualParamInfo(endpoint.ID) {
-		blocks = append(blocks, CodeBlock{
-			Code:    info.RunCode,
-			Imports: info.CodeImports,
-		})
+		cgas = append(cgas, info.CodeAdder)
 	}
 
 	for _, header := range endpoint.Headers {
 		if header.Name == "accept" {
 			continue
 		}
-		blocks = append(blocks, newRunMethodCodeBlock(header.Name, "c.AddRequestHeader"))
+		cgas = append(cgas, newRunMethodAdder(header.Name, "c.AddRequestHeader"))
 	}
 
 	for _, param := range endpoint.PathParams {
-		blocks = append(blocks, newRunMethodCodeBlock(param.Name, "c.UpdateURLPath"))
+		cgas = append(cgas, newRunMethodAdder(param.Name, "c.UpdateURLPath"))
 	}
 
 	for _, param := range endpoint.QueryParams {
-		blocks = append(blocks, newRunMethodCodeBlock(param.Name, "c.UpdateURLQuery"))
+		cgas = append(cgas, newRunMethodAdder(param.Name, "c.UpdateURLQuery"))
 	}
 
 	for _, preview := range endpoint.Previews {
-		blocks = append(blocks, newRunMethodCodeBlock(preview.Name, UpdateMethodMap["preview"]))
+		cgas = append(cgas, newRunMethodAdder(preview.Name, "c.UpdatePreview"))
 	}
 
 	if endpoint.JSONBodySchema != nil {
 		for _, param := range util.FlattenParams(endpoint.JSONBodySchema.ObjectParams) {
-			blocks = append(blocks, newRunMethodCodeBlock(param.Name, "c.UpdateBody"))
+			cgas = append(cgas, newRunMethodAdder(param.Name, "c.UpdateBody"))
 		}
 	}
 
-	return RunMethod{
-		ReceiverName: endpointCmdStructName(endpoint),
-		Method:       strings.ToUpper(endpoint.Method),
-		URLPath:      endpoint.Path,
-		CodeBlocks:   blocks,
+	return runMethod{
+		receiverName:    endpointCmdStructName(endpoint),
+		method:          strings.ToUpper(endpoint.Method),
+		urlPath:         endpoint.Path,
+		codeGroupAdders: cgas,
 	}
 }

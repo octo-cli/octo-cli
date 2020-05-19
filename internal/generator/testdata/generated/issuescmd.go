@@ -2,9 +2,7 @@
 
 package generated
 
-import (
-	"github.com/octo-cli/octo-cli/internal"
-)
+import internal "github.com/octo-cli/octo-cli/internal"
 
 type IssuesCmd struct {
 	AddAssignees             IssuesAddAssigneesCmd             `cmd:""`
@@ -49,8 +47,8 @@ type IssuesCmd struct {
 }
 
 type IssuesAddAssigneesCmd struct {
-	Repo        string   `required:"" name:"repo"`
-	IssueNumber int64    `required:"" name:"issue_number"`
+	Repo        string   `name:"repo" required:"true"`
+	IssueNumber int64    `name:"issue_number" required:"true"`
 	Assignees   []string `name:"assignees"`
 	internal.BaseCmd
 }
@@ -65,9 +63,9 @@ func (c *IssuesAddAssigneesCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesAddLabelsCmd struct {
-	Repo        string   `required:"" name:"repo"`
-	IssueNumber int64    `required:"" name:"issue_number"`
-	Labels      []string `required:"" name:"labels"`
+	Repo        string   `name:"repo" required:"true"`
+	IssueNumber int64    `name:"issue_number" required:"true"`
+	Labels      []string `name:"labels" required:"true"`
 	internal.BaseCmd
 }
 
@@ -81,8 +79,8 @@ func (c *IssuesAddLabelsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesCheckAssigneeCmd struct {
-	Repo     string `required:"" name:"repo"`
-	Assignee string `required:"" name:"assignee"`
+	Repo     string `name:"repo" required:"true"`
+	Assignee string `name:"assignee" required:"true"`
 	internal.BaseCmd
 }
 
@@ -95,13 +93,13 @@ func (c *IssuesCheckAssigneeCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesCreateCmd struct {
-	Repo      string   `required:"" name:"repo"`
-	Title     string   `required:"" name:"title"`
+	Repo      string   `name:"repo" required:"true"`
 	Assignee  string   `name:"assignee"`
 	Assignees []string `name:"assignees"`
 	Body      string   `name:"body"`
 	Labels    []string `name:"labels"`
 	Milestone int64    `name:"milestone"`
+	Title     string   `name:"title" required:"true"`
 	internal.BaseCmd
 }
 
@@ -119,9 +117,9 @@ func (c *IssuesCreateCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesCreateCommentCmd struct {
-	Repo        string `required:"" name:"repo"`
-	IssueNumber int64  `required:"" name:"issue_number"`
-	Body        string `required:"" name:"body"`
+	Repo        string `name:"repo" required:"true"`
+	IssueNumber int64  `name:"issue_number" required:"true"`
+	Body        string `name:"body" required:"true"`
 	internal.BaseCmd
 }
 
@@ -135,10 +133,10 @@ func (c *IssuesCreateCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesCreateLabelCmd struct {
-	Repo        string `required:"" name:"repo"`
-	Color       string `required:"" name:"color"`
-	Name        string `required:"" name:"name"`
+	Repo        string `name:"repo" required:"true"`
 	Description string `name:"description"`
+	Color       string `name:"color" required:"true"`
+	Name        string `name:"name" required:"true"`
 	internal.BaseCmd
 }
 
@@ -153,11 +151,11 @@ func (c *IssuesCreateLabelCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesCreateMilestoneCmd struct {
-	Repo        string `required:"" name:"repo"`
-	Title       string `required:"" name:"title"`
+	Repo        string `name:"repo" required:"true"`
 	Description string `name:"description"`
 	DueOn       string `name:"due_on"`
 	State       string `name:"state"`
+	Title       string `name:"title" required:"true"`
 	internal.BaseCmd
 }
 
@@ -173,8 +171,8 @@ func (c *IssuesCreateMilestoneCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesDeleteCommentCmd struct {
-	Repo      string `required:"" name:"repo"`
-	CommentId int64  `required:"" name:"comment_id"`
+	Repo      string `name:"repo" required:"true"`
+	CommentId int64  `name:"comment_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -187,8 +185,8 @@ func (c *IssuesDeleteCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesDeleteLabelCmd struct {
-	Repo string `required:"" name:"repo"`
-	Name string `required:"" name:"name"`
+	Repo string `name:"repo" required:"true"`
+	Name string `name:"name" required:"true"`
 	internal.BaseCmd
 }
 
@@ -201,8 +199,8 @@ func (c *IssuesDeleteLabelCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesDeleteMilestoneCmd struct {
-	Repo            string `required:"" name:"repo"`
-	MilestoneNumber int64  `required:"" name:"milestone_number"`
+	Repo            string `name:"repo" required:"true"`
+	MilestoneNumber int64  `name:"milestone_number" required:"true"`
 	internal.BaseCmd
 }
 
@@ -216,8 +214,8 @@ func (c *IssuesDeleteMilestoneCmd) Run(isValueSetMap map[string]bool) error {
 
 type IssuesGetCmd struct {
 	SquirrelGirl bool   `name:"squirrel-girl-preview"`
-	Repo         string `required:"" name:"repo"`
-	IssueNumber  int64  `required:"" name:"issue_number"`
+	Repo         string `name:"repo" required:"true"`
+	IssueNumber  int64  `name:"issue_number" required:"true"`
 	internal.BaseCmd
 }
 
@@ -233,8 +231,8 @@ func (c *IssuesGetCmd) Run(isValueSetMap map[string]bool) error {
 type IssuesGetCommentCmd struct {
 	MachineMan   bool   `name:"machine-man-preview"`
 	SquirrelGirl bool   `name:"squirrel-girl-preview"`
-	Repo         string `required:"" name:"repo"`
-	CommentId    int64  `required:"" name:"comment_id"`
+	Repo         string `name:"repo" required:"true"`
+	CommentId    int64  `name:"comment_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -252,8 +250,8 @@ type IssuesGetEventCmd struct {
 	MachineMan bool   `name:"machine-man-preview"`
 	SailorV    bool   `name:"sailor-v-preview"`
 	Starfox    bool   `name:"starfox-preview"`
-	Repo       string `required:"" name:"repo"`
-	EventId    int64  `required:"" name:"event_id"`
+	Repo       string `name:"repo" required:"true"`
+	EventId    int64  `name:"event_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -269,8 +267,8 @@ func (c *IssuesGetEventCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesGetLabelCmd struct {
-	Repo string `required:"" name:"repo"`
-	Name string `required:"" name:"name"`
+	Repo string `name:"repo" required:"true"`
+	Name string `name:"name" required:"true"`
 	internal.BaseCmd
 }
 
@@ -283,8 +281,8 @@ func (c *IssuesGetLabelCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesGetMilestoneCmd struct {
-	Repo            string `required:"" name:"repo"`
-	MilestoneNumber int64  `required:"" name:"milestone_number"`
+	Repo            string `name:"repo" required:"true"`
+	MilestoneNumber int64  `name:"milestone_number" required:"true"`
 	internal.BaseCmd
 }
 
@@ -297,7 +295,7 @@ func (c *IssuesGetMilestoneCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesListAssigneesCmd struct {
-	Repo    string `required:"" name:"repo"`
+	Repo    string `name:"repo" required:"true"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	internal.BaseCmd
@@ -344,8 +342,8 @@ func (c *IssuesListCmd) Run(isValueSetMap map[string]bool) error {
 
 type IssuesListCommentsCmd struct {
 	SquirrelGirl bool   `name:"squirrel-girl-preview"`
-	Repo         string `required:"" name:"repo"`
-	IssueNumber  int64  `required:"" name:"issue_number"`
+	Repo         string `name:"repo" required:"true"`
+	IssueNumber  int64  `name:"issue_number" required:"true"`
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
 	Since        string `name:"since"`
@@ -366,7 +364,7 @@ func (c *IssuesListCommentsCmd) Run(isValueSetMap map[string]bool) error {
 
 type IssuesListCommentsForRepoCmd struct {
 	SquirrelGirl bool   `name:"squirrel-girl-preview"`
-	Repo         string `required:"" name:"repo"`
+	Repo         string `name:"repo" required:"true"`
 	Direction    string `name:"direction"`
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
@@ -391,8 +389,8 @@ func (c *IssuesListCommentsForRepoCmd) Run(isValueSetMap map[string]bool) error 
 type IssuesListEventsCmd struct {
 	SailorV     bool   `name:"sailor-v-preview"`
 	Starfox     bool   `name:"starfox-preview"`
-	Repo        string `required:"" name:"repo"`
-	IssueNumber int64  `required:"" name:"issue_number"`
+	Repo        string `name:"repo" required:"true"`
+	IssueNumber int64  `name:"issue_number" required:"true"`
 	Page        int64  `name:"page"`
 	PerPage     int64  `name:"per_page"`
 	internal.BaseCmd
@@ -413,7 +411,7 @@ func (c *IssuesListEventsCmd) Run(isValueSetMap map[string]bool) error {
 type IssuesListEventsForRepoCmd struct {
 	SailorV bool   `name:"sailor-v-preview"`
 	Starfox bool   `name:"starfox-preview"`
-	Repo    string `required:"" name:"repo"`
+	Repo    string `name:"repo" required:"true"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	internal.BaseCmd
@@ -431,10 +429,10 @@ func (c *IssuesListEventsForRepoCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesListEventsForTimelineCmd struct {
-	Mockingbird bool   `required:"" name:"mockingbird-preview"`
 	Starfox     bool   `name:"starfox-preview"`
-	Repo        string `required:"" name:"repo"`
-	IssueNumber int64  `required:"" name:"issue_number"`
+	Mockingbird bool   `name:"mockingbird-preview" required:"true"`
+	Repo        string `name:"repo" required:"true"`
+	IssueNumber int64  `name:"issue_number" required:"true"`
 	Page        int64  `name:"page"`
 	PerPage     int64  `name:"per_page"`
 	internal.BaseCmd
@@ -485,7 +483,7 @@ func (c *IssuesListForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) e
 type IssuesListForOrgCmd struct {
 	MachineMan   bool   `name:"machine-man-preview"`
 	SquirrelGirl bool   `name:"squirrel-girl-preview"`
-	Org          string `required:"" name:"org"`
+	Org          string `name:"org" required:"true"`
 	Direction    string `name:"direction"`
 	Filter       string `name:"filter"`
 	Labels       string `name:"labels"`
@@ -517,7 +515,7 @@ func (c *IssuesListForOrgCmd) Run(isValueSetMap map[string]bool) error {
 type IssuesListForRepoCmd struct {
 	MachineMan   bool   `name:"machine-man-preview"`
 	SquirrelGirl bool   `name:"squirrel-girl-preview"`
-	Repo         string `required:"" name:"repo"`
+	Repo         string `name:"repo" required:"true"`
 	Assignee     string `name:"assignee"`
 	Creator      string `name:"creator"`
 	Direction    string `name:"direction"`
@@ -553,8 +551,8 @@ func (c *IssuesListForRepoCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesListLabelsForMilestoneCmd struct {
-	Repo            string `required:"" name:"repo"`
-	MilestoneNumber int64  `required:"" name:"milestone_number"`
+	Repo            string `name:"repo" required:"true"`
+	MilestoneNumber int64  `name:"milestone_number" required:"true"`
 	Page            int64  `name:"page"`
 	PerPage         int64  `name:"per_page"`
 	internal.BaseCmd
@@ -571,7 +569,7 @@ func (c *IssuesListLabelsForMilestoneCmd) Run(isValueSetMap map[string]bool) err
 }
 
 type IssuesListLabelsForRepoCmd struct {
-	Repo    string `required:"" name:"repo"`
+	Repo    string `name:"repo" required:"true"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	internal.BaseCmd
@@ -587,8 +585,8 @@ func (c *IssuesListLabelsForRepoCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesListLabelsOnIssueCmd struct {
-	Repo        string `required:"" name:"repo"`
-	IssueNumber int64  `required:"" name:"issue_number"`
+	Repo        string `name:"repo" required:"true"`
+	IssueNumber int64  `name:"issue_number" required:"true"`
 	Page        int64  `name:"page"`
 	PerPage     int64  `name:"per_page"`
 	internal.BaseCmd
@@ -605,7 +603,7 @@ func (c *IssuesListLabelsOnIssueCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesListMilestonesForRepoCmd struct {
-	Repo      string `required:"" name:"repo"`
+	Repo      string `name:"repo" required:"true"`
 	Direction string `name:"direction"`
 	Page      int64  `name:"page"`
 	PerPage   int64  `name:"per_page"`
@@ -628,8 +626,8 @@ func (c *IssuesListMilestonesForRepoCmd) Run(isValueSetMap map[string]bool) erro
 
 type IssuesLockCmd struct {
 	SailorV     bool   `name:"sailor-v-preview"`
-	Repo        string `required:"" name:"repo"`
-	IssueNumber int64  `required:"" name:"issue_number"`
+	Repo        string `name:"repo" required:"true"`
+	IssueNumber int64  `name:"issue_number" required:"true"`
 	LockReason  string `name:"lock_reason"`
 	internal.BaseCmd
 }
@@ -645,8 +643,8 @@ func (c *IssuesLockCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesRemoveAllLabelsCmd struct {
-	Repo        string `required:"" name:"repo"`
-	IssueNumber int64  `required:"" name:"issue_number"`
+	Repo        string `name:"repo" required:"true"`
+	IssueNumber int64  `name:"issue_number" required:"true"`
 	internal.BaseCmd
 }
 
@@ -659,8 +657,8 @@ func (c *IssuesRemoveAllLabelsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesRemoveAssigneesCmd struct {
-	Repo        string   `required:"" name:"repo"`
-	IssueNumber int64    `required:"" name:"issue_number"`
+	Repo        string   `name:"repo" required:"true"`
+	IssueNumber int64    `name:"issue_number" required:"true"`
 	Assignees   []string `name:"assignees"`
 	internal.BaseCmd
 }
@@ -675,9 +673,9 @@ func (c *IssuesRemoveAssigneesCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesRemoveLabelCmd struct {
-	Repo        string `required:"" name:"repo"`
-	IssueNumber int64  `required:"" name:"issue_number"`
-	Name        string `required:"" name:"name"`
+	Repo        string `name:"repo" required:"true"`
+	IssueNumber int64  `name:"issue_number" required:"true"`
+	Name        string `name:"name" required:"true"`
 	internal.BaseCmd
 }
 
@@ -691,8 +689,8 @@ func (c *IssuesRemoveLabelCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesReplaceAllLabelsCmd struct {
-	Repo        string   `required:"" name:"repo"`
-	IssueNumber int64    `required:"" name:"issue_number"`
+	Repo        string   `name:"repo" required:"true"`
+	IssueNumber int64    `name:"issue_number" required:"true"`
 	Labels      []string `name:"labels"`
 	internal.BaseCmd
 }
@@ -707,8 +705,8 @@ func (c *IssuesReplaceAllLabelsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesUnlockCmd struct {
-	Repo        string `required:"" name:"repo"`
-	IssueNumber int64  `required:"" name:"issue_number"`
+	Repo        string `name:"repo" required:"true"`
+	IssueNumber int64  `name:"issue_number" required:"true"`
 	internal.BaseCmd
 }
 
@@ -721,8 +719,8 @@ func (c *IssuesUnlockCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesUpdateCmd struct {
-	Repo        string   `required:"" name:"repo"`
-	IssueNumber int64    `required:"" name:"issue_number"`
+	Repo        string   `name:"repo" required:"true"`
+	IssueNumber int64    `name:"issue_number" required:"true"`
 	Assignee    string   `name:"assignee"`
 	Assignees   []string `name:"assignees"`
 	Body        string   `name:"body"`
@@ -749,9 +747,9 @@ func (c *IssuesUpdateCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesUpdateCommentCmd struct {
-	Repo      string `required:"" name:"repo"`
-	CommentId int64  `required:"" name:"comment_id"`
-	Body      string `required:"" name:"body"`
+	Repo      string `name:"repo" required:"true"`
+	CommentId int64  `name:"comment_id" required:"true"`
+	Body      string `name:"body" required:"true"`
 	internal.BaseCmd
 }
 
@@ -765,8 +763,8 @@ func (c *IssuesUpdateCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesUpdateLabelCmd struct {
-	Repo        string `required:"" name:"repo"`
-	Name        string `required:"" name:"name"`
+	Repo        string `name:"repo" required:"true"`
+	Name        string `name:"name" required:"true"`
 	Color       string `name:"color"`
 	Description string `name:"description"`
 	NewName     string `name:"new_name"`
@@ -785,8 +783,8 @@ func (c *IssuesUpdateLabelCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesUpdateMilestoneCmd struct {
-	Repo            string `required:"" name:"repo"`
-	MilestoneNumber int64  `required:"" name:"milestone_number"`
+	Repo            string `name:"repo" required:"true"`
+	MilestoneNumber int64  `name:"milestone_number" required:"true"`
 	Description     string `name:"description"`
 	DueOn           string `name:"due_on"`
 	State           string `name:"state"`

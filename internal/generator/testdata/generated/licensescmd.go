@@ -2,9 +2,7 @@
 
 package generated
 
-import (
-	"github.com/octo-cli/octo-cli/internal"
-)
+import internal "github.com/octo-cli/octo-cli/internal"
 
 type LicensesCmd struct {
 	Get              LicensesGetCmd              `cmd:""`
@@ -13,7 +11,7 @@ type LicensesCmd struct {
 }
 
 type LicensesGetCmd struct {
-	License string `required:"" name:"license"`
+	License string `name:"license" required:"true"`
 	internal.BaseCmd
 }
 
@@ -25,7 +23,7 @@ func (c *LicensesGetCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type LicensesGetForRepoCmd struct {
-	Repo string `required:"" name:"repo"`
+	Repo string `name:"repo" required:"true"`
 	internal.BaseCmd
 }
 

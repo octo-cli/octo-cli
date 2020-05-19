@@ -2,9 +2,7 @@
 
 package generated
 
-import (
-	"github.com/octo-cli/octo-cli/internal"
-)
+import internal "github.com/octo-cli/octo-cli/internal"
 
 type ChecksCmd struct {
 	Create               ChecksCreateCmd               `cmd:""`
@@ -21,10 +19,8 @@ type ChecksCmd struct {
 }
 
 type ChecksCreateCmd struct {
-	Antiope           bool                  `required:"" name:"antiope-preview"`
-	Repo              string                `required:"" name:"repo"`
-	HeadSha           string                `required:"" name:"head_sha"`
-	Name              string                `required:"" name:"name"`
+	Antiope           bool                  `name:"antiope-preview" required:"true"`
+	Repo              string                `name:"repo" required:"true"`
 	Actions           []internal.JSONObject `name:"actions"`
 	CompletedAt       string                `name:"completed_at"`
 	Conclusion        string                `name:"conclusion"`
@@ -37,6 +33,8 @@ type ChecksCreateCmd struct {
 	OutputTitle       string                `name:"output.title"`
 	StartedAt         string                `name:"started_at"`
 	Status            string                `name:"status"`
+	HeadSha           string                `name:"head_sha" required:"true"`
+	Name              string                `name:"name" required:"true"`
 	internal.BaseCmd
 }
 
@@ -63,9 +61,9 @@ func (c *ChecksCreateCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ChecksCreateSuiteCmd struct {
-	Antiope bool   `required:"" name:"antiope-preview"`
-	Repo    string `required:"" name:"repo"`
-	HeadSha string `required:"" name:"head_sha"`
+	Antiope bool   `name:"antiope-preview" required:"true"`
+	Repo    string `name:"repo" required:"true"`
+	HeadSha string `name:"head_sha" required:"true"`
 	internal.BaseCmd
 }
 
@@ -79,9 +77,9 @@ func (c *ChecksCreateSuiteCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ChecksGetCmd struct {
-	Antiope    bool   `required:"" name:"antiope-preview"`
-	Repo       string `required:"" name:"repo"`
-	CheckRunId int64  `required:"" name:"check_run_id"`
+	Antiope    bool   `name:"antiope-preview" required:"true"`
+	Repo       string `name:"repo" required:"true"`
+	CheckRunId int64  `name:"check_run_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -95,9 +93,9 @@ func (c *ChecksGetCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ChecksGetSuiteCmd struct {
-	Antiope      bool   `required:"" name:"antiope-preview"`
-	Repo         string `required:"" name:"repo"`
-	CheckSuiteId int64  `required:"" name:"check_suite_id"`
+	Antiope      bool   `name:"antiope-preview" required:"true"`
+	Repo         string `name:"repo" required:"true"`
+	CheckSuiteId int64  `name:"check_suite_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -111,9 +109,9 @@ func (c *ChecksGetSuiteCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ChecksListAnnotationsCmd struct {
-	Antiope    bool   `required:"" name:"antiope-preview"`
-	Repo       string `required:"" name:"repo"`
-	CheckRunId int64  `required:"" name:"check_run_id"`
+	Antiope    bool   `name:"antiope-preview" required:"true"`
+	Repo       string `name:"repo" required:"true"`
+	CheckRunId int64  `name:"check_run_id" required:"true"`
 	Page       int64  `name:"page"`
 	PerPage    int64  `name:"per_page"`
 	internal.BaseCmd
@@ -131,9 +129,9 @@ func (c *ChecksListAnnotationsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ChecksListForRefCmd struct {
-	Antiope   bool   `required:"" name:"antiope-preview"`
-	Repo      string `required:"" name:"repo"`
-	Ref       string `required:"" name:"ref"`
+	Antiope   bool   `name:"antiope-preview" required:"true"`
+	Repo      string `name:"repo" required:"true"`
+	Ref       string `name:"ref" required:"true"`
 	CheckName string `name:"check_name"`
 	Filter    string `name:"filter"`
 	Page      int64  `name:"page"`
@@ -157,9 +155,9 @@ func (c *ChecksListForRefCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ChecksListForSuiteCmd struct {
-	Antiope      bool   `required:"" name:"antiope-preview"`
-	Repo         string `required:"" name:"repo"`
-	CheckSuiteId int64  `required:"" name:"check_suite_id"`
+	Antiope      bool   `name:"antiope-preview" required:"true"`
+	Repo         string `name:"repo" required:"true"`
+	CheckSuiteId int64  `name:"check_suite_id" required:"true"`
 	CheckName    string `name:"check_name"`
 	Filter       string `name:"filter"`
 	Page         int64  `name:"page"`
@@ -183,9 +181,9 @@ func (c *ChecksListForSuiteCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ChecksListSuitesForRefCmd struct {
-	Antiope   bool   `required:"" name:"antiope-preview"`
-	Repo      string `required:"" name:"repo"`
-	Ref       string `required:"" name:"ref"`
+	Antiope   bool   `name:"antiope-preview" required:"true"`
+	Repo      string `name:"repo" required:"true"`
+	Ref       string `name:"ref" required:"true"`
 	AppId     int64  `name:"app_id"`
 	CheckName string `name:"check_name"`
 	Page      int64  `name:"page"`
@@ -207,9 +205,9 @@ func (c *ChecksListSuitesForRefCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ChecksRerequestSuiteCmd struct {
-	Antiope      bool   `required:"" name:"antiope-preview"`
-	Repo         string `required:"" name:"repo"`
-	CheckSuiteId int64  `required:"" name:"check_suite_id"`
+	Antiope      bool   `name:"antiope-preview" required:"true"`
+	Repo         string `name:"repo" required:"true"`
+	CheckSuiteId int64  `name:"check_suite_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -223,8 +221,8 @@ func (c *ChecksRerequestSuiteCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ChecksSetSuitesPreferencesCmd struct {
-	Antiope           bool                  `required:"" name:"antiope-preview"`
-	Repo              string                `required:"" name:"repo"`
+	Antiope           bool                  `name:"antiope-preview" required:"true"`
+	Repo              string                `name:"repo" required:"true"`
 	AutoTriggerChecks []internal.JSONObject `name:"auto_trigger_checks"`
 	internal.BaseCmd
 }
@@ -239,9 +237,9 @@ func (c *ChecksSetSuitesPreferencesCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type ChecksUpdateCmd struct {
-	Antiope           bool                  `required:"" name:"antiope-preview"`
-	Repo              string                `required:"" name:"repo"`
-	CheckRunId        int64                 `required:"" name:"check_run_id"`
+	Antiope           bool                  `name:"antiope-preview" required:"true"`
+	Repo              string                `name:"repo" required:"true"`
+	CheckRunId        int64                 `name:"check_run_id" required:"true"`
 	Actions           []internal.JSONObject `name:"actions"`
 	CompletedAt       string                `name:"completed_at"`
 	Conclusion        string                `name:"conclusion"`

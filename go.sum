@@ -1,5 +1,7 @@
 github.com/alecthomas/kong v0.2.5-0.20200316010313-509fd46c42d7 h1:xNeqdYJyPyy7T6kyXEvpYCnA16tNGm4nCAgV2tX7O+g=
 github.com/alecthomas/kong v0.2.5-0.20200316010313-509fd46c42d7/go.mod h1:8BHFeYkCGej9u0eG7Lb7Pew1n2MUt0wF/b3m/kS9Pvk=
+github.com/dave/jennifer v1.4.0 h1:tNJFJmLDVTLu+v05mVZ88RINa3vQqnyyWkTKWYz0CwE=
+github.com/dave/jennifer v1.4.0/go.mod h1:fIb+770HOpJ2fmN9EPPKOqm1vMGhB+TwXKMZhrIygKg=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=

@@ -17,7 +17,6 @@ var CmdHelps = map[string]map[string]string{
 		"get-thread": "example",
 	},
 }
-
 var FlagHelps = map[string]map[string]map[string]string{
 	"actions": {
 		"cancel-workflow-run": {
@@ -31,10 +30,5 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"repo":        "repo parameter",
 		},
 	},
-	"activity": {
-		"get-feeds": {},
-		"get-thread": {
-			"thread_id": "thread_id parameter",
-		},
-	},
+	"activity": {"get-thread": {"thread_id": "thread_id parameter"}},
 }

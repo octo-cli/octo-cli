@@ -2,9 +2,7 @@
 
 package generated
 
-import (
-	"github.com/octo-cli/octo-cli/internal"
-)
+import internal "github.com/octo-cli/octo-cli/internal"
 
 type InteractionsCmd struct {
 	AddOrUpdateRestrictionsForOrg  InteractionsAddOrUpdateRestrictionsForOrgCmd  `cmd:""`
@@ -16,9 +14,9 @@ type InteractionsCmd struct {
 }
 
 type InteractionsAddOrUpdateRestrictionsForOrgCmd struct {
-	Sombra bool   `required:"" name:"sombra-preview"`
-	Org    string `required:"" name:"org"`
-	Limit  string `required:"" name:"limit"`
+	Sombra bool   `name:"sombra-preview" required:"true"`
+	Org    string `name:"org" required:"true"`
+	Limit  string `name:"limit" required:"true"`
 	internal.BaseCmd
 }
 
@@ -32,9 +30,9 @@ func (c *InteractionsAddOrUpdateRestrictionsForOrgCmd) Run(isValueSetMap map[str
 }
 
 type InteractionsAddOrUpdateRestrictionsForRepoCmd struct {
-	Sombra bool   `required:"" name:"sombra-preview"`
-	Repo   string `required:"" name:"repo"`
-	Limit  string `required:"" name:"limit"`
+	Sombra bool   `name:"sombra-preview" required:"true"`
+	Repo   string `name:"repo" required:"true"`
+	Limit  string `name:"limit" required:"true"`
 	internal.BaseCmd
 }
 
@@ -48,8 +46,8 @@ func (c *InteractionsAddOrUpdateRestrictionsForRepoCmd) Run(isValueSetMap map[st
 }
 
 type InteractionsGetRestrictionsForOrgCmd struct {
-	Sombra bool   `required:"" name:"sombra-preview"`
-	Org    string `required:"" name:"org"`
+	Sombra bool   `name:"sombra-preview" required:"true"`
+	Org    string `name:"org" required:"true"`
 	internal.BaseCmd
 }
 
@@ -62,8 +60,8 @@ func (c *InteractionsGetRestrictionsForOrgCmd) Run(isValueSetMap map[string]bool
 }
 
 type InteractionsGetRestrictionsForRepoCmd struct {
-	Sombra bool   `required:"" name:"sombra-preview"`
-	Repo   string `required:"" name:"repo"`
+	Sombra bool   `name:"sombra-preview" required:"true"`
+	Repo   string `name:"repo" required:"true"`
 	internal.BaseCmd
 }
 
@@ -76,8 +74,8 @@ func (c *InteractionsGetRestrictionsForRepoCmd) Run(isValueSetMap map[string]boo
 }
 
 type InteractionsRemoveRestrictionsForOrgCmd struct {
-	Sombra bool   `required:"" name:"sombra-preview"`
-	Org    string `required:"" name:"org"`
+	Sombra bool   `name:"sombra-preview" required:"true"`
+	Org    string `name:"org" required:"true"`
 	internal.BaseCmd
 }
 
@@ -90,8 +88,8 @@ func (c *InteractionsRemoveRestrictionsForOrgCmd) Run(isValueSetMap map[string]b
 }
 
 type InteractionsRemoveRestrictionsForRepoCmd struct {
-	Sombra bool   `required:"" name:"sombra-preview"`
-	Repo   string `required:"" name:"repo"`
+	Sombra bool   `name:"sombra-preview" required:"true"`
+	Repo   string `name:"repo" required:"true"`
 	internal.BaseCmd
 }
 

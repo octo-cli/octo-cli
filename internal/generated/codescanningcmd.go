@@ -2,9 +2,7 @@
 
 package generated
 
-import (
-	"github.com/octo-cli/octo-cli/internal"
-)
+import internal "github.com/octo-cli/octo-cli/internal"
 
 type CodeScanningCmd struct {
 	GetAlert          CodeScanningGetAlertCmd          `cmd:""`
@@ -12,8 +10,8 @@ type CodeScanningCmd struct {
 }
 
 type CodeScanningGetAlertCmd struct {
-	Repo    string `required:"" name:"repo"`
-	AlertId int64  `required:"" name:"alert_id"`
+	Repo    string `name:"repo" required:"true"`
+	AlertId int64  `name:"alert_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -26,7 +24,7 @@ func (c *CodeScanningGetAlertCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type CodeScanningListAlertsForRepoCmd struct {
-	Repo  string `required:"" name:"repo"`
+	Repo  string `name:"repo" required:"true"`
 	Ref   string `name:"ref"`
 	State string `name:"state"`
 	internal.BaseCmd

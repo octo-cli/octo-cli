@@ -2,9 +2,7 @@
 
 package generated
 
-import (
-	"github.com/octo-cli/octo-cli/internal"
-)
+import internal "github.com/octo-cli/octo-cli/internal"
 
 type ActionsCmd struct {
 	AddSelectedRepoToOrgSecret      ActionsAddSelectedRepoToOrgSecretCmd      `cmd:""`
@@ -55,9 +53,9 @@ type ActionsCmd struct {
 }
 
 type ActionsAddSelectedRepoToOrgSecretCmd struct {
-	Org          string `required:"" name:"org"`
-	SecretName   string `required:"" name:"secret_name"`
-	RepositoryId int64  `required:"" name:"repository_id"`
+	Org          string `name:"org" required:"true"`
+	SecretName   string `name:"secret_name" required:"true"`
+	RepositoryId int64  `name:"repository_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -71,8 +69,8 @@ func (c *ActionsAddSelectedRepoToOrgSecretCmd) Run(isValueSetMap map[string]bool
 }
 
 type ActionsCancelWorkflowRunCmd struct {
-	Repo  string `required:"" name:"repo"`
-	RunId int64  `required:"" name:"run_id"`
+	Repo  string `name:"repo" required:"true"`
+	RunId int64  `name:"run_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -85,8 +83,8 @@ func (c *ActionsCancelWorkflowRunCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsCreateOrUpdateOrgSecretCmd struct {
-	Org                   string   `required:"" name:"org"`
-	SecretName            string   `required:"" name:"secret_name"`
+	Org                   string   `name:"org" required:"true"`
+	SecretName            string   `name:"secret_name" required:"true"`
 	EncryptedValue        string   `name:"encrypted_value"`
 	KeyId                 string   `name:"key_id"`
 	SelectedRepositoryIds []string `name:"selected_repository_ids"`
@@ -107,8 +105,8 @@ func (c *ActionsCreateOrUpdateOrgSecretCmd) Run(isValueSetMap map[string]bool) e
 }
 
 type ActionsCreateOrUpdateRepoSecretCmd struct {
-	Repo           string `required:"" name:"repo"`
-	SecretName     string `required:"" name:"secret_name"`
+	Repo           string `name:"repo" required:"true"`
+	SecretName     string `name:"secret_name" required:"true"`
 	EncryptedValue string `name:"encrypted_value"`
 	KeyId          string `name:"key_id"`
 	internal.BaseCmd
@@ -125,7 +123,7 @@ func (c *ActionsCreateOrUpdateRepoSecretCmd) Run(isValueSetMap map[string]bool) 
 }
 
 type ActionsCreateRegistrationTokenForOrgCmd struct {
-	Org string `required:"" name:"org"`
+	Org string `name:"org" required:"true"`
 	internal.BaseCmd
 }
 
@@ -137,7 +135,7 @@ func (c *ActionsCreateRegistrationTokenForOrgCmd) Run(isValueSetMap map[string]b
 }
 
 type ActionsCreateRegistrationTokenForRepoCmd struct {
-	Repo string `required:"" name:"repo"`
+	Repo string `name:"repo" required:"true"`
 	internal.BaseCmd
 }
 
@@ -149,7 +147,7 @@ func (c *ActionsCreateRegistrationTokenForRepoCmd) Run(isValueSetMap map[string]
 }
 
 type ActionsCreateRemoveTokenForOrgCmd struct {
-	Org string `required:"" name:"org"`
+	Org string `name:"org" required:"true"`
 	internal.BaseCmd
 }
 
@@ -161,7 +159,7 @@ func (c *ActionsCreateRemoveTokenForOrgCmd) Run(isValueSetMap map[string]bool) e
 }
 
 type ActionsCreateRemoveTokenForRepoCmd struct {
-	Repo string `required:"" name:"repo"`
+	Repo string `name:"repo" required:"true"`
 	internal.BaseCmd
 }
 
@@ -173,8 +171,8 @@ func (c *ActionsCreateRemoveTokenForRepoCmd) Run(isValueSetMap map[string]bool) 
 }
 
 type ActionsDeleteArtifactCmd struct {
-	Repo       string `required:"" name:"repo"`
-	ArtifactId int64  `required:"" name:"artifact_id"`
+	Repo       string `name:"repo" required:"true"`
+	ArtifactId int64  `name:"artifact_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -187,8 +185,8 @@ func (c *ActionsDeleteArtifactCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsDeleteOrgSecretCmd struct {
-	Org        string `required:"" name:"org"`
-	SecretName string `required:"" name:"secret_name"`
+	Org        string `name:"org" required:"true"`
+	SecretName string `name:"secret_name" required:"true"`
 	internal.BaseCmd
 }
 
@@ -201,8 +199,8 @@ func (c *ActionsDeleteOrgSecretCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsDeleteRepoSecretCmd struct {
-	Repo       string `required:"" name:"repo"`
-	SecretName string `required:"" name:"secret_name"`
+	Repo       string `name:"repo" required:"true"`
+	SecretName string `name:"secret_name" required:"true"`
 	internal.BaseCmd
 }
 
@@ -215,8 +213,8 @@ func (c *ActionsDeleteRepoSecretCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsDeleteSelfHostedRunnerFromOrgCmd struct {
-	Org      string `required:"" name:"org"`
-	RunnerId int64  `required:"" name:"runner_id"`
+	Org      string `name:"org" required:"true"`
+	RunnerId int64  `name:"runner_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -229,8 +227,8 @@ func (c *ActionsDeleteSelfHostedRunnerFromOrgCmd) Run(isValueSetMap map[string]b
 }
 
 type ActionsDeleteSelfHostedRunnerFromRepoCmd struct {
-	Repo     string `required:"" name:"repo"`
-	RunnerId int64  `required:"" name:"runner_id"`
+	Repo     string `name:"repo" required:"true"`
+	RunnerId int64  `name:"runner_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -243,8 +241,8 @@ func (c *ActionsDeleteSelfHostedRunnerFromRepoCmd) Run(isValueSetMap map[string]
 }
 
 type ActionsDeleteWorkflowRunLogsCmd struct {
-	Repo  string `required:"" name:"repo"`
-	RunId int64  `required:"" name:"run_id"`
+	Repo  string `name:"repo" required:"true"`
+	RunId int64  `name:"run_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -257,9 +255,9 @@ func (c *ActionsDeleteWorkflowRunLogsCmd) Run(isValueSetMap map[string]bool) err
 }
 
 type ActionsDownloadArtifactCmd struct {
-	Repo          string `required:"" name:"repo"`
-	ArtifactId    int64  `required:"" name:"artifact_id"`
-	ArchiveFormat string `required:"" name:"archive_format"`
+	Repo          string `name:"repo" required:"true"`
+	ArtifactId    int64  `name:"artifact_id" required:"true"`
+	ArchiveFormat string `name:"archive_format" required:"true"`
 	internal.BaseCmd
 }
 
@@ -273,8 +271,8 @@ func (c *ActionsDownloadArtifactCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsDownloadWorkflowJobLogsCmd struct {
-	Repo  string `required:"" name:"repo"`
-	JobId int64  `required:"" name:"job_id"`
+	Repo  string `name:"repo" required:"true"`
+	JobId int64  `name:"job_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -287,8 +285,8 @@ func (c *ActionsDownloadWorkflowJobLogsCmd) Run(isValueSetMap map[string]bool) e
 }
 
 type ActionsDownloadWorkflowRunLogsCmd struct {
-	Repo  string `required:"" name:"repo"`
-	RunId int64  `required:"" name:"run_id"`
+	Repo  string `name:"repo" required:"true"`
+	RunId int64  `name:"run_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -301,8 +299,8 @@ func (c *ActionsDownloadWorkflowRunLogsCmd) Run(isValueSetMap map[string]bool) e
 }
 
 type ActionsGetArtifactCmd struct {
-	Repo       string `required:"" name:"repo"`
-	ArtifactId int64  `required:"" name:"artifact_id"`
+	Repo       string `name:"repo" required:"true"`
+	ArtifactId int64  `name:"artifact_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -315,7 +313,7 @@ func (c *ActionsGetArtifactCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsGetOrgPublicKeyCmd struct {
-	Org string `required:"" name:"org"`
+	Org string `name:"org" required:"true"`
 	internal.BaseCmd
 }
 
@@ -327,8 +325,8 @@ func (c *ActionsGetOrgPublicKeyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsGetOrgSecretCmd struct {
-	Org        string `required:"" name:"org"`
-	SecretName string `required:"" name:"secret_name"`
+	Org        string `name:"org" required:"true"`
+	SecretName string `name:"secret_name" required:"true"`
 	internal.BaseCmd
 }
 
@@ -341,7 +339,7 @@ func (c *ActionsGetOrgSecretCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsGetRepoPublicKeyCmd struct {
-	Repo string `required:"" name:"repo"`
+	Repo string `name:"repo" required:"true"`
 	internal.BaseCmd
 }
 
@@ -353,8 +351,8 @@ func (c *ActionsGetRepoPublicKeyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsGetRepoSecretCmd struct {
-	Repo       string `required:"" name:"repo"`
-	SecretName string `required:"" name:"secret_name"`
+	Repo       string `name:"repo" required:"true"`
+	SecretName string `name:"secret_name" required:"true"`
 	internal.BaseCmd
 }
 
@@ -367,8 +365,8 @@ func (c *ActionsGetRepoSecretCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsGetSelfHostedRunnerForOrgCmd struct {
-	Org      string `required:"" name:"org"`
-	RunnerId int64  `required:"" name:"runner_id"`
+	Org      string `name:"org" required:"true"`
+	RunnerId int64  `name:"runner_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -381,8 +379,8 @@ func (c *ActionsGetSelfHostedRunnerForOrgCmd) Run(isValueSetMap map[string]bool)
 }
 
 type ActionsGetSelfHostedRunnerForRepoCmd struct {
-	Repo     string `required:"" name:"repo"`
-	RunnerId int64  `required:"" name:"runner_id"`
+	Repo     string `name:"repo" required:"true"`
+	RunnerId int64  `name:"runner_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -395,8 +393,8 @@ func (c *ActionsGetSelfHostedRunnerForRepoCmd) Run(isValueSetMap map[string]bool
 }
 
 type ActionsGetWorkflowCmd struct {
-	Repo       string `required:"" name:"repo"`
-	WorkflowId int64  `required:"" name:"workflow_id"`
+	Repo       string `name:"repo" required:"true"`
+	WorkflowId int64  `name:"workflow_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -409,8 +407,8 @@ func (c *ActionsGetWorkflowCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsGetWorkflowJobCmd struct {
-	Repo  string `required:"" name:"repo"`
-	JobId int64  `required:"" name:"job_id"`
+	Repo  string `name:"repo" required:"true"`
+	JobId int64  `name:"job_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -423,8 +421,8 @@ func (c *ActionsGetWorkflowJobCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsGetWorkflowRunCmd struct {
-	Repo  string `required:"" name:"repo"`
-	RunId int64  `required:"" name:"run_id"`
+	Repo  string `name:"repo" required:"true"`
+	RunId int64  `name:"run_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -437,8 +435,8 @@ func (c *ActionsGetWorkflowRunCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsGetWorkflowRunUsageCmd struct {
-	Repo  string `required:"" name:"repo"`
-	RunId int64  `required:"" name:"run_id"`
+	Repo  string `name:"repo" required:"true"`
+	RunId int64  `name:"run_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -451,8 +449,8 @@ func (c *ActionsGetWorkflowRunUsageCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type ActionsGetWorkflowUsageCmd struct {
-	Repo       string `required:"" name:"repo"`
-	WorkflowId int64  `required:"" name:"workflow_id"`
+	Repo       string `name:"repo" required:"true"`
+	WorkflowId int64  `name:"workflow_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -465,7 +463,7 @@ func (c *ActionsGetWorkflowUsageCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsListArtifactsForRepoCmd struct {
-	Repo    string `required:"" name:"repo"`
+	Repo    string `name:"repo" required:"true"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	internal.BaseCmd
@@ -481,8 +479,8 @@ func (c *ActionsListArtifactsForRepoCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type ActionsListJobsForWorkflowRunCmd struct {
-	Repo    string `required:"" name:"repo"`
-	RunId   int64  `required:"" name:"run_id"`
+	Repo    string `name:"repo" required:"true"`
+	RunId   int64  `name:"run_id" required:"true"`
 	Filter  string `name:"filter"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
@@ -501,7 +499,7 @@ func (c *ActionsListJobsForWorkflowRunCmd) Run(isValueSetMap map[string]bool) er
 }
 
 type ActionsListOrgSecretsCmd struct {
-	Org     string `required:"" name:"org"`
+	Org     string `name:"org" required:"true"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	internal.BaseCmd
@@ -517,7 +515,7 @@ func (c *ActionsListOrgSecretsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsListRepoSecretsCmd struct {
-	Repo    string `required:"" name:"repo"`
+	Repo    string `name:"repo" required:"true"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	internal.BaseCmd
@@ -533,7 +531,7 @@ func (c *ActionsListRepoSecretsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsListRepoWorkflowRunsCmd struct {
-	Repo    string `required:"" name:"repo"`
+	Repo    string `name:"repo" required:"true"`
 	Actor   string `name:"actor"`
 	Branch  string `name:"branch"`
 	Event   string `name:"event"`
@@ -557,7 +555,7 @@ func (c *ActionsListRepoWorkflowRunsCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type ActionsListRepoWorkflowsCmd struct {
-	Repo    string `required:"" name:"repo"`
+	Repo    string `name:"repo" required:"true"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	internal.BaseCmd
@@ -573,7 +571,7 @@ func (c *ActionsListRepoWorkflowsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsListRunnerApplicationsForOrgCmd struct {
-	Org string `required:"" name:"org"`
+	Org string `name:"org" required:"true"`
 	internal.BaseCmd
 }
 
@@ -585,7 +583,7 @@ func (c *ActionsListRunnerApplicationsForOrgCmd) Run(isValueSetMap map[string]bo
 }
 
 type ActionsListRunnerApplicationsForRepoCmd struct {
-	Repo string `required:"" name:"repo"`
+	Repo string `name:"repo" required:"true"`
 	internal.BaseCmd
 }
 
@@ -597,8 +595,8 @@ func (c *ActionsListRunnerApplicationsForRepoCmd) Run(isValueSetMap map[string]b
 }
 
 type ActionsListSelectedReposForOrgSecretCmd struct {
-	Org        string `required:"" name:"org"`
-	SecretName string `required:"" name:"secret_name"`
+	Org        string `name:"org" required:"true"`
+	SecretName string `name:"secret_name" required:"true"`
 	internal.BaseCmd
 }
 
@@ -611,7 +609,7 @@ func (c *ActionsListSelectedReposForOrgSecretCmd) Run(isValueSetMap map[string]b
 }
 
 type ActionsListSelfHostedRunnersForOrgCmd struct {
-	Org     string `required:"" name:"org"`
+	Org     string `name:"org" required:"true"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	internal.BaseCmd
@@ -627,7 +625,7 @@ func (c *ActionsListSelfHostedRunnersForOrgCmd) Run(isValueSetMap map[string]boo
 }
 
 type ActionsListSelfHostedRunnersForRepoCmd struct {
-	Repo    string `required:"" name:"repo"`
+	Repo    string `name:"repo" required:"true"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	internal.BaseCmd
@@ -643,8 +641,8 @@ func (c *ActionsListSelfHostedRunnersForRepoCmd) Run(isValueSetMap map[string]bo
 }
 
 type ActionsListWorkflowRunArtifactsCmd struct {
-	Repo    string `required:"" name:"repo"`
-	RunId   int64  `required:"" name:"run_id"`
+	Repo    string `name:"repo" required:"true"`
+	RunId   int64  `name:"run_id" required:"true"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	internal.BaseCmd
@@ -661,8 +659,8 @@ func (c *ActionsListWorkflowRunArtifactsCmd) Run(isValueSetMap map[string]bool) 
 }
 
 type ActionsListWorkflowRunsCmd struct {
-	Repo       string `required:"" name:"repo"`
-	WorkflowId int64  `required:"" name:"workflow_id"`
+	Repo       string `name:"repo" required:"true"`
+	WorkflowId int64  `name:"workflow_id" required:"true"`
 	Actor      string `name:"actor"`
 	Branch     string `name:"branch"`
 	Event      string `name:"event"`
@@ -687,8 +685,8 @@ func (c *ActionsListWorkflowRunsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsReRunWorkflowCmd struct {
-	Repo  string `required:"" name:"repo"`
-	RunId int64  `required:"" name:"run_id"`
+	Repo  string `name:"repo" required:"true"`
+	RunId int64  `name:"run_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -701,9 +699,9 @@ func (c *ActionsReRunWorkflowCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsRemoveSelectedRepoFromOrgSecretCmd struct {
-	Org          string `required:"" name:"org"`
-	SecretName   string `required:"" name:"secret_name"`
-	RepositoryId int64  `required:"" name:"repository_id"`
+	Org          string `name:"org" required:"true"`
+	SecretName   string `name:"secret_name" required:"true"`
+	RepositoryId int64  `name:"repository_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -717,8 +715,8 @@ func (c *ActionsRemoveSelectedRepoFromOrgSecretCmd) Run(isValueSetMap map[string
 }
 
 type ActionsSetSelectedReposForOrgSecretCmd struct {
-	Org                   string  `required:"" name:"org"`
-	SecretName            string  `required:"" name:"secret_name"`
+	Org                   string  `name:"org" required:"true"`
+	SecretName            string  `name:"secret_name" required:"true"`
 	SelectedRepositoryIds []int64 `name:"selected_repository_ids"`
 	internal.BaseCmd
 }

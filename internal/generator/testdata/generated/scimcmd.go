@@ -2,9 +2,7 @@
 
 package generated
 
-import (
-	"github.com/octo-cli/octo-cli/internal"
-)
+import internal "github.com/octo-cli/octo-cli/internal"
 
 type ScimCmd struct {
 	GetProvisioningDetailsForUser     ScimGetProvisioningDetailsForUserCmd     `cmd:""`
@@ -16,8 +14,8 @@ type ScimCmd struct {
 }
 
 type ScimGetProvisioningDetailsForUserCmd struct {
-	Org        string `required:"" name:"org"`
-	ScimUserId int64  `required:"" name:"scim_user_id"`
+	Org        string `name:"org" required:"true"`
+	ScimUserId int64  `name:"scim_user_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -30,7 +28,7 @@ func (c *ScimGetProvisioningDetailsForUserCmd) Run(isValueSetMap map[string]bool
 }
 
 type ScimListProvisionedIdentitiesCmd struct {
-	Org        string `required:"" name:"org"`
+	Org        string `name:"org" required:"true"`
 	Count      int64  `name:"count"`
 	Filter     string `name:"filter"`
 	StartIndex int64  `name:"startIndex"`
@@ -48,7 +46,7 @@ func (c *ScimListProvisionedIdentitiesCmd) Run(isValueSetMap map[string]bool) er
 }
 
 type ScimProvisionAndInviteUsersCmd struct {
-	Org string `required:"" name:"org"`
+	Org string `name:"org" required:"true"`
 	internal.BaseCmd
 }
 
@@ -60,8 +58,8 @@ func (c *ScimProvisionAndInviteUsersCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type ScimRemoveUserFromOrgCmd struct {
-	Org        string `required:"" name:"org"`
-	ScimUserId int64  `required:"" name:"scim_user_id"`
+	Org        string `name:"org" required:"true"`
+	ScimUserId int64  `name:"scim_user_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -74,8 +72,8 @@ func (c *ScimRemoveUserFromOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ScimReplaceProvisionedUserInformationCmd struct {
-	Org        string `required:"" name:"org"`
-	ScimUserId int64  `required:"" name:"scim_user_id"`
+	Org        string `name:"org" required:"true"`
+	ScimUserId int64  `name:"scim_user_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -88,8 +86,8 @@ func (c *ScimReplaceProvisionedUserInformationCmd) Run(isValueSetMap map[string]
 }
 
 type ScimUpdateUserAttributeCmd struct {
-	Org        string `required:"" name:"org"`
-	ScimUserId int64  `required:"" name:"scim_user_id"`
+	Org        string `name:"org" required:"true"`
+	ScimUserId int64  `name:"scim_user_id" required:"true"`
 	internal.BaseCmd
 }
 

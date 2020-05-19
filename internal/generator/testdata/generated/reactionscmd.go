@@ -2,9 +2,7 @@
 
 package generated
 
-import (
-	"github.com/octo-cli/octo-cli/internal"
-)
+import internal "github.com/octo-cli/octo-cli/internal"
 
 type ReactionsCmd struct {
 	CreateForCommitComment               ReactionsCreateForCommitCommentCmd               `cmd:""`
@@ -33,10 +31,10 @@ type ReactionsCmd struct {
 }
 
 type ReactionsCreateForCommitCommentCmd struct {
-	SquirrelGirl bool   `required:"" name:"squirrel-girl-preview"`
-	Repo         string `required:"" name:"repo"`
-	CommentId    int64  `required:"" name:"comment_id"`
-	Content      string `required:"" name:"content"`
+	SquirrelGirl bool   `name:"squirrel-girl-preview" required:"true"`
+	Repo         string `name:"repo" required:"true"`
+	CommentId    int64  `name:"comment_id" required:"true"`
+	Content      string `name:"content" required:"true"`
 	internal.BaseCmd
 }
 
@@ -51,10 +49,10 @@ func (c *ReactionsCreateForCommitCommentCmd) Run(isValueSetMap map[string]bool) 
 }
 
 type ReactionsCreateForIssueCmd struct {
-	SquirrelGirl bool   `required:"" name:"squirrel-girl-preview"`
-	Repo         string `required:"" name:"repo"`
-	IssueNumber  int64  `required:"" name:"issue_number"`
-	Content      string `required:"" name:"content"`
+	SquirrelGirl bool   `name:"squirrel-girl-preview" required:"true"`
+	Repo         string `name:"repo" required:"true"`
+	IssueNumber  int64  `name:"issue_number" required:"true"`
+	Content      string `name:"content" required:"true"`
 	internal.BaseCmd
 }
 
@@ -69,10 +67,10 @@ func (c *ReactionsCreateForIssueCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReactionsCreateForIssueCommentCmd struct {
-	SquirrelGirl bool   `required:"" name:"squirrel-girl-preview"`
-	Repo         string `required:"" name:"repo"`
-	CommentId    int64  `required:"" name:"comment_id"`
-	Content      string `required:"" name:"content"`
+	SquirrelGirl bool   `name:"squirrel-girl-preview" required:"true"`
+	Repo         string `name:"repo" required:"true"`
+	CommentId    int64  `name:"comment_id" required:"true"`
+	Content      string `name:"content" required:"true"`
 	internal.BaseCmd
 }
 
@@ -87,10 +85,10 @@ func (c *ReactionsCreateForIssueCommentCmd) Run(isValueSetMap map[string]bool) e
 }
 
 type ReactionsCreateForPullRequestReviewCommentCmd struct {
-	SquirrelGirl bool   `required:"" name:"squirrel-girl-preview"`
-	Repo         string `required:"" name:"repo"`
-	CommentId    int64  `required:"" name:"comment_id"`
-	Content      string `required:"" name:"content"`
+	SquirrelGirl bool   `name:"squirrel-girl-preview" required:"true"`
+	Repo         string `name:"repo" required:"true"`
+	CommentId    int64  `name:"comment_id" required:"true"`
+	Content      string `name:"content" required:"true"`
 	internal.BaseCmd
 }
 
@@ -105,12 +103,12 @@ func (c *ReactionsCreateForPullRequestReviewCommentCmd) Run(isValueSetMap map[st
 }
 
 type ReactionsCreateForTeamDiscussionCommentInOrgCmd struct {
-	SquirrelGirl     bool   `required:"" name:"squirrel-girl-preview"`
-	Org              string `required:"" name:"org"`
-	TeamSlug         string `required:"" name:"team_slug"`
-	DiscussionNumber int64  `required:"" name:"discussion_number"`
-	CommentNumber    int64  `required:"" name:"comment_number"`
-	Content          string `required:"" name:"content"`
+	SquirrelGirl     bool   `name:"squirrel-girl-preview" required:"true"`
+	Org              string `name:"org" required:"true"`
+	TeamSlug         string `name:"team_slug" required:"true"`
+	DiscussionNumber int64  `name:"discussion_number" required:"true"`
+	CommentNumber    int64  `name:"comment_number" required:"true"`
+	Content          string `name:"content" required:"true"`
 	internal.BaseCmd
 }
 
@@ -127,11 +125,11 @@ func (c *ReactionsCreateForTeamDiscussionCommentInOrgCmd) Run(isValueSetMap map[
 }
 
 type ReactionsCreateForTeamDiscussionCommentLegacyCmd struct {
-	SquirrelGirl     bool   `required:"" name:"squirrel-girl-preview"`
-	TeamId           int64  `required:"" name:"team_id"`
-	DiscussionNumber int64  `required:"" name:"discussion_number"`
-	CommentNumber    int64  `required:"" name:"comment_number"`
-	Content          string `required:"" name:"content"`
+	SquirrelGirl     bool   `name:"squirrel-girl-preview" required:"true"`
+	TeamId           int64  `name:"team_id" required:"true"`
+	DiscussionNumber int64  `name:"discussion_number" required:"true"`
+	CommentNumber    int64  `name:"comment_number" required:"true"`
+	Content          string `name:"content" required:"true"`
 	internal.BaseCmd
 }
 
@@ -147,11 +145,11 @@ func (c *ReactionsCreateForTeamDiscussionCommentLegacyCmd) Run(isValueSetMap map
 }
 
 type ReactionsCreateForTeamDiscussionInOrgCmd struct {
-	SquirrelGirl     bool   `required:"" name:"squirrel-girl-preview"`
-	Org              string `required:"" name:"org"`
-	TeamSlug         string `required:"" name:"team_slug"`
-	DiscussionNumber int64  `required:"" name:"discussion_number"`
-	Content          string `required:"" name:"content"`
+	SquirrelGirl     bool   `name:"squirrel-girl-preview" required:"true"`
+	Org              string `name:"org" required:"true"`
+	TeamSlug         string `name:"team_slug" required:"true"`
+	DiscussionNumber int64  `name:"discussion_number" required:"true"`
+	Content          string `name:"content" required:"true"`
 	internal.BaseCmd
 }
 
@@ -167,10 +165,10 @@ func (c *ReactionsCreateForTeamDiscussionInOrgCmd) Run(isValueSetMap map[string]
 }
 
 type ReactionsCreateForTeamDiscussionLegacyCmd struct {
-	SquirrelGirl     bool   `required:"" name:"squirrel-girl-preview"`
-	TeamId           int64  `required:"" name:"team_id"`
-	DiscussionNumber int64  `required:"" name:"discussion_number"`
-	Content          string `required:"" name:"content"`
+	SquirrelGirl     bool   `name:"squirrel-girl-preview" required:"true"`
+	TeamId           int64  `name:"team_id" required:"true"`
+	DiscussionNumber int64  `name:"discussion_number" required:"true"`
+	Content          string `name:"content" required:"true"`
 	internal.BaseCmd
 }
 
@@ -185,10 +183,10 @@ func (c *ReactionsCreateForTeamDiscussionLegacyCmd) Run(isValueSetMap map[string
 }
 
 type ReactionsDeleteForCommitCommentCmd struct {
-	SquirrelGirl bool   `required:"" name:"squirrel-girl-preview"`
-	Repo         string `required:"" name:"repo"`
-	CommentId    int64  `required:"" name:"comment_id"`
-	ReactionId   int64  `required:"" name:"reaction_id"`
+	SquirrelGirl bool   `name:"squirrel-girl-preview" required:"true"`
+	Repo         string `name:"repo" required:"true"`
+	CommentId    int64  `name:"comment_id" required:"true"`
+	ReactionId   int64  `name:"reaction_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -203,10 +201,10 @@ func (c *ReactionsDeleteForCommitCommentCmd) Run(isValueSetMap map[string]bool) 
 }
 
 type ReactionsDeleteForIssueCmd struct {
-	SquirrelGirl bool   `required:"" name:"squirrel-girl-preview"`
-	Repo         string `required:"" name:"repo"`
-	IssueNumber  int64  `required:"" name:"issue_number"`
-	ReactionId   int64  `required:"" name:"reaction_id"`
+	SquirrelGirl bool   `name:"squirrel-girl-preview" required:"true"`
+	Repo         string `name:"repo" required:"true"`
+	IssueNumber  int64  `name:"issue_number" required:"true"`
+	ReactionId   int64  `name:"reaction_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -221,10 +219,10 @@ func (c *ReactionsDeleteForIssueCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReactionsDeleteForIssueCommentCmd struct {
-	SquirrelGirl bool   `required:"" name:"squirrel-girl-preview"`
-	Repo         string `required:"" name:"repo"`
-	CommentId    int64  `required:"" name:"comment_id"`
-	ReactionId   int64  `required:"" name:"reaction_id"`
+	SquirrelGirl bool   `name:"squirrel-girl-preview" required:"true"`
+	Repo         string `name:"repo" required:"true"`
+	CommentId    int64  `name:"comment_id" required:"true"`
+	ReactionId   int64  `name:"reaction_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -239,10 +237,10 @@ func (c *ReactionsDeleteForIssueCommentCmd) Run(isValueSetMap map[string]bool) e
 }
 
 type ReactionsDeleteForPullRequestCommentCmd struct {
-	SquirrelGirl bool   `required:"" name:"squirrel-girl-preview"`
-	Repo         string `required:"" name:"repo"`
-	CommentId    int64  `required:"" name:"comment_id"`
-	ReactionId   int64  `required:"" name:"reaction_id"`
+	SquirrelGirl bool   `name:"squirrel-girl-preview" required:"true"`
+	Repo         string `name:"repo" required:"true"`
+	CommentId    int64  `name:"comment_id" required:"true"`
+	ReactionId   int64  `name:"reaction_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -257,11 +255,11 @@ func (c *ReactionsDeleteForPullRequestCommentCmd) Run(isValueSetMap map[string]b
 }
 
 type ReactionsDeleteForTeamDiscussionCmd struct {
-	SquirrelGirl     bool   `required:"" name:"squirrel-girl-preview"`
-	Org              string `required:"" name:"org"`
-	TeamSlug         string `required:"" name:"team_slug"`
-	DiscussionNumber int64  `required:"" name:"discussion_number"`
-	ReactionId       int64  `required:"" name:"reaction_id"`
+	SquirrelGirl     bool   `name:"squirrel-girl-preview" required:"true"`
+	Org              string `name:"org" required:"true"`
+	TeamSlug         string `name:"team_slug" required:"true"`
+	DiscussionNumber int64  `name:"discussion_number" required:"true"`
+	ReactionId       int64  `name:"reaction_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -277,12 +275,12 @@ func (c *ReactionsDeleteForTeamDiscussionCmd) Run(isValueSetMap map[string]bool)
 }
 
 type ReactionsDeleteForTeamDiscussionCommentCmd struct {
-	SquirrelGirl     bool   `required:"" name:"squirrel-girl-preview"`
-	Org              string `required:"" name:"org"`
-	TeamSlug         string `required:"" name:"team_slug"`
-	DiscussionNumber int64  `required:"" name:"discussion_number"`
-	CommentNumber    int64  `required:"" name:"comment_number"`
-	ReactionId       int64  `required:"" name:"reaction_id"`
+	SquirrelGirl     bool   `name:"squirrel-girl-preview" required:"true"`
+	Org              string `name:"org" required:"true"`
+	TeamSlug         string `name:"team_slug" required:"true"`
+	DiscussionNumber int64  `name:"discussion_number" required:"true"`
+	CommentNumber    int64  `name:"comment_number" required:"true"`
+	ReactionId       int64  `name:"reaction_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -299,8 +297,8 @@ func (c *ReactionsDeleteForTeamDiscussionCommentCmd) Run(isValueSetMap map[strin
 }
 
 type ReactionsDeleteLegacyCmd struct {
-	SquirrelGirl bool  `required:"" name:"squirrel-girl-preview"`
-	ReactionId   int64 `required:"" name:"reaction_id"`
+	SquirrelGirl bool  `name:"squirrel-girl-preview" required:"true"`
+	ReactionId   int64 `name:"reaction_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -313,9 +311,9 @@ func (c *ReactionsDeleteLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReactionsListForCommitCommentCmd struct {
-	SquirrelGirl bool   `required:"" name:"squirrel-girl-preview"`
-	Repo         string `required:"" name:"repo"`
-	CommentId    int64  `required:"" name:"comment_id"`
+	SquirrelGirl bool   `name:"squirrel-girl-preview" required:"true"`
+	Repo         string `name:"repo" required:"true"`
+	CommentId    int64  `name:"comment_id" required:"true"`
 	Content      string `name:"content"`
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
@@ -335,9 +333,9 @@ func (c *ReactionsListForCommitCommentCmd) Run(isValueSetMap map[string]bool) er
 }
 
 type ReactionsListForIssueCmd struct {
-	SquirrelGirl bool   `required:"" name:"squirrel-girl-preview"`
-	Repo         string `required:"" name:"repo"`
-	IssueNumber  int64  `required:"" name:"issue_number"`
+	SquirrelGirl bool   `name:"squirrel-girl-preview" required:"true"`
+	Repo         string `name:"repo" required:"true"`
+	IssueNumber  int64  `name:"issue_number" required:"true"`
 	Content      string `name:"content"`
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
@@ -357,9 +355,9 @@ func (c *ReactionsListForIssueCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReactionsListForIssueCommentCmd struct {
-	SquirrelGirl bool   `required:"" name:"squirrel-girl-preview"`
-	Repo         string `required:"" name:"repo"`
-	CommentId    int64  `required:"" name:"comment_id"`
+	SquirrelGirl bool   `name:"squirrel-girl-preview" required:"true"`
+	Repo         string `name:"repo" required:"true"`
+	CommentId    int64  `name:"comment_id" required:"true"`
 	Content      string `name:"content"`
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
@@ -379,9 +377,9 @@ func (c *ReactionsListForIssueCommentCmd) Run(isValueSetMap map[string]bool) err
 }
 
 type ReactionsListForPullRequestReviewCommentCmd struct {
-	SquirrelGirl bool   `required:"" name:"squirrel-girl-preview"`
-	Repo         string `required:"" name:"repo"`
-	CommentId    int64  `required:"" name:"comment_id"`
+	SquirrelGirl bool   `name:"squirrel-girl-preview" required:"true"`
+	Repo         string `name:"repo" required:"true"`
+	CommentId    int64  `name:"comment_id" required:"true"`
 	Content      string `name:"content"`
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
@@ -401,11 +399,11 @@ func (c *ReactionsListForPullRequestReviewCommentCmd) Run(isValueSetMap map[stri
 }
 
 type ReactionsListForTeamDiscussionCommentInOrgCmd struct {
-	SquirrelGirl     bool   `required:"" name:"squirrel-girl-preview"`
-	Org              string `required:"" name:"org"`
-	TeamSlug         string `required:"" name:"team_slug"`
-	DiscussionNumber int64  `required:"" name:"discussion_number"`
-	CommentNumber    int64  `required:"" name:"comment_number"`
+	SquirrelGirl     bool   `name:"squirrel-girl-preview" required:"true"`
+	Org              string `name:"org" required:"true"`
+	TeamSlug         string `name:"team_slug" required:"true"`
+	DiscussionNumber int64  `name:"discussion_number" required:"true"`
+	CommentNumber    int64  `name:"comment_number" required:"true"`
 	Content          string `name:"content"`
 	Page             int64  `name:"page"`
 	PerPage          int64  `name:"per_page"`
@@ -427,10 +425,10 @@ func (c *ReactionsListForTeamDiscussionCommentInOrgCmd) Run(isValueSetMap map[st
 }
 
 type ReactionsListForTeamDiscussionCommentLegacyCmd struct {
-	SquirrelGirl     bool   `required:"" name:"squirrel-girl-preview"`
-	TeamId           int64  `required:"" name:"team_id"`
-	DiscussionNumber int64  `required:"" name:"discussion_number"`
-	CommentNumber    int64  `required:"" name:"comment_number"`
+	SquirrelGirl     bool   `name:"squirrel-girl-preview" required:"true"`
+	TeamId           int64  `name:"team_id" required:"true"`
+	DiscussionNumber int64  `name:"discussion_number" required:"true"`
+	CommentNumber    int64  `name:"comment_number" required:"true"`
 	Content          string `name:"content"`
 	Page             int64  `name:"page"`
 	PerPage          int64  `name:"per_page"`
@@ -451,10 +449,10 @@ func (c *ReactionsListForTeamDiscussionCommentLegacyCmd) Run(isValueSetMap map[s
 }
 
 type ReactionsListForTeamDiscussionInOrgCmd struct {
-	SquirrelGirl     bool   `required:"" name:"squirrel-girl-preview"`
-	Org              string `required:"" name:"org"`
-	TeamSlug         string `required:"" name:"team_slug"`
-	DiscussionNumber int64  `required:"" name:"discussion_number"`
+	SquirrelGirl     bool   `name:"squirrel-girl-preview" required:"true"`
+	Org              string `name:"org" required:"true"`
+	TeamSlug         string `name:"team_slug" required:"true"`
+	DiscussionNumber int64  `name:"discussion_number" required:"true"`
 	Content          string `name:"content"`
 	Page             int64  `name:"page"`
 	PerPage          int64  `name:"per_page"`
@@ -475,9 +473,9 @@ func (c *ReactionsListForTeamDiscussionInOrgCmd) Run(isValueSetMap map[string]bo
 }
 
 type ReactionsListForTeamDiscussionLegacyCmd struct {
-	SquirrelGirl     bool   `required:"" name:"squirrel-girl-preview"`
-	TeamId           int64  `required:"" name:"team_id"`
-	DiscussionNumber int64  `required:"" name:"discussion_number"`
+	SquirrelGirl     bool   `name:"squirrel-girl-preview" required:"true"`
+	TeamId           int64  `name:"team_id" required:"true"`
+	DiscussionNumber int64  `name:"discussion_number" required:"true"`
 	Content          string `name:"content"`
 	Page             int64  `name:"page"`
 	PerPage          int64  `name:"per_page"`

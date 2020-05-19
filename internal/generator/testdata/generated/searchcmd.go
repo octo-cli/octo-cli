@@ -2,9 +2,7 @@
 
 package generated
 
-import (
-	"github.com/octo-cli/octo-cli/internal"
-)
+import internal "github.com/octo-cli/octo-cli/internal"
 
 type SearchCmd struct {
 	Code                  SearchCodeCmd                  `cmd:""`
@@ -17,11 +15,11 @@ type SearchCmd struct {
 }
 
 type SearchCodeCmd struct {
-	Q       string `required:"" name:"q"`
 	Order   string `name:"order"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Sort    string `name:"sort"`
+	Q       string `name:"q" required:"true"`
 	internal.BaseCmd
 }
 
@@ -37,12 +35,12 @@ func (c *SearchCodeCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type SearchCommitsCmd struct {
-	Cloak   bool   `required:"" name:"cloak-preview"`
-	Q       string `required:"" name:"q"`
+	Cloak   bool   `name:"cloak-preview" required:"true"`
 	Order   string `name:"order"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Sort    string `name:"sort"`
+	Q       string `name:"q" required:"true"`
 	internal.BaseCmd
 }
 
@@ -59,11 +57,11 @@ func (c *SearchCommitsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type SearchIssuesAndPullRequestsCmd struct {
-	Q       string `required:"" name:"q"`
 	Order   string `name:"order"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Sort    string `name:"sort"`
+	Q       string `name:"q" required:"true"`
 	internal.BaseCmd
 }
 
@@ -79,10 +77,10 @@ func (c *SearchIssuesAndPullRequestsCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type SearchLabelsCmd struct {
-	Q            string `required:"" name:"q"`
-	RepositoryId int64  `required:"" name:"repository_id"`
 	Order        string `name:"order"`
 	Sort         string `name:"sort"`
+	Q            string `name:"q" required:"true"`
+	RepositoryId int64  `name:"repository_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -98,11 +96,11 @@ func (c *SearchLabelsCmd) Run(isValueSetMap map[string]bool) error {
 
 type SearchReposCmd struct {
 	Mercy   bool   `name:"mercy-preview"`
-	Q       string `required:"" name:"q"`
 	Order   string `name:"order"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Sort    string `name:"sort"`
+	Q       string `name:"q" required:"true"`
 	internal.BaseCmd
 }
 
@@ -120,7 +118,7 @@ func (c *SearchReposCmd) Run(isValueSetMap map[string]bool) error {
 
 type SearchTopicsCmd struct {
 	Mercy bool   `name:"mercy-preview"`
-	Q     string `required:"" name:"q"`
+	Q     string `name:"q" required:"true"`
 	internal.BaseCmd
 }
 
@@ -133,11 +131,11 @@ func (c *SearchTopicsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type SearchUsersCmd struct {
-	Q       string `required:"" name:"q"`
 	Order   string `name:"order"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Sort    string `name:"sort"`
+	Q       string `name:"q" required:"true"`
 	internal.BaseCmd
 }
 

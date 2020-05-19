@@ -1,123 +1,20 @@
 package codegen
 
 import (
-	"bytes"
-	"fmt"
-	"go/format"
 	"io/ioutil"
 	"path/filepath"
 	"testing"
-	"text/template"
 
-	"github.com/octo-cli/octo-cli/internal/generator/util"
 	"github.com/stretchr/testify/require"
 )
-
-func execAndFormatTmpl(t *testing.T, tm *template.Template, data interface{}) string {
-	t.Helper()
-	var buf bytes.Buffer
-	err := tm.Execute(&buf, data)
-	require.NoError(t, err)
-	got, err := format.Source(buf.Bytes())
-	require.NoError(t, err)
-	return string(got)
-}
-
-func TestTemplate(t *testing.T) {
-	t.Run("RunMethod", func(t *testing.T) {
-
-		t.Run("with params", func(t *testing.T) {
-			data := RunMethod{
-				ReceiverName: "receiverName",
-				Method:       "mymethod",
-				URLPath:      "urlPath",
-				CodeBlocks: []CodeBlock{
-					{
-						Code: `
-	c.updateMethod1("param1", c.valueField1)`,
-					},
-					{
-						Code: `
-	c.updateMethod2("param2", c.valueField2)`,
-					},
-				},
-			}
-			want := `
-func (c *receiverName) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("urlPath")
-	c.updateMethod1("param1", c.valueField1)
-	c.updateMethod2("param2", c.valueField2)
-	return c.DoRequest("mymethod")
-}
-
-`
-			got := execAndFormatTmpl(t, tmpl.Lookup("RunMethod"), data)
-			require.Equal(t, want, got)
-		})
-
-		t.Run("no params", func(t *testing.T) {
-			data := RunMethod{
-				ReceiverName: "receiverName",
-				Method:       "mymethod",
-				URLPath:      "urlPath",
-			}
-			want := `
-func (c *receiverName) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("urlPath")
-	return c.DoRequest("mymethod")
-}
-
-`
-			got := execAndFormatTmpl(t, tmpl.Lookup("RunMethod"), data)
-			require.Equal(t, want, got)
-		})
-	})
-
-	t.Run("StructType", func(t *testing.T) {
-		t.Run("no fields", func(t *testing.T) {
-			data := StructTmplHelper{
-				Name: "myname",
-			}
-			want := `type myname struct {
-}`
-			got := execAndFormatTmpl(t, tmpl.Lookup("StructType"), data)
-			require.Equal(t, want, got)
-		})
-
-		t.Run("with fields", func(t *testing.T) {
-			fmt.Println(t.Name())
-			data := StructTmplHelper{
-				Name: "myname",
-				Fields: []StructField{
-					{
-						Name: "field1",
-						Type: "fieldType",
-						Tags: nil,
-					},
-					{
-						Name: "field2",
-						Type: "fieldType",
-						Tags: util.NewTags(util.NewTag("tagKey", "tagVal"), util.NewTag("emptyTag", "")),
-					},
-				},
-			}
-			want, err := ioutil.ReadFile(filepath.FromSlash("testdata/template_structtype_with_fields.txt"))
-			require.NoError(t, err)
-			got := execAndFormatTmpl(t, tmpl.Lookup("StructType"), data)
-			require.Equal(t, string(want), got)
-		})
-	})
-}
 
 func Test_generateGoFile(t *testing.T) {
 	t.Run("CLI", func(t *testing.T) {
 		want, err := ioutil.ReadFile(filepath.FromSlash("testdata/generategofile_cli.txt"))
 		require.NoError(t, err)
 
-		fileTmpl := FileTmpl{
-			CmdHelps: map[string]map[string]string{
+		fileTmpl1 := fileTmpl{
+			cmdHelps: map[string]map[string]string{
 				"actions": {
 					"cancel-workflow-run": "example",
 					"delete-artifact":     "example",
@@ -127,7 +24,7 @@ func Test_generateGoFile(t *testing.T) {
 					"get-thread": "example",
 				},
 			},
-			FlagHelps: map[string]map[string]map[string]string{
+			flagHelps: map[string]map[string]map[string]string{
 				"actions": {
 					"cancel-workflow-run": {
 						"owner":  "owner parameter",
@@ -147,26 +44,26 @@ func Test_generateGoFile(t *testing.T) {
 					},
 				},
 			},
-			PrimaryStructs: []StructTmplHelper{
+			primaryStructs: []structTmplHelper{
 				{
-					Name: "CLI",
-					Fields: []StructField{
+					name: "CLI",
+					fields: []structField{
 						{
-							Name: "Actions",
-							Type: "ActionsCmd",
-							Tags: util.NewTags(util.NewTag("cmd", "")),
+							name:      "Actions",
+							fieldType: "ActionsCmd",
+							tags:      map[string]string{"cmd": ""},
 						},
 						{
-							Name: "Activity",
-							Type: "ActivityCmd",
-							Tags: util.NewTags(util.NewTag("cmd", "")),
+							name:      "Activity",
+							fieldType: "ActivityCmd",
+							tags:      map[string]string{"cmd": ""},
 						},
 					},
 				},
 			},
 		}
 
-		got, err := generateGoFile(fileTmpl)
+		got, err := generateGoFile(fileTmpl1)
 		require.NoError(t, err)
 		require.Equal(t, string(want), string(got))
 	})
@@ -174,98 +71,83 @@ func Test_generateGoFile(t *testing.T) {
 	t.Run("license", func(t *testing.T) {
 		want, err := ioutil.ReadFile(filepath.FromSlash("testdata/generategofile_license.txt"))
 		require.NoError(t, err)
-		fileTmpl := FileTmpl{
-			SvcTmpls: []SvcTmpl{
+		fileTmpl1 := fileTmpl{
+			svcTmpls: []svcTmpl{
 				{
-					SvcStruct: StructTmplHelper{
-						Name: "LicensesCmd",
-						Fields: []StructField{
+					svcStruct: &structTmplHelper{
+						name: "LicensesCmd",
+						fields: []structField{
 							{
-								Name: "Get",
-								Type: "LicensesGetCmd",
-								Tags: util.NewTags(util.NewTag("cmd", "")),
+								name:      "Get",
+								fieldType: "LicensesGetCmd",
+								tags:      map[string]string{"cmd": ""},
 							},
 							{
-								Name: "GetForRepo",
-								Type: "LicensesGetForRepoCmd",
-								Tags: util.NewTags(util.NewTag("cmd", "")),
+								name:      "GetForRepo",
+								fieldType: "LicensesGetForRepoCmd",
+								tags:      map[string]string{"cmd": ""},
 							},
 							{
-								Name: "ListCommonlyUsed",
-								Type: "LicensesListCommonlyUsedCmd",
-								Tags: util.NewTags(util.NewTag("cmd", "")),
+								name:      "ListCommonlyUsed",
+								fieldType: "LicensesListCommonlyUsedCmd",
+								tags:      map[string]string{"cmd": ""},
 							},
 						},
 					},
-					CmdStructAndMethods: []CmdStructAndMethod{
+					cmdStructAndMethods: []cmdStructAndMethod{
 						{
-							CmdStruct: StructTmplHelper{
-								Name: "LicensesGetCmd",
-								Fields: []StructField{
+							cmdStruct: &structTmplHelper{
+								name: "LicensesGetCmd",
+								fields: []structField{
 									{
-										Name: "License",
-										Type: "string",
-										Tags: util.NewTags(util.NewTag("required", ""), util.NewTag("name", "license")),
-									},
+										name:      "License",
+										fieldType: "string",
+										tags:      map[string]string{"required": "true", "name": "license"}},
 									{
-										Type:   "internal.BaseCmd",
-										Import: "github.com/octo-cli/octo-cli/internal",
+										fieldType: "internal.BaseCmd",
 									},
 								},
 							},
-							RunMethod: RunMethod{
-								ReceiverName: "LicensesGetCmd",
-								Method:       "GET",
-								URLPath:      "/licenses/{license}",
-								CodeBlocks: []CodeBlock{
-									{
-										Code: `
-c.UpdateURLPath("license", c.License)`,
-									},
-								},
+							runMethod: &runMethod{
+								receiverName:    "LicensesGetCmd",
+								method:          "GET",
+								urlPath:         "/licenses/{license}",
+								codeGroupAdders: []codeGroupAdder{newRunMethodAdder("license", "c.UpdateURLPath")},
 							},
 						},
 						{
-							CmdStruct: StructTmplHelper{
-								Name: "LicensesGetForRepoCmd",
-								Fields: []StructField{
+							cmdStruct: &structTmplHelper{
+								name: "LicensesGetForRepoCmd",
+								fields: []structField{
 									{
-										Name: "Repo",
-										Type: "string",
-										Tags: util.NewTags(util.NewTag("required", ""), util.NewTag("name", "repo")),
-									},
+										name:      "Repo",
+										fieldType: "string",
+										tags:      map[string]string{"required": "true", "name": "repo"}},
 									{
-										Type:   "internal.BaseCmd",
-										Import: "github.com/octo-cli/octo-cli/internal",
+										fieldType: "internal.BaseCmd",
 									},
 								},
 							},
-							RunMethod: RunMethod{
-								ReceiverName: "LicensesGetForRepoCmd",
-								Method:       "GET",
-								URLPath:      "/repos/{repo}/license",
-								CodeBlocks: []CodeBlock{
-									{
-										Code: `
-c.UpdateURLPath("repo", c.Repo)`,
-									},
-								},
+							runMethod: &runMethod{
+								receiverName:    "LicensesGetForRepoCmd",
+								method:          "GET",
+								urlPath:         "/repos/{repo}/license",
+								codeGroupAdders: []codeGroupAdder{newRunMethodAdder("repo", "c.UpdateURLPath")},
 							},
 						},
 						{
-							CmdStruct: StructTmplHelper{
-								Name: "LicensesListCommonlyUsedCmd",
-								Fields: []StructField{
+							cmdStruct: &structTmplHelper{
+								name: "LicensesListCommonlyUsedCmd",
+								fields: []structField{
 									{
-										Type:   "internal.BaseCmd",
-										Import: "github.com/octo-cli/octo-cli/internal",
+										fieldType: "internal.BaseCmd",
 									},
 								},
 							},
-							RunMethod: RunMethod{
-								ReceiverName: "LicensesListCommonlyUsedCmd",
-								Method:       "GET",
-								URLPath:      "/licenses",
+							runMethod: &runMethod{
+								receiverName: "LicensesListCommonlyUsedCmd",
+								method:       "GET",
+								urlPath:      "/licenses",
 							},
 						},
 					},
@@ -273,7 +155,7 @@ c.UpdateURLPath("repo", c.Repo)`,
 			},
 		}
 
-		got, err := generateGoFile(fileTmpl)
+		got, err := generateGoFile(fileTmpl1)
 		require.NoError(t, err)
 		require.Equal(t, string(want), string(got))
 	})
