@@ -6,7 +6,7 @@ CDPATH="" cd -- "$(dirname -- "$(dirname -- "$0")")"
 
 get_latest_version() {
   latest_url="$(curl -s -I  -w "%{redirect_url}" -o /dev/null  https://unpkg.com/@github/openapi/dist/api.github.com.json)"
-  echo $latest_url | cut -d "@" -f3 | cut -d "/" -f1
+  echo "$latest_url" | cut -d "@" -f3 | cut -d "/" -f1
 }
 
 touch ./current-schema-tag.txt
