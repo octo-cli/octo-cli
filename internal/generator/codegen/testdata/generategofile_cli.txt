@@ -30,5 +30,8 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"repo":        "repo parameter",
 		},
 	},
-	"activity": {"get-thread": {"thread_id": "thread_id parameter"}},
+	"activity": {
+		"get-feeds":  {},
+		"get-thread": {"thread_id": "thread_id parameter"},
+	},
 }
