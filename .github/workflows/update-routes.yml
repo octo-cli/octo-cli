@@ -10,6 +10,6 @@ jobs:
       - uses: actions/setup-go@v2
         with:
           go-version: '~1.14.0'
-      - run: script/new-routes-pr
+      - run: script/new-schema-pr
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
