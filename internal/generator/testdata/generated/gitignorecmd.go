@@ -2,9 +2,7 @@
 
 package generated
 
-import (
-	"github.com/octo-cli/octo-cli/internal"
-)
+import internal "github.com/octo-cli/octo-cli/internal"
 
 type GitignoreCmd struct {
 	GetTemplate   GitignoreGetTemplateCmd   `cmd:""`
@@ -12,7 +10,7 @@ type GitignoreCmd struct {
 }
 
 type GitignoreGetTemplateCmd struct {
-	Name string `required:"" name:"name"`
+	Name string `name:"name" required:"true"`
 	internal.BaseCmd
 }
 

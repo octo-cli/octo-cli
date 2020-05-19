@@ -2,9 +2,7 @@
 
 package generated
 
-import (
-	"github.com/octo-cli/octo-cli/internal"
-)
+import internal "github.com/octo-cli/octo-cli/internal"
 
 type OrgsCmd struct {
 	AddOrUpdateMembership              OrgsAddOrUpdateMembershipCmd              `cmd:""`
@@ -47,8 +45,8 @@ type OrgsCmd struct {
 }
 
 type OrgsAddOrUpdateMembershipCmd struct {
-	Org      string `required:"" name:"org"`
-	Username string `required:"" name:"username"`
+	Org      string `name:"org" required:"true"`
+	Username string `name:"username" required:"true"`
 	Role     string `name:"role"`
 	internal.BaseCmd
 }
@@ -63,8 +61,8 @@ func (c *OrgsAddOrUpdateMembershipCmd) Run(isValueSetMap map[string]bool) error 
 }
 
 type OrgsBlockUserCmd struct {
-	Org      string `required:"" name:"org"`
-	Username string `required:"" name:"username"`
+	Org      string `name:"org" required:"true"`
+	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 
@@ -77,8 +75,8 @@ func (c *OrgsBlockUserCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsCheckBlockedUserCmd struct {
-	Org      string `required:"" name:"org"`
-	Username string `required:"" name:"username"`
+	Org      string `name:"org" required:"true"`
+	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 
@@ -91,8 +89,8 @@ func (c *OrgsCheckBlockedUserCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsCheckMembershipCmd struct {
-	Org      string `required:"" name:"org"`
-	Username string `required:"" name:"username"`
+	Org      string `name:"org" required:"true"`
+	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 
@@ -105,8 +103,8 @@ func (c *OrgsCheckMembershipCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsCheckPublicMembershipCmd struct {
-	Org      string `required:"" name:"org"`
-	Username string `required:"" name:"username"`
+	Org      string `name:"org" required:"true"`
+	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 
@@ -119,8 +117,8 @@ func (c *OrgsCheckPublicMembershipCmd) Run(isValueSetMap map[string]bool) error 
 }
 
 type OrgsConcealMembershipCmd struct {
-	Org      string `required:"" name:"org"`
-	Username string `required:"" name:"username"`
+	Org      string `name:"org" required:"true"`
+	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 
@@ -133,8 +131,8 @@ func (c *OrgsConcealMembershipCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsConvertMemberToOutsideCollaboratorCmd struct {
-	Org      string `required:"" name:"org"`
-	Username string `required:"" name:"username"`
+	Org      string `name:"org" required:"true"`
+	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 
@@ -147,14 +145,14 @@ func (c *OrgsConvertMemberToOutsideCollaboratorCmd) Run(isValueSetMap map[string
 }
 
 type OrgsCreateHookCmd struct {
-	Org               string   `required:"" name:"org"`
-	ConfigUrl         string   `required:"" name:"config.url"`
-	Name              string   `required:"" name:"name"`
+	Org               string   `name:"org" required:"true"`
 	Active            bool     `name:"active"`
 	ConfigContentType string   `name:"config.content_type"`
 	ConfigInsecureSsl string   `name:"config.insecure_ssl"`
 	ConfigSecret      string   `name:"config.secret"`
 	Events            []string `name:"events"`
+	ConfigUrl         string   `name:"config.url" required:"true"`
+	Name              string   `name:"name" required:"true"`
 	internal.BaseCmd
 }
 
@@ -173,7 +171,7 @@ func (c *OrgsCreateHookCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsCreateInvitationCmd struct {
-	Org       string  `required:"" name:"org"`
+	Org       string  `name:"org" required:"true"`
 	Email     string  `name:"email"`
 	InviteeId int64   `name:"invitee_id"`
 	Role      string  `name:"role"`
@@ -193,8 +191,8 @@ func (c *OrgsCreateInvitationCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsDeleteHookCmd struct {
-	Org    string `required:"" name:"org"`
-	HookId int64  `required:"" name:"hook_id"`
+	Org    string `name:"org" required:"true"`
+	HookId int64  `name:"hook_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -208,7 +206,7 @@ func (c *OrgsDeleteHookCmd) Run(isValueSetMap map[string]bool) error {
 
 type OrgsGetCmd struct {
 	Surtur bool   `name:"surtur-preview"`
-	Org    string `required:"" name:"org"`
+	Org    string `name:"org" required:"true"`
 	internal.BaseCmd
 }
 
@@ -221,8 +219,8 @@ func (c *OrgsGetCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsGetHookCmd struct {
-	Org    string `required:"" name:"org"`
-	HookId int64  `required:"" name:"hook_id"`
+	Org    string `name:"org" required:"true"`
+	HookId int64  `name:"hook_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -235,8 +233,8 @@ func (c *OrgsGetHookCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsGetMembershipCmd struct {
-	Org      string `required:"" name:"org"`
-	Username string `required:"" name:"username"`
+	Org      string `name:"org" required:"true"`
+	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 
@@ -249,7 +247,7 @@ func (c *OrgsGetMembershipCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsGetMembershipForAuthenticatedUserCmd struct {
-	Org string `required:"" name:"org"`
+	Org string `name:"org" required:"true"`
 	internal.BaseCmd
 }
 
@@ -261,7 +259,7 @@ func (c *OrgsGetMembershipForAuthenticatedUserCmd) Run(isValueSetMap map[string]
 }
 
 type OrgsListBlockedUsersCmd struct {
-	Org string `required:"" name:"org"`
+	Org string `name:"org" required:"true"`
 	internal.BaseCmd
 }
 
@@ -285,7 +283,7 @@ func (c *OrgsListCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsListCredentialAuthorizationsCmd struct {
-	Org string `required:"" name:"org"`
+	Org string `name:"org" required:"true"`
 	internal.BaseCmd
 }
 
@@ -311,7 +309,7 @@ func (c *OrgsListForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) err
 }
 
 type OrgsListForUserCmd struct {
-	Username string `required:"" name:"username"`
+	Username string `name:"username" required:"true"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
 	internal.BaseCmd
@@ -327,7 +325,7 @@ func (c *OrgsListForUserCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsListHooksCmd struct {
-	Org     string `required:"" name:"org"`
+	Org     string `name:"org" required:"true"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	internal.BaseCmd
@@ -343,8 +341,8 @@ func (c *OrgsListHooksCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsListInstallationsCmd struct {
-	MachineMan bool   `required:"" name:"machine-man-preview"`
-	Org        string `required:"" name:"org"`
+	MachineMan bool   `name:"machine-man-preview" required:"true"`
+	Org        string `name:"org" required:"true"`
 	Page       int64  `name:"page"`
 	PerPage    int64  `name:"per_page"`
 	internal.BaseCmd
@@ -361,8 +359,8 @@ func (c *OrgsListInstallationsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsListInvitationTeamsCmd struct {
-	Org          string `required:"" name:"org"`
-	InvitationId int64  `required:"" name:"invitation_id"`
+	Org          string `name:"org" required:"true"`
+	InvitationId int64  `name:"invitation_id" required:"true"`
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
 	internal.BaseCmd
@@ -379,7 +377,7 @@ func (c *OrgsListInvitationTeamsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsListMembersCmd struct {
-	Org     string `required:"" name:"org"`
+	Org     string `name:"org" required:"true"`
 	Filter  string `name:"filter"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
@@ -415,7 +413,7 @@ func (c *OrgsListMembershipsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsListOutsideCollaboratorsCmd struct {
-	Org     string `required:"" name:"org"`
+	Org     string `name:"org" required:"true"`
 	Filter  string `name:"filter"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
@@ -433,7 +431,7 @@ func (c *OrgsListOutsideCollaboratorsCmd) Run(isValueSetMap map[string]bool) err
 }
 
 type OrgsListPendingInvitationsCmd struct {
-	Org     string `required:"" name:"org"`
+	Org     string `name:"org" required:"true"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	internal.BaseCmd
@@ -449,7 +447,7 @@ func (c *OrgsListPendingInvitationsCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type OrgsListPublicMembersCmd struct {
-	Org     string `required:"" name:"org"`
+	Org     string `name:"org" required:"true"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	internal.BaseCmd
@@ -465,8 +463,8 @@ func (c *OrgsListPublicMembersCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsPingHookCmd struct {
-	Org    string `required:"" name:"org"`
-	HookId int64  `required:"" name:"hook_id"`
+	Org    string `name:"org" required:"true"`
+	HookId int64  `name:"hook_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -479,8 +477,8 @@ func (c *OrgsPingHookCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsPublicizeMembershipCmd struct {
-	Org      string `required:"" name:"org"`
-	Username string `required:"" name:"username"`
+	Org      string `name:"org" required:"true"`
+	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 
@@ -493,8 +491,8 @@ func (c *OrgsPublicizeMembershipCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsRemoveCredentialAuthorizationCmd struct {
-	Org          string `required:"" name:"org"`
-	CredentialId int64  `required:"" name:"credential_id"`
+	Org          string `name:"org" required:"true"`
+	CredentialId int64  `name:"credential_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -507,8 +505,8 @@ func (c *OrgsRemoveCredentialAuthorizationCmd) Run(isValueSetMap map[string]bool
 }
 
 type OrgsRemoveMemberCmd struct {
-	Org      string `required:"" name:"org"`
-	Username string `required:"" name:"username"`
+	Org      string `name:"org" required:"true"`
+	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 
@@ -521,8 +519,8 @@ func (c *OrgsRemoveMemberCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsRemoveMembershipCmd struct {
-	Org      string `required:"" name:"org"`
-	Username string `required:"" name:"username"`
+	Org      string `name:"org" required:"true"`
+	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 
@@ -535,8 +533,8 @@ func (c *OrgsRemoveMembershipCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsRemoveOutsideCollaboratorCmd struct {
-	Org      string `required:"" name:"org"`
-	Username string `required:"" name:"username"`
+	Org      string `name:"org" required:"true"`
+	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 
@@ -549,8 +547,8 @@ func (c *OrgsRemoveOutsideCollaboratorCmd) Run(isValueSetMap map[string]bool) er
 }
 
 type OrgsUnblockUserCmd struct {
-	Org      string `required:"" name:"org"`
-	Username string `required:"" name:"username"`
+	Org      string `name:"org" required:"true"`
+	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 
@@ -564,7 +562,7 @@ func (c *OrgsUnblockUserCmd) Run(isValueSetMap map[string]bool) error {
 
 type OrgsUpdateCmd struct {
 	Surtur                               bool   `name:"surtur-preview"`
-	Org                                  string `required:"" name:"org"`
+	Org                                  string `name:"org" required:"true"`
 	BillingEmail                         string `name:"billing_email"`
 	Company                              string `name:"company"`
 	DefaultRepositoryPermission          string `name:"default_repository_permission"`
@@ -605,8 +603,8 @@ func (c *OrgsUpdateCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsUpdateHookCmd struct {
-	Org               string   `required:"" name:"org"`
-	HookId            int64    `required:"" name:"hook_id"`
+	Org               string   `name:"org" required:"true"`
+	HookId            int64    `name:"hook_id" required:"true"`
 	Active            bool     `name:"active"`
 	ConfigContentType string   `name:"config.content_type"`
 	ConfigInsecureSsl string   `name:"config.insecure_ssl"`
@@ -631,8 +629,8 @@ func (c *OrgsUpdateHookCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsUpdateMembershipCmd struct {
-	Org   string `required:"" name:"org"`
-	State string `required:"" name:"state"`
+	Org   string `name:"org" required:"true"`
+	State string `name:"state" required:"true"`
 	internal.BaseCmd
 }
 

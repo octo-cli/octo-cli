@@ -4,6 +4,7 @@ go 1.14
 
 require (
 	github.com/alecthomas/kong v0.2.5-0.20200316010313-509fd46c42d7
+	github.com/dave/jennifer v1.4.0
 	github.com/dnaeon/go-vcr v1.0.1
 	github.com/fatih/structtag v1.0.0
 	github.com/gabriel-vasile/mimetype v1.1.0

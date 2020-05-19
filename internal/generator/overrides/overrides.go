@@ -1,19 +1,18 @@
 package overrides
 
 import (
-	"github.com/fatih/structtag"
-	"github.com/octo-cli/octo-cli/internal/generator/util"
+	"github.com/dave/jennifer/jen"
 )
 
 type ManualParamInfo struct {
 	Name        string
 	Type        string
-	RunCode     string
+	CodeAdder   func(group *jen.Group)
 	CodeImports []string
 	FieldImport string
 	Required    bool
 	Description string
-	Tags        *structtag.Tags
+	Tags        map[string]string
 	Hidden      bool
 }
 
@@ -23,17 +22,19 @@ func GetManualParamInfo(opID string) []ManualParamInfo {
 			{
 				Name:        "file",
 				Type:        "string",
-				Tags:        util.NewTags(util.NewTag("type", "existingfile")),
+				Tags:        map[string]string{"type": "existingfile"},
 				Required:    true,
 				CodeImports: []string{"github.com/octo-cli/octo-cli/internal"},
 				Description: "the file to upload",
-				RunCode: `
-internal.MarkdownRenderRawOverride(&c.BaseCmd, c.File)`,
+				CodeAdder: func(group *jen.Group) {
+					group.Qual("github.com/octo-cli/octo-cli/internal", "MarkdownRenderRawOverride").
+						Params(jen.Id("&c.BaseCmd"), jen.Id("c.File"))
+				},
 			},
 			{
 				Name:   "content-type",
 				Type:   "string",
-				Tags:   util.NewTags(util.NewTag("hidden", "")),
+				Tags:   map[string]string{"hidden": ""},
 				Hidden: true,
 			},
 		},
@@ -41,12 +42,14 @@ internal.MarkdownRenderRawOverride(&c.BaseCmd, c.File)`,
 			{
 				Name:        "file",
 				Type:        "string",
-				Tags:        util.NewTags(util.NewTag("type", "existingfile")),
+				Tags:        map[string]string{"type": "existingfile"},
 				Required:    true,
 				CodeImports: []string{"github.com/octo-cli/octo-cli/internal"},
 				Description: "the file to upload",
-				RunCode: `
-internal.ReposUploadReleaseAssetOverride(&c.BaseCmd, c.File)`,
+				CodeAdder: func(group *jen.Group) {
+					group.Qual("github.com/octo-cli/octo-cli/internal", "ReposUploadReleaseAssetOverride").
+						Params(jen.Id("&c.BaseCmd"), jen.Id("c.File"))
+				},
 			},
 			{
 				Name:        "content-type",
@@ -56,7 +59,7 @@ internal.ReposUploadReleaseAssetOverride(&c.BaseCmd, c.File)`,
 			{
 				Name:   "content-length",
 				Type:   "string",
-				Tags:   util.NewTags(util.NewTag("hidden", "")),
+				Tags:   map[string]string{"hidden": ""},
 				Hidden: true,
 			},
 		},

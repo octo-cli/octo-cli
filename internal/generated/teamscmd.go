@@ -2,9 +2,7 @@
 
 package generated
 
-import (
-	"github.com/octo-cli/octo-cli/internal"
-)
+import internal "github.com/octo-cli/octo-cli/internal"
 
 type TeamsCmd struct {
 	AddMemberLegacy                         TeamsAddMemberLegacyCmd                         `cmd:""`
@@ -75,8 +73,8 @@ type TeamsCmd struct {
 }
 
 type TeamsAddMemberLegacyCmd struct {
-	TeamId   int64  `required:"" name:"team_id"`
-	Username string `required:"" name:"username"`
+	TeamId   int64  `name:"team_id" required:"true"`
+	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 
@@ -89,9 +87,9 @@ func (c *TeamsAddMemberLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsAddOrUpdateMembershipInOrgCmd struct {
-	Org      string `required:"" name:"org"`
-	TeamSlug string `required:"" name:"team_slug"`
-	Username string `required:"" name:"username"`
+	Org      string `name:"org" required:"true"`
+	TeamSlug string `name:"team_slug" required:"true"`
+	Username string `name:"username" required:"true"`
 	Role     string `name:"role"`
 	internal.BaseCmd
 }
@@ -107,8 +105,8 @@ func (c *TeamsAddOrUpdateMembershipInOrgCmd) Run(isValueSetMap map[string]bool) 
 }
 
 type TeamsAddOrUpdateMembershipLegacyCmd struct {
-	TeamId   int64  `required:"" name:"team_id"`
-	Username string `required:"" name:"username"`
+	TeamId   int64  `name:"team_id" required:"true"`
+	Username string `name:"username" required:"true"`
 	Role     string `name:"role"`
 	internal.BaseCmd
 }
@@ -123,10 +121,10 @@ func (c *TeamsAddOrUpdateMembershipLegacyCmd) Run(isValueSetMap map[string]bool)
 }
 
 type TeamsAddOrUpdateProjectInOrgCmd struct {
-	Inertia    bool   `required:"" name:"inertia-preview"`
-	Org        string `required:"" name:"org"`
-	TeamSlug   string `required:"" name:"team_slug"`
-	ProjectId  int64  `required:"" name:"project_id"`
+	Inertia    bool   `name:"inertia-preview" required:"true"`
+	Org        string `name:"org" required:"true"`
+	TeamSlug   string `name:"team_slug" required:"true"`
+	ProjectId  int64  `name:"project_id" required:"true"`
 	Permission string `name:"permission"`
 	internal.BaseCmd
 }
@@ -143,9 +141,9 @@ func (c *TeamsAddOrUpdateProjectInOrgCmd) Run(isValueSetMap map[string]bool) err
 }
 
 type TeamsAddOrUpdateProjectLegacyCmd struct {
-	Inertia    bool   `required:"" name:"inertia-preview"`
-	TeamId     int64  `required:"" name:"team_id"`
-	ProjectId  int64  `required:"" name:"project_id"`
+	Inertia    bool   `name:"inertia-preview" required:"true"`
+	TeamId     int64  `name:"team_id" required:"true"`
+	ProjectId  int64  `name:"project_id" required:"true"`
 	Permission string `name:"permission"`
 	internal.BaseCmd
 }
@@ -161,9 +159,9 @@ func (c *TeamsAddOrUpdateProjectLegacyCmd) Run(isValueSetMap map[string]bool) er
 }
 
 type TeamsAddOrUpdateRepoInOrgCmd struct {
-	Org        string `required:"" name:"org"`
-	TeamSlug   string `required:"" name:"team_slug"`
-	Repo       string `required:"" name:"repo"`
+	Org        string `name:"org" required:"true"`
+	TeamSlug   string `name:"team_slug" required:"true"`
+	Repo       string `name:"repo" required:"true"`
 	Permission string `name:"permission"`
 	internal.BaseCmd
 }
@@ -179,8 +177,8 @@ func (c *TeamsAddOrUpdateRepoInOrgCmd) Run(isValueSetMap map[string]bool) error 
 }
 
 type TeamsAddOrUpdateRepoLegacyCmd struct {
-	TeamId     int64  `required:"" name:"team_id"`
-	Repo       string `required:"" name:"repo"`
+	TeamId     int64  `name:"team_id" required:"true"`
+	Repo       string `name:"repo" required:"true"`
 	Permission string `name:"permission"`
 	internal.BaseCmd
 }
@@ -195,9 +193,9 @@ func (c *TeamsAddOrUpdateRepoLegacyCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type TeamsCheckManagesRepoInOrgCmd struct {
-	Org      string `required:"" name:"org"`
-	TeamSlug string `required:"" name:"team_slug"`
-	Repo     string `required:"" name:"repo"`
+	Org      string `name:"org" required:"true"`
+	TeamSlug string `name:"team_slug" required:"true"`
+	Repo     string `name:"repo" required:"true"`
 	internal.BaseCmd
 }
 
@@ -211,8 +209,8 @@ func (c *TeamsCheckManagesRepoInOrgCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type TeamsCheckManagesRepoLegacyCmd struct {
-	TeamId int64  `required:"" name:"team_id"`
-	Repo   string `required:"" name:"repo"`
+	TeamId int64  `name:"team_id" required:"true"`
+	Repo   string `name:"repo" required:"true"`
 	internal.BaseCmd
 }
 
@@ -225,14 +223,14 @@ func (c *TeamsCheckManagesRepoLegacyCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type TeamsCreateCmd struct {
-	Org          string   `required:"" name:"org"`
-	Name         string   `required:"" name:"name"`
+	Org          string   `name:"org" required:"true"`
 	Description  string   `name:"description"`
 	Maintainers  []string `name:"maintainers"`
 	ParentTeamId int64    `name:"parent_team_id"`
 	Permission   string   `name:"permission"`
 	Privacy      string   `name:"privacy"`
 	RepoNames    []string `name:"repo_names"`
+	Name         string   `name:"name" required:"true"`
 	internal.BaseCmd
 }
 
@@ -252,10 +250,10 @@ func (c *TeamsCreateCmd) Run(isValueSetMap map[string]bool) error {
 
 type TeamsCreateDiscussionCommentInOrgCmd struct {
 	SquirrelGirl     bool   `name:"squirrel-girl-preview"`
-	Org              string `required:"" name:"org"`
-	TeamSlug         string `required:"" name:"team_slug"`
-	DiscussionNumber int64  `required:"" name:"discussion_number"`
-	Body             string `required:"" name:"body"`
+	Org              string `name:"org" required:"true"`
+	TeamSlug         string `name:"team_slug" required:"true"`
+	DiscussionNumber int64  `name:"discussion_number" required:"true"`
+	Body             string `name:"body" required:"true"`
 	internal.BaseCmd
 }
 
@@ -272,9 +270,9 @@ func (c *TeamsCreateDiscussionCommentInOrgCmd) Run(isValueSetMap map[string]bool
 
 type TeamsCreateDiscussionCommentLegacyCmd struct {
 	SquirrelGirl     bool   `name:"squirrel-girl-preview"`
-	TeamId           int64  `required:"" name:"team_id"`
-	DiscussionNumber int64  `required:"" name:"discussion_number"`
-	Body             string `required:"" name:"body"`
+	TeamId           int64  `name:"team_id" required:"true"`
+	DiscussionNumber int64  `name:"discussion_number" required:"true"`
+	Body             string `name:"body" required:"true"`
 	internal.BaseCmd
 }
 
@@ -290,11 +288,11 @@ func (c *TeamsCreateDiscussionCommentLegacyCmd) Run(isValueSetMap map[string]boo
 
 type TeamsCreateDiscussionInOrgCmd struct {
 	SquirrelGirl bool   `name:"squirrel-girl-preview"`
-	Org          string `required:"" name:"org"`
-	TeamSlug     string `required:"" name:"team_slug"`
-	Body         string `required:"" name:"body"`
-	Title        string `required:"" name:"title"`
+	Org          string `name:"org" required:"true"`
+	TeamSlug     string `name:"team_slug" required:"true"`
 	Private      bool   `name:"private"`
+	Body         string `name:"body" required:"true"`
+	Title        string `name:"title" required:"true"`
 	internal.BaseCmd
 }
 
@@ -312,10 +310,10 @@ func (c *TeamsCreateDiscussionInOrgCmd) Run(isValueSetMap map[string]bool) error
 
 type TeamsCreateDiscussionLegacyCmd struct {
 	SquirrelGirl bool   `name:"squirrel-girl-preview"`
-	TeamId       int64  `required:"" name:"team_id"`
-	Body         string `required:"" name:"body"`
-	Title        string `required:"" name:"title"`
+	TeamId       int64  `name:"team_id" required:"true"`
 	Private      bool   `name:"private"`
+	Body         string `name:"body" required:"true"`
+	Title        string `name:"title" required:"true"`
 	internal.BaseCmd
 }
 
@@ -331,9 +329,9 @@ func (c *TeamsCreateDiscussionLegacyCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type TeamsCreateOrUpdateIdPGroupConnectionsInOrgCmd struct {
-	Org      string                `required:"" name:"org"`
-	TeamSlug string                `required:"" name:"team_slug"`
-	Groups   []internal.JSONObject `required:"" name:"groups"`
+	Org      string                `name:"org" required:"true"`
+	TeamSlug string                `name:"team_slug" required:"true"`
+	Groups   []internal.JSONObject `name:"groups" required:"true"`
 	internal.BaseCmd
 }
 
@@ -347,8 +345,8 @@ func (c *TeamsCreateOrUpdateIdPGroupConnectionsInOrgCmd) Run(isValueSetMap map[s
 }
 
 type TeamsCreateOrUpdateIdPGroupConnectionsLegacyCmd struct {
-	TeamId int64                 `required:"" name:"team_id"`
-	Groups []internal.JSONObject `required:"" name:"groups"`
+	TeamId int64                 `name:"team_id" required:"true"`
+	Groups []internal.JSONObject `name:"groups" required:"true"`
 	internal.BaseCmd
 }
 
@@ -361,10 +359,10 @@ func (c *TeamsCreateOrUpdateIdPGroupConnectionsLegacyCmd) Run(isValueSetMap map[
 }
 
 type TeamsDeleteDiscussionCommentInOrgCmd struct {
-	Org              string `required:"" name:"org"`
-	TeamSlug         string `required:"" name:"team_slug"`
-	DiscussionNumber int64  `required:"" name:"discussion_number"`
-	CommentNumber    int64  `required:"" name:"comment_number"`
+	Org              string `name:"org" required:"true"`
+	TeamSlug         string `name:"team_slug" required:"true"`
+	DiscussionNumber int64  `name:"discussion_number" required:"true"`
+	CommentNumber    int64  `name:"comment_number" required:"true"`
 	internal.BaseCmd
 }
 
@@ -379,9 +377,9 @@ func (c *TeamsDeleteDiscussionCommentInOrgCmd) Run(isValueSetMap map[string]bool
 }
 
 type TeamsDeleteDiscussionCommentLegacyCmd struct {
-	TeamId           int64 `required:"" name:"team_id"`
-	DiscussionNumber int64 `required:"" name:"discussion_number"`
-	CommentNumber    int64 `required:"" name:"comment_number"`
+	TeamId           int64 `name:"team_id" required:"true"`
+	DiscussionNumber int64 `name:"discussion_number" required:"true"`
+	CommentNumber    int64 `name:"comment_number" required:"true"`
 	internal.BaseCmd
 }
 
@@ -395,9 +393,9 @@ func (c *TeamsDeleteDiscussionCommentLegacyCmd) Run(isValueSetMap map[string]boo
 }
 
 type TeamsDeleteDiscussionInOrgCmd struct {
-	Org              string `required:"" name:"org"`
-	TeamSlug         string `required:"" name:"team_slug"`
-	DiscussionNumber int64  `required:"" name:"discussion_number"`
+	Org              string `name:"org" required:"true"`
+	TeamSlug         string `name:"team_slug" required:"true"`
+	DiscussionNumber int64  `name:"discussion_number" required:"true"`
 	internal.BaseCmd
 }
 
@@ -411,8 +409,8 @@ func (c *TeamsDeleteDiscussionInOrgCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type TeamsDeleteDiscussionLegacyCmd struct {
-	TeamId           int64 `required:"" name:"team_id"`
-	DiscussionNumber int64 `required:"" name:"discussion_number"`
+	TeamId           int64 `name:"team_id" required:"true"`
+	DiscussionNumber int64 `name:"discussion_number" required:"true"`
 	internal.BaseCmd
 }
 
@@ -425,8 +423,8 @@ func (c *TeamsDeleteDiscussionLegacyCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type TeamsDeleteInOrgCmd struct {
-	Org      string `required:"" name:"org"`
-	TeamSlug string `required:"" name:"team_slug"`
+	Org      string `name:"org" required:"true"`
+	TeamSlug string `name:"team_slug" required:"true"`
 	internal.BaseCmd
 }
 
@@ -439,7 +437,7 @@ func (c *TeamsDeleteInOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsDeleteLegacyCmd struct {
-	TeamId int64 `required:"" name:"team_id"`
+	TeamId int64 `name:"team_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -451,8 +449,8 @@ func (c *TeamsDeleteLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsGetByNameCmd struct {
-	Org      string `required:"" name:"org"`
-	TeamSlug string `required:"" name:"team_slug"`
+	Org      string `name:"org" required:"true"`
+	TeamSlug string `name:"team_slug" required:"true"`
 	internal.BaseCmd
 }
 
@@ -466,10 +464,10 @@ func (c *TeamsGetByNameCmd) Run(isValueSetMap map[string]bool) error {
 
 type TeamsGetDiscussionCommentInOrgCmd struct {
 	SquirrelGirl     bool   `name:"squirrel-girl-preview"`
-	Org              string `required:"" name:"org"`
-	TeamSlug         string `required:"" name:"team_slug"`
-	DiscussionNumber int64  `required:"" name:"discussion_number"`
-	CommentNumber    int64  `required:"" name:"comment_number"`
+	Org              string `name:"org" required:"true"`
+	TeamSlug         string `name:"team_slug" required:"true"`
+	DiscussionNumber int64  `name:"discussion_number" required:"true"`
+	CommentNumber    int64  `name:"comment_number" required:"true"`
 	internal.BaseCmd
 }
 
@@ -486,9 +484,9 @@ func (c *TeamsGetDiscussionCommentInOrgCmd) Run(isValueSetMap map[string]bool) e
 
 type TeamsGetDiscussionCommentLegacyCmd struct {
 	SquirrelGirl     bool  `name:"squirrel-girl-preview"`
-	TeamId           int64 `required:"" name:"team_id"`
-	DiscussionNumber int64 `required:"" name:"discussion_number"`
-	CommentNumber    int64 `required:"" name:"comment_number"`
+	TeamId           int64 `name:"team_id" required:"true"`
+	DiscussionNumber int64 `name:"discussion_number" required:"true"`
+	CommentNumber    int64 `name:"comment_number" required:"true"`
 	internal.BaseCmd
 }
 
@@ -504,9 +502,9 @@ func (c *TeamsGetDiscussionCommentLegacyCmd) Run(isValueSetMap map[string]bool) 
 
 type TeamsGetDiscussionInOrgCmd struct {
 	SquirrelGirl     bool   `name:"squirrel-girl-preview"`
-	Org              string `required:"" name:"org"`
-	TeamSlug         string `required:"" name:"team_slug"`
-	DiscussionNumber int64  `required:"" name:"discussion_number"`
+	Org              string `name:"org" required:"true"`
+	TeamSlug         string `name:"team_slug" required:"true"`
+	DiscussionNumber int64  `name:"discussion_number" required:"true"`
 	internal.BaseCmd
 }
 
@@ -522,8 +520,8 @@ func (c *TeamsGetDiscussionInOrgCmd) Run(isValueSetMap map[string]bool) error {
 
 type TeamsGetDiscussionLegacyCmd struct {
 	SquirrelGirl     bool  `name:"squirrel-girl-preview"`
-	TeamId           int64 `required:"" name:"team_id"`
-	DiscussionNumber int64 `required:"" name:"discussion_number"`
+	TeamId           int64 `name:"team_id" required:"true"`
+	DiscussionNumber int64 `name:"discussion_number" required:"true"`
 	internal.BaseCmd
 }
 
@@ -537,7 +535,7 @@ func (c *TeamsGetDiscussionLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsGetLegacyCmd struct {
-	TeamId int64 `required:"" name:"team_id"`
+	TeamId int64 `name:"team_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -549,8 +547,8 @@ func (c *TeamsGetLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsGetMemberLegacyCmd struct {
-	TeamId   int64  `required:"" name:"team_id"`
-	Username string `required:"" name:"username"`
+	TeamId   int64  `name:"team_id" required:"true"`
+	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 
@@ -563,9 +561,9 @@ func (c *TeamsGetMemberLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsGetMembershipInOrgCmd struct {
-	Org      string `required:"" name:"org"`
-	TeamSlug string `required:"" name:"team_slug"`
-	Username string `required:"" name:"username"`
+	Org      string `name:"org" required:"true"`
+	TeamSlug string `name:"team_slug" required:"true"`
+	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 
@@ -579,8 +577,8 @@ func (c *TeamsGetMembershipInOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsGetMembershipLegacyCmd struct {
-	TeamId   int64  `required:"" name:"team_id"`
-	Username string `required:"" name:"username"`
+	TeamId   int64  `name:"team_id" required:"true"`
+	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 
@@ -593,8 +591,8 @@ func (c *TeamsGetMembershipLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsListChildInOrgCmd struct {
-	Org      string `required:"" name:"org"`
-	TeamSlug string `required:"" name:"team_slug"`
+	Org      string `name:"org" required:"true"`
+	TeamSlug string `name:"team_slug" required:"true"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
 	internal.BaseCmd
@@ -611,7 +609,7 @@ func (c *TeamsListChildInOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsListChildLegacyCmd struct {
-	TeamId  int64 `required:"" name:"team_id"`
+	TeamId  int64 `name:"team_id" required:"true"`
 	Page    int64 `name:"page"`
 	PerPage int64 `name:"per_page"`
 	internal.BaseCmd
@@ -627,7 +625,7 @@ func (c *TeamsListChildLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsListCmd struct {
-	Org     string `required:"" name:"org"`
+	Org     string `name:"org" required:"true"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	internal.BaseCmd
@@ -644,9 +642,9 @@ func (c *TeamsListCmd) Run(isValueSetMap map[string]bool) error {
 
 type TeamsListDiscussionCommentsInOrgCmd struct {
 	SquirrelGirl     bool   `name:"squirrel-girl-preview"`
-	Org              string `required:"" name:"org"`
-	TeamSlug         string `required:"" name:"team_slug"`
-	DiscussionNumber int64  `required:"" name:"discussion_number"`
+	Org              string `name:"org" required:"true"`
+	TeamSlug         string `name:"team_slug" required:"true"`
+	DiscussionNumber int64  `name:"discussion_number" required:"true"`
 	Direction        string `name:"direction"`
 	Page             int64  `name:"page"`
 	PerPage          int64  `name:"per_page"`
@@ -668,8 +666,8 @@ func (c *TeamsListDiscussionCommentsInOrgCmd) Run(isValueSetMap map[string]bool)
 
 type TeamsListDiscussionCommentsLegacyCmd struct {
 	SquirrelGirl     bool   `name:"squirrel-girl-preview"`
-	TeamId           int64  `required:"" name:"team_id"`
-	DiscussionNumber int64  `required:"" name:"discussion_number"`
+	TeamId           int64  `name:"team_id" required:"true"`
+	DiscussionNumber int64  `name:"discussion_number" required:"true"`
 	Direction        string `name:"direction"`
 	Page             int64  `name:"page"`
 	PerPage          int64  `name:"per_page"`
@@ -690,8 +688,8 @@ func (c *TeamsListDiscussionCommentsLegacyCmd) Run(isValueSetMap map[string]bool
 
 type TeamsListDiscussionsInOrgCmd struct {
 	SquirrelGirl bool   `name:"squirrel-girl-preview"`
-	Org          string `required:"" name:"org"`
-	TeamSlug     string `required:"" name:"team_slug"`
+	Org          string `name:"org" required:"true"`
+	TeamSlug     string `name:"team_slug" required:"true"`
 	Direction    string `name:"direction"`
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
@@ -712,7 +710,7 @@ func (c *TeamsListDiscussionsInOrgCmd) Run(isValueSetMap map[string]bool) error 
 
 type TeamsListDiscussionsLegacyCmd struct {
 	SquirrelGirl bool   `name:"squirrel-girl-preview"`
-	TeamId       int64  `required:"" name:"team_id"`
+	TeamId       int64  `name:"team_id" required:"true"`
 	Direction    string `name:"direction"`
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
@@ -745,7 +743,7 @@ func (c *TeamsListForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) er
 }
 
 type TeamsListIdPGroupsForLegacyCmd struct {
-	TeamId int64 `required:"" name:"team_id"`
+	TeamId int64 `name:"team_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -757,7 +755,7 @@ func (c *TeamsListIdPGroupsForLegacyCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type TeamsListIdPGroupsForOrgCmd struct {
-	Org     string `required:"" name:"org"`
+	Org     string `name:"org" required:"true"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	internal.BaseCmd
@@ -773,8 +771,8 @@ func (c *TeamsListIdPGroupsForOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsListIdPGroupsInOrgCmd struct {
-	Org      string `required:"" name:"org"`
-	TeamSlug string `required:"" name:"team_slug"`
+	Org      string `name:"org" required:"true"`
+	TeamSlug string `name:"team_slug" required:"true"`
 	internal.BaseCmd
 }
 
@@ -787,8 +785,8 @@ func (c *TeamsListIdPGroupsInOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsListMembersInOrgCmd struct {
-	Org      string `required:"" name:"org"`
-	TeamSlug string `required:"" name:"team_slug"`
+	Org      string `name:"org" required:"true"`
+	TeamSlug string `name:"team_slug" required:"true"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
 	Role     string `name:"role"`
@@ -807,7 +805,7 @@ func (c *TeamsListMembersInOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsListMembersLegacyCmd struct {
-	TeamId  int64  `required:"" name:"team_id"`
+	TeamId  int64  `name:"team_id" required:"true"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	Role    string `name:"role"`
@@ -825,8 +823,8 @@ func (c *TeamsListMembersLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsListPendingInvitationsInOrgCmd struct {
-	Org      string `required:"" name:"org"`
-	TeamSlug string `required:"" name:"team_slug"`
+	Org      string `name:"org" required:"true"`
+	TeamSlug string `name:"team_slug" required:"true"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
 	internal.BaseCmd
@@ -843,7 +841,7 @@ func (c *TeamsListPendingInvitationsInOrgCmd) Run(isValueSetMap map[string]bool)
 }
 
 type TeamsListPendingInvitationsLegacyCmd struct {
-	TeamId  int64 `required:"" name:"team_id"`
+	TeamId  int64 `name:"team_id" required:"true"`
 	Page    int64 `name:"page"`
 	PerPage int64 `name:"per_page"`
 	internal.BaseCmd
@@ -859,9 +857,9 @@ func (c *TeamsListPendingInvitationsLegacyCmd) Run(isValueSetMap map[string]bool
 }
 
 type TeamsListProjectsInOrgCmd struct {
-	Inertia  bool   `required:"" name:"inertia-preview"`
-	Org      string `required:"" name:"org"`
-	TeamSlug string `required:"" name:"team_slug"`
+	Inertia  bool   `name:"inertia-preview" required:"true"`
+	Org      string `name:"org" required:"true"`
+	TeamSlug string `name:"team_slug" required:"true"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
 	internal.BaseCmd
@@ -879,8 +877,8 @@ func (c *TeamsListProjectsInOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsListProjectsLegacyCmd struct {
-	Inertia bool  `required:"" name:"inertia-preview"`
-	TeamId  int64 `required:"" name:"team_id"`
+	Inertia bool  `name:"inertia-preview" required:"true"`
+	TeamId  int64 `name:"team_id" required:"true"`
 	Page    int64 `name:"page"`
 	PerPage int64 `name:"per_page"`
 	internal.BaseCmd
@@ -897,8 +895,8 @@ func (c *TeamsListProjectsLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsListReposInOrgCmd struct {
-	Org      string `required:"" name:"org"`
-	TeamSlug string `required:"" name:"team_slug"`
+	Org      string `name:"org" required:"true"`
+	TeamSlug string `name:"team_slug" required:"true"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
 	internal.BaseCmd
@@ -915,7 +913,7 @@ func (c *TeamsListReposInOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsListReposLegacyCmd struct {
-	TeamId  int64 `required:"" name:"team_id"`
+	TeamId  int64 `name:"team_id" required:"true"`
 	Page    int64 `name:"page"`
 	PerPage int64 `name:"per_page"`
 	internal.BaseCmd
@@ -931,8 +929,8 @@ func (c *TeamsListReposLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsRemoveMemberLegacyCmd struct {
-	TeamId   int64  `required:"" name:"team_id"`
-	Username string `required:"" name:"username"`
+	TeamId   int64  `name:"team_id" required:"true"`
+	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 
@@ -945,9 +943,9 @@ func (c *TeamsRemoveMemberLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsRemoveMembershipInOrgCmd struct {
-	Org      string `required:"" name:"org"`
-	TeamSlug string `required:"" name:"team_slug"`
-	Username string `required:"" name:"username"`
+	Org      string `name:"org" required:"true"`
+	TeamSlug string `name:"team_slug" required:"true"`
+	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 
@@ -961,8 +959,8 @@ func (c *TeamsRemoveMembershipInOrgCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type TeamsRemoveMembershipLegacyCmd struct {
-	TeamId   int64  `required:"" name:"team_id"`
-	Username string `required:"" name:"username"`
+	TeamId   int64  `name:"team_id" required:"true"`
+	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 
@@ -975,9 +973,9 @@ func (c *TeamsRemoveMembershipLegacyCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type TeamsRemoveProjectInOrgCmd struct {
-	Org       string `required:"" name:"org"`
-	TeamSlug  string `required:"" name:"team_slug"`
-	ProjectId int64  `required:"" name:"project_id"`
+	Org       string `name:"org" required:"true"`
+	TeamSlug  string `name:"team_slug" required:"true"`
+	ProjectId int64  `name:"project_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -991,8 +989,8 @@ func (c *TeamsRemoveProjectInOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsRemoveProjectLegacyCmd struct {
-	TeamId    int64 `required:"" name:"team_id"`
-	ProjectId int64 `required:"" name:"project_id"`
+	TeamId    int64 `name:"team_id" required:"true"`
+	ProjectId int64 `name:"project_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -1005,9 +1003,9 @@ func (c *TeamsRemoveProjectLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsRemoveRepoInOrgCmd struct {
-	Org      string `required:"" name:"org"`
-	TeamSlug string `required:"" name:"team_slug"`
-	Repo     string `required:"" name:"repo"`
+	Org      string `name:"org" required:"true"`
+	TeamSlug string `name:"team_slug" required:"true"`
+	Repo     string `name:"repo" required:"true"`
 	internal.BaseCmd
 }
 
@@ -1021,8 +1019,8 @@ func (c *TeamsRemoveRepoInOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsRemoveRepoLegacyCmd struct {
-	TeamId int64  `required:"" name:"team_id"`
-	Repo   string `required:"" name:"repo"`
+	TeamId int64  `name:"team_id" required:"true"`
+	Repo   string `name:"repo" required:"true"`
 	internal.BaseCmd
 }
 
@@ -1035,10 +1033,10 @@ func (c *TeamsRemoveRepoLegacyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsReviewProjectInOrgCmd struct {
-	Inertia   bool   `required:"" name:"inertia-preview"`
-	Org       string `required:"" name:"org"`
-	TeamSlug  string `required:"" name:"team_slug"`
-	ProjectId int64  `required:"" name:"project_id"`
+	Inertia   bool   `name:"inertia-preview" required:"true"`
+	Org       string `name:"org" required:"true"`
+	TeamSlug  string `name:"team_slug" required:"true"`
+	ProjectId int64  `name:"project_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -1053,9 +1051,9 @@ func (c *TeamsReviewProjectInOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsReviewProjectLegacyCmd struct {
-	Inertia   bool  `required:"" name:"inertia-preview"`
-	TeamId    int64 `required:"" name:"team_id"`
-	ProjectId int64 `required:"" name:"project_id"`
+	Inertia   bool  `name:"inertia-preview" required:"true"`
+	TeamId    int64 `name:"team_id" required:"true"`
+	ProjectId int64 `name:"project_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -1070,11 +1068,11 @@ func (c *TeamsReviewProjectLegacyCmd) Run(isValueSetMap map[string]bool) error {
 
 type TeamsUpdateDiscussionCommentInOrgCmd struct {
 	SquirrelGirl     bool   `name:"squirrel-girl-preview"`
-	Org              string `required:"" name:"org"`
-	TeamSlug         string `required:"" name:"team_slug"`
-	DiscussionNumber int64  `required:"" name:"discussion_number"`
-	CommentNumber    int64  `required:"" name:"comment_number"`
-	Body             string `required:"" name:"body"`
+	Org              string `name:"org" required:"true"`
+	TeamSlug         string `name:"team_slug" required:"true"`
+	DiscussionNumber int64  `name:"discussion_number" required:"true"`
+	CommentNumber    int64  `name:"comment_number" required:"true"`
+	Body             string `name:"body" required:"true"`
 	internal.BaseCmd
 }
 
@@ -1092,10 +1090,10 @@ func (c *TeamsUpdateDiscussionCommentInOrgCmd) Run(isValueSetMap map[string]bool
 
 type TeamsUpdateDiscussionCommentLegacyCmd struct {
 	SquirrelGirl     bool   `name:"squirrel-girl-preview"`
-	TeamId           int64  `required:"" name:"team_id"`
-	DiscussionNumber int64  `required:"" name:"discussion_number"`
-	CommentNumber    int64  `required:"" name:"comment_number"`
-	Body             string `required:"" name:"body"`
+	TeamId           int64  `name:"team_id" required:"true"`
+	DiscussionNumber int64  `name:"discussion_number" required:"true"`
+	CommentNumber    int64  `name:"comment_number" required:"true"`
+	Body             string `name:"body" required:"true"`
 	internal.BaseCmd
 }
 
@@ -1112,9 +1110,9 @@ func (c *TeamsUpdateDiscussionCommentLegacyCmd) Run(isValueSetMap map[string]boo
 
 type TeamsUpdateDiscussionInOrgCmd struct {
 	SquirrelGirl     bool   `name:"squirrel-girl-preview"`
-	Org              string `required:"" name:"org"`
-	TeamSlug         string `required:"" name:"team_slug"`
-	DiscussionNumber int64  `required:"" name:"discussion_number"`
+	Org              string `name:"org" required:"true"`
+	TeamSlug         string `name:"team_slug" required:"true"`
+	DiscussionNumber int64  `name:"discussion_number" required:"true"`
 	Body             string `name:"body"`
 	Title            string `name:"title"`
 	internal.BaseCmd
@@ -1134,8 +1132,8 @@ func (c *TeamsUpdateDiscussionInOrgCmd) Run(isValueSetMap map[string]bool) error
 
 type TeamsUpdateDiscussionLegacyCmd struct {
 	SquirrelGirl     bool   `name:"squirrel-girl-preview"`
-	TeamId           int64  `required:"" name:"team_id"`
-	DiscussionNumber int64  `required:"" name:"discussion_number"`
+	TeamId           int64  `name:"team_id" required:"true"`
+	DiscussionNumber int64  `name:"discussion_number" required:"true"`
 	Body             string `name:"body"`
 	Title            string `name:"title"`
 	internal.BaseCmd
@@ -1153,13 +1151,13 @@ func (c *TeamsUpdateDiscussionLegacyCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type TeamsUpdateInOrgCmd struct {
-	Org          string `required:"" name:"org"`
-	TeamSlug     string `required:"" name:"team_slug"`
-	Name         string `required:"" name:"name"`
+	Org          string `name:"org" required:"true"`
+	TeamSlug     string `name:"team_slug" required:"true"`
 	Description  string `name:"description"`
 	ParentTeamId int64  `name:"parent_team_id"`
 	Permission   string `name:"permission"`
 	Privacy      string `name:"privacy"`
+	Name         string `name:"name" required:"true"`
 	internal.BaseCmd
 }
 
@@ -1177,12 +1175,12 @@ func (c *TeamsUpdateInOrgCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type TeamsUpdateLegacyCmd struct {
-	TeamId       int64  `required:"" name:"team_id"`
-	Name         string `required:"" name:"name"`
+	TeamId       int64  `name:"team_id" required:"true"`
 	Description  string `name:"description"`
 	ParentTeamId int64  `name:"parent_team_id"`
 	Permission   string `name:"permission"`
 	Privacy      string `name:"privacy"`
+	Name         string `name:"name" required:"true"`
 	internal.BaseCmd
 }
 

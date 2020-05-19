@@ -2,9 +2,7 @@
 
 package generated
 
-import (
-	"github.com/octo-cli/octo-cli/internal"
-)
+import internal "github.com/octo-cli/octo-cli/internal"
 
 type UsersCmd struct {
 	AddEmails                         UsersAddEmailsCmd                         `cmd:""`
@@ -42,7 +40,7 @@ type UsersCmd struct {
 }
 
 type UsersAddEmailsCmd struct {
-	Emails []string `required:"" name:"emails"`
+	Emails []string `name:"emails" required:"true"`
 	internal.BaseCmd
 }
 
@@ -54,7 +52,7 @@ func (c *UsersAddEmailsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersBlockCmd struct {
-	Username string `required:"" name:"username"`
+	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 
@@ -66,7 +64,7 @@ func (c *UsersBlockCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersCheckBlockedCmd struct {
-	Username string `required:"" name:"username"`
+	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 
@@ -78,7 +76,7 @@ func (c *UsersCheckBlockedCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersCheckFollowingCmd struct {
-	Username string `required:"" name:"username"`
+	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 
@@ -90,8 +88,8 @@ func (c *UsersCheckFollowingCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersCheckFollowingForUserCmd struct {
-	Username   string `required:"" name:"username"`
-	TargetUser string `required:"" name:"target_user"`
+	Username   string `name:"username" required:"true"`
+	TargetUser string `name:"target_user" required:"true"`
 	internal.BaseCmd
 }
 
@@ -130,7 +128,7 @@ func (c *UsersCreatePublicKeyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersDeleteEmailsCmd struct {
-	Emails []string `required:"" name:"emails"`
+	Emails []string `name:"emails" required:"true"`
 	internal.BaseCmd
 }
 
@@ -142,7 +140,7 @@ func (c *UsersDeleteEmailsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersDeleteGpgKeyCmd struct {
-	GpgKeyId int64 `required:"" name:"gpg_key_id"`
+	GpgKeyId int64 `name:"gpg_key_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -154,7 +152,7 @@ func (c *UsersDeleteGpgKeyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersDeletePublicKeyCmd struct {
-	KeyId int64 `required:"" name:"key_id"`
+	KeyId int64 `name:"key_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -166,7 +164,7 @@ func (c *UsersDeletePublicKeyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersFollowCmd struct {
-	Username string `required:"" name:"username"`
+	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 
@@ -188,7 +186,7 @@ func (c *UsersGetAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersGetByUsernameCmd struct {
-	Username string `required:"" name:"username"`
+	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 
@@ -200,7 +198,7 @@ func (c *UsersGetByUsernameCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersGetContextForUserCmd struct {
-	Username    string `required:"" name:"username"`
+	Username    string `name:"username" required:"true"`
 	SubjectId   string `name:"subject_id"`
 	SubjectType string `name:"subject_type"`
 	internal.BaseCmd
@@ -216,7 +214,7 @@ func (c *UsersGetContextForUserCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersGetGpgKeyCmd struct {
-	GpgKeyId int64 `required:"" name:"gpg_key_id"`
+	GpgKeyId int64 `name:"gpg_key_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -228,7 +226,7 @@ func (c *UsersGetGpgKeyCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersGetPublicKeyCmd struct {
-	KeyId int64 `required:"" name:"key_id"`
+	KeyId int64 `name:"key_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -304,7 +302,7 @@ func (c *UsersListFollowersForAuthenticatedUserCmd) Run(isValueSetMap map[string
 }
 
 type UsersListFollowersForUserCmd struct {
-	Username string `required:"" name:"username"`
+	Username string `name:"username" required:"true"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
 	internal.BaseCmd
@@ -320,7 +318,7 @@ func (c *UsersListFollowersForUserCmd) Run(isValueSetMap map[string]bool) error 
 }
 
 type UsersListFollowingForUserCmd struct {
-	Username string `required:"" name:"username"`
+	Username string `name:"username" required:"true"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
 	internal.BaseCmd
@@ -350,7 +348,7 @@ func (c *UsersListGpgKeysCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersListGpgKeysForUserCmd struct {
-	Username string `required:"" name:"username"`
+	Username string `name:"username" required:"true"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
 	internal.BaseCmd
@@ -394,7 +392,7 @@ func (c *UsersListPublicKeysCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersListPublicKeysForUserCmd struct {
-	Username string `required:"" name:"username"`
+	Username string `name:"username" required:"true"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
 	internal.BaseCmd
@@ -410,8 +408,8 @@ func (c *UsersListPublicKeysForUserCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type UsersTogglePrimaryEmailVisibilityCmd struct {
-	Email      string `required:"" name:"email"`
-	Visibility string `required:"" name:"visibility"`
+	Email      string `name:"email" required:"true"`
+	Visibility string `name:"visibility" required:"true"`
 	internal.BaseCmd
 }
 
@@ -424,7 +422,7 @@ func (c *UsersTogglePrimaryEmailVisibilityCmd) Run(isValueSetMap map[string]bool
 }
 
 type UsersUnblockCmd struct {
-	Username string `required:"" name:"username"`
+	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 
@@ -436,7 +434,7 @@ func (c *UsersUnblockCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersUnfollowCmd struct {
-	Username string `required:"" name:"username"`
+	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 

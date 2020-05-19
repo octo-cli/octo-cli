@@ -2,9 +2,7 @@
 
 package generated
 
-import (
-	"github.com/octo-cli/octo-cli/internal"
-)
+import internal "github.com/octo-cli/octo-cli/internal"
 
 type GistsCmd struct {
 	CheckIsStarred GistsCheckIsStarredCmd `cmd:""`
@@ -30,7 +28,7 @@ type GistsCmd struct {
 }
 
 type GistsCheckIsStarredCmd struct {
-	GistId string `required:"" name:"gist_id"`
+	GistId string `name:"gist_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -42,9 +40,9 @@ func (c *GistsCheckIsStarredCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsCreateCmd struct {
-	Description  string `name:"description"`
-	FilesContent string `name:"files.content"`
-	Public       bool   `name:"public"`
+	Description string              `name:"description"`
+	Public      bool                `name:"public"`
+	Files       internal.JSONObject `name:"files" required:"true"`
 	internal.BaseCmd
 }
 
@@ -52,14 +50,14 @@ func (c *GistsCreateCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/gists")
 	c.UpdateBody("description", c.Description)
-	c.UpdateBody("files.content", c.FilesContent)
+	c.UpdateBody("files", c.Files)
 	c.UpdateBody("public", c.Public)
 	return c.DoRequest("POST")
 }
 
 type GistsCreateCommentCmd struct {
-	GistId string `required:"" name:"gist_id"`
-	Body   string `required:"" name:"body"`
+	GistId string `name:"gist_id" required:"true"`
+	Body   string `name:"body" required:"true"`
 	internal.BaseCmd
 }
 
@@ -72,7 +70,7 @@ func (c *GistsCreateCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsDeleteCmd struct {
-	GistId string `required:"" name:"gist_id"`
+	GistId string `name:"gist_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -84,8 +82,8 @@ func (c *GistsDeleteCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsDeleteCommentCmd struct {
-	GistId    string `required:"" name:"gist_id"`
-	CommentId int64  `required:"" name:"comment_id"`
+	GistId    string `name:"gist_id" required:"true"`
+	CommentId int64  `name:"comment_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -98,7 +96,7 @@ func (c *GistsDeleteCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsForkCmd struct {
-	GistId string `required:"" name:"gist_id"`
+	GistId string `name:"gist_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -110,7 +108,7 @@ func (c *GistsForkCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsGetCmd struct {
-	GistId string `required:"" name:"gist_id"`
+	GistId string `name:"gist_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -122,8 +120,8 @@ func (c *GistsGetCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsGetCommentCmd struct {
-	GistId    string `required:"" name:"gist_id"`
-	CommentId int64  `required:"" name:"comment_id"`
+	GistId    string `name:"gist_id" required:"true"`
+	CommentId int64  `name:"comment_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -136,8 +134,8 @@ func (c *GistsGetCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsGetRevisionCmd struct {
-	GistId string `required:"" name:"gist_id"`
-	Sha    string `required:"" name:"sha"`
+	GistId string `name:"gist_id" required:"true"`
+	Sha    string `name:"sha" required:"true"`
 	internal.BaseCmd
 }
 
@@ -166,7 +164,7 @@ func (c *GistsListCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsListCommentsCmd struct {
-	GistId  string `required:"" name:"gist_id"`
+	GistId  string `name:"gist_id" required:"true"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	internal.BaseCmd
@@ -182,7 +180,7 @@ func (c *GistsListCommentsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsListCommitsCmd struct {
-	GistId  string `required:"" name:"gist_id"`
+	GistId  string `name:"gist_id" required:"true"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	internal.BaseCmd
@@ -198,7 +196,7 @@ func (c *GistsListCommitsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsListForUserCmd struct {
-	Username string `required:"" name:"username"`
+	Username string `name:"username" required:"true"`
 	Page     int64  `name:"page"`
 	PerPage  int64  `name:"per_page"`
 	Since    string `name:"since"`
@@ -216,7 +214,7 @@ func (c *GistsListForUserCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsListForksCmd struct {
-	GistId  string `required:"" name:"gist_id"`
+	GistId  string `name:"gist_id" required:"true"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	internal.BaseCmd
@@ -264,7 +262,7 @@ func (c *GistsListStarredCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsStarCmd struct {
-	GistId string `required:"" name:"gist_id"`
+	GistId string `name:"gist_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -276,7 +274,7 @@ func (c *GistsStarCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsUnstarCmd struct {
-	GistId string `required:"" name:"gist_id"`
+	GistId string `name:"gist_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -288,10 +286,9 @@ func (c *GistsUnstarCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GistsUpdateCmd struct {
-	GistId        string `required:"" name:"gist_id"`
-	Description   string `name:"description"`
-	FilesContent  string `name:"files.content"`
-	FilesFilename string `name:"files.filename"`
+	GistId      string              `name:"gist_id" required:"true"`
+	Description string              `name:"description"`
+	Files       internal.JSONObject `name:"files"`
 	internal.BaseCmd
 }
 
@@ -300,15 +297,14 @@ func (c *GistsUpdateCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetURLPath("/gists/{gist_id}")
 	c.UpdateURLPath("gist_id", c.GistId)
 	c.UpdateBody("description", c.Description)
-	c.UpdateBody("files.content", c.FilesContent)
-	c.UpdateBody("files.filename", c.FilesFilename)
+	c.UpdateBody("files", c.Files)
 	return c.DoRequest("PATCH")
 }
 
 type GistsUpdateCommentCmd struct {
-	GistId    string `required:"" name:"gist_id"`
-	CommentId int64  `required:"" name:"comment_id"`
-	Body      string `required:"" name:"body"`
+	GistId    string `name:"gist_id" required:"true"`
+	CommentId int64  `name:"comment_id" required:"true"`
+	Body      string `name:"body" required:"true"`
 	internal.BaseCmd
 }
 

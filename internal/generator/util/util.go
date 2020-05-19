@@ -54,3 +54,14 @@ func SchemaParamType(schema *model.ParamSchema) string {
 	}
 	return schemaParamTypes[schema.Type]
 }
+
+//FieldTags returns the tags for a command field
+func FieldTags(name string, required bool) map[string]string {
+	mp := map[string]string{
+		"name": name,
+	}
+	if required {
+		mp["required"] = "true"
+	}
+	return mp
+}

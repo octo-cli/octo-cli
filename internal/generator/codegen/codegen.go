@@ -1,68 +1,29 @@
 package codegen
 
 import (
-	"bytes"
-	"go/format"
 	"path/filepath"
 	"sort"
-	"text/template"
+	"strings"
 
-	"github.com/fatih/structtag"
+	"github.com/dave/jennifer/jen"
 	"github.com/octo-cli/octo-cli/internal/generator/util"
 	"github.com/spf13/afero"
 )
 
-var tmpl = template.Must(template.New("").Parse(tmplFileTmpl))
-
-func init() {
-	template.Must(tmpl.New("RunMethodParam").Parse(tmplRunMethodParam))
-	template.Must(tmpl.New("RunMethod").Parse(tmplRunMethod))
-	template.Must(tmpl.New("StructType").Parse(tmplStructType))
-	template.Must(tmpl.New("SvcTmpl").Parse(tmplSvcTmpl))
-	template.Must(tmpl.New("CmdHelps").Parse(tmplCmdHelps))
-	template.Must(tmpl.New("FlagHelps").Parse(tmplFlagHelps))
-}
-
-type CodeBlock struct {
-	Code    string
-	Imports []string
-}
-
-type RunMethodParam struct {
-	Name         string
-	ValueField   string
-	UpdateMethod string
-	Import       string
-}
-
-// language=GoTemplate
-const tmplRunMethodParam = `
-{{.UpdateMethod}}("{{.Name}}", c.{{.ValueField}})`
-
-type RunMethod struct {
-	ReceiverName string
-	Method       string
-	URLPath      string
-	CodeBlocks   []CodeBlock
-}
-
-func (r *RunMethod) imports() []string {
-	var imps []string
-	for _, block := range r.CodeBlocks {
-		imps = append(imps, block.Imports...)
+func newRunMethodAdder(name, updateMethod string) codeGroupAdder {
+	return func(group *jen.Group) {
+		group.Id(updateMethod).Params(jen.Lit(name), jen.Id("c").Dot(util.ToArgName(name)))
 	}
-	return uniqueSortedStrings(imps)
 }
 
-// language=GoTemplate
-const tmplRunMethod = `
-func (c *{{.ReceiverName}}) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("{{.URLPath}}"){{range .CodeBlocks}}{{.Code}}{{end}}
-	return c.DoRequest("{{.Method}}")
-}
+type codeGroupAdder func(group *jen.Group)
 
-`
+type runMethod struct {
+	receiverName    string
+	method          string
+	urlPath         string
+	codeGroupAdders []codeGroupAdder
+}
 
 type paramLocation int
 
@@ -76,158 +37,161 @@ const (
 	locPreview
 )
 
-// StructField is one field in a StructTmplHelper
-type StructField struct {
-	Name          string
-	Type          string
-	Tags          *structtag.Tags
-	Import        string
-	ParamLocation paramLocation
-	ParamOrder    int
+type structField struct {
+	name          string
+	fieldType     string
+	tags          map[string]string
+	paramLocation paramLocation
+	paramOrder    int
 }
 
-func (s StructField) less(o StructField) bool {
-	if s.ParamLocation < o.ParamLocation {
-		return true
-	}
-	if s.ParamLocation > o.ParamLocation {
+func (s structField) required() bool {
+	if s.tags == nil {
 		return false
 	}
-	if s.ParamOrder < o.ParamOrder {
+	_, ok := s.tags["required"]
+	return ok
+}
+
+func (s structField) less(o structField) bool {
+	if s.paramLocation < o.paramLocation {
 		return true
 	}
-	if s.ParamOrder > o.ParamOrder {
+	if s.paramLocation > o.paramLocation {
 		return false
 	}
-	if util.TagsHasKey(s.Tags, "required") != util.TagsHasKey(o.Tags, "required") {
-		return util.TagsHasKey(s.Tags, "required")
+	if s.paramOrder < o.paramOrder {
+		return true
 	}
-	return s.Name < o.Name
+	if s.paramOrder > o.paramOrder {
+		return false
+	}
+	if s.required() != o.required() {
+		return o.required()
+	}
+	return s.name < o.name
 }
 
-type StructTmplHelper struct {
-	Name   string
-	Fields []StructField
+type structTmplHelper struct {
+	name   string
+	fields []structField
 }
 
-func (s *StructTmplHelper) imports() []string {
-	imps := make([]string, 0, len(s.Fields))
-	for _, field := range s.Fields {
-		if field.Import == "" {
-			continue
+func (s *structTmplHelper) stmt(group *jen.Group) {
+	group.Line().Type().Id(s.name).StructFunc(func(group *jen.Group) {
+		for _, field := range s.fields {
+
+			if strings.HasPrefix(field.fieldType, "internal.") {
+				fieldType := strings.TrimPrefix(field.fieldType, "internal.")
+				group.Id(field.name).Qual("github.com/octo-cli/octo-cli/internal", fieldType).Tag(field.tags)
+				continue
+			}
+			group.Id(field.name).Id(field.fieldType).Tag(field.tags)
 		}
-		imps = append(imps, field.Import)
+	})
+}
+
+type cmdStructAndMethod struct {
+	cmdStruct *structTmplHelper
+	runMethod *runMethod
+}
+
+type svcTmpl struct {
+	svcStruct           *structTmplHelper
+	cmdStructAndMethods []cmdStructAndMethod
+}
+
+func (s svcTmpl) stmt(stmt *jen.Group) {
+	if s.svcStruct.name != "" {
+		s.svcStruct.stmt(stmt)
 	}
-	return uniqueSortedStrings(imps)
-}
-
-// language=GoTemplate
-const tmplStructType = `type {{.Name}} struct { {{range .Fields}}
-	{{.Name}} {{.Type}} {{if .Tags}}{{printf "%#q" .Tags}} {{end}}{{end}}
-}`
-
-type CmdStructAndMethod struct {
-	CmdStruct StructTmplHelper
-	RunMethod RunMethod
-}
-
-func (s *CmdStructAndMethod) imports() []string {
-	imps := append(s.CmdStruct.imports(), s.RunMethod.imports()...)
-	return uniqueSortedStrings(imps)
-}
-
-type SvcTmpl struct {
-	SvcStruct           StructTmplHelper
-	CmdStructAndMethods []CmdStructAndMethod
-}
-
-func (s *SvcTmpl) imports() []string {
-	result := s.SvcStruct.imports()
-	for _, csm := range s.CmdStructAndMethods {
-		result = append(result, csm.imports()...)
+	for _, csm := range s.cmdStructAndMethods {
+		if csm.cmdStruct != nil {
+			csm.cmdStruct.stmt(stmt)
+		}
+		if csm.runMethod != nil {
+			r := csm.runMethod
+			stmt.Line().Func().Params(jen.Id("c").Op("*").
+				Id(r.receiverName)).
+				Id("Run(isValueSetMap map[string]bool) error").
+				BlockFunc(func(group *jen.Group) {
+					group.Id("c.SetIsValueSetMap(isValueSetMap)")
+					group.Id("c.SetURLPath").Params(jen.Lit(r.urlPath))
+					for _, cga := range r.codeGroupAdders {
+						if cga == nil {
+							continue
+						}
+						cga(group)
+					}
+					group.Return(jen.Id("c.DoRequest").Params(jen.Lit(r.method)))
+				})
+		}
 	}
-	return uniqueSortedStrings(result)
 }
 
-// language=GoTemplate
-const tmplSvcTmpl = `{{if .SvcStruct}}{{template "StructType" .SvcStruct}}{{end}}
-	{{range .CmdStructAndMethods}}
-	{{if .CmdStruct}}{{template "StructType" .CmdStruct}}{{end}}
-	{{if .RunMethod}}{{template "RunMethod" .RunMethod}}{{end}}
-	{{end}}
-`
-
-type FileTmpl struct {
-	CmdHelps       map[string]map[string]string
-	FlagHelps      map[string]map[string]map[string]string
-	PrimaryStructs []StructTmplHelper
-	SvcTmpls       []SvcTmpl
+type fileTmpl struct {
+	cmdHelps       map[string]map[string]string
+	flagHelps      map[string]map[string]map[string]string
+	primaryStructs []structTmplHelper
+	svcTmpls       []svcTmpl
 }
 
-func (f FileTmpl) Imports() []string {
-	var imports []string
-	for _, primaryStruct := range f.PrimaryStructs {
-		imports = append(imports, primaryStruct.imports()...)
+func stringMapDict(mp map[string]string) jen.Dict {
+	return jen.DictFunc(func(dict jen.Dict) {
+		for k, v := range mp {
+			dict[jen.Lit(k)] = jen.Lit(v)
+		}
+	})
+}
+
+func doubleStringMap(mp map[string]map[string]string) jen.Dict {
+	return jen.DictFunc(func(dict jen.Dict) {
+		for k, v := range mp {
+			dict[jen.Lit(k)] = jen.Values(stringMapDict(v))
+		}
+	})
+}
+
+func (f fileTmpl) addFlagHelps(file *jen.File) {
+	if len(f.flagHelps) == 0 {
+		return
 	}
-	for _, svcTmpl := range f.SvcTmpls {
-		imports = append(imports, svcTmpl.imports()...)
-	}
-	return uniqueSortedStrings(imports)
+	file.Var().Id("FlagHelps").Op("=").
+		Map(jen.String()).
+		Map(jen.String()).
+		Map(jen.String()).String().Values(jen.DictFunc(func(dict jen.Dict) {
+		for k, v := range f.flagHelps {
+			dict[jen.Lit(k)] = jen.Values(doubleStringMap(v))
+		}
+	}))
 }
 
-// language=GoTemplate
-const tmplCmdHelps = `
-{{if .}}
-  var CmdHelps = map[string]map[string]string{
-  {{range $topCmd, $topCmdVals := .}}"{{$topCmd}}": {
-  {{range $cmd, $help := $topCmdVals}}"{{$cmd}}": {{printf "%q" $help}},
-  {{end}}
-  },
-  {{end}}
-  }
-{{end}}
-`
+func (f fileTmpl) addCmdHelps(file *jen.File) {
+	if len(f.cmdHelps) == 0 {
+		return
+	}
+	file.Var().Id("CmdHelps").Op("=").
+		Map(jen.String()).
+		Map(jen.String()).String().Values(
+		doubleStringMap(f.cmdHelps),
+	)
+}
 
-// language=GoTemplate
-const tmplFlagHelps = `
-{{if .}}
-  var FlagHelps = map[string]map[string]map[string]string{
-  {{range $topCmd, $topCmdVals := .}}"{{$topCmd}}": {
-  {{range $cmd, $flagHelps := $topCmdVals}}"{{$cmd}}": {
-  {{range $flag, $help := $flagHelps}}"{{$flag}}": {{printf "%q" $help}},
-  {{end}}
-  },
-  {{end}}
-  },
-  {{end}}
-  }
-{{end}}
-`
+func (f fileTmpl) jenFile() *jen.File {
+	file := jen.NewFile("generated")
+	file.HeaderComment("Code generated by octo-cli/generator; DO NOT EDIT.")
+	for _, primaryStruct := range f.primaryStructs {
+		primaryStruct.stmt(file.Group)
+	}
+	for _, svcTmpl := range f.svcTmpls {
+		svcTmpl.stmt(file.Group)
+	}
+	f.addCmdHelps(file)
+	f.addFlagHelps(file)
+	return file
+}
 
-// language=GoTemplate
-const tmplFileTmpl = `// Code generated by octo-cli/generator; DO NOT EDIT.
-
-package generated
-
-{{ $imports := .Imports }}{{if $imports}}
-import (
-{{range $imports}}{{printf "%q" .}}
-{{end}})
-{{end}}
-
-{{range .PrimaryStructs}}
-    {{template "StructType" .}}
-{{end}}
-
-{{range .SvcTmpls}}{{template "SvcTmpl" .}}{{end}}
-
-{{template "CmdHelps" .CmdHelps}}
-
-{{template "FlagHelps" .FlagHelps}}
-
-`
-
-func WriteFiles(files map[string]FileTmpl, outputPath string, fs afero.Fs) error {
+func writeFiles(files map[string]fileTmpl, outputPath string, fs afero.Fs) error {
 	for name, fileTmpl := range files {
 		err := writeGoFile(name, fileTmpl, outputPath, fs)
 		if err != nil {
@@ -237,8 +201,7 @@ func WriteFiles(files map[string]FileTmpl, outputPath string, fs afero.Fs) error
 	return nil
 }
 
-//writeGoFile executes the named template and does the equivalent of `go fmt` and `goimports` on the output
-func writeGoFile(filename string, fileTmpl FileTmpl, path string, fs afero.Fs) error {
+func writeGoFile(filename string, fileTmpl fileTmpl, path string, fs afero.Fs) error {
 	out, err := generateGoFile(fileTmpl)
 	if err != nil {
 		return err
@@ -247,30 +210,21 @@ func writeGoFile(filename string, fileTmpl FileTmpl, path string, fs afero.Fs) e
 	return afero.WriteFile(fs, fl, out, 0644)
 }
 
-func generateGoFile(fileTmpl FileTmpl) ([]byte, error) {
-	for _, svcTmpl := range fileTmpl.SvcTmpls {
+func generateGoFile(fileTmpl fileTmpl) ([]byte, error) {
+	for _, svcTmpl := range fileTmpl.svcTmpls {
 		tmplSorting(&svcTmpl)
 	}
-	var buf bytes.Buffer
-	err := tmpl.ExecuteTemplate(&buf, "", fileTmpl)
-	if err != nil {
-		return nil, err
-	}
-	out, err := format.Source(buf.Bytes())
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
+	return []byte(fileTmpl.jenFile().GoString()), nil
 }
 
-func sortCmdStructFields(fields []StructField) {
+func sortCmdStructFields(fields []structField) {
 	if len(fields) == 0 {
 		return
 	}
-	newFields := make([]StructField, 0, len(fields))
-	holdouts := make([]StructField, 0, len(fields))
+	newFields := make([]structField, 0, len(fields))
+	holdouts := make([]structField, 0, len(fields))
 	for _, field := range fields {
-		if field.Name == "" {
+		if field.name == "" {
 			holdouts = append(holdouts, field)
 			continue
 		}
@@ -280,33 +234,20 @@ func sortCmdStructFields(fields []StructField) {
 		return newFields[i].less(newFields[j])
 	})
 	sort.Slice(holdouts, func(i, j int) bool {
-		return holdouts[i].Type < holdouts[j].Type
+		return holdouts[i].fieldType < holdouts[j].fieldType
 	})
 	newFields = append(newFields, holdouts...)
 	copy(fields, newFields)
 }
 
-func tmplSorting(svcTmpl *SvcTmpl) {
-	sort.Slice(svcTmpl.SvcStruct.Fields, func(i, j int) bool {
-		return svcTmpl.SvcStruct.Fields[i].Name < svcTmpl.SvcStruct.Fields[j].Name
+func tmplSorting(svcTmpl *svcTmpl) {
+	sort.Slice(svcTmpl.svcStruct.fields, func(i, j int) bool {
+		return svcTmpl.svcStruct.fields[i].name < svcTmpl.svcStruct.fields[j].name
 	})
-	for _, csm := range svcTmpl.CmdStructAndMethods {
-		sortCmdStructFields(csm.CmdStruct.Fields)
+	for _, csm := range svcTmpl.cmdStructAndMethods {
+		sortCmdStructFields(csm.cmdStruct.fields)
 	}
-	sort.Slice(svcTmpl.CmdStructAndMethods, func(i, j int) bool {
-		return svcTmpl.CmdStructAndMethods[i].CmdStruct.Name < svcTmpl.CmdStructAndMethods[j].CmdStruct.Name
+	sort.Slice(svcTmpl.cmdStructAndMethods, func(i, j int) bool {
+		return svcTmpl.cmdStructAndMethods[i].cmdStruct.name < svcTmpl.cmdStructAndMethods[j].cmdStruct.name
 	})
-}
-
-func uniqueSortedStrings(strs []string) []string {
-	vals := make(map[string]bool, len(strs))
-	for _, str := range strs {
-		vals[str] = true
-	}
-	result := make([]string, 0, len(vals))
-	for val := range vals {
-		result = append(result, val)
-	}
-	sort.Strings(result)
-	return result
 }

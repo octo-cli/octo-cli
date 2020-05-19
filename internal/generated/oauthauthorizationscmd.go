@@ -2,9 +2,7 @@
 
 package generated
 
-import (
-	"github.com/octo-cli/octo-cli/internal"
-)
+import internal "github.com/octo-cli/octo-cli/internal"
 
 type OauthAuthorizationsCmd struct {
 	CreateAuthorization                          OauthAuthorizationsCreateAuthorizationCmd                          `cmd:""`
@@ -20,12 +18,12 @@ type OauthAuthorizationsCmd struct {
 }
 
 type OauthAuthorizationsCreateAuthorizationCmd struct {
-	Note         string   `required:"" name:"note"`
 	ClientId     string   `name:"client_id"`
 	ClientSecret string   `name:"client_secret"`
 	Fingerprint  string   `name:"fingerprint"`
 	NoteUrl      string   `name:"note_url"`
 	Scopes       []string `name:"scopes"`
+	Note         string   `name:"note" required:"true"`
 	internal.BaseCmd
 }
 
@@ -42,7 +40,7 @@ func (c *OauthAuthorizationsCreateAuthorizationCmd) Run(isValueSetMap map[string
 }
 
 type OauthAuthorizationsDeleteAuthorizationCmd struct {
-	AuthorizationId int64 `required:"" name:"authorization_id"`
+	AuthorizationId int64 `name:"authorization_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -54,7 +52,7 @@ func (c *OauthAuthorizationsDeleteAuthorizationCmd) Run(isValueSetMap map[string
 }
 
 type OauthAuthorizationsDeleteGrantCmd struct {
-	GrantId int64 `required:"" name:"grant_id"`
+	GrantId int64 `name:"grant_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -66,7 +64,7 @@ func (c *OauthAuthorizationsDeleteGrantCmd) Run(isValueSetMap map[string]bool) e
 }
 
 type OauthAuthorizationsGetAuthorizationCmd struct {
-	AuthorizationId int64 `required:"" name:"authorization_id"`
+	AuthorizationId int64 `name:"authorization_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -78,7 +76,7 @@ func (c *OauthAuthorizationsGetAuthorizationCmd) Run(isValueSetMap map[string]bo
 }
 
 type OauthAuthorizationsGetGrantCmd struct {
-	GrantId int64 `required:"" name:"grant_id"`
+	GrantId int64 `name:"grant_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -90,12 +88,12 @@ func (c *OauthAuthorizationsGetGrantCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type OauthAuthorizationsGetOrCreateAuthorizationForAppAndFingerprintCmd struct {
-	ClientId     string   `required:"" name:"client_id"`
-	Fingerprint  string   `required:"" name:"fingerprint"`
-	ClientSecret string   `required:"" name:"client_secret"`
+	ClientId     string   `name:"client_id" required:"true"`
+	Fingerprint  string   `name:"fingerprint" required:"true"`
 	Note         string   `name:"note"`
 	NoteUrl      string   `name:"note_url"`
 	Scopes       []string `name:"scopes"`
+	ClientSecret string   `name:"client_secret" required:"true"`
 	internal.BaseCmd
 }
 
@@ -112,12 +110,12 @@ func (c *OauthAuthorizationsGetOrCreateAuthorizationForAppAndFingerprintCmd) Run
 }
 
 type OauthAuthorizationsGetOrCreateAuthorizationForAppCmd struct {
-	ClientId     string   `required:"" name:"client_id"`
-	ClientSecret string   `required:"" name:"client_secret"`
+	ClientId     string   `name:"client_id" required:"true"`
 	Fingerprint  string   `name:"fingerprint"`
 	Note         string   `name:"note"`
 	NoteUrl      string   `name:"note_url"`
 	Scopes       []string `name:"scopes"`
+	ClientSecret string   `name:"client_secret" required:"true"`
 	internal.BaseCmd
 }
 
@@ -162,7 +160,7 @@ func (c *OauthAuthorizationsListGrantsCmd) Run(isValueSetMap map[string]bool) er
 }
 
 type OauthAuthorizationsUpdateAuthorizationCmd struct {
-	AuthorizationId int64    `required:"" name:"authorization_id"`
+	AuthorizationId int64    `name:"authorization_id" required:"true"`
 	AddScopes       []string `name:"add_scopes"`
 	Fingerprint     string   `name:"fingerprint"`
 	Note            string   `name:"note"`

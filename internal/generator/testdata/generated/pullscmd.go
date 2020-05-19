@@ -2,9 +2,7 @@
 
 package generated
 
-import (
-	"github.com/octo-cli/octo-cli/internal"
-)
+import internal "github.com/octo-cli/octo-cli/internal"
 
 type PullsCmd struct {
 	CheckIfMerged            PullsCheckIfMergedCmd            `cmd:""`
@@ -37,8 +35,8 @@ type PullsCmd struct {
 }
 
 type PullsCheckIfMergedCmd struct {
-	Repo       string `required:"" name:"repo"`
-	PullNumber int64  `required:"" name:"pull_number"`
+	Repo       string `name:"repo" required:"true"`
+	PullNumber int64  `name:"pull_number" required:"true"`
 	internal.BaseCmd
 }
 
@@ -52,13 +50,13 @@ func (c *PullsCheckIfMergedCmd) Run(isValueSetMap map[string]bool) error {
 
 type PullsCreateCmd struct {
 	SailorV             bool   `name:"sailor-v-preview"`
-	Repo                string `required:"" name:"repo"`
-	Base                string `required:"" name:"base"`
-	Head                string `required:"" name:"head"`
-	Title               string `required:"" name:"title"`
+	Repo                string `name:"repo" required:"true"`
 	Body                string `name:"body"`
 	Draft               bool   `name:"draft"`
 	MaintainerCanModify bool   `name:"maintainer_can_modify"`
+	Base                string `name:"base" required:"true"`
+	Head                string `name:"head" required:"true"`
+	Title               string `name:"title" required:"true"`
 	internal.BaseCmd
 }
 
@@ -78,16 +76,16 @@ func (c *PullsCreateCmd) Run(isValueSetMap map[string]bool) error {
 
 type PullsCreateCommentCmd struct {
 	ComfortFade bool   `name:"comfort-fade-preview"`
-	Repo        string `required:"" name:"repo"`
-	PullNumber  int64  `required:"" name:"pull_number"`
-	Body        string `required:"" name:"body"`
-	CommitId    string `required:"" name:"commit_id"`
-	Path        string `required:"" name:"path"`
+	Repo        string `name:"repo" required:"true"`
+	PullNumber  int64  `name:"pull_number" required:"true"`
 	Line        int64  `name:"line"`
 	Position    int64  `name:"position"`
 	Side        string `name:"side"`
 	StartLine   int64  `name:"start_line"`
 	StartSide   string `name:"start_side"`
+	Body        string `name:"body" required:"true"`
+	CommitId    string `name:"commit_id" required:"true"`
+	Path        string `name:"path" required:"true"`
 	internal.BaseCmd
 }
 
@@ -109,8 +107,8 @@ func (c *PullsCreateCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsCreateReviewCmd struct {
-	Repo       string                `required:"" name:"repo"`
-	PullNumber int64                 `required:"" name:"pull_number"`
+	Repo       string                `name:"repo" required:"true"`
+	PullNumber int64                 `name:"pull_number" required:"true"`
 	Body       string                `name:"body"`
 	Comments   []internal.JSONObject `name:"comments"`
 	CommitId   string                `name:"commit_id"`
@@ -131,10 +129,10 @@ func (c *PullsCreateReviewCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsCreateReviewCommentReplyCmd struct {
-	Repo       string `required:"" name:"repo"`
-	PullNumber int64  `required:"" name:"pull_number"`
-	CommentId  int64  `required:"" name:"comment_id"`
-	Body       string `required:"" name:"body"`
+	Repo       string `name:"repo" required:"true"`
+	PullNumber int64  `name:"pull_number" required:"true"`
+	CommentId  int64  `name:"comment_id" required:"true"`
+	Body       string `name:"body" required:"true"`
 	internal.BaseCmd
 }
 
@@ -149,8 +147,8 @@ func (c *PullsCreateReviewCommentReplyCmd) Run(isValueSetMap map[string]bool) er
 }
 
 type PullsCreateReviewRequestCmd struct {
-	Repo          string   `required:"" name:"repo"`
-	PullNumber    int64    `required:"" name:"pull_number"`
+	Repo          string   `name:"repo" required:"true"`
+	PullNumber    int64    `name:"pull_number" required:"true"`
 	Reviewers     []string `name:"reviewers"`
 	TeamReviewers []string `name:"team_reviewers"`
 	internal.BaseCmd
@@ -167,8 +165,8 @@ func (c *PullsCreateReviewRequestCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsDeleteCommentCmd struct {
-	Repo      string `required:"" name:"repo"`
-	CommentId int64  `required:"" name:"comment_id"`
+	Repo      string `name:"repo" required:"true"`
+	CommentId int64  `name:"comment_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -181,9 +179,9 @@ func (c *PullsDeleteCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsDeletePendingReviewCmd struct {
-	Repo       string `required:"" name:"repo"`
-	PullNumber int64  `required:"" name:"pull_number"`
-	ReviewId   int64  `required:"" name:"review_id"`
+	Repo       string `name:"repo" required:"true"`
+	PullNumber int64  `name:"pull_number" required:"true"`
+	ReviewId   int64  `name:"review_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -197,8 +195,8 @@ func (c *PullsDeletePendingReviewCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsDeleteReviewRequestCmd struct {
-	Repo          string   `required:"" name:"repo"`
-	PullNumber    int64    `required:"" name:"pull_number"`
+	Repo          string   `name:"repo" required:"true"`
+	PullNumber    int64    `name:"pull_number" required:"true"`
 	Reviewers     []string `name:"reviewers"`
 	TeamReviewers []string `name:"team_reviewers"`
 	internal.BaseCmd
@@ -215,10 +213,10 @@ func (c *PullsDeleteReviewRequestCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsDismissReviewCmd struct {
-	Repo       string `required:"" name:"repo"`
-	PullNumber int64  `required:"" name:"pull_number"`
-	ReviewId   int64  `required:"" name:"review_id"`
-	Message    string `required:"" name:"message"`
+	Repo       string `name:"repo" required:"true"`
+	PullNumber int64  `name:"pull_number" required:"true"`
+	ReviewId   int64  `name:"review_id" required:"true"`
+	Message    string `name:"message" required:"true"`
 	internal.BaseCmd
 }
 
@@ -234,8 +232,8 @@ func (c *PullsDismissReviewCmd) Run(isValueSetMap map[string]bool) error {
 
 type PullsGetCmd struct {
 	SailorV    bool   `name:"sailor-v-preview"`
-	Repo       string `required:"" name:"repo"`
-	PullNumber int64  `required:"" name:"pull_number"`
+	Repo       string `name:"repo" required:"true"`
+	PullNumber int64  `name:"pull_number" required:"true"`
 	internal.BaseCmd
 }
 
@@ -251,8 +249,8 @@ func (c *PullsGetCmd) Run(isValueSetMap map[string]bool) error {
 type PullsGetCommentCmd struct {
 	ComfortFade  bool   `name:"comfort-fade-preview"`
 	SquirrelGirl bool   `name:"squirrel-girl-preview"`
-	Repo         string `required:"" name:"repo"`
-	CommentId    int64  `required:"" name:"comment_id"`
+	Repo         string `name:"repo" required:"true"`
+	CommentId    int64  `name:"comment_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -267,9 +265,9 @@ func (c *PullsGetCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsGetCommentsForReviewCmd struct {
-	Repo       string `required:"" name:"repo"`
-	PullNumber int64  `required:"" name:"pull_number"`
-	ReviewId   int64  `required:"" name:"review_id"`
+	Repo       string `name:"repo" required:"true"`
+	PullNumber int64  `name:"pull_number" required:"true"`
+	ReviewId   int64  `name:"review_id" required:"true"`
 	Page       int64  `name:"page"`
 	PerPage    int64  `name:"per_page"`
 	internal.BaseCmd
@@ -287,9 +285,9 @@ func (c *PullsGetCommentsForReviewCmd) Run(isValueSetMap map[string]bool) error 
 }
 
 type PullsGetReviewCmd struct {
-	Repo       string `required:"" name:"repo"`
-	PullNumber int64  `required:"" name:"pull_number"`
-	ReviewId   int64  `required:"" name:"review_id"`
+	Repo       string `name:"repo" required:"true"`
+	PullNumber int64  `name:"pull_number" required:"true"`
+	ReviewId   int64  `name:"review_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -304,7 +302,7 @@ func (c *PullsGetReviewCmd) Run(isValueSetMap map[string]bool) error {
 
 type PullsListCmd struct {
 	SailorV   bool   `name:"sailor-v-preview"`
-	Repo      string `required:"" name:"repo"`
+	Repo      string `name:"repo" required:"true"`
 	Base      string `name:"base"`
 	Direction string `name:"direction"`
 	Head      string `name:"head"`
@@ -333,8 +331,8 @@ func (c *PullsListCmd) Run(isValueSetMap map[string]bool) error {
 type PullsListCommentsCmd struct {
 	ComfortFade  bool   `name:"comfort-fade-preview"`
 	SquirrelGirl bool   `name:"squirrel-girl-preview"`
-	Repo         string `required:"" name:"repo"`
-	PullNumber   int64  `required:"" name:"pull_number"`
+	Repo         string `name:"repo" required:"true"`
+	PullNumber   int64  `name:"pull_number" required:"true"`
 	Direction    string `name:"direction"`
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
@@ -361,7 +359,7 @@ func (c *PullsListCommentsCmd) Run(isValueSetMap map[string]bool) error {
 type PullsListCommentsForRepoCmd struct {
 	ComfortFade  bool   `name:"comfort-fade-preview"`
 	SquirrelGirl bool   `name:"squirrel-girl-preview"`
-	Repo         string `required:"" name:"repo"`
+	Repo         string `name:"repo" required:"true"`
 	Direction    string `name:"direction"`
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
@@ -385,8 +383,8 @@ func (c *PullsListCommentsForRepoCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsListCommitsCmd struct {
-	Repo       string `required:"" name:"repo"`
-	PullNumber int64  `required:"" name:"pull_number"`
+	Repo       string `name:"repo" required:"true"`
+	PullNumber int64  `name:"pull_number" required:"true"`
 	Page       int64  `name:"page"`
 	PerPage    int64  `name:"per_page"`
 	internal.BaseCmd
@@ -403,8 +401,8 @@ func (c *PullsListCommitsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsListFilesCmd struct {
-	Repo       string `required:"" name:"repo"`
-	PullNumber int64  `required:"" name:"pull_number"`
+	Repo       string `name:"repo" required:"true"`
+	PullNumber int64  `name:"pull_number" required:"true"`
 	Page       int64  `name:"page"`
 	PerPage    int64  `name:"per_page"`
 	internal.BaseCmd
@@ -421,8 +419,8 @@ func (c *PullsListFilesCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsListReviewRequestsCmd struct {
-	Repo       string `required:"" name:"repo"`
-	PullNumber int64  `required:"" name:"pull_number"`
+	Repo       string `name:"repo" required:"true"`
+	PullNumber int64  `name:"pull_number" required:"true"`
 	Page       int64  `name:"page"`
 	PerPage    int64  `name:"per_page"`
 	internal.BaseCmd
@@ -439,8 +437,8 @@ func (c *PullsListReviewRequestsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsListReviewsCmd struct {
-	Repo       string `required:"" name:"repo"`
-	PullNumber int64  `required:"" name:"pull_number"`
+	Repo       string `name:"repo" required:"true"`
+	PullNumber int64  `name:"pull_number" required:"true"`
 	Page       int64  `name:"page"`
 	PerPage    int64  `name:"per_page"`
 	internal.BaseCmd
@@ -457,8 +455,8 @@ func (c *PullsListReviewsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsMergeCmd struct {
-	Repo          string `required:"" name:"repo"`
-	PullNumber    int64  `required:"" name:"pull_number"`
+	Repo          string `name:"repo" required:"true"`
+	PullNumber    int64  `name:"pull_number" required:"true"`
 	CommitMessage string `name:"commit_message"`
 	CommitTitle   string `name:"commit_title"`
 	MergeMethod   string `name:"merge_method"`
@@ -479,11 +477,11 @@ func (c *PullsMergeCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsSubmitReviewCmd struct {
-	Repo       string `required:"" name:"repo"`
-	PullNumber int64  `required:"" name:"pull_number"`
-	ReviewId   int64  `required:"" name:"review_id"`
-	Event      string `required:"" name:"event"`
+	Repo       string `name:"repo" required:"true"`
+	PullNumber int64  `name:"pull_number" required:"true"`
+	ReviewId   int64  `name:"review_id" required:"true"`
 	Body       string `name:"body"`
+	Event      string `name:"event" required:"true"`
 	internal.BaseCmd
 }
 
@@ -499,9 +497,9 @@ func (c *PullsSubmitReviewCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsUpdateBranchCmd struct {
-	Lydian          bool   `required:"" name:"lydian-preview"`
-	Repo            string `required:"" name:"repo"`
-	PullNumber      int64  `required:"" name:"pull_number"`
+	Lydian          bool   `name:"lydian-preview" required:"true"`
+	Repo            string `name:"repo" required:"true"`
+	PullNumber      int64  `name:"pull_number" required:"true"`
 	ExpectedHeadSha string `name:"expected_head_sha"`
 	internal.BaseCmd
 }
@@ -518,8 +516,8 @@ func (c *PullsUpdateBranchCmd) Run(isValueSetMap map[string]bool) error {
 
 type PullsUpdateCmd struct {
 	SailorV             bool   `name:"sailor-v-preview"`
-	Repo                string `required:"" name:"repo"`
-	PullNumber          int64  `required:"" name:"pull_number"`
+	Repo                string `name:"repo" required:"true"`
+	PullNumber          int64  `name:"pull_number" required:"true"`
 	Base                string `name:"base"`
 	Body                string `name:"body"`
 	MaintainerCanModify bool   `name:"maintainer_can_modify"`
@@ -544,9 +542,9 @@ func (c *PullsUpdateCmd) Run(isValueSetMap map[string]bool) error {
 
 type PullsUpdateCommentCmd struct {
 	ComfortFade bool   `name:"comfort-fade-preview"`
-	Repo        string `required:"" name:"repo"`
-	CommentId   int64  `required:"" name:"comment_id"`
-	Body        string `required:"" name:"body"`
+	Repo        string `name:"repo" required:"true"`
+	CommentId   int64  `name:"comment_id" required:"true"`
+	Body        string `name:"body" required:"true"`
 	internal.BaseCmd
 }
 
@@ -561,10 +559,10 @@ func (c *PullsUpdateCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsUpdateReviewCmd struct {
-	Repo       string `required:"" name:"repo"`
-	PullNumber int64  `required:"" name:"pull_number"`
-	ReviewId   int64  `required:"" name:"review_id"`
-	Body       string `required:"" name:"body"`
+	Repo       string `name:"repo" required:"true"`
+	PullNumber int64  `name:"pull_number" required:"true"`
+	ReviewId   int64  `name:"review_id" required:"true"`
+	Body       string `name:"body" required:"true"`
 	internal.BaseCmd
 }
 

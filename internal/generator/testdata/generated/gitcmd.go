@@ -2,9 +2,7 @@
 
 package generated
 
-import (
-	"github.com/octo-cli/octo-cli/internal"
-)
+import internal "github.com/octo-cli/octo-cli/internal"
 
 type GitCmd struct {
 	CreateBlob       GitCreateBlobCmd       `cmd:""`
@@ -23,9 +21,9 @@ type GitCmd struct {
 }
 
 type GitCreateBlobCmd struct {
-	Repo     string `required:"" name:"repo"`
-	Content  string `required:"" name:"content"`
+	Repo     string `name:"repo" required:"true"`
 	Encoding string `name:"encoding"`
+	Content  string `name:"content" required:"true"`
 	internal.BaseCmd
 }
 
@@ -39,10 +37,7 @@ func (c *GitCreateBlobCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GitCreateCommitCmd struct {
-	Repo           string   `required:"" name:"repo"`
-	Message        string   `required:"" name:"message"`
-	Parents        []string `required:"" name:"parents"`
-	Tree           string   `required:"" name:"tree"`
+	Repo           string   `name:"repo" required:"true"`
 	AuthorDate     string   `name:"author.date"`
 	AuthorEmail    string   `name:"author.email"`
 	AuthorName     string   `name:"author.name"`
@@ -50,6 +45,9 @@ type GitCreateCommitCmd struct {
 	CommitterEmail string   `name:"committer.email"`
 	CommitterName  string   `name:"committer.name"`
 	Signature      string   `name:"signature"`
+	Message        string   `name:"message" required:"true"`
+	Parents        []string `name:"parents" required:"true"`
+	Tree           string   `name:"tree" required:"true"`
 	internal.BaseCmd
 }
 
@@ -71,9 +69,9 @@ func (c *GitCreateCommitCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GitCreateRefCmd struct {
-	Repo string `required:"" name:"repo"`
-	Ref  string `required:"" name:"ref"`
-	Sha  string `required:"" name:"sha"`
+	Repo string `name:"repo" required:"true"`
+	Ref  string `name:"ref" required:"true"`
+	Sha  string `name:"sha" required:"true"`
 	internal.BaseCmd
 }
 
@@ -87,14 +85,14 @@ func (c *GitCreateRefCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GitCreateTagCmd struct {
-	Repo        string `required:"" name:"repo"`
-	Message     string `required:"" name:"message"`
-	Object      string `required:"" name:"object"`
-	Tag         string `required:"" name:"tag"`
-	Type        string `required:"" name:"type"`
+	Repo        string `name:"repo" required:"true"`
 	TaggerDate  string `name:"tagger.date"`
 	TaggerEmail string `name:"tagger.email"`
 	TaggerName  string `name:"tagger.name"`
+	Message     string `name:"message" required:"true"`
+	Object      string `name:"object" required:"true"`
+	Tag         string `name:"tag" required:"true"`
+	Type        string `name:"type" required:"true"`
 	internal.BaseCmd
 }
 
@@ -113,9 +111,9 @@ func (c *GitCreateTagCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GitCreateTreeCmd struct {
-	Repo     string                `required:"" name:"repo"`
-	Tree     []internal.JSONObject `required:"" name:"tree"`
+	Repo     string                `name:"repo" required:"true"`
 	BaseTree string                `name:"base_tree"`
+	Tree     []internal.JSONObject `name:"tree" required:"true"`
 	internal.BaseCmd
 }
 
@@ -129,8 +127,8 @@ func (c *GitCreateTreeCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GitDeleteRefCmd struct {
-	Repo string `required:"" name:"repo"`
-	Ref  string `required:"" name:"ref"`
+	Repo string `name:"repo" required:"true"`
+	Ref  string `name:"ref" required:"true"`
 	internal.BaseCmd
 }
 
@@ -143,8 +141,8 @@ func (c *GitDeleteRefCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GitGetBlobCmd struct {
-	Repo    string `required:"" name:"repo"`
-	FileSha string `required:"" name:"file_sha"`
+	Repo    string `name:"repo" required:"true"`
+	FileSha string `name:"file_sha" required:"true"`
 	internal.BaseCmd
 }
 
@@ -157,8 +155,8 @@ func (c *GitGetBlobCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GitGetCommitCmd struct {
-	Repo      string `required:"" name:"repo"`
-	CommitSha string `required:"" name:"commit_sha"`
+	Repo      string `name:"repo" required:"true"`
+	CommitSha string `name:"commit_sha" required:"true"`
 	internal.BaseCmd
 }
 
@@ -171,8 +169,8 @@ func (c *GitGetCommitCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GitGetRefCmd struct {
-	Repo string `required:"" name:"repo"`
-	Ref  string `required:"" name:"ref"`
+	Repo string `name:"repo" required:"true"`
+	Ref  string `name:"ref" required:"true"`
 	internal.BaseCmd
 }
 
@@ -185,8 +183,8 @@ func (c *GitGetRefCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GitGetTagCmd struct {
-	Repo   string `required:"" name:"repo"`
-	TagSha string `required:"" name:"tag_sha"`
+	Repo   string `name:"repo" required:"true"`
+	TagSha string `name:"tag_sha" required:"true"`
 	internal.BaseCmd
 }
 
@@ -199,8 +197,8 @@ func (c *GitGetTagCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GitGetTreeCmd struct {
-	Repo      string `required:"" name:"repo"`
-	TreeSha   string `required:"" name:"tree_sha"`
+	Repo      string `name:"repo" required:"true"`
+	TreeSha   string `name:"tree_sha" required:"true"`
 	Recursive int64  `name:"recursive"`
 	internal.BaseCmd
 }
@@ -215,8 +213,8 @@ func (c *GitGetTreeCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GitListMatchingRefsCmd struct {
-	Repo    string `required:"" name:"repo"`
-	Ref     string `required:"" name:"ref"`
+	Repo    string `name:"repo" required:"true"`
+	Ref     string `name:"ref" required:"true"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	internal.BaseCmd
@@ -233,10 +231,10 @@ func (c *GitListMatchingRefsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type GitUpdateRefCmd struct {
-	Repo  string `required:"" name:"repo"`
-	Ref   string `required:"" name:"ref"`
-	Sha   string `required:"" name:"sha"`
+	Repo  string `name:"repo" required:"true"`
+	Ref   string `name:"ref" required:"true"`
 	Force bool   `name:"force"`
+	Sha   string `name:"sha" required:"true"`
 	internal.BaseCmd
 }
 

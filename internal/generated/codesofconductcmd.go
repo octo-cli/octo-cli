@@ -2,9 +2,7 @@
 
 package generated
 
-import (
-	"github.com/octo-cli/octo-cli/internal"
-)
+import internal "github.com/octo-cli/octo-cli/internal"
 
 type CodesOfConductCmd struct {
 	GetAllCodesOfConduct CodesOfConductGetAllCodesOfConductCmd `cmd:""`
@@ -13,7 +11,7 @@ type CodesOfConductCmd struct {
 }
 
 type CodesOfConductGetAllCodesOfConductCmd struct {
-	ScarletWitch bool `required:"" name:"scarlet-witch-preview"`
+	ScarletWitch bool `name:"scarlet-witch-preview" required:"true"`
 	internal.BaseCmd
 }
 
@@ -25,8 +23,8 @@ func (c *CodesOfConductGetAllCodesOfConductCmd) Run(isValueSetMap map[string]boo
 }
 
 type CodesOfConductGetConductCodeCmd struct {
-	ScarletWitch bool   `required:"" name:"scarlet-witch-preview"`
-	Key          string `required:"" name:"key"`
+	ScarletWitch bool   `name:"scarlet-witch-preview" required:"true"`
+	Key          string `name:"key" required:"true"`
 	internal.BaseCmd
 }
 
@@ -39,8 +37,8 @@ func (c *CodesOfConductGetConductCodeCmd) Run(isValueSetMap map[string]bool) err
 }
 
 type CodesOfConductGetForRepoCmd struct {
-	ScarletWitch bool   `required:"" name:"scarlet-witch-preview"`
-	Repo         string `required:"" name:"repo"`
+	ScarletWitch bool   `name:"scarlet-witch-preview" required:"true"`
+	Repo         string `name:"repo" required:"true"`
 	internal.BaseCmd
 }
 
