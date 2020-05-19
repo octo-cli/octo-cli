@@ -208,11 +208,11 @@ Octo-cli looks for a personal access token in the `GITHUB_TOKEN` environment var
 That is the only form of authentication that is currently available. Unfortunately this means that authenticating as
  a GitHub App is not possible for now.
 
-## GitHub Enterprise
+## GitHub Enterprise Server
 
 Use octo-cli with GitHub enterprise by setting the environment variable
-GITHUB_API_BASE_URL. Something like `export GITHUB_API_BASE_URL=https://ghe.example.com/v3/api`.
-You can also set this with a flag on each command: `--api-base-url="https://ghe.example.com/v3/api"`.
+GITHUB_API_BASE_URL. Something like `export GITHUB_API_BASE_URL=https://ghe.example.com/api/v3`.
+You can also set this with a flag on each command: `--api-base-url="https://ghe.example.com/api/v3"`.
 
 ## Curl
 
