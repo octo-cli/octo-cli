@@ -7,11 +7,15 @@ import internal "github.com/octo-cli/octo-cli/internal"
 type SearchCmd struct {
 	Code                  SearchCodeCmd                  `cmd:""`
 	Commits               SearchCommitsCmd               `cmd:""`
+	EmailLegacy           SearchEmailLegacyCmd           `cmd:""`
 	IssuesAndPullRequests SearchIssuesAndPullRequestsCmd `cmd:""`
+	IssuesLegacy          SearchIssuesLegacyCmd          `cmd:""`
 	Labels                SearchLabelsCmd                `cmd:""`
 	Repos                 SearchReposCmd                 `cmd:""`
+	ReposLegacy           SearchReposLegacyCmd           `cmd:""`
 	Topics                SearchTopicsCmd                `cmd:""`
 	Users                 SearchUsersCmd                 `cmd:""`
+	UsersLegacy           SearchUsersLegacyCmd           `cmd:""`
 }
 
 type SearchCodeCmd struct {
@@ -56,6 +60,18 @@ func (c *SearchCommitsCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
+type SearchEmailLegacyCmd struct {
+	Email string `name:"email" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *SearchEmailLegacyCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/legacy/user/email/{email}")
+	c.UpdateURLPath("email", c.Email)
+	return c.DoRequest("GET")
+}
+
 type SearchIssuesAndPullRequestsCmd struct {
 	Order   string `name:"order"`
 	Page    int64  `name:"page"`
@@ -73,6 +89,24 @@ func (c *SearchIssuesAndPullRequestsCmd) Run(isValueSetMap map[string]bool) erro
 	c.UpdateURLQuery("order", c.Order)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
+}
+
+type SearchIssuesLegacyCmd struct {
+	Owner      string `name:"owner" required:"true"`
+	Repository string `name:"repository" required:"true"`
+	State      string `name:"state" required:"true"`
+	Keyword    string `name:"keyword" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *SearchIssuesLegacyCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/legacy/issues/search/{owner}/{repository}/{state}/{keyword}")
+	c.UpdateURLPath("owner", c.Owner)
+	c.UpdateURLPath("repository", c.Repository)
+	c.UpdateURLPath("state", c.State)
+	c.UpdateURLPath("keyword", c.Keyword)
 	return c.DoRequest("GET")
 }
 
@@ -116,6 +150,26 @@ func (c *SearchReposCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
+type SearchReposLegacyCmd struct {
+	Keyword   string `name:"keyword" required:"true"`
+	Language  string `name:"language"`
+	Order     string `name:"order"`
+	Sort      string `name:"sort"`
+	StartPage string `name:"start_page"`
+	internal.BaseCmd
+}
+
+func (c *SearchReposLegacyCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/legacy/repos/search/{keyword}")
+	c.UpdateURLPath("keyword", c.Keyword)
+	c.UpdateURLQuery("language", c.Language)
+	c.UpdateURLQuery("start_page", c.StartPage)
+	c.UpdateURLQuery("sort", c.Sort)
+	c.UpdateURLQuery("order", c.Order)
+	return c.DoRequest("GET")
+}
+
 type SearchTopicsCmd struct {
 	Mercy bool   `name:"mercy-preview"`
 	Q     string `name:"q" required:"true"`
@@ -147,5 +201,23 @@ func (c *SearchUsersCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLQuery("order", c.Order)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
+}
+
+type SearchUsersLegacyCmd struct {
+	Keyword   string `name:"keyword" required:"true"`
+	Order     string `name:"order"`
+	Sort      string `name:"sort"`
+	StartPage string `name:"start_page"`
+	internal.BaseCmd
+}
+
+func (c *SearchUsersLegacyCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/legacy/user/search/{keyword}")
+	c.UpdateURLPath("keyword", c.Keyword)
+	c.UpdateURLQuery("start_page", c.StartPage)
+	c.UpdateURLQuery("sort", c.Sort)
+	c.UpdateURLQuery("order", c.Order)
 	return c.DoRequest("GET")
 }

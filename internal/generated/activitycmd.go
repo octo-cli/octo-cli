@@ -6,6 +6,7 @@ import internal "github.com/octo-cli/octo-cli/internal"
 
 type ActivityCmd struct {
 	CheckRepoIsStarredByAuthenticatedUser     ActivityCheckRepoIsStarredByAuthenticatedUserCmd     `cmd:""`
+	CheckWatchingRepoLegacy                   ActivityCheckWatchingRepoLegacyCmd                   `cmd:""`
 	DeleteRepoSubscription                    ActivityDeleteRepoSubscriptionCmd                    `cmd:""`
 	DeleteThreadSubscription                  ActivityDeleteThreadSubscriptionCmd                  `cmd:""`
 	GetFeeds                                  ActivityGetFeedsCmd                                  `cmd:""`
@@ -35,7 +36,9 @@ type ActivityCmd struct {
 	SetRepoSubscription                       ActivitySetRepoSubscriptionCmd                       `cmd:""`
 	SetThreadSubscription                     ActivitySetThreadSubscriptionCmd                     `cmd:""`
 	StarRepoForAuthenticatedUser              ActivityStarRepoForAuthenticatedUserCmd              `cmd:""`
+	StopWatchingRepoLegacy                    ActivityStopWatchingRepoLegacyCmd                    `cmd:""`
 	UnstarRepoForAuthenticatedUser            ActivityUnstarRepoForAuthenticatedUserCmd            `cmd:""`
+	WatchRepoLegacy                           ActivityWatchRepoLegacyCmd                           `cmd:""`
 }
 
 type ActivityCheckRepoIsStarredByAuthenticatedUserCmd struct {
@@ -46,6 +49,18 @@ type ActivityCheckRepoIsStarredByAuthenticatedUserCmd struct {
 func (c *ActivityCheckRepoIsStarredByAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/starred/{repo}")
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("GET")
+}
+
+type ActivityCheckWatchingRepoLegacyCmd struct {
+	Repo string `name:"repo" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ActivityCheckWatchingRepoLegacyCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/subscriptions/{repo}")
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("GET")
 }
@@ -490,6 +505,18 @@ func (c *ActivityStarRepoForAuthenticatedUserCmd) Run(isValueSetMap map[string]b
 	return c.DoRequest("PUT")
 }
 
+type ActivityStopWatchingRepoLegacyCmd struct {
+	Repo string `name:"repo" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ActivityStopWatchingRepoLegacyCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/subscriptions/{repo}")
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("DELETE")
+}
+
 type ActivityUnstarRepoForAuthenticatedUserCmd struct {
 	Repo string `name:"repo" required:"true"`
 	internal.BaseCmd
@@ -500,4 +527,16 @@ func (c *ActivityUnstarRepoForAuthenticatedUserCmd) Run(isValueSetMap map[string
 	c.SetURLPath("/user/starred/{repo}")
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("DELETE")
+}
+
+type ActivityWatchRepoLegacyCmd struct {
+	Repo string `name:"repo" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ActivityWatchRepoLegacyCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/subscriptions/{repo}")
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("PUT")
 }
