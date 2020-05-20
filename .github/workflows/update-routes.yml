@@ -1,7 +1,7 @@
 name: update-routes
 on:
   schedule:
-    - cron: '46 */12 * * *'
+    - cron: '16 * * * *'
 jobs:
   update-routes:
     runs-on: ubuntu-18.04
