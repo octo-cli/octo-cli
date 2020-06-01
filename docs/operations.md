@@ -2987,7 +2987,7 @@ Be aware that the `id` of a pull request returned from "Issues" endpoints will b
 |------|-------------|
 | issue_number | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| squirrel-girl-preview | An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## issues get-comment
 
@@ -3002,7 +3002,7 @@ https://developer.github.com/v3/issues/comments/#get-a-single-comment
 |------|-------------|
 | comment_id | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| machine-man-preview | If an issue comment is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).<br><br>To receive the `performed_via_github_app` object in the response, you must set this flag. |
+| machine-man-preview | To access the API with your GitHub App, you must set this flag for your requests. |
 | squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## issues get-event
@@ -3018,7 +3018,7 @@ https://developer.github.com/v3/issues/events/#get-a-single-event
 |------|-------------|
 | event_id | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| machine-man-preview | If an issue event is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).<br><br>To receive the `performed_via_github_app` object in the response, you must set this flag. |
+| machine-man-preview | To access the API with your GitHub App, you must set this flag for your requests. |
 | sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must set this flag. |
 | starfox-preview | Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](https://developer.github.com/changes/2018-09-05-project-card-events).<br><br>To receive the `project_card` attribute, project boards must be [enabled](https://help.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must set this flag. |
 
@@ -3068,12 +3068,12 @@ Be aware that the `id` of a pull request returned from "Issues" endpoints will b
 | direction | The direction of the sort. Can be either `asc` or `desc`. |
 | filter | Indicates which sorts of issues to return. Can be one of:  <br>\* `assigned`: Issues assigned to you  <br>\* `created`: Issues created by you  <br>\* `mentioned`: Issues mentioning you  <br>\* `subscribed`: Issues you're subscribed to updates for  <br>\* `all`: All issues the authenticated user can see, regardless of participation or creation |
 | labels | A list of comma separated label names. Example: `bug,ui,@high` |
-| machine-man-preview | If an issue is opened via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).<br><br>To receive the `performed_via_github_app` object in the response, you must set this flag. |
+| machine-man-preview | To access the API with your GitHub App, you must set this flag for your requests. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | since | Only issues updated at or after this time are returned. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 | sort | What to sort results by. Can be either `created`, `updated`, `comments`. |
-| squirrel-girl-preview | An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | state | Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`. |
 
 ## issues list-assignees
@@ -3199,12 +3199,12 @@ Be aware that the `id` of a pull request returned from "Issues" endpoints will b
 | direction | The direction of the sort. Can be either `asc` or `desc`. |
 | filter | Indicates which sorts of issues to return. Can be one of:  <br>\* `assigned`: Issues assigned to you  <br>\* `created`: Issues created by you  <br>\* `mentioned`: Issues mentioning you  <br>\* `subscribed`: Issues you're subscribed to updates for  <br>\* `all`: All issues the authenticated user can see, regardless of participation or creation |
 | labels | A list of comma separated label names. Example: `bug,ui,@high` |
-| machine-man-preview | If an issue is opened via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).<br><br>To receive the `performed_via_github_app` object in the response, you must set this flag. |
+| machine-man-preview | To access the API with your GitHub App, you must set this flag for your requests. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | since | Only issues updated at or after this time are returned. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 | sort | What to sort results by. Can be either `created`, `updated`, `comments`. |
-| squirrel-girl-preview | An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | state | Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`. |
 
 ## issues list-for-org
@@ -3226,12 +3226,12 @@ Be aware that the `id` of a pull request returned from "Issues" endpoints will b
 | direction | The direction of the sort. Can be either `asc` or `desc`. |
 | filter | Indicates which sorts of issues to return. Can be one of:  <br>\* `assigned`: Issues assigned to you  <br>\* `created`: Issues created by you  <br>\* `mentioned`: Issues mentioning you  <br>\* `subscribed`: Issues you're subscribed to updates for  <br>\* `all`: All issues the authenticated user can see, regardless of participation or creation |
 | labels | A list of comma separated label names. Example: `bug,ui,@high` |
-| machine-man-preview | If an issue is opened via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).<br><br>To receive the `performed_via_github_app` object in the response, you must set this flag. |
+| machine-man-preview | To access the API with your GitHub App, you must set this flag for your requests. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | since | Only issues updated at or after this time are returned. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 | sort | What to sort results by. Can be either `created`, `updated`, `comments`. |
-| squirrel-girl-preview | An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | state | Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`. |
 
 ## issues list-for-repo
@@ -3254,14 +3254,14 @@ Be aware that the `id` of a pull request returned from "Issues" endpoints will b
 | creator | The user that created the issue. |
 | direction | The direction of the sort. Can be either `asc` or `desc`. |
 | labels | A list of comma separated label names. Example: `bug,ui,@high` |
-| machine-man-preview | If an issue is opened via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).<br><br>To receive the `performed_via_github_app` object in the response, you must set this flag. |
+| machine-man-preview | To access the API with your GitHub App, you must set this flag for your requests. |
 | mentioned | A user that's mentioned in the issue. |
 | milestone | If an `integer` is passed, it should refer to a milestone by its `number` field. If the string `*` is passed, issues with any milestone are accepted. If the string `none` is passed, issues without milestones are returned. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | since | Only issues updated at or after this time are returned. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 | sort | What to sort results by. Can be either `created`, `updated`, `comments`. |
-| squirrel-girl-preview | An additional `reactions` object in the issue payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | state | Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`. |
 
 ## issues list-labels-for-milestone
@@ -5426,7 +5426,7 @@ The `reactions` key will have the following payload where `url` can be used to c
 | comment_id | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 | comfort-fade-preview | Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must set this flag. |
-| squirrel-girl-preview | An additional `reactions` object in the review comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## pulls get-comments-for-review
 
@@ -5520,7 +5520,7 @@ The `reactions` key will have the following payload where `url` can be used to c
 | per_page | Results per page (max 100) |
 | since | This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. Only returns comments `updated` at or after this time. |
 | sort | Can be either `created` or `updated` comments. |
-| squirrel-girl-preview | An additional `reactions` object in the review comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## pulls list-comments-for-repo
 
@@ -5560,7 +5560,7 @@ The `reactions` key will have the following payload where `url` can be used to c
 | per_page | Results per page (max 100) |
 | since | This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. Only returns comments `updated` at or after this time. |
 | sort | Can be either `created` or `updated` comments. |
-| squirrel-girl-preview | An additional `reactions` object in the review comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## pulls list-commits
 
@@ -5792,7 +5792,7 @@ Create a reaction to a [commit comment](https://developer.github.com/v3/repos/co
 | comment_id | __Required__  |
 | content | __Required__ The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the commit comment. |
 | repo | __Required__ repository in OWNER/REPO form |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## reactions create-for-issue
 
@@ -5808,7 +5808,7 @@ Create a reaction to an [issue](https://developer.github.com/v3/issues/). A resp
 | content | __Required__ The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the issue. |
 | issue_number | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## reactions create-for-issue-comment
 
@@ -5824,7 +5824,7 @@ Create a reaction to an [issue comment](https://developer.github.com/v3/issues/c
 | comment_id | __Required__  |
 | content | __Required__ The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the issue comment. |
 | repo | __Required__ repository in OWNER/REPO form |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## reactions create-for-pull-request-review-comment
 
@@ -5840,7 +5840,7 @@ Create a reaction to a [pull request review comment](https://developer.github.co
 | comment_id | __Required__  |
 | content | __Required__ The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the pull request review comment. |
 | repo | __Required__ repository in OWNER/REPO form |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## reactions create-for-team-discussion-comment-in-org
 
@@ -5859,7 +5859,7 @@ Create a reaction to a [team discussion comment](https://developer.github.com/v3
 | content | __Required__ The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the team discussion comment. |
 | discussion_number | __Required__  |
 | org | __Required__  |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | team_slug | __Required__  |
 
 ## reactions create-for-team-discussion-comment-legacy
@@ -5878,7 +5878,7 @@ Create a reaction to a [team discussion comment](https://developer.github.com/v3
 | comment_number | __Required__  |
 | content | __Required__ The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the team discussion comment. |
 | discussion_number | __Required__  |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | team_id | __Required__  |
 
 ## reactions create-for-team-discussion-in-org
@@ -5897,7 +5897,7 @@ Create a reaction to a [team discussion](https://developer.github.com/v3/teams/d
 | content | __Required__ The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the team discussion. |
 | discussion_number | __Required__  |
 | org | __Required__  |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | team_slug | __Required__  |
 
 ## reactions create-for-team-discussion-legacy
@@ -5915,7 +5915,7 @@ Create a reaction to a [team discussion](https://developer.github.com/v3/teams/d
 |------|-------------|
 | content | __Required__ The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the team discussion. |
 | discussion_number | __Required__  |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | team_id | __Required__  |
 
 ## reactions delete-for-commit-comment
@@ -5934,7 +5934,7 @@ Delete a reaction to a [commit comment](https://developer.github.com/v3/repos/co
 | comment_id | __Required__  |
 | reaction_id | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## reactions delete-for-issue
 
@@ -5952,7 +5952,7 @@ Delete a reaction to an [issue](https://developer.github.com/v3/issues/).
 | issue_number | __Required__  |
 | reaction_id | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## reactions delete-for-issue-comment
 
@@ -5970,7 +5970,7 @@ Delete a reaction to an [issue comment](https://developer.github.com/v3/issues/c
 | comment_id | __Required__  |
 | reaction_id | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## reactions delete-for-pull-request-comment
 
@@ -5988,7 +5988,7 @@ Delete a reaction to a [pull request review comment](https://developer.github.co
 | comment_id | __Required__  |
 | reaction_id | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## reactions delete-for-team-discussion
 
@@ -6006,7 +6006,7 @@ Delete a reaction to a [team discussion](https://developer.github.com/v3/teams/d
 | discussion_number | __Required__  |
 | org | __Required__  |
 | reaction_id | __Required__  |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | team_slug | __Required__  |
 
 ## reactions delete-for-team-discussion-comment
@@ -6026,7 +6026,7 @@ Delete a reaction to a [team discussion comment](https://developer.github.com/v3
 | discussion_number | __Required__  |
 | org | __Required__  |
 | reaction_id | __Required__  |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | team_slug | __Required__  |
 
 ## reactions delete-legacy
@@ -6043,7 +6043,7 @@ OAuth access tokens require the `write:discussion` [scope](https://developer.git
 | name | description |
 |------|-------------|
 | reaction_id | __Required__  |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## reactions list-for-commit-comment
 
@@ -6058,7 +6058,7 @@ List the reactions to a [commit comment](https://developer.github.com/v3/repos/c
 |------|-------------|
 | comment_id | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | content | Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to a commit comment. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -6076,7 +6076,7 @@ List the reactions to an [issue](https://developer.github.com/v3/issues/).
 |------|-------------|
 | issue_number | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | content | Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to an issue. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -6094,7 +6094,7 @@ List the reactions to an [issue comment](https://developer.github.com/v3/issues/
 |------|-------------|
 | comment_id | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | content | Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to an issue comment. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -6112,7 +6112,7 @@ List the reactions to a [pull request review comment](https://developer.github.c
 |------|-------------|
 | comment_id | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | content | Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to a pull request review comment. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -6133,7 +6133,7 @@ List the reactions to a [team discussion comment](https://developer.github.com/v
 | comment_number | __Required__  |
 | discussion_number | __Required__  |
 | org | __Required__  |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | team_slug | __Required__  |
 | content | Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to a team discussion comment. |
 | page | Page number of the results to fetch. |
@@ -6154,7 +6154,7 @@ List the reactions to a [team discussion comment](https://developer.github.com/v
 |------|-------------|
 | comment_number | __Required__  |
 | discussion_number | __Required__  |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | team_id | __Required__  |
 | content | Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to a team discussion comment. |
 | page | Page number of the results to fetch. |
@@ -6175,7 +6175,7 @@ List the reactions to a [team discussion](https://developer.github.com/v3/teams/
 |------|-------------|
 | discussion_number | __Required__  |
 | org | __Required__  |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | team_slug | __Required__  |
 | content | Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to a team discussion. |
 | page | Page number of the results to fetch. |
@@ -6195,7 +6195,7 @@ List the reactions to a [team discussion](https://developer.github.com/v3/teams/
 | name | description |
 |------|-------------|
 | discussion_number | __Required__  |
-| squirrel-girl-preview | __Required__ APIs for managing reactions are currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To access the API during the preview period, you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | team_id | __Required__  |
 | content | Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to a team discussion. |
 | page | Page number of the results to fetch. |
@@ -6505,7 +6505,7 @@ This error happens when the `required_contexts` parameter indicates that one or 
 |------|-------------|
 | ref | __Required__ The ref to deploy. This can be a branch, tag, or SHA. |
 | repo | __Required__ repository in OWNER/REPO form |
-| ant-man-preview | The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must set this flag. |
+| ant-man-preview | The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must set this flag. |
 | auto_merge | Attempts to automatically merge the default branch into the requested ref, if it's behind the default branch. |
 | description | Short description of the deployment. |
 | environment | Name for the target deployment environment (e.g., `production`, `staging`, `qa`). |
@@ -6757,7 +6757,7 @@ When using [OAuth](https://developer.github.com/apps/building-oauth-apps/underst
 
 | name | description |
 |------|-------------|
-| baptiste-preview | __Required__ Creating and using repository templates is currently available for developers to preview. To access this new endpoint during the preview period, you must set this flag. |
+| baptiste-preview | __Required__ The `is_template` and `template_repository` keys are currently available for developer to preview. See [Create a repository using a template](https://developer.github.com/v3/repos/#create-a-repository-using-a-template) to learn how to create template repositories. To access these new response keys during the preview period, you must set this flag. |
 | name | __Required__ The name of the new repository. |
 | template_owner | __Required__  |
 | template_repo | __Required__  |
@@ -7026,7 +7026,7 @@ The `parent` and `source` objects are present when the repository is a fork. `pa
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
 | nebula-preview | You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).<br><br>To access repository visibility during the preview period, you must set this flag. |
-| scarlet-witch-preview | Developers can preview a new `code_of_conduct` key in responses. For more information, see [Codes of Conduct API](https://developer.github.com/v3/codes_of_conduct/).<br><br>To access this new response key during the preview period, you must set this flag. |
+| scarlet-witch-preview | The Codes of Conduct API is currently available for developers to preview.<br><br>To access the API during the preview period, you must set this flag. |
 
 ## repos get-all-topics
 
@@ -7235,7 +7235,7 @@ https://developer.github.com/v3/repos/comments/#get-a-single-commit-comment
 |------|-------------|
 | comment_id | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| squirrel-girl-preview | An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## repos get-contents
 
@@ -7319,8 +7319,8 @@ https://developer.github.com/v3/repos/deployments/#get-a-single-deployment
 |------|-------------|
 | deployment_id | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| ant-man-preview | The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must set this flag. |
-| machine-man-preview | If a deployment is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).<br><br>To receive the `performed_via_github_app` object in the response, you must set this flag. |
+| ant-man-preview | The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must set this flag. |
+| machine-man-preview | To access the API with your GitHub App, you must set this flag for your requests. |
 
 ## repos get-deployment-status
 
@@ -7338,7 +7338,7 @@ Users with pull access can view a deployment status for a deployment:
 | status_id | __Required__  |
 | ant-man-preview | The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must set this flag. |
 | flash-preview | New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](https://developer.github.com/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.<br><br>To access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must set this flag. |
-| machine-man-preview | If a deployment is created via a GitHub App, the response will include the `performed_via_github_app` object with information about the GitHub App. For more information, see the [related blog post](https://developer.github.com/changes/2016-09-14-Integrations-Early-Access).<br><br>To receive the `performed_via_github_app` object in the response, you must set this flag. |
+| machine-man-preview | To access the API with your GitHub App, you must set this flag for your requests. |
 
 ## repos get-download
 
@@ -7749,7 +7749,7 @@ Use the `:commit_sha` to specify the commit that will have its comments listed.
 | repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| squirrel-girl-preview | An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## repos list-commit-comments
 
@@ -7767,7 +7767,7 @@ Comments are ordered by ascending ID.
 | repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| squirrel-girl-preview | An additional `reactions` object in the commit comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## repos list-commits
 
@@ -7872,7 +7872,7 @@ Simple filtering of deployments is available via query parameters:
 | name | description |
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
-| ant-man-preview | The `transient_environment` and `production_environment` parameters are currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must set this flag. |
+| ant-man-preview | The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must set this flag. |
 | environment | The name of the environment that was deployed to (e.g., `staging` or `production`). |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -8388,7 +8388,7 @@ https://developer.github.com/v3/repos/#replace-all-repository-topics
 
 | name | description |
 |------|-------------|
-| mercy-preview | __Required__ Repository topics on GitHub are currently available for developers to preview. To use this endpoint, you must set this flag. |
+| mercy-preview | __Required__ The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must set this flag. |
 | names | __Required__ An array of topics to add to the repository. Pass one or more topics to _replace_ the set of existing topics. Send an empty array (`[]`) to clear all topics from the repository. **Note:** Topic `names` cannot contain uppercase letters. |
 | repo | __Required__ repository in OWNER/REPO form |
 
@@ -9297,7 +9297,7 @@ This endpoint triggers [notifications](https://help.github.com/articles/about-no
 | discussion_number | __Required__  |
 | org | __Required__  |
 | team_slug | __Required__  |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## teams create-discussion-comment-legacy
 
@@ -9317,7 +9317,7 @@ This endpoint triggers [notifications](https://help.github.com/articles/about-no
 | body | __Required__ The discussion comment's body text. |
 | discussion_number | __Required__  |
 | team_id | __Required__  |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## teams create-discussion-in-org
 
@@ -9339,7 +9339,7 @@ This endpoint triggers [notifications](https://help.github.com/articles/about-no
 | team_slug | __Required__  |
 | title | __Required__ The discussion post's title. |
 | private | Private posts are only visible to team members, organization owners, and team maintainers. Public posts are visible to all members of the organization. Set to `true` to create a private post. |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## teams create-discussion-legacy
 
@@ -9360,7 +9360,7 @@ This endpoint triggers [notifications](https://help.github.com/articles/about-no
 | team_id | __Required__  |
 | title | __Required__ The discussion post's title. |
 | private | Private posts are only visible to team members, organization owners, and team maintainers. Public posts are visible to all members of the organization. Set to `true` to create a private post. |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## teams create-or-update-id-p-group-connections-in-org
 
@@ -9535,7 +9535,7 @@ Get a specific comment on a team discussion. OAuth access tokens require the `re
 | discussion_number | __Required__  |
 | org | __Required__  |
 | team_slug | __Required__  |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## teams get-discussion-comment-legacy
 
@@ -9553,7 +9553,7 @@ Get a specific comment on a team discussion. OAuth access tokens require the `re
 | comment_number | __Required__  |
 | discussion_number | __Required__  |
 | team_id | __Required__  |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## teams get-discussion-in-org
 
@@ -9571,7 +9571,7 @@ Get a specific discussion on a team's page. OAuth access tokens require the `rea
 | discussion_number | __Required__  |
 | org | __Required__  |
 | team_slug | __Required__  |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## teams get-discussion-legacy
 
@@ -9588,7 +9588,7 @@ Get a specific discussion on a team's page. OAuth access tokens require the `rea
 |------|-------------|
 | discussion_number | __Required__  |
 | team_id | __Required__  |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## teams get-legacy
 
@@ -9729,7 +9729,7 @@ List all comments on a team discussion. OAuth access tokens require the `read:di
 | direction | Sorts the discussion comments by the date they were created. To return the oldest comments first, set to `asc`. Can be one of `asc` or `desc`. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## teams list-discussion-comments-legacy
 
@@ -9749,7 +9749,7 @@ List all comments on a team discussion. OAuth access tokens require the `read:di
 | direction | Sorts the discussion comments by the date they were created. To return the oldest comments first, set to `asc`. Can be one of `asc` or `desc`. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## teams list-discussions-in-org
 
@@ -9769,7 +9769,7 @@ List all discussions on a team's page. OAuth access tokens require the `read:dis
 | direction | Sorts the discussion comments by the date they were created. To return the oldest comments first, set to `asc`. Can be one of `asc` or `desc`. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## teams list-discussions-legacy
 
@@ -9788,7 +9788,7 @@ List all discussions on a team's page. OAuth access tokens require the `read:dis
 | direction | Sorts the discussion comments by the date they were created. To return the oldest comments first, set to `asc`. Can be one of `asc` or `desc`. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## teams list-for-authenticated-user
 
@@ -10182,7 +10182,7 @@ Edits the body text of a discussion comment. OAuth access tokens require the `wr
 | discussion_number | __Required__  |
 | org | __Required__  |
 | team_slug | __Required__  |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## teams update-discussion-comment-legacy
 
@@ -10201,7 +10201,7 @@ Edits the body text of a discussion comment. OAuth access tokens require the `wr
 | comment_number | __Required__  |
 | discussion_number | __Required__  |
 | team_id | __Required__  |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## teams update-discussion-in-org
 
@@ -10220,7 +10220,7 @@ Edits the title and body text of a discussion post. Only the parameters you prov
 | org | __Required__  |
 | team_slug | __Required__  |
 | body | The discussion post's body text. |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | title | The discussion post's title. |
 
 ## teams update-discussion-legacy
@@ -10239,7 +10239,7 @@ Edits the title and body text of a discussion post. Only the parameters you prov
 | discussion_number | __Required__  |
 | team_id | __Required__  |
 | body | The discussion post's body text. |
-| squirrel-girl-preview | The [reactions API](https://developer.github.com/v3/reactions/) is available for developers to preview. The `url` can be used to construct the API location for [listing and creating](https://developer.github.com/v3/reactions) reactions. See the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details. To receive the `reactions` object in the response for this endpoint you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | title | The discussion post's title. |
 
 ## teams update-in-org
