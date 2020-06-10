@@ -17,6 +17,7 @@ type ProjectsCmd struct {
 	Get                        ProjectsGetCmd                        `cmd:""`
 	GetCard                    ProjectsGetCardCmd                    `cmd:""`
 	GetColumn                  ProjectsGetColumnCmd                  `cmd:""`
+	GetPermissionForUser       ProjectsGetPermissionForUserCmd       `cmd:""`
 	ListCards                  ProjectsListCardsCmd                  `cmd:""`
 	ListCollaborators          ProjectsListCollaboratorsCmd          `cmd:""`
 	ListColumns                ProjectsListColumnsCmd                `cmd:""`
@@ -26,7 +27,6 @@ type ProjectsCmd struct {
 	MoveCard                   ProjectsMoveCardCmd                   `cmd:""`
 	MoveColumn                 ProjectsMoveColumnCmd                 `cmd:""`
 	RemoveCollaborator         ProjectsRemoveCollaboratorCmd         `cmd:""`
-	ReviewUserPermissionLevel  ProjectsReviewUserPermissionLevelCmd  `cmd:""`
 	Update                     ProjectsUpdateCmd                     `cmd:""`
 	UpdateCard                 ProjectsUpdateCardCmd                 `cmd:""`
 	UpdateColumn               ProjectsUpdateColumnCmd               `cmd:""`
@@ -222,6 +222,22 @@ func (c *ProjectsGetColumnCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
+type ProjectsGetPermissionForUserCmd struct {
+	Inertia   bool   `name:"inertia-preview" required:"true"`
+	ProjectId int64  `name:"project_id" required:"true"`
+	Username  string `name:"username" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ProjectsGetPermissionForUserCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/projects/{project_id}/collaborators/{username}/permission")
+	c.UpdateURLPath("project_id", c.ProjectId)
+	c.UpdateURLPath("username", c.Username)
+	c.UpdatePreview("inertia", c.Inertia)
+	return c.DoRequest("GET")
+}
+
 type ProjectsListCardsCmd struct {
 	Inertia       bool   `name:"inertia-preview" required:"true"`
 	ColumnId      int64  `name:"column_id" required:"true"`
@@ -388,22 +404,6 @@ func (c *ProjectsRemoveCollaboratorCmd) Run(isValueSetMap map[string]bool) error
 	c.UpdateURLPath("username", c.Username)
 	c.UpdatePreview("inertia", c.Inertia)
 	return c.DoRequest("DELETE")
-}
-
-type ProjectsReviewUserPermissionLevelCmd struct {
-	Inertia   bool   `name:"inertia-preview" required:"true"`
-	ProjectId int64  `name:"project_id" required:"true"`
-	Username  string `name:"username" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *ProjectsReviewUserPermissionLevelCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/projects/{project_id}/collaborators/{username}/permission")
-	c.UpdateURLPath("project_id", c.ProjectId)
-	c.UpdateURLPath("username", c.Username)
-	c.UpdatePreview("inertia", c.Inertia)
-	return c.DoRequest("GET")
 }
 
 type ProjectsUpdateCardCmd struct {

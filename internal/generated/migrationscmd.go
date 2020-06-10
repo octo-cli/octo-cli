@@ -11,7 +11,7 @@ type MigrationsCmd struct {
 	DownloadArchiveForOrg             MigrationsDownloadArchiveForOrgCmd             `cmd:""`
 	GetArchiveForAuthenticatedUser    MigrationsGetArchiveForAuthenticatedUserCmd    `cmd:""`
 	GetCommitAuthors                  MigrationsGetCommitAuthorsCmd                  `cmd:""`
-	GetImportProgress                 MigrationsGetImportProgressCmd                 `cmd:""`
+	GetImportStatus                   MigrationsGetImportStatusCmd                   `cmd:""`
 	GetLargeFiles                     MigrationsGetLargeFilesCmd                     `cmd:""`
 	GetStatusForAuthenticatedUser     MigrationsGetStatusForAuthenticatedUserCmd     `cmd:""`
 	GetStatusForOrg                   MigrationsGetStatusForOrgCmd                   `cmd:""`
@@ -115,12 +115,12 @@ func (c *MigrationsGetCommitAuthorsCmd) Run(isValueSetMap map[string]bool) error
 	return c.DoRequest("GET")
 }
 
-type MigrationsGetImportProgressCmd struct {
+type MigrationsGetImportStatusCmd struct {
 	Repo string `name:"repo" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *MigrationsGetImportProgressCmd) Run(isValueSetMap map[string]bool) error {
+func (c *MigrationsGetImportStatusCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/import")
 	c.UpdateURLPath("repo", c.Repo)
