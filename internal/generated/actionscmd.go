@@ -20,9 +20,10 @@ type ActionsCmd struct {
 	DeleteSelfHostedRunnerFromRepo  ActionsDeleteSelfHostedRunnerFromRepoCmd  `cmd:""`
 	DeleteWorkflowRunLogs           ActionsDeleteWorkflowRunLogsCmd           `cmd:""`
 	DownloadArtifact                ActionsDownloadArtifactCmd                `cmd:""`
-	DownloadWorkflowJobLogs         ActionsDownloadWorkflowJobLogsCmd         `cmd:""`
+	DownloadJobLogsForWorkflowRun   ActionsDownloadJobLogsForWorkflowRunCmd   `cmd:""`
 	DownloadWorkflowRunLogs         ActionsDownloadWorkflowRunLogsCmd         `cmd:""`
 	GetArtifact                     ActionsGetArtifactCmd                     `cmd:""`
+	GetJobForWorkflowRun            ActionsGetJobForWorkflowRunCmd            `cmd:""`
 	GetOrgPublicKey                 ActionsGetOrgPublicKeyCmd                 `cmd:""`
 	GetOrgSecret                    ActionsGetOrgSecretCmd                    `cmd:""`
 	GetRepoPublicKey                ActionsGetRepoPublicKeyCmd                `cmd:""`
@@ -30,7 +31,6 @@ type ActionsCmd struct {
 	GetSelfHostedRunnerForOrg       ActionsGetSelfHostedRunnerForOrgCmd       `cmd:""`
 	GetSelfHostedRunnerForRepo      ActionsGetSelfHostedRunnerForRepoCmd      `cmd:""`
 	GetWorkflow                     ActionsGetWorkflowCmd                     `cmd:""`
-	GetWorkflowJob                  ActionsGetWorkflowJobCmd                  `cmd:""`
 	GetWorkflowRun                  ActionsGetWorkflowRunCmd                  `cmd:""`
 	GetWorkflowRunUsage             ActionsGetWorkflowRunUsageCmd             `cmd:""`
 	GetWorkflowUsage                ActionsGetWorkflowUsageCmd                `cmd:""`
@@ -38,7 +38,6 @@ type ActionsCmd struct {
 	ListJobsForWorkflowRun          ActionsListJobsForWorkflowRunCmd          `cmd:""`
 	ListOrgSecrets                  ActionsListOrgSecretsCmd                  `cmd:""`
 	ListRepoSecrets                 ActionsListRepoSecretsCmd                 `cmd:""`
-	ListRepoWorkflowRuns            ActionsListRepoWorkflowRunsCmd            `cmd:""`
 	ListRepoWorkflows               ActionsListRepoWorkflowsCmd               `cmd:""`
 	ListRunnerApplicationsForOrg    ActionsListRunnerApplicationsForOrgCmd    `cmd:""`
 	ListRunnerApplicationsForRepo   ActionsListRunnerApplicationsForRepoCmd   `cmd:""`
@@ -47,6 +46,7 @@ type ActionsCmd struct {
 	ListSelfHostedRunnersForRepo    ActionsListSelfHostedRunnersForRepoCmd    `cmd:""`
 	ListWorkflowRunArtifacts        ActionsListWorkflowRunArtifactsCmd        `cmd:""`
 	ListWorkflowRuns                ActionsListWorkflowRunsCmd                `cmd:""`
+	ListWorkflowRunsForRepo         ActionsListWorkflowRunsForRepoCmd         `cmd:""`
 	ReRunWorkflow                   ActionsReRunWorkflowCmd                   `cmd:""`
 	RemoveSelectedRepoFromOrgSecret ActionsRemoveSelectedRepoFromOrgSecretCmd `cmd:""`
 	SetSelectedReposForOrgSecret    ActionsSetSelectedReposForOrgSecretCmd    `cmd:""`
@@ -270,13 +270,13 @@ func (c *ActionsDownloadArtifactCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
-type ActionsDownloadWorkflowJobLogsCmd struct {
+type ActionsDownloadJobLogsForWorkflowRunCmd struct {
 	Repo  string `name:"repo" required:"true"`
 	JobId int64  `name:"job_id" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *ActionsDownloadWorkflowJobLogsCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ActionsDownloadJobLogsForWorkflowRunCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/actions/jobs/{job_id}/logs")
 	c.UpdateURLPath("repo", c.Repo)
@@ -309,6 +309,20 @@ func (c *ActionsGetArtifactCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetURLPath("/repos/{repo}/actions/artifacts/{artifact_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("artifact_id", c.ArtifactId)
+	return c.DoRequest("GET")
+}
+
+type ActionsGetJobForWorkflowRunCmd struct {
+	Repo  string `name:"repo" required:"true"`
+	JobId int64  `name:"job_id" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ActionsGetJobForWorkflowRunCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/actions/jobs/{job_id}")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("job_id", c.JobId)
 	return c.DoRequest("GET")
 }
 
@@ -403,20 +417,6 @@ func (c *ActionsGetWorkflowCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetURLPath("/repos/{repo}/actions/workflows/{workflow_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("workflow_id", c.WorkflowId)
-	return c.DoRequest("GET")
-}
-
-type ActionsGetWorkflowJobCmd struct {
-	Repo  string `name:"repo" required:"true"`
-	JobId int64  `name:"job_id" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *ActionsGetWorkflowJobCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/actions/jobs/{job_id}")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("job_id", c.JobId)
 	return c.DoRequest("GET")
 }
 
@@ -525,30 +525,6 @@ func (c *ActionsListRepoSecretsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/actions/secrets")
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type ActionsListRepoWorkflowRunsCmd struct {
-	Repo    string `name:"repo" required:"true"`
-	Actor   string `name:"actor"`
-	Branch  string `name:"branch"`
-	Event   string `name:"event"`
-	Page    int64  `name:"page"`
-	PerPage int64  `name:"per_page"`
-	Status  string `name:"status"`
-	internal.BaseCmd
-}
-
-func (c *ActionsListRepoWorkflowRunsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/actions/runs")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLQuery("actor", c.Actor)
-	c.UpdateURLQuery("branch", c.Branch)
-	c.UpdateURLQuery("event", c.Event)
-	c.UpdateURLQuery("status", c.Status)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
@@ -675,6 +651,30 @@ func (c *ActionsListWorkflowRunsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetURLPath("/repos/{repo}/actions/workflows/{workflow_id}/runs")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("workflow_id", c.WorkflowId)
+	c.UpdateURLQuery("actor", c.Actor)
+	c.UpdateURLQuery("branch", c.Branch)
+	c.UpdateURLQuery("event", c.Event)
+	c.UpdateURLQuery("status", c.Status)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
+}
+
+type ActionsListWorkflowRunsForRepoCmd struct {
+	Repo    string `name:"repo" required:"true"`
+	Actor   string `name:"actor"`
+	Branch  string `name:"branch"`
+	Event   string `name:"event"`
+	Page    int64  `name:"page"`
+	PerPage int64  `name:"per_page"`
+	Status  string `name:"status"`
+	internal.BaseCmd
+}
+
+func (c *ActionsListWorkflowRunsForRepoCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/actions/runs")
+	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("actor", c.Actor)
 	c.UpdateURLQuery("branch", c.Branch)
 	c.UpdateURLQuery("event", c.Event)
