@@ -199,7 +199,7 @@ func (c *GitGetTagCmd) Run(isValueSetMap map[string]bool) error {
 type GitGetTreeCmd struct {
 	Repo      string `name:"repo" required:"true"`
 	TreeSha   string `name:"tree_sha" required:"true"`
-	Recursive int64  `name:"recursive"`
+	Recursive string `name:"recursive"`
 	internal.BaseCmd
 }
 

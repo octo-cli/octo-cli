@@ -260,9 +260,9 @@ Call this endpoint using the `-v` flag, which enables verbose output and allows 
 | artifact_id | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
-## actions download-workflow-job-logs
+## actions download-job-logs-for-workflow-run
 
-https://developer.github.com/v3/actions/workflow-jobs/#download-workflow-job-logs
+https://developer.github.com/v3/actions/workflow-jobs/#download-job-logs-for-a-workflow-run
 
 Gets a redirect URL to download a plain text file of logs for a workflow job. This link expires after 1 minute. Look for `Location:` in the response header to find the URL for the download. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
 
@@ -304,6 +304,20 @@ Gets a specific artifact for a workflow run. Anyone with read access to the repo
 | name | description |
 |------|-------------|
 | artifact_id | __Required__  |
+| repo | __Required__ repository in OWNER/REPO form |
+
+## actions get-job-for-workflow-run
+
+https://developer.github.com/v3/actions/workflow-jobs/#get-a-job-for-a-workflow-run
+
+Gets a specific job in a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| job_id | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## actions get-org-public-key
@@ -404,20 +418,6 @@ Gets a specific workflow. You can also replace `:workflow_id` with `:workflow_fi
 | repo | __Required__ repository in OWNER/REPO form |
 | workflow_id | __Required__  |
 
-## actions get-workflow-job
-
-https://developer.github.com/v3/actions/workflow-jobs/#get-a-workflow-job
-
-Gets a specific job in a workflow run. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| job_id | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
-
 ## actions get-workflow-run
 
 https://developer.github.com/v3/actions/workflow-runs/#get-a-workflow-run
@@ -438,7 +438,7 @@ https://developer.github.com/v3/actions/workflow-runs/#get-workflow-run-usage
 
 **Warning:** This GitHub Actions usage endpoint is currently in public beta and subject to change. For more information, see "[GitHub Actions API workflow usage](https://developer.github.com/changes/2020-05-15-actions-api-workflow-usage)."
 
-Gets the number of billable minutes and total run time for a specific workflow run. Billable minutes only apply to workflows in private repositories that use GitHub-hosted runners. Usage is listed for each GitHub-hosted runner operating system in milliseconds. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)" in the GitHub Help documentation.
+Gets the number of billable minutes and total run time for a specific workflow run. Billable minutes only apply to workflows in private repositories that use GitHub-hosted runners. Usage is listed for each GitHub-hosted runner operating system in milliseconds. Any job re-runs are also included in the usage. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
 
 Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
 
@@ -456,7 +456,7 @@ https://developer.github.com/v3/actions/workflows/#get-workflow-usage
 
 **Warning:** This GitHub Actions usage endpoint is currently in public beta and subject to change. For more information, see "[GitHub Actions API workflow usage](https://developer.github.com/changes/2020-05-15-actions-api-workflow-usage)."
 
-Gets the number of billable minutes used by a specific workflow during the current billing cycle. Billable minutes only apply to workflows in private repositories that use GitHub-hosted runners. Usage is listed for each GitHub-hosted runner operating system in milliseconds. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)" in the GitHub Help documentation.
+Gets the number of billable minutes used by a specific workflow during the current billing cycle. Billable minutes only apply to workflows in private repositories that use GitHub-hosted runners. Usage is listed for each GitHub-hosted runner operating system in milliseconds. Any job re-runs are also included in the usage. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
 
 You can also replace `:workflow_id` with `:workflow_file_name`. For example, you could use `main.yml`. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
 
@@ -529,27 +529,6 @@ Lists all secrets available in a repository without revealing their encrypted va
 | repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-
-## actions list-repo-workflow-runs
-
-https://developer.github.com/v3/actions/workflow-runs/#list-repository-workflow-runs
-
-Lists all workflow runs for a repository. You can use parameters to narrow the list of results. For more information about using parameters, see [Parameters](https://developer.github.com/v3/#parameters).
-
-Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| repo | __Required__ repository in OWNER/REPO form |
-| actor | Returns someone's workflow runs. Use the login for the user who created the `push` associated with the check suite or workflow run. |
-| branch | Returns workflow runs associated with a branch. Use the name of the branch of the `push`. |
-| event | Returns workflow run triggered by the event you specify. For example, `push`, `pull_request` or `issue`. For more information, see "[Events that trigger workflows](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/events-that-trigger-workflows)" in the GitHub Help documentation. |
-| page | Page number of the results to fetch. |
-| per_page | Results per page (max 100) |
-| status | Returns workflow runs associated with the check run `status` or `conclusion` you specify. For example, a conclusion can be `success` or a status can be `completed`. For more information, see the `status` and `conclusion` options available in "[Create a check run](https://developer.github.com/v3/checks/runs/#create-a-check-run)." |
 
 ## actions list-repo-workflows
 
@@ -673,7 +652,28 @@ Anyone with read access to the repository can use this endpoint. If the reposito
 | workflow_id | __Required__  |
 | actor | Returns someone's workflow runs. Use the login for the user who created the `push` associated with the check suite or workflow run. |
 | branch | Returns workflow runs associated with a branch. Use the name of the branch of the `push`. |
-| event | Returns workflow run triggered by the event you specify. For example, `push`, `pull_request` or `issue`. For more information, see "[Events that trigger workflows](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/events-that-trigger-workflows)" in the GitHub Help documentation. |
+| event | Returns workflow run triggered by the event you specify. For example, `push`, `pull_request` or `issue`. For more information, see "[Events that trigger workflows](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/events-that-trigger-workflows)." |
+| page | Page number of the results to fetch. |
+| per_page | Results per page (max 100) |
+| status | Returns workflow runs associated with the check run `status` or `conclusion` you specify. For example, a conclusion can be `success` or a status can be `completed`. For more information, see the `status` and `conclusion` options available in "[Create a check run](https://developer.github.com/v3/checks/runs/#create-a-check-run)." |
+
+## actions list-workflow-runs-for-repo
+
+https://developer.github.com/v3/actions/workflow-runs/#list-workflow-runs-for-a-repository
+
+Lists all workflow runs for a repository. You can use parameters to narrow the list of results. For more information about using parameters, see [Parameters](https://developer.github.com/v3/#parameters).
+
+Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| repo | __Required__ repository in OWNER/REPO form |
+| actor | Returns someone's workflow runs. Use the login for the user who created the `push` associated with the check suite or workflow run. |
+| branch | Returns workflow runs associated with a branch. Use the name of the branch of the `push`. |
+| event | Returns workflow run triggered by the event you specify. For example, `push`, `pull_request` or `issue`. For more information, see "[Events that trigger workflows](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/events-that-trigger-workflows)." |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | status | Returns workflow runs associated with the check run `status` or `conclusion` you specify. For example, a conclusion can be `success` or a status can be `completed`. For more information, see the `status` and `conclusion` options available in "[Create a check run](https://developer.github.com/v3/checks/runs/#create-a-check-run)." |
@@ -1197,7 +1197,7 @@ https://developer.github.com/v3/activity/starring/#unstar-a-repository-for-the-a
 
 ## apps add-repo-to-installation
 
-https://developer.github.com/v3/apps/installations/#add-repository-to-installation
+https://developer.github.com/v3/apps/installations/#add-a-repository-to-an-app-installation
 
 Add a single repository to an installation. The authenticated user must have admin access to the repository.
 
@@ -1216,7 +1216,7 @@ You must use a personal access token (which you can create via the [command line
 
 https://developer.github.com/v3/apps/oauth_applications/#check-an-authorization
 
-**Deprecation Notice:** GitHub will replace and discontinue OAuth endpoints containing `access_token` in the path parameter. We are introducing new endpoints that allow you to securely manage tokens for OAuth Apps by using `access_token` as an input parameter. The OAuth Application API will be removed on July 1, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-app-endpoint/).
+**Deprecation Notice:** GitHub will replace and discontinue OAuth endpoints containing `access_token` in the path parameter. We are introducing new endpoints that allow you to securely manage tokens for OAuth Apps by using `access_token` as an input parameter. The OAuth Application API will be removed on May 5, 2021. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-app-endpoint/).
 
 OAuth applications can use a special API method for checking OAuth token validity without exceeding the normal rate limits for failed login attempts. Authentication works differently with this particular endpoint. You must use [Basic Authentication](https://developer.github.com/v3/auth#basic-authentication) when accessing this endpoint, using the OAuth application's `client_id` and `client_secret` as the username and password. Invalid tokens will return `404 NOT FOUND`.
 
@@ -1277,9 +1277,9 @@ Use this endpoint to complete the handshake necessary when implementing the [Git
 |------|-------------|
 | code | __Required__  |
 
-## apps create-installation-token
+## apps create-installation-access-token
 
-https://developer.github.com/v3/apps/#create-a-new-installation-token
+https://developer.github.com/v3/apps/#create-an-installation-access-token-for-an-app
 
 Creates an installation access token that enables a GitHub App to make authenticated API requests for the app's installation on an organization or individual account. Installation tokens expire one hour from the time you create them. Using an expired token produces a status code of `401 - Unauthorized`, and requires creating a new installation token. By default the installation token has access to all repositories that the installation can access. To restrict the access to specific repositories, you can provide the `repository_ids` when creating the token. When you omit `repository_ids`, the response does not contain the `repositories` key.
 
@@ -1295,7 +1295,7 @@ This example grants the token "Read and write" permission to `issues` and "Read"
 | installation_id | __Required__  |
 | machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
 | permissions | The permissions granted to the access token. The permissions object includes the permission names and their access type. For a complete list of permissions and allowable values, see "[GitHub App permissions](https://developer.github.com/apps/building-github-apps/creating-github-apps-using-url-parameters/#github-app-permissions)." |
-| repository_ids | The `id`s of the repositories that the installation token can access. Providing repository `id`s restricts the access of an installation token to specific repositories. You can use the "[List repositories](https://developer.github.com/v3/apps/installations/#list-repositories)" endpoint to get the `id` of all repositories that an installation can access. For example, you can select specific repositories when creating an installation token to restrict the number of repositories that can be cloned using the token. |
+| repository_ids | The `id`s of the repositories that the installation token can access. Providing repository `id`s restricts the access of an installation token to specific repositories. You can use the "[List repositories accessible to the app installation](https://developer.github.com/v3/apps/installations/#list-repositories-accessible-to-the-app-installation)" endpoint to get the `id` of all repositories that an installation can access. For example, you can select specific repositories when creating an installation token to restrict the number of repositories that can be cloned using the token. |
 
 ## apps delete-authorization
 
@@ -1315,9 +1315,9 @@ Deleting an OAuth application's grant will also delete all OAuth tokens associat
 
 ## apps delete-installation
 
-https://developer.github.com/v3/apps/#delete-an-installation
+https://developer.github.com/v3/apps/#delete-an-installation-for-the-authenticated-app
 
-Uninstalls a GitHub App on a user, organization, or business account. If you prefer to temporarily suspend an app's access to your account's resources, then we recommend the "[Suspend an installation](https://developer.github.com/v3/apps/#suspend-an-installation)" endpoint.
+Uninstalls a GitHub App on a user, organization, or business account. If you prefer to temporarily suspend an app's access to your account's resources, then we recommend the "[Suspend an app installation](https://developer.github.com/v3/apps/#suspend-an-app-installation)" endpoint.
 
 You must use a [JWT](https://developer.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
 
@@ -1345,9 +1345,9 @@ OAuth application owners can revoke a single token for an OAuth application. You
 
 ## apps get-authenticated
 
-https://developer.github.com/v3/apps/#get-the-authenticated-github-app
+https://developer.github.com/v3/apps/#get-the-authenticated-app
 
-Returns the GitHub App associated with the authentication credentials used. To see how many app installations are associated with this GitHub App, see the `installations_count` in the response. For more details about your app's installations, see the "[List installations](https://developer.github.com/v3/apps/#list-installations)" endpoint.
+Returns the GitHub App associated with the authentication credentials used. To see how many app installations are associated with this GitHub App, see the `installations_count` in the response. For more details about your app's installations, see the "[List installations for the authenticated app](https://developer.github.com/v3/apps/#list-installations-for-the-authenticated-app)" endpoint.
 
 You must use a [JWT](https://developer.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
 
@@ -1360,7 +1360,7 @@ You must use a [JWT](https://developer.github.com/apps/building-github-apps/auth
 
 ## apps get-by-slug
 
-https://developer.github.com/v3/apps/#get-a-single-github-app
+https://developer.github.com/v3/apps/#get-an-app
 
 **Note**: The `:app_slug` is just the URL-friendly name of your GitHub App. You can find this on the settings page for your GitHub App (e.g., `https://github.com/settings/apps/:app_slug`).
 
@@ -1376,7 +1376,9 @@ If the GitHub App you specify is public, you can access this endpoint without au
 
 ## apps get-installation
 
-https://developer.github.com/v3/apps/#get-an-installation
+https://developer.github.com/v3/apps/#get-an-installation-for-the-authenticated-app
+
+Enables an authenticated GitHub App to find an installation's information using the installation id. The installation's account type (`target_type`) will be either an organization or a user account, depending which account the repository belongs to.
 
 You must use a [JWT](https://developer.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
 
@@ -1390,7 +1392,7 @@ You must use a [JWT](https://developer.github.com/apps/building-github-apps/auth
 
 ## apps get-org-installation
 
-https://developer.github.com/v3/apps/#get-an-organization-installation
+https://developer.github.com/v3/apps/#get-an-organization-installation-for-the-authenticated-app
 
 Enables an authenticated GitHub App to find the organization's installation information.
 
@@ -1406,7 +1408,7 @@ You must use a [JWT](https://developer.github.com/apps/building-github-apps/auth
 
 ## apps get-repo-installation
 
-https://developer.github.com/v3/apps/#get-a-repository-installation
+https://developer.github.com/v3/apps/#get-a-repository-installation-for-the-authenticated-app
 
 Enables an authenticated GitHub App to find the repository's installation information. The installation's account type will be either an organization or a user account, depending which account the repository belongs to.
 
@@ -1452,7 +1454,7 @@ GitHub Apps must use a [JWT](https://developer.github.com/apps/building-github-a
 
 ## apps get-user-installation
 
-https://developer.github.com/v3/apps/#get-a-user-installation
+https://developer.github.com/v3/apps/#get-a-user-installation-for-the-authenticated-app
 
 Enables an authenticated GitHub App to find the user’s installation information.
 
@@ -1506,7 +1508,7 @@ GitHub Apps must use a [JWT](https://developer.github.com/apps/building-github-a
 
 ## apps list-installation-repos-for-authenticated-user
 
-https://developer.github.com/v3/apps/installations/#list-repositories-accessible-to-the-user-for-an-installation
+https://developer.github.com/v3/apps/installations/#list-repositories-accessible-to-the-user-access-token
 
 List repositories that the authenticated user has explicit permission (`:read`, `:write`, or `:admin`) to access for an installation.
 
@@ -1529,7 +1531,7 @@ The access the user has to each repository is included in the hash under the `pe
 
 ## apps list-installations
 
-https://developer.github.com/v3/apps/#list-installations
+https://developer.github.com/v3/apps/#list-installations-for-the-authenticated-app
 
 You must use a [JWT](https://developer.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
 
@@ -1546,7 +1548,7 @@ The permissions the installation has are included under the `permissions` key.
 
 ## apps list-installations-for-authenticated-user
 
-https://developer.github.com/v3/apps/installations/#list-installations-for-a-user
+https://developer.github.com/v3/apps/installations/#list-app-installations-accessible-to-the-user-access-token
 
 Lists installations of your GitHub App that the authenticated user has explicit permission (`:read`, `:write`, or `:admin`) to access.
 
@@ -1597,11 +1599,11 @@ GitHub Apps must use a [JWT](https://developer.github.com/apps/building-github-a
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
-## apps list-repos
+## apps list-repos-accessible-to-installation
 
-https://developer.github.com/v3/apps/installations/#list-repositories
+https://developer.github.com/v3/apps/installations/#list-repositories-accessible-to-the-app-installation
 
-List repositories that an installation can access.
+List repositories that an app installation can access.
 
 You must use an [installation access token](https://developer.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-an-installation) to access this endpoint.
 
@@ -1645,7 +1647,7 @@ Lists the active subscriptions for the authenticated user. You must use a [user-
 
 ## apps remove-repo-from-installation
 
-https://developer.github.com/v3/apps/installations/#remove-repository-from-installation
+https://developer.github.com/v3/apps/installations/#remove-a-repository-from-an-app-installation
 
 Remove a single repository from an installation. The authenticated user must have admin access to the repository.
 
@@ -1664,7 +1666,7 @@ You must use a personal access token (which you can create via the [command line
 
 https://developer.github.com/v3/apps/oauth_applications/#reset-an-authorization
 
-**Deprecation Notice:** GitHub will replace and discontinue OAuth endpoints containing `access_token` in the path parameter. We are introducing new endpoints that allow you to securely manage tokens for OAuth Apps by using `access_token` as an input parameter. The OAuth Application API will be removed on July 1, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-app-endpoint/).
+**Deprecation Notice:** GitHub will replace and discontinue OAuth endpoints containing `access_token` in the path parameter. We are introducing new endpoints that allow you to securely manage tokens for OAuth Apps by using `access_token` as an input parameter. The OAuth Application API will be removed on May 5, 2021. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-app-endpoint/).
 
 OAuth applications can use this API method to reset a valid OAuth token without end-user involvement. Applications must save the "token" property in the response because changes take effect immediately. You must use [Basic Authentication](https://developer.github.com/v3/auth#basic-authentication) when accessing this endpoint, using the OAuth application's `client_id` and `client_secret` as the username and password. Invalid tokens will return `404 NOT FOUND`.
 
@@ -1694,7 +1696,7 @@ OAuth applications can use this API method to reset a valid OAuth token without 
 
 https://developer.github.com/v3/apps/oauth_applications/#revoke-an-authorization-for-an-application
 
-**Deprecation Notice:** GitHub will replace and discontinue OAuth endpoints containing `access_token` in the path parameter. We are introducing new endpoints that allow you to securely manage tokens for OAuth Apps by using `access_token` as an input parameter. The OAuth Application API will be removed on July 1, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-app-endpoint/).
+**Deprecation Notice:** GitHub will replace and discontinue OAuth endpoints containing `access_token` in the path parameter. We are introducing new endpoints that allow you to securely manage tokens for OAuth Apps by using `access_token` as an input parameter. The OAuth Application API will be removed on May 5, 2021. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-app-endpoint/).
 
 OAuth application owners can revoke a single token for an OAuth application. You must use [Basic Authentication](https://developer.github.com/v3/auth#basic-authentication) when accessing this endpoint, using the OAuth application's `client_id` and `client_secret` as the username and password.
 
@@ -1710,7 +1712,7 @@ OAuth application owners can revoke a single token for an OAuth application. You
 
 https://developer.github.com/v3/apps/oauth_applications/#revoke-a-grant-for-an-application
 
-**Deprecation Notice:** GitHub will replace and discontinue OAuth endpoints containing `access_token` in the path parameter. We are introducing new endpoints that allow you to securely manage tokens for OAuth Apps by using `access_token` as an input parameter. The OAuth Application API will be removed on July 1, 2020. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-app-endpoint/).
+**Deprecation Notice:** GitHub will replace and discontinue OAuth endpoints containing `access_token` in the path parameter. We are introducing new endpoints that allow you to securely manage tokens for OAuth Apps by using `access_token` as an input parameter. The OAuth Application API will be removed on May 5, 2021. For more information, including scheduled brownouts, see the [blog post](https://developer.github.com/changes/2020-02-14-deprecating-oauth-app-endpoint/).
 
 OAuth application owners can revoke a grant for their OAuth application and a specific user. You must use [Basic Authentication](https://developer.github.com/v3/auth#basic-authentication) when accessing this endpoint, using the OAuth application's `client_id` and `client_secret` as the username and password. You must also provide a valid token as `:access_token` and the grant for the token's owner will be deleted.
 
@@ -1724,19 +1726,19 @@ Deleting an OAuth application's grant will also delete all OAuth tokens associat
 | access_token | __Required__  |
 | client_id | __Required__  |
 
-## apps revoke-installation-token
+## apps revoke-installation-access-token
 
-https://developer.github.com/v3/apps/installations/#revoke-an-installation-token
+https://developer.github.com/v3/apps/installations/#revoke-an-installation-access-token
 
 Revokes the installation token you're using to authenticate as an installation and access this endpoint.
 
-Once an installation token is revoked, the token is invalidated and cannot be used. Other endpoints that require the revoked installation token must have a new installation token to work. You can create a new token using the "[Create a new installation token](https://developer.github.com/v3/apps/#create-a-new-installation-token)" endpoint.
+Once an installation token is revoked, the token is invalidated and cannot be used. Other endpoints that require the revoked installation token must have a new installation token to work. You can create a new token using the "[Create an installation access token for an app](https://developer.github.com/v3/apps/#create-an-installation-access-token-for-an-app)" endpoint.
 
 You must use an [installation access token](https://developer.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-an-installation) to access this endpoint.
 
 ## apps suspend-installation
 
-https://developer.github.com/v3/apps/#suspend-an-installation
+https://developer.github.com/v3/apps/#suspend-an-app-installation
 
 **Note:** Suspending a GitHub App installation is currently in beta and subject to change. Before you can suspend a GitHub App, the app owner must enable suspending installations for the app by opting-in to the beta. For more information, see "[Suspending a GitHub App installation](https://developer.github.com/apps/managing-github-apps/suspending-a-github-app-installation/)."
 
@@ -1755,7 +1757,7 @@ You must use a [JWT](https://developer.github.com/apps/building-github-apps/auth
 
 ## apps unsuspend-installation
 
-https://developer.github.com/v3/apps/#unsuspend-an-installation
+https://developer.github.com/v3/apps/#unsuspend-an-app-installation
 
 **Note:** Suspending a GitHub App installation is currently in beta and subject to change. Before you can suspend a GitHub App, the app owner must enable suspending installations for the app by opting-in to the beta. For more information, see "[Suspending a GitHub App installation](https://developer.github.com/apps/managing-github-apps/suspending-a-github-app-installation/)."
 
@@ -2039,7 +2041,7 @@ Lists all open code scanning alerts for the default branch (usually `master`) an
 
 ## codes-of-conduct get-all-codes-of-conduct
 
-https://developer.github.com/v3/codes_of_conduct/#list-all-codes-of-conduct
+https://developer.github.com/v3/codes_of_conduct/#get-all-codes-of-conduct
 
 
 
@@ -2052,7 +2054,7 @@ https://developer.github.com/v3/codes_of_conduct/#list-all-codes-of-conduct
 
 ## codes-of-conduct get-conduct-code
 
-https://developer.github.com/v3/codes_of_conduct/#get-an-individual-code-of-conduct
+https://developer.github.com/v3/codes_of_conduct/#get-a-code-of-conduct
 
 
 
@@ -2066,7 +2068,7 @@ https://developer.github.com/v3/codes_of_conduct/#get-an-individual-code-of-cond
 
 ## codes-of-conduct get-for-repo
 
-https://developer.github.com/v3/codes_of_conduct/#get-the-contents-of-a-repositorys-code-of-conduct
+https://developer.github.com/v3/codes_of_conduct/#get-the-code-of-conduct-for-a-repository
 
 This method returns the contents of the repository's code of conduct file, if one is detected.
 
@@ -2083,7 +2085,7 @@ This method returns the contents of the repository's code of conduct file, if on
 
 ## emojis get
 
-https://developer.github.com/v3/emojis/#emojis
+https://developer.github.com/v3/emojis/#get-emojis
 
 Lists all the emojis available to use on GitHub.
 
@@ -2122,7 +2124,7 @@ Allows you to add a new gist with one or more files.
 
 ## gists create-comment
 
-https://developer.github.com/v3/gists/comments/#create-a-comment
+https://developer.github.com/v3/gists/comments/#create-a-gist-comment
 
 
 
@@ -2149,7 +2151,7 @@ https://developer.github.com/v3/gists/#delete-a-gist
 
 ## gists delete-comment
 
-https://developer.github.com/v3/gists/comments/#delete-a-comment
+https://developer.github.com/v3/gists/comments/#delete-a-gist-comment
 
 
 
@@ -2189,7 +2191,7 @@ https://developer.github.com/v3/gists/#get-a-gist
 
 ## gists get-comment
 
-https://developer.github.com/v3/gists/comments/#get-a-single-comment
+https://developer.github.com/v3/gists/comments/#get-a-gist-comment
 
 
 
@@ -2203,7 +2205,7 @@ https://developer.github.com/v3/gists/comments/#get-a-single-comment
 
 ## gists get-revision
 
-https://developer.github.com/v3/gists/#get-a-specific-revision-of-a-gist
+https://developer.github.com/v3/gists/#get-a-gist-revision
 
 
 
@@ -2232,7 +2234,7 @@ Lists the authenticated user's gists or if called anonymously, this endpoint ret
 
 ## gists list-comments
 
-https://developer.github.com/v3/gists/comments/#list-comments-on-a-gist
+https://developer.github.com/v3/gists/comments/#list-gist-comments
 
 
 
@@ -2366,7 +2368,7 @@ Allows you to update or delete a gist file and rename gist files. Files from the
 
 ## gists update-comment
 
-https://developer.github.com/v3/gists/comments/#edit-a-comment
+https://developer.github.com/v3/gists/comments/#update-a-gist-comment
 
 
 
@@ -2588,11 +2590,11 @@ These are the possible values for `reason` in the `verification` object:
 
 ## git get-ref
 
-https://developer.github.com/v3/git/refs/#get-a-single-reference
+https://developer.github.com/v3/git/refs/#get-a-reference
 
 Returns a single reference from your Git database. The `:ref` in the URL must be formatted as `heads/<branch name>` for branches and `tags/<tag name>` for tags. If the `:ref` doesn't match an existing ref, a `404` is returned.
 
-**Note:** You need to explicitly [request a pull request](https://developer.github.com/v3/pulls/#get-a-single-pull-request) to trigger a test merge commit, which checks the mergeability of pull requests. For more information, see "[Checking mergeability of pull requests](https://developer.github.com/v3/git/#checking-mergeability-of-pull-requests)".
+**Note:** You need to explicitly [request a pull request](https://developer.github.com/v3/pulls/#get-a-pull-request) to trigger a test merge commit, which checks the mergeability of pull requests. For more information, see "[Checking mergeability of pull requests](https://developer.github.com/v3/git/#checking-mergeability-of-pull-requests)".
 
 To get the reference for a branch named `skunkworkz/featureA`, the endpoint route is:
 
@@ -2644,7 +2646,7 @@ https://developer.github.com/v3/git/trees/#get-a-tree
 
 Returns a single tree using the SHA1 value for that tree.
 
-If `truncated` is `true` in the response then the number of items in the `tree` array exceeded our maximum limit. If you need to fetch more items, you can clone the repository and iterate over the Git data locally.
+If `truncated` is `true` in the response then the number of items in the `tree` array exceeded our maximum limit. If you need to fetch more items, use the non-recursive method of fetching trees, and fetch one sub-tree at a time.
 
 ### parameters
 
@@ -2652,8 +2654,8 @@ If `truncated` is `true` in the response then the number of items in the `tree` 
 | name | description |
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
-| tree_sha | __Required__ tree_sha parameter |
-| recursive | recursive parameter |
+| tree_sha | __Required__  |
+| recursive | Setting this parameter to any value returns the objects or subtrees referenced by the tree specified in `:tree_sha`. For example, setting `recursive` to any of the following will enable returning objects or subtrees: `0`, `1`, `"true"`, and `"false"`. Omit this parameter to prevent recursively returning objects or subtrees. |
 
 ## git list-matching-refs
 
@@ -2663,7 +2665,7 @@ Returns an array of references from your Git database that match the supplied na
 
 When you use this endpoint without providing a `:ref`, it will return an array of all the references from your Git database, including notes and stashes if they exist on the server. Anything in the namespace is returned, not just `heads` and `tags`.
 
-**Note:** You need to explicitly [request a pull request](https://developer.github.com/v3/pulls/#get-a-single-pull-request) to trigger a test merge commit, which checks the mergeability of pull requests. For more information, see "[Checking mergeability of pull requests](https://developer.github.com/v3/git/#checking-mergeability-of-pull-requests)".
+**Note:** You need to explicitly [request a pull request](https://developer.github.com/v3/pulls/#get-a-pull-request) to trigger a test merge commit, which checks the mergeability of pull requests. For more information, see "[Checking mergeability of pull requests](https://developer.github.com/v3/git/#checking-mergeability-of-pull-requests)".
 
 If you request matching references for a branch named `feature` but the branch `feature` doesn't exist, the response can still include other matching head refs that start with the word `feature`, such as `featureA` and `featureB`.
 
@@ -2696,9 +2698,15 @@ https://developer.github.com/v3/git/refs/#update-a-reference
 # gitignore
 
 
+## gitignore get-all-templates
+
+https://developer.github.com/v3/gitignore/#get-all-gitignore-templates
+
+List all templates available to pass as an option when [creating a repository](https://developer.github.com/v3/repos/#create-a-repository-for-the-authenticated-user).
+
 ## gitignore get-template
 
-https://developer.github.com/v3/gitignore/#get-a-single-template
+https://developer.github.com/v3/gitignore/#get-a-gitignore-template
 
 The API also allows fetching the source of a single template.
 
@@ -2711,44 +2719,8 @@ Use the raw [media type](https://developer.github.com/v3/media/) to get the raw 
 |------|-------------|
 | name | __Required__  |
 
-## gitignore list-templates
-
-https://developer.github.com/v3/gitignore/#listing-available-templates
-
-List all templates available to pass as an option when [creating a repository](https://developer.github.com/v3/repos/#create-a-repository-for-the-authenticated-user).
-
 # interactions
 
-
-## interactions add-or-update-restrictions-for-org
-
-https://developer.github.com/v3/interactions/orgs/#add-or-update-interaction-restrictions-for-an-organization
-
-Temporarily restricts interactions to certain GitHub users in any public repository in the given organization. You must be an organization owner to set these restrictions.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| limit | __Required__ Specifies the group of GitHub users who can comment, open issues, or create pull requests in public repositories for the given organization. Must be one of: `existing_users`, `contributors_only`, or `collaborators_only`. |
-| org | __Required__  |
-| sombra-preview | __Required__ The Interactions API is currently in public preview. See the [blog post](https://developer.github.com/changes/2018-12-18-interactions-preview) preview for more details. To access the API during the preview period, you must set this flag. |
-
-## interactions add-or-update-restrictions-for-repo
-
-https://developer.github.com/v3/interactions/repos/#add-or-update-interaction-restrictions-for-a-repository
-
-Temporarily restricts interactions to certain GitHub users within the given repository. You must have owner or admin access to set restrictions.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| limit | __Required__ Specifies the group of GitHub users who can comment, open issues, or create pull requests for the given repository. Must be one of: `existing_users`, `contributors_only`, or `collaborators_only`. |
-| repo | __Required__ repository in OWNER/REPO form |
-| sombra-preview | __Required__ The Interactions API is currently in public preview. See the [blog post](https://developer.github.com/changes/2018-12-18-interactions-preview) preview for more details. To access the API during the preview period, you must set this flag. |
 
 ## interactions get-restrictions-for-org
 
@@ -2806,6 +2778,36 @@ Removes all interaction restrictions from the given repository. You must have ow
 | repo | __Required__ repository in OWNER/REPO form |
 | sombra-preview | __Required__ The Interactions API is currently in public preview. See the [blog post](https://developer.github.com/changes/2018-12-18-interactions-preview) preview for more details. To access the API during the preview period, you must set this flag. |
 
+## interactions set-restrictions-for-org
+
+https://developer.github.com/v3/interactions/orgs/#set-interaction-restrictions-for-an-organization
+
+Temporarily restricts interactions to certain GitHub users in any public repository in the given organization. You must be an organization owner to set these restrictions.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| limit | __Required__ Specifies the group of GitHub users who can comment, open issues, or create pull requests in public repositories for the given organization. Must be one of: `existing_users`, `contributors_only`, or `collaborators_only`. |
+| org | __Required__  |
+| sombra-preview | __Required__ The Interactions API is currently in public preview. See the [blog post](https://developer.github.com/changes/2018-12-18-interactions-preview) preview for more details. To access the API during the preview period, you must set this flag. |
+
+## interactions set-restrictions-for-repo
+
+https://developer.github.com/v3/interactions/repos/#set-interaction-restrictions-for-a-repository
+
+Temporarily restricts interactions to certain GitHub users within the given repository. You must have owner or admin access to set restrictions.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| limit | __Required__ Specifies the group of GitHub users who can comment, open issues, or create pull requests for the given repository. Must be one of: `existing_users`, `contributors_only`, or `collaborators_only`. |
+| repo | __Required__ repository in OWNER/REPO form |
+| sombra-preview | __Required__ The Interactions API is currently in public preview. See the [blog post](https://developer.github.com/changes/2018-12-18-interactions-preview) preview for more details. To access the API during the preview period, you must set this flag. |
+
 # issues
 
 
@@ -2841,9 +2843,9 @@ https://developer.github.com/v3/issues/labels/#add-labels-to-an-issue
 | labels | __Required__ The name of the label to add to the issue. Must contain at least one label. **Note:** Alternatively, you can pass a single label as a `string` or an `array` of labels directly, but GitHub recommends passing an object with the `labels` key. |
 | repo | __Required__ repository in OWNER/REPO form |
 
-## issues check-assignee
+## issues check-user-can-be-assigned
 
-https://developer.github.com/v3/issues/assignees/#check-assignee
+https://developer.github.com/v3/issues/assignees/#check-if-a-user-can-be-assigned
 
 Checks if a user has permission to be assigned to an issue in this repository.
 
@@ -2882,7 +2884,7 @@ This endpoint triggers [notifications](https://help.github.com/articles/about-no
 
 ## issues create-comment
 
-https://developer.github.com/v3/issues/comments/#create-a-comment
+https://developer.github.com/v3/issues/comments/#create-an-issue-comment
 
 This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
 
@@ -2930,7 +2932,7 @@ https://developer.github.com/v3/issues/milestones/#create-a-milestone
 
 ## issues delete-comment
 
-https://developer.github.com/v3/issues/comments/#delete-a-comment
+https://developer.github.com/v3/issues/comments/#delete-an-issue-comment
 
 
 
@@ -2991,7 +2993,7 @@ Be aware that the `id` of a pull request returned from "Issues" endpoints will b
 
 ## issues get-comment
 
-https://developer.github.com/v3/issues/comments/#get-a-single-comment
+https://developer.github.com/v3/issues/comments/#get-an-issue-comment
 
 
 
@@ -3007,7 +3009,7 @@ https://developer.github.com/v3/issues/comments/#get-a-single-comment
 
 ## issues get-event
 
-https://developer.github.com/v3/issues/events/#get-a-single-event
+https://developer.github.com/v3/issues/events/#get-an-issue-event
 
 
 
@@ -3024,7 +3026,7 @@ https://developer.github.com/v3/issues/events/#get-a-single-event
 
 ## issues get-label
 
-https://developer.github.com/v3/issues/labels/#get-a-single-label
+https://developer.github.com/v3/issues/labels/#get-a-label
 
 
 
@@ -3038,7 +3040,7 @@ https://developer.github.com/v3/issues/labels/#get-a-single-label
 
 ## issues get-milestone
 
-https://developer.github.com/v3/issues/milestones/#get-a-single-milestone
+https://developer.github.com/v3/issues/milestones/#get-a-milestone
 
 
 
@@ -3093,7 +3095,7 @@ Lists the [available assignees](https://help.github.com/articles/assigning-issue
 
 ## issues list-comments
 
-https://developer.github.com/v3/issues/comments/#list-comments-on-an-issue
+https://developer.github.com/v3/issues/comments/#list-issue-comments
 
 Issue Comments are ordered by ascending ID.
 
@@ -3111,7 +3113,7 @@ Issue Comments are ordered by ascending ID.
 
 ## issues list-comments-for-repo
 
-https://developer.github.com/v3/issues/comments/#list-comments-in-a-repository
+https://developer.github.com/v3/issues/comments/#list-issue-comments-for-a-repository
 
 By default, Issue Comments are ordered by ascending ID.
 
@@ -3130,7 +3132,7 @@ By default, Issue Comments are ordered by ascending ID.
 
 ## issues list-events
 
-https://developer.github.com/v3/issues/events/#list-events-for-an-issue
+https://developer.github.com/v3/issues/events/#list-issue-events
 
 
 
@@ -3148,7 +3150,7 @@ https://developer.github.com/v3/issues/events/#list-events-for-an-issue
 
 ## issues list-events-for-repo
 
-https://developer.github.com/v3/issues/events/#list-events-for-a-repository
+https://developer.github.com/v3/issues/events/#list-issue-events-for-a-repository
 
 
 
@@ -3165,7 +3167,7 @@ https://developer.github.com/v3/issues/events/#list-events-for-a-repository
 
 ## issues list-events-for-timeline
 
-https://developer.github.com/v3/issues/timeline/#list-events-for-an-issue
+https://developer.github.com/v3/issues/timeline/#list-timeline-events-for-an-issue
 
 
 
@@ -3266,7 +3268,7 @@ Be aware that the `id` of a pull request returned from "Issues" endpoints will b
 
 ## issues list-labels-for-milestone
 
-https://developer.github.com/v3/issues/labels/#get-labels-for-every-issue-in-a-milestone
+https://developer.github.com/v3/issues/labels/#list-labels-for-issues-in-a-milestone
 
 
 
@@ -3282,7 +3284,7 @@ https://developer.github.com/v3/issues/labels/#get-labels-for-every-issue-in-a-m
 
 ## issues list-labels-for-repo
 
-https://developer.github.com/v3/issues/labels/#list-all-labels-for-this-repository
+https://developer.github.com/v3/issues/labels/#list-labels-for-a-repository
 
 
 
@@ -3297,7 +3299,7 @@ https://developer.github.com/v3/issues/labels/#list-all-labels-for-this-reposito
 
 ## issues list-labels-on-issue
 
-https://developer.github.com/v3/issues/labels/#list-labels-on-an-issue
+https://developer.github.com/v3/issues/labels/#list-labels-for-an-issue
 
 
 
@@ -3311,9 +3313,9 @@ https://developer.github.com/v3/issues/labels/#list-labels-on-an-issue
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
-## issues list-milestones-for-repo
+## issues list-milestones
 
-https://developer.github.com/v3/issues/milestones/#list-milestones-for-a-repository
+https://developer.github.com/v3/issues/milestones/#list-milestones
 
 
 
@@ -3393,11 +3395,11 @@ Removes the specified label from the issue, and returns the remaining labels on 
 | name | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
-## issues replace-all-labels
+## issues set-labels
 
-https://developer.github.com/v3/issues/labels/#replace-all-labels-for-an-issue
+https://developer.github.com/v3/issues/labels/#set-labels-for-an-issue
 
-
+Removes any previous labels and sets the new labels for an issue.
 
 ### parameters
 
@@ -3445,7 +3447,7 @@ Issue owners and users with push access can edit an issue.
 
 ## issues update-comment
 
-https://developer.github.com/v3/issues/comments/#edit-a-comment
+https://developer.github.com/v3/issues/comments/#update-an-issue-comment
 
 
 
@@ -3498,7 +3500,7 @@ https://developer.github.com/v3/issues/milestones/#update-a-milestone
 
 ## licenses get
 
-https://developer.github.com/v3/licenses/#get-an-individual-license
+https://developer.github.com/v3/licenses/#get-a-license
 
 
 
@@ -3509,13 +3511,19 @@ https://developer.github.com/v3/licenses/#get-an-individual-license
 |------|-------------|
 | license | __Required__  |
 
+## licenses get-all-commonly-used
+
+https://developer.github.com/v3/licenses/#get-all-commonly-used-licenses
+
+
+
 ## licenses get-for-repo
 
-https://developer.github.com/v3/licenses/#get-the-contents-of-a-repositorys-license
+https://developer.github.com/v3/licenses/#get-the-license-for-a-repository
 
 This method returns the contents of the repository's license file, if one is detected.
 
-Similar to [the repository contents API](https://developer.github.com/v3/repos/contents/#get-contents), this method also supports [custom media types](https://developer.github.com/v3/repos/contents/#custom-media-types) for retrieving the raw license content or rendered license HTML.
+Similar to [Get repository content](https://developer.github.com/v3/repos/contents/#get-repository-content), this method also supports [custom media types](https://developer.github.com/v3/repos/contents/#custom-media-types) for retrieving the raw license content or rendered license HTML.
 
 ### parameters
 
@@ -3524,18 +3532,12 @@ Similar to [the repository contents API](https://developer.github.com/v3/repos/c
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
 
-## licenses list-commonly-used
-
-https://developer.github.com/v3/licenses/#list-commonly-used-licenses
-
-
-
 # markdown
 
 
 ## markdown render
 
-https://developer.github.com/v3/markdown/#render-an-arbitrary-markdown-document
+https://developer.github.com/v3/markdown/#render-a-markdown-document
 
 
 
@@ -3566,7 +3568,7 @@ You must send Markdown as plain text (using a `Content-Type` header of `text/pla
 
 ## meta get
 
-https://developer.github.com/v3/meta/#meta
+https://developer.github.com/v3/meta/#get-github-meta-information
 
 This endpoint provides a list of GitHub's IP addresses. For more information, see "[About GitHub's IP addresses](https://help.github.com/articles/about-github-s-ip-addresses/)."
 
@@ -3590,7 +3592,7 @@ Stop an import for a repository.
 
 https://developer.github.com/v3/migrations/users/#delete-a-user-migration-archive
 
-Deletes a previous migration archive. Downloadable migration archives are automatically deleted after seven days. Migration metadata, which is returned in the [List user migrations](https://developer.github.com/v3/migrations/users/#list-user-migrations) and [Get the status of a user migration](https://developer.github.com/v3/migrations/users/#get-the-status-of-a-user-migration) endpoints, will continue to be available even after an archive is deleted.
+Deletes a previous migration archive. Downloadable migration archives are automatically deleted after seven days. Migration metadata, which is returned in the [List user migrations](https://developer.github.com/v3/migrations/users/#list-user-migrations) and [Get a user migration status](https://developer.github.com/v3/migrations/users/#get-a-user-migration-status) endpoints, will continue to be available even after an archive is deleted.
 
 ### parameters
 
@@ -3670,7 +3672,7 @@ https://developer.github.com/v3/migrations/source_imports/#get-commit-authors
 
 Each type of source control system represents authors in a different way. For example, a Git commit author has a display name and an email address, but a Subversion commit author just has a username. The GitHub Importer will make the author information valid, but the author might not be correct. For example, it will change the bare Subversion username `hubot` into something like `hubot <hubot@12341234-abab-fefe-8787-fedcba987654>`.
 
-This API method and the "Map a commit author" method allow you to provide correct Git author information.
+This endpoint and the [Map a commit author](https://developer.github.com/v3/migrations/source_imports/#map-a-commit-author) endpoint allow you to provide correct Git author information.
 
 ### parameters
 
@@ -3680,9 +3682,9 @@ This API method and the "Map a commit author" method allow you to provide correc
 | repo | __Required__ repository in OWNER/REPO form |
 | since | Only authors found after this id are returned. Provide the highest author ID you've seen so far. New authors may be added to the list at any point while the importer is performing the `raw` step. |
 
-## migrations get-import-progress
+## migrations get-import-status
 
-https://developer.github.com/v3/migrations/source_imports/#get-import-progress
+https://developer.github.com/v3/migrations/source_imports/#get-an-import-status
 
 View the progress of an import.
 
@@ -3700,11 +3702,11 @@ An import that does not have errors will progress through these steps:
 
 If there are problems, you will see one of these in the `status` field:
 
-*   `auth_failed` - the import requires authentication in order to connect to the original repository. To update authentication for the import, please see the [Update Existing Import](https://developer.github.com/v3/migrations/source_imports/#update-existing-import) section.
+*   `auth_failed` - the import requires authentication in order to connect to the original repository. To update authentication for the import, please see the [Update an import](https://developer.github.com/v3/migrations/source_imports/#update-an-import) section.
 *   `error` - the import encountered an error. The import progress response will include the `failed_step` and an error message. Contact [GitHub Support](https://github.com/contact) or [GitHub Premium Support](https://premium.githubsupport.com) for more information.
-*   `detection_needs_auth` - the importer requires authentication for the originating repository to continue detection. To update authentication for the import, please see the [Update Existing Import](https://developer.github.com/v3/migrations/source_imports/#update-existing-import) section.
+*   `detection_needs_auth` - the importer requires authentication for the originating repository to continue detection. To update authentication for the import, please see the [Update an import](https://developer.github.com/v3/migrations/source_imports/#update-an-import) section.
 *   `detection_found_nothing` - the importer didn't recognize any source control at the URL. To resolve, [Cancel the import](https://developer.github.com/v3/migrations/source_imports/#cancel-an-import) and [retry](https://developer.github.com/v3/migrations/source_imports/#start-an-import) with the correct URL.
-*   `detection_found_multiple` - the importer found several projects or repositories at the provided URL. When this is the case, the Import Progress response will also include a `project_choices` field with the possible project choices as values. To update project choice, please see the [Update Existing Import](https://developer.github.com/v3/migrations/source_imports/#update-existing-import) section.
+*   `detection_found_multiple` - the importer found several projects or repositories at the provided URL. When this is the case, the Import Progress response will also include a `project_choices` field with the possible project choices as values. To update project choice, please see the [Update an import](https://developer.github.com/v3/migrations/source_imports/#update-an-import) section.
 
 **The project_choices field**
 
@@ -3741,7 +3743,7 @@ List files larger than 100MB found during the import
 
 ## migrations get-status-for-authenticated-user
 
-https://developer.github.com/v3/migrations/users/#get-the-status-of-a-user-migration
+https://developer.github.com/v3/migrations/users/#get-a-user-migration-status
 
 Fetches a single user migration. The response includes the `state` of the migration, which can be one of the following values:
 
@@ -3762,7 +3764,7 @@ Once the migration has been `exported` you can [download the migration archive](
 
 ## migrations get-status-for-org
 
-https://developer.github.com/v3/migrations/orgs/#get-the-status-of-an-organization-migration
+https://developer.github.com/v3/migrations/orgs/#get-an-organization-migration-status
 
 Fetches the status of a migration.
 
@@ -3864,7 +3866,7 @@ Update an author's identity for the import. Your application can continue updati
 
 ## migrations set-lfs-preference
 
-https://developer.github.com/v3/migrations/source_imports/#set-git-lfs-preference
+https://developer.github.com/v3/migrations/source_imports/#update-git-lfs-preference
 
 You can import repositories from Subversion, Mercurial, and TFS that include files larger than 100MB. This ability is powered by [Git LFS](https://git-lfs.github.com). You can learn more about our LFS feature and working with large files [on our help site](https://help.github.com/articles/versioning-large-files/).
 
@@ -3958,7 +3960,7 @@ Unlocks a repository that was locked for migration. You should unlock each migra
 
 ## migrations update-import
 
-https://developer.github.com/v3/migrations/source_imports/#update-existing-import
+https://developer.github.com/v3/migrations/source_imports/#update-an-import
 
 An import can be updated with credentials or a project choice by passing in the appropriate parameters in this API request. If no parameters are provided, the import will be restarted.
 
@@ -4168,32 +4170,9 @@ You can only send one of these scope keys at a time.
 # orgs
 
 
-## orgs add-or-update-membership
-
-https://developer.github.com/v3/orgs/members/#add-or-update-organization-membership
-
-Only authenticated organization owners can add a member to the organization or update the member's role.
-
-*   If the authenticated user is _adding_ a member to the organization, the invited user will receive an email inviting them to the organization. The user's [membership status](https://developer.github.com/v3/orgs/members/#get-organization-membership) will be `pending` until they accept the invitation.
-    
-*   Authenticated users can _update_ a user's membership by passing the `role` parameter. If the authenticated user changes a member's role to `admin`, the affected user will receive an email notifying them that they've been made an organization owner. If the authenticated user changes an owner's role to `member`, no email will be sent.
-
-**Rate limits**
-
-To prevent abuse, the authenticated user is limited to 50 organization invitations per 24 hour period. If the organization is more than one month old or on a paid plan, the limit is 500 invitations per 24 hour period.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| org | __Required__  |
-| username | __Required__  |
-| role | The role to give the user in the organization. Can be one of:  <br>\* `admin` - The user will become an owner of the organization.  <br>\* `member` - The user will become a non-owner member of the organization. |
-
 ## orgs block-user
 
-https://developer.github.com/v3/orgs/blocking/#block-a-user
+https://developer.github.com/v3/orgs/blocking/#block-a-user-from-an-organization
 
 
 
@@ -4207,7 +4186,7 @@ https://developer.github.com/v3/orgs/blocking/#block-a-user
 
 ## orgs check-blocked-user
 
-https://developer.github.com/v3/orgs/blocking/#check-whether-a-user-is-blocked-from-an-organization
+https://developer.github.com/v3/orgs/blocking/#check-if-a-user-is-blocked-by-an-organization
 
 If the user is blocked:
 
@@ -4221,9 +4200,9 @@ If the user is not blocked:
 | org | __Required__  |
 | username | __Required__  |
 
-## orgs check-membership
+## orgs check-membership-for-user
 
-https://developer.github.com/v3/orgs/members/#check-membership
+https://developer.github.com/v3/orgs/members/#check-organization-membership-for-a-user
 
 Check if a user is, publicly or privately, a member of the organization.
 
@@ -4235,23 +4214,9 @@ Check if a user is, publicly or privately, a member of the organization.
 | org | __Required__  |
 | username | __Required__  |
 
-## orgs check-public-membership
+## orgs check-public-membership-for-user
 
-https://developer.github.com/v3/orgs/members/#check-public-membership
-
-
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| org | __Required__  |
-| username | __Required__  |
-
-## orgs conceal-membership
-
-https://developer.github.com/v3/orgs/members/#conceal-a-users-membership
+https://developer.github.com/v3/orgs/members/#check-public-organization-membership-for-a-user
 
 
 
@@ -4265,7 +4230,7 @@ https://developer.github.com/v3/orgs/members/#conceal-a-users-membership
 
 ## orgs convert-member-to-outside-collaborator
 
-https://developer.github.com/v3/orgs/outside_collaborators/#convert-member-to-outside-collaborator
+https://developer.github.com/v3/orgs/outside_collaborators/#convert-an-organization-member-to-outside-collaborator
 
 When an organization member is converted to an outside collaborator, they'll only have access to the repositories that their current team membership allows. The user will no longer be a member of the organization. For more information, see "[Converting an organization member to an outside collaborator](https://help.github.com/articles/converting-an-organization-member-to-an-outside-collaborator/)".
 
@@ -4277,9 +4242,28 @@ When an organization member is converted to an outside collaborator, they'll onl
 | org | __Required__  |
 | username | __Required__  |
 
-## orgs create-hook
+## orgs create-invitation
 
-https://developer.github.com/v3/orgs/hooks/#create-a-hook
+https://developer.github.com/v3/orgs/members/#create-an-organization-invitation
+
+Invite people to an organization by using their GitHub user ID or their email address. In order to create invitations in an organization, the authenticated user must be an organization owner.
+
+This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| org | __Required__  |
+| email | **Required unless you provide `invitee_id`**. Email address of the person you are inviting, which can be an existing GitHub user. |
+| invitee_id | **Required unless you provide `email`**. GitHub user ID for the person you are inviting. |
+| role | Specify role for new member. Can be one of:  <br>\* `admin` - Organization owners with full administrative rights to the organization and complete access to all repositories and teams.  <br>\* `direct_member` - Non-owner organization members with ability to see other members and join teams by invitation.  <br>\* `billing_manager` - Non-owner organization members with ability to manage the billing settings of your organization. |
+| team_ids | Specify IDs for the teams you want to invite new members to. |
+
+## orgs create-webhook
+
+https://developer.github.com/v3/orgs/hooks/#create-an-organization-webhook
 
 Here's how you can create a hook that posts payloads in JSON format:
 
@@ -4297,28 +4281,9 @@ Here's how you can create a hook that posts payloads in JSON format:
 | config.secret | If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value in the [`X-Hub-Signature`](https://developer.github.com/webhooks/event-payloads/#delivery-headers) header. |
 | events | Determines what [events](https://developer.github.com/webhooks/event-payloads) the hook is triggered for. |
 
-## orgs create-invitation
+## orgs delete-webhook
 
-https://developer.github.com/v3/orgs/members/#create-organization-invitation
-
-Invite people to an organization by using their GitHub user ID or their email address. In order to create invitations in an organization, the authenticated user must be an organization owner.
-
-This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| org | __Required__  |
-| email | **Required unless you provide `invitee_id`**. Email address of the person you are inviting, which can be an existing GitHub user. |
-| invitee_id | **Required unless you provide `email`**. GitHub user ID for the person you are inviting. |
-| role | Specify role for new member. Can be one of:  <br>\* `admin` - Organization owners with full administrative rights to the organization and complete access to all repositories and teams.  <br>\* `direct_member` - Non-owner organization members with ability to see other members and join teams by invitation.  <br>\* `billing_manager` - Non-owner organization members with ability to manage the billing settings of your organization. |
-| team_ids | Specify IDs for the teams you want to invite new members to. |
-
-## orgs delete-hook
-
-https://developer.github.com/v3/orgs/hooks/#delete-a-hook
+https://developer.github.com/v3/orgs/hooks/#delete-an-organization-webhook
 
 
 
@@ -4346,9 +4311,9 @@ GitHub Apps with the `Organization plan` permission can use this endpoint to ret
 | org | __Required__  |
 | surtur-preview | New repository creation permissions are available to preview. You can now use `members_can_create_public_repositories`, `members_can_create_private_repositories`, and `members_can_create_internal_repositories`. You can only allow members to create internal repositories if your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+. These parameters provide more granular permissions to configure the type of repositories organization members can create.<br><br>To access these new parameters during the preview period, you must set this flag. |
 
-## orgs get-hook
+## orgs get-membership-for-authenticated-user
 
-https://developer.github.com/v3/orgs/hooks/#get-single-hook
+https://developer.github.com/v3/orgs/members/#get-an-organization-membership-for-the-authenticated-user
 
 
 
@@ -4357,12 +4322,11 @@ https://developer.github.com/v3/orgs/hooks/#get-single-hook
 
 | name | description |
 |------|-------------|
-| hook_id | __Required__  |
 | org | __Required__  |
 
-## orgs get-membership
+## orgs get-membership-for-user
 
-https://developer.github.com/v3/orgs/members/#get-organization-membership
+https://developer.github.com/v3/orgs/members/#get-organization-membership-for-a-user
 
 In order to get a user's membership with an organization, the authenticated user must be an organization member.
 
@@ -4374,9 +4338,9 @@ In order to get a user's membership with an organization, the authenticated user
 | org | __Required__  |
 | username | __Required__  |
 
-## orgs get-membership-for-authenticated-user
+## orgs get-webhook
 
-https://developer.github.com/v3/orgs/members/#get-your-organization-membership
+https://developer.github.com/v3/orgs/hooks/#get-an-organization-webhook
 
 
 
@@ -4385,11 +4349,12 @@ https://developer.github.com/v3/orgs/members/#get-your-organization-membership
 
 | name | description |
 |------|-------------|
+| hook_id | __Required__  |
 | org | __Required__  |
 
 ## orgs list
 
-https://developer.github.com/v3/orgs/#list-all-organizations
+https://developer.github.com/v3/orgs/#list-organizations
 
 Lists all organizations, in the order that they were created on GitHub.
 
@@ -4402,9 +4367,25 @@ Lists all organizations, in the order that they were created on GitHub.
 |------|-------------|
 | since | The integer ID of the last organization that you've seen. |
 
+## orgs list-app-installations
+
+https://developer.github.com/v3/orgs/#list-app-installations-for-an-organization
+
+Lists all GitHub Apps in an organization. The installation count includes all GitHub Apps installed on repositories in the organization. You must be an organization owner with `admin:read` scope to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
+| org | __Required__  |
+| page | Page number of the results to fetch. |
+| per_page | Results per page (max 100) |
+
 ## orgs list-blocked-users
 
-https://developer.github.com/v3/orgs/blocking/#list-blocked-users
+https://developer.github.com/v3/orgs/blocking/#list-users-blocked-by-an-organization
 
 List the users blocked by an organization.
 
@@ -4415,24 +4396,9 @@ List the users blocked by an organization.
 |------|-------------|
 | org | __Required__  |
 
-## orgs list-credential-authorizations
-
-https://developer.github.com/v3/orgs/#list-credential-authorizations-for-an-organization
-
-Listing and deleting credential authorizations is available to organizations with GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-
-An authenticated organization owner with the `read:org` scope can list all credential authorizations for an organization that uses SAML single sign-on (SSO). The credentials are either personal access tokens or SSH keys that organization members have authorized for the organization. For more information, see [About authentication with SAML single sign-on](https://help.github.com/en/articles/about-authentication-with-saml-single-sign-on).
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| org | __Required__  |
-
 ## orgs list-for-authenticated-user
 
-https://developer.github.com/v3/orgs/#list-your-organizations
+https://developer.github.com/v3/orgs/#list-organizations-for-the-authenticated-user
 
 List organizations for the authenticated user.
 
@@ -4450,11 +4416,11 @@ This only lists organizations that your authorization allows you to operate on i
 
 ## orgs list-for-user
 
-https://developer.github.com/v3/orgs/#list-user-organizations
+https://developer.github.com/v3/orgs/#list-organizations-for-a-user
 
 List [public organization memberships](https://help.github.com/articles/publicizing-or-concealing-organization-membership) for the specified user.
 
-This method only lists _public_ memberships, regardless of authentication. If you need to fetch all of the organization memberships (public and private) for the authenticated user, use the [List your organizations](https://developer.github.com/v3/orgs/#list-your-organizations) API instead.
+This method only lists _public_ memberships, regardless of authentication. If you need to fetch all of the organization memberships (public and private) for the authenticated user, use the [List organizations for the authenticated user](https://developer.github.com/v3/orgs/#list-organizations-for-the-authenticated-user) API instead.
 
 ### parameters
 
@@ -4462,37 +4428,6 @@ This method only lists _public_ memberships, regardless of authentication. If yo
 | name | description |
 |------|-------------|
 | username | __Required__  |
-| page | Page number of the results to fetch. |
-| per_page | Results per page (max 100) |
-
-## orgs list-hooks
-
-https://developer.github.com/v3/orgs/hooks/#list-hooks
-
-
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| org | __Required__  |
-| page | Page number of the results to fetch. |
-| per_page | Results per page (max 100) |
-
-## orgs list-installations
-
-https://developer.github.com/v3/orgs/#list-installations-for-an-organization
-
-Lists all GitHub Apps in an organization. The installation count includes all GitHub Apps installed on repositories in the organization. You must be an organization owner with `admin:read` scope to use this endpoint.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
-| org | __Required__  |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -4514,7 +4449,7 @@ List all teams associated with an invitation. In order to see invitations in an 
 
 ## orgs list-members
 
-https://developer.github.com/v3/orgs/members/#members-list
+https://developer.github.com/v3/orgs/members/#list-organization-members
 
 List all users who are members of an organization. If the authenticated user is also a member of this organization then both concealed and public members will be returned.
 
@@ -4529,9 +4464,9 @@ List all users who are members of an organization. If the authenticated user is 
 | per_page | Results per page (max 100) |
 | role | Filter members returned by their role. Can be one of:  <br>\* `all` - All members of the organization, regardless of role.  <br>\* `admin` - Organization owners.  <br>\* `member` - Non-owner organization members. |
 
-## orgs list-memberships
+## orgs list-memberships-for-authenticated-user
 
-https://developer.github.com/v3/orgs/members/#list-your-organization-memberships
+https://developer.github.com/v3/orgs/members/#list-organization-memberships-for-the-authenticated-user
 
 
 
@@ -4546,7 +4481,7 @@ https://developer.github.com/v3/orgs/members/#list-your-organization-memberships
 
 ## orgs list-outside-collaborators
 
-https://developer.github.com/v3/orgs/outside_collaborators/#list-outside-collaborators
+https://developer.github.com/v3/orgs/outside_collaborators/#list-outside-collaborators-for-an-organization
 
 List all users who are outside collaborators of an organization.
 
@@ -4577,7 +4512,7 @@ The return hash contains a `role` field which refers to the Organization Invitat
 
 ## orgs list-public-members
 
-https://developer.github.com/v3/orgs/members/#public-members-list
+https://developer.github.com/v3/orgs/members/#list-public-organization-members
 
 Members of an organization can choose to have their membership publicized or not.
 
@@ -4590,9 +4525,39 @@ Members of an organization can choose to have their membership publicized or not
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
-## orgs ping-hook
+## orgs list-saml-sso-authorizations
 
-https://developer.github.com/v3/orgs/hooks/#ping-a-hook
+https://developer.github.com/v3/orgs/#list-saml-sso-authorizations-for-an-organization
+
+Listing and deleting credential authorizations is available to organizations with GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products).
+
+An authenticated organization owner with the `read:org` scope can list all credential authorizations for an organization that uses SAML single sign-on (SSO). The credentials are either personal access tokens or SSH keys that organization members have authorized for the organization. For more information, see [About authentication with SAML single sign-on](https://help.github.com/en/articles/about-authentication-with-saml-single-sign-on).
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| org | __Required__  |
+
+## orgs list-webhooks
+
+https://developer.github.com/v3/orgs/hooks/#list-organization-webhooks
+
+
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| org | __Required__  |
+| page | Page number of the results to fetch. |
+| per_page | Results per page (max 100) |
+
+## orgs ping-webhook
+
+https://developer.github.com/v3/orgs/hooks/#ping-an-organization-webhook
 
 This will trigger a [ping event](https://developer.github.com/webhooks/#ping-event) to be sent to the hook.
 
@@ -4604,41 +4569,9 @@ This will trigger a [ping event](https://developer.github.com/webhooks/#ping-eve
 | hook_id | __Required__  |
 | org | __Required__  |
 
-## orgs publicize-membership
-
-https://developer.github.com/v3/orgs/members/#publicize-a-users-membership
-
-The user can publicize their own membership. (A user cannot publicize the membership for another user.)
-
-Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://developer.github.com/v3/#http-verbs)."
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| org | __Required__  |
-| username | __Required__  |
-
-## orgs remove-credential-authorization
-
-https://developer.github.com/v3/orgs/#remove-a-credential-authorization-for-an-organization
-
-Listing and deleting credential authorizations is available to organizations with GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-
-An authenticated organization owner with the `admin:org` scope can remove a credential authorization for an organization that uses SAML SSO. Once you remove someone's credential authorization, they will need to create a new personal access token or SSH key and authorize it for the organization they want to access.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| credential_id | __Required__  |
-| org | __Required__  |
-
 ## orgs remove-member
 
-https://developer.github.com/v3/orgs/members/#remove-a-member
+https://developer.github.com/v3/orgs/members/#remove-an-organization-member
 
 Removing a user from this list will remove them from all teams and they will no longer have any access to the organization's repositories.
 
@@ -4650,9 +4583,9 @@ Removing a user from this list will remove them from all teams and they will no 
 | org | __Required__  |
 | username | __Required__  |
 
-## orgs remove-membership
+## orgs remove-membership-for-user
 
-https://developer.github.com/v3/orgs/members/#remove-organization-membership
+https://developer.github.com/v3/orgs/members/#remove-organization-membership-for-a-user
 
 In order to remove a user's membership with an organization, the authenticated user must be an organization owner.
 
@@ -4668,7 +4601,7 @@ If the specified user is an active member of the organization, this will remove 
 
 ## orgs remove-outside-collaborator
 
-https://developer.github.com/v3/orgs/outside_collaborators/#remove-outside-collaborator
+https://developer.github.com/v3/orgs/outside_collaborators/#remove-outside-collaborator-from-an-organization
 
 Removing a user from this list will remove them from all the organization's repositories.
 
@@ -4680,9 +4613,78 @@ Removing a user from this list will remove them from all the organization's repo
 | org | __Required__  |
 | username | __Required__  |
 
+## orgs remove-public-membership-for-authenticated-user
+
+https://developer.github.com/v3/orgs/members/#remove-public-organization-membership-for-the-authenticated-user
+
+
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| org | __Required__  |
+| username | __Required__  |
+
+## orgs remove-saml-sso-authorization
+
+https://developer.github.com/v3/orgs/#remove-a-saml-sso-authorization-for-an-organization
+
+Listing and deleting credential authorizations is available to organizations with GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products).
+
+An authenticated organization owner with the `admin:org` scope can remove a credential authorization for an organization that uses SAML SSO. Once you remove someone's credential authorization, they will need to create a new personal access token or SSH key and authorize it for the organization they want to access.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| credential_id | __Required__  |
+| org | __Required__  |
+
+## orgs set-membership-for-user
+
+https://developer.github.com/v3/orgs/members/#set-organization-membership-for-a-user
+
+Only authenticated organization owners can add a member to the organization or update the member's role.
+
+*   If the authenticated user is _adding_ a member to the organization, the invited user will receive an email inviting them to the organization. The user's [membership status](https://developer.github.com/v3/orgs/members/#get-organization-membership-for-a-user) will be `pending` until they accept the invitation.
+    
+*   Authenticated users can _update_ a user's membership by passing the `role` parameter. If the authenticated user changes a member's role to `admin`, the affected user will receive an email notifying them that they've been made an organization owner. If the authenticated user changes an owner's role to `member`, no email will be sent.
+
+**Rate limits**
+
+To prevent abuse, the authenticated user is limited to 50 organization invitations per 24 hour period. If the organization is more than one month old or on a paid plan, the limit is 500 invitations per 24 hour period.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| org | __Required__  |
+| username | __Required__  |
+| role | The role to give the user in the organization. Can be one of:  <br>\* `admin` - The user will become an owner of the organization.  <br>\* `member` - The user will become a non-owner member of the organization. |
+
+## orgs set-public-membership-for-authenticated-user
+
+https://developer.github.com/v3/orgs/members/#set-public-organization-membership-for-the-authenticated-user
+
+The user can publicize their own membership. (A user cannot publicize the membership for another user.)
+
+Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://developer.github.com/v3/#http-verbs)."
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| org | __Required__  |
+| username | __Required__  |
+
 ## orgs unblock-user
 
-https://developer.github.com/v3/orgs/blocking/#unblock-a-user
+https://developer.github.com/v3/orgs/blocking/#unblock-a-user-from-an-organization
 
 
 
@@ -4696,7 +4698,7 @@ https://developer.github.com/v3/orgs/blocking/#unblock-a-user
 
 ## orgs update
 
-https://developer.github.com/v3/orgs/#edit-an-organization
+https://developer.github.com/v3/orgs/#update-an-organization
 
 **Parameter Deprecation Notice:** GitHub will replace and discontinue `members_allowed_repository_creation_type` in favor of more granular permissions. The new input parameters are `members_can_create_public_repositories`, `members_can_create_private_repositories` for all organizations and `members_can_create_internal_repositories` for organizations associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes).
 
@@ -4717,16 +4719,31 @@ Enables an authenticated organization owner with the `admin:org` scope to update
 | has_repository_projects | Toggles whether repositories that belong to the organization can use repository projects. |
 | location | The location. |
 | members_allowed_repository_creation_type | Specifies which types of repositories non-admin organization members can create. Can be one of:  <br>\* `all` - all organization members can create public and private repositories.  <br>\* `private` - members can create private repositories. This option is only available to repositories that are part of an organization on GitHub Enterprise Cloud.  <br>\* `none` - only admin members can create repositories.  <br>**Note:** This parameter is deprecated and will be removed in the future. Its return value ignores internal repositories. Using this parameter overrides values set in `members_can_create_repositories`. See [this note](https://developer.github.com/v3/orgs/#members_can_create_repositories) for details. |
-| members_can_create_internal_repositories | Toggles whether organization members can create internal repositories, which are visible to all enterprise members. You can only allow members to create internal repositories if your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+. Can be one of:  <br>\* `true` - all organization members can create internal repositories.  <br>\* `false` - only organization owners can create internal repositories.  <br>Default: `true`. For more information, see "[Restricting repository creation in your organization](https://help.github.com/github/setting-up-and-managing-organizations-and-teams/restricting-repository-creation-in-your-organization)" in the GitHub Help documentation. |
-| members_can_create_private_repositories | Toggles whether organization members can create private repositories, which are visible to organization members with permission. Can be one of:  <br>\* `true` - all organization members can create private repositories.  <br>\* `false` - only organization owners can create private repositories.  <br>Default: `true`. For more information, see "[Restricting repository creation in your organization](https://help.github.com/github/setting-up-and-managing-organizations-and-teams/restricting-repository-creation-in-your-organization)" in the GitHub Help documentation. |
-| members_can_create_public_repositories | Toggles whether organization members can create public repositories, which are visible to anyone. Can be one of:  <br>\* `true` - all organization members can create public repositories.  <br>\* `false` - only organization owners can create public repositories.  <br>Default: `true`. For more information, see "[Restricting repository creation in your organization](https://help.github.com/github/setting-up-and-managing-organizations-and-teams/restricting-repository-creation-in-your-organization)" in the GitHub Help documentation. |
+| members_can_create_internal_repositories | Toggles whether organization members can create internal repositories, which are visible to all enterprise members. You can only allow members to create internal repositories if your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+. Can be one of:  <br>\* `true` - all organization members can create internal repositories.  <br>\* `false` - only organization owners can create internal repositories.  <br>Default: `true`. For more information, see "[Restricting repository creation in your organization](https://help.github.com/github/setting-up-and-managing-organizations-and-teams/restricting-repository-creation-in-your-organization)". |
+| members_can_create_private_repositories | Toggles whether organization members can create private repositories, which are visible to organization members with permission. Can be one of:  <br>\* `true` - all organization members can create private repositories.  <br>\* `false` - only organization owners can create private repositories.  <br>Default: `true`. For more information, see "[Restricting repository creation in your organization](https://help.github.com/github/setting-up-and-managing-organizations-and-teams/restricting-repository-creation-in-your-organization)". |
+| members_can_create_public_repositories | Toggles whether organization members can create public repositories, which are visible to anyone. Can be one of:  <br>\* `true` - all organization members can create public repositories.  <br>\* `false` - only organization owners can create public repositories.  <br>Default: `true`. For more information, see "[Restricting repository creation in your organization](https://help.github.com/github/setting-up-and-managing-organizations-and-teams/restricting-repository-creation-in-your-organization)". |
 | members_can_create_repositories | Toggles the ability of non-admin organization members to create repositories. Can be one of:  <br>\* `true` - all organization members can create repositories.  <br>\* `false` - only organization owners can create repositories.  <br>Default: `true`  <br>**Note:** A parameter can override this parameter. See `members_allowed_repository_creation_type` in this table for details. **Note:** A parameter can override this parameter. See `members_allowed_repository_creation_type` in this table for details. |
 | name | The shorthand name of the company. |
 | surtur-preview | New repository creation permissions are available to preview. You can now use `members_can_create_public_repositories`, `members_can_create_private_repositories`, and `members_can_create_internal_repositories`. You can only allow members to create internal repositories if your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+. These parameters provide more granular permissions to configure the type of repositories organization members can create.<br><br>To access these new parameters during the preview period, you must set this flag. |
+| twitter_username | The Twitter username of the company. |
 
-## orgs update-hook
+## orgs update-membership-for-authenticated-user
 
-https://developer.github.com/v3/orgs/hooks/#edit-a-hook
+https://developer.github.com/v3/orgs/members/#update-an-organization-membership-for-the-authenticated-user
+
+
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| org | __Required__  |
+| state | __Required__ The state that the membership should be in. Only `"active"` will be accepted. |
+
+## orgs update-webhook
+
+https://developer.github.com/v3/orgs/hooks/#update-an-organization-webhook
 
 
 
@@ -4744,28 +4761,14 @@ https://developer.github.com/v3/orgs/hooks/#edit-a-hook
 | config.url | The URL to which the payloads will be delivered. |
 | events | Determines what [events](https://developer.github.com/webhooks/event-payloads) the hook is triggered for. |
 
-## orgs update-membership
-
-https://developer.github.com/v3/orgs/members/#edit-your-organization-membership
-
-
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| org | __Required__  |
-| state | __Required__ The state that the membership should be in. Only `"active"` will be accepted. |
-
 # projects
 
 
 ## projects add-collaborator
 
-https://developer.github.com/v3/projects/collaborators/#add-user-as-a-collaborator
+https://developer.github.com/v3/projects/collaborators/#add-project-collaborator
 
-Adds a collaborator to a an organization project and sets their permission level. You must be an organization owner or a project `admin` to add a collaborator.
+Adds a collaborator to an organization project and sets their permission level. You must be an organization owner or a project `admin` to add a collaborator.
 
 ### parameters
 
@@ -4942,6 +4945,21 @@ https://developer.github.com/v3/projects/columns/#get-a-project-column
 | column_id | __Required__  |
 | inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 
+## projects get-permission-for-user
+
+https://developer.github.com/v3/projects/collaborators/#get-project-permission-for-a-user
+
+Returns the collaborator's permission level for an organization project. Possible values for the `permission` key: `admin`, `write`, `read`, `none`. You must be an organization owner or a project `admin` to review a user's permission level.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
+| project_id | __Required__  |
+| username | __Required__  |
+
 ## projects list-cards
 
 https://developer.github.com/v3/projects/cards/#list-project-cards
@@ -4961,7 +4979,7 @@ https://developer.github.com/v3/projects/cards/#list-project-cards
 
 ## projects list-collaborators
 
-https://developer.github.com/v3/projects/collaborators/#list-collaborators
+https://developer.github.com/v3/projects/collaborators/#list-project-collaborators
 
 Lists the collaborators for an organization project. For a project, the list of collaborators includes outside collaborators, organization members that are direct collaborators, organization members with access through team memberships, organization members with access through default organization permissions, and organization owners. You must be an organization owner or a project `admin` to list collaborators.
 
@@ -5078,24 +5096,9 @@ https://developer.github.com/v3/projects/columns/#move-a-project-column
 
 ## projects remove-collaborator
 
-https://developer.github.com/v3/projects/collaborators/#remove-user-as-a-collaborator
+https://developer.github.com/v3/projects/collaborators/#remove-project-collaborator
 
 Removes a collaborator from an organization project. You must be an organization owner or a project `admin` to remove a collaborator.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
-| project_id | __Required__  |
-| username | __Required__  |
-
-## projects review-user-permission-level
-
-https://developer.github.com/v3/projects/collaborators/#review-a-users-permission-level
-
-Returns the collaborator's permission level for an organization project. Possible values for the `permission` key: `admin`, `write`, `read`, `none`. You must be an organization owner or a project `admin` to review a user's permission level.
 
 ### parameters
 
@@ -5121,7 +5124,7 @@ Updates a project board's information. Returns a `404 Not Found` status if proje
 | project_id | __Required__  |
 | body | The description of the project. |
 | name | The name of the project. |
-| organization_permission | The permission level that determines whether all members of the project's organization can see and/or make changes to the project. Setting `organization_permission` is only available for organization projects. If an organization member belongs to a team with a higher level of access or is a collaborator with a higher level of access, their permission level is not lowered by `organization_permission`. For information on changing access for a team or collaborator, see [Add or update team project](https://developer.github.com/v3/teams/#add-or-update-team-project) or [Add user as a collaborator](https://developer.github.com/v3/projects/collaborators/#add-user-as-a-collaborator).  <br>  <br>**Note:** Updating a project's `organization_permission` requires `admin` access to the project.  <br>  <br>Can be one of:  <br>\* `read` - Organization members can read, but not write to or administer this project.  <br>\* `write` - Organization members can read and write, but not administer this project.  <br>\* `admin` - Organization members can read, write and administer this project.  <br>\* `none` - Organization members can only see this project if it is public. |
+| organization_permission | The permission level that determines whether all members of the project's organization can see and/or make changes to the project. Setting `organization_permission` is only available for organization projects. If an organization member belongs to a team with a higher level of access or is a collaborator with a higher level of access, their permission level is not lowered by `organization_permission`. For information on changing access for a team or collaborator, see [Add or update team project permissions](https://developer.github.com/v3/teams/#add-or-update-team-project-permissions) or [Add project collaborator](https://developer.github.com/v3/projects/collaborators/#add-project-collaborator).  <br>  <br>**Note:** Updating a project's `organization_permission` requires `admin` access to the project.  <br>  <br>Can be one of:  <br>\* `read` - Organization members can read, but not write to or administer this project.  <br>\* `write` - Organization members can read and write, but not administer this project.  <br>\* `admin` - Organization members can read, write and administer this project.  <br>\* `none` - Organization members can only see this project if it is public. |
 | private | Sets the visibility of a project board. Setting `private` is only available for organization and user projects. **Note:** Updating a project's visibility requires `admin` access to the project.  <br>  <br>Can be one of:  <br>\* `false` - Anyone can see the project.  <br>\* `true` - Only the user can view a project board created on a user account. Organization members with the appropriate `organization_permission` can see project boards in an organization account. |
 | state | State of the project. Either `open` or `closed`. |
 
@@ -5161,7 +5164,7 @@ https://developer.github.com/v3/projects/columns/#update-a-project-column
 
 ## pulls check-if-merged
 
-https://developer.github.com/v3/pulls/#get-if-a-pull-request-has-been-merged
+https://developer.github.com/v3/pulls/#check-if-a-pull-request-has-been-merged
 
 
 
@@ -5199,13 +5202,55 @@ This endpoint triggers [notifications](https://help.github.com/articles/about-no
 | maintainer_can_modify | Indicates whether [maintainers can modify](https://help.github.com/articles/allowing-changes-to-a-pull-request-branch-created-from-a-fork/) the pull request. |
 | sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must set this flag. |
 
-## pulls create-comment
+## pulls create-reply-for-review-comment
 
-https://developer.github.com/v3/pulls/comments/#create-a-comment
+https://developer.github.com/v3/pulls/comments/#create-a-reply-for-a-review-comment
+
+Creates a reply to a review comment for a pull request. For the `comment_id`, provide the ID of the review comment you are replying to. This must be the ID of a _top-level review comment_, not a reply to that comment. Replies to replies are not supported.
+
+This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| body | __Required__ The text of the review comment. |
+| comment_id | __Required__  |
+| pull_number | __Required__  |
+| repo | __Required__ repository in OWNER/REPO form |
+
+## pulls create-review
+
+https://developer.github.com/v3/pulls/reviews/#create-a-review-for-a-pull-request
+
+This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
+
+Pull request reviews created in the `PENDING` state do not include the `submitted_at` property in the response.
+
+**Note:** To comment on a specific line in a file, you need to first determine the _position_ of that line in the diff. The GitHub REST API v3 offers the `application/vnd.github.v3.diff` [media type](https://developer.github.com/v3/media/#commits-commit-comparison-and-pull-requests). To see a pull request diff, add this media type to the `Accept` header of a call to the [single pull request](https://developer.github.com/v3/pulls/#get-a-pull-request) endpoint.
+
+The `position` value equals the number of lines down from the first "@@" hunk header in the file you want to add a comment. The line just below the "@@" line is position 1, the next line is position 2, and so on. The position in the diff continues to increase through lines of whitespace and additional hunks until the beginning of a new file.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| pull_number | __Required__  |
+| repo | __Required__ repository in OWNER/REPO form |
+| body | **Required** when using `REQUEST_CHANGES` or `COMMENT` for the `event` parameter. The body text of the pull request review. |
+| comments | Use the following table to specify the location, destination, and contents of the draft review comment. |
+| commit_id | The SHA of the commit that needs a review. Not using the latest commit SHA may render your review comment outdated if a subsequent commit modifies the line you specify as the `position`. Defaults to the most recent commit in the pull request when you do not specify a value. |
+| event | The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. By leaving this blank, you set the review action state to `PENDING`, which means you will need to [submit the pull request review](https://developer.github.com/v3/pulls/reviews/#submit-a-review-for-a-pull-request) when you are ready. |
+
+## pulls create-review-comment
+
+https://developer.github.com/v3/pulls/comments/#create-a-review-comment-for-a-pull-request
 
 **Note:** Multi-line comments on pull requests are currently in public beta and subject to change.
 
-Creates a review comment in the pull request diff. To add a regular comment to a pull request timeline, see "[Comments](https://developer.github.com/v3/issues/comments/#create-a-comment)." We recommend creating a review comment using `line`, `side`, and optionally `start_line` and `start_side` if your comment applies to more than one line in the pull request diff.
+Creates a review comment in the pull request diff. To add a regular comment to a pull request timeline, see "[Create an issue comment](https://developer.github.com/v3/issues/comments/#create-an-issue-comment)." We recommend creating a review comment using `line`, `side`, and optionally `start_line` and `start_side` if your comment applies to more than one line in the pull request diff.
 
 You can still create a review comment using the `position` parameter. When you use `position`, the `line`, `side`, `start_line`, and `start_side` parameters are not required. For more information, see [Multi-line comment summary](https://developer.github.com/v3/pulls/comments/#multi-line-comment-summary-3).
 
@@ -5242,83 +5287,13 @@ If you don't use the `comfort-fade` preview header, multi-line and single-line c
 | comfort-fade-preview | Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must set this flag. |
 | line | **Required with `comfort-fade` preview**. The line of the blob in the pull request diff that the comment applies to. For a multi-line comment, the last line of the range that your comment applies to. |
 | position | **Required without `comfort-fade` preview**. The position in the diff where you want to add a review comment. Note this value is not the same as the line number in the file. For help finding the position value, read the note above. |
-| side | **Required with `comfort-fade` preview**. In a split diff view, the side of the diff that the pull request's changes appear on. Can be `LEFT` or `RIGHT`. Use `LEFT` for deletions that appear in red. Use `RIGHT` for additions that appear in green or unchanged lines that appear in white and are shown for context. For a multi-line comment, side represents whether the last line of the comment range is a deletion or addition. For more information, see "[Diff view options](https://help.github.com/en/articles/about-comparing-branches-in-pull-requests#diff-view-options)" in the GitHub Help documentation. |
-| start_line | **Required when using multi-line comments**. To create multi-line comments, you must use the `comfort-fade` preview header. The `start_line` is the first line in the pull request diff that your multi-line comment applies to. To learn more about multi-line comments, see "[Commenting on a pull request](https://help.github.com/en/articles/commenting-on-a-pull-request#adding-line-comments-to-a-pull-request)" in the GitHub Help documentation. |
-| start_side | **Required when using multi-line comments**. To create multi-line comments, you must use the `comfort-fade` preview header. The `start_side` is the starting side of the diff that the comment applies to. Can be `LEFT` or `RIGHT`. To learn more about multi-line comments, see "[Commenting on a pull request](https://help.github.com/en/articles/commenting-on-a-pull-request#adding-line-comments-to-a-pull-request)" in the GitHub Help documentation. See `side` in this table for additional context. |
-
-## pulls create-review
-
-https://developer.github.com/v3/pulls/reviews/#create-a-pull-request-review
-
-This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
-
-**Note:** To comment on a specific line in a file, you need to first determine the _position_ of that line in the diff. The GitHub REST API v3 offers the `application/vnd.github.v3.diff` [media type](https://developer.github.com/v3/media/#commits-commit-comparison-and-pull-requests). To see a pull request diff, add this media type to the `Accept` header of a call to the [single pull request](https://developer.github.com/v3/pulls/#get-a-single-pull-request) endpoint.
-
-The `position` value equals the number of lines down from the first "@@" hunk header in the file you want to add a comment. The line just below the "@@" line is position 1, the next line is position 2, and so on. The position in the diff continues to increase through lines of whitespace and additional hunks until the beginning of a new file.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| pull_number | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
-| body | **Required** when using `REQUEST_CHANGES` or `COMMENT` for the `event` parameter. The body text of the pull request review. |
-| comments | Use the following table to specify the location, destination, and contents of the draft review comment. |
-| commit_id | The SHA of the commit that needs a review. Not using the latest commit SHA may render your review comment outdated if a subsequent commit modifies the line you specify as the `position`. Defaults to the most recent commit in the pull request when you do not specify a value. |
-| event | The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. By leaving this blank, you set the review action state to `PENDING`, which means you will need to [submit the pull request review](https://developer.github.com/v3/pulls/reviews/#submit-a-pull-request-review) when you are ready. |
-
-## pulls create-review-comment-reply
-
-https://developer.github.com/v3/pulls/comments/#create-a-review-comment-reply
-
-Creates a reply to a review comment for a pull request. For the `comment_id`, provide the ID of the review comment you are replying to. This must be the ID of a _top-level review comment_, not a reply to that comment. Replies to replies are not supported.
-
-This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| body | __Required__ The text of the review comment. |
-| comment_id | __Required__  |
-| pull_number | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
-
-## pulls create-review-request
-
-https://developer.github.com/v3/pulls/review_requests/#create-a-review-request
-
-This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| pull_number | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
-| reviewers | An array of user `login`s that will be requested. |
-| team_reviewers | An array of team `slug`s that will be requested. |
-
-## pulls delete-comment
-
-https://developer.github.com/v3/pulls/comments/#delete-a-comment
-
-Deletes a review comment.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| comment_id | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
+| side | **Required with `comfort-fade` preview**. In a split diff view, the side of the diff that the pull request's changes appear on. Can be `LEFT` or `RIGHT`. Use `LEFT` for deletions that appear in red. Use `RIGHT` for additions that appear in green or unchanged lines that appear in white and are shown for context. For a multi-line comment, side represents whether the last line of the comment range is a deletion or addition. For more information, see "[Diff view options](https://help.github.com/en/articles/about-comparing-branches-in-pull-requests#diff-view-options)". |
+| start_line | **Required when using multi-line comments**. To create multi-line comments, you must use the `comfort-fade` preview header. The `start_line` is the first line in the pull request diff that your multi-line comment applies to. To learn more about multi-line comments, see "[Commenting on a pull request](https://help.github.com/en/articles/commenting-on-a-pull-request#adding-line-comments-to-a-pull-request)". |
+| start_side | **Required when using multi-line comments**. To create multi-line comments, you must use the `comfort-fade` preview header. The `start_side` is the starting side of the diff that the comment applies to. Can be `LEFT` or `RIGHT`. To learn more about multi-line comments, see "[Commenting on a pull request](https://help.github.com/en/articles/commenting-on-a-pull-request#adding-line-comments-to-a-pull-request)". See `side` in this table for additional context. |
 
 ## pulls delete-pending-review
 
-https://developer.github.com/v3/pulls/reviews/#delete-a-pending-review
+https://developer.github.com/v3/pulls/reviews/#delete-a-pending-review-for-a-pull-request
 
 
 
@@ -5331,25 +5306,23 @@ https://developer.github.com/v3/pulls/reviews/#delete-a-pending-review
 | repo | __Required__ repository in OWNER/REPO form |
 | review_id | __Required__  |
 
-## pulls delete-review-request
+## pulls delete-review-comment
 
-https://developer.github.com/v3/pulls/review_requests/#delete-a-review-request
+https://developer.github.com/v3/pulls/comments/#delete-a-review-comment-for-a-pull-request
 
-
+Deletes a review comment.
 
 ### parameters
 
 
 | name | description |
 |------|-------------|
-| pull_number | __Required__  |
+| comment_id | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| reviewers | An array of user `login`s that will be removed. |
-| team_reviewers | An array of team `slug`s that will be removed. |
 
 ## pulls dismiss-review
 
-https://developer.github.com/v3/pulls/reviews/#dismiss-a-pull-request-review
+https://developer.github.com/v3/pulls/reviews/#dismiss-a-review-for-a-pull-request
 
 **Note:** To dismiss a pull request review on a [protected branch](https://developer.github.com/v3/repos/branches/), you must be a repository administrator or be included in the list of people or teams who can dismiss pull request reviews.
 
@@ -5365,7 +5338,7 @@ https://developer.github.com/v3/pulls/reviews/#dismiss-a-pull-request-review
 
 ## pulls get
 
-https://developer.github.com/v3/pulls/#get-a-single-pull-request
+https://developer.github.com/v3/pulls/#get-a-pull-request
 
 Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
@@ -5392,9 +5365,24 @@ Pass the appropriate [media type](https://developer.github.com/v3/media/#commits
 | repo | __Required__ repository in OWNER/REPO form |
 | sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must set this flag. |
 
-## pulls get-comment
+## pulls get-review
 
-https://developer.github.com/v3/pulls/comments/#get-a-single-comment
+https://developer.github.com/v3/pulls/reviews/#get-a-review-for-a-pull-request
+
+
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| pull_number | __Required__  |
+| repo | __Required__ repository in OWNER/REPO form |
+| review_id | __Required__  |
+
+## pulls get-review-comment
+
+https://developer.github.com/v3/pulls/comments/#get-a-review-comment-for-a-pull-request
 
 **Note:** Multi-line comments on pull requests are currently in public beta and subject to change.
 
@@ -5428,38 +5416,6 @@ The `reactions` key will have the following payload where `url` can be used to c
 | comfort-fade-preview | Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must set this flag. |
 | squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
-## pulls get-comments-for-review
-
-https://developer.github.com/v3/pulls/reviews/#get-comments-for-a-single-review
-
-
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| pull_number | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
-| review_id | __Required__  |
-| page | Page number of the results to fetch. |
-| per_page | Results per page (max 100) |
-
-## pulls get-review
-
-https://developer.github.com/v3/pulls/reviews/#get-a-single-review
-
-
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| pull_number | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
-| review_id | __Required__  |
-
 ## pulls list
 
 https://developer.github.com/v3/pulls/#list-pull-requests
@@ -5481,13 +5437,78 @@ Draft pull requests are available in public repositories with GitHub Free and Gi
 | sort | What to sort results by. Can be either `created`, `updated`, `popularity` (comment count) or `long-running` (age, filtering by pulls updated in the last month). |
 | state | Either `open`, `closed`, or `all` to filter by state. |
 
-## pulls list-comments
+## pulls list-comments-for-review
 
-https://developer.github.com/v3/pulls/comments/#list-comments-on-a-pull-request
+https://developer.github.com/v3/pulls/reviews/#list-comments-for-a-pull-request-review
+
+List comments for a specific pull request review.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| pull_number | __Required__  |
+| repo | __Required__ repository in OWNER/REPO form |
+| review_id | __Required__  |
+| page | Page number of the results to fetch. |
+| per_page | Results per page (max 100) |
+
+## pulls list-commits
+
+https://developer.github.com/v3/pulls/#list-commits-on-a-pull-request
+
+Lists a maximum of 250 commits for a pull request. To receive a complete commit list for pull requests with more than 250 commits, use the [List commits](https://developer.github.com/v3/repos/commits/#list-commits) endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| pull_number | __Required__  |
+| repo | __Required__ repository in OWNER/REPO form |
+| page | Page number of the results to fetch. |
+| per_page | Results per page (max 100) |
+
+## pulls list-files
+
+https://developer.github.com/v3/pulls/#list-pull-requests-files
+
+**Note:** Responses include a maximum of 3000 files. The paginated response returns 30 files per page by default.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| pull_number | __Required__  |
+| repo | __Required__ repository in OWNER/REPO form |
+| page | Page number of the results to fetch. |
+| per_page | Results per page (max 100) |
+
+## pulls list-requested-reviewers
+
+https://developer.github.com/v3/pulls/review_requests/#list-requested-reviewers-for-a-pull-request
+
+
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| pull_number | __Required__  |
+| repo | __Required__ repository in OWNER/REPO form |
+| page | Page number of the results to fetch. |
+| per_page | Results per page (max 100) |
+
+## pulls list-review-comments
+
+https://developer.github.com/v3/pulls/comments/#list-review-comments-on-a-pull-request
 
 **Note:** Multi-line comments on pull requests are currently in public beta and subject to change.
 
-Lists review comments for a pull request. By default, review comments are in ascending order by ID.
+Lists all review comments for a pull request. By default, review comments are in ascending order by ID.
 
 **Multi-line comment summary**
 
@@ -5522,9 +5543,9 @@ The `reactions` key will have the following payload where `url` can be used to c
 | sort | Can be either `created` or `updated` comments. |
 | squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
-## pulls list-comments-for-repo
+## pulls list-review-comments-for-repo
 
-https://developer.github.com/v3/pulls/comments/#list-comments-in-a-repository
+https://developer.github.com/v3/pulls/comments/#list-review-comments-in-a-repository
 
 **Note:** Multi-line comments on pull requests are currently in public beta and subject to change.
 
@@ -5562,57 +5583,9 @@ The `reactions` key will have the following payload where `url` can be used to c
 | sort | Can be either `created` or `updated` comments. |
 | squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
-## pulls list-commits
-
-https://developer.github.com/v3/pulls/#list-commits-on-a-pull-request
-
-Lists a maximum of 250 commits for a pull request. To receive a complete commit list for pull requests with more than 250 commits, use the [Commit List API](https://developer.github.com/v3/repos/commits/#list-commits-on-a-repository).
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| pull_number | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
-| page | Page number of the results to fetch. |
-| per_page | Results per page (max 100) |
-
-## pulls list-files
-
-https://developer.github.com/v3/pulls/#list-pull-requests-files
-
-**Note:** Responses include a maximum of 3000 files. The paginated response returns 30 files per page by default.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| pull_number | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
-| page | Page number of the results to fetch. |
-| per_page | Results per page (max 100) |
-
-## pulls list-review-requests
-
-https://developer.github.com/v3/pulls/review_requests/#list-review-requests
-
-
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| pull_number | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
-| page | Page number of the results to fetch. |
-| per_page | Results per page (max 100) |
-
 ## pulls list-reviews
 
-https://developer.github.com/v3/pulls/reviews/#list-reviews-on-a-pull-request
+https://developer.github.com/v3/pulls/reviews/#list-reviews-for-a-pull-request
 
 The list of reviews returns in chronological order.
 
@@ -5628,7 +5601,7 @@ The list of reviews returns in chronological order.
 
 ## pulls merge
 
-https://developer.github.com/v3/pulls/#merge-a-pull-request-merge-button
+https://developer.github.com/v3/pulls/#merge-a-pull-request
 
 This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
 
@@ -5644,9 +5617,41 @@ This endpoint triggers [notifications](https://help.github.com/articles/about-no
 | merge_method | Merge method to use. Possible values are `merge`, `squash` or `rebase`. Default is `merge`. |
 | sha | SHA that pull request head must match to allow merge. |
 
+## pulls remove-requested-reviewers
+
+https://developer.github.com/v3/pulls/review_requests/#remove-requested-reviewers-from-a-pull-request
+
+
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| pull_number | __Required__  |
+| repo | __Required__ repository in OWNER/REPO form |
+| reviewers | An array of user `login`s that will be removed. |
+| team_reviewers | An array of team `slug`s that will be removed. |
+
+## pulls request-reviewers
+
+https://developer.github.com/v3/pulls/review_requests/#request-reviewers-for-a-pull-request
+
+This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| pull_number | __Required__  |
+| repo | __Required__ repository in OWNER/REPO form |
+| reviewers | An array of user `login`s that will be requested. |
+| team_reviewers | An array of team `slug`s that will be requested. |
+
 ## pulls submit-review
 
-https://developer.github.com/v3/pulls/reviews/#submit-a-pull-request-review
+https://developer.github.com/v3/pulls/reviews/#submit-a-review-for-a-pull-request
 
 
 
@@ -5697,11 +5702,27 @@ Updates the pull request branch with the latest upstream changes by merging HEAD
 | lydian-preview | __Required__ Updating the pull request branch with latest upstream changes is currently available for developers to preview. To access this new endpoint during the preview period, you must set this flag. |
 | pull_number | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| expected_head_sha | The expected SHA of the pull request's HEAD ref. This is the most recent commit on the pull request's branch. If the expected SHA does not match the pull request's HEAD, you will receive a `422 Unprocessable Entity` status. You can use the "[List commits on a repository](https://developer.github.com/v3/repos/commits/#list-commits-on-a-repository)" endpoint to find the most recent commit SHA. Default: SHA of the pull request's current HEAD ref. |
+| expected_head_sha | The expected SHA of the pull request's HEAD ref. This is the most recent commit on the pull request's branch. If the expected SHA does not match the pull request's HEAD, you will receive a `422 Unprocessable Entity` status. You can use the "[List commits](https://developer.github.com/v3/repos/commits/#list-commits)" endpoint to find the most recent commit SHA. Default: SHA of the pull request's current HEAD ref. |
 
-## pulls update-comment
+## pulls update-review
 
-https://developer.github.com/v3/pulls/comments/#edit-a-comment
+https://developer.github.com/v3/pulls/reviews/#update-a-review-for-a-pull-request
+
+Update the review summary comment with new text.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| body | __Required__ The body text of the pull request review. |
+| pull_number | __Required__  |
+| repo | __Required__ repository in OWNER/REPO form |
+| review_id | __Required__  |
+
+## pulls update-review-comment
+
+https://developer.github.com/v3/pulls/comments/#update-a-review-comment-for-a-pull-request
 
 **Note:** Multi-line comments on pull requests are currently in public beta and subject to change.
 
@@ -5733,28 +5754,12 @@ If you don't use the `comfort-fade` preview header, multi-line and single-line c
 | repo | __Required__ repository in OWNER/REPO form |
 | comfort-fade-preview | Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must set this flag. |
 
-## pulls update-review
-
-https://developer.github.com/v3/pulls/reviews/#update-a-pull-request-review
-
-Update the review summary comment with new text.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| body | __Required__ The body text of the pull request review. |
-| pull_number | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
-| review_id | __Required__  |
-
 # rate-limit
 
 
 ## rate-limit get
 
-https://developer.github.com/v3/rate_limit/#get-your-current-rate-limit-status
+https://developer.github.com/v3/rate_limit/#get-rate-limit-status-for-the-authenticated-user
 
 **Note:** Accessing this endpoint does not count against your REST API rate limit.
 
@@ -6217,13 +6222,33 @@ https://developer.github.com/v3/repos/invitations/#accept-a-repository-invitatio
 |------|-------------|
 | invitation_id | __Required__  |
 
+## repos add-app-access-restrictions
+
+https://developer.github.com/v3/repos/branches/#add-app-access-restrictions
+
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+
+Grants the specified apps push access for this branch. Only installed GitHub Apps with `write` access to the `contents` permission can be added as authorized actors on a protected branch.
+
+| Type    | Description                                                                                                                                                |
+| ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `array` | The GitHub Apps that have push access to this branch. Use the app's `slug`. **Note**: The list of users, apps, and teams in total is limited to 100 items. |
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| branch | __Required__  |
+| repo | __Required__ repository in OWNER/REPO form |
+
 ## repos add-collaborator
 
-https://developer.github.com/v3/repos/collaborators/#add-user-as-a-collaborator
+https://developer.github.com/v3/repos/collaborators/#add-a-repository-collaborator
 
 This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
 
-For more information the permission levels, see "[Repository permission levels for an organization](https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/repository-permission-levels-for-an-organization#permission-levels-for-repositories-owned-by-an-organization)" in the GitHub Help documentation.
+For more information the permission levels, see "[Repository permission levels for an organization](https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/repository-permission-levels-for-an-organization#permission-levels-for-repositories-owned-by-an-organization)".
 
 Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://developer.github.com/v3/#http-verbs)."
 
@@ -6242,78 +6267,9 @@ To prevent abuse, you are limited to sending 50 invitations to a repository per 
 | username | __Required__  |
 | permission | The permission to grant the collaborator. **Only valid on organization-owned repositories.** Can be one of:  <br>\* `pull` - can pull, but not push to or administer this repository.  <br>\* `push` - can pull and push, but not administer this repository.  <br>\* `admin` - can pull, push and administer this repository.  <br>\* `maintain` - Recommended for project managers who need to manage the repository without access to sensitive or destructive actions.  <br>\* `triage` - Recommended for contributors who need to proactively manage issues and pull requests without write access. |
 
-## repos add-deploy-key
+## repos add-status-check-contexts
 
-https://developer.github.com/v3/repos/keys/#add-a-new-deploy-key
-
-Here's how you can create a read-only deploy key:
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| key | __Required__ The contents of the key. |
-| repo | __Required__ repository in OWNER/REPO form |
-| read_only | If `true`, the key will only be able to read repository contents. Otherwise, the key will be able to read and write.  <br>  <br>Deploy keys with write access can perform the same actions as an organization member with admin access, or a collaborator on a personal repository. For more information, see "[Repository permission levels for an organization](https://help.github.com/articles/repository-permission-levels-for-an-organization/)" and "[Permission levels for a user account repository](https://help.github.com/articles/permission-levels-for-a-user-account-repository/)." |
-| title | A name for the key. |
-
-## repos add-protected-branch-admin-enforcement
-
-https://developer.github.com/v3/repos/branches/#add-admin-enforcement-of-protected-branch
-
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-
-Adding admin enforcement requires admin or owner permissions to the repository and branch protection to be enabled.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| branch | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
-
-## repos add-protected-branch-app-restrictions
-
-https://developer.github.com/v3/repos/branches/#add-app-restrictions-of-protected-branch
-
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-
-Grants the specified apps push access for this branch. Only installed GitHub Apps with `write` access to the `contents` permission can be added as authorized actors on a protected branch.
-
-| Type    | Description                                                                                                                                                |
-| ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `array` | The GitHub Apps that have push access to this branch. Use the app's `slug`. **Note**: The list of users, apps, and teams in total is limited to 100 items. |
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| branch | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
-
-## repos add-protected-branch-required-signatures
-
-https://developer.github.com/v3/repos/branches/#add-required-signatures-of-protected-branch
-
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-
-When authenticated with admin or owner permissions to the repository, you can use this endpoint to require signed commits on a branch. You must enable branch protection to require signed commits.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| branch | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
-| zzzax-preview | __Required__ Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must set this flag. |
-
-## repos add-protected-branch-required-status-checks-contexts
-
-https://developer.github.com/v3/repos/branches/#add-required-status-checks-contexts-of-protected-branch
+https://developer.github.com/v3/repos/branches/#add-status-check-contexts
 
 Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
@@ -6325,9 +6281,9 @@ Protected branches are available in public repositories with GitHub Free and Git
 | branch | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
-## repos add-protected-branch-team-restrictions
+## repos add-team-access-restrictions
 
-https://developer.github.com/v3/repos/branches/#add-team-restrictions-of-protected-branch
+https://developer.github.com/v3/repos/branches/#add-team-access-restrictions
 
 Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
@@ -6345,9 +6301,9 @@ Grants the specified teams push access for this branch. You can also give push a
 | branch | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
-## repos add-protected-branch-user-restrictions
+## repos add-user-access-restrictions
 
-https://developer.github.com/v3/repos/branches/#add-user-restrictions-of-protected-branch
+https://developer.github.com/v3/repos/branches/#add-user-access-restrictions
 
 Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
@@ -6367,7 +6323,7 @@ Grants the specified people push access for this branch.
 
 ## repos check-collaborator
 
-https://developer.github.com/v3/repos/collaborators/#check-if-a-user-is-a-collaborator
+https://developer.github.com/v3/repos/collaborators/#check-if-a-user-is-a-repository-collaborator
 
 For organization-owned repositories, the list of collaborators includes outside collaborators, organization members that are direct collaborators, organization members with access through team memberships, organization members with access through default organization permissions, and organization owners.
 
@@ -6385,14 +6341,14 @@ Team members will include the members of child teams.
 
 https://developer.github.com/v3/repos/#check-if-vulnerability-alerts-are-enabled-for-a-repository
 
-Shows whether vulnerability alerts are enabled or disabled for a repository. The authenticated user must have admin access to the repository. For more information, see "[About security alerts for vulnerable dependencies](https://help.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies)" in the GitHub Help documentation.
+Shows whether dependency alerts are enabled or disabled for a repository. The authenticated user must have admin access to the repository. For more information, see "[About security alerts for vulnerable dependencies](https://help.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies)".
 
 ### parameters
 
 
 | name | description |
 |------|-------------|
-| dorian-preview | __Required__ Enabling and disabling vulnerability alerts for a repository using the REST API is currently available for developers to preview. To access these new endpoints during the preview period, you must set this flag. |
+| dorian-preview | __Required__ Enabling and disabling dependency alerts for a repository using the REST API is currently available for developers to preview. To access these new endpoints during the preview period, you must set this flag. |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos compare-commits
@@ -6407,7 +6363,7 @@ The response also includes details on the files that were changed between the tw
 
 **Working with large comparisons**
 
-The response will include a comparison of up to 250 commits. If you are working with a larger commit range, you can use the [Commit List API](https://developer.github.com/v3/repos/commits/#list-commits-on-a-repository) to enumerate all commits in the range.
+The response will include a comparison of up to 250 commits. If you are working with a larger commit range, you can use the [List commits](https://developer.github.com/v3/repos/commits/#list-commits) to enumerate all commits in the range.
 
 For comparisons with extremely large diffs, you may receive an error response indicating that the diff took too long to generate. You can typically resolve this error by using a smaller commit range.
 
@@ -6461,6 +6417,59 @@ This endpoint triggers [notifications](https://help.github.com/articles/about-no
 | line | **Deprecated**. Use **position** parameter instead. Line number in the file to comment on. |
 | path | Relative path of the file to comment on. |
 | position | Line index in the diff to comment on. |
+
+## repos create-commit-signature-protection
+
+https://developer.github.com/v3/repos/branches/#create-commit-signature-protection
+
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+
+When authenticated with admin or owner permissions to the repository, you can use this endpoint to require signed commits on a branch. You must enable branch protection to require signed commits.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| branch | __Required__  |
+| repo | __Required__ repository in OWNER/REPO form |
+| zzzax-preview | __Required__ Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must set this flag. |
+
+## repos create-commit-status
+
+https://developer.github.com/v3/repos/statuses/#create-a-commit-status
+
+Users with push access in a repository can create commit statuses for a given SHA.
+
+Note: there is a limit of 1000 statuses per `sha` and `context` within a repository. Attempts to create more than 1000 statuses will result in a validation error.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| repo | __Required__ repository in OWNER/REPO form |
+| sha | __Required__  |
+| state | __Required__ The state of the status. Can be one of `error`, `failure`, `pending`, or `success`. |
+| context | A string label to differentiate this status from the status of other systems. |
+| description | A short description of the status. |
+| target_url | The target URL to associate with this status. This URL will be linked from the GitHub UI to allow users to easily see the source of the status.  <br>For example, if your continuous integration system is posting build status, you would want to provide the deep link for the build output for this specific SHA:  <br>`http://ci.example.com/user/repo/build/sha` |
+
+## repos create-deploy-key
+
+https://developer.github.com/v3/repos/keys/#create-a-deploy-key
+
+Here's how you can create a read-only deploy key:
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| key | __Required__ The contents of the key. |
+| repo | __Required__ repository in OWNER/REPO form |
+| read_only | If `true`, the key will only be able to read repository contents. Otherwise, the key will be able to read and write.  <br>  <br>Deploy keys with write access can perform the same actions as an organization member with admin access, or a collaborator on a personal repository. For more information, see "[Repository permission levels for an organization](https://help.github.com/articles/repository-permission-levels-for-an-organization/)" and "[Permission levels for a user account repository](https://help.github.com/articles/permission-levels-for-a-user-account-repository/)." |
+| title | A name for the key. |
 
 ## repos create-deployment
 
@@ -6530,7 +6539,7 @@ GitHub Apps require `read & write` access to "Deployments" and `read-only` acces
 |------|-------------|
 | deployment_id | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| state | __Required__ The state of the status. Can be one of `error`, `failure`, `inactive`, `in_progress`, `queued` `pending`, or `success`. **Note:** To use the `inactive` state, you must provide the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. To use the `in_progress` and `queued` states, you must provide the [`application/vnd.github.flash-preview+json`](https://developer.github.com/v3/previews/#deployment-statuses) custom media type. |
+| state | __Required__ The state of the status. Can be one of `error`, `failure`, `inactive`, `in_progress`, `queued` `pending`, or `success`. **Note:** To use the `inactive` state, you must provide the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. To use the `in_progress` and `queued` states, you must provide the [`application/vnd.github.flash-preview+json`](https://developer.github.com/v3/previews/#deployment-statuses) custom media type. When you set a transient deployment to `inactive`, the deployment will be shown as `destroyed` in GitHub. |
 | ant-man-preview | The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must set this flag. |
 | auto_inactive | Adds a new `inactive` status to all prior non-transient, non-production environment deployments with the same repository and `environment` name as the created status's deployment. An `inactive` status is only added to deployments that had a `success` state. Default: `true`  <br>**Note:** To add an `inactive` status to `production` environments, you must use the [`application/vnd.github.flash-preview+json`](https://developer.github.com/v3/previews/#deployment-statuses) custom media type.  <br>**Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. |
 | description | A short description of the status. The maximum description length is 140 characters. |
@@ -6597,7 +6606,7 @@ When using [OAuth](https://developer.github.com/apps/building-oauth-apps/underst
 | nebula-preview | You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).<br><br>To access repository visibility during the preview period, you must set this flag. |
 | private | Either `true` to create a private repository or `false` to create a public one. |
 | team_id | The id of the team that will be granted access to this repository. This is only valid when creating a repository in an organization. |
-| visibility | Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. For more information, see "[Creating an internal repository](https://help.github.com/github/creating-cloning-and-archiving-repositories/creating-an-internal-repository)" in the GitHub Help documentation.  <br>The `visibility` parameter overrides the `private` parameter when you use both parameters with the `nebula-preview` preview header. |
+| visibility | Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. For more information, see "[Creating an internal repository](https://help.github.com/github/creating-cloning-and-archiving-repositories/creating-an-internal-repository)".  <br>The `visibility` parameter overrides the `private` parameter when you use both parameters with the `nebula-preview` preview header. |
 
 ## repos create-fork
 
@@ -6614,28 +6623,6 @@ Create a fork for the authenticated user.
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
 | organization | Optional parameter to specify the organization name if forking into an organization. |
-
-## repos create-hook
-
-https://developer.github.com/v3/repos/hooks/#create-a-hook
-
-Repositories can have multiple webhooks installed. Each webhook should have a unique `config`. Multiple webhooks can share the same `config` as long as those webhooks do not have any `events` that overlap.
-
-Here's how you can create a hook that posts payloads in JSON format:
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| config.url | __Required__ The URL to which the payloads will be delivered. |
-| repo | __Required__ repository in OWNER/REPO form |
-| active | Determines if notifications are sent when the webhook is triggered. Set to `true` to send notifications. |
-| config.content_type | The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`. |
-| config.insecure_ssl | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. **We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.** |
-| config.secret | If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value in the [`X-Hub-Signature`](https://developer.github.com/webhooks/event-payloads/#delivery-headers) header. |
-| events | Determines what [events](https://developer.github.com/webhooks/event-payloads) the hook is triggered for. |
-| name | Use `web` to create a webhook. Default: `web`. This parameter only accepts the value `web`. |
 
 ## repos create-in-org
 
@@ -6674,13 +6661,13 @@ When using [OAuth](https://developer.github.com/apps/building-oauth-apps/underst
 | nebula-preview | You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).<br><br>To access repository visibility during the preview period, you must set this flag. |
 | private | Either `true` to create a private repository or `false` to create a public one. |
 | team_id | The id of the team that will be granted access to this repository. This is only valid when creating a repository in an organization. |
-| visibility | Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. For more information, see "[Creating an internal repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-repository-visibility#about-internal-repositories)" in the GitHub Help documentation.  <br>The `visibility` parameter overrides the `private` parameter when you use both parameters with the `nebula-preview` preview header. |
+| visibility | Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. For more information, see "[Creating an internal repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-repository-visibility#about-internal-repositories)".  <br>The `visibility` parameter overrides the `private` parameter when you use both parameters with the `nebula-preview` preview header. |
 
-## repos create-or-update-file
+## repos create-or-update-file-contents
 
-https://developer.github.com/v3/repos/contents/#create-or-update-a-file
+https://developer.github.com/v3/repos/contents/#create-or-update-file-contents
 
-Creates a new file or updates an existing file in a repository.
+Creates a new file or replaces an existing file in a repository.
 
 ### parameters
 
@@ -6697,6 +6684,22 @@ Creates a new file or updates an existing file in a repository.
 | committer.email | The email of the author or committer of the commit. You'll receive a `422` status code if `email` is omitted. |
 | committer.name | The name of the author or committer of the commit. You'll receive a `422` status code if `name` is omitted. |
 | sha | **Required if you are updating a file**. The blob SHA of the file being replaced. |
+
+## repos create-pages-site
+
+https://developer.github.com/v3/repos/pages/#create-a-github-pages-site
+
+
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| repo | __Required__ repository in OWNER/REPO form |
+| switcheroo-preview | __Required__ Enabling and disabling Pages in the Pages API is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2019-03-14-enabling-disabling-pages/) preview for more details. To access the new endpoints during the preview period, you must set this flag. |
+| source.branch | The repository branch used to publish your [site's source files](https://help.github.com/articles/configuring-a-publishing-source-for-github-pages/). Can be either `master` or `gh-pages`. |
+| source.path | The repository directory that includes the source files for the Pages site. When `branch` is `master`, you can change `path` to `/docs`. When `branch` is `gh-pages`, you are unable to specify a `path` other than `/`. |
 
 ## repos create-release
 
@@ -6718,26 +6721,6 @@ This endpoint triggers [notifications](https://help.github.com/articles/about-no
 | name | The name of the release. |
 | prerelease | `true` to identify the release as a prerelease. `false` to identify the release as a full release. |
 | target_commitish | Specifies the commitish value that determines where the Git tag is created from. Can be any branch or commit SHA. Unused if the Git tag already exists. Default: the repository's default branch (usually `master`). |
-
-## repos create-status
-
-https://developer.github.com/v3/repos/statuses/#create-a-status
-
-Users with push access in a repository can create commit statuses for a given SHA.
-
-Note: there is a limit of 1000 statuses per `sha` and `context` within a repository. Attempts to create more than 1000 statuses will result in a validation error.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| repo | __Required__ repository in OWNER/REPO form |
-| sha | __Required__  |
-| state | __Required__ The state of the status. Can be one of `error`, `failure`, `pending`, or `success`. |
-| context | A string label to differentiate this status from the status of other systems. |
-| description | A short description of the status. |
-| target_url | The target URL to associate with this status. This URL will be linked from the GitHub UI to allow users to easily see the source of the status.  <br>For example, if your continuous integration system is posting build status, you would want to provide the deep link for the build output for this specific SHA:  <br>`http://ci.example.com/user/repo/build/sha` |
 
 ## repos create-using-template
 
@@ -6764,6 +6747,28 @@ When using [OAuth](https://developer.github.com/apps/building-oauth-apps/underst
 | description | A short description of the new repository. |
 | owner | The organization or person who will own the new repository. To create a new repository in an organization, the authenticated user must be a member of the specified organization. |
 | private | Either `true` to create a new private repository or `false` to create a new public one. |
+
+## repos create-webhook
+
+https://developer.github.com/v3/repos/hooks/#create-a-repository-webhook
+
+Repositories can have multiple webhooks installed. Each webhook should have a unique `config`. Multiple webhooks can share the same `config` as long as those webhooks do not have any `events` that overlap.
+
+Here's how you can create a hook that posts payloads in JSON format:
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| config.url | __Required__ The URL to which the payloads will be delivered. |
+| repo | __Required__ repository in OWNER/REPO form |
+| active | Determines if notifications are sent when the webhook is triggered. Set to `true` to send notifications. |
+| config.content_type | The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`. |
+| config.insecure_ssl | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. **We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.** |
+| config.secret | If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value in the [`X-Hub-Signature`](https://developer.github.com/webhooks/event-payloads/#delivery-headers) header. |
+| events | Determines what [events](https://developer.github.com/webhooks/event-payloads) the hook is triggered for. |
+| name | Use `web` to create a webhook. Default: `web`. This parameter only accepts the value `web`. |
 
 ## repos decline-invitation
 
@@ -6793,6 +6798,52 @@ If an organization owner has configured the organization to prevent members from
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
 
+## repos delete-access-restrictions
+
+https://developer.github.com/v3/repos/branches/#delete-access-restrictions
+
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+
+Disables the ability to restrict who can push to this branch.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| branch | __Required__  |
+| repo | __Required__ repository in OWNER/REPO form |
+
+## repos delete-admin-branch-protection
+
+https://developer.github.com/v3/repos/branches/#delete-admin-branch-protection
+
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+
+Removing admin enforcement requires admin or owner permissions to the repository and branch protection to be enabled.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| branch | __Required__  |
+| repo | __Required__ repository in OWNER/REPO form |
+
+## repos delete-branch-protection
+
+https://developer.github.com/v3/repos/branches/#delete-branch-protection
+
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| branch | __Required__  |
+| repo | __Required__ repository in OWNER/REPO form |
+
 ## repos delete-commit-comment
 
 https://developer.github.com/v3/repos/comments/#delete-a-commit-comment
@@ -6805,6 +6856,37 @@ https://developer.github.com/v3/repos/comments/#delete-a-commit-comment
 | name | description |
 |------|-------------|
 | comment_id | __Required__  |
+| repo | __Required__ repository in OWNER/REPO form |
+
+## repos delete-commit-signature-protection
+
+https://developer.github.com/v3/repos/branches/#delete-commit-signature-protection
+
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+
+When authenticated with admin or owner permissions to the repository, you can use this endpoint to disable required signed commits on a branch. You must enable branch protection to require signed commits.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| branch | __Required__  |
+| repo | __Required__ repository in OWNER/REPO form |
+| zzzax-preview | __Required__ Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must set this flag. |
+
+## repos delete-deploy-key
+
+https://developer.github.com/v3/repos/keys/#delete-a-deploy-key
+
+
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| key_id | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos delete-deployment
@@ -6826,20 +6908,6 @@ For more information, see "[Create a deployment](https://developer.github.com/v3
 | name | description |
 |------|-------------|
 | deployment_id | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
-
-## repos delete-download
-
-https://developer.github.com/v3/repos/downloads/#delete-a-download
-
-
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| download_id | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos delete-file
@@ -6869,20 +6937,6 @@ You must provide values for both `name` and `email`, whether you choose to use `
 | committer.email | The email of the author (or committer) of the commit |
 | committer.name | The name of the author (or committer) of the commit |
 
-## repos delete-hook
-
-https://developer.github.com/v3/repos/hooks/#delete-a-hook
-
-
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| hook_id | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
-
 ## repos delete-invitation
 
 https://developer.github.com/v3/repos/invitations/#delete-a-repository-invitation
@@ -6895,6 +6949,34 @@ https://developer.github.com/v3/repos/invitations/#delete-a-repository-invitatio
 | name | description |
 |------|-------------|
 | invitation_id | __Required__  |
+| repo | __Required__ repository in OWNER/REPO form |
+
+## repos delete-pages-site
+
+https://developer.github.com/v3/repos/pages/#delete-a-github-pages-site
+
+
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| repo | __Required__ repository in OWNER/REPO form |
+| switcheroo-preview | __Required__ Enabling and disabling Pages in the Pages API is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2019-03-14-enabling-disabling-pages/) preview for more details. To access the new endpoints during the preview period, you must set this flag. |
+
+## repos delete-pull-request-review-protection
+
+https://developer.github.com/v3/repos/branches/#delete-pull-request-review-protection
+
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| branch | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos delete-release
@@ -6925,11 +7007,25 @@ https://developer.github.com/v3/repos/releases/#delete-a-release-asset
 | asset_id | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
+## repos delete-webhook
+
+https://developer.github.com/v3/repos/hooks/#delete-a-repository-webhook
+
+
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| hook_id | __Required__  |
+| repo | __Required__ repository in OWNER/REPO form |
+
 ## repos disable-automated-security-fixes
 
 https://developer.github.com/v3/repos/#disable-automated-security-fixes
 
-Disables automated security fixes for a repository. The authenticated user must have admin access to the repository. For more information, see "[Configuring automated security fixes](https://help.github.com/en/articles/configuring-automated-security-fixes)" in the GitHub Help documentation.
+Disables automated security fixes for a repository. The authenticated user must have admin access to the repository. For more information, see "[Configuring automated security fixes](https://help.github.com/en/articles/configuring-automated-security-fixes)".
 
 ### parameters
 
@@ -6939,39 +7035,44 @@ Disables automated security fixes for a repository. The authenticated user must 
 | london-preview | __Required__ Enabling or disabling automated security fixes is currently available for developers to preview. To access this new endpoint during the preview period, you must set this flag. |
 | repo | __Required__ repository in OWNER/REPO form |
 
-## repos disable-pages-site
-
-https://developer.github.com/v3/repos/pages/#disable-a-pages-site
-
-
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| repo | __Required__ repository in OWNER/REPO form |
-| switcheroo-preview | __Required__ Enabling and disabling Pages in the Pages API is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2019-03-14-enabling-disabling-pages/) preview for more details. To access the new endpoints during the preview period, you must set this flag. |
-
 ## repos disable-vulnerability-alerts
 
 https://developer.github.com/v3/repos/#disable-vulnerability-alerts
 
-Disables vulnerability alerts and the dependency graph for a repository. The authenticated user must have admin access to the repository. For more information, see "[About security alerts for vulnerable dependencies](https://help.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies)" in the GitHub Help documentation.
+Disables dependency alerts and the dependency graph for a repository. The authenticated user must have admin access to the repository. For more information, see "[About security alerts for vulnerable dependencies](https://help.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies)".
 
 ### parameters
 
 
 | name | description |
 |------|-------------|
-| dorian-preview | __Required__ Enabling and disabling vulnerability alerts for a repository using the REST API is currently available for developers to preview. To access these new endpoints during the preview period, you must set this flag. |
+| dorian-preview | __Required__ Enabling and disabling dependency alerts for a repository using the REST API is currently available for developers to preview. To access these new endpoints during the preview period, you must set this flag. |
+| repo | __Required__ repository in OWNER/REPO form |
+
+## repos download-archive
+
+https://developer.github.com/v3/repos/contents/#download-a-repository-archive
+
+Gets a redirect URL to download an archive for a repository. The `:archive_format` can be either `tarball` or `zipball`. The `:ref` must be a valid Git reference. If you omit `:ref`, the repository’s default branch (usually `master`) will be used. Please make sure your HTTP framework is configured to follow redirects or you will need to use the `Location` header to make a second `GET` request.
+
+_Note_: For private repositories, these links are temporary and expire after five minutes.
+
+To follow redirects with curl, use the `-L` switch:
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| archive_format | __Required__  |
+| ref | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos enable-automated-security-fixes
 
 https://developer.github.com/v3/repos/#enable-automated-security-fixes
 
-Enables automated security fixes for a repository. The authenticated user must have admin access to the repository. For more information, see "[Configuring automated security fixes](https://help.github.com/en/articles/configuring-automated-security-fixes)" in the GitHub Help documentation.
+Enables automated security fixes for a repository. The authenticated user must have admin access to the repository. For more information, see "[Configuring automated security fixes](https://help.github.com/en/articles/configuring-automated-security-fixes)".
 
 ### parameters
 
@@ -6981,34 +7082,18 @@ Enables automated security fixes for a repository. The authenticated user must h
 | london-preview | __Required__ Enabling or disabling automated security fixes is currently available for developers to preview. To access this new endpoint during the preview period, you must set this flag. |
 | repo | __Required__ repository in OWNER/REPO form |
 
-## repos enable-pages-site
-
-https://developer.github.com/v3/repos/pages/#enable-a-pages-site
-
-
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| repo | __Required__ repository in OWNER/REPO form |
-| switcheroo-preview | __Required__ Enabling and disabling Pages in the Pages API is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2019-03-14-enabling-disabling-pages/) preview for more details. To access the new endpoints during the preview period, you must set this flag. |
-| source.branch | The repository branch used to publish your [site's source files](https://help.github.com/articles/configuring-a-publishing-source-for-github-pages/). Can be either `master` or `gh-pages`. |
-| source.path | The repository directory that includes the source files for the Pages site. When `branch` is `master`, you can change `path` to `/docs`. When `branch` is `gh-pages`, you are unable to specify a `path` other than `/`. |
-
 ## repos enable-vulnerability-alerts
 
 https://developer.github.com/v3/repos/#enable-vulnerability-alerts
 
-Enables vulnerability alerts and the dependency graph for a repository. The authenticated user must have admin access to the repository. For more information, see "[About security alerts for vulnerable dependencies](https://help.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies)" in the GitHub Help documentation.
+Enables dependency alerts and the dependency graph for a repository. The authenticated user must have admin access to the repository. For more information, see "[About security alerts for vulnerable dependencies](https://help.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies)".
 
 ### parameters
 
 
 | name | description |
 |------|-------------|
-| dorian-preview | __Required__ Enabling and disabling vulnerability alerts for a repository using the REST API is currently available for developers to preview. To access these new endpoints during the preview period, you must set this flag. |
+| dorian-preview | __Required__ Enabling and disabling dependency alerts for a repository using the REST API is currently available for developers to preview. To access these new endpoints during the preview period, you must set this flag. |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get
@@ -7028,6 +7113,52 @@ The `parent` and `source` objects are present when the repository is a fork. `pa
 | nebula-preview | You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).<br><br>To access repository visibility during the preview period, you must set this flag. |
 | scarlet-witch-preview | The Codes of Conduct API is currently available for developers to preview.<br><br>To access the API during the preview period, you must set this flag. |
 
+## repos get-access-restrictions
+
+https://developer.github.com/v3/repos/branches/#get-access-restrictions
+
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+
+Lists who has access to this protected branch.
+
+**Note**: Users, apps, and teams `restrictions` are only available for organization-owned repositories.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| branch | __Required__  |
+| repo | __Required__ repository in OWNER/REPO form |
+
+## repos get-admin-branch-protection
+
+https://developer.github.com/v3/repos/branches/#get-admin-branch-protection
+
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| branch | __Required__  |
+| repo | __Required__ repository in OWNER/REPO form |
+
+## repos get-all-status-check-contexts
+
+https://developer.github.com/v3/repos/branches/#get-all-status-check-contexts
+
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| branch | __Required__  |
+| repo | __Required__ repository in OWNER/REPO form |
+
 ## repos get-all-topics
 
 https://developer.github.com/v3/repos/#get-all-repository-topics
@@ -7044,7 +7175,7 @@ https://developer.github.com/v3/repos/#get-all-repository-topics
 
 ## repos get-apps-with-access-to-protected-branch
 
-https://developer.github.com/v3/repos/branches/#list-apps-with-access-to-protected-branch
+https://developer.github.com/v3/repos/branches/#list-apps-with-access-to-the-protected-branch
 
 Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
@@ -7058,28 +7189,9 @@ Lists the GitHub Apps that have push access to this branch. Only installed GitHu
 | branch | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
-## repos get-archive-link
-
-https://developer.github.com/v3/repos/contents/#get-archive-link
-
-Gets a redirect URL to download an archive for a repository. The `:archive_format` can be either `tarball` or `zipball`. The `:ref` must be a valid Git reference. If you omit `:ref`, the repository’s default branch (usually `master`) will be used. Please make sure your HTTP framework is configured to follow redirects or you will need to use the `Location` header to make a second `GET` request.
-
-_Note_: For private repositories, these links are temporary and expire after five minutes.
-
-To follow redirects with curl, use the `-L` switch:
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| archive_format | __Required__  |
-| ref | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
-
 ## repos get-branch
 
-https://developer.github.com/v3/repos/branches/#get-branch
+https://developer.github.com/v3/repos/branches/#get-a-branch
 
 
 
@@ -7108,7 +7220,7 @@ Protected branches are available in public repositories with GitHub Free and Git
 
 ## repos get-clones
 
-https://developer.github.com/v3/repos/traffic/#clones
+https://developer.github.com/v3/repos/traffic/#get-repository-clones
 
 Get the total number of clones and breakdown per day or week for the last 14 days. Timestamps are aligned to UTC midnight of the beginning of the day or week. Week begins on Monday.
 
@@ -7122,7 +7234,7 @@ Get the total number of clones and breakdown per day or week for the last 14 day
 
 ## repos get-code-frequency-stats
 
-https://developer.github.com/v3/repos/statistics/#get-the-number-of-additions-and-deletions-per-week
+https://developer.github.com/v3/repos/statistics/#get-the-weekly-commit-activity
 
 Returns a weekly aggregate of the number of additions and deletions pushed to a repository.
 
@@ -7135,7 +7247,7 @@ Returns a weekly aggregate of the number of additions and deletions pushed to a 
 
 ## repos get-collaborator-permission-level
 
-https://developer.github.com/v3/repos/collaborators/#review-a-users-permission-level
+https://developer.github.com/v3/repos/collaborators/#get-repository-permissions-for-a-user
 
 Checks the repository permission of a collaborator. The possible repository permissions are `admin`, `write`, `read`, and `none`.
 
@@ -7149,7 +7261,7 @@ Checks the repository permission of a collaborator. The possible repository perm
 
 ## repos get-combined-status-for-ref
 
-https://developer.github.com/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref
+https://developer.github.com/v3/repos/statuses/#get-the-combined-status-for-a-specific-reference
 
 Users with pull access in a repository can access a combined view of commit statuses for a given ref. The ref can be a SHA, a branch name, or a tag name.
 
@@ -7171,7 +7283,7 @@ Additionally, a combined `state` is returned. The `state` is one of:
 
 ## repos get-commit
 
-https://developer.github.com/v3/repos/commits/#get-a-single-commit
+https://developer.github.com/v3/repos/commits/#get-a-commit
 
 Returns the contents of a single commit reference. You must have `read` access for the repository to use this endpoint.
 
@@ -7211,7 +7323,7 @@ These are the possible values for `reason` in the `verification` object:
 
 ## repos get-commit-activity-stats
 
-https://developer.github.com/v3/repos/statistics/#get-the-last-year-of-commit-activity-data
+https://developer.github.com/v3/repos/statistics/#get-the-last-year-of-commit-activity
 
 Returns the last year of commit activity grouped by week. The `days` array is a group of commits per day, starting on `Sunday`.
 
@@ -7224,7 +7336,7 @@ Returns the last year of commit activity grouped by week. The `days` array is a 
 
 ## repos get-commit-comment
 
-https://developer.github.com/v3/repos/comments/#get-a-single-commit-comment
+https://developer.github.com/v3/repos/comments/#get-a-commit-comment
 
 
 
@@ -7237,9 +7349,41 @@ https://developer.github.com/v3/repos/comments/#get-a-single-commit-comment
 | repo | __Required__ repository in OWNER/REPO form |
 | squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
-## repos get-contents
+## repos get-commit-signature-protection
 
-https://developer.github.com/v3/repos/contents/#get-contents
+https://developer.github.com/v3/repos/branches/#get-commit-signature-protection
+
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+
+When authenticated with admin or owner permissions to the repository, you can use this endpoint to check whether a branch requires signed commits. An enabled status of `true` indicates you must sign commits on this branch. For more information, see [Signing commits with GPG](https://help.github.com/articles/signing-commits-with-gpg) in GitHub Help.
+
+**Note**: You must enable branch protection to require signed commits.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| branch | __Required__  |
+| repo | __Required__ repository in OWNER/REPO form |
+| zzzax-preview | __Required__ Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must set this flag. |
+
+## repos get-community-profile-metrics
+
+https://developer.github.com/v3/repos/community/#get-community-profile-metrics
+
+This endpoint will return all community profile metrics, including an overall health score, repository description, the presence of documentation, detected code of conduct, detected license, and the presence of ISSUE\_TEMPLATE, PULL\_REQUEST\_TEMPLATE, README, and CONTRIBUTING files.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| repo | __Required__ repository in OWNER/REPO form |
+
+## repos get-content
+
+https://developer.github.com/v3/repos/contents/#get-repository-content
 
 Gets the contents of a file or directory in a repository. Specify the file path or directory in `:path`. If you omit `:path`, you will receive the contents of all files in the repository.
 
@@ -7274,7 +7418,7 @@ If the submodule repository is not hosted on github.com, the Git URLs (`git_url`
 
 ## repos get-contributors-stats
 
-https://developer.github.com/v3/repos/statistics/#get-contributors-list-with-additions-deletions-and-commit-counts
+https://developer.github.com/v3/repos/statistics/#get-all-contributor-commit-activity
 
 *   `total` - The Total number of commits authored by the contributor.
 
@@ -7308,7 +7452,7 @@ https://developer.github.com/v3/repos/keys/#get-a-deploy-key
 
 ## repos get-deployment
 
-https://developer.github.com/v3/repos/deployments/#get-a-single-deployment
+https://developer.github.com/v3/repos/deployments/#get-a-deployment
 
 
 
@@ -7324,7 +7468,7 @@ https://developer.github.com/v3/repos/deployments/#get-a-single-deployment
 
 ## repos get-deployment-status
 
-https://developer.github.com/v3/repos/deployments/#get-a-single-deployment-status
+https://developer.github.com/v3/repos/deployments/#get-a-deployment-status
 
 Users with pull access can view a deployment status for a deployment:
 
@@ -7339,34 +7483,6 @@ Users with pull access can view a deployment status for a deployment:
 | ant-man-preview | The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must set this flag. |
 | flash-preview | New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](https://developer.github.com/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.<br><br>To access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must set this flag. |
 | machine-man-preview | To access the API with your GitHub App, you must set this flag for your requests. |
-
-## repos get-download
-
-https://developer.github.com/v3/repos/downloads/#get-a-single-download
-
-
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| download_id | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
-
-## repos get-hook
-
-https://developer.github.com/v3/repos/hooks/#get-single-hook
-
-
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| hook_id | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-latest-pages-build
 
@@ -7398,7 +7514,7 @@ The latest release is the most recent non-prerelease, non-draft release, sorted 
 
 ## repos get-pages
 
-https://developer.github.com/v3/repos/pages/#get-information-about-a-pages-site
+https://developer.github.com/v3/repos/pages/#get-a-github-pages-site
 
 
 
@@ -7411,7 +7527,7 @@ https://developer.github.com/v3/repos/pages/#get-information-about-a-pages-site
 
 ## repos get-pages-build
 
-https://developer.github.com/v3/repos/pages/#get-a-specific-pages-build
+https://developer.github.com/v3/repos/pages/#get-github-pages-build
 
 
 
@@ -7425,7 +7541,7 @@ https://developer.github.com/v3/repos/pages/#get-a-specific-pages-build
 
 ## repos get-participation-stats
 
-https://developer.github.com/v3/repos/statistics/#get-the-weekly-commit-count-for-the-repository-owner-and-everyone-else
+https://developer.github.com/v3/repos/statistics/#get-the-weekly-commit-count
 
 Returns the total commit counts for the `owner` and total commit counts in `all`. `all` is everyone combined, including the `owner` in the last 52 weeks. If you'd like to get the commit counts for non-owners, you can subtract `owner` from `all`.
 
@@ -7438,23 +7554,9 @@ The array order is oldest week (index 0) to most recent week.
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
 
-## repos get-protected-branch-admin-enforcement
+## repos get-pull-request-review-protection
 
-https://developer.github.com/v3/repos/branches/#get-admin-enforcement-of-protected-branch
-
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| branch | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
-
-## repos get-protected-branch-pull-request-review-enforcement
-
-https://developer.github.com/v3/repos/branches/#get-pull-request-review-enforcement-of-protected-branch
+https://developer.github.com/v3/repos/branches/#get-pull-request-review-protection
 
 Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
@@ -7467,60 +7569,9 @@ Protected branches are available in public repositories with GitHub Free and Git
 | repo | __Required__ repository in OWNER/REPO form |
 | luke-cage-preview | The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must set this flag. |
 
-## repos get-protected-branch-required-signatures
-
-https://developer.github.com/v3/repos/branches/#get-required-signatures-of-protected-branch
-
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-
-When authenticated with admin or owner permissions to the repository, you can use this endpoint to check whether a branch requires signed commits. An enabled status of `true` indicates you must sign commits on this branch. For more information, see [Signing commits with GPG](https://help.github.com/articles/signing-commits-with-gpg) in GitHub Help.
-
-**Note**: You must enable branch protection to require signed commits.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| branch | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
-| zzzax-preview | __Required__ Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must set this flag. |
-
-## repos get-protected-branch-required-status-checks
-
-https://developer.github.com/v3/repos/branches/#get-required-status-checks-of-protected-branch
-
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| branch | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
-
-## repos get-protected-branch-restrictions
-
-https://developer.github.com/v3/repos/branches/#get-restrictions-of-protected-branch
-
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-
-Lists who has access to this protected branch. {{#note}}
-
-**Note**: Users, apps, and teams `restrictions` are only available for organization-owned repositories.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| branch | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
-
 ## repos get-punch-card-stats
 
-https://developer.github.com/v3/repos/statistics/#get-the-number-of-commits-per-hour-in-each-day
+https://developer.github.com/v3/repos/statistics/#get-the-hourly-commit-count-for-each-day
 
 Each array contains the day number, hour number, and number of commits:
 
@@ -7539,7 +7590,7 @@ For example, `[2, 14, 25]` indicates that there were 25 total commits, during th
 
 ## repos get-readme
 
-https://developer.github.com/v3/repos/contents/#get-the-readme
+https://developer.github.com/v3/repos/contents/#get-a-repository-readme
 
 Gets the preferred README for a repository.
 
@@ -7555,7 +7606,7 @@ READMEs support [custom media types](https://developer.github.com/v3/repos/conte
 
 ## repos get-release
 
-https://developer.github.com/v3/repos/releases/#get-a-single-release
+https://developer.github.com/v3/repos/releases/#get-a-release
 
 **Note:** This returns an `upload_url` key corresponding to the endpoint for uploading release assets. This key is a [hypermedia resource](https://developer.github.com/v3/#hypermedia).
 
@@ -7569,7 +7620,7 @@ https://developer.github.com/v3/repos/releases/#get-a-single-release
 
 ## repos get-release-asset
 
-https://developer.github.com/v3/repos/releases/#get-a-single-release-asset
+https://developer.github.com/v3/repos/releases/#get-a-release-asset
 
 To download the asset's binary content, set the `Accept` header of the request to [`application/octet-stream`](https://developer.github.com/v3/media/#media-types). The API will either redirect the client to the location, or stream it directly if possible. API clients should handle both a `200` or `302` response.
 
@@ -7595,9 +7646,23 @@ Get a published release with the specified tag.
 | repo | __Required__ repository in OWNER/REPO form |
 | tag | __Required__  |
 
+## repos get-status-checks-protection
+
+https://developer.github.com/v3/repos/branches/#get-status-checks-protection
+
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| branch | __Required__  |
+| repo | __Required__ repository in OWNER/REPO form |
+
 ## repos get-teams-with-access-to-protected-branch
 
-https://developer.github.com/v3/repos/branches/#list-teams-with-access-to-protected-branch
+https://developer.github.com/v3/repos/branches/#list-teams-with-access-to-the-protected-branch
 
 Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
@@ -7613,7 +7678,7 @@ Lists the teams who have push access to this branch. The list includes child tea
 
 ## repos get-top-paths
 
-https://developer.github.com/v3/repos/traffic/#list-paths
+https://developer.github.com/v3/repos/traffic/#get-top-referral-paths
 
 Get the top 10 popular contents over the last 14 days.
 
@@ -7626,7 +7691,7 @@ Get the top 10 popular contents over the last 14 days.
 
 ## repos get-top-referrers
 
-https://developer.github.com/v3/repos/traffic/#list-referrers
+https://developer.github.com/v3/repos/traffic/#get-top-referral-sources
 
 Get the top 10 referrers over the last 14 days.
 
@@ -7639,7 +7704,7 @@ Get the top 10 referrers over the last 14 days.
 
 ## repos get-users-with-access-to-protected-branch
 
-https://developer.github.com/v3/repos/branches/#list-users-with-access-to-protected-branch
+https://developer.github.com/v3/repos/branches/#list-users-with-access-to-the-protected-branch
 
 Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
@@ -7655,7 +7720,7 @@ Lists the people who have push access to this branch.
 
 ## repos get-views
 
-https://developer.github.com/v3/repos/traffic/#views
+https://developer.github.com/v3/repos/traffic/#get-page-views
 
 Get the total number of views and breakdown per day or week for the last 14 days. Timestamps are aligned to UTC midnight of the beginning of the day or week. Week begins on Monday.
 
@@ -7667,9 +7732,9 @@ Get the total number of views and breakdown per day or week for the last 14 days
 | repo | __Required__ repository in OWNER/REPO form |
 | per | Must be one of: `day`, `week`. |
 
-## repos list-assets-for-release
+## repos get-webhook
 
-https://developer.github.com/v3/repos/releases/#list-assets-for-a-release
+https://developer.github.com/v3/repos/hooks/#get-a-repository-webhook
 
 
 
@@ -7678,10 +7743,8 @@ https://developer.github.com/v3/repos/releases/#list-assets-for-a-release
 
 | name | description |
 |------|-------------|
-| release_id | __Required__  |
+| hook_id | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| page | Page number of the results to fetch. |
-| per_page | Results per page (max 100) |
 
 ## repos list-branches
 
@@ -7718,7 +7781,7 @@ Returns all branches where the given commit SHA is the HEAD, or latest commit fo
 
 ## repos list-collaborators
 
-https://developer.github.com/v3/repos/collaborators/#list-collaborators
+https://developer.github.com/v3/repos/collaborators/#list-repository-collaborators
 
 For organization-owned repositories, the list of collaborators includes outside collaborators, organization members that are direct collaborators, organization members with access through team memberships, organization members with access through default organization permissions, and organization owners.
 
@@ -7736,7 +7799,7 @@ Team members will include the members of child teams.
 
 ## repos list-comments-for-commit
 
-https://developer.github.com/v3/repos/comments/#list-comments-for-a-single-commit
+https://developer.github.com/v3/repos/comments/#list-commit-comments
 
 Use the `:commit_sha` to specify the commit that will have its comments listed.
 
@@ -7751,7 +7814,7 @@ Use the `:commit_sha` to specify the commit that will have its comments listed.
 | per_page | Results per page (max 100) |
 | squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
-## repos list-commit-comments
+## repos list-commit-comments-for-repo
 
 https://developer.github.com/v3/repos/comments/#list-commit-comments-for-a-repository
 
@@ -7769,9 +7832,27 @@ Comments are ordered by ascending ID.
 | per_page | Results per page (max 100) |
 | squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
+## repos list-commit-statuses-for-ref
+
+https://developer.github.com/v3/repos/statuses/#list-commit-statuses-for-a-reference
+
+Users with pull access in a repository can view commit statuses for a given ref. The ref can be a SHA, a branch name, or a tag name. Statuses are returned in reverse chronological order. The first status in the list will be the latest one.
+
+This resource is also available via a legacy route: `GET /repos/:owner/:repo/statuses/:ref`.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| ref | __Required__  |
+| repo | __Required__ repository in OWNER/REPO form |
+| page | Page number of the results to fetch. |
+| per_page | Results per page (max 100) |
+
 ## repos list-commits
 
-https://developer.github.com/v3/repos/commits/#list-commits-on-a-repository
+https://developer.github.com/v3/repos/commits/#list-commits
 
 **Signature verification object**
 
@@ -7811,7 +7892,7 @@ These are the possible values for `reason` in the `verification` object:
 
 ## repos list-contributors
 
-https://developer.github.com/v3/repos/#list-contributors
+https://developer.github.com/v3/repos/#list-repository-contributors
 
 Lists contributors to the specified repository and sorts them by the number of commits per contributor in descending order. This endpoint may return information that is a few hours old because the GitHub REST API v3 caches contributor data to improve performance.
 
@@ -7879,21 +7960,6 @@ Simple filtering of deployments is available via query parameters:
 | ref | The name of the ref. This can be a branch, tag, or SHA. |
 | sha | The SHA recorded at creation time. |
 | task | The name of the task for the deployment (e.g., `deploy` or `deploy:migrations`). |
-
-## repos list-downloads
-
-https://developer.github.com/v3/repos/downloads/#list-downloads-for-a-repository
-
-
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| repo | __Required__ repository in OWNER/REPO form |
-| page | Page number of the results to fetch. |
-| per_page | Results per page (max 100) |
 
 ## repos list-for-authenticated-user
 
@@ -7971,24 +8037,9 @@ https://developer.github.com/v3/repos/forks/#list-forks
 | per_page | Results per page (max 100) |
 | sort | The sort order. Can be either `newest`, `oldest`, or `stargazers`. |
 
-## repos list-hooks
-
-https://developer.github.com/v3/repos/hooks/#list-hooks
-
-
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| repo | __Required__ repository in OWNER/REPO form |
-| page | Page number of the results to fetch. |
-| per_page | Results per page (max 100) |
-
 ## repos list-invitations
 
-https://developer.github.com/v3/repos/invitations/#list-invitations-for-a-repository
+https://developer.github.com/v3/repos/invitations/#list-repository-invitations
 
 When authenticating as a user with admin rights to a repository, this endpoint will list all currently open repository invitations.
 
@@ -8003,7 +8054,7 @@ When authenticating as a user with admin rights to a repository, this endpoint w
 
 ## repos list-invitations-for-authenticated-user
 
-https://developer.github.com/v3/repos/invitations/#list-a-users-repository-invitations
+https://developer.github.com/v3/repos/invitations/#list-repository-invitations-for-the-authenticated-user
 
 When authenticating as a user, this endpoint will list all currently open repository invitations for that user.
 
@@ -8017,7 +8068,7 @@ When authenticating as a user, this endpoint will list all currently open reposi
 
 ## repos list-languages
 
-https://developer.github.com/v3/repos/#list-languages
+https://developer.github.com/v3/repos/#list-repository-languages
 
 Lists languages for the specified repository. The value shown for each language is the number of bytes of code written in that language.
 
@@ -8030,7 +8081,7 @@ Lists languages for the specified repository. The value shown for each language 
 
 ## repos list-pages-builds
 
-https://developer.github.com/v3/repos/pages/#list-pages-builds
+https://developer.github.com/v3/repos/pages/#list-github-pages-builds
 
 
 
@@ -8042,20 +8093,6 @@ https://developer.github.com/v3/repos/pages/#list-pages-builds
 | repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-
-## repos list-protected-branch-required-status-checks-contexts
-
-https://developer.github.com/v3/repos/branches/#list-required-status-checks-contexts-of-protected-branch
-
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| branch | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
 
 ## repos list-public
 
@@ -8074,7 +8111,7 @@ Note: Pagination is powered exclusively by the `since` parameter. Use the [Link 
 
 ## repos list-pull-requests-associated-with-commit
 
-https://developer.github.com/v3/repos/commits/#list-pull-requests-associated-with-commit
+https://developer.github.com/v3/repos/commits/#list-pull-requests-associated-with-a-commit
 
 Lists all pull requests containing the provided commit SHA, which can be from any point in the commit history. The results will include open and closed pull requests. Additional preview headers may be required to see certain details for associated pull requests, such as whether a pull request is in a draft state. For more information about previews that might affect this endpoint, see the [List pull requests](https://developer.github.com/v3/pulls/#list-pull-requests) endpoint.
 
@@ -8089,11 +8126,27 @@ Lists all pull requests containing the provided commit SHA, which can be from an
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
+## repos list-release-assets
+
+https://developer.github.com/v3/repos/releases/#list-release-assets
+
+
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| release_id | __Required__  |
+| repo | __Required__ repository in OWNER/REPO form |
+| page | Page number of the results to fetch. |
+| per_page | Results per page (max 100) |
+
 ## repos list-releases
 
-https://developer.github.com/v3/repos/releases/#list-releases-for-a-repository
+https://developer.github.com/v3/repos/releases/#list-releases
 
-This returns a list of releases, which does not include regular Git tags that have not been associated with a release. To get a list of Git tags, use the [Repository Tags API](https://developer.github.com/v3/repos/#list-tags).
+This returns a list of releases, which does not include regular Git tags that have not been associated with a release. To get a list of Git tags, use the [Repository Tags API](https://developer.github.com/v3/repos/#list-repository-tags).
 
 Information about published releases are available to everyone. Only users with push access will receive listings for draft releases.
 
@@ -8106,27 +8159,9 @@ Information about published releases are available to everyone. Only users with 
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
-## repos list-statuses-for-ref
-
-https://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref
-
-Users with pull access in a repository can view commit statuses for a given ref. The ref can be a SHA, a branch name, or a tag name. Statuses are returned in reverse chronological order. The first status in the list will be the latest one.
-
-This resource is also available via a legacy route: `GET /repos/:owner/:repo/statuses/:ref`.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| ref | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
-| page | Page number of the results to fetch. |
-| per_page | Results per page (max 100) |
-
 ## repos list-tags
 
-https://developer.github.com/v3/repos/#list-tags
+https://developer.github.com/v3/repos/#list-repository-tags
 
 
 
@@ -8141,7 +8176,22 @@ https://developer.github.com/v3/repos/#list-tags
 
 ## repos list-teams
 
-https://developer.github.com/v3/repos/#list-teams
+https://developer.github.com/v3/repos/#list-repository-teams
+
+
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| repo | __Required__ repository in OWNER/REPO form |
+| page | Page number of the results to fetch. |
+| per_page | Results per page (max 100) |
+
+## repos list-webhooks
+
+https://developer.github.com/v3/repos/hooks/#list-repository-webhooks
 
 
 
@@ -8156,7 +8206,7 @@ https://developer.github.com/v3/repos/#list-teams
 
 ## repos merge
 
-https://developer.github.com/v3/repos/merging/#perform-a-merge
+https://developer.github.com/v3/repos/merging/#merge-a-branch
 
 
 
@@ -8170,9 +8220,9 @@ https://developer.github.com/v3/repos/merging/#perform-a-merge
 | repo | __Required__ repository in OWNER/REPO form |
 | commit_message | Commit message to use for the merge commit. If omitted, a default message will be used. |
 
-## repos ping-hook
+## repos ping-webhook
 
-https://developer.github.com/v3/repos/hooks/#ping-a-hook
+https://developer.github.com/v3/repos/hooks/#ping-a-repository-webhook
 
 This will trigger a [ping event](https://developer.github.com/webhooks/#ping-event) to be sent to the hook.
 
@@ -8184,67 +8234,9 @@ This will trigger a [ping event](https://developer.github.com/webhooks/#ping-eve
 | hook_id | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
-## repos remove-branch-protection
+## repos remove-app-access-restrictions
 
-https://developer.github.com/v3/repos/branches/#remove-branch-protection
-
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| branch | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
-
-## repos remove-collaborator
-
-https://developer.github.com/v3/repos/collaborators/#remove-user-as-a-collaborator
-
-
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| repo | __Required__ repository in OWNER/REPO form |
-| username | __Required__  |
-
-## repos remove-deploy-key
-
-https://developer.github.com/v3/repos/keys/#remove-a-deploy-key
-
-
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| key_id | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
-
-## repos remove-protected-branch-admin-enforcement
-
-https://developer.github.com/v3/repos/branches/#remove-admin-enforcement-of-protected-branch
-
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-
-Removing admin enforcement requires admin or owner permissions to the repository and branch protection to be enabled.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| branch | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
-
-## repos remove-protected-branch-app-restrictions
-
-https://developer.github.com/v3/repos/branches/#remove-app-restrictions-of-protected-branch
+https://developer.github.com/v3/repos/branches/#remove-app-access-restrictions
 
 Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
@@ -8262,9 +8254,23 @@ Removes the ability of an app to push to this branch. Only installed GitHub Apps
 | branch | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
-## repos remove-protected-branch-pull-request-review-enforcement
+## repos remove-collaborator
 
-https://developer.github.com/v3/repos/branches/#remove-pull-request-review-enforcement-of-protected-branch
+https://developer.github.com/v3/repos/collaborators/#remove-a-repository-collaborator
+
+
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| repo | __Required__ repository in OWNER/REPO form |
+| username | __Required__  |
+
+## repos remove-status-check-contexts
+
+https://developer.github.com/v3/repos/branches/#remove-status-check-contexts
 
 Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
@@ -8276,26 +8282,9 @@ Protected branches are available in public repositories with GitHub Free and Git
 | branch | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
-## repos remove-protected-branch-required-signatures
+## repos remove-status-check-protection
 
-https://developer.github.com/v3/repos/branches/#remove-required-signatures-of-protected-branch
-
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-
-When authenticated with admin or owner permissions to the repository, you can use this endpoint to disable required signed commits on a branch. You must enable branch protection to require signed commits.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| branch | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
-| zzzax-preview | __Required__ Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must set this flag. |
-
-## repos remove-protected-branch-required-status-checks
-
-https://developer.github.com/v3/repos/branches/#remove-required-status-checks-of-protected-branch
+https://developer.github.com/v3/repos/branches/#remove-status-check-protection
 
 Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
@@ -8307,39 +8296,9 @@ Protected branches are available in public repositories with GitHub Free and Git
 | branch | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
-## repos remove-protected-branch-required-status-checks-contexts
+## repos remove-team-access-restrictions
 
-https://developer.github.com/v3/repos/branches/#remove-required-status-checks-contexts-of-protected-branch
-
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| branch | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
-
-## repos remove-protected-branch-restrictions
-
-https://developer.github.com/v3/repos/branches/#remove-restrictions-of-protected-branch
-
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-
-Disables the ability to restrict who can push to this branch.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| branch | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
-
-## repos remove-protected-branch-team-restrictions
-
-https://developer.github.com/v3/repos/branches/#remove-team-restrictions-of-protected-branch
+https://developer.github.com/v3/repos/branches/#remove-team-access-restrictions
 
 Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
@@ -8357,9 +8316,9 @@ Removes the ability of a team to push to this branch. You can also remove push a
 | branch | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
-## repos remove-protected-branch-user-restrictions
+## repos remove-user-access-restrictions
 
-https://developer.github.com/v3/repos/branches/#remove-user-restrictions-of-protected-branch
+https://developer.github.com/v3/repos/branches/#remove-user-access-restrictions
 
 Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
@@ -8392,9 +8351,40 @@ https://developer.github.com/v3/repos/#replace-all-repository-topics
 | names | __Required__ An array of topics to add to the repository. Pass one or more topics to _replace_ the set of existing topics. Send an empty array (`[]`) to clear all topics from the repository. **Note:** Topic `names` cannot contain uppercase letters. |
 | repo | __Required__ repository in OWNER/REPO form |
 
-## repos replace-protected-branch-app-restrictions
+## repos request-pages-build
 
-https://developer.github.com/v3/repos/branches/#replace-app-restrictions-of-protected-branch
+https://developer.github.com/v3/repos/pages/#request-a-github-pages-build
+
+You can request that your site be built from the latest revision on the default branch. This has the same effect as pushing a commit to your default branch, but does not require an additional commit. Manually triggering page builds can be helpful when diagnosing build warnings and failures.
+
+Build requests are limited to one concurrent build per repository and one concurrent build per requester. If you request a build while another is still in progress, the second request will be queued until the first completes.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| repo | __Required__ repository in OWNER/REPO form |
+
+## repos set-admin-branch-protection
+
+https://developer.github.com/v3/repos/branches/#set-admin-branch-protection
+
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+
+Adding admin enforcement requires admin or owner permissions to the repository and branch protection to be enabled.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| branch | __Required__  |
+| repo | __Required__ repository in OWNER/REPO form |
+
+## repos set-app-access-restrictions
+
+https://developer.github.com/v3/repos/branches/#set-app-access-restrictions
 
 Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
@@ -8412,9 +8402,9 @@ Replaces the list of apps that have push access to this branch. This removes all
 | branch | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
-## repos replace-protected-branch-required-status-checks-contexts
+## repos set-status-check-contexts
 
-https://developer.github.com/v3/repos/branches/#replace-required-status-checks-contexts-of-protected-branch
+https://developer.github.com/v3/repos/branches/#set-status-check-contexts
 
 Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
@@ -8426,9 +8416,9 @@ Protected branches are available in public repositories with GitHub Free and Git
 | branch | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
-## repos replace-protected-branch-team-restrictions
+## repos set-team-access-restrictions
 
-https://developer.github.com/v3/repos/branches/#replace-team-restrictions-of-protected-branch
+https://developer.github.com/v3/repos/branches/#set-team-access-restrictions
 
 Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
@@ -8446,9 +8436,9 @@ Replaces the list of teams that have push access to this branch. This removes al
 | branch | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
-## repos replace-protected-branch-user-restrictions
+## repos set-user-access-restrictions
 
-https://developer.github.com/v3/repos/branches/#replace-user-restrictions-of-protected-branch
+https://developer.github.com/v3/repos/branches/#set-user-access-restrictions
 
 Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
@@ -8466,37 +8456,9 @@ Replaces the list of people that have push access to this branch. This removes a
 | branch | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
-## repos request-page-build
+## repos test-push-webhook
 
-https://developer.github.com/v3/repos/pages/#request-a-page-build
-
-You can request that your site be built from the latest revision on the default branch. This has the same effect as pushing a commit to your default branch, but does not require an additional commit. Manually triggering page builds can be helpful when diagnosing build warnings and failures.
-
-Build requests are limited to one concurrent build per repository and one concurrent build per requester. If you request a build while another is still in progress, the second request will be queued until the first completes.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| repo | __Required__ repository in OWNER/REPO form |
-
-## repos retrieve-community-profile-metrics
-
-https://developer.github.com/v3/repos/community/#retrieve-community-profile-metrics
-
-This endpoint will return all community profile metrics, including an overall health score, repository description, the presence of documentation, detected code of conduct, detected license, and the presence of ISSUE\_TEMPLATE, PULL\_REQUEST\_TEMPLATE, README, and CONTRIBUTING files.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| repo | __Required__ repository in OWNER/REPO form |
-
-## repos test-push-hook
-
-https://developer.github.com/v3/repos/hooks/#test-a-push-hook
+https://developer.github.com/v3/repos/hooks/#test-the-push-repository-webhook
 
 This will trigger the hook with the latest push to the current repository if the hook is subscribed to `push` events. If the hook is not subscribed to `push` events, the server will respond with 204 but no test POST will be generated.
 
@@ -8579,10 +8541,10 @@ Protecting a branch requires admin or owner permissions to the repository.
 | required_status_checks.strict | __Required__ Require branches to be up to date before merging. |
 | restrictions.teams | __Required__ The list of team `slug`s with push access |
 | restrictions.users | __Required__ The list of user `login`s with push access |
-| allow_deletions | Allows deletion of the protected branch by anyone with write access to the repository. Set to `false` to prevent deletion of the protected branch. Default: `false`. For more information, see "[Enabling force pushes to a protected branch](https://help.github.com/en/github/administering-a-repository/enabling-force-pushes-to-a-protected-branch)" in the GitHub Help documentation. |
-| allow_force_pushes | Permits force pushes to the protected branch by anyone with write access to the repository. Set to `true` to allow force pushes. Set to `false` or `null` to block force pushes. Default: `false`. For more information, see "[Enabling force pushes to a protected branch](https://help.github.com/en/github/administering-a-repository/enabling-force-pushes-to-a-protected-branch)" in the GitHub Help documentation." |
+| allow_deletions | Allows deletion of the protected branch by anyone with write access to the repository. Set to `false` to prevent deletion of the protected branch. Default: `false`. For more information, see "[Enabling force pushes to a protected branch](https://help.github.com/en/github/administering-a-repository/enabling-force-pushes-to-a-protected-branch)". |
+| allow_force_pushes | Permits force pushes to the protected branch by anyone with write access to the repository. Set to `true` to allow force pushes. Set to `false` or `null` to block force pushes. Default: `false`. For more information, see "[Enabling force pushes to a protected branch](https://help.github.com/en/github/administering-a-repository/enabling-force-pushes-to-a-protected-branch)". |
 | luke-cage-preview | The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must set this flag. |
-| required_linear_history | Enforces a linear commit Git history, which prevents anyone from pushing merge commits to a branch. Set to `true` to enforce a linear commit history. Set to `false` to disable a linear commit Git history. Your repository must allow squash merging or rebase merging before you can enable a linear commit history. Default: `false`. For more information, see "[Requiring a linear commit history](https://help.github.com/github/administering-a-repository/requiring-a-linear-commit-history)" in the GitHub Help documentation. |
+| required_linear_history | Enforces a linear commit Git history, which prevents anyone from pushing merge commits to a branch. Set to `true` to enforce a linear commit history. Set to `false` to disable a linear commit Git history. Your repository must allow squash merging or rebase merging before you can enable a linear commit history. Default: `false`. For more information, see "[Requiring a linear commit history](https://help.github.com/github/administering-a-repository/requiring-a-linear-commit-history)". |
 | required_pull_request_reviews.dismiss_stale_reviews | Set to `true` if you want to automatically dismiss approving reviews when someone pushes a new commit. |
 | required_pull_request_reviews.dismissal_restrictions.teams | The list of team `slug`s with dismissal access |
 | required_pull_request_reviews.dismissal_restrictions.users | The list of user `login`s with dismissal access |
@@ -8605,31 +8567,9 @@ https://developer.github.com/v3/repos/comments/#update-a-commit-comment
 | comment_id | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
-## repos update-hook
-
-https://developer.github.com/v3/repos/hooks/#edit-a-hook
-
-
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| hook_id | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
-| active | Determines if notifications are sent when the webhook is triggered. Set to `true` to send notifications. |
-| add_events | Determines a list of events to be added to the list of events that the Hook triggers for. |
-| config.content_type | The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`. |
-| config.insecure_ssl | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. **We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.** |
-| config.secret | If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value in the [`X-Hub-Signature`](https://developer.github.com/webhooks/event-payloads/#delivery-headers) header. |
-| config.url | The URL to which the payloads will be delivered. |
-| events | Determines what [events](https://developer.github.com/webhooks/event-payloads) the hook is triggered for. This replaces the entire array of events. |
-| remove_events | Determines a list of events to be removed from the list of events that the Hook triggers for. |
-
 ## repos update-information-about-pages-site
 
-https://developer.github.com/v3/repos/pages/#update-information-about-a-pages-site
+https://developer.github.com/v3/repos/pages/#update-information-about-a-github-pages-site
 
 
 
@@ -8657,9 +8597,9 @@ https://developer.github.com/v3/repos/invitations/#update-a-repository-invitatio
 | repo | __Required__ repository in OWNER/REPO form |
 | permissions | The permissions that the associated user will have on the repository. Valid values are `read`, `write`, `maintain`, `triage`, and `admin`. |
 
-## repos update-protected-branch-pull-request-review-enforcement
+## repos update-pull-request-review-protection
 
-https://developer.github.com/v3/repos/branches/#update-pull-request-review-enforcement-of-protected-branch
+https://developer.github.com/v3/repos/branches/#update-pull-request-review-protection
 
 Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
@@ -8681,27 +8621,9 @@ Updating pull request review enforcement requires admin or owner permissions to 
 | require_code_owner_reviews | Blocks merging pull requests until [code owners](https://help.github.com/articles/about-code-owners/) have reviewed. |
 | required_approving_review_count | Specifies the number of reviewers required to approve pull requests. Use a number between 1 and 6. |
 
-## repos update-protected-branch-required-status-checks
-
-https://developer.github.com/v3/repos/branches/#update-required-status-checks-of-protected-branch
-
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
-
-Updating required status checks requires admin or owner permissions to the repository and branch protection to be enabled.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| branch | __Required__  |
-| repo | __Required__ repository in OWNER/REPO form |
-| contexts | The list of status checks to require in order to merge into this branch |
-| strict | Require branches to be up to date before merging. |
-
 ## repos update-release
 
-https://developer.github.com/v3/repos/releases/#edit-a-release
+https://developer.github.com/v3/repos/releases/#update-a-release
 
 Users with push access to the repository can edit a release.
 
@@ -8721,7 +8643,7 @@ Users with push access to the repository can edit a release.
 
 ## repos update-release-asset
 
-https://developer.github.com/v3/repos/releases/#edit-a-release-asset
+https://developer.github.com/v3/repos/releases/#update-a-release-asset
 
 Users with push access to the repository can edit a release asset.
 
@@ -8734,6 +8656,46 @@ Users with push access to the repository can edit a release asset.
 | repo | __Required__ repository in OWNER/REPO form |
 | label | An alternate short description of the asset. Used in place of the filename. |
 | name | The file name of the asset. |
+
+## repos update-status-check-potection
+
+https://developer.github.com/v3/repos/branches/#update-status-check-potection
+
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+
+Updating required status checks requires admin or owner permissions to the repository and branch protection to be enabled.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| branch | __Required__  |
+| repo | __Required__ repository in OWNER/REPO form |
+| contexts | The list of status checks to require in order to merge into this branch |
+| strict | Require branches to be up to date before merging. |
+
+## repos update-webhook
+
+https://developer.github.com/v3/repos/hooks/#update-a-repository-webhook
+
+
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| hook_id | __Required__  |
+| repo | __Required__ repository in OWNER/REPO form |
+| active | Determines if notifications are sent when the webhook is triggered. Set to `true` to send notifications. |
+| add_events | Determines a list of events to be added to the list of events that the Hook triggers for. |
+| config.content_type | The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`. |
+| config.insecure_ssl | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. **We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.** |
+| config.secret | If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value in the [`X-Hub-Signature`](https://developer.github.com/webhooks/event-payloads/#delivery-headers) header. |
+| config.url | The URL to which the payloads will be delivered. |
+| events | Determines what [events](https://developer.github.com/webhooks/event-payloads) the hook is triggered for. This replaces the entire array of events. |
+| remove_events | Determines a list of events to be removed from the list of events that the Hook triggers for. |
 
 ## repos upload-release-asset
 
@@ -8771,9 +8733,23 @@ This may leave an empty asset with a state of `starter`. It can be safely delete
 # scim
 
 
-## scim get-provisioning-details-for-user
+## scim delete-user-from-org
 
-https://developer.github.com/v3/scim/#get-provisioning-details-for-a-single-user
+https://developer.github.com/v3/scim/#delete-a-scim-user-from-an-organization
+
+
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| org | __Required__  |
+| scim_user_id | __Required__  |
+
+## scim get-provisioning-information-for-user
+
+https://developer.github.com/v3/scim/#get-scim-provisioning-information-for-a-user
 
 
 
@@ -8787,7 +8763,7 @@ https://developer.github.com/v3/scim/#get-provisioning-details-for-a-single-user
 
 ## scim list-provisioned-identities
 
-https://developer.github.com/v3/scim/#get-a-list-of-provisioned-identities
+https://developer.github.com/v3/scim/#list-scim-provisioned-identities
 
 To filter for a specific email address, use the `email` query parameter and the `eq` operator:
 
@@ -8807,9 +8783,9 @@ Retrieves a paginated list of all provisioned organization members, including pe
 | filter | Filters results using the equals query parameter operator (`eq`). You can filter results that are equal to `id`, `userName`, `emails`, and `external_id`. For example, to search for an identity with the `userName` Octocat, you would use this query: `?filter=userName%20eq%20\"Octocat\"`. |
 | startIndex | Used for pagination: the index of the first result to return. |
 
-## scim provision-and-invite-users
+## scim provision-and-invite-user
 
-https://developer.github.com/v3/scim/#provision-and-invite-users
+https://developer.github.com/v3/scim/#provision-and-invite-a-scim-user
 
 Provision organization membership for a user, and send an activation email to the email address.
 
@@ -8822,25 +8798,11 @@ As shown in the following example, you must at least provide the required values
 |------|-------------|
 | org | __Required__  |
 
-## scim remove-user-from-org
+## scim set-information-for-provisioned-user
 
-https://developer.github.com/v3/scim/#remove-a-user-from-the-organization
+https://developer.github.com/v3/scim/#set-scim-information-for-a-provisioned-user
 
-
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| org | __Required__  |
-| scim_user_id | __Required__  |
-
-## scim replace-provisioned-user-information
-
-https://developer.github.com/v3/scim/#replace-a-provisioned-users-information
-
-Replaces an existing provisioned user's information. You must provide all the information required for the user as if you were provisioning them for the first time. Any existing user information that you don't provide will be removed. If you want to only update a specific attribute, use the [Update a user attribute](https://developer.github.com/v3/scim/#update-a-user-attribute) endpoint instead.
+Replaces an existing provisioned user's information. You must provide all the information required for the user as if you were provisioning them for the first time. Any existing user information that you don't provide will be removed. If you want to only update a specific attribute, use the [Update an attribute for a SCIM user](https://developer.github.com/v3/scim/#update-an-attribute-for-a-scim-user) endpoint instead.
 
 As shown in the following example, you must at least provide the required values for the user: `userName`, `name`, and `emails`.
 
@@ -8854,9 +8816,9 @@ As shown in the following example, you must at least provide the required values
 | org | __Required__  |
 | scim_user_id | __Required__  |
 
-## scim update-user-attribute
+## scim update-attribute-for-user
 
-https://developer.github.com/v3/scim/#update-a-user-attribute
+https://developer.github.com/v3/scim/#update-an-attribute-for-a-scim-user
 
 Allows you to change a provisioned user's individual attributes. To change a user's values, you must provide a specific `Operations` JSON format that contains at least one of the `add`, `remove`, or `replace` operations.
 
@@ -9074,7 +9036,7 @@ https://developer.github.com/v3/teams/members/#add-team-member-legacy
 
 The "Add team member" endpoint (described below) is deprecated.
 
-We recommend using the [Add team membership](https://developer.github.com/v3/teams/members/#add-or-update-team-membership) endpoint instead. It allows you to invite new organization members to your teams.
+We recommend using the [Add or update team membership for a user](https://developer.github.com/v3/teams/members/#add-or-update-team-membership-for-a-user) endpoint instead. It allows you to invite new organization members to your teams.
 
 Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
@@ -9092,9 +9054,9 @@ Note that you'll need to set `Content-Length` to zero when calling out to this e
 | team_id | __Required__  |
 | username | __Required__  |
 
-## teams add-or-update-membership-in-org
+## teams add-or-update-membership-for-user-in-org
 
-https://developer.github.com/v3/teams/members/#add-or-update-team-membership
+https://developer.github.com/v3/teams/members/#add-or-update-team-membership-for-a-user
 
 Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
@@ -9118,11 +9080,11 @@ If the user is already a member of the team, this endpoint will update the role 
 | username | __Required__  |
 | role | The role that this user should have in the team. Can be one of:  <br>\* `member` - a normal member of the team.  <br>\* `maintainer` - a team maintainer. Able to add/remove other team members, promote other team members to team maintainer, and edit the team's name and description. |
 
-## teams add-or-update-membership-legacy
+## teams add-or-update-membership-for-user-legacy
 
-https://developer.github.com/v3/teams/members/#add-or-update-team-membership-legacy
+https://developer.github.com/v3/teams/members/#add-or-update-team-membership-for-a-user-legacy
 
-**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Add or update team membership`](https://developer.github.com/v3/teams/members/#add-or-update-team-membership) endpoint.
+**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Add or update team membership for a user](https://developer.github.com/v3/teams/members/#add-or-update-team-membership-for-a-user) endpoint.
 
 Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
@@ -9143,9 +9105,9 @@ If the user is already a member of the team, this endpoint will update the role 
 | username | __Required__  |
 | role | The role that this user should have in the team. Can be one of:  <br>\* `member` - a normal member of the team.  <br>\* `maintainer` - a team maintainer. Able to add/remove other team members, promote other team members to team maintainer, and edit the team's name and description. |
 
-## teams add-or-update-project-in-org
+## teams add-or-update-project-permissions-in-org
 
-https://developer.github.com/v3/teams/#add-or-update-team-project
+https://developer.github.com/v3/teams/#add-or-update-team-project-permissions
 
 Adds an organization project to a team. To add a project to a team or update the team's permission on a project, the authenticated user must have `admin` permissions for the project. The project and team must be part of the same organization.
 
@@ -9162,11 +9124,11 @@ Adds an organization project to a team. To add a project to a team or update the
 | team_slug | __Required__  |
 | permission | The permission to grant to the team for this project. Can be one of:  <br>\* `read` - team members can read, but not write to or administer this project.  <br>\* `write` - team members can read and write, but not administer this project.  <br>\* `admin` - team members can read, write and administer this project.  <br>Default: the team's `permission` attribute will be used to determine what permission to grant the team on this project. Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://developer.github.com/v3/#http-verbs)." |
 
-## teams add-or-update-project-legacy
+## teams add-or-update-project-permissions-legacy
 
-https://developer.github.com/v3/teams/#add-or-update-team-project-legacy
+https://developer.github.com/v3/teams/#add-or-update-team-project-permissions-legacy
 
-**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Add or update team project`](https://developer.github.com/v3/teams/#add-or-update-team-project) endpoint.
+**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Add or update team project permissions](https://developer.github.com/v3/teams/#add-or-update-team-project-permissions) endpoint.
 
 Adds an organization project to a team. To add a project to a team or update the team's permission on a project, the authenticated user must have `admin` permissions for the project. The project and team must be part of the same organization.
 
@@ -9180,15 +9142,15 @@ Adds an organization project to a team. To add a project to a team or update the
 | team_id | __Required__  |
 | permission | The permission to grant to the team for this project. Can be one of:  <br>\* `read` - team members can read, but not write to or administer this project.  <br>\* `write` - team members can read and write, but not administer this project.  <br>\* `admin` - team members can read, write and administer this project.  <br>Default: the team's `permission` attribute will be used to determine what permission to grant the team on this project. Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://developer.github.com/v3/#http-verbs)." |
 
-## teams add-or-update-repo-in-org
+## teams add-or-update-repo-permissions-in-org
 
-https://developer.github.com/v3/teams/#add-or-update-team-repository
+https://developer.github.com/v3/teams/#add-or-update-team-repository-permissions
 
 To add a repository to a team or update the team's permission on a repository, the authenticated user must have admin access to the repository, and must be able to see the team. The repository must be owned by the organization, or a direct fork of a repository owned by the organization. You will get a `422 Unprocessable Entity` status if you attempt to add a repository to a team that is not owned by the organization. Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://developer.github.com/v3/#http-verbs)."
 
 **Note:** You can also specify a team by `org_id` and `team_id` using the route `PUT /organizations/:org_id/team/:team_id/repos/:owner/:repo`.
 
-For more information about the permission levels, see "[Repository permission levels for an organization](https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/repository-permission-levels-for-an-organization#permission-levels-for-repositories-owned-by-an-organization)" in the GitHub Help documentation.
+For more information about the permission levels, see "[Repository permission levels for an organization](https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/repository-permission-levels-for-an-organization#permission-levels-for-repositories-owned-by-an-organization)".
 
 ### parameters
 
@@ -9200,11 +9162,11 @@ For more information about the permission levels, see "[Repository permission le
 | team_slug | __Required__  |
 | permission | The permission to grant the team on this repository. Can be one of:  <br>\* `pull` - team members can pull, but not push to or administer this repository.  <br>\* `push` - team members can pull and push, but not administer this repository.  <br>\* `admin` - team members can pull, push and administer this repository.  <br>\* `maintain` - team members can manage the repository without access to sensitive or destructive actions. Recommended for project managers. Only applies to repositories owned by organizations.  <br>\* `triage` - team members can proactively manage issues and pull requests without write access. Recommended for contributors who triage a repository. Only applies to repositories owned by organizations.  <br>  <br>If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository. |
 
-## teams add-or-update-repo-legacy
+## teams add-or-update-repo-permissions-legacy
 
-https://developer.github.com/v3/teams/#add-or-update-team-repository-legacy
+https://developer.github.com/v3/teams/#add-or-update-team-repository-permissions-legacy
 
-**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Add or update team repository`](https://developer.github.com/v3/teams/#add-or-update-team-repository) endpoint.
+**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Add or update team repository permissions](https://developer.github.com/v3/teams/#add-or-update-team-repository-permissions) endpoint.
 
 To add a repository to a team or update the team's permission on a repository, the authenticated user must have admin access to the repository, and must be able to see the team. The repository must be owned by the organization, or a direct fork of a repository owned by the organization. You will get a `422 Unprocessable Entity` status if you attempt to add a repository to a team that is not owned by the organization.
 
@@ -9219,9 +9181,44 @@ Note that, if you choose not to pass any parameters, you'll need to set `Content
 | team_id | __Required__  |
 | permission | The permission to grant the team on this repository. Can be one of:  <br>\* `pull` - team members can pull, but not push to or administer this repository.  <br>\* `push` - team members can pull and push, but not administer this repository.  <br>\* `admin` - team members can pull, push and administer this repository.  <br>  <br>If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository. |
 
-## teams check-manages-repo-in-org
+## teams check-permissions-for-project-in-org
 
-https://developer.github.com/v3/teams/#check-if-a-team-manages-a-repository
+https://developer.github.com/v3/teams/#check-team-permissions-for-a-project
+
+Checks whether a team has `read`, `write`, or `admin` permissions for an organization project. The response includes projects inherited from a parent team.
+
+**Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/:org_id/team/:team_id/projects/:project_id`.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
+| org | __Required__  |
+| project_id | __Required__  |
+| team_slug | __Required__  |
+
+## teams check-permissions-for-project-legacy
+
+https://developer.github.com/v3/teams/#check-team-permissions-for-a-project-legacy
+
+**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Check team permissions for a project](https://developer.github.com/v3/teams/#check-team-permissions-for-a-project) endpoint.
+
+Checks whether a team has `read`, `write`, or `admin` permissions for an organization project. The response includes projects inherited from a parent team.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
+| project_id | __Required__  |
+| team_id | __Required__  |
+
+## teams check-permissions-for-repo-in-org
+
+https://developer.github.com/v3/teams/#check-team-permissions-for-a-repository
 
 Checks whether a team has `admin`, `push`, `maintain`, `triage`, or `pull` permission for a repository. Repositories inherited through a parent team will also be checked.
 
@@ -9238,13 +9235,13 @@ You can also get information about the specified repository, including what perm
 | repo | __Required__ repository in OWNER/REPO form |
 | team_slug | __Required__  |
 
-## teams check-manages-repo-legacy
+## teams check-permissions-for-repo-legacy
 
-https://developer.github.com/v3/teams/#check-if-a-team-manages-a-repository-legacy
+https://developer.github.com/v3/teams/#check-team-permissions-for-a-repository-legacy
 
 **Note**: Repositories inherited through a parent team will also be checked.
 
-**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Check if a team manages a repository`](https://developer.github.com/v3/teams/#check-if-a-team-manages-a-repository) endpoint.
+**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Check team permissions for a repository](https://developer.github.com/v3/teams/#check-team-permissions-for-a-repository) endpoint.
 
 You can also get information about the specified repository, including what permissions the team grants on it, by passing the following custom [media type](https://developer.github.com/v3/media/) via the `Accept` header:
 
@@ -9258,11 +9255,11 @@ You can also get information about the specified repository, including what perm
 
 ## teams create
 
-https://developer.github.com/v3/teams/#create-team
+https://developer.github.com/v3/teams/#create-a-team
 
 To create a team, the authenticated user must be a member or owner of `:org`. By default, organization members can create teams. Organization owners can limit team creation to organization owners. For more information, see "[Setting team creation permissions](https://help.github.com/en/articles/setting-team-creation-permissions-in-your-organization)."
 
-When you create a new team, you automatically become a team maintainer without explicitly adding yourself to the optional array of `maintainers`. For more information, see "[About teams](https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/about-teams)" in the GitHub Help documentation.
+When you create a new team, you automatically become a team maintainer without explicitly adding yourself to the optional array of `maintainers`. For more information, see "[About teams](https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/about-teams)".
 
 ### parameters
 
@@ -9280,7 +9277,7 @@ When you create a new team, you automatically become a team maintainer without e
 
 ## teams create-discussion-comment-in-org
 
-https://developer.github.com/v3/teams/discussion_comments/#create-a-comment
+https://developer.github.com/v3/teams/discussion_comments/#create-a-discussion-comment
 
 Creates a new comment on a team discussion. OAuth access tokens require the `write:discussion` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
@@ -9301,9 +9298,9 @@ This endpoint triggers [notifications](https://help.github.com/articles/about-no
 
 ## teams create-discussion-comment-legacy
 
-https://developer.github.com/v3/teams/discussion_comments/#create-a-comment-legacy
+https://developer.github.com/v3/teams/discussion_comments/#create-a-discussion-comment-legacy
 
-**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Create a comment`](https://developer.github.com/v3/teams/discussion_comments/#create-a-comment) endpoint.
+**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Create a discussion comment](https://developer.github.com/v3/teams/discussion_comments/#create-a-discussion-comment) endpoint.
 
 Creates a new comment on a team discussion. OAuth access tokens require the `write:discussion` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
@@ -9401,7 +9398,7 @@ Creates, updates, or removes a connection between a team and an IdP group. When 
 
 ## teams delete-discussion-comment-in-org
 
-https://developer.github.com/v3/teams/discussion_comments/#delete-a-comment
+https://developer.github.com/v3/teams/discussion_comments/#delete-a-discussion-comment
 
 Deletes a comment on a team discussion. OAuth access tokens require the `write:discussion` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
@@ -9419,9 +9416,9 @@ Deletes a comment on a team discussion. OAuth access tokens require the `write:d
 
 ## teams delete-discussion-comment-legacy
 
-https://developer.github.com/v3/teams/discussion_comments/#delete-a-comment-legacy
+https://developer.github.com/v3/teams/discussion_comments/#delete-a-discussion-comment-legacy
 
-**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Delete a comment`](https://developer.github.com/v3/teams/discussion_comments/#delete-a-comment) endpoint.
+**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Delete a discussion comment](https://developer.github.com/v3/teams/discussion_comments/#delete-a-discussion-comment) endpoint.
 
 Deletes a comment on a team discussion. OAuth access tokens require the `write:discussion` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
@@ -9469,7 +9466,7 @@ Delete a discussion from a team's page. OAuth access tokens require the `write:d
 
 ## teams delete-in-org
 
-https://developer.github.com/v3/teams/#delete-team
+https://developer.github.com/v3/teams/#delete-a-team
 
 To delete a team, the authenticated user must be an organization owner or team maintainer.
 
@@ -9487,9 +9484,9 @@ If you are an organization owner, deleting a parent team will delete all of its 
 
 ## teams delete-legacy
 
-https://developer.github.com/v3/teams/#delete-team-legacy
+https://developer.github.com/v3/teams/#delete-a-team-legacy
 
-**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Delete team`](https://developer.github.com/v3/teams/#delete-team) endpoint.
+**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Delete a team](https://developer.github.com/v3/teams/#delete-a-team) endpoint.
 
 To delete a team, the authenticated user must be an organization owner or team maintainer.
 
@@ -9504,7 +9501,7 @@ If you are an organization owner, deleting a parent team will delete all of its 
 
 ## teams get-by-name
 
-https://developer.github.com/v3/teams/#get-team-by-name
+https://developer.github.com/v3/teams/#get-a-team-by-name
 
 Gets a team using the team's `slug`. GitHub generates the `slug` from the team `name`.
 
@@ -9520,7 +9517,7 @@ Gets a team using the team's `slug`. GitHub generates the `slug` from the team `
 
 ## teams get-discussion-comment-in-org
 
-https://developer.github.com/v3/teams/discussion_comments/#get-a-single-comment
+https://developer.github.com/v3/teams/discussion_comments/#get-a-discussion-comment
 
 Get a specific comment on a team discussion. OAuth access tokens require the `read:discussion` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
@@ -9539,9 +9536,9 @@ Get a specific comment on a team discussion. OAuth access tokens require the `re
 
 ## teams get-discussion-comment-legacy
 
-https://developer.github.com/v3/teams/discussion_comments/#get-a-single-comment-legacy
+https://developer.github.com/v3/teams/discussion_comments/#get-a-discussion-comment-legacy
 
-**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Get a single comment`](https://developer.github.com/v3/teams/discussion_comments/#get-a-single-comment) endpoint.
+**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Get a discussion comment](https://developer.github.com/v3/teams/discussion_comments/#get-a-discussion-comment) endpoint.
 
 Get a specific comment on a team discussion. OAuth access tokens require the `read:discussion` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
@@ -9557,7 +9554,7 @@ Get a specific comment on a team discussion. OAuth access tokens require the `re
 
 ## teams get-discussion-in-org
 
-https://developer.github.com/v3/teams/discussions/#get-a-single-discussion
+https://developer.github.com/v3/teams/discussions/#get-a-discussion
 
 Get a specific discussion on a team's page. OAuth access tokens require the `read:discussion` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
@@ -9575,9 +9572,9 @@ Get a specific discussion on a team's page. OAuth access tokens require the `rea
 
 ## teams get-discussion-legacy
 
-https://developer.github.com/v3/teams/discussions/#get-a-single-discussion-legacy
+https://developer.github.com/v3/teams/discussions/#get-a-discussion-legacy
 
-**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Get a single discussion`](https://developer.github.com/v3/teams/discussions/#get-a-single-discussion) endpoint.
+**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Get a discussion](https://developer.github.com/v3/teams/discussions/#get-a-discussion) endpoint.
 
 Get a specific discussion on a team's page. OAuth access tokens require the `read:discussion` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
@@ -9592,9 +9589,9 @@ Get a specific discussion on a team's page. OAuth access tokens require the `rea
 
 ## teams get-legacy
 
-https://developer.github.com/v3/teams/#get-team-legacy
+https://developer.github.com/v3/teams/#get-a-team-legacy
 
-**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the [`Get team by name`](https://developer.github.com/v3/teams/#get-team-by-name) endpoint.
+**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the [Get a team by name](https://developer.github.com/v3/teams/#get-a-team-by-name) endpoint.
 
 ### parameters
 
@@ -9609,7 +9606,7 @@ https://developer.github.com/v3/teams/members/#get-team-member-legacy
 
 The "Get team member" endpoint (described below) is deprecated.
 
-We recommend using the [Get team membership](https://developer.github.com/v3/teams/members/#get-team-membership) endpoint instead. It allows you to get both active and pending memberships.
+We recommend using the [Get team membership for a user](https://developer.github.com/v3/teams/members/#get-team-membership-for-a-user) endpoint instead. It allows you to get both active and pending memberships.
 
 To list members in a team, the team must be visible to the authenticated user.
 
@@ -9621,9 +9618,9 @@ To list members in a team, the team must be visible to the authenticated user.
 | team_id | __Required__  |
 | username | __Required__  |
 
-## teams get-membership-in-org
+## teams get-membership-for-user-in-org
 
-https://developer.github.com/v3/teams/members/#get-team-membership
+https://developer.github.com/v3/teams/members/#get-team-membership-for-a-user
 
 Team members will include the members of child teams.
 
@@ -9631,7 +9628,7 @@ To get a user's membership with a team, the team must be visible to the authenti
 
 **Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/:org_id/team/:team_id/memberships/:username`.
 
-**Note:** The `role` for organization owners returns as `maintainer`. For more information about `maintainer` roles, see [Create team](https://developer.github.com/v3/teams#create-team).
+**Note:** The `role` for organization owners returns as `maintainer`. For more information about `maintainer` roles, see [Create a team](https://developer.github.com/v3/teams/#create-a-team).
 
 ### parameters
 
@@ -9642,17 +9639,17 @@ To get a user's membership with a team, the team must be visible to the authenti
 | team_slug | __Required__  |
 | username | __Required__  |
 
-## teams get-membership-legacy
+## teams get-membership-for-user-legacy
 
-https://developer.github.com/v3/teams/members/#get-team-membership-legacy
+https://developer.github.com/v3/teams/members/#get-team-membership-for-a-user-legacy
 
-**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Get team membership`](https://developer.github.com/v3/teams/members/#get-team-membership) endpoint.
+**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Get team membership for a user](https://developer.github.com/v3/teams/members/#get-team-membership-for-a-user) endpoint.
 
 Team members will include the members of child teams.
 
 To get a user's membership with a team, the team must be visible to the authenticated user.
 
-**Note:** The `role` for organization owners returns as `maintainer`. For more information about `maintainer` roles, see [Create team](https://developer.github.com/v3/teams#create-team).
+**Note:** The `role` for organization owners returns as `maintainer`. For more information about `maintainer` roles, see [Create a team](https://developer.github.com/v3/teams/#create-a-team).
 
 ### parameters
 
@@ -9712,7 +9709,7 @@ https://developer.github.com/v3/teams/#list-child-teams-legacy
 
 ## teams list-discussion-comments-in-org
 
-https://developer.github.com/v3/teams/discussion_comments/#list-comments
+https://developer.github.com/v3/teams/discussion_comments/#list-discussion-comments
 
 List all comments on a team discussion. OAuth access tokens require the `read:discussion` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
@@ -9733,9 +9730,9 @@ List all comments on a team discussion. OAuth access tokens require the `read:di
 
 ## teams list-discussion-comments-legacy
 
-https://developer.github.com/v3/teams/discussion_comments/#list-comments-legacy
+https://developer.github.com/v3/teams/discussion_comments/#list-discussion-comments-legacy
 
-**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List comments`](https://developer.github.com/v3/teams/discussion_comments/#list-comments) endpoint.
+**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [List discussion comments](https://developer.github.com/v3/teams/discussion_comments/#list-discussion-comments) endpoint.
 
 List all comments on a team discussion. OAuth access tokens require the `read:discussion` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
@@ -9792,7 +9789,7 @@ List all discussions on a team's page. OAuth access tokens require the `read:dis
 
 ## teams list-for-authenticated-user
 
-https://developer.github.com/v3/teams/#list-user-teams
+https://developer.github.com/v3/teams/#list-teams-for-the-authenticated-user
 
 List all of the teams across all of the organizations to which the authenticated user belongs. This method requires `user`, `repo`, or `read:org` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/) when authenticating via [OAuth](https://developer.github.com/apps/building-oauth-apps/).
 
@@ -9823,7 +9820,7 @@ List IdP groups connected to a team on GitHub.
 
 ## teams list-id-p-groups-for-org
 
-https://developer.github.com/v3/teams/team_sync/#list-idp-groups-in-an-organization
+https://developer.github.com/v3/teams/team_sync/#list-idp-groups-for-an-organization
 
 Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
@@ -9969,7 +9966,7 @@ Lists the organization projects for a team.
 
 ## teams list-repos-in-org
 
-https://developer.github.com/v3/teams/#list-team-repos
+https://developer.github.com/v3/teams/#list-team-repositories
 
 Lists a team's repositories visible to the authenticated user.
 
@@ -9987,9 +9984,9 @@ Lists a team's repositories visible to the authenticated user.
 
 ## teams list-repos-legacy
 
-https://developer.github.com/v3/teams/#list-team-repos-legacy
+https://developer.github.com/v3/teams/#list-team-repositories-legacy
 
-**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List team repos`](https://developer.github.com/v3/teams/#list-team-repos) endpoint.
+**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [List team repositories](https://developer.github.com/v3/teams/#list-team-repositories) endpoint.
 
 ### parameters
 
@@ -10006,7 +10003,7 @@ https://developer.github.com/v3/teams/members/#remove-team-member-legacy
 
 The "Remove team member" endpoint (described below) is deprecated.
 
-We recommend using the [Remove team membership](https://developer.github.com/v3/teams/members/#remove-team-membership) endpoint instead. It allows you to remove both active and pending memberships.
+We recommend using the [Remove team membership for a user](https://developer.github.com/v3/teams/members/#remove-team-membership-for-a-user) endpoint instead. It allows you to remove both active and pending memberships.
 
 Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
@@ -10022,9 +10019,9 @@ To remove a team member, the authenticated user must have 'admin' permissions to
 | team_id | __Required__  |
 | username | __Required__  |
 
-## teams remove-membership-in-org
+## teams remove-membership-for-user-in-org
 
-https://developer.github.com/v3/teams/members/#remove-team-membership
+https://developer.github.com/v3/teams/members/#remove-team-membership-for-a-user
 
 Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
@@ -10043,11 +10040,11 @@ To remove a membership between a user and a team, the authenticated user must ha
 | team_slug | __Required__  |
 | username | __Required__  |
 
-## teams remove-membership-legacy
+## teams remove-membership-for-user-legacy
 
-https://developer.github.com/v3/teams/members/#remove-team-membership-legacy
+https://developer.github.com/v3/teams/members/#remove-team-membership-for-a-user-legacy
 
-**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Remove team membership`](https://developer.github.com/v3/teams/members/#remove-team-membership) endpoint.
+**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Remove team membership for a user](https://developer.github.com/v3/teams/members/#remove-team-membership-for-a-user) endpoint.
 
 Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
@@ -10065,7 +10062,7 @@ To remove a membership between a user and a team, the authenticated user must ha
 
 ## teams remove-project-in-org
 
-https://developer.github.com/v3/teams/#remove-team-project
+https://developer.github.com/v3/teams/#remove-a-project-from-a-team
 
 Removes an organization project from a team. An organization owner or a team maintainer can remove any project from the team. To remove a project from a team as an organization member, the authenticated user must have `read` access to both the team and project, or `admin` access to the team or project. This endpoint removes the project from the team, but does not delete the project.
 
@@ -10082,9 +10079,9 @@ Removes an organization project from a team. An organization owner or a team mai
 
 ## teams remove-project-legacy
 
-https://developer.github.com/v3/teams/#remove-team-project-legacy
+https://developer.github.com/v3/teams/#remove-a-project-from-a-team-legacy
 
-**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Remove team project`](https://developer.github.com/v3/teams/#remove-team-project) endpoint.
+**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Remove a project from a team](https://developer.github.com/v3/teams/#remove-a-project-from-a-team) endpoint.
 
 Removes an organization project from a team. An organization owner or a team maintainer can remove any project from the team. To remove a project from a team as an organization member, the authenticated user must have `read` access to both the team and project, or `admin` access to the team or project. **Note:** This endpoint removes the project from the team, but does not delete it.
 
@@ -10098,7 +10095,7 @@ Removes an organization project from a team. An organization owner or a team mai
 
 ## teams remove-repo-in-org
 
-https://developer.github.com/v3/teams/#remove-team-repository
+https://developer.github.com/v3/teams/#remove-a-repository-from-a-team
 
 If the authenticated user is an organization owner or a team maintainer, they can remove any repositories from the team. To remove a repository from a team as an organization member, the authenticated user must have admin access to the repository and must be able to see the team. This does not delete the repository, it just removes it from the team.
 
@@ -10115,9 +10112,9 @@ If the authenticated user is an organization owner or a team maintainer, they ca
 
 ## teams remove-repo-legacy
 
-https://developer.github.com/v3/teams/#remove-team-repository-legacy
+https://developer.github.com/v3/teams/#remove-a-repository-from-a-team-legacy
 
-**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Remove team repository`](https://developer.github.com/v3/teams/#remove-team-repository) endpoint.
+**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Remove a repository from a team](https://developer.github.com/v3/teams/#remove-a-repository-from-a-team) endpoint.
 
 If the authenticated user is an organization owner or a team maintainer, they can remove any repositories from the team. To remove a repository from a team as an organization member, the authenticated user must have admin access to the repository and must be able to see the team. NOTE: This does not delete the repository, it just removes it from the team.
 
@@ -10129,44 +10126,9 @@ If the authenticated user is an organization owner or a team maintainer, they ca
 | repo | __Required__ repository in OWNER/REPO form |
 | team_id | __Required__  |
 
-## teams review-project-in-org
-
-https://developer.github.com/v3/teams/#review-a-team-project
-
-Checks whether a team has `read`, `write`, or `admin` permissions for an organization project. The response includes projects inherited from a parent team.
-
-**Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/:org_id/team/:team_id/projects/:project_id`.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
-| org | __Required__  |
-| project_id | __Required__  |
-| team_slug | __Required__  |
-
-## teams review-project-legacy
-
-https://developer.github.com/v3/teams/#review-a-team-project-legacy
-
-**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Review a team project`](https://developer.github.com/v3/teams/#review-a-team-project) endpoint.
-
-Checks whether a team has `read`, `write`, or `admin` permissions for an organization project. The response includes projects inherited from a parent team.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
-| project_id | __Required__  |
-| team_id | __Required__  |
-
 ## teams update-discussion-comment-in-org
 
-https://developer.github.com/v3/teams/discussion_comments/#edit-a-comment
+https://developer.github.com/v3/teams/discussion_comments/#update-a-discussion-comment
 
 Edits the body text of a discussion comment. OAuth access tokens require the `write:discussion` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
@@ -10186,9 +10148,9 @@ Edits the body text of a discussion comment. OAuth access tokens require the `wr
 
 ## teams update-discussion-comment-legacy
 
-https://developer.github.com/v3/teams/discussion_comments/#edit-a-comment-legacy
+https://developer.github.com/v3/teams/discussion_comments/#update-a-discussion-comment-legacy
 
-**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Edit a comment`](https://developer.github.com/v3/teams/discussion_comments/#edit-a-comment) endpoint.
+**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Update a discussion comment](https://developer.github.com/v3/teams/discussion_comments/#update-a-discussion-comment) endpoint.
 
 Edits the body text of a discussion comment. OAuth access tokens require the `write:discussion` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
@@ -10205,7 +10167,7 @@ Edits the body text of a discussion comment. OAuth access tokens require the `wr
 
 ## teams update-discussion-in-org
 
-https://developer.github.com/v3/teams/discussions/#edit-a-discussion
+https://developer.github.com/v3/teams/discussions/#update-a-discussion
 
 Edits the title and body text of a discussion post. Only the parameters you provide are updated. OAuth access tokens require the `write:discussion` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
@@ -10225,9 +10187,9 @@ Edits the title and body text of a discussion post. Only the parameters you prov
 
 ## teams update-discussion-legacy
 
-https://developer.github.com/v3/teams/discussions/#edit-a-discussion-legacy
+https://developer.github.com/v3/teams/discussions/#update-a-discussion-legacy
 
-**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Edit a discussion`](https://developer.github.com/v3/teams/discussions/#edit-a-discussion) endpoint.
+**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Update a discussion](https://developer.github.com/v3/teams/discussions/#update-a-discussion) endpoint.
 
 Edits the title and body text of a discussion post. Only the parameters you provide are updated. OAuth access tokens require the `write:discussion` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
@@ -10244,7 +10206,7 @@ Edits the title and body text of a discussion post. Only the parameters you prov
 
 ## teams update-in-org
 
-https://developer.github.com/v3/teams/#edit-team
+https://developer.github.com/v3/teams/#update-a-team
 
 To edit a team, the authenticated user must either be an organization owner or a team maintainer.
 
@@ -10265,9 +10227,9 @@ To edit a team, the authenticated user must either be an organization owner or a
 
 ## teams update-legacy
 
-https://developer.github.com/v3/teams/#edit-team-legacy
+https://developer.github.com/v3/teams/#update-a-team-legacy
 
-**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Edit team`](https://developer.github.com/v3/teams/#edit-team) endpoint.
+**Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Update a team](https://developer.github.com/v3/teams/#update-a-team) endpoint.
 
 To edit a team, the authenticated user must either be an organization owner or a team maintainer.
 
@@ -10288,9 +10250,9 @@ To edit a team, the authenticated user must either be an organization owner or a
 # users
 
 
-## users add-emails
+## users add-email-for-authenticated
 
-https://developer.github.com/v3/users/emails/#add-email-addresses
+https://developer.github.com/v3/users/emails/#add-an-email-address-for-the-authenticated-user
 
 This endpoint is accessible with the `user` scope.
 
@@ -10316,7 +10278,7 @@ https://developer.github.com/v3/users/blocking/#block-a-user
 
 ## users check-blocked
 
-https://developer.github.com/v3/users/blocking/#check-whether-youve-blocked-a-user
+https://developer.github.com/v3/users/blocking/#check-if-a-user-is-blocked-by-the-authenticated-user
 
 If the user is blocked:
 
@@ -10329,22 +10291,9 @@ If the user is not blocked:
 |------|-------------|
 | username | __Required__  |
 
-## users check-following
-
-https://developer.github.com/v3/users/followers/#check-if-you-are-following-a-user
-
-
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| username | __Required__  |
-
 ## users check-following-for-user
 
-https://developer.github.com/v3/users/followers/#check-if-one-user-follows-another
+https://developer.github.com/v3/users/followers/#check-if-a-user-follows-another-user
 
 
 
@@ -10356,9 +10305,22 @@ https://developer.github.com/v3/users/followers/#check-if-one-user-follows-anoth
 | target_user | __Required__  |
 | username | __Required__  |
 
-## users create-gpg-key
+## users check-person-is-followed-by-authenticated
 
-https://developer.github.com/v3/users/gpg_keys/#create-a-gpg-key
+https://developer.github.com/v3/users/followers/#check-if-a-person-is-followed-by-the-authenticated-user
+
+
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| username | __Required__  |
+
+## users create-gpg-key-for-authenticated
+
+https://developer.github.com/v3/users/gpg_keys/#create-a-gpg-key-for-the-authenticated-user
 
 Adds a GPG key to the authenticated user's GitHub account. Requires that you are authenticated via Basic Auth, or OAuth with at least `write:gpg_key` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
@@ -10369,9 +10331,9 @@ Adds a GPG key to the authenticated user's GitHub account. Requires that you are
 |------|-------------|
 | armored_public_key | Your GPG key, generated in ASCII-armored format. See "[Generating a new GPG key](https://help.github.com/articles/generating-a-new-gpg-key/)" for help creating a GPG key. |
 
-## users create-public-key
+## users create-public-ssh-key-for-authenticated
 
-https://developer.github.com/v3/users/keys/#create-a-public-key
+https://developer.github.com/v3/users/keys/#create-a-public-ssh-key-for-the-authenticated-user
 
 Adds a public SSH key to the authenticated user's GitHub account. Requires that you are authenticated via Basic Auth, or OAuth with at least `write:public_key` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
@@ -10383,9 +10345,9 @@ Adds a public SSH key to the authenticated user's GitHub account. Requires that 
 | key | The public SSH key to add to your GitHub account. See "[Generating a new SSH key](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)" for guidance on how to create a public SSH key. |
 | title | A descriptive name for the new key. Use a name that will help you recognize this key in your GitHub account. For example, if you're using a personal Mac, you might call this key "Personal MacBook Air". |
 
-## users delete-emails
+## users delete-email-for-authenticated
 
-https://developer.github.com/v3/users/emails/#delete-email-addresses
+https://developer.github.com/v3/users/emails/#delete-an-email-address-for-the-authenticated-user
 
 This endpoint is accessible with the `user` scope.
 
@@ -10396,9 +10358,9 @@ This endpoint is accessible with the `user` scope.
 |------|-------------|
 | emails | __Required__ Deletes one or more email addresses from your GitHub account. Must contain at least one email address. **Note:** Alternatively, you can pass a single email address or an `array` of emails addresses directly, but we recommend that you pass an object using the `emails` key. |
 
-## users delete-gpg-key
+## users delete-gpg-key-for-authenticated
 
-https://developer.github.com/v3/users/gpg_keys/#delete-a-gpg-key
+https://developer.github.com/v3/users/gpg_keys/#delete-a-gpg-key-for-the-authenticated-user
 
 Removes a GPG key from the authenticated user's GitHub account. Requires that you are authenticated via Basic Auth or via OAuth with at least `admin:gpg_key` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
@@ -10409,9 +10371,9 @@ Removes a GPG key from the authenticated user's GitHub account. Requires that yo
 |------|-------------|
 | gpg_key_id | __Required__  |
 
-## users delete-public-key
+## users delete-public-ssh-key-for-authenticated
 
-https://developer.github.com/v3/users/keys/#delete-a-public-key
+https://developer.github.com/v3/users/keys/#delete-a-public-ssh-key-for-the-authenticated-user
 
 Removes a public SSH key from the authenticated user's GitHub account. Requires that you are authenticated via Basic Auth or via OAuth with at least `admin:public_key` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
@@ -10447,7 +10409,7 @@ Lists public profile information when authenticated through OAuth without the `u
 
 ## users get-by-username
 
-https://developer.github.com/v3/users/#get-a-single-user
+https://developer.github.com/v3/users/#get-a-user
 
 Provides publicly available information about someone with a GitHub account.
 
@@ -10466,7 +10428,7 @@ The Emails API enables you to list all of your email addresses, and toggle a pri
 
 ## users get-context-for-user
 
-https://developer.github.com/v3/users/#get-contextual-information-about-a-user
+https://developer.github.com/v3/users/#get-contextual-information-for-a-user
 
 Provides hovercard information when authenticated through basic auth or OAuth with the `repo` scope. You can find out more about someone in relation to their pull requests, issues, repositories, and organizations.
 
@@ -10481,9 +10443,9 @@ The `subject_type` and `subject_id` parameters provide context for the person's 
 | subject_id | Uses the ID for the `subject_type` you specified. **Required** when using `subject_type`. |
 | subject_type | Identifies which additional information you'd like to receive about the person's hovercard. Can be `organization`, `repository`, `issue`, `pull_request`. **Required** when using `subject_id`. |
 
-## users get-gpg-key
+## users get-gpg-key-for-authenticated
 
-https://developer.github.com/v3/users/gpg_keys/#get-a-single-gpg-key
+https://developer.github.com/v3/users/gpg_keys/#get-a-gpg-key-for-the-authenticated-user
 
 View extended details for a single GPG key. Requires that you are authenticated via Basic Auth or via OAuth with at least `read:gpg_key` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
@@ -10494,9 +10456,9 @@ View extended details for a single GPG key. Requires that you are authenticated 
 |------|-------------|
 | gpg_key_id | __Required__  |
 
-## users get-public-key
+## users get-public-ssh-key-for-authenticated
 
-https://developer.github.com/v3/users/keys/#get-a-single-public-key
+https://developer.github.com/v3/users/keys/#get-a-public-ssh-key-for-the-authenticated-user
 
 View extended details for a single public SSH key. Requires that you are authenticated via Basic Auth or via OAuth with at least `read:public_key` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
@@ -10509,7 +10471,7 @@ View extended details for a single public SSH key. Requires that you are authent
 
 ## users list
 
-https://developer.github.com/v3/users/#get-all-users
+https://developer.github.com/v3/users/#list-users
 
 Lists all users, in the order that they signed up on GitHub. This list includes personal user accounts and organization accounts.
 
@@ -10522,15 +10484,15 @@ Note: Pagination is powered exclusively by the `since` parameter. Use the [Link 
 |------|-------------|
 | since | The integer ID of the last User that you've seen. |
 
-## users list-blocked
+## users list-blocked-by-authenticated
 
-https://developer.github.com/v3/users/blocking/#list-blocked-users
+https://developer.github.com/v3/users/blocking/#list-users-blocked-by-the-authenticated-user
 
 List the users you've blocked on your personal account.
 
-## users list-emails
+## users list-emails-for-authenticated
 
-https://developer.github.com/v3/users/emails/#list-email-addresses-for-a-user
+https://developer.github.com/v3/users/emails/#list-email-addresses-for-the-authenticated-user
 
 Lists all of your email addresses, and specifies which one is visible to the public. This endpoint is accessible with the `user:email` scope.
 
@@ -10544,7 +10506,7 @@ Lists all of your email addresses, and specifies which one is visible to the pub
 
 ## users list-followed-by-authenticated
 
-https://developer.github.com/v3/users/followers/#list-users-followed-by-the-authenticated-user
+https://developer.github.com/v3/users/followers/#list-the-people-the-authenticated-user-follows
 
 Lists the people who the authenticated user follows.
 
@@ -10587,7 +10549,7 @@ Lists the people following the specified user.
 
 ## users list-following-for-user
 
-https://developer.github.com/v3/users/followers/#list-users-followed-by-another-user
+https://developer.github.com/v3/users/followers/#list-the-people-a-user-follows
 
 Lists the people who the specified user follows.
 
@@ -10600,9 +10562,9 @@ Lists the people who the specified user follows.
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
-## users list-gpg-keys
+## users list-gpg-keys-for-authenticated
 
-https://developer.github.com/v3/users/gpg_keys/#list-your-gpg-keys
+https://developer.github.com/v3/users/gpg_keys/#list-gpg-keys-for-the-authenticated-user
 
 Lists the current user's GPG keys. Requires that you are authenticated via Basic Auth or via OAuth with at least `read:gpg_key` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
@@ -10629,25 +10591,11 @@ Lists the GPG keys for a user. This information is accessible by anyone.
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
-## users list-public-emails
+## users list-public-emails-for-authenticated
 
-https://developer.github.com/v3/users/emails/#list-public-email-addresses-for-a-user
+https://developer.github.com/v3/users/emails/#list-public-email-addresses-for-the-authenticated-user
 
-Lists your publicly visible email address, which you can set with the [Toggle primary email visibility](https://developer.github.com/v3/users/emails/#toggle-primary-email-visibility) endpoint. This endpoint is accessible with the `user:email` scope.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| page | Page number of the results to fetch. |
-| per_page | Results per page (max 100) |
-
-## users list-public-keys
-
-https://developer.github.com/v3/users/keys/#list-your-public-keys
-
-Lists the public SSH keys for the authenticated user's GitHub account. Requires that you are authenticated via Basic Auth or via OAuth with at least `read:public_key` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
+Lists your publicly visible email address, which you can set with the [Set primary email visibility for the authenticated user](https://developer.github.com/v3/users/emails/#set-primary-email-visibility-for-the-authenticated-user) endpoint. This endpoint is accessible with the `user:email` scope.
 
 ### parameters
 
@@ -10672,9 +10620,23 @@ Lists the _verified_ public SSH keys for a user. This is accessible by anyone.
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
-## users toggle-primary-email-visibility
+## users list-public-ssh-keys-for-authenticated
 
-https://developer.github.com/v3/users/emails/#toggle-primary-email-visibility
+https://developer.github.com/v3/users/keys/#list-public-ssh-keys-for-the-authenticated-user
+
+Lists the public SSH keys for the authenticated user's GitHub account. Requires that you are authenticated via Basic Auth or via OAuth with at least `read:public_key` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| page | Page number of the results to fetch. |
+| per_page | Results per page (max 100) |
+
+## users set-primary-email-visibility-for-authenticated
+
+https://developer.github.com/v3/users/emails/#set-primary-email-visibility-for-the-authenticated-user
 
 Sets the visibility for your primary email addresses.
 
@@ -10730,3 +10692,4 @@ https://developer.github.com/v3/users/#update-the-authenticated-user
 | hireable | The new hiring availability of the user. |
 | location | The new location of the user. |
 | name | The new name of the user. |
+| twitter_username | The new Twitter username of the user. |
