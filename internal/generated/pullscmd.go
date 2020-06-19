@@ -5,33 +5,33 @@ package generated
 import internal "github.com/octo-cli/octo-cli/internal"
 
 type PullsCmd struct {
-	CheckIfMerged            PullsCheckIfMergedCmd            `cmd:""`
-	Create                   PullsCreateCmd                   `cmd:""`
-	CreateComment            PullsCreateCommentCmd            `cmd:""`
-	CreateReview             PullsCreateReviewCmd             `cmd:""`
-	CreateReviewCommentReply PullsCreateReviewCommentReplyCmd `cmd:""`
-	CreateReviewRequest      PullsCreateReviewRequestCmd      `cmd:""`
-	DeleteComment            PullsDeleteCommentCmd            `cmd:""`
-	DeletePendingReview      PullsDeletePendingReviewCmd      `cmd:""`
-	DeleteReviewRequest      PullsDeleteReviewRequestCmd      `cmd:""`
-	DismissReview            PullsDismissReviewCmd            `cmd:""`
-	Get                      PullsGetCmd                      `cmd:""`
-	GetComment               PullsGetCommentCmd               `cmd:""`
-	GetCommentsForReview     PullsGetCommentsForReviewCmd     `cmd:""`
-	GetReview                PullsGetReviewCmd                `cmd:""`
-	List                     PullsListCmd                     `cmd:""`
-	ListComments             PullsListCommentsCmd             `cmd:""`
-	ListCommentsForRepo      PullsListCommentsForRepoCmd      `cmd:""`
-	ListCommits              PullsListCommitsCmd              `cmd:""`
-	ListFiles                PullsListFilesCmd                `cmd:""`
-	ListReviewRequests       PullsListReviewRequestsCmd       `cmd:""`
-	ListReviews              PullsListReviewsCmd              `cmd:""`
-	Merge                    PullsMergeCmd                    `cmd:""`
-	SubmitReview             PullsSubmitReviewCmd             `cmd:""`
-	Update                   PullsUpdateCmd                   `cmd:""`
-	UpdateBranch             PullsUpdateBranchCmd             `cmd:""`
-	UpdateComment            PullsUpdateCommentCmd            `cmd:""`
-	UpdateReview             PullsUpdateReviewCmd             `cmd:""`
+	CheckIfMerged               PullsCheckIfMergedCmd               `cmd:""`
+	Create                      PullsCreateCmd                      `cmd:""`
+	CreateReplyForReviewComment PullsCreateReplyForReviewCommentCmd `cmd:""`
+	CreateReview                PullsCreateReviewCmd                `cmd:""`
+	CreateReviewComment         PullsCreateReviewCommentCmd         `cmd:""`
+	DeletePendingReview         PullsDeletePendingReviewCmd         `cmd:""`
+	DeleteReviewComment         PullsDeleteReviewCommentCmd         `cmd:""`
+	DismissReview               PullsDismissReviewCmd               `cmd:""`
+	Get                         PullsGetCmd                         `cmd:""`
+	GetReview                   PullsGetReviewCmd                   `cmd:""`
+	GetReviewComment            PullsGetReviewCommentCmd            `cmd:""`
+	List                        PullsListCmd                        `cmd:""`
+	ListCommentsForReview       PullsListCommentsForReviewCmd       `cmd:""`
+	ListCommits                 PullsListCommitsCmd                 `cmd:""`
+	ListFiles                   PullsListFilesCmd                   `cmd:""`
+	ListRequestedReviewers      PullsListRequestedReviewersCmd      `cmd:""`
+	ListReviewComments          PullsListReviewCommentsCmd          `cmd:""`
+	ListReviewCommentsForRepo   PullsListReviewCommentsForRepoCmd   `cmd:""`
+	ListReviews                 PullsListReviewsCmd                 `cmd:""`
+	Merge                       PullsMergeCmd                       `cmd:""`
+	RemoveRequestedReviewers    PullsRemoveRequestedReviewersCmd    `cmd:""`
+	RequestReviewers            PullsRequestReviewersCmd            `cmd:""`
+	SubmitReview                PullsSubmitReviewCmd                `cmd:""`
+	Update                      PullsUpdateCmd                      `cmd:""`
+	UpdateBranch                PullsUpdateBranchCmd                `cmd:""`
+	UpdateReview                PullsUpdateReviewCmd                `cmd:""`
+	UpdateReviewComment         PullsUpdateReviewCommentCmd         `cmd:""`
 }
 
 type PullsCheckIfMergedCmd struct {
@@ -74,35 +74,21 @@ func (c *PullsCreateCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("POST")
 }
 
-type PullsCreateCommentCmd struct {
-	ComfortFade bool   `name:"comfort-fade-preview"`
-	Repo        string `name:"repo" required:"true"`
-	PullNumber  int64  `name:"pull_number" required:"true"`
-	Line        int64  `name:"line"`
-	Position    int64  `name:"position"`
-	Side        string `name:"side"`
-	StartLine   int64  `name:"start_line"`
-	StartSide   string `name:"start_side"`
-	Body        string `name:"body" required:"true"`
-	CommitId    string `name:"commit_id" required:"true"`
-	Path        string `name:"path" required:"true"`
+type PullsCreateReplyForReviewCommentCmd struct {
+	Repo       string `name:"repo" required:"true"`
+	PullNumber int64  `name:"pull_number" required:"true"`
+	CommentId  int64  `name:"comment_id" required:"true"`
+	Body       string `name:"body" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *PullsCreateCommentCmd) Run(isValueSetMap map[string]bool) error {
+func (c *PullsCreateReplyForReviewCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/comments")
+	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/comments/{comment_id}/replies")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("pull_number", c.PullNumber)
-	c.UpdatePreview("comfort-fade", c.ComfortFade)
+	c.UpdateURLPath("comment_id", c.CommentId)
 	c.UpdateBody("body", c.Body)
-	c.UpdateBody("commit_id", c.CommitId)
-	c.UpdateBody("line", c.Line)
-	c.UpdateBody("path", c.Path)
-	c.UpdateBody("position", c.Position)
-	c.UpdateBody("side", c.Side)
-	c.UpdateBody("start_line", c.StartLine)
-	c.UpdateBody("start_side", c.StartSide)
 	return c.DoRequest("POST")
 }
 
@@ -128,54 +114,36 @@ func (c *PullsCreateReviewCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("POST")
 }
 
-type PullsCreateReviewCommentReplyCmd struct {
-	Repo       string `name:"repo" required:"true"`
-	PullNumber int64  `name:"pull_number" required:"true"`
-	CommentId  int64  `name:"comment_id" required:"true"`
-	Body       string `name:"body" required:"true"`
+type PullsCreateReviewCommentCmd struct {
+	ComfortFade bool   `name:"comfort-fade-preview"`
+	Repo        string `name:"repo" required:"true"`
+	PullNumber  int64  `name:"pull_number" required:"true"`
+	Line        int64  `name:"line"`
+	Position    int64  `name:"position"`
+	Side        string `name:"side"`
+	StartLine   int64  `name:"start_line"`
+	StartSide   string `name:"start_side"`
+	Body        string `name:"body" required:"true"`
+	CommitId    string `name:"commit_id" required:"true"`
+	Path        string `name:"path" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *PullsCreateReviewCommentReplyCmd) Run(isValueSetMap map[string]bool) error {
+func (c *PullsCreateReviewCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/comments/{comment_id}/replies")
+	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/comments")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("pull_number", c.PullNumber)
-	c.UpdateURLPath("comment_id", c.CommentId)
+	c.UpdatePreview("comfort-fade", c.ComfortFade)
 	c.UpdateBody("body", c.Body)
+	c.UpdateBody("commit_id", c.CommitId)
+	c.UpdateBody("line", c.Line)
+	c.UpdateBody("path", c.Path)
+	c.UpdateBody("position", c.Position)
+	c.UpdateBody("side", c.Side)
+	c.UpdateBody("start_line", c.StartLine)
+	c.UpdateBody("start_side", c.StartSide)
 	return c.DoRequest("POST")
-}
-
-type PullsCreateReviewRequestCmd struct {
-	Repo          string   `name:"repo" required:"true"`
-	PullNumber    int64    `name:"pull_number" required:"true"`
-	Reviewers     []string `name:"reviewers"`
-	TeamReviewers []string `name:"team_reviewers"`
-	internal.BaseCmd
-}
-
-func (c *PullsCreateReviewRequestCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/requested_reviewers")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("pull_number", c.PullNumber)
-	c.UpdateBody("reviewers", c.Reviewers)
-	c.UpdateBody("team_reviewers", c.TeamReviewers)
-	return c.DoRequest("POST")
-}
-
-type PullsDeleteCommentCmd struct {
-	Repo      string `name:"repo" required:"true"`
-	CommentId int64  `name:"comment_id" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *PullsDeleteCommentCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/pulls/comments/{comment_id}")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("comment_id", c.CommentId)
-	return c.DoRequest("DELETE")
 }
 
 type PullsDeletePendingReviewCmd struct {
@@ -194,21 +162,17 @@ func (c *PullsDeletePendingReviewCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("DELETE")
 }
 
-type PullsDeleteReviewRequestCmd struct {
-	Repo          string   `name:"repo" required:"true"`
-	PullNumber    int64    `name:"pull_number" required:"true"`
-	Reviewers     []string `name:"reviewers"`
-	TeamReviewers []string `name:"team_reviewers"`
+type PullsDeleteReviewCommentCmd struct {
+	Repo      string `name:"repo" required:"true"`
+	CommentId int64  `name:"comment_id" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *PullsDeleteReviewRequestCmd) Run(isValueSetMap map[string]bool) error {
+func (c *PullsDeleteReviewCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/requested_reviewers")
+	c.SetURLPath("/repos/{repo}/pulls/comments/{comment_id}")
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("pull_number", c.PullNumber)
-	c.UpdateBody("reviewers", c.Reviewers)
-	c.UpdateBody("team_reviewers", c.TeamReviewers)
+	c.UpdateURLPath("comment_id", c.CommentId)
 	return c.DoRequest("DELETE")
 }
 
@@ -246,44 +210,6 @@ func (c *PullsGetCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
-type PullsGetCommentCmd struct {
-	ComfortFade  bool   `name:"comfort-fade-preview"`
-	SquirrelGirl bool   `name:"squirrel-girl-preview"`
-	Repo         string `name:"repo" required:"true"`
-	CommentId    int64  `name:"comment_id" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *PullsGetCommentCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/pulls/comments/{comment_id}")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("comment_id", c.CommentId)
-	c.UpdatePreview("comfort-fade", c.ComfortFade)
-	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
-	return c.DoRequest("GET")
-}
-
-type PullsGetCommentsForReviewCmd struct {
-	Repo       string `name:"repo" required:"true"`
-	PullNumber int64  `name:"pull_number" required:"true"`
-	ReviewId   int64  `name:"review_id" required:"true"`
-	Page       int64  `name:"page"`
-	PerPage    int64  `name:"per_page"`
-	internal.BaseCmd
-}
-
-func (c *PullsGetCommentsForReviewCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/reviews/{review_id}/comments")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("pull_number", c.PullNumber)
-	c.UpdateURLPath("review_id", c.ReviewId)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
 type PullsGetReviewCmd struct {
 	Repo       string `name:"repo" required:"true"`
 	PullNumber int64  `name:"pull_number" required:"true"`
@@ -297,6 +223,24 @@ func (c *PullsGetReviewCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLPath("review_id", c.ReviewId)
+	return c.DoRequest("GET")
+}
+
+type PullsGetReviewCommentCmd struct {
+	ComfortFade  bool   `name:"comfort-fade-preview"`
+	SquirrelGirl bool   `name:"squirrel-girl-preview"`
+	Repo         string `name:"repo" required:"true"`
+	CommentId    int64  `name:"comment_id" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *PullsGetReviewCommentCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/pulls/comments/{comment_id}")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("comment_id", c.CommentId)
+	c.UpdatePreview("comfort-fade", c.ComfortFade)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	return c.DoRequest("GET")
 }
 
@@ -328,57 +272,23 @@ func (c *PullsListCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
-type PullsListCommentsCmd struct {
-	ComfortFade  bool   `name:"comfort-fade-preview"`
-	SquirrelGirl bool   `name:"squirrel-girl-preview"`
-	Repo         string `name:"repo" required:"true"`
-	PullNumber   int64  `name:"pull_number" required:"true"`
-	Direction    string `name:"direction"`
-	Page         int64  `name:"page"`
-	PerPage      int64  `name:"per_page"`
-	Since        string `name:"since"`
-	Sort         string `name:"sort"`
+type PullsListCommentsForReviewCmd struct {
+	Repo       string `name:"repo" required:"true"`
+	PullNumber int64  `name:"pull_number" required:"true"`
+	ReviewId   int64  `name:"review_id" required:"true"`
+	Page       int64  `name:"page"`
+	PerPage    int64  `name:"per_page"`
 	internal.BaseCmd
 }
 
-func (c *PullsListCommentsCmd) Run(isValueSetMap map[string]bool) error {
+func (c *PullsListCommentsForReviewCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/comments")
+	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/reviews/{review_id}/comments")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("pull_number", c.PullNumber)
-	c.UpdateURLQuery("sort", c.Sort)
-	c.UpdateURLQuery("direction", c.Direction)
-	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLPath("review_id", c.ReviewId)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
-	c.UpdatePreview("comfort-fade", c.ComfortFade)
-	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
-	return c.DoRequest("GET")
-}
-
-type PullsListCommentsForRepoCmd struct {
-	ComfortFade  bool   `name:"comfort-fade-preview"`
-	SquirrelGirl bool   `name:"squirrel-girl-preview"`
-	Repo         string `name:"repo" required:"true"`
-	Direction    string `name:"direction"`
-	Page         int64  `name:"page"`
-	PerPage      int64  `name:"per_page"`
-	Since        string `name:"since"`
-	Sort         string `name:"sort"`
-	internal.BaseCmd
-}
-
-func (c *PullsListCommentsForRepoCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/pulls/comments")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLQuery("sort", c.Sort)
-	c.UpdateURLQuery("direction", c.Direction)
-	c.UpdateURLQuery("since", c.Since)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	c.UpdatePreview("comfort-fade", c.ComfortFade)
-	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	return c.DoRequest("GET")
 }
 
@@ -418,7 +328,7 @@ func (c *PullsListFilesCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
-type PullsListReviewRequestsCmd struct {
+type PullsListRequestedReviewersCmd struct {
 	Repo       string `name:"repo" required:"true"`
 	PullNumber int64  `name:"pull_number" required:"true"`
 	Page       int64  `name:"page"`
@@ -426,13 +336,67 @@ type PullsListReviewRequestsCmd struct {
 	internal.BaseCmd
 }
 
-func (c *PullsListReviewRequestsCmd) Run(isValueSetMap map[string]bool) error {
+func (c *PullsListRequestedReviewersCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/requested_reviewers")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
+}
+
+type PullsListReviewCommentsCmd struct {
+	ComfortFade  bool   `name:"comfort-fade-preview"`
+	SquirrelGirl bool   `name:"squirrel-girl-preview"`
+	Repo         string `name:"repo" required:"true"`
+	PullNumber   int64  `name:"pull_number" required:"true"`
+	Direction    string `name:"direction"`
+	Page         int64  `name:"page"`
+	PerPage      int64  `name:"per_page"`
+	Since        string `name:"since"`
+	Sort         string `name:"sort"`
+	internal.BaseCmd
+}
+
+func (c *PullsListReviewCommentsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/comments")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("pull_number", c.PullNumber)
+	c.UpdateURLQuery("sort", c.Sort)
+	c.UpdateURLQuery("direction", c.Direction)
+	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdatePreview("comfort-fade", c.ComfortFade)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	return c.DoRequest("GET")
+}
+
+type PullsListReviewCommentsForRepoCmd struct {
+	ComfortFade  bool   `name:"comfort-fade-preview"`
+	SquirrelGirl bool   `name:"squirrel-girl-preview"`
+	Repo         string `name:"repo" required:"true"`
+	Direction    string `name:"direction"`
+	Page         int64  `name:"page"`
+	PerPage      int64  `name:"per_page"`
+	Since        string `name:"since"`
+	Sort         string `name:"sort"`
+	internal.BaseCmd
+}
+
+func (c *PullsListReviewCommentsForRepoCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/pulls/comments")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("sort", c.Sort)
+	c.UpdateURLQuery("direction", c.Direction)
+	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	c.UpdatePreview("comfort-fade", c.ComfortFade)
+	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	return c.DoRequest("GET")
 }
 
@@ -474,6 +438,42 @@ func (c *PullsMergeCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateBody("merge_method", c.MergeMethod)
 	c.UpdateBody("sha", c.Sha)
 	return c.DoRequest("PUT")
+}
+
+type PullsRemoveRequestedReviewersCmd struct {
+	Repo          string   `name:"repo" required:"true"`
+	PullNumber    int64    `name:"pull_number" required:"true"`
+	Reviewers     []string `name:"reviewers"`
+	TeamReviewers []string `name:"team_reviewers"`
+	internal.BaseCmd
+}
+
+func (c *PullsRemoveRequestedReviewersCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/requested_reviewers")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("pull_number", c.PullNumber)
+	c.UpdateBody("reviewers", c.Reviewers)
+	c.UpdateBody("team_reviewers", c.TeamReviewers)
+	return c.DoRequest("DELETE")
+}
+
+type PullsRequestReviewersCmd struct {
+	Repo          string   `name:"repo" required:"true"`
+	PullNumber    int64    `name:"pull_number" required:"true"`
+	Reviewers     []string `name:"reviewers"`
+	TeamReviewers []string `name:"team_reviewers"`
+	internal.BaseCmd
+}
+
+func (c *PullsRequestReviewersCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/pulls/{pull_number}/requested_reviewers")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("pull_number", c.PullNumber)
+	c.UpdateBody("reviewers", c.Reviewers)
+	c.UpdateBody("team_reviewers", c.TeamReviewers)
+	return c.DoRequest("POST")
 }
 
 type PullsSubmitReviewCmd struct {
@@ -540,24 +540,6 @@ func (c *PullsUpdateCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("PATCH")
 }
 
-type PullsUpdateCommentCmd struct {
-	ComfortFade bool   `name:"comfort-fade-preview"`
-	Repo        string `name:"repo" required:"true"`
-	CommentId   int64  `name:"comment_id" required:"true"`
-	Body        string `name:"body" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *PullsUpdateCommentCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/pulls/comments/{comment_id}")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("comment_id", c.CommentId)
-	c.UpdatePreview("comfort-fade", c.ComfortFade)
-	c.UpdateBody("body", c.Body)
-	return c.DoRequest("PATCH")
-}
-
 type PullsUpdateReviewCmd struct {
 	Repo       string `name:"repo" required:"true"`
 	PullNumber int64  `name:"pull_number" required:"true"`
@@ -574,4 +556,22 @@ func (c *PullsUpdateReviewCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLPath("review_id", c.ReviewId)
 	c.UpdateBody("body", c.Body)
 	return c.DoRequest("PUT")
+}
+
+type PullsUpdateReviewCommentCmd struct {
+	ComfortFade bool   `name:"comfort-fade-preview"`
+	Repo        string `name:"repo" required:"true"`
+	CommentId   int64  `name:"comment_id" required:"true"`
+	Body        string `name:"body" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *PullsUpdateReviewCommentCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/pulls/comments/{comment_id}")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("comment_id", c.CommentId)
+	c.UpdatePreview("comfort-fade", c.ComfortFade)
+	c.UpdateBody("body", c.Body)
+	return c.DoRequest("PATCH")
 }

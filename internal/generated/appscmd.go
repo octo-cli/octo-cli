@@ -10,7 +10,7 @@ type AppsCmd struct {
 	CheckToken                                   AppsCheckTokenCmd                                   `cmd:""`
 	CreateContentAttachment                      AppsCreateContentAttachmentCmd                      `cmd:""`
 	CreateFromManifest                           AppsCreateFromManifestCmd                           `cmd:""`
-	CreateInstallationToken                      AppsCreateInstallationTokenCmd                      `cmd:""`
+	CreateInstallationAccessToken                AppsCreateInstallationAccessTokenCmd                `cmd:""`
 	DeleteAuthorization                          AppsDeleteAuthorizationCmd                          `cmd:""`
 	DeleteInstallation                           AppsDeleteInstallationCmd                           `cmd:""`
 	DeleteToken                                  AppsDeleteTokenCmd                                  `cmd:""`
@@ -29,7 +29,7 @@ type AppsCmd struct {
 	ListInstallationsForAuthenticatedUser        AppsListInstallationsForAuthenticatedUserCmd        `cmd:""`
 	ListPlans                                    AppsListPlansCmd                                    `cmd:""`
 	ListPlansStubbed                             AppsListPlansStubbedCmd                             `cmd:""`
-	ListRepos                                    AppsListReposCmd                                    `cmd:""`
+	ListReposAccessibleToInstallation            AppsListReposAccessibleToInstallationCmd            `cmd:""`
 	ListSubscriptionsForAuthenticatedUser        AppsListSubscriptionsForAuthenticatedUserCmd        `cmd:""`
 	ListSubscriptionsForAuthenticatedUserStubbed AppsListSubscriptionsForAuthenticatedUserStubbedCmd `cmd:""`
 	RemoveRepoFromInstallation                   AppsRemoveRepoFromInstallationCmd                   `cmd:""`
@@ -37,7 +37,7 @@ type AppsCmd struct {
 	ResetToken                                   AppsResetTokenCmd                                   `cmd:""`
 	RevokeAuthorizationForApplication            AppsRevokeAuthorizationForApplicationCmd            `cmd:""`
 	RevokeGrantForApplication                    AppsRevokeGrantForApplicationCmd                    `cmd:""`
-	RevokeInstallationToken                      AppsRevokeInstallationTokenCmd                      `cmd:""`
+	RevokeInstallationAccessToken                AppsRevokeInstallationAccessTokenCmd                `cmd:""`
 	SuspendInstallation                          AppsSuspendInstallationCmd                          `cmd:""`
 	UnsuspendInstallation                        AppsUnsuspendInstallationCmd                        `cmd:""`
 }
@@ -116,7 +116,7 @@ func (c *AppsCreateFromManifestCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("POST")
 }
 
-type AppsCreateInstallationTokenCmd struct {
+type AppsCreateInstallationAccessTokenCmd struct {
 	MachineMan     bool                `name:"machine-man-preview" required:"true"`
 	InstallationId int64               `name:"installation_id" required:"true"`
 	Permissions    internal.JSONObject `name:"permissions"`
@@ -124,7 +124,7 @@ type AppsCreateInstallationTokenCmd struct {
 	internal.BaseCmd
 }
 
-func (c *AppsCreateInstallationTokenCmd) Run(isValueSetMap map[string]bool) error {
+func (c *AppsCreateInstallationAccessTokenCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/app/installations/{installation_id}/access_tokens")
 	c.UpdateURLPath("installation_id", c.InstallationId)
@@ -402,7 +402,7 @@ func (c *AppsListPlansStubbedCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
-type AppsListReposCmd struct {
+type AppsListReposAccessibleToInstallationCmd struct {
 	Mercy      bool  `name:"mercy-preview"`
 	MachineMan bool  `name:"machine-man-preview" required:"true"`
 	Page       int64 `name:"page"`
@@ -410,7 +410,7 @@ type AppsListReposCmd struct {
 	internal.BaseCmd
 }
 
-func (c *AppsListReposCmd) Run(isValueSetMap map[string]bool) error {
+func (c *AppsListReposAccessibleToInstallationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/installation/repositories")
 	c.UpdateURLQuery("per_page", c.PerPage)
@@ -520,11 +520,11 @@ func (c *AppsRevokeGrantForApplicationCmd) Run(isValueSetMap map[string]bool) er
 	return c.DoRequest("DELETE")
 }
 
-type AppsRevokeInstallationTokenCmd struct {
+type AppsRevokeInstallationAccessTokenCmd struct {
 	internal.BaseCmd
 }
 
-func (c *AppsRevokeInstallationTokenCmd) Run(isValueSetMap map[string]bool) error {
+func (c *AppsRevokeInstallationAccessTokenCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/installation/token")
 	return c.DoRequest("DELETE")
