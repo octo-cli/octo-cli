@@ -6,14 +6,16 @@ import internal "github.com/octo-cli/octo-cli/internal"
 
 type TeamsCmd struct {
 	AddMemberLegacy                         TeamsAddMemberLegacyCmd                         `cmd:""`
-	AddOrUpdateMembershipInOrg              TeamsAddOrUpdateMembershipInOrgCmd              `cmd:""`
-	AddOrUpdateMembershipLegacy             TeamsAddOrUpdateMembershipLegacyCmd             `cmd:""`
-	AddOrUpdateProjectInOrg                 TeamsAddOrUpdateProjectInOrgCmd                 `cmd:""`
-	AddOrUpdateProjectLegacy                TeamsAddOrUpdateProjectLegacyCmd                `cmd:""`
-	AddOrUpdateRepoInOrg                    TeamsAddOrUpdateRepoInOrgCmd                    `cmd:""`
-	AddOrUpdateRepoLegacy                   TeamsAddOrUpdateRepoLegacyCmd                   `cmd:""`
-	CheckManagesRepoInOrg                   TeamsCheckManagesRepoInOrgCmd                   `cmd:""`
-	CheckManagesRepoLegacy                  TeamsCheckManagesRepoLegacyCmd                  `cmd:""`
+	AddOrUpdateMembershipForUserInOrg       TeamsAddOrUpdateMembershipForUserInOrgCmd       `cmd:""`
+	AddOrUpdateMembershipForUserLegacy      TeamsAddOrUpdateMembershipForUserLegacyCmd      `cmd:""`
+	AddOrUpdateProjectPermissionsInOrg      TeamsAddOrUpdateProjectPermissionsInOrgCmd      `cmd:""`
+	AddOrUpdateProjectPermissionsLegacy     TeamsAddOrUpdateProjectPermissionsLegacyCmd     `cmd:""`
+	AddOrUpdateRepoPermissionsInOrg         TeamsAddOrUpdateRepoPermissionsInOrgCmd         `cmd:""`
+	AddOrUpdateRepoPermissionsLegacy        TeamsAddOrUpdateRepoPermissionsLegacyCmd        `cmd:""`
+	CheckPermissionsForProjectInOrg         TeamsCheckPermissionsForProjectInOrgCmd         `cmd:""`
+	CheckPermissionsForProjectLegacy        TeamsCheckPermissionsForProjectLegacyCmd        `cmd:""`
+	CheckPermissionsForRepoInOrg            TeamsCheckPermissionsForRepoInOrgCmd            `cmd:""`
+	CheckPermissionsForRepoLegacy           TeamsCheckPermissionsForRepoLegacyCmd           `cmd:""`
 	Create                                  TeamsCreateCmd                                  `cmd:""`
 	CreateDiscussionCommentInOrg            TeamsCreateDiscussionCommentInOrgCmd            `cmd:""`
 	CreateDiscussionCommentLegacy           TeamsCreateDiscussionCommentLegacyCmd           `cmd:""`
@@ -34,8 +36,8 @@ type TeamsCmd struct {
 	GetDiscussionLegacy                     TeamsGetDiscussionLegacyCmd                     `cmd:""`
 	GetLegacy                               TeamsGetLegacyCmd                               `cmd:""`
 	GetMemberLegacy                         TeamsGetMemberLegacyCmd                         `cmd:""`
-	GetMembershipInOrg                      TeamsGetMembershipInOrgCmd                      `cmd:""`
-	GetMembershipLegacy                     TeamsGetMembershipLegacyCmd                     `cmd:""`
+	GetMembershipForUserInOrg               TeamsGetMembershipForUserInOrgCmd               `cmd:""`
+	GetMembershipForUserLegacy              TeamsGetMembershipForUserLegacyCmd              `cmd:""`
 	List                                    TeamsListCmd                                    `cmd:""`
 	ListChildInOrg                          TeamsListChildInOrgCmd                          `cmd:""`
 	ListChildLegacy                         TeamsListChildLegacyCmd                         `cmd:""`
@@ -56,14 +58,12 @@ type TeamsCmd struct {
 	ListReposInOrg                          TeamsListReposInOrgCmd                          `cmd:""`
 	ListReposLegacy                         TeamsListReposLegacyCmd                         `cmd:""`
 	RemoveMemberLegacy                      TeamsRemoveMemberLegacyCmd                      `cmd:""`
-	RemoveMembershipInOrg                   TeamsRemoveMembershipInOrgCmd                   `cmd:""`
-	RemoveMembershipLegacy                  TeamsRemoveMembershipLegacyCmd                  `cmd:""`
+	RemoveMembershipForUserInOrg            TeamsRemoveMembershipForUserInOrgCmd            `cmd:""`
+	RemoveMembershipForUserLegacy           TeamsRemoveMembershipForUserLegacyCmd           `cmd:""`
 	RemoveProjectInOrg                      TeamsRemoveProjectInOrgCmd                      `cmd:""`
 	RemoveProjectLegacy                     TeamsRemoveProjectLegacyCmd                     `cmd:""`
 	RemoveRepoInOrg                         TeamsRemoveRepoInOrgCmd                         `cmd:""`
 	RemoveRepoLegacy                        TeamsRemoveRepoLegacyCmd                        `cmd:""`
-	ReviewProjectInOrg                      TeamsReviewProjectInOrgCmd                      `cmd:""`
-	ReviewProjectLegacy                     TeamsReviewProjectLegacyCmd                     `cmd:""`
 	UpdateDiscussionCommentInOrg            TeamsUpdateDiscussionCommentInOrgCmd            `cmd:""`
 	UpdateDiscussionCommentLegacy           TeamsUpdateDiscussionCommentLegacyCmd           `cmd:""`
 	UpdateDiscussionInOrg                   TeamsUpdateDiscussionInOrgCmd                   `cmd:""`
@@ -86,7 +86,7 @@ func (c *TeamsAddMemberLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("PUT")
 }
 
-type TeamsAddOrUpdateMembershipInOrgCmd struct {
+type TeamsAddOrUpdateMembershipForUserInOrgCmd struct {
 	Org      string `name:"org" required:"true"`
 	TeamSlug string `name:"team_slug" required:"true"`
 	Username string `name:"username" required:"true"`
@@ -94,7 +94,7 @@ type TeamsAddOrUpdateMembershipInOrgCmd struct {
 	internal.BaseCmd
 }
 
-func (c *TeamsAddOrUpdateMembershipInOrgCmd) Run(isValueSetMap map[string]bool) error {
+func (c *TeamsAddOrUpdateMembershipForUserInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/memberships/{username}")
 	c.UpdateURLPath("org", c.Org)
@@ -104,14 +104,14 @@ func (c *TeamsAddOrUpdateMembershipInOrgCmd) Run(isValueSetMap map[string]bool) 
 	return c.DoRequest("PUT")
 }
 
-type TeamsAddOrUpdateMembershipLegacyCmd struct {
+type TeamsAddOrUpdateMembershipForUserLegacyCmd struct {
 	TeamId   int64  `name:"team_id" required:"true"`
 	Username string `name:"username" required:"true"`
 	Role     string `name:"role"`
 	internal.BaseCmd
 }
 
-func (c *TeamsAddOrUpdateMembershipLegacyCmd) Run(isValueSetMap map[string]bool) error {
+func (c *TeamsAddOrUpdateMembershipForUserLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/memberships/{username}")
 	c.UpdateURLPath("team_id", c.TeamId)
@@ -120,7 +120,7 @@ func (c *TeamsAddOrUpdateMembershipLegacyCmd) Run(isValueSetMap map[string]bool)
 	return c.DoRequest("PUT")
 }
 
-type TeamsAddOrUpdateProjectInOrgCmd struct {
+type TeamsAddOrUpdateProjectPermissionsInOrgCmd struct {
 	Inertia    bool   `name:"inertia-preview" required:"true"`
 	Org        string `name:"org" required:"true"`
 	TeamSlug   string `name:"team_slug" required:"true"`
@@ -129,7 +129,7 @@ type TeamsAddOrUpdateProjectInOrgCmd struct {
 	internal.BaseCmd
 }
 
-func (c *TeamsAddOrUpdateProjectInOrgCmd) Run(isValueSetMap map[string]bool) error {
+func (c *TeamsAddOrUpdateProjectPermissionsInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/projects/{project_id}")
 	c.UpdateURLPath("org", c.Org)
@@ -140,7 +140,7 @@ func (c *TeamsAddOrUpdateProjectInOrgCmd) Run(isValueSetMap map[string]bool) err
 	return c.DoRequest("PUT")
 }
 
-type TeamsAddOrUpdateProjectLegacyCmd struct {
+type TeamsAddOrUpdateProjectPermissionsLegacyCmd struct {
 	Inertia    bool   `name:"inertia-preview" required:"true"`
 	TeamId     int64  `name:"team_id" required:"true"`
 	ProjectId  int64  `name:"project_id" required:"true"`
@@ -148,7 +148,7 @@ type TeamsAddOrUpdateProjectLegacyCmd struct {
 	internal.BaseCmd
 }
 
-func (c *TeamsAddOrUpdateProjectLegacyCmd) Run(isValueSetMap map[string]bool) error {
+func (c *TeamsAddOrUpdateProjectPermissionsLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/projects/{project_id}")
 	c.UpdateURLPath("team_id", c.TeamId)
@@ -158,7 +158,7 @@ func (c *TeamsAddOrUpdateProjectLegacyCmd) Run(isValueSetMap map[string]bool) er
 	return c.DoRequest("PUT")
 }
 
-type TeamsAddOrUpdateRepoInOrgCmd struct {
+type TeamsAddOrUpdateRepoPermissionsInOrgCmd struct {
 	Org        string `name:"org" required:"true"`
 	TeamSlug   string `name:"team_slug" required:"true"`
 	Repo       string `name:"repo" required:"true"`
@@ -166,7 +166,7 @@ type TeamsAddOrUpdateRepoInOrgCmd struct {
 	internal.BaseCmd
 }
 
-func (c *TeamsAddOrUpdateRepoInOrgCmd) Run(isValueSetMap map[string]bool) error {
+func (c *TeamsAddOrUpdateRepoPermissionsInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/repos/{repo}")
 	c.UpdateURLPath("org", c.Org)
@@ -176,14 +176,14 @@ func (c *TeamsAddOrUpdateRepoInOrgCmd) Run(isValueSetMap map[string]bool) error 
 	return c.DoRequest("PUT")
 }
 
-type TeamsAddOrUpdateRepoLegacyCmd struct {
+type TeamsAddOrUpdateRepoPermissionsLegacyCmd struct {
 	TeamId     int64  `name:"team_id" required:"true"`
 	Repo       string `name:"repo" required:"true"`
 	Permission string `name:"permission"`
 	internal.BaseCmd
 }
 
-func (c *TeamsAddOrUpdateRepoLegacyCmd) Run(isValueSetMap map[string]bool) error {
+func (c *TeamsAddOrUpdateRepoPermissionsLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/repos/{repo}")
 	c.UpdateURLPath("team_id", c.TeamId)
@@ -192,14 +192,48 @@ func (c *TeamsAddOrUpdateRepoLegacyCmd) Run(isValueSetMap map[string]bool) error
 	return c.DoRequest("PUT")
 }
 
-type TeamsCheckManagesRepoInOrgCmd struct {
+type TeamsCheckPermissionsForProjectInOrgCmd struct {
+	Inertia   bool   `name:"inertia-preview" required:"true"`
+	Org       string `name:"org" required:"true"`
+	TeamSlug  string `name:"team_slug" required:"true"`
+	ProjectId int64  `name:"project_id" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *TeamsCheckPermissionsForProjectInOrgCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/{org}/teams/{team_slug}/projects/{project_id}")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("team_slug", c.TeamSlug)
+	c.UpdateURLPath("project_id", c.ProjectId)
+	c.UpdatePreview("inertia", c.Inertia)
+	return c.DoRequest("GET")
+}
+
+type TeamsCheckPermissionsForProjectLegacyCmd struct {
+	Inertia   bool  `name:"inertia-preview" required:"true"`
+	TeamId    int64 `name:"team_id" required:"true"`
+	ProjectId int64 `name:"project_id" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *TeamsCheckPermissionsForProjectLegacyCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/teams/{team_id}/projects/{project_id}")
+	c.UpdateURLPath("team_id", c.TeamId)
+	c.UpdateURLPath("project_id", c.ProjectId)
+	c.UpdatePreview("inertia", c.Inertia)
+	return c.DoRequest("GET")
+}
+
+type TeamsCheckPermissionsForRepoInOrgCmd struct {
 	Org      string `name:"org" required:"true"`
 	TeamSlug string `name:"team_slug" required:"true"`
 	Repo     string `name:"repo" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *TeamsCheckManagesRepoInOrgCmd) Run(isValueSetMap map[string]bool) error {
+func (c *TeamsCheckPermissionsForRepoInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/repos/{repo}")
 	c.UpdateURLPath("org", c.Org)
@@ -208,13 +242,13 @@ func (c *TeamsCheckManagesRepoInOrgCmd) Run(isValueSetMap map[string]bool) error
 	return c.DoRequest("GET")
 }
 
-type TeamsCheckManagesRepoLegacyCmd struct {
+type TeamsCheckPermissionsForRepoLegacyCmd struct {
 	TeamId int64  `name:"team_id" required:"true"`
 	Repo   string `name:"repo" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *TeamsCheckManagesRepoLegacyCmd) Run(isValueSetMap map[string]bool) error {
+func (c *TeamsCheckPermissionsForRepoLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/repos/{repo}")
 	c.UpdateURLPath("team_id", c.TeamId)
@@ -560,14 +594,14 @@ func (c *TeamsGetMemberLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
-type TeamsGetMembershipInOrgCmd struct {
+type TeamsGetMembershipForUserInOrgCmd struct {
 	Org      string `name:"org" required:"true"`
 	TeamSlug string `name:"team_slug" required:"true"`
 	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *TeamsGetMembershipInOrgCmd) Run(isValueSetMap map[string]bool) error {
+func (c *TeamsGetMembershipForUserInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/memberships/{username}")
 	c.UpdateURLPath("org", c.Org)
@@ -576,13 +610,13 @@ func (c *TeamsGetMembershipInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
-type TeamsGetMembershipLegacyCmd struct {
+type TeamsGetMembershipForUserLegacyCmd struct {
 	TeamId   int64  `name:"team_id" required:"true"`
 	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *TeamsGetMembershipLegacyCmd) Run(isValueSetMap map[string]bool) error {
+func (c *TeamsGetMembershipForUserLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/memberships/{username}")
 	c.UpdateURLPath("team_id", c.TeamId)
@@ -942,14 +976,14 @@ func (c *TeamsRemoveMemberLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("DELETE")
 }
 
-type TeamsRemoveMembershipInOrgCmd struct {
+type TeamsRemoveMembershipForUserInOrgCmd struct {
 	Org      string `name:"org" required:"true"`
 	TeamSlug string `name:"team_slug" required:"true"`
 	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *TeamsRemoveMembershipInOrgCmd) Run(isValueSetMap map[string]bool) error {
+func (c *TeamsRemoveMembershipForUserInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/memberships/{username}")
 	c.UpdateURLPath("org", c.Org)
@@ -958,13 +992,13 @@ func (c *TeamsRemoveMembershipInOrgCmd) Run(isValueSetMap map[string]bool) error
 	return c.DoRequest("DELETE")
 }
 
-type TeamsRemoveMembershipLegacyCmd struct {
+type TeamsRemoveMembershipForUserLegacyCmd struct {
 	TeamId   int64  `name:"team_id" required:"true"`
 	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *TeamsRemoveMembershipLegacyCmd) Run(isValueSetMap map[string]bool) error {
+func (c *TeamsRemoveMembershipForUserLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/memberships/{username}")
 	c.UpdateURLPath("team_id", c.TeamId)
@@ -1030,40 +1064,6 @@ func (c *TeamsRemoveRepoLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLPath("team_id", c.TeamId)
 	c.UpdateURLPath("repo", c.Repo)
 	return c.DoRequest("DELETE")
-}
-
-type TeamsReviewProjectInOrgCmd struct {
-	Inertia   bool   `name:"inertia-preview" required:"true"`
-	Org       string `name:"org" required:"true"`
-	TeamSlug  string `name:"team_slug" required:"true"`
-	ProjectId int64  `name:"project_id" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *TeamsReviewProjectInOrgCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/{org}/teams/{team_slug}/projects/{project_id}")
-	c.UpdateURLPath("org", c.Org)
-	c.UpdateURLPath("team_slug", c.TeamSlug)
-	c.UpdateURLPath("project_id", c.ProjectId)
-	c.UpdatePreview("inertia", c.Inertia)
-	return c.DoRequest("GET")
-}
-
-type TeamsReviewProjectLegacyCmd struct {
-	Inertia   bool  `name:"inertia-preview" required:"true"`
-	TeamId    int64 `name:"team_id" required:"true"`
-	ProjectId int64 `name:"project_id" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *TeamsReviewProjectLegacyCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/teams/{team_id}/projects/{project_id}")
-	c.UpdateURLPath("team_id", c.TeamId)
-	c.UpdateURLPath("project_id", c.ProjectId)
-	c.UpdatePreview("inertia", c.Inertia)
-	return c.DoRequest("GET")
 }
 
 type TeamsUpdateDiscussionCommentInOrgCmd struct {
