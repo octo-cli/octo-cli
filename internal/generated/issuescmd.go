@@ -7,7 +7,7 @@ import internal "github.com/octo-cli/octo-cli/internal"
 type IssuesCmd struct {
 	AddAssignees             IssuesAddAssigneesCmd             `cmd:""`
 	AddLabels                IssuesAddLabelsCmd                `cmd:""`
-	CheckAssignee            IssuesCheckAssigneeCmd            `cmd:""`
+	CheckUserCanBeAssigned   IssuesCheckUserCanBeAssignedCmd   `cmd:""`
 	Create                   IssuesCreateCmd                   `cmd:""`
 	CreateComment            IssuesCreateCommentCmd            `cmd:""`
 	CreateLabel              IssuesCreateLabelCmd              `cmd:""`
@@ -33,12 +33,12 @@ type IssuesCmd struct {
 	ListLabelsForMilestone   IssuesListLabelsForMilestoneCmd   `cmd:""`
 	ListLabelsForRepo        IssuesListLabelsForRepoCmd        `cmd:""`
 	ListLabelsOnIssue        IssuesListLabelsOnIssueCmd        `cmd:""`
-	ListMilestonesForRepo    IssuesListMilestonesForRepoCmd    `cmd:""`
+	ListMilestones           IssuesListMilestonesCmd           `cmd:""`
 	Lock                     IssuesLockCmd                     `cmd:""`
 	RemoveAllLabels          IssuesRemoveAllLabelsCmd          `cmd:""`
 	RemoveAssignees          IssuesRemoveAssigneesCmd          `cmd:""`
 	RemoveLabel              IssuesRemoveLabelCmd              `cmd:""`
-	ReplaceAllLabels         IssuesReplaceAllLabelsCmd         `cmd:""`
+	SetLabels                IssuesSetLabelsCmd                `cmd:""`
 	Unlock                   IssuesUnlockCmd                   `cmd:""`
 	Update                   IssuesUpdateCmd                   `cmd:""`
 	UpdateComment            IssuesUpdateCommentCmd            `cmd:""`
@@ -78,13 +78,13 @@ func (c *IssuesAddLabelsCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("POST")
 }
 
-type IssuesCheckAssigneeCmd struct {
+type IssuesCheckUserCanBeAssignedCmd struct {
 	Repo     string `name:"repo" required:"true"`
 	Assignee string `name:"assignee" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *IssuesCheckAssigneeCmd) Run(isValueSetMap map[string]bool) error {
+func (c *IssuesCheckUserCanBeAssignedCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/assignees/{assignee}")
 	c.UpdateURLPath("repo", c.Repo)
@@ -602,7 +602,7 @@ func (c *IssuesListLabelsOnIssueCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
-type IssuesListMilestonesForRepoCmd struct {
+type IssuesListMilestonesCmd struct {
 	Repo      string `name:"repo" required:"true"`
 	Direction string `name:"direction"`
 	Page      int64  `name:"page"`
@@ -612,7 +612,7 @@ type IssuesListMilestonesForRepoCmd struct {
 	internal.BaseCmd
 }
 
-func (c *IssuesListMilestonesForRepoCmd) Run(isValueSetMap map[string]bool) error {
+func (c *IssuesListMilestonesCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/milestones")
 	c.UpdateURLPath("repo", c.Repo)
@@ -688,14 +688,14 @@ func (c *IssuesRemoveLabelCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("DELETE")
 }
 
-type IssuesReplaceAllLabelsCmd struct {
+type IssuesSetLabelsCmd struct {
 	Repo        string   `name:"repo" required:"true"`
 	IssueNumber int64    `name:"issue_number" required:"true"`
 	Labels      []string `name:"labels"`
 	internal.BaseCmd
 }
 
-func (c *IssuesReplaceAllLabelsCmd) Run(isValueSetMap map[string]bool) error {
+func (c *IssuesSetLabelsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/issues/{issue_number}/labels")
 	c.UpdateURLPath("repo", c.Repo)

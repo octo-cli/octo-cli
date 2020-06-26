@@ -5,21 +5,35 @@ package generated
 import internal "github.com/octo-cli/octo-cli/internal"
 
 type ScimCmd struct {
-	GetProvisioningDetailsForUser     ScimGetProvisioningDetailsForUserCmd     `cmd:""`
+	DeleteUserFromOrg                 ScimDeleteUserFromOrgCmd                 `cmd:""`
+	GetProvisioningInformationForUser ScimGetProvisioningInformationForUserCmd `cmd:""`
 	ListProvisionedIdentities         ScimListProvisionedIdentitiesCmd         `cmd:""`
-	ProvisionAndInviteUsers           ScimProvisionAndInviteUsersCmd           `cmd:""`
-	RemoveUserFromOrg                 ScimRemoveUserFromOrgCmd                 `cmd:""`
-	ReplaceProvisionedUserInformation ScimReplaceProvisionedUserInformationCmd `cmd:""`
-	UpdateUserAttribute               ScimUpdateUserAttributeCmd               `cmd:""`
+	ProvisionAndInviteUser            ScimProvisionAndInviteUserCmd            `cmd:""`
+	SetInformationForProvisionedUser  ScimSetInformationForProvisionedUserCmd  `cmd:""`
+	UpdateAttributeForUser            ScimUpdateAttributeForUserCmd            `cmd:""`
 }
 
-type ScimGetProvisioningDetailsForUserCmd struct {
+type ScimDeleteUserFromOrgCmd struct {
 	Org        string `name:"org" required:"true"`
 	ScimUserId int64  `name:"scim_user_id" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *ScimGetProvisioningDetailsForUserCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ScimDeleteUserFromOrgCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/scim/v2/organizations/{org}/Users/{scim_user_id}")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdateURLPath("scim_user_id", c.ScimUserId)
+	return c.DoRequest("DELETE")
+}
+
+type ScimGetProvisioningInformationForUserCmd struct {
+	Org        string `name:"org" required:"true"`
+	ScimUserId int64  `name:"scim_user_id" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ScimGetProvisioningInformationForUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/scim/v2/organizations/{org}/Users/{scim_user_id}")
 	c.UpdateURLPath("org", c.Org)
@@ -45,39 +59,25 @@ func (c *ScimListProvisionedIdentitiesCmd) Run(isValueSetMap map[string]bool) er
 	return c.DoRequest("GET")
 }
 
-type ScimProvisionAndInviteUsersCmd struct {
+type ScimProvisionAndInviteUserCmd struct {
 	Org string `name:"org" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *ScimProvisionAndInviteUsersCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ScimProvisionAndInviteUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/scim/v2/organizations/{org}/Users")
 	c.UpdateURLPath("org", c.Org)
 	return c.DoRequest("POST")
 }
 
-type ScimRemoveUserFromOrgCmd struct {
+type ScimSetInformationForProvisionedUserCmd struct {
 	Org        string `name:"org" required:"true"`
 	ScimUserId int64  `name:"scim_user_id" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *ScimRemoveUserFromOrgCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/scim/v2/organizations/{org}/Users/{scim_user_id}")
-	c.UpdateURLPath("org", c.Org)
-	c.UpdateURLPath("scim_user_id", c.ScimUserId)
-	return c.DoRequest("DELETE")
-}
-
-type ScimReplaceProvisionedUserInformationCmd struct {
-	Org        string `name:"org" required:"true"`
-	ScimUserId int64  `name:"scim_user_id" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *ScimReplaceProvisionedUserInformationCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ScimSetInformationForProvisionedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/scim/v2/organizations/{org}/Users/{scim_user_id}")
 	c.UpdateURLPath("org", c.Org)
@@ -85,13 +85,13 @@ func (c *ScimReplaceProvisionedUserInformationCmd) Run(isValueSetMap map[string]
 	return c.DoRequest("PUT")
 }
 
-type ScimUpdateUserAttributeCmd struct {
+type ScimUpdateAttributeForUserCmd struct {
 	Org        string `name:"org" required:"true"`
 	ScimUserId int64  `name:"scim_user_id" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *ScimUpdateUserAttributeCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ScimUpdateAttributeForUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/scim/v2/organizations/{org}/Users/{scim_user_id}")
 	c.UpdateURLPath("org", c.Org)

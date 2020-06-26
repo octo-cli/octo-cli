@@ -5,8 +5,18 @@ package generated
 import internal "github.com/octo-cli/octo-cli/internal"
 
 type GitignoreCmd struct {
-	GetTemplate   GitignoreGetTemplateCmd   `cmd:""`
-	ListTemplates GitignoreListTemplatesCmd `cmd:""`
+	GetAllTemplates GitignoreGetAllTemplatesCmd `cmd:""`
+	GetTemplate     GitignoreGetTemplateCmd     `cmd:""`
+}
+
+type GitignoreGetAllTemplatesCmd struct {
+	internal.BaseCmd
+}
+
+func (c *GitignoreGetAllTemplatesCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/gitignore/templates")
+	return c.DoRequest("GET")
 }
 
 type GitignoreGetTemplateCmd struct {
@@ -18,15 +28,5 @@ func (c *GitignoreGetTemplateCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/gitignore/templates/{name}")
 	c.UpdateURLPath("name", c.Name)
-	return c.DoRequest("GET")
-}
-
-type GitignoreListTemplatesCmd struct {
-	internal.BaseCmd
-}
-
-func (c *GitignoreListTemplatesCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/gitignore/templates")
 	return c.DoRequest("GET")
 }
