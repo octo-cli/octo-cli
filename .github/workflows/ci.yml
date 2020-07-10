@@ -3,6 +3,7 @@ on:
   push: {}
   repository_dispatch:
     types: [trigger_ci]
+  workflow_dispatch: {}
 jobs:
   cibuild:
     name: cibuild
