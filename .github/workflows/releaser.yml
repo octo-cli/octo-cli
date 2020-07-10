@@ -1,7 +1,6 @@
 name: releaser
 on:
-  repository_dispatch:
-    types: [trigger_releaser]
+  - workflow_dispatch
 jobs:
   tag:
     runs-on: ubuntu-18.04
