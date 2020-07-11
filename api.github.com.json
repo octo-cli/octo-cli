@@ -436,7 +436,8 @@
                   "permissions": {
                     "type": "object",
                     "description": "The permissions granted to the access token. The permissions object includes the permission names and their access type. For a complete list of permissions and allowable values, see \"[GitHub App permissions](https://developer.github.com/apps/building-github-apps/creating-github-apps-using-url-parameters/#github-app-permissions).\"",
-                    "properties": {}
+                    "properties": {},
+                    "additionalProperties": true
                   }
                 }
               },
@@ -2941,6 +2942,7 @@
                     "type": "object",
                     "description": "The filenames and content that make up this gist.",
                     "additionalProperties": {
+                      "nullable": true,
                       "type": "object",
                       "properties": {
                         "content": {
@@ -6571,7 +6573,7 @@
                   },
                   "visibility": {
                     "type": "string",
-                    "description": "Configures the access that repositories have to the organization secret. Can be one of:  \n\\- `all` - All repositories in an organization can access the secret.  \n\\- `private` - Private repositories in an organization can access the secret.  \n\\- `selected` - Only specific repositories can access the secret.",
+                    "description": "Configures the access that repositories have to the organization secret. Can be one of:\n\\- `all` - All repositories in an organization can access the secret.\n\\- `private` - Private repositories in an organization can access the secret.\n\\- `selected` - Only specific repositories can access the secret.",
                     "enum": [
                       "all",
                       "private",
@@ -6582,7 +6584,7 @@
                     "type": "array",
                     "description": "An array of repository ids that can access the organization secret. You can only provide a list of repository ids when the `visibility` is set to `selected`. You can manage the list of selected repositories using the [List selected repositories for an organization secret](https://developer.github.com/v3/actions/secrets/#list-selected-repositories-for-an-organization-secret), [Set selected repositories for an organization secret](https://developer.github.com/v3/actions/secrets/#set-selected-repositories-for-an-organization-secret), and [Remove selected repository from an organization secret](https://developer.github.com/v3/actions/secrets/#remove-selected-repository-from-an-organization-secret) endpoints.",
                     "items": {
-                      "type": "string"
+                      "type": "number"
                     }
                   }
                 }
@@ -13931,7 +13933,7 @@
                   {
                     "group_id": "123",
                     "group_name": "Octocat admins",
-                    "description": "The people who configure your octoworld."
+                    "group_description": "The people who configure your octoworld."
                   }
                 ]
               }
@@ -21968,7 +21970,7 @@
                   },
                   "conclusion": {
                     "type": "string",
-                    "description": "**Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `success`, `failure`, `neutral`, `cancelled`, `skipped`, `timed_out`, or `action_required`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.  \n**Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. Only GitHub can change a check run conclusion to `stale`.",
+                    "description": "**Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `success`, `failure`, `neutral`, `cancelled`, `skipped`, `timed_out`, or `action_required`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.\n**Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. Only GitHub can change a check run conclusion to `stale`.",
                     "enum": [
                       "success",
                       "failure",
@@ -24590,6 +24592,7 @@
                     "description": "Line index in the diff to comment on."
                   },
                   "line": {
+                    "nullable": true,
                     "type": "integer",
                     "description": "**Deprecated**. Use **position** parameter instead. Line number in the file to comment on."
                   }
@@ -25306,7 +25309,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/components/parameters/accept"
+            "$ref": "#/components/parameters/accept-black-panther"
           },
           {
             "$ref": "#/components/parameters/owner"
@@ -25336,7 +25339,13 @@
           "legacy": false,
           "enabledForApps": true,
           "githubCloudOnly": false,
-          "previews": []
+          "previews": [
+            {
+              "required": true,
+              "name": "black-panther",
+              "note": "We're currently offering a preview of the Community Profile API (also known as community health). To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the  `Accept` header:\n```shell\napplication/vnd.github.black-panther-preview+json\n```"
+            }
+          ]
         },
         "x-githubBreakingChanges": [
           {
@@ -25354,11 +25363,11 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl \\\n  -H \"Accept: application/vnd.github.v3+json\" \\\n  https://api.github.com/repos/octocat/hello-world/community/profile"
+            "source": "curl \\\n  -H \"Accept: application/vnd.github.black-panther+json\" \\\n  https://api.github.com/repos/octocat/hello-world/community/profile"
           },
           {
             "lang": "JavaScript",
-            "source": "await octokit.request('GET /repos/{owner}/{repo}/community/profile', {\n  owner: 'octocat',\n  repo: 'hello-world'\n})"
+            "source": "await octokit.request('GET /repos/{owner}/{repo}/community/profile', {\n  owner: 'octocat',\n  repo: 'hello-world',\n  mediaType: {\n    previews: [\n      'black-panther'\n    ]\n  }\n})"
           },
           {
             "lang": "Ruby",
@@ -26172,7 +26181,6 @@
                     }
                   },
                   "payload": {
-                    "type": "string",
                     "description": "JSON payload with extra information about the deployment.",
                     "default": ""
                   },
@@ -26188,12 +26196,12 @@
                   },
                   "transient_environment": {
                     "type": "boolean",
-                    "description": "Specifies if the given environment is specific to the deployment and will no longer exist at some point in the future. Default: `false`  \n**Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. **Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type.",
+                    "description": "Specifies if the given environment is specific to the deployment and will no longer exist at some point in the future. Default: `false`\n**Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. **Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type.",
                     "default": false
                   },
                   "production_environment": {
                     "type": "boolean",
-                    "description": "Specifies if the given environment is one that end-users directly interact with. Default: `true` when `environment` is `production` and `false` otherwise.  \n**Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type."
+                    "description": "Specifies if the given environment is one that end-users directly interact with. Default: `true` when `environment` is `production` and `false` otherwise.\n**Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type."
                   }
                 },
                 "required": [
@@ -26743,7 +26751,8 @@
                     "type": "object",
                     "description": "JSON payload with extra information about the webhook event that your action or worklow may use.",
                     "default": {},
-                    "properties": {}
+                    "properties": {},
+                    "additionalProperties": true
                   }
                 }
               },
@@ -29052,7 +29061,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/import-3"
+                  "$ref": "#/components/schemas/import-2"
                 },
                 "examples": {
                   "example-1": {
@@ -46376,7 +46385,7 @@
                   {
                     "group_id": "123",
                     "group_name": "Octocat admins",
-                    "description": "The people who configure your octoworld."
+                    "group_description": "The people who configure your octoworld."
                   }
                 ]
               }
@@ -52295,6 +52304,7 @@
             "type": "string"
           },
           "description": {
+            "nullable": true,
             "type": "string"
           },
           "external_url": {
@@ -52427,6 +52437,7 @@
             "type": "string"
           },
           "expires_at": {
+            "nullable": true,
             "type": "string"
           },
           "permissions": {
@@ -52665,6 +52676,7 @@
                   "type": "string"
                 },
                 "language": {
+                  "nullable": true,
                   "type": "string"
                 },
                 "forks_count": {
@@ -52745,7 +52757,7 @@
                   "type": "boolean"
                 },
                 "template_repository": {
-                  "type": "string"
+                  "nullable": true
                 },
                 "temp_clone_token": {
                   "type": "string"
@@ -53056,9 +53068,11 @@
             }
           },
           "note": {
+            "nullable": true,
             "type": "string"
           },
           "note_url": {
+            "nullable": true,
             "type": "string"
           },
           "updated_at": {
@@ -53068,6 +53082,7 @@
             "type": "string"
           },
           "fingerprint": {
+            "nullable": true,
             "type": "string"
           }
         }
@@ -53275,6 +53290,7 @@
           "files": {
             "type": "object",
             "additionalProperties": {
+              "nullable": true,
               "type": "object",
               "properties": {
                 "filename": {
@@ -53311,6 +53327,7 @@
             "type": "number"
           },
           "user": {
+            "nullable": true,
             "type": "string"
           },
           "comments_url": {
@@ -53410,6 +53427,7 @@
           "files": {
             "type": "object",
             "additionalProperties": {
+              "nullable": true,
               "type": "object",
               "properties": {
                 "filename": {
@@ -53452,6 +53470,7 @@
             "type": "number"
           },
           "user": {
+            "nullable": true,
             "type": "string"
           },
           "comments_url": {
@@ -54162,6 +54181,7 @@
             "type": "string"
           },
           "language": {
+            "nullable": true,
             "type": "string"
           },
           "forks_count": {
@@ -54228,7 +54248,7 @@
             "type": "boolean"
           },
           "template_repository": {
-            "type": "string"
+            "nullable": true
           },
           "temp_clone_token": {
             "type": "string"
@@ -54600,6 +54620,7 @@
                 "type": "string"
               },
               "closed_at": {
+                "nullable": true,
                 "type": "string"
               },
               "due_on": {
@@ -54634,6 +54655,7 @@
             }
           },
           "closed_at": {
+            "nullable": true,
             "type": "string"
           },
           "created_at": {
@@ -54858,6 +54880,7 @@
                 "type": "string"
               },
               "language": {
+                "nullable": true,
                 "type": "string"
               },
               "forks_count": {
@@ -54938,7 +54961,7 @@
                 "type": "boolean"
               },
               "template_repository": {
-                "type": "string"
+                "nullable": true
               },
               "temp_clone_token": {
                 "type": "string"
@@ -55051,6 +55074,7 @@
             "type": "string"
           },
           "email": {
+            "nullable": true,
             "type": "string"
           },
           "organization_billing_email": {
@@ -55063,7 +55087,8 @@
                 "type": "string"
               },
               "unit_count": {
-                "type": "string"
+                "type": "integer",
+                "nullable": true
               },
               "id": {
                 "type": "number"
@@ -55105,6 +55130,7 @@
                     "type": "string"
                   },
                   "unit_name": {
+                    "nullable": true,
                     "type": "string"
                   },
                   "bullets": {
@@ -55127,7 +55153,8 @@
                 "type": "string"
               },
               "unit_count": {
-                "type": "string"
+                "type": "integer",
+                "nullable": true
               },
               "on_free_trial": {
                 "type": "boolean"
@@ -55172,6 +55199,7 @@
                     "type": "boolean"
                   },
                   "unit_name": {
+                    "nullable": true,
                     "type": "string"
                   },
                   "state": {
@@ -55223,6 +55251,7 @@
             "type": "boolean"
           },
           "unit_name": {
+            "nullable": true,
             "type": "string"
           },
           "state": {
@@ -55523,6 +55552,7 @@
             }
           },
           "reason": {
+            "nullable": true,
             "type": "string"
           },
           "unread": {
@@ -55549,6 +55579,7 @@
             "type": "boolean"
           },
           "reason": {
+            "nullable": true,
             "type": "string"
           },
           "created_at": {
@@ -55719,6 +55750,12 @@
               },
               "private_repos": {
                 "type": "number"
+              },
+              "seats": {
+                "type": "number"
+              },
+              "filled_seats": {
+                "type": "number"
               }
             }
           },
@@ -55792,6 +55829,7 @@
             "type": "string"
           },
           "expires_at": {
+            "nullable": true,
             "type": "string"
           }
         }
@@ -56317,6 +56355,7 @@
             "type": "string"
           },
           "single_file_name": {
+            "nullable": true,
             "type": "string"
           }
         }
@@ -56441,6 +56480,7 @@
             "type": "string"
           },
           "single_file_name": {
+            "nullable": true,
             "type": "string"
           }
         }
@@ -56455,6 +56495,7 @@
             "type": "string"
           },
           "expires_at": {
+            "nullable": true,
             "type": "string"
           }
         }
@@ -56581,7 +56622,7 @@
             "type": "string"
           },
           "parent": {
-            "type": "string"
+            "nullable": true
           }
         }
       },
@@ -56979,6 +57020,7 @@
                   "type": "string"
                 },
                 "language": {
+                  "nullable": true,
                   "type": "string"
                 },
                 "forks_count": {
@@ -57059,7 +57101,7 @@
                   "type": "boolean"
                 },
                 "template_repository": {
-                  "type": "string"
+                  "nullable": true
                 },
                 "temp_clone_token": {
                   "type": "string"
@@ -57309,6 +57351,7 @@
             "type": "string"
           },
           "language": {
+            "nullable": true,
             "type": "string"
           },
           "forks_count": {
@@ -57386,7 +57429,7 @@
             }
           },
           "template_repository": {
-            "type": "string"
+            "nullable": true
           },
           "temp_clone_token": {
             "type": "string"
@@ -57738,6 +57781,7 @@
             "type": "string"
           },
           "language": {
+            "nullable": true,
             "type": "string"
           },
           "forks_count": {
@@ -57818,7 +57862,7 @@
             "type": "boolean"
           },
           "template_repository": {
-            "type": "string"
+            "nullable": true
           },
           "temp_clone_token": {
             "type": "string"
@@ -57904,7 +57948,7 @@
             "type": "string"
           },
           "parent": {
-            "type": "string"
+            "nullable": true
           },
           "members_count": {
             "type": "number"
@@ -58090,6 +58134,7 @@
             "type": "string"
           },
           "last_edited_at": {
+            "nullable": true,
             "type": "string"
           },
           "html_url": {
@@ -58225,6 +58270,7 @@
             "type": "string"
           },
           "last_edited_at": {
+            "nullable": true,
             "type": "string"
           },
           "discussion_url": {
@@ -58764,6 +58810,7 @@
                 "type": "string"
               },
               "language": {
+                "nullable": true,
                 "type": "string"
               },
               "forks_count": {
@@ -58844,7 +58891,7 @@
                 "type": "boolean"
               },
               "template_repository": {
-                "type": "string"
+                "nullable": true
               },
               "temp_clone_token": {
                 "type": "string"
@@ -59082,6 +59129,7 @@
                 "type": "string"
               },
               "language": {
+                "nullable": true,
                 "type": "string"
               },
               "forks_count": {
@@ -59162,7 +59210,7 @@
                 "type": "boolean"
               },
               "template_repository": {
-                "type": "string"
+                "nullable": true
               },
               "temp_clone_token": {
                 "type": "string"
@@ -59650,6 +59698,7 @@
             "type": "string"
           },
           "description": {
+            "nullable": true,
             "type": "string"
           },
           "fork": {
@@ -59728,6 +59777,7 @@
             "type": "string"
           },
           "languages_url": {
+            "nullable": true,
             "type": "string"
           },
           "merges_url": {
@@ -59773,6 +59823,7 @@
             "type": "string"
           },
           "mirror_url": {
+            "nullable": true,
             "type": "string"
           },
           "hooks_url": {
@@ -59782,9 +59833,11 @@
             "type": "string"
           },
           "homepage": {
+            "nullable": true,
             "type": "string"
           },
           "language": {
+            "nullable": true,
             "type": "string"
           },
           "forks_count": {
@@ -59871,6 +59924,7 @@
             "type": "boolean"
           },
           "template_repository": {
+            "nullable": true,
             "type": "string"
           },
           "temp_clone_token": {
@@ -60186,6 +60240,7 @@
                 "type": "string"
               },
               "language": {
+                "nullable": true,
                 "type": "string"
               },
               "forks_count": {
@@ -60266,7 +60321,7 @@
                 "type": "boolean"
               },
               "template_repository": {
-                "type": "string"
+                "nullable": true
               },
               "temp_clone_token": {
                 "type": "string"
@@ -60504,6 +60559,7 @@
                 "type": "string"
               },
               "language": {
+                "nullable": true,
                 "type": "string"
               },
               "forks_count": {
@@ -60584,7 +60640,7 @@
                 "type": "boolean"
               },
               "template_repository": {
-                "type": "string"
+                "nullable": true
               },
               "temp_clone_token": {
                 "type": "string"
@@ -60603,6 +60659,23 @@
               },
               "network_count": {
                 "type": "number"
+              }
+            }
+          },
+          "code_of_conduct": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "key": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              },
+              "html_url": {
+                "type": "string"
               }
             }
           }
@@ -60824,6 +60897,7 @@
             "type": "string"
           },
           "language": {
+            "nullable": true,
             "type": "string"
           },
           "forks_count": {
@@ -60910,7 +60984,7 @@
             "type": "boolean"
           },
           "template_repository": {
-            "type": "string"
+            "nullable": true
           },
           "temp_clone_token": {
             "type": "string"
@@ -61205,6 +61279,7 @@
                 "type": "string"
               },
               "language": {
+                "nullable": true,
                 "type": "string"
               },
               "forks_count": {
@@ -61285,7 +61360,7 @@
                 "type": "boolean"
               },
               "template_repository": {
-                "type": "string"
+                "nullable": true
               },
               "temp_clone_token": {
                 "type": "string"
@@ -61523,6 +61598,7 @@
                 "type": "string"
               },
               "language": {
+                "nullable": true,
                 "type": "string"
               },
               "forks_count": {
@@ -61603,7 +61679,7 @@
                 "type": "boolean"
               },
               "template_repository": {
-                "type": "string"
+                "nullable": true
               },
               "temp_clone_token": {
                 "type": "string"
@@ -61698,6 +61774,7 @@
             "type": "string"
           },
           "expires_at": {
+            "nullable": true,
             "type": "string"
           }
         }
@@ -61805,6 +61882,7 @@
             "type": "string"
           },
           "conclusion": {
+            "nullable": true,
             "type": "string"
           },
           "workflow_id": {
@@ -61967,6 +62045,7 @@
                 "type": "string"
               },
               "description": {
+                "nullable": true,
                 "type": "string"
               },
               "fork": {
@@ -62169,6 +62248,7 @@
                 "type": "string"
               },
               "description": {
+                "nullable": true,
                 "type": "string"
               },
               "fork": {
@@ -62601,12 +62681,15 @@
                         "type": "boolean"
                       },
                       "reason": {
+                        "nullable": true,
                         "type": "string"
                       },
                       "signature": {
+                        "nullable": true,
                         "type": "string"
                       },
                       "payload": {
+                        "nullable": true,
                         "type": "string"
                       }
                     }
@@ -62873,7 +62956,7 @@
                           "type": "string"
                         },
                         "parent": {
-                          "type": "string"
+                          "nullable": true
                         }
                       }
                     }
@@ -63007,7 +63090,7 @@
                       "type": "string"
                     },
                     "parent": {
-                      "type": "string"
+                      "nullable": true
                     }
                   }
                 }
@@ -63269,7 +63352,7 @@
                       "type": "string"
                     },
                     "parent": {
-                      "type": "string"
+                      "nullable": true
                     }
                   }
                 }
@@ -63423,7 +63506,7 @@
                   "type": "string"
                 },
                 "parent": {
-                  "type": "string"
+                  "nullable": true
                 }
               }
             }
@@ -63557,12 +63640,14 @@
             "type": "string"
           },
           "conclusion": {
+            "nullable": true,
             "type": "string"
           },
           "started_at": {
             "type": "string"
           },
           "completed_at": {
+            "nullable": true,
             "type": "string"
           },
           "output": {
@@ -63573,6 +63658,12 @@
               },
               "summary": {
                 "type": "string"
+              },
+              "annotations_url": {
+                "type": "string"
+              },
+              "annotations_count": {
+                "type": "number"
               },
               "text": {
                 "type": "string"
@@ -63783,12 +63874,14 @@
             "type": "string"
           },
           "conclusion": {
+            "nullable": true,
             "type": "string"
           },
           "started_at": {
             "type": "string"
           },
           "completed_at": {
+            "nullable": true,
             "type": "string"
           },
           "output": {
@@ -64365,6 +64458,7 @@
                 "type": "string"
               },
               "language": {
+                "nullable": true,
                 "type": "string"
               },
               "forks_count": {
@@ -64445,7 +64539,7 @@
                 "type": "boolean"
               },
               "template_repository": {
-                "type": "string"
+                "nullable": true
               },
               "temp_clone_token": {
                 "type": "string"
@@ -64711,6 +64805,7 @@
                 "type": "string"
               },
               "language": {
+                "nullable": true,
                 "type": "string"
               },
               "forks_count": {
@@ -64791,7 +64886,7 @@
                 "type": "boolean"
               },
               "template_repository": {
-                "type": "string"
+                "nullable": true
               },
               "temp_clone_token": {
                 "type": "string"
@@ -64837,9 +64932,11 @@
             "type": "boolean"
           },
           "closed_by": {
+            "nullable": true,
             "type": "string"
           },
           "closed_at": {
+            "nullable": true,
             "type": "string"
           },
           "url": {
@@ -65436,12 +65533,15 @@
                     "type": "boolean"
                   },
                   "reason": {
+                    "nullable": true,
                     "type": "string"
                   },
                   "signature": {
+                    "nullable": true,
                     "type": "string"
                   },
                   "payload": {
+                    "nullable": true,
                     "type": "string"
                   }
                 }
@@ -65848,6 +65948,7 @@
                 "type": "string"
               },
               "closed_at": {
+                "nullable": true,
                 "type": "string"
               },
               "due_on": {
@@ -65865,6 +65966,7 @@
             "type": "string"
           },
           "closed_at": {
+            "nullable": true,
             "type": "string"
           },
           "merged_at": {
@@ -66115,7 +66217,7 @@
                   "type": "string"
                 },
                 "parent": {
-                  "type": "string"
+                  "nullable": true
                 }
               }
             }
@@ -66407,6 +66509,7 @@
                     "type": "string"
                   },
                   "language": {
+                    "nullable": true,
                     "type": "string"
                   },
                   "forks_count": {
@@ -66487,7 +66590,7 @@
                     "type": "boolean"
                   },
                   "template_repository": {
-                    "type": "string"
+                    "nullable": true
                   },
                   "temp_clone_token": {
                     "type": "string"
@@ -66798,6 +66901,7 @@
                     "type": "string"
                   },
                   "language": {
+                    "nullable": true,
                     "type": "string"
                   },
                   "forks_count": {
@@ -66878,7 +66982,7 @@
                     "type": "boolean"
                   },
                   "template_repository": {
-                    "type": "string"
+                    "nullable": true
                   },
                   "temp_clone_token": {
                     "type": "string"
@@ -67055,12 +67159,15 @@
                     "type": "boolean"
                   },
                   "reason": {
+                    "nullable": true,
                     "type": "string"
                   },
                   "signature": {
+                    "nullable": true,
                     "type": "string"
                   },
                   "payload": {
+                    "nullable": true,
                     "type": "string"
                   }
                 }
@@ -67810,12 +67917,15 @@
                         "type": "boolean"
                       },
                       "reason": {
+                        "nullable": true,
                         "type": "string"
                       },
                       "signature": {
+                        "nullable": true,
                         "type": "string"
                       },
                       "payload": {
+                        "nullable": true,
                         "type": "string"
                       }
                     }
@@ -68032,12 +68142,15 @@
                         "type": "boolean"
                       },
                       "reason": {
+                        "nullable": true,
                         "type": "string"
                       },
                       "signature": {
+                        "nullable": true,
                         "type": "string"
                       },
                       "payload": {
+                        "nullable": true,
                         "type": "string"
                       }
                     }
@@ -68268,12 +68381,15 @@
                           "type": "boolean"
                         },
                         "reason": {
+                          "nullable": true,
                           "type": "string"
                         },
                         "signature": {
+                          "nullable": true,
                           "type": "string"
                         },
                         "payload": {
+                          "nullable": true,
                           "type": "string"
                         }
                       }
@@ -68489,6 +68605,13 @@
             "type": "string"
           },
           "download_url": {
+            "nullable": true,
+            "type": "string"
+          },
+          "target": {
+            "type": "string"
+          },
+          "submodule_git_url": {
             "type": "string"
           },
           "_links": {
@@ -68511,6 +68634,7 @@
         "type": "object",
         "properties": {
           "content": {
+            "nullable": true,
             "type": "object",
             "properties": {
               "name": {
@@ -68637,12 +68761,15 @@
                     "type": "boolean"
                   },
                   "reason": {
+                    "nullable": true,
                     "type": "string"
                   },
                   "signature": {
+                    "nullable": true,
                     "type": "string"
                   },
                   "payload": {
+                    "nullable": true,
                     "type": "string"
                   }
                 }
@@ -68655,7 +68782,7 @@
         "type": "object",
         "properties": {
           "content": {
-            "type": "string"
+            "nullable": true
           },
           "commit": {
             "type": "object",
@@ -68738,12 +68865,15 @@
                     "type": "boolean"
                   },
                   "reason": {
+                    "nullable": true,
                     "type": "string"
                   },
                   "signature": {
+                    "nullable": true,
                     "type": "string"
                   },
                   "payload": {
+                    "nullable": true,
                     "type": "string"
                   }
                 }
@@ -69140,12 +69270,15 @@
                 "type": "boolean"
               },
               "reason": {
+                "nullable": true,
                 "type": "string"
               },
               "signature": {
+                "nullable": true,
                 "type": "string"
               },
               "payload": {
+                "nullable": true,
                 "type": "string"
               }
             }
@@ -69233,12 +69366,15 @@
                 "type": "boolean"
               },
               "reason": {
+                "nullable": true,
                 "type": "string"
               },
               "signature": {
+                "nullable": true,
                 "type": "string"
               },
               "payload": {
+                "nullable": true,
                 "type": "string"
               }
             }
@@ -69320,8 +69456,7 @@
                 "mode",
                 "type",
                 "sha",
-                "url",
-                "size"
+                "url"
               ]
             }
           },
@@ -69384,12 +69519,14 @@
             "type": "object",
             "properties": {
               "code": {
+                "nullable": true,
                 "type": "string"
               },
               "status": {
                 "type": "string"
               },
               "message": {
+                "nullable": true,
                 "type": "string"
               }
             }
@@ -69487,34 +69624,8 @@
           },
           "repository_url": {
             "type": "string"
-          }
-        }
-      },
-      "import-3": {
-        "type": "object",
-        "properties": {
-          "vcs": {
-            "type": "string"
           },
-          "use_lfs": {
-            "type": "string"
-          },
-          "vcs_url": {
-            "type": "string"
-          },
-          "status": {
-            "type": "string"
-          },
-          "url": {
-            "type": "string"
-          },
-          "html_url": {
-            "type": "string"
-          },
-          "authors_url": {
-            "type": "string"
-          },
-          "repository_url": {
+          "tfvc_project": {
             "type": "string"
           }
         }
@@ -69912,6 +70023,7 @@
                 "type": "string"
               },
               "closed_at": {
+                "nullable": true,
                 "type": "string"
               },
               "due_on": {
@@ -69946,6 +70058,7 @@
             }
           },
           "closed_at": {
+            "nullable": true,
             "type": "string"
           },
           "created_at": {
@@ -70306,6 +70419,7 @@
                 "type": "string"
               },
               "closed_at": {
+                "nullable": true,
                 "type": "string"
               },
               "due_on": {
@@ -70340,6 +70454,7 @@
             }
           },
           "closed_at": {
+            "nullable": true,
             "type": "string"
           },
           "created_at": {
@@ -70927,6 +71042,7 @@
                     "type": "string"
                   },
                   "closed_at": {
+                    "nullable": true,
                     "type": "string"
                   },
                   "due_on": {
@@ -70961,6 +71077,7 @@
                 }
               },
               "closed_at": {
+                "nullable": true,
                 "type": "string"
               },
               "created_at": {
@@ -71343,6 +71460,7 @@
                 "type": "string"
               },
               "closed_at": {
+                "nullable": true,
                 "type": "string"
               },
               "due_on": {
@@ -71377,6 +71495,7 @@
             }
           },
           "closed_at": {
+            "nullable": true,
             "type": "string"
           },
           "created_at": {
@@ -71674,12 +71793,15 @@
                     "type": "boolean"
                   },
                   "reason": {
+                    "nullable": true,
                     "type": "string"
                   },
                   "signature": {
+                    "nullable": true,
                     "type": "string"
                   },
                   "payload": {
+                    "nullable": true,
                     "type": "string"
                   }
                 }
@@ -71935,6 +72057,7 @@
             "type": "string"
           },
           "closed_at": {
+            "nullable": true,
             "type": "string"
           },
           "due_on": {
@@ -71986,6 +72109,7 @@
             "type": "object",
             "properties": {
               "message": {
+                "nullable": true,
                 "type": "string"
               }
             }
@@ -72318,6 +72442,7 @@
                 "type": "string"
               },
               "closed_at": {
+                "nullable": true,
                 "type": "string"
               },
               "due_on": {
@@ -72335,6 +72460,7 @@
             "type": "string"
           },
           "closed_at": {
+            "nullable": true,
             "type": "string"
           },
           "merged_at": {
@@ -72585,7 +72711,7 @@
                   "type": "string"
                 },
                 "parent": {
-                  "type": "string"
+                  "nullable": true
                 }
               }
             }
@@ -72877,6 +73003,7 @@
                     "type": "string"
                   },
                   "language": {
+                    "nullable": true,
                     "type": "string"
                   },
                   "forks_count": {
@@ -72957,7 +73084,7 @@
                     "type": "boolean"
                   },
                   "template_repository": {
-                    "type": "string"
+                    "nullable": true
                   },
                   "temp_clone_token": {
                     "type": "string"
@@ -73268,6 +73395,7 @@
                     "type": "string"
                   },
                   "language": {
+                    "nullable": true,
                     "type": "string"
                   },
                   "forks_count": {
@@ -73348,7 +73476,7 @@
                     "type": "boolean"
                   },
                   "template_repository": {
-                    "type": "string"
+                    "nullable": true
                   },
                   "temp_clone_token": {
                     "type": "string"
@@ -73856,7 +73984,7 @@
                   "type": "string"
                 },
                 "parent": {
-                  "type": "string"
+                  "nullable": true
                 }
               }
             }
@@ -74107,6 +74235,7 @@
                 "type": "string"
               },
               "closed_at": {
+                "nullable": true,
                 "type": "string"
               },
               "due_on": {
@@ -74124,6 +74253,7 @@
             "type": "string"
           },
           "closed_at": {
+            "nullable": true,
             "type": "string"
           },
           "merged_at": {
@@ -74394,7 +74524,7 @@
                   "type": "string"
                 },
                 "parent": {
-                  "type": "string"
+                  "nullable": true
                 }
               }
             }
@@ -74686,6 +74816,7 @@
                     "type": "string"
                   },
                   "language": {
+                    "nullable": true,
                     "type": "string"
                   },
                   "forks_count": {
@@ -74766,7 +74897,7 @@
                     "type": "boolean"
                   },
                   "template_repository": {
-                    "type": "string"
+                    "nullable": true
                   },
                   "temp_clone_token": {
                     "type": "string"
@@ -75077,6 +75208,7 @@
                     "type": "string"
                   },
                   "language": {
+                    "nullable": true,
                     "type": "string"
                   },
                   "forks_count": {
@@ -75157,7 +75289,7 @@
                     "type": "boolean"
                   },
                   "template_repository": {
-                    "type": "string"
+                    "nullable": true
                   },
                   "temp_clone_token": {
                     "type": "string"
@@ -76252,6 +76384,7 @@
             "type": "boolean"
           },
           "reason": {
+            "nullable": true,
             "type": "string"
           },
           "created_at": {
@@ -76614,6 +76747,7 @@
             "type": "string"
           },
           "language": {
+            "nullable": true,
             "type": "string"
           },
           "forks_count": {
@@ -76909,6 +77043,7 @@
                 "type": "string"
               },
               "language": {
+                "nullable": true,
                 "type": "string"
               },
               "forks_count": {
@@ -76989,7 +77124,7 @@
                 "type": "boolean"
               },
               "template_repository": {
-                "type": "string"
+                "nullable": true
               },
               "temp_clone_token": {
                 "type": "string"
@@ -78004,9 +78139,11 @@
             "type": "string"
           },
           "assignee": {
+            "nullable": true,
             "type": "string"
           },
           "milestone": {
+            "nullable": true,
             "type": "string"
           },
           "comments": {
@@ -78019,18 +78156,22 @@
             "type": "string"
           },
           "closed_at": {
+            "nullable": true,
             "type": "string"
           },
           "pull_request": {
             "type": "object",
             "properties": {
               "html_url": {
+                "nullable": true,
                 "type": "string"
               },
               "diff_url": {
+                "nullable": true,
                 "type": "string"
               },
               "patch_url": {
+                "nullable": true,
                 "type": "string"
               }
             }
@@ -78163,6 +78304,7 @@
             "type": "number"
           },
           "language": {
+            "nullable": true,
             "type": "string"
           },
           "forks_count": {
@@ -78451,6 +78593,7 @@
             "type": "boolean"
           },
           "visibility": {
+            "nullable": true,
             "type": "string"
           }
         }
@@ -78462,6 +78605,7 @@
             "type": "number"
           },
           "primary_key_id": {
+            "nullable": true,
             "type": "string"
           },
           "key_id": {
@@ -78493,6 +78637,7 @@
                   "type": "number"
                 },
                 "primary_key_id": {
+                  "nullable": true,
                   "type": "number"
                 },
                 "key_id": {
@@ -78525,6 +78670,7 @@
                   "type": "string"
                 },
                 "expires_at": {
+                  "nullable": true,
                   "type": "string"
                 }
               }
@@ -78546,6 +78692,7 @@
             "type": "string"
           },
           "expires_at": {
+            "nullable": true,
             "type": "string"
           }
         }
@@ -78669,6 +78816,7 @@
             }
           },
           "single_file_name": {
+            "nullable": true,
             "type": "string"
           }
         },
@@ -78696,7 +78844,8 @@
             "type": "string"
           },
           "unit_count": {
-            "type": "string"
+            "type": "integer",
+            "nullable": true
           },
           "on_free_trial": {
             "type": "boolean"
@@ -78720,6 +78869,7 @@
                 "type": "string"
               },
               "email": {
+                "nullable": true,
                 "type": "string"
               },
               "organization_billing_email": {
@@ -78764,6 +78914,7 @@
                 "type": "boolean"
               },
               "unit_name": {
+                "nullable": true,
                 "type": "string"
               },
               "state": {
@@ -79074,6 +79225,7 @@
                   "type": "string"
                 },
                 "language": {
+                  "nullable": true,
                   "type": "string"
                 },
                 "forks_count": {
@@ -79154,7 +79306,7 @@
                   "type": "boolean"
                 },
                 "template_repository": {
-                  "type": "string"
+                  "nullable": true
                 },
                 "temp_clone_token": {
                   "type": "string"
@@ -79410,6 +79562,7 @@
                 "type": "string"
               },
               "language": {
+                "nullable": true,
                 "type": "string"
               },
               "forks_count": {
@@ -79490,7 +79643,7 @@
                 "type": "boolean"
               },
               "template_repository": {
-                "type": "string"
+                "nullable": true
               },
               "temp_clone_token": {
                 "type": "string"
@@ -79612,6 +79765,23 @@
           },
           "updated_at": {
             "type": "string"
+          },
+          "plan": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "space": {
+                "type": "number"
+              },
+              "private_repos": {
+                "type": "number"
+              },
+              "collaborators": {
+                "type": "number"
+              }
+            }
           }
         }
       },
@@ -84736,9 +84906,6 @@
           "forks_count": 0,
           "mirror_url": null,
           "open_issues_count": 0,
-          "forks": 0,
-          "open_issues": 0,
-          "watchers": 0,
           "default_branch": "master",
           "code_of_conduct": {
             "key": "contributor_covenant",
@@ -97389,6 +97556,16 @@
           "type": "integer"
         },
         "example": 1
+      },
+      "accept-black-panther": {
+        "name": "accept",
+        "description": "This API is under preview and subject to change.",
+        "in": "header",
+        "schema": {
+          "type": "string",
+          "default": "application/vnd.github.black-panther+json"
+        },
+        "required": true
       },
       "path": {
         "name": "path",
