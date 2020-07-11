@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - name: set schema version
-        if: github.event_name == 'repository_dispatch'
+        if: ${{ github.event_name == 'workflow_dispatch' }}
         run: echo '::set-env name=TARGET_SCHEMA_VERSION::${{ github.event.inputs.schemaVersion }}'
       - uses: actions/checkout@v2
       - uses: actions/setup-go@v2
