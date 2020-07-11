@@ -1,12 +1,11 @@
 name: update-schema
 on:
-  workflow_dispatch: {
+  workflow_dispatch:
     inputs:
       schemaVersion:
         default: ""
         description: version of the schema to target
         required: false
-  }
   schedule:
     - cron: '16 * * * *'
 jobs:
