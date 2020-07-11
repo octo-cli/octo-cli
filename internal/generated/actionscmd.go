@@ -13,11 +13,13 @@ type ActionsCmd struct {
 	CreateRegistrationTokenForRepo  ActionsCreateRegistrationTokenForRepoCmd  `cmd:""`
 	CreateRemoveTokenForOrg         ActionsCreateRemoveTokenForOrgCmd         `cmd:""`
 	CreateRemoveTokenForRepo        ActionsCreateRemoveTokenForRepoCmd        `cmd:""`
+	CreateWorkflowDispatch          ActionsCreateWorkflowDispatchCmd          `cmd:""`
 	DeleteArtifact                  ActionsDeleteArtifactCmd                  `cmd:""`
 	DeleteOrgSecret                 ActionsDeleteOrgSecretCmd                 `cmd:""`
 	DeleteRepoSecret                ActionsDeleteRepoSecretCmd                `cmd:""`
 	DeleteSelfHostedRunnerFromOrg   ActionsDeleteSelfHostedRunnerFromOrgCmd   `cmd:""`
 	DeleteSelfHostedRunnerFromRepo  ActionsDeleteSelfHostedRunnerFromRepoCmd  `cmd:""`
+	DeleteWorkflowRun               ActionsDeleteWorkflowRunCmd               `cmd:""`
 	DeleteWorkflowRunLogs           ActionsDeleteWorkflowRunLogsCmd           `cmd:""`
 	DownloadArtifact                ActionsDownloadArtifactCmd                `cmd:""`
 	DownloadJobLogsForWorkflowRun   ActionsDownloadJobLogsForWorkflowRunCmd   `cmd:""`
@@ -170,6 +172,24 @@ func (c *ActionsCreateRemoveTokenForRepoCmd) Run(isValueSetMap map[string]bool) 
 	return c.DoRequest("POST")
 }
 
+type ActionsCreateWorkflowDispatchCmd struct {
+	Repo       string              `name:"repo" required:"true"`
+	WorkflowId int64               `name:"workflow_id" required:"true"`
+	Inputs     internal.JSONObject `name:"inputs"`
+	Ref        string              `name:"ref" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ActionsCreateWorkflowDispatchCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/actions/workflows/{workflow_id}/dispatches")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("workflow_id", c.WorkflowId)
+	c.UpdateBody("inputs", c.Inputs)
+	c.UpdateBody("ref", c.Ref)
+	return c.DoRequest("POST")
+}
+
 type ActionsDeleteArtifactCmd struct {
 	Repo       string `name:"repo" required:"true"`
 	ArtifactId int64  `name:"artifact_id" required:"true"`
@@ -237,6 +257,20 @@ func (c *ActionsDeleteSelfHostedRunnerFromRepoCmd) Run(isValueSetMap map[string]
 	c.SetURLPath("/repos/{repo}/actions/runners/{runner_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("runner_id", c.RunnerId)
+	return c.DoRequest("DELETE")
+}
+
+type ActionsDeleteWorkflowRunCmd struct {
+	Repo  string `name:"repo" required:"true"`
+	RunId int64  `name:"run_id" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ActionsDeleteWorkflowRunCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/actions/runs/{run_id}")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("run_id", c.RunId)
 	return c.DoRequest("DELETE")
 }
 

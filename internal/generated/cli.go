@@ -6,6 +6,7 @@ type CLI struct {
 	Actions             ActionsCmd             `cmd:""`
 	Activity            ActivityCmd            `cmd:""`
 	Apps                AppsCmd                `cmd:""`
+	Billing             BillingCmd             `cmd:""`
 	Checks              ChecksCmd              `cmd:""`
 	CodeScanning        CodeScanningCmd        `cmd:""`
 	CodesOfConduct      CodesOfConductCmd      `cmd:""`
@@ -42,11 +43,13 @@ var CmdHelps = map[string]map[string]string{
 		"create-registration-token-for-repo":   "Create a registration token for a repository - https://developer.github.com/v3/actions/self-hosted-runners/#create-a-registration-token-for-a-repository",
 		"create-remove-token-for-org":          "Create a remove token for an organization - https://developer.github.com/v3/actions/self-hosted-runners/#create-a-remove-token-for-an-organization",
 		"create-remove-token-for-repo":         "Create a remove token for a repository - https://developer.github.com/v3/actions/self-hosted-runners/#create-a-remove-token-for-a-repository",
+		"create-workflow-dispatch":             "Create a workflow dispatch event - https://developer.github.com/v3/actions/workflows/#create-a-workflow-dispatch-event",
 		"delete-artifact":                      "Delete an artifact - https://developer.github.com/v3/actions/artifacts/#delete-an-artifact",
 		"delete-org-secret":                    "Delete an organization secret - https://developer.github.com/v3/actions/secrets/#delete-an-organization-secret",
 		"delete-repo-secret":                   "Delete a repository secret - https://developer.github.com/v3/actions/secrets/#delete-a-repository-secret",
 		"delete-self-hosted-runner-from-org":   "Delete a self-hosted runner from an organization - https://developer.github.com/v3/actions/self-hosted-runners/#delete-a-self-hosted-runner-from-an-organization",
 		"delete-self-hosted-runner-from-repo":  "Delete a self-hosted runner from a repository - https://developer.github.com/v3/actions/self-hosted-runners/#delete-a-self-hosted-runner-from-a-repository",
+		"delete-workflow-run":                  "Delete a workflow run - https://developer.github.com/v3/actions/workflow-runs/#delete-a-workflow-run",
 		"delete-workflow-run-logs":             "Delete workflow run logs - https://developer.github.com/v3/actions/workflow-runs/#delete-workflow-run-logs",
 		"download-artifact":                    "Download an artifact - https://developer.github.com/v3/actions/artifacts/#download-an-artifact",
 		"download-job-logs-for-workflow-run":   "Download job logs for a workflow run - https://developer.github.com/v3/actions/workflow-jobs/#download-job-logs-for-a-workflow-run",
@@ -149,6 +152,17 @@ var CmdHelps = map[string]map[string]string{
 		"revoke-installation-access-token":                  "Revoke an installation access token - https://developer.github.com/v3/apps/installations/#revoke-an-installation-access-token",
 		"suspend-installation":                              "Suspend an app installation - https://developer.github.com/v3/apps/#suspend-an-app-installation",
 		"unsuspend-installation":                            "Unsuspend an app installation - https://developer.github.com/v3/apps/#unsuspend-an-app-installation",
+	},
+	"billing": {
+		"get-github-actions-billing-ghe":   "Get GitHub Actions billing for an enterprise - https://developer.github.com/v3/billing/#get-github-actions-billing-for-an-enterprise",
+		"get-github-actions-billing-org":   "Get GitHub Actions billing for an organization - https://developer.github.com/v3/billing/#get-github-actions-billing-for-an-organization",
+		"get-github-actions-billing-user":  "Get GitHub Actions billing for a user - https://developer.github.com/v3/billing/#get-github-actions-billing-for-a-user",
+		"get-github-packages-billing-ghe":  "Get GitHub Packages billing for an enterprise - https://developer.github.com/v3/billing/#get-github-packages-billing-for-an-enterprise",
+		"get-github-packages-billing-org":  "Get GitHub Packages billing for an organization - https://developer.github.com/v3/billing/#get-github-packages-billing-for-an-organization",
+		"get-github-packages-billing-user": "Get GitHub Packages billing for a user - https://developer.github.com/v3/billing/#get-github-packages-billing-for-a-user",
+		"get-shared-storage-billing-ghe":   "Get shared storage billing for an enterprise - https://developer.github.com/v3/billing/#get-shared-storage-billing-for-an-enterprise",
+		"get-shared-storage-billing-org":   "Get shared storage billing for an organization - https://developer.github.com/v3/billing/#get-shared-storage-billing-for-an-organization",
+		"get-shared-storage-billing-user":  "Get shared storage billing for a user - https://developer.github.com/v3/billing/#get-shared-storage-billing-for-a-user",
 	},
 	"checks": {
 		"create":                 "Create a check run - https://developer.github.com/v3/checks/runs/#create-a-check-run",
@@ -704,11 +718,17 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"key_id":          "ID of the key you used to encrypt the secret.",
 			"repo":            "repository in OWNER/REPO form",
 		},
-		"create-registration-token-for-repo":  {"repo": "repository in OWNER/REPO form"},
-		"create-remove-token-for-repo":        {"repo": "repository in OWNER/REPO form"},
+		"create-registration-token-for-repo": {"repo": "repository in OWNER/REPO form"},
+		"create-remove-token-for-repo":       {"repo": "repository in OWNER/REPO form"},
+		"create-workflow-dispatch": {
+			"inputs": "Input keys and values configured in the workflow file. The maximum number of properties is 10.",
+			"ref":    "The reference of the workflow run. The reference can be a branch, tag, or a commit SHA.",
+			"repo":   "repository in OWNER/REPO form",
+		},
 		"delete-artifact":                     {"repo": "repository in OWNER/REPO form"},
 		"delete-repo-secret":                  {"repo": "repository in OWNER/REPO form"},
 		"delete-self-hosted-runner-from-repo": {"repo": "repository in OWNER/REPO form"},
+		"delete-workflow-run":                 {"repo": "repository in OWNER/REPO form"},
 		"delete-workflow-run-logs":            {"repo": "repository in OWNER/REPO form"},
 		"download-artifact":                   {"repo": "repository in OWNER/REPO form"},
 		"download-job-logs-for-workflow-run":  {"repo": "repository in OWNER/REPO form"},
@@ -963,6 +983,11 @@ var FlagHelps = map[string]map[string]map[string]string{
 		},
 		"remove-repo-from-installation": {"machine-man-preview": "To access the API with your GitHub App, you must set this flag for your requests."},
 		"reset-token":                   {"access_token": "The OAuth access token used to authenticate to the GitHub API."},
+	},
+	"billing": {
+		"get-github-actions-billing-ghe":  {"enterprise_id": "Unique identifier of the GitHub Enterprise Cloud instance."},
+		"get-github-packages-billing-ghe": {"enterprise_id": "Unique identifier of the GitHub Enterprise Cloud instance."},
+		"get-shared-storage-billing-ghe":  {"enterprise_id": "Unique identifier of the GitHub Enterprise Cloud instance."},
 	},
 	"checks": {
 		"create": {
@@ -2553,11 +2578,35 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"repo":         "repository in OWNER/REPO form",
 		},
 	},
-	"scim": {"list-provisioned-identities": {
-		"count":      "Used for pagination: the number of results to return.",
-		"filter":     "Filters results using the equals query parameter operator (`eq`). You can filter results that are equal to `id`, `userName`, `emails`, and `external_id`. For example, to search for an identity with the `userName` Octocat, you would use this query: `?filter=userName%20eq%20\\\"Octocat\\\"`.",
-		"startIndex": "Used for pagination: the index of the first result to return.",
-	}},
+	"scim": {
+		"delete-user-from-org":                  {"scim_user_id": "Identifier generated by the GitHub SCIM endpoint."},
+		"get-provisioning-information-for-user": {"scim_user_id": "Identifier generated by the GitHub SCIM endpoint."},
+		"list-provisioned-identities": {
+			"count":      "Used for pagination: the number of results to return.",
+			"filter":     "Filters results using the equals query parameter operator (`eq`). You can filter results that are equal to `id`, `userName`, `emails`, and `external_id`. For example, to search for an identity with the `userName` Octocat, you would use this query:\n\n`?filter=userName%20eq%20\\\"Octocat\\\"`.\n\nTo filter results for for the identity with the email `octocat@github.com`, you would use this query:\n\n`?filter=emails%20eq%20\\\"octocat@github.com\\\"`.",
+			"startIndex": "Used for pagination: the index of the first result to return.",
+		},
+		"provision-and-invite-user": {
+			"emails":          "List of user emails.",
+			"name.familyName": "The last name of the user.",
+			"name.givenName":  "The first name of the user.",
+			"schemas":         "The SCIM schema URIs.",
+			"userName":        "The username for the user.",
+		},
+		"set-information-for-provisioned-user": {
+			"emails":          "List of user emails.",
+			"name.familyName": "The last name of the user.",
+			"name.givenName":  "The first name of the user.",
+			"schemas":         "The SCIM schema URIs.",
+			"scim_user_id":    "Identifier generated by the GitHub SCIM endpoint.",
+			"userName":        "The username for the user.",
+		},
+		"update-attribute-for-user": {
+			"Operations":   "Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2).",
+			"schemas":      "The SCIM schema URIs.",
+			"scim_user_id": "Identifier generated by the GitHub SCIM endpoint.",
+		},
+	},
 	"search": {
 		"code": {
 			"order":    "Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.",
