@@ -6,6 +6,7 @@ type CLI struct {
 	Actions             ActionsCmd             `cmd:""`
 	Activity            ActivityCmd            `cmd:""`
 	Apps                AppsCmd                `cmd:""`
+	Billing             BillingCmd             `cmd:""`
 	Checks              ChecksCmd              `cmd:""`
 	CodeScanning        CodeScanningCmd        `cmd:""`
 	CodesOfConduct      CodesOfConductCmd      `cmd:""`
@@ -42,11 +43,13 @@ var CmdHelps = map[string]map[string]string{
 		"create-registration-token-for-repo":   "Create a registration token for a repository - https://developer.github.com/v3/actions/self-hosted-runners/#create-a-registration-token-for-a-repository",
 		"create-remove-token-for-org":          "Create a remove token for an organization - https://developer.github.com/v3/actions/self-hosted-runners/#create-a-remove-token-for-an-organization",
 		"create-remove-token-for-repo":         "Create a remove token for a repository - https://developer.github.com/v3/actions/self-hosted-runners/#create-a-remove-token-for-a-repository",
+		"create-workflow-dispatch":             "Create a workflow dispatch event - https://developer.github.com/v3/actions/workflows/#create-a-workflow-dispatch-event",
 		"delete-artifact":                      "Delete an artifact - https://developer.github.com/v3/actions/artifacts/#delete-an-artifact",
 		"delete-org-secret":                    "Delete an organization secret - https://developer.github.com/v3/actions/secrets/#delete-an-organization-secret",
 		"delete-repo-secret":                   "Delete a repository secret - https://developer.github.com/v3/actions/secrets/#delete-a-repository-secret",
 		"delete-self-hosted-runner-from-org":   "Delete a self-hosted runner from an organization - https://developer.github.com/v3/actions/self-hosted-runners/#delete-a-self-hosted-runner-from-an-organization",
 		"delete-self-hosted-runner-from-repo":  "Delete a self-hosted runner from a repository - https://developer.github.com/v3/actions/self-hosted-runners/#delete-a-self-hosted-runner-from-a-repository",
+		"delete-workflow-run":                  "Delete a workflow run - https://developer.github.com/v3/actions/workflow-runs/#delete-a-workflow-run",
 		"delete-workflow-run-logs":             "Delete workflow run logs - https://developer.github.com/v3/actions/workflow-runs/#delete-workflow-run-logs",
 		"download-artifact":                    "Download an artifact - https://developer.github.com/v3/actions/artifacts/#download-an-artifact",
 		"download-job-logs-for-workflow-run":   "Download job logs for a workflow run - https://developer.github.com/v3/actions/workflow-jobs/#download-job-logs-for-a-workflow-run",
@@ -149,6 +152,17 @@ var CmdHelps = map[string]map[string]string{
 		"revoke-installation-access-token":                  "Revoke an installation access token - https://developer.github.com/v3/apps/installations/#revoke-an-installation-access-token",
 		"suspend-installation":                              "Suspend an app installation - https://developer.github.com/v3/apps/#suspend-an-app-installation",
 		"unsuspend-installation":                            "Unsuspend an app installation - https://developer.github.com/v3/apps/#unsuspend-an-app-installation",
+	},
+	"billing": {
+		"get-github-actions-billing-ghe":   "Get GitHub Actions billing for an enterprise - https://developer.github.com/v3/billing/#get-github-actions-billing-for-an-enterprise",
+		"get-github-actions-billing-org":   "Get GitHub Actions billing for an organization - https://developer.github.com/v3/billing/#get-github-actions-billing-for-an-organization",
+		"get-github-actions-billing-user":  "Get GitHub Actions billing for a user - https://developer.github.com/v3/billing/#get-github-actions-billing-for-a-user",
+		"get-github-packages-billing-ghe":  "Get GitHub Packages billing for an enterprise - https://developer.github.com/v3/billing/#get-github-packages-billing-for-an-enterprise",
+		"get-github-packages-billing-org":  "Get GitHub Packages billing for an organization - https://developer.github.com/v3/billing/#get-github-packages-billing-for-an-organization",
+		"get-github-packages-billing-user": "Get GitHub Packages billing for a user - https://developer.github.com/v3/billing/#get-github-packages-billing-for-a-user",
+		"get-shared-storage-billing-ghe":   "Get shared storage billing for an enterprise - https://developer.github.com/v3/billing/#get-shared-storage-billing-for-an-enterprise",
+		"get-shared-storage-billing-org":   "Get shared storage billing for an organization - https://developer.github.com/v3/billing/#get-shared-storage-billing-for-an-organization",
+		"get-shared-storage-billing-user":  "Get shared storage billing for a user - https://developer.github.com/v3/billing/#get-shared-storage-billing-for-a-user",
 	},
 	"checks": {
 		"create":                 "Create a check run - https://developer.github.com/v3/checks/runs/#create-a-check-run",
@@ -697,18 +711,24 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"encrypted_value":         "Value for your secret, encrypted with [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages) using the public key retrieved from the [Get an organization public key](https://developer.github.com/v3/actions/secrets/#get-an-organization-public-key) endpoint.",
 			"key_id":                  "ID of the key you used to encrypt the secret.",
 			"selected_repository_ids": "An array of repository ids that can access the organization secret. You can only provide a list of repository ids when the `visibility` is set to `selected`. You can manage the list of selected repositories using the [List selected repositories for an organization secret](https://developer.github.com/v3/actions/secrets/#list-selected-repositories-for-an-organization-secret), [Set selected repositories for an organization secret](https://developer.github.com/v3/actions/secrets/#set-selected-repositories-for-an-organization-secret), and [Remove selected repository from an organization secret](https://developer.github.com/v3/actions/secrets/#remove-selected-repository-from-an-organization-secret) endpoints.",
-			"visibility":              "Configures the access that repositories have to the organization secret. Can be one of:  \n\\- `all` - All repositories in an organization can access the secret.  \n\\- `private` - Private repositories in an organization can access the secret.  \n\\- `selected` - Only specific repositories can access the secret.",
+			"visibility":              "Configures the access that repositories have to the organization secret. Can be one of:\n\\- `all` - All repositories in an organization can access the secret.\n\\- `private` - Private repositories in an organization can access the secret.\n\\- `selected` - Only specific repositories can access the secret.",
 		},
 		"create-or-update-repo-secret": {
 			"encrypted_value": "Value for your secret, encrypted with [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages) using the public key retrieved from the [Get a repository public key](https://developer.github.com/v3/actions/secrets/#get-a-repository-public-key) endpoint.",
 			"key_id":          "ID of the key you used to encrypt the secret.",
 			"repo":            "repository in OWNER/REPO form",
 		},
-		"create-registration-token-for-repo":  {"repo": "repository in OWNER/REPO form"},
-		"create-remove-token-for-repo":        {"repo": "repository in OWNER/REPO form"},
+		"create-registration-token-for-repo": {"repo": "repository in OWNER/REPO form"},
+		"create-remove-token-for-repo":       {"repo": "repository in OWNER/REPO form"},
+		"create-workflow-dispatch": {
+			"inputs": "Input keys and values configured in the workflow file. The maximum number of properties is 10.",
+			"ref":    "The reference of the workflow run. The reference can be a branch, tag, or a commit SHA.",
+			"repo":   "repository in OWNER/REPO form",
+		},
 		"delete-artifact":                     {"repo": "repository in OWNER/REPO form"},
 		"delete-repo-secret":                  {"repo": "repository in OWNER/REPO form"},
 		"delete-self-hosted-runner-from-repo": {"repo": "repository in OWNER/REPO form"},
+		"delete-workflow-run":                 {"repo": "repository in OWNER/REPO form"},
 		"delete-workflow-run-logs":            {"repo": "repository in OWNER/REPO form"},
 		"download-artifact":                   {"repo": "repository in OWNER/REPO form"},
 		"download-job-logs-for-workflow-run":  {"repo": "repository in OWNER/REPO form"},
@@ -964,12 +984,17 @@ var FlagHelps = map[string]map[string]map[string]string{
 		"remove-repo-from-installation": {"machine-man-preview": "To access the API with your GitHub App, you must set this flag for your requests."},
 		"reset-token":                   {"access_token": "The OAuth access token used to authenticate to the GitHub API."},
 	},
+	"billing": {
+		"get-github-actions-billing-ghe":  {"enterprise_id": "Unique identifier of the GitHub Enterprise Cloud instance."},
+		"get-github-packages-billing-ghe": {"enterprise_id": "Unique identifier of the GitHub Enterprise Cloud instance."},
+		"get-shared-storage-billing-ghe":  {"enterprise_id": "Unique identifier of the GitHub Enterprise Cloud instance."},
+	},
 	"checks": {
 		"create": {
 			"actions":            "Displays a button on GitHub that can be clicked to alert your app to do additional tasks. For example, a code linting app can display a button that automatically fixes detected errors. The button created in this object is displayed after the check run completes. When a user clicks the button, GitHub sends the [`check_run.requested_action` webhook](https://developer.github.com/webhooks/event-payloads/#check_run) to your app. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://developer.github.com/v3/checks/runs/#actions-object) description. To learn more about check runs and requested actions, see \"[Check runs and requested actions](https://developer.github.com/v3/checks/runs/#check-runs-and-requested-actions).\" To learn more about check runs and requested actions, see \"[Check runs and requested actions](https://developer.github.com/v3/checks/runs/#check-runs-and-requested-actions).\"",
 			"antiope-preview":    "The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag.",
 			"completed_at":       "The time the check completed. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.",
-			"conclusion":         "**Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `success`, `failure`, `neutral`, `cancelled`, `skipped`, `timed_out`, or `action_required`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.  \n**Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. Only GitHub can change a check run conclusion to `stale`.",
+			"conclusion":         "**Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `success`, `failure`, `neutral`, `cancelled`, `skipped`, `timed_out`, or `action_required`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.\n**Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. Only GitHub can change a check run conclusion to `stale`.",
 			"details_url":        "The URL of the integrator's site that has the full details of the check. If the integrator does not provide this, then the homepage of the GitHub app is used.",
 			"external_id":        "A reference for the run on the integrator's system.",
 			"head_sha":           "The SHA of the commit.",
@@ -2031,12 +2056,12 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"description":            "Short description of the deployment.",
 			"environment":            "Name for the target deployment environment (e.g., `production`, `staging`, `qa`).",
 			"payload":                "JSON payload with extra information about the deployment.",
-			"production_environment": "Specifies if the given environment is one that end-users directly interact with. Default: `true` when `environment` is `production` and `false` otherwise.  \n**Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type.",
+			"production_environment": "Specifies if the given environment is one that end-users directly interact with. Default: `true` when `environment` is `production` and `false` otherwise.\n**Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type.",
 			"ref":                    "The ref to deploy. This can be a branch, tag, or SHA.",
 			"repo":                   "repository in OWNER/REPO form",
 			"required_contexts":      "The [status](https://developer.github.com/v3/repos/statuses/) contexts to verify against commit status checks. If you omit this parameter, GitHub verifies all unique contexts before creating a deployment. To bypass checking entirely, pass an empty array. Defaults to all unique contexts.",
 			"task":                   "Specifies a task to execute (e.g., `deploy` or `deploy:migrations`).",
-			"transient_environment":  "Specifies if the given environment is specific to the deployment and will no longer exist at some point in the future. Default: `false`  \n**Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. **Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type.",
+			"transient_environment":  "Specifies if the given environment is specific to the deployment and will no longer exist at some point in the future. Default: `false`\n**Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. **Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type.",
 		},
 		"create-deployment-status": {
 			"ant-man-preview": "The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.\n\nTo access the API during the preview period, you must set this flag.",
@@ -2226,7 +2251,10 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"repo":          "repository in OWNER/REPO form",
 			"zzzax-preview": "Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must set this flag.",
 		},
-		"get-community-profile-metrics": {"repo": "repository in OWNER/REPO form"},
+		"get-community-profile-metrics": {
+			"black-panther-preview": "We're currently offering a preview of the Community Profile API (also known as community health). To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the  `Accept` header.",
+			"repo":                  "repository in OWNER/REPO form",
+		},
 		"get-content": {
 			"ref":  "The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`)",
 			"repo": "repository in OWNER/REPO form",
@@ -2550,11 +2578,35 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"repo":         "repository in OWNER/REPO form",
 		},
 	},
-	"scim": {"list-provisioned-identities": {
-		"count":      "Used for pagination: the number of results to return.",
-		"filter":     "Filters results using the equals query parameter operator (`eq`). You can filter results that are equal to `id`, `userName`, `emails`, and `external_id`. For example, to search for an identity with the `userName` Octocat, you would use this query: `?filter=userName%20eq%20\\\"Octocat\\\"`.",
-		"startIndex": "Used for pagination: the index of the first result to return.",
-	}},
+	"scim": {
+		"delete-user-from-org":                  {"scim_user_id": "Identifier generated by the GitHub SCIM endpoint."},
+		"get-provisioning-information-for-user": {"scim_user_id": "Identifier generated by the GitHub SCIM endpoint."},
+		"list-provisioned-identities": {
+			"count":      "Used for pagination: the number of results to return.",
+			"filter":     "Filters results using the equals query parameter operator (`eq`). You can filter results that are equal to `id`, `userName`, `emails`, and `external_id`. For example, to search for an identity with the `userName` Octocat, you would use this query:\n\n`?filter=userName%20eq%20\\\"Octocat\\\"`.\n\nTo filter results for for the identity with the email `octocat@github.com`, you would use this query:\n\n`?filter=emails%20eq%20\\\"octocat@github.com\\\"`.",
+			"startIndex": "Used for pagination: the index of the first result to return.",
+		},
+		"provision-and-invite-user": {
+			"emails":          "List of user emails.",
+			"name.familyName": "The last name of the user.",
+			"name.givenName":  "The first name of the user.",
+			"schemas":         "The SCIM schema URIs.",
+			"userName":        "The username for the user.",
+		},
+		"set-information-for-provisioned-user": {
+			"emails":          "List of user emails.",
+			"name.familyName": "The last name of the user.",
+			"name.givenName":  "The first name of the user.",
+			"schemas":         "The SCIM schema URIs.",
+			"scim_user_id":    "Identifier generated by the GitHub SCIM endpoint.",
+			"userName":        "The username for the user.",
+		},
+		"update-attribute-for-user": {
+			"Operations":   "Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2).",
+			"schemas":      "The SCIM schema URIs.",
+			"scim_user_id": "Identifier generated by the GitHub SCIM endpoint.",
+		},
+	},
 	"search": {
 		"code": {
 			"order":    "Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`.",
