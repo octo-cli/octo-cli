@@ -1203,7 +1203,8 @@ func (c *ReposGetCommitSignatureProtectionCmd) Run(isValueSetMap map[string]bool
 }
 
 type ReposGetCommunityProfileMetricsCmd struct {
-	Repo string `name:"repo" required:"true"`
+	BlackPanther bool   `name:"black-panther-preview" required:"true"`
+	Repo         string `name:"repo" required:"true"`
 	internal.BaseCmd
 }
 
@@ -1211,6 +1212,7 @@ func (c *ReposGetCommunityProfileMetricsCmd) Run(isValueSetMap map[string]bool) 
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/community/profile")
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdatePreview("black-panther", c.BlackPanther)
 	return c.DoRequest("GET")
 }
 

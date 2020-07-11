@@ -121,7 +121,7 @@ puts Base64.strict_encode64(encrypted_secret)
 | encrypted_value | Value for your secret, encrypted with [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages) using the public key retrieved from the [Get an organization public key](https://developer.github.com/v3/actions/secrets/#get-an-organization-public-key) endpoint. |
 | key_id | ID of the key you used to encrypt the secret. |
 | selected_repository_ids | An array of repository ids that can access the organization secret. You can only provide a list of repository ids when the `visibility` is set to `selected`. You can manage the list of selected repositories using the [List selected repositories for an organization secret](https://developer.github.com/v3/actions/secrets/#list-selected-repositories-for-an-organization-secret), [Set selected repositories for an organization secret](https://developer.github.com/v3/actions/secrets/#set-selected-repositories-for-an-organization-secret), and [Remove selected repository from an organization secret](https://developer.github.com/v3/actions/secrets/#remove-selected-repository-from-an-organization-secret) endpoints. |
-| visibility | Configures the access that repositories have to the organization secret. Can be one of:  <br>\- `all` - All repositories in an organization can access the secret.  <br>\- `private` - Private repositories in an organization can access the secret.  <br>\- `selected` - Only specific repositories can access the secret. |
+| visibility | Configures the access that repositories have to the organization secret. Can be one of:<br>\- `all` - All repositories in an organization can access the secret.<br>\- `private` - Private repositories in an organization can access the secret.<br>\- `selected` - Only specific repositories can access the secret. |
 
 ## actions create-or-update-repo-secret
 
@@ -1945,7 +1945,7 @@ Creates a new check run for a specific commit in a repository. Your GitHub App m
 | repo | __Required__ repository in OWNER/REPO form |
 | actions | Displays a button on GitHub that can be clicked to alert your app to do additional tasks. For example, a code linting app can display a button that automatically fixes detected errors. The button created in this object is displayed after the check run completes. When a user clicks the button, GitHub sends the [`check_run.requested_action` webhook](https://developer.github.com/webhooks/event-payloads/#check_run) to your app. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://developer.github.com/v3/checks/runs/#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://developer.github.com/v3/checks/runs/#check-runs-and-requested-actions)." To learn more about check runs and requested actions, see "[Check runs and requested actions](https://developer.github.com/v3/checks/runs/#check-runs-and-requested-actions)." |
 | completed_at | The time the check completed. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
-| conclusion | **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `success`, `failure`, `neutral`, `cancelled`, `skipped`, `timed_out`, or `action_required`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.  <br>**Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. Only GitHub can change a check run conclusion to `stale`. |
+| conclusion | **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `success`, `failure`, `neutral`, `cancelled`, `skipped`, `timed_out`, or `action_required`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.<br>**Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. Only GitHub can change a check run conclusion to `stale`. |
 | details_url | The URL of the integrator's site that has the full details of the check. If the integrator does not provide this, then the homepage of the GitHub app is used. |
 | external_id | A reference for the run on the integrator's system. |
 | output.annotations | Adds information from your analysis to specific lines of code. Annotations are visible on GitHub in the **Checks** and **Files changed** tab of the pull request. The Checks API limits the number of annotations to a maximum of 50 per API request. To create more than 50 annotations, you have to make multiple requests to the [Update a check run](https://developer.github.com/v3/checks/runs/#update-a-check-run) endpoint. Each time you update the check run, annotations are appended to the list of annotations that already exist for the check run. For details about how you can view annotations on GitHub, see "[About status checks](https://help.github.com/articles/about-status-checks#checks)". See the [`annotations` object](https://developer.github.com/v3/checks/runs/#annotations-object) description for details about how to use this parameter. |
@@ -5918,22 +5918,7 @@ https://developer.github.com/v3/rate_limit/#get-rate-limit-status-for-the-authen
 
 **Note:** Accessing this endpoint does not count against your REST API rate limit.
 
-**Understanding your rate limit status**
-
-The Search API has a [custom rate limit](https://developer.github.com/v3/search/#rate-limit), separate from the rate limit governing the rest of the REST API. The GraphQL API also has a [custom rate limit](https://developer.github.com/v4/guides/resource-limitations/#rate-limit) that is separate from and calculated differently than rate limits in the REST API.
-
-For these reasons, the Rate Limit API response categorizes your rate limit. Under `resources`, you'll see four objects:
-
-*   The `core` object provides your rate limit status for all non-search-related resources in the REST API.
-*   The `search` object provides your rate limit status for the [Search API](https://developer.github.com/v3/search/).
-*   The `graphql` object provides your rate limit status for the [GraphQL API](https://developer.github.com/v4/).
-*   The `integration_manifest` object provides your rate limit status for the [GitHub App Manifest code conversion](https://developer.github.com/apps/building-github-apps/creating-github-apps-from-a-manifest/#3-you-exchange-the-temporary-code-to-retrieve-the-app-configuration) endpoint.
-
-For more information on the headers and values in the rate limit response, see "[Rate limiting](https://developer.github.com/v3/#rate-limiting)."
-
-The `rate` object (shown at the bottom of the response above) is deprecated.
-
-If you're writing new API client code or updating existing code, you should use the `core` object instead of the `rate` object. The `core` object contains the same information that is present in the `rate` object.
+**Note:** The `rate` object is deprecated. If you're writing new API client code or updating existing code, you should use the `core` object instead of the `rate` object. The `core` object contains the same information that is present in the `rate` object.
 
 # reactions
 
@@ -6674,10 +6659,10 @@ This error happens when the `required_contexts` parameter indicates that one or 
 | description | Short description of the deployment. |
 | environment | Name for the target deployment environment (e.g., `production`, `staging`, `qa`). |
 | payload | JSON payload with extra information about the deployment. |
-| production_environment | Specifies if the given environment is one that end-users directly interact with. Default: `true` when `environment` is `production` and `false` otherwise.  <br>**Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. |
+| production_environment | Specifies if the given environment is one that end-users directly interact with. Default: `true` when `environment` is `production` and `false` otherwise.<br>**Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. |
 | required_contexts | The [status](https://developer.github.com/v3/repos/statuses/) contexts to verify against commit status checks. If you omit this parameter, GitHub verifies all unique contexts before creating a deployment. To bypass checking entirely, pass an empty array. Defaults to all unique contexts. |
 | task | Specifies a task to execute (e.g., `deploy` or `deploy:migrations`). |
-| transient_environment | Specifies if the given environment is specific to the deployment and will no longer exist at some point in the future. Default: `false`  <br>**Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. **Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. |
+| transient_environment | Specifies if the given environment is specific to the deployment and will no longer exist at some point in the future. Default: `false`<br>**Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. **Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. |
 
 ## repos create-deployment-status
 
@@ -7534,6 +7519,7 @@ This endpoint will return all community profile metrics, including an overall he
 
 | name | description |
 |------|-------------|
+| black-panther-preview | __Required__ We're currently offering a preview of the Community Profile API (also known as community health). To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the  `Accept` header. |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-content
