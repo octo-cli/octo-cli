@@ -94,6 +94,8 @@ func buildEndpoint(opPath, httpMethod string, op *openapi3.Operation) (*model.En
 
 var op2modelTypes = map[string]model.ParamType{
 	"string":  model.ParamTypeString,
+	"":        model.ParamTypeString,
+	"number":  model.ParamTypeString,
 	"integer": model.ParamTypeInt,
 	"boolean": model.ParamTypeBool,
 	"object":  model.ParamTypeObject,
