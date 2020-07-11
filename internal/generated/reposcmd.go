@@ -419,7 +419,7 @@ func (c *ReposCreateDeploymentStatusCmd) Run(isValueSetMap map[string]bool) erro
 type ReposCreateDispatchEventCmd struct {
 	Repo          string              `name:"repo" required:"true"`
 	ClientPayload internal.JSONObject `name:"client_payload"`
-	EventType     string              `name:"event_type"`
+	EventType     string              `name:"event_type" required:"true"`
 	internal.BaseCmd
 }
 

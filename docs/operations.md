@@ -309,6 +309,26 @@ To remove your self-hosted runner from a repository, replace TOKEN with the remo
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
 
+## actions create-workflow-dispatch
+
+https://developer.github.com/v3/actions/workflows/#create-a-workflow-dispatch-event
+
+You can use this endpoint to manually trigger a GitHub Actions workflow run. You can also replace `{workflow_id}` with the workflow file name. For example, you could use `main.yml`.
+
+You must configure your GitHub Actions workflow to run when the [`workflow_dispatch` webhook](/developers/webhooks-and-events/webhook-events-and-payloads#workflow_dispatch) event occurs. The `inputs` are configured in the workflow file. For more information about how to configure the `workflow_dispatch` event in the workflow file, see "[Events that trigger workflows](/actions/reference/events-that-trigger-workflows#workflow_dispatch)."
+
+You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint. For more information, see "[Creating a personal access token for the command line](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line)."
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| ref | __Required__ The reference of the workflow run. The reference can be a branch, tag, or a commit SHA. |
+| repo | __Required__ repository in OWNER/REPO form |
+| workflow_id | __Required__  |
+| inputs | Input keys and values configured in the workflow file. The maximum number of properties is 10. |
+
 ## actions delete-artifact
 
 https://developer.github.com/v3/actions/artifacts/#delete-an-artifact
@@ -380,6 +400,22 @@ Forces the removal of a self-hosted runner from a repository. You can use this e
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
 | runner_id | __Required__  |
+
+## actions delete-workflow-run
+
+https://developer.github.com/v3/actions/workflow-runs/#delete-a-workflow-run
+
+Delete a specific workflow run. Anyone with write access to the repository can use this endpoint. If the repository is
+private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:write` permission to use
+this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| repo | __Required__ repository in OWNER/REPO form |
+| run_id | __Required__  |
 
 ## actions delete-workflow-run-logs
 
@@ -1922,6 +1958,180 @@ You must use a [JWT](https://developer.github.com/apps/building-github-apps/auth
 | name | description |
 |------|-------------|
 | installation_id | __Required__  |
+
+# billing
+
+
+## billing get-github-actions-billing-ghe
+
+https://developer.github.com/v3/billing/#get-github-actions-billing-for-an-enterprise
+
+**Warning:** The Billing API is currently in public beta and subject to change.
+
+Gets the summary of the free and paid GitHub Actions minutes used.
+
+Paid minutes only apply to workflows in private repositories that use GitHub-hosted runners. Minutes used is listed for each GitHub-hosted runner operating system. Any job re-runs are also included in the usage. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
+
+The authenticated user must be an enterprise admin.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| enterprise_id | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+
+## billing get-github-actions-billing-org
+
+https://developer.github.com/v3/billing/#get-github-actions-billing-for-an-organization
+
+**Warning:** The Billing API is currently in public beta and subject to change.
+
+Gets the summary of the free and paid GitHub Actions minutes used.
+
+Paid minutes only apply to workflows in private repositories that use GitHub-hosted runners. Minutes used is listed for each GitHub-hosted runner operating system. Any job re-runs are also included in the usage. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
+
+Access tokens must have the `read:org` scope.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| org | __Required__  |
+
+## billing get-github-actions-billing-user
+
+https://developer.github.com/v3/billing/#get-github-actions-billing-for-a-user
+
+**Warning:** The Billing API is currently in public beta and subject to change.
+
+Gets the summary of the free and paid GitHub Actions minutes used.
+
+Paid minutes only apply to workflows in private repositories that use GitHub-hosted runners. Minutes used is listed for each GitHub-hosted runner operating system. Any job re-runs are also included in the usage. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
+
+Access tokens must have the `user` scope.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| username | __Required__  |
+
+## billing get-github-packages-billing-ghe
+
+https://developer.github.com/v3/billing/#get-github-packages-billing-for-an-enterprise
+
+**Warning:** The Billing API is currently in public beta and subject to change.
+
+Gets the free and paid storage used for GitHub Packages in gigabytes.
+
+Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
+
+The authenticated user must be an enterprise admin.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| enterprise_id | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+
+## billing get-github-packages-billing-org
+
+https://developer.github.com/v3/billing/#get-github-packages-billing-for-an-organization
+
+**Warning:** The Billing API is currently in public beta and subject to change.
+
+Gets the free and paid storage usued for GitHub Packages in gigabytes.
+
+Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
+
+Access tokens must have the `read:org` scope.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| org | __Required__  |
+
+## billing get-github-packages-billing-user
+
+https://developer.github.com/v3/billing/#get-github-packages-billing-for-a-user
+
+**Warning:** The Billing API is currently in public beta and subject to change.
+
+Gets the free and paid storage used for GitHub Packages in gigabytes.
+
+Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
+
+Access tokens must have the `user` scope.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| username | __Required__  |
+
+## billing get-shared-storage-billing-ghe
+
+https://developer.github.com/v3/billing/#get-shared-storage-billing-for-an-enterprise
+
+**Warning:** The Billing API is currently in public beta and subject to change.
+
+Gets the estimated paid and estimated total storage used for GitHub Actions and Github Packages.
+
+Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
+
+The authenticated user must be an enterprise admin.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| enterprise_id | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+
+## billing get-shared-storage-billing-org
+
+https://developer.github.com/v3/billing/#get-shared-storage-billing-for-an-organization
+
+**Warning:** The Billing API is currently in public beta and subject to change.
+
+Gets the estimated paid and estimated total storage used for GitHub Actions and Github Packages.
+
+Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
+
+Access tokens must have the `read:org` scope.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| org | __Required__  |
+
+## billing get-shared-storage-billing-user
+
+https://developer.github.com/v3/billing/#get-shared-storage-billing-for-a-user
+
+**Warning:** The Billing API is currently in public beta and subject to change.
+
+Gets the estimated paid and estimated total storage used for GitHub Actions and Github Packages.
+
+Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
+
+Access tokens must have the `user` scope.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| username | __Required__  |
 
 # checks
 
@@ -4119,13 +4329,8 @@ Unlocks a repository that was locked for migration. You should unlock each migra
 
 https://developer.github.com/v3/migrations/source_imports/#update-an-import
 
-An import can be updated with credentials or a project choice by passing in the appropriate parameters in this API request. If no parameters are provided, the import will be restarted.
-
-Some servers (e.g. TFS servers) can have several projects at a single URL. In those cases the import progress will have the status `detection_found_multiple` and the Import Progress response will include a `project_choices` array. You can select the project to import by providing one of the objects in the `project_choices` array in the update request.
-
-The following example demonstrates the workflow for updating an import with "project1" as the project choice. Given a `project_choices` array like such:
-
-To restart an import, no parameters are provided in the update request.
+An import can be updated with credentials or a project choice by passing in the appropriate parameters in this API
+request. If no parameters are provided, the import will be restarted.
 
 ### parameters
 
@@ -4345,9 +4550,7 @@ https://developer.github.com/v3/orgs/blocking/#block-a-user-from-an-organization
 
 https://developer.github.com/v3/orgs/blocking/#check-if-a-user-is-blocked-by-an-organization
 
-If the user is blocked:
 
-If the user is not blocked:
 
 ### parameters
 
@@ -6599,7 +6802,7 @@ Note: there is a limit of 1000 statuses per `sha` and `context` within a reposit
 
 https://developer.github.com/v3/repos/keys/#create-a-deploy-key
 
-Here's how you can create a read-only deploy key:
+You can create a read-only deploy key.
 
 ### parameters
 
@@ -6615,37 +6818,51 @@ Here's how you can create a read-only deploy key:
 
 https://developer.github.com/v3/repos/deployments/#create-a-deployment
 
-Deployments offer a few configurable parameters with sane defaults.
+Deployments offer a few configurable parameters with certain defaults.
 
-The `ref` parameter can be any named branch, tag, or SHA. At GitHub we often deploy branches and verify them before we merge a pull request.
+The `ref` parameter can be any named branch, tag, or SHA. At GitHub we often deploy branches and verify them
+before we merge a pull request.
 
-The `environment` parameter allows deployments to be issued to different runtime environments. Teams often have multiple environments for verifying their applications, such as `production`, `staging`, and `qa`. This parameter makes it easier to track which environments have requested deployments. The default environment is `production`.
+The `environment` parameter allows deployments to be issued to different runtime environments. Teams often have
+multiple environments for verifying their applications, such as `production`, `staging`, and `qa`. This parameter
+makes it easier to track which environments have requested deployments. The default environment is `production`.
 
-The `auto_merge` parameter is used to ensure that the requested ref is not behind the repository's default branch. If the ref _is_ behind the default branch for the repository, we will attempt to merge it for you. If the merge succeeds, the API will return a successful merge commit. If merge conflicts prevent the merge from succeeding, the API will return a failure response.
+The `auto_merge` parameter is used to ensure that the requested ref is not behind the repository's default branch. If
+the ref _is_ behind the default branch for the repository, we will attempt to merge it for you. If the merge succeeds,
+the API will return a successful merge commit. If merge conflicts prevent the merge from succeeding, the API will
+return a failure response.
 
-By default, [commit statuses](https://developer.github.com/v3/repos/statuses) for every submitted context must be in a `success` state. The `required_contexts` parameter allows you to specify a subset of contexts that must be `success`, or to specify contexts that have not yet been submitted. You are not required to use commit statuses to deploy. If you do not require any contexts or create any commit statuses, the deployment will always succeed.
+By default, [commit statuses](https://developer.github.com/v3/repos/statuses) for every submitted context must be in a `success`
+state. The `required_contexts` parameter allows you to specify a subset of contexts that must be `success`, or to
+specify contexts that have not yet been submitted. You are not required to use commit statuses to deploy. If you do
+not require any contexts or create any commit statuses, the deployment will always succeed.
 
-The `payload` parameter is available for any extra information that a deployment system might need. It is a JSON text field that will be passed on when a deployment event is dispatched.
+The `payload` parameter is available for any extra information that a deployment system might need. It is a JSON text
+field that will be passed on when a deployment event is dispatched.
 
-The `task` parameter is used by the deployment system to allow different execution paths. In the web world this might be `deploy:migrations` to run schema changes on the system. In the compiled world this could be a flag to compile an application with debugging enabled.
+The `task` parameter is used by the deployment system to allow different execution paths. In the web world this might
+be `deploy:migrations` to run schema changes on the system. In the compiled world this could be a flag to compile an
+application with debugging enabled.
 
-Users with `repo` or `repo_deployment` scopes can create a deployment for a given ref:
+Users with `repo` or `repo_deployment` scopes can create a deployment for a given ref.
 
-A simple example putting the user and room into the payload to notify back to chat networks.
-
-A more advanced example specifying required commit statuses and bypassing auto-merging.
-
-You will see this response when GitHub automatically merges the base branch into the topic branch instead of creating a deployment. This auto-merge happens when:
-
+#### Merged branch response
+You will see this response when GitHub automatically merges the base branch into the topic branch instead of creating
+a deployment. This auto-merge happens when:
 *   Auto-merge option is enabled in the repository
 *   Topic branch does not include the latest changes on the base branch, which is `master` in the response example
 *   There are no merge conflicts
 
-If there are no new commits in the base branch, a new request to create a deployment should give a successful response.
+If there are no new commits in the base branch, a new request to create a deployment should give a successful
+response.
 
-This error happens when the `auto_merge` option is enabled and when the default branch (in this case `master`), can't be merged into the branch that's being deployed (in this case `topic-branch`), due to merge conflicts.
+#### Merge conflict response
+This error happens when the `auto_merge` option is enabled and when the default branch (in this case `master`), can't
+be merged into the branch that's being deployed (in this case `topic-branch`), due to merge conflicts.
 
-This error happens when the `required_contexts` parameter indicates that one or more contexts need to have a `success` status for the commit to be deployed, but one or more of the required contexts do not have a state of `success`.
+#### Failed commit status checks
+This error happens when the `required_contexts` parameter indicates that one or more contexts need to have a `success`
+status for the commit to be deployed, but one or more of the required contexts do not have a state of `success`.
 
 ### parameters
 
@@ -6706,9 +6923,9 @@ This input example shows how you can use the `client_payload` as a test to debug
 
 | name | description |
 |------|-------------|
+| event_type | __Required__ **Required:** A custom webhook event name. |
 | repo | __Required__ repository in OWNER/REPO form |
 | client_payload | JSON payload with extra information about the webhook event that your action or worklow may use. |
-| event_type | **Required:** A custom webhook event name. |
 
 ## repos create-for-authenticated-user
 
@@ -6892,9 +7109,8 @@ When using [OAuth](https://developer.github.com/apps/building-oauth-apps/underst
 
 https://developer.github.com/v3/repos/hooks/#create-a-repository-webhook
 
-Repositories can have multiple webhooks installed. Each webhook should have a unique `config`. Multiple webhooks can share the same `config` as long as those webhooks do not have any `events` that overlap.
-
-Here's how you can create a hook that posts payloads in JSON format:
+Repositories can have multiple webhooks installed. Each webhook should have a unique `config`. Multiple webhooks can
+share the same `config` as long as those webhooks do not have any `events` that overlap.
 
 ### parameters
 
@@ -6929,7 +7145,8 @@ https://developer.github.com/v3/repos/#delete-a-repository
 
 Deleting a repository requires admin access. If OAuth is used, the `delete_repo` scope is required.
 
-If an organization owner has configured the organization to prevent members from deleting organization-owned repositories, a member will get this response:
+If an organization owner has configured the organization to prevent members from deleting organization-owned
+repositories, you will get a `403 Forbidden` response.
 
 ### parameters
 
@@ -7019,7 +7236,7 @@ When authenticated with admin or owner permissions to the repository, you can us
 
 https://developer.github.com/v3/repos/keys/#delete-a-deploy-key
 
-
+Deploy keys are immutable. If you need to update a key, remove the key and create a new one instead.
 
 ### parameters
 
@@ -7193,11 +7410,12 @@ Disables dependency alerts and the dependency graph for a repository. The authen
 
 https://developer.github.com/v3/repos/contents/#download-a-repository-archive
 
-Gets a redirect URL to download an archive for a repository. The `:archive_format` can be either `tarball` or `zipball`. The `:ref` must be a valid Git reference. If you omit `:ref`, the repository’s default branch (usually `master`) will be used. Please make sure your HTTP framework is configured to follow redirects or you will need to use the `Location` header to make a second `GET` request.
+Gets a redirect URL to download an archive for a repository. The `:archive_format` can be either `tarball` or
+`zipball`. The `:ref` must be a valid Git reference. If you omit `:ref`, the repository’s default branch (usually
+`master`) will be used. Please make sure your HTTP framework is configured to follow redirects or you will need to use
+the `Location` header to make a second `GET` request.
 
-_Note_: For private repositories, these links are temporary and expire after five minutes.
-
-To follow redirects with curl, use the `-L` switch:
+**Note**: For private repositories, these links are temporary and expire after five minutes.
 
 ### parameters
 
@@ -7526,27 +7744,38 @@ This endpoint will return all community profile metrics, including an overall he
 
 https://developer.github.com/v3/repos/contents/#get-repository-content
 
-Gets the contents of a file or directory in a repository. Specify the file path or directory in `:path`. If you omit `:path`, you will receive the contents of all files in the repository.
+Gets the contents of a file or directory in a repository. Specify the file path or directory in `:path`. If you omit
+`:path`, you will receive the contents of all files in the repository.
 
-Files and symlinks support [a custom media type](https://developer.github.com/v3/repos/contents/#custom-media-types) for retrieving the raw content or rendered HTML (when supported). All content types support [a custom media type](https://developer.github.com/v3/repos/contents/#custom-media-types) to ensure the content is returned in a consistent object format.
+Files and symlinks support [a custom media type](https://developer.github.com/v3/repos/contents/#custom-media-types) for
+retrieving the raw content or rendered HTML (when supported). All content types support [a custom media
+type](https://developer.github.com/v3/repos/contents/#custom-media-types) to ensure the content is returned in a consistent
+object format.
 
 **Note**:
-
 *   To get a repository's contents recursively, you can [recursively get the tree](https://developer.github.com/v3/git/trees/).
-*   This API has an upper limit of 1,000 files for a directory. If you need to retrieve more files, use the [Git Trees API](https://developer.github.com/v3/git/trees/#get-a-tree).
+*   This API has an upper limit of 1,000 files for a directory. If you need to retrieve more files, use the [Git Trees
+API](https://developer.github.com/v3/git/trees/#get-a-tree).
 *   This API supports files up to 1 megabyte in size.
 
+#### If the content is a directory
 The response will be an array of objects, one object for each item in the directory.
+When listing the contents of a directory, submodules have their "type" specified as "file". Logically, the value
+_should_ be "submodule". This behavior exists in API v3 [for backwards compatibility purposes](https://git.io/v1YCW).
+In the next major version of the API, the type will be returned as "submodule".
 
-When listing the contents of a directory, submodules have their "type" specified as "file". Logically, the value _should_ be "submodule". This behavior exists in API v3 [for backwards compatibility purposes](https://git.io/v1YCW). In the next major version of the API, the type will be returned as "submodule".
+#### If the content is a symlink 
+If the requested `:path` points to a symlink, and the symlink's target is a normal file in the repository, then the
+API responds with the content of the file (in the format shown in the example. Otherwise, the API responds with an object 
+describing the symlink itself.
 
-If the requested `:path` points to a symlink, and the symlink's target is a normal file in the repository, then the API responds with the content of the file (in the [format shown above](https://developer.github.com/v3/repos/contents/#response-if-content-is-a-file)).
+#### If the content is a submodule
+The `submodule_git_url` identifies the location of the submodule repository, and the `sha` identifies a specific
+commit within the submodule repository. Git uses the given URL when cloning the submodule repository, and checks out
+the submodule at that specific commit.
 
-Otherwise, the API responds with an object describing the symlink itself:
-
-The `submodule_git_url` identifies the location of the submodule repository, and the `sha` identifies a specific commit within the submodule repository. Git uses the given URL when cloning the submodule repository, and checks out the submodule at that specific commit.
-
-If the submodule repository is not hosted on github.com, the Git URLs (`git_url` and `_links["git"]`) and the github.com URLs (`html_url` and `_links["html"]`) will have null values.
+If the submodule repository is not hosted on github.com, the Git URLs (`git_url` and `_links["git"]`) and the
+github.com URLs (`html_url` and `_links["html"]`) will have null values.
 
 ### parameters
 
@@ -7561,9 +7790,8 @@ If the submodule repository is not hosted on github.com, the Git URLs (`git_url`
 
 https://developer.github.com/v3/repos/statistics/#get-all-contributor-commit-activity
 
-*   `total` - The Total number of commits authored by the contributor.
 
-Weekly Hash (`weeks` array):
+Returns the `total` number of commits authored by the contributor. In addition, the response includes a Weekly Hash (`weeks` array) with the following information:
 
 *   `w` - Start of the week, given as a [Unix timestamp](http://en.wikipedia.org/wiki/Unix_time).
 *   `a` - Number of additions
@@ -8842,22 +9070,24 @@ https://developer.github.com/v3/repos/hooks/#update-a-repository-webhook
 
 https://developer.github.com/v3/repos/releases/#upload-a-release-asset
 
-This endpoint makes use of [a Hypermedia relation](https://developer.github.com/v3/#hypermedia) to determine which URL to access. The endpoint you call to upload release assets is specific to your release. Use the `upload_url` returned in the response of the [Create a release endpoint](https://developer.github.com/v3/repos/releases/#create-a-release) to upload a release asset.
+This endpoint makes use of [a Hypermedia relation](https://developer.github.com/v3/#hypermedia) to determine which URL to access. The endpoint you call to upload release assets is specific to your release. Use the `upload_url` returned in
+the response of the [Create a release endpoint](https://developer.github.com/v3/repos/releases/#create-a-release) to upload a release asset.
 
 You need to use an HTTP client which supports [SNI](http://en.wikipedia.org/wiki/Server_Name_Indication) to make calls to this endpoint.
 
-Most libraries will set the required `Content-Length` header automatically. Use the required `Content-Type` header to provide the media type of the asset. For a list of media types, see [Media Types](https://www.iana.org/assignments/media-types/media-types.xhtml). For example:
+Most libraries will set the required `Content-Length` header automatically. Use the required `Content-Type` header to provide the media type of the asset. For a list of media types, see [Media Types](https://www.iana.org/assignments/media-types/media-types.xhtml). For example: 
 
 `application/zip`
 
-GitHub expects the asset data in its raw binary form, rather than JSON. You will send the raw binary content of the asset as the request body. Everything else about the endpoint is the same as the rest of the API. For example, you'll still need to pass your authentication to be able to upload an asset.
+GitHub expects the asset data in its raw binary form, rather than JSON. You will send the raw binary content of the asset as the request body. Everything else about the endpoint is the same as the rest of the API. For example,
+you'll still need to pass your authentication to be able to upload an asset.
+
+When an upstream failure occurs, you will receive a `502 Bad Gateway` status. This may leave an empty asset with a state of `starter`. It can be safely deleted.
 
 **Notes:**
-
-*   GitHub renames asset filenames that have special characters, non-alphanumeric characters, and leading or trailing periods. The "[List assets for a release](https://developer.github.com/v3/repos/releases/#list-assets-for-a-release)" endpoint lists the renamed filenames. For more information and help, contact [GitHub Support](https://github.com/contact).
+*   GitHub renames asset filenames that have special characters, non-alphanumeric characters, and leading or trailing periods. The "[List assets for a release](https://developer.github.com/v3/repos/releases/#list-assets-for-a-release)"
+endpoint lists the renamed filenames. For more information and help, contact [GitHub Support](https://github.com/contact).
 *   If you upload an asset with the same filename as another uploaded asset, you'll receive an error and must delete the old file before you can re-upload the new asset.
-
-This may leave an empty asset with a state of `starter`. It can be safely deleted.
 
 ### parameters
 
@@ -8886,7 +9116,7 @@ https://developer.github.com/v3/scim/#delete-a-scim-user-from-an-organization
 | name | description |
 |------|-------------|
 | org | __Required__  |
-| scim_user_id | __Required__  |
+| scim_user_id | __Required__ Identifier generated by the GitHub SCIM endpoint. |
 
 ## scim get-provisioning-information-for-user
 
@@ -8900,19 +9130,13 @@ https://developer.github.com/v3/scim/#get-scim-provisioning-information-for-a-us
 | name | description |
 |------|-------------|
 | org | __Required__  |
-| scim_user_id | __Required__  |
+| scim_user_id | __Required__ Identifier generated by the GitHub SCIM endpoint. |
 
 ## scim list-provisioned-identities
 
 https://developer.github.com/v3/scim/#list-scim-provisioned-identities
 
-To filter for a specific email address, use the `email` query parameter and the `eq` operator:
-
-Your filter would look like this cURL command:
-
-Retrieves users that match the filter. In the example, we searched only for [octocat@github.com](mailto:octocat@github.com).
-
-Retrieves a paginated list of all provisioned organization members, including pending invitations.
+Retrieves a all provisioned organization members, including members with pending invitations.
 
 ### parameters
 
@@ -8930,14 +9154,17 @@ https://developer.github.com/v3/scim/#provision-and-invite-a-scim-user
 
 Provision organization membership for a user, and send an activation email to the email address.
 
-As shown in the following example, you must at least provide the required values for the user: `userName`, `name`, and `emails`.
-
 ### parameters
 
 
 | name | description |
 |------|-------------|
+| emails | __Required__ List of user emails. |
+| name.familyName | __Required__ The last name of the user. |
+| name.givenName | __Required__ The first name of the user. |
 | org | __Required__  |
+| schemas | __Required__ The SCIM schema URIs. |
+| userName | __Required__ The username for the user. |
 
 ## scim set-information-for-provisioned-user
 
@@ -8945,25 +9172,28 @@ https://developer.github.com/v3/scim/#set-scim-information-for-a-provisioned-use
 
 Replaces an existing provisioned user's information. You must provide all the information required for the user as if you were provisioning them for the first time. Any existing user information that you don't provide will be removed. If you want to only update a specific attribute, use the [Update an attribute for a SCIM user](https://developer.github.com/v3/scim/#update-an-attribute-for-a-scim-user) endpoint instead.
 
-As shown in the following example, you must at least provide the required values for the user: `userName`, `name`, and `emails`.
+You must at least provide the required values for the user: `userName`, `name`, and `emails`.
 
-**Warning:** Setting `active: false` removes the user from the organization, deletes the external identity, and deletes the associated `:scim_user_id`.
+**Warning:** Setting `active: false` removes the user from the organization, deletes the external identity, and deletes the associated `{scim_user_id}`.
 
 ### parameters
 
 
 | name | description |
 |------|-------------|
+| emails | __Required__ List of user emails. |
+| name.familyName | __Required__ The last name of the user. |
+| name.givenName | __Required__ The first name of the user. |
 | org | __Required__  |
-| scim_user_id | __Required__  |
+| schemas | __Required__ The SCIM schema URIs. |
+| scim_user_id | __Required__ Identifier generated by the GitHub SCIM endpoint. |
+| userName | __Required__ The username for the user. |
 
 ## scim update-attribute-for-user
 
 https://developer.github.com/v3/scim/#update-an-attribute-for-a-scim-user
 
-Allows you to change a provisioned user's individual attributes. To change a user's values, you must provide a specific `Operations` JSON format that contains at least one of the `add`, `remove`, or `replace` operations.
-
-The following example shows adding a new email address and updating the user's given name. For other examples and more information on the SCIM operations format, see the [SCIM specification](https://tools.ietf.org/html/rfc7644#section-3.5.2).
+Allows you to change a provisioned user's individual attributes. To change a user's values, you must provide a specific `Operations` JSON format that contains at least one of the `add`, `remove`, or `replace` operations. For examples and more information on the SCIM operations format, see the [SCIM specification](https://tools.ietf.org/html/rfc7644#section-3.5.2).
 
 **Note:** Complicated SCIM `path` selectors that include filters are not supported. For example, a `path` selector defined as `"path": "emails[type eq \"work\"]"` will not work.
 
@@ -8985,8 +9215,10 @@ The following example shows adding a new email address and updating the user's g
 
 | name | description |
 |------|-------------|
+| Operations | __Required__ Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2). |
 | org | __Required__  |
-| scim_user_id | __Required__  |
+| schemas | __Required__ The SCIM schema URIs. |
+| scim_user_id | __Required__ Identifier generated by the GitHub SCIM endpoint. |
 
 # search
 
@@ -8995,23 +9227,24 @@ The following example shows adding a new email address and updating the user's g
 
 https://developer.github.com/v3/search/#search-code
 
-Find file contents via various criteria. This method returns up to 100 results [per page](https://developer.github.com/v3/#pagination).
+Searches for query terms inside of a file. This method returns up to 100 results [per page](https://developer.github.com/v3/#pagination).
 
 When searching for code, you can get text match metadata for the file **content** and file **path** fields when you pass the `text-match` media type. For more details about how to receive highlighted search results, see [Text match metadata](https://developer.github.com/v3/search/#text-match-metadata).
 
-**Note:** You must [authenticate](https://developer.github.com/v3/#authentication) to search for code across all public repositories.
+For example, if you want to find the definition of the `addClass` function inside [jQuery](https://github.com/jquery/jquery) repository, your query would look something like this:
 
-**Considerations for code search**
+`q=addClass+in:file+language:js+repo:jquery/jquery`
+
+This query searches for the keyword `addClass` within a file's contents. The query limits the search to files where the language is JavaScript in the `jquery/jquery` repository.
+
+#### Considerations for code search
 
 Due to the complexity of searching code, there are a few restrictions on how searches are performed:
 
 *   Only the _default branch_ is considered. In most cases, this will be the `master` branch.
 *   Only files smaller than 384 KB are searchable.
-*   You must always include at least one search term when searching source code. For example, searching for [`language:go`](https://github.com/search?utf8=%E2%9C%93&q=language%3Ago&type=Code) is not valid, while [`amazing language:go`](https://github.com/search?utf8=%E2%9C%93&q=amazing+language%3Ago&type=Code) is.
-
-Suppose you want to find the definition of the `addClass` function inside [jQuery](https://github.com/jquery/jquery). Your query would look something like this:
-
-Here, we're searching for the keyword `addClass` within a file's contents. We're making sure that we're only looking in files where the language is JavaScript. And we're scoping the search to the `repo:jquery/jquery` repository.
+*   You must always include at least one search term when searching source code. For example, searching for [`language:go`](https://github.com/search?utf8=%E2%9C%93&q=language%3Ago&type=Code) is not valid, while [`amazing
+language:go`](https://github.com/search?utf8=%E2%9C%93&q=amazing+language%3Ago&type=Code) is.
 
 ### parameters
 
@@ -9028,15 +9261,14 @@ Here, we're searching for the keyword `addClass` within a file's contents. We're
 
 https://developer.github.com/v3/search/#search-commits
 
-Find commits via various criteria. This method returns up to 100 results [per page](https://developer.github.com/v3/#pagination).
+Find commits via various criteria on the default branch (usually `master`). This method returns up to 100 results [per page](https://developer.github.com/v3/#pagination).
 
-When searching for commits, you can get text match metadata for the **message** field when you provide the `text-match` media type. For more details about how to receive highlighted search results, see [Text match metadata](https://developer.github.com/v3/search/#text-match-metadata).
+When searching for commits, you can get text match metadata for the **message** field when you provide the `text-match` media type. For more details about how to receive highlighted search results, see [Text match
+metadata](https://developer.github.com/v3/search/#text-match-metadata).
 
-**Considerations for commit search**
+For example, if you want to find commits related to CSS in the [octocat/Spoon-Knife](https://github.com/octocat/Spoon-Knife) repository. Your query would look something like this:
 
-Only the _default branch_ is considered. In most cases, this will be the `master` branch.
-
-Suppose you want to find commits related to CSS in the [octocat/Spoon-Knife](https://github.com/octocat/Spoon-Knife) repository. Your query would look something like this:
+`q=repo:octocat/Spoon-Knife+css`
 
 ### parameters
 
@@ -9056,11 +9288,14 @@ https://developer.github.com/v3/search/#search-issues-and-pull-requests
 
 Find issues by state and keyword. This method returns up to 100 results [per page](https://developer.github.com/v3/#pagination).
 
-When searching for issues, you can get text match metadata for the issue **title**, issue **body**, and issue **comment body** fields when you pass the `text-match` media type. For more details about how to receive highlighted search results, see [Text match metadata](https://developer.github.com/v3/search/#text-match-metadata).
+When searching for issues, you can get text match metadata for the issue **title**, issue **body**, and issue **comment body** fields when you pass the `text-match` media type. For more details about how to receive highlighted
+search results, see [Text match metadata](https://developer.github.com/v3/search/#text-match-metadata).
 
-Let's say you want to find the oldest unresolved Python bugs on Windows. Your query might look something like this.
+For example, if you want to find the oldest unresolved Python bugs on Windows. Your query might look something like this.
 
-In this query, we're searching for the keyword `windows`, within any open issue that's labeled as `bug`. The search runs across repositories whose primary language is Python. We’re sorting by creation date in ascending order, so that the oldest issues appear first in the search results.
+`q=windows+label:bug+language:python+state:open&sort=created&order=asc`
+
+This query searches for the keyword `windows`, within any open issue that is labeled as `bug`. The search runs across repositories whose primary language is Python. The results are sorted by creation date in ascending order, whick means the oldest issues appear first in the search results.
 
 ### parameters
 
@@ -9081,9 +9316,11 @@ Find labels in a repository with names or descriptions that match search keyword
 
 When searching for labels, you can get text match metadata for the label **name** and **description** fields when you pass the `text-match` media type. For more details about how to receive highlighted search results, see [Text match metadata](https://developer.github.com/v3/search/#text-match-metadata).
 
-Suppose you want to find labels in the `linguist` repository that match `bug`, `defect`, or `enhancement`. Your query might look like this:
+For example, if you want to find labels in the `linguist` repository that match `bug`, `defect`, or `enhancement`. Your query might look like this:
 
-The labels that best match for the query appear first in the search results.
+`q=bug+defect+enhancement&repository_id=64778136`
+
+The labels that best match the query appear first in the search results.
 
 ### parameters
 
@@ -9103,11 +9340,15 @@ Find repositories via various criteria. This method returns up to 100 results [p
 
 When searching for repositories, you can get text match metadata for the **name** and **description** fields when you pass the `text-match` media type. For more details about how to receive highlighted search results, see [Text match metadata](https://developer.github.com/v3/search/#text-match-metadata).
 
-Suppose you want to search for popular Tetris repositories written in Assembly. Your query might look like this.
+For example, if you want to search for popular Tetris repositories written in assembly code, your query might look like this:
 
-You can search for multiple topics by adding more `topic:` instances, and including the `mercy-preview` header. For example:
+`q=tetris+language:assembly&sort=stars&order=desc`
 
-In this request, we're searching for repositories with the word `tetris` in the name, the description, or the README. We're limiting the results to only find repositories where the primary language is Assembly. We're sorting by stars in descending order, so that the most popular repositories appear first in the search results.
+This query searches for repositories with the word `tetris` in the name, the description, or the README. The results are limited to repositories where the primary language is assembly. The results are sorted by stars in descending order, so that the most popular repositories appear first in the search results.
+
+When you include the `mercy` preview header, you can also search for multiple topics by adding more `topic:` instances. For example, your query might look like this:
+
+`q=topic:ruby+topic:rails`
 
 ### parameters
 
@@ -9125,25 +9366,23 @@ In this request, we're searching for repositories with the word `tetris` in the 
 
 https://developer.github.com/v3/search/#search-topics
 
-Find topics via various criteria. Results are sorted by best match. This method returns up to 100 results [per page](https://developer.github.com/v3/#pagination).
+Find topics via various criteria. Results are sorted by best match. This method returns up to 100 results [per page](https://developer.github.com/v3/#pagination). See "[Searching topics](https://help.github.com/articles/searching-topics/)" for a detailed list of qualifiers.
 
 When searching for topics, you can get text match metadata for the topic's **short\_description**, **description**, **name**, or **display\_name** field when you pass the `text-match` media type. For more details about how to receive highlighted search results, see [Text match metadata](https://developer.github.com/v3/search/#text-match-metadata).
 
-See "[Searching topics](https://help.github.com/articles/searching-topics/)" for a detailed list of qualifiers.
+For example, if you want to search for topics related to Ruby that are featured on https://github.com/topics. Your query might look like this:
 
-Suppose you want to search for topics related to Ruby that are featured on [https://github.com/topics](https://github.com/topics). Your query might look like this:
+`q=ruby+is:featured`
 
-In this request, we're searching for topics with the keyword `ruby`, and we're limiting the results to find only topics that are featured. The topics that are the best match for the query appear first in the search results.
-
-**Note:** A search for featured Ruby topics only has 6 total results, so a [Link header](https://developer.github.com/v3/#link-header) indicating pagination is not included in the response.
+This query searches for topics with the keyword `ruby` and limits the results to find only topics that are featured. The topics that are the best match for the query appear first in the search results.
 
 ### parameters
 
 
 | name | description |
 |------|-------------|
+| mercy-preview | __Required__ The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must set this flag. |
 | q | __Required__ The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://developer.github.com/v3/search/#constructing-a-search-query). |
-| mercy-preview | The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must set this flag. |
 
 ## search users
 
@@ -9153,9 +9392,11 @@ Find users via various criteria. This method returns up to 100 results [per page
 
 When searching for users, you can get text match metadata for the issue **login**, **email**, and **name** fields when you pass the `text-match` media type. For more details about highlighting search results, see [Text match metadata](https://developer.github.com/v3/search/#text-match-metadata). For more details about how to receive highlighted search results, see [Text match metadata](https://developer.github.com/v3/search/#text-match-metadata).
 
-Imagine you're looking for a list of popular users. You might try out this query:
+For example, if you're looking for a list of popular users, you might try this query:
 
-Here, we're looking at users with the name Tom. We're only interested in those with more than 42 repositories, and only if they have over 1,000 followers.
+`q=tom+repos:%3E42+followers:%3E1000`
+
+This query searches for users with the name `tom`. The results are restricted to users with more than 42 repositories and over 1,000 followers.
 
 ### parameters
 
@@ -9209,7 +9450,7 @@ An organization owner can add someone who is not part of the team's organization
 
 If the user is already a member of the team, this endpoint will update the role of the team member's role. To update the membership of a team member, the authenticated user must be an organization owner or a team maintainer.
 
-**Note:** You can also specify a team by `org_id` and `team_id` using the route `PUT /organizations/:org_id/team/:team_id/memberships/:username`.
+**Note:** You can also specify a team by `org_id` and `team_id` using the route `PUT /organizations/{org_id}/team/{team_id}/memberships/{username}`.
 
 ### parameters
 
@@ -9252,7 +9493,7 @@ https://developer.github.com/v3/teams/#add-or-update-team-project-permissions
 
 Adds an organization project to a team. To add a project to a team or update the team's permission on a project, the authenticated user must have `admin` permissions for the project. The project and team must be part of the same organization.
 
-**Note:** You can also specify a team by `org_id` and `team_id` using the route `PUT /organizations/:org_id/team/:team_id/projects/:project_id`.
+**Note:** You can also specify a team by `org_id` and `team_id` using the route `PUT /organizations/{org_id}/team/{team_id}/projects/{project_id}`.
 
 ### parameters
 
@@ -9289,7 +9530,7 @@ https://developer.github.com/v3/teams/#add-or-update-team-repository-permissions
 
 To add a repository to a team or update the team's permission on a repository, the authenticated user must have admin access to the repository, and must be able to see the team. The repository must be owned by the organization, or a direct fork of a repository owned by the organization. You will get a `422 Unprocessable Entity` status if you attempt to add a repository to a team that is not owned by the organization. Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://developer.github.com/v3/#http-verbs)."
 
-**Note:** You can also specify a team by `org_id` and `team_id` using the route `PUT /organizations/:org_id/team/:team_id/repos/:owner/:repo`.
+**Note:** You can also specify a team by `org_id` and `team_id` using the route `PUT /organizations/{org_id}/team/{team_id}/repos/{owner}/{repo}`.
 
 For more information about the permission levels, see "[Repository permission levels for an organization](https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/repository-permission-levels-for-an-organization#permission-levels-for-repositories-owned-by-an-organization)".
 
@@ -9328,7 +9569,7 @@ https://developer.github.com/v3/teams/#check-team-permissions-for-a-project
 
 Checks whether a team has `read`, `write`, or `admin` permissions for an organization project. The response includes projects inherited from a parent team.
 
-**Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/:org_id/team/:team_id/projects/:project_id`.
+**Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/projects/{project_id}`.
 
 ### parameters
 
@@ -9363,9 +9604,11 @@ https://developer.github.com/v3/teams/#check-team-permissions-for-a-repository
 
 Checks whether a team has `admin`, `push`, `maintain`, `triage`, or `pull` permission for a repository. Repositories inherited through a parent team will also be checked.
 
-**Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/:org_id/team/:team_id/repos/:owner/:repo`.
+You can also get information about the specified repository, including what permissions the team grants on it, by passing the following custom [media type](https://developer.github.com/v3/media/) via the `application/vnd.github.v3.repository+json` accept header.
 
-You can also get information about the specified repository, including what permissions the team grants on it, by passing the following custom [media type](https://developer.github.com/v3/media/) via the `Accept` header:
+If a team doesn't have permission for the repository, you will receive a `404 Not Found` response status.
+
+**Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/repos/{owner}/{repo}`.
 
 ### parameters
 
@@ -9398,7 +9641,7 @@ You can also get information about the specified repository, including what perm
 
 https://developer.github.com/v3/teams/#create-a-team
 
-To create a team, the authenticated user must be a member or owner of `:org`. By default, organization members can create teams. Organization owners can limit team creation to organization owners. For more information, see "[Setting team creation permissions](https://help.github.com/en/articles/setting-team-creation-permissions-in-your-organization)."
+To create a team, the authenticated user must be a member or owner of `{org}`. By default, organization members can create teams. Organization owners can limit team creation to organization owners. For more information, see "[Setting team creation permissions](https://help.github.com/en/articles/setting-team-creation-permissions-in-your-organization)."
 
 When you create a new team, you automatically become a team maintainer without explicitly adding yourself to the optional array of `maintainers`. For more information, see "[About teams](https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/about-teams)".
 
@@ -9424,7 +9667,7 @@ Creates a new comment on a team discussion. OAuth access tokens require the `wri
 
 This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
 
-**Note:** You can also specify a team by `org_id` and `team_id` using the route `POST /organizations/:org_id/team/:team_id/discussions/:discussion_number/comments`.
+**Note:** You can also specify a team by `org_id` and `team_id` using the route `POST /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}/comments`.
 
 ### parameters
 
@@ -9465,7 +9708,7 @@ Creates a new discussion post on a team's page. OAuth access tokens require the 
 
 This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
 
-**Note:** You can also specify a team by `org_id` and `team_id` using the route `POST /organizations/:org_id/team/:team_id/discussions`.
+**Note:** You can also specify a team by `org_id` and `team_id` using the route `POST /organizations/{org_id}/team/{team_id}/discussions`.
 
 ### parameters
 
@@ -9508,7 +9751,7 @@ Team synchronization is available for organizations using GitHub Enterprise Clou
 
 Creates, updates, or removes a connection between a team and an IdP group. When adding groups to a team, you must include all new and existing groups to avoid replacing existing groups with the new ones. Specifying an empty `groups` array will remove all connections for a team.
 
-**Note:** You can also specify a team by `org_id` and `team_id` using the route `PATCH /organizations/:org_id/team/:team_id/team-sync/group-mappings`.
+**Note:** You can also specify a team by `org_id` and `team_id` using the route `PATCH /organizations/{org_id}/team/{team_id}/team-sync/group-mappings`.
 
 ### parameters
 
@@ -9543,7 +9786,7 @@ https://developer.github.com/v3/teams/discussion_comments/#delete-a-discussion-c
 
 Deletes a comment on a team discussion. OAuth access tokens require the `write:discussion` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
-**Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/:org_id/team/:team_id/discussions/:discussion_number/comments/:comment_number`.
+**Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}/comments/{comment_number}`.
 
 ### parameters
 
@@ -9578,7 +9821,7 @@ https://developer.github.com/v3/teams/discussions/#delete-a-discussion
 
 Delete a discussion from a team's page. OAuth access tokens require the `write:discussion` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
-**Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/:org_id/team/:team_id/discussions/:discussion_number`.
+**Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}`.
 
 ### parameters
 
@@ -9611,9 +9854,9 @@ https://developer.github.com/v3/teams/#delete-a-team
 
 To delete a team, the authenticated user must be an organization owner or team maintainer.
 
-**Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/:org_id/team/:team_id`.
-
 If you are an organization owner, deleting a parent team will delete all of its child teams as well.
+
+**Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/{org_id}/team/{team_id}`.
 
 ### parameters
 
@@ -9646,7 +9889,7 @@ https://developer.github.com/v3/teams/#get-a-team-by-name
 
 Gets a team using the team's `slug`. GitHub generates the `slug` from the team `name`.
 
-**Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/:org_id/team/:team_id`.
+**Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}`.
 
 ### parameters
 
@@ -9662,7 +9905,7 @@ https://developer.github.com/v3/teams/discussion_comments/#get-a-discussion-comm
 
 Get a specific comment on a team discussion. OAuth access tokens require the `read:discussion` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
-**Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/:org_id/team/:team_id/discussions/:discussion_number/comments/:comment_number`.
+**Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}/comments/{comment_number}`.
 
 ### parameters
 
@@ -9699,7 +9942,7 @@ https://developer.github.com/v3/teams/discussions/#get-a-discussion
 
 Get a specific discussion on a team's page. OAuth access tokens require the `read:discussion` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
-**Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/:org_id/team/:team_id/discussions/:discussion_number`.
+**Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}`.
 
 ### parameters
 
@@ -9767,7 +10010,7 @@ Team members will include the members of child teams.
 
 To get a user's membership with a team, the team must be visible to the authenticated user.
 
-**Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/:org_id/team/:team_id/memberships/:username`.
+**Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/memberships/{username}`.
 
 **Note:** The `role` for organization owners returns as `maintainer`. For more information about `maintainer` roles, see [Create a team](https://developer.github.com/v3/teams/#create-a-team).
 
@@ -9819,9 +10062,9 @@ Lists all teams in an organization that are visible to the authenticated user.
 
 https://developer.github.com/v3/teams/#list-child-teams
 
-Lists the child teams of the team requested by `:team_slug`.
+Lists the child teams of the team specified by `{team_slug}`.
 
-**Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/:org_id/team/:team_id/teams`.
+**Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/teams`.
 
 ### parameters
 
@@ -9854,7 +10097,7 @@ https://developer.github.com/v3/teams/discussion_comments/#list-discussion-comme
 
 List all comments on a team discussion. OAuth access tokens require the `read:discussion` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
-**Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/:org_id/team/:team_id/discussions/:discussion_number/comments`.
+**Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}/comments`.
 
 ### parameters
 
@@ -9895,7 +10138,7 @@ https://developer.github.com/v3/teams/discussions/#list-discussions
 
 List all discussions on a team's page. OAuth access tokens require the `read:discussion` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
-**Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/:org_id/team/:team_id/discussions`.
+**Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/discussions`.
 
 ### parameters
 
@@ -9986,7 +10229,7 @@ Team synchronization is available for organizations using GitHub Enterprise Clou
 
 List IdP groups connected to a team on GitHub.
 
-**Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/:org_id/team/:team_id/team-sync/group-mappings`.
+**Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/team-sync/group-mappings`.
 
 ### parameters
 
@@ -10039,7 +10282,7 @@ https://developer.github.com/v3/teams/members/#list-pending-team-invitations
 
 The return hash contains a `role` field which refers to the Organization Invitation role and will be one of the following values: `direct_member`, `admin`, `billing_manager`, `hiring_manager`, or `reinstate`. If the invitee is not a GitHub member, the `login` field in the return hash will be `null`.
 
-**Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/:org_id/team/:team_id/invitations`.
+**Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/invitations`.
 
 ### parameters
 
@@ -10074,7 +10317,7 @@ https://developer.github.com/v3/teams/#list-team-projects
 
 Lists the organization projects for a team.
 
-**Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/:org_id/team/:team_id/projects`.
+**Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/projects`.
 
 ### parameters
 
@@ -10111,7 +10354,7 @@ https://developer.github.com/v3/teams/#list-team-repositories
 
 Lists a team's repositories visible to the authenticated user.
 
-**Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/:org_id/team/:team_id/repos`.
+**Note:** You can also specify a team by `org_id` and `team_id` using the route `GET /organizations/{org_id}/team/{team_id}/repos`.
 
 ### parameters
 
@@ -10170,7 +10413,7 @@ To remove a membership between a user and a team, the authenticated user must ha
 
 **Note:** When you have team synchronization set up for a team with your organization's identity provider (IdP), you will see an error if you attempt to use the API for making changes to the team's membership. If you have access to manage group membership in your IdP, you can manage GitHub team membership through your identity provider, which automatically adds and removes team members in an organization. For more information, see "[Synchronizing teams between your identity provider and GitHub](https://help.github.com/articles/synchronizing-teams-between-your-identity-provider-and-github/)."
 
-**Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/:org_id/team/:team_id/memberships/:username`.
+**Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/{org_id}/team/{team_id}/memberships/{username}`.
 
 ### parameters
 
@@ -10207,7 +10450,7 @@ https://developer.github.com/v3/teams/#remove-a-project-from-a-team
 
 Removes an organization project from a team. An organization owner or a team maintainer can remove any project from the team. To remove a project from a team as an organization member, the authenticated user must have `read` access to both the team and project, or `admin` access to the team or project. This endpoint removes the project from the team, but does not delete the project.
 
-**Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/:org_id/team/:team_id/projects/:project_id`.
+**Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/{org_id}/team/{team_id}/projects/{project_id}`.
 
 ### parameters
 
@@ -10240,7 +10483,7 @@ https://developer.github.com/v3/teams/#remove-a-repository-from-a-team
 
 If the authenticated user is an organization owner or a team maintainer, they can remove any repositories from the team. To remove a repository from a team as an organization member, the authenticated user must have admin access to the repository and must be able to see the team. This does not delete the repository, it just removes it from the team.
 
-**Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/:org_id/team/:team_id/repos/:owner/:repo`.
+**Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/{org_id}/team/{team_id}/repos/{owner}/{repo}`.
 
 ### parameters
 
@@ -10273,7 +10516,7 @@ https://developer.github.com/v3/teams/discussion_comments/#update-a-discussion-c
 
 Edits the body text of a discussion comment. OAuth access tokens require the `write:discussion` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
-**Note:** You can also specify a team by `org_id` and `team_id` using the route `PATCH /organizations/:org_id/team/:team_id/discussions/:discussion_number/comments/:comment_number`.
+**Note:** You can also specify a team by `org_id` and `team_id` using the route `PATCH /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}/comments/{comment_number}`.
 
 ### parameters
 
@@ -10312,7 +10555,7 @@ https://developer.github.com/v3/teams/discussions/#update-a-discussion
 
 Edits the title and body text of a discussion post. Only the parameters you provide are updated. OAuth access tokens require the `write:discussion` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
-**Note:** You can also specify a team by `org_id` and `team_id` using the route `PATCH /organizations/:org_id/team/:team_id/discussions/:discussion_number`.
+**Note:** You can also specify a team by `org_id` and `team_id` using the route `PATCH /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}`.
 
 ### parameters
 
@@ -10351,7 +10594,7 @@ https://developer.github.com/v3/teams/#update-a-team
 
 To edit a team, the authenticated user must either be an organization owner or a team maintainer.
 
-**Note:** You can also specify a team by `org_id` and `team_id` using the route `PATCH /organizations/:org_id/team/:team_id`.
+**Note:** You can also specify a team by `org_id` and `team_id` using the route `PATCH /organizations/{org_id}/team/{team_id}`.
 
 ### parameters
 
@@ -10544,9 +10787,9 @@ Following a user requires the user to be logged in and authenticated with basic 
 
 https://developer.github.com/v3/users/#get-the-authenticated-user
 
-Lists public and private profile information when authenticated through basic auth or OAuth with the `user` scope.
+If the authenticated user is authenticated through basic authentication or OAuth with the `user` scope, then the response lists public and private profile information.
 
-Lists public profile information when authenticated through OAuth without the `user` scope.
+If the authenticated user is authenticated through OAuth without the `user` scope, then the response lists only public profile information.
 
 ## users get-by-username
 
@@ -10574,6 +10817,11 @@ https://developer.github.com/v3/users/#get-contextual-information-for-a-user
 Provides hovercard information when authenticated through basic auth or OAuth with the `repo` scope. You can find out more about someone in relation to their pull requests, issues, repositories, and organizations.
 
 The `subject_type` and `subject_id` parameters provide context for the person's hovercard, which returns more information than without the parameters. For example, if you wanted to find out more about `octocat` who owns the `Spoon-Knife` repository via cURL, it would look like this:
+
+```shell
+ curl -u username:token
+  https://api.github.com/users/octocat/hovercard?subject_type=repository&subject_id=1300192
+```
 
 ### parameters
 
