@@ -13799,7 +13799,7 @@
           "200": {
             "description": "Alternative response with repository permissions",
             "content": {
-              "application/vnd.github.v3.repository+json": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/team-repository"
                 },
@@ -19648,7 +19648,7 @@
           "200": {
             "description": "response",
             "content": {
-              "application/vnd.github.luke-cage-preview+json": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/protected-branch-pull-request-review"
                 },
@@ -46254,7 +46254,7 @@
           "200": {
             "description": "Alternative response with extra repository information",
             "content": {
-              "application/vnd.github.v3.repository+json": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/team-repository"
                 },
