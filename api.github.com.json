@@ -772,8 +772,6 @@
           }
         },
         "x-github": {
-          "deprecationDate": "2020-02-14",
-          "removalDate": "2020-07-01",
           "enabledForApps": false,
           "githubCloudOnly": false,
           "previews": []
@@ -842,7 +840,7 @@
         },
         "x-github": {
           "deprecationDate": "2020-02-14",
-          "removalDate": "2020-07-01",
+          "removalDate": "2021-05-05",
           "enabledForApps": false,
           "githubCloudOnly": false,
           "previews": []
@@ -915,8 +913,6 @@
           }
         },
         "x-github": {
-          "deprecationDate": "2020-02-14",
-          "removalDate": "2020-07-01",
           "enabledForApps": false,
           "githubCloudOnly": false,
           "previews": []
@@ -991,8 +987,6 @@
           }
         },
         "x-github": {
-          "deprecationDate": "2020-02-14",
-          "removalDate": "2020-07-01",
           "enabledForApps": false,
           "githubCloudOnly": false,
           "previews": []
@@ -1055,8 +1049,6 @@
           }
         },
         "x-github": {
-          "deprecationDate": "2020-02-14",
-          "removalDate": "2020-07-01",
           "enabledForApps": false,
           "githubCloudOnly": false,
           "previews": []
@@ -1137,7 +1129,7 @@
         },
         "x-github": {
           "deprecationDate": "2020-02-14",
-          "removalDate": "2020-07-01",
+          "removalDate": "2021-05-05",
           "enabledForApps": false,
           "githubCloudOnly": false,
           "previews": []
@@ -1212,7 +1204,7 @@
         },
         "x-github": {
           "deprecationDate": "2020-02-14",
-          "removalDate": "2020-07-01",
+          "removalDate": "2021-05-05",
           "enabledForApps": false,
           "githubCloudOnly": false,
           "previews": []
@@ -1275,7 +1267,7 @@
         },
         "x-github": {
           "deprecationDate": "2020-02-14",
-          "removalDate": "2020-07-01",
+          "removalDate": "2021-05-05",
           "enabledForApps": false,
           "githubCloudOnly": false,
           "previews": []
