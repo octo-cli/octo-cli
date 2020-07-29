@@ -233,7 +233,7 @@ type MigrationsListReposForUserCmd struct {
 
 func (c *MigrationsListReposForUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/{migration_id}/repositories")
+	c.SetURLPath("/user/migrations/{migration_id}/repositories")
 	c.UpdateURLPath("migration_id", c.MigrationId)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)

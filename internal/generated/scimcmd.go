@@ -15,7 +15,7 @@ type ScimCmd struct {
 
 type ScimDeleteUserFromOrgCmd struct {
 	Org        string `name:"org" required:"true"`
-	ScimUserId int64  `name:"scim_user_id" required:"true"`
+	ScimUserId string `name:"scim_user_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -29,7 +29,7 @@ func (c *ScimDeleteUserFromOrgCmd) Run(isValueSetMap map[string]bool) error {
 
 type ScimGetProvisioningInformationForUserCmd struct {
 	Org        string `name:"org" required:"true"`
-	ScimUserId int64  `name:"scim_user_id" required:"true"`
+	ScimUserId string `name:"scim_user_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -83,7 +83,7 @@ func (c *ScimProvisionAndInviteUserCmd) Run(isValueSetMap map[string]bool) error
 
 type ScimSetInformationForProvisionedUserCmd struct {
 	Org            string                `name:"org" required:"true"`
-	ScimUserId     int64                 `name:"scim_user_id" required:"true"`
+	ScimUserId     string                `name:"scim_user_id" required:"true"`
 	Emails         []internal.JSONObject `name:"emails" required:"true"`
 	NameFamilyName string                `name:"name.familyName" required:"true"`
 	NameGivenName  string                `name:"name.givenName" required:"true"`
@@ -107,7 +107,7 @@ func (c *ScimSetInformationForProvisionedUserCmd) Run(isValueSetMap map[string]b
 
 type ScimUpdateAttributeForUserCmd struct {
 	Org        string                `name:"org" required:"true"`
-	ScimUserId int64                 `name:"scim_user_id" required:"true"`
+	ScimUserId string                `name:"scim_user_id" required:"true"`
 	Operations []internal.JSONObject `name:"Operations" required:"true"`
 	Schemas    []string              `name:"schemas" required:"true"`
 	internal.BaseCmd
