@@ -5,9 +5,23 @@ package generated
 import internal "github.com/octo-cli/octo-cli/internal"
 
 type LicensesCmd struct {
-	Get              LicensesGetCmd              `cmd:""`
-	GetForRepo       LicensesGetForRepoCmd       `cmd:""`
-	ListCommonlyUsed LicensesListCommonlyUsedCmd `cmd:""`
+	Get                LicensesGetCmd                `cmd:""`
+	GetAllCommonlyUsed LicensesGetAllCommonlyUsedCmd `cmd:""`
+	GetForRepo         LicensesGetForRepoCmd         `cmd:""`
+}
+
+type LicensesGetAllCommonlyUsedCmd struct {
+	Featured bool  `name:"featured"`
+	PerPage  int64 `name:"per_page"`
+	internal.BaseCmd
+}
+
+func (c *LicensesGetAllCommonlyUsedCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/licenses")
+	c.UpdateURLQuery("featured", c.Featured)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	return c.DoRequest("GET")
 }
 
 type LicensesGetCmd struct {
@@ -31,15 +45,5 @@ func (c *LicensesGetForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/license")
 	c.UpdateURLPath("repo", c.Repo)
-	return c.DoRequest("GET")
-}
-
-type LicensesListCommonlyUsedCmd struct {
-	internal.BaseCmd
-}
-
-func (c *LicensesListCommonlyUsedCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/licenses")
 	return c.DoRequest("GET")
 }

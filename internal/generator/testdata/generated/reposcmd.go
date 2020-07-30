@@ -5,148 +5,146 @@ package generated
 import internal "github.com/octo-cli/octo-cli/internal"
 
 type ReposCmd struct {
-	AcceptInvitation                                   ReposAcceptInvitationCmd                                   `cmd:""`
-	AddCollaborator                                    ReposAddCollaboratorCmd                                    `cmd:""`
-	AddDeployKey                                       ReposAddDeployKeyCmd                                       `cmd:""`
-	AddProtectedBranchAdminEnforcement                 ReposAddProtectedBranchAdminEnforcementCmd                 `cmd:""`
-	AddProtectedBranchAppRestrictions                  ReposAddProtectedBranchAppRestrictionsCmd                  `cmd:""`
-	AddProtectedBranchRequiredSignatures               ReposAddProtectedBranchRequiredSignaturesCmd               `cmd:""`
-	AddProtectedBranchRequiredStatusChecksContexts     ReposAddProtectedBranchRequiredStatusChecksContextsCmd     `cmd:""`
-	AddProtectedBranchTeamRestrictions                 ReposAddProtectedBranchTeamRestrictionsCmd                 `cmd:""`
-	AddProtectedBranchUserRestrictions                 ReposAddProtectedBranchUserRestrictionsCmd                 `cmd:""`
-	CheckCollaborator                                  ReposCheckCollaboratorCmd                                  `cmd:""`
-	CheckVulnerabilityAlerts                           ReposCheckVulnerabilityAlertsCmd                           `cmd:""`
-	CompareCommits                                     ReposCompareCommitsCmd                                     `cmd:""`
-	CreateCommitComment                                ReposCreateCommitCommentCmd                                `cmd:""`
-	CreateDeployment                                   ReposCreateDeploymentCmd                                   `cmd:""`
-	CreateDeploymentStatus                             ReposCreateDeploymentStatusCmd                             `cmd:""`
-	CreateDispatchEvent                                ReposCreateDispatchEventCmd                                `cmd:""`
-	CreateForAuthenticatedUser                         ReposCreateForAuthenticatedUserCmd                         `cmd:""`
-	CreateFork                                         ReposCreateForkCmd                                         `cmd:""`
-	CreateHook                                         ReposCreateHookCmd                                         `cmd:""`
-	CreateInOrg                                        ReposCreateInOrgCmd                                        `cmd:""`
-	CreateOrUpdateFile                                 ReposCreateOrUpdateFileCmd                                 `cmd:""`
-	CreateRelease                                      ReposCreateReleaseCmd                                      `cmd:""`
-	CreateStatus                                       ReposCreateStatusCmd                                       `cmd:""`
-	CreateUsingTemplate                                ReposCreateUsingTemplateCmd                                `cmd:""`
-	DeclineInvitation                                  ReposDeclineInvitationCmd                                  `cmd:""`
-	Delete                                             ReposDeleteCmd                                             `cmd:""`
-	DeleteCommitComment                                ReposDeleteCommitCommentCmd                                `cmd:""`
-	DeleteDeployment                                   ReposDeleteDeploymentCmd                                   `cmd:""`
-	DeleteDownload                                     ReposDeleteDownloadCmd                                     `cmd:""`
-	DeleteFile                                         ReposDeleteFileCmd                                         `cmd:""`
-	DeleteHook                                         ReposDeleteHookCmd                                         `cmd:""`
-	DeleteInvitation                                   ReposDeleteInvitationCmd                                   `cmd:""`
-	DeleteRelease                                      ReposDeleteReleaseCmd                                      `cmd:""`
-	DeleteReleaseAsset                                 ReposDeleteReleaseAssetCmd                                 `cmd:""`
-	DisableAutomatedSecurityFixes                      ReposDisableAutomatedSecurityFixesCmd                      `cmd:""`
-	DisablePagesSite                                   ReposDisablePagesSiteCmd                                   `cmd:""`
-	DisableVulnerabilityAlerts                         ReposDisableVulnerabilityAlertsCmd                         `cmd:""`
-	EnableAutomatedSecurityFixes                       ReposEnableAutomatedSecurityFixesCmd                       `cmd:""`
-	EnablePagesSite                                    ReposEnablePagesSiteCmd                                    `cmd:""`
-	EnableVulnerabilityAlerts                          ReposEnableVulnerabilityAlertsCmd                          `cmd:""`
-	Get                                                ReposGetCmd                                                `cmd:""`
-	GetAllTopics                                       ReposGetAllTopicsCmd                                       `cmd:""`
-	GetAppsWithAccessToProtectedBranch                 ReposGetAppsWithAccessToProtectedBranchCmd                 `cmd:""`
-	GetArchiveLink                                     ReposGetArchiveLinkCmd                                     `cmd:""`
-	GetBranch                                          ReposGetBranchCmd                                          `cmd:""`
-	GetBranchProtection                                ReposGetBranchProtectionCmd                                `cmd:""`
-	GetClones                                          ReposGetClonesCmd                                          `cmd:""`
-	GetCodeFrequencyStats                              ReposGetCodeFrequencyStatsCmd                              `cmd:""`
-	GetCollaboratorPermissionLevel                     ReposGetCollaboratorPermissionLevelCmd                     `cmd:""`
-	GetCombinedStatusForRef                            ReposGetCombinedStatusForRefCmd                            `cmd:""`
-	GetCommit                                          ReposGetCommitCmd                                          `cmd:""`
-	GetCommitActivityStats                             ReposGetCommitActivityStatsCmd                             `cmd:""`
-	GetCommitComment                                   ReposGetCommitCommentCmd                                   `cmd:""`
-	GetContents                                        ReposGetContentsCmd                                        `cmd:""`
-	GetContributorsStats                               ReposGetContributorsStatsCmd                               `cmd:""`
-	GetDeployKey                                       ReposGetDeployKeyCmd                                       `cmd:""`
-	GetDeployment                                      ReposGetDeploymentCmd                                      `cmd:""`
-	GetDeploymentStatus                                ReposGetDeploymentStatusCmd                                `cmd:""`
-	GetDownload                                        ReposGetDownloadCmd                                        `cmd:""`
-	GetHook                                            ReposGetHookCmd                                            `cmd:""`
-	GetLatestPagesBuild                                ReposGetLatestPagesBuildCmd                                `cmd:""`
-	GetLatestRelease                                   ReposGetLatestReleaseCmd                                   `cmd:""`
-	GetPages                                           ReposGetPagesCmd                                           `cmd:""`
-	GetPagesBuild                                      ReposGetPagesBuildCmd                                      `cmd:""`
-	GetParticipationStats                              ReposGetParticipationStatsCmd                              `cmd:""`
-	GetProtectedBranchAdminEnforcement                 ReposGetProtectedBranchAdminEnforcementCmd                 `cmd:""`
-	GetProtectedBranchPullRequestReviewEnforcement     ReposGetProtectedBranchPullRequestReviewEnforcementCmd     `cmd:""`
-	GetProtectedBranchRequiredSignatures               ReposGetProtectedBranchRequiredSignaturesCmd               `cmd:""`
-	GetProtectedBranchRequiredStatusChecks             ReposGetProtectedBranchRequiredStatusChecksCmd             `cmd:""`
-	GetProtectedBranchRestrictions                     ReposGetProtectedBranchRestrictionsCmd                     `cmd:""`
-	GetPunchCardStats                                  ReposGetPunchCardStatsCmd                                  `cmd:""`
-	GetReadme                                          ReposGetReadmeCmd                                          `cmd:""`
-	GetRelease                                         ReposGetReleaseCmd                                         `cmd:""`
-	GetReleaseAsset                                    ReposGetReleaseAssetCmd                                    `cmd:""`
-	GetReleaseByTag                                    ReposGetReleaseByTagCmd                                    `cmd:""`
-	GetTeamsWithAccessToProtectedBranch                ReposGetTeamsWithAccessToProtectedBranchCmd                `cmd:""`
-	GetTopPaths                                        ReposGetTopPathsCmd                                        `cmd:""`
-	GetTopReferrers                                    ReposGetTopReferrersCmd                                    `cmd:""`
-	GetUsersWithAccessToProtectedBranch                ReposGetUsersWithAccessToProtectedBranchCmd                `cmd:""`
-	GetViews                                           ReposGetViewsCmd                                           `cmd:""`
-	ListAssetsForRelease                               ReposListAssetsForReleaseCmd                               `cmd:""`
-	ListBranches                                       ReposListBranchesCmd                                       `cmd:""`
-	ListBranchesForHeadCommit                          ReposListBranchesForHeadCommitCmd                          `cmd:""`
-	ListCollaborators                                  ReposListCollaboratorsCmd                                  `cmd:""`
-	ListCommentsForCommit                              ReposListCommentsForCommitCmd                              `cmd:""`
-	ListCommitComments                                 ReposListCommitCommentsCmd                                 `cmd:""`
-	ListCommits                                        ReposListCommitsCmd                                        `cmd:""`
-	ListContributors                                   ReposListContributorsCmd                                   `cmd:""`
-	ListDeployKeys                                     ReposListDeployKeysCmd                                     `cmd:""`
-	ListDeploymentStatuses                             ReposListDeploymentStatusesCmd                             `cmd:""`
-	ListDeployments                                    ReposListDeploymentsCmd                                    `cmd:""`
-	ListDownloads                                      ReposListDownloadsCmd                                      `cmd:""`
-	ListForAuthenticatedUser                           ReposListForAuthenticatedUserCmd                           `cmd:""`
-	ListForOrg                                         ReposListForOrgCmd                                         `cmd:""`
-	ListForUser                                        ReposListForUserCmd                                        `cmd:""`
-	ListForks                                          ReposListForksCmd                                          `cmd:""`
-	ListHooks                                          ReposListHooksCmd                                          `cmd:""`
-	ListInvitations                                    ReposListInvitationsCmd                                    `cmd:""`
-	ListInvitationsForAuthenticatedUser                ReposListInvitationsForAuthenticatedUserCmd                `cmd:""`
-	ListLanguages                                      ReposListLanguagesCmd                                      `cmd:""`
-	ListPagesBuilds                                    ReposListPagesBuildsCmd                                    `cmd:""`
-	ListProtectedBranchRequiredStatusChecksContexts    ReposListProtectedBranchRequiredStatusChecksContextsCmd    `cmd:""`
-	ListPublic                                         ReposListPublicCmd                                         `cmd:""`
-	ListPullRequestsAssociatedWithCommit               ReposListPullRequestsAssociatedWithCommitCmd               `cmd:""`
-	ListReleases                                       ReposListReleasesCmd                                       `cmd:""`
-	ListStatusesForRef                                 ReposListStatusesForRefCmd                                 `cmd:""`
-	ListTags                                           ReposListTagsCmd                                           `cmd:""`
-	ListTeams                                          ReposListTeamsCmd                                          `cmd:""`
-	Merge                                              ReposMergeCmd                                              `cmd:""`
-	PingHook                                           ReposPingHookCmd                                           `cmd:""`
-	RemoveBranchProtection                             ReposRemoveBranchProtectionCmd                             `cmd:""`
-	RemoveCollaborator                                 ReposRemoveCollaboratorCmd                                 `cmd:""`
-	RemoveDeployKey                                    ReposRemoveDeployKeyCmd                                    `cmd:""`
-	RemoveProtectedBranchAdminEnforcement              ReposRemoveProtectedBranchAdminEnforcementCmd              `cmd:""`
-	RemoveProtectedBranchAppRestrictions               ReposRemoveProtectedBranchAppRestrictionsCmd               `cmd:""`
-	RemoveProtectedBranchPullRequestReviewEnforcement  ReposRemoveProtectedBranchPullRequestReviewEnforcementCmd  `cmd:""`
-	RemoveProtectedBranchRequiredSignatures            ReposRemoveProtectedBranchRequiredSignaturesCmd            `cmd:""`
-	RemoveProtectedBranchRequiredStatusChecks          ReposRemoveProtectedBranchRequiredStatusChecksCmd          `cmd:""`
-	RemoveProtectedBranchRequiredStatusChecksContexts  ReposRemoveProtectedBranchRequiredStatusChecksContextsCmd  `cmd:""`
-	RemoveProtectedBranchRestrictions                  ReposRemoveProtectedBranchRestrictionsCmd                  `cmd:""`
-	RemoveProtectedBranchTeamRestrictions              ReposRemoveProtectedBranchTeamRestrictionsCmd              `cmd:""`
-	RemoveProtectedBranchUserRestrictions              ReposRemoveProtectedBranchUserRestrictionsCmd              `cmd:""`
-	ReplaceAllTopics                                   ReposReplaceAllTopicsCmd                                   `cmd:""`
-	ReplaceProtectedBranchAppRestrictions              ReposReplaceProtectedBranchAppRestrictionsCmd              `cmd:""`
-	ReplaceProtectedBranchRequiredStatusChecksContexts ReposReplaceProtectedBranchRequiredStatusChecksContextsCmd `cmd:""`
-	ReplaceProtectedBranchTeamRestrictions             ReposReplaceProtectedBranchTeamRestrictionsCmd             `cmd:""`
-	ReplaceProtectedBranchUserRestrictions             ReposReplaceProtectedBranchUserRestrictionsCmd             `cmd:""`
-	RequestPageBuild                                   ReposRequestPageBuildCmd                                   `cmd:""`
-	RetrieveCommunityProfileMetrics                    ReposRetrieveCommunityProfileMetricsCmd                    `cmd:""`
-	TestPushHook                                       ReposTestPushHookCmd                                       `cmd:""`
-	Transfer                                           ReposTransferCmd                                           `cmd:""`
-	Update                                             ReposUpdateCmd                                             `cmd:""`
-	UpdateBranchProtection                             ReposUpdateBranchProtectionCmd                             `cmd:""`
-	UpdateCommitComment                                ReposUpdateCommitCommentCmd                                `cmd:""`
-	UpdateHook                                         ReposUpdateHookCmd                                         `cmd:""`
-	UpdateInformationAboutPagesSite                    ReposUpdateInformationAboutPagesSiteCmd                    `cmd:""`
-	UpdateInvitation                                   ReposUpdateInvitationCmd                                   `cmd:""`
-	UpdateProtectedBranchPullRequestReviewEnforcement  ReposUpdateProtectedBranchPullRequestReviewEnforcementCmd  `cmd:""`
-	UpdateProtectedBranchRequiredStatusChecks          ReposUpdateProtectedBranchRequiredStatusChecksCmd          `cmd:""`
-	UpdateRelease                                      ReposUpdateReleaseCmd                                      `cmd:""`
-	UpdateReleaseAsset                                 ReposUpdateReleaseAssetCmd                                 `cmd:""`
-	UploadReleaseAsset                                 ReposUploadReleaseAssetCmd                                 `cmd:""`
+	AcceptInvitation                     ReposAcceptInvitationCmd                     `cmd:""`
+	AddAppAccessRestrictions             ReposAddAppAccessRestrictionsCmd             `cmd:""`
+	AddCollaborator                      ReposAddCollaboratorCmd                      `cmd:""`
+	AddStatusCheckContexts               ReposAddStatusCheckContextsCmd               `cmd:""`
+	AddTeamAccessRestrictions            ReposAddTeamAccessRestrictionsCmd            `cmd:""`
+	AddUserAccessRestrictions            ReposAddUserAccessRestrictionsCmd            `cmd:""`
+	CheckCollaborator                    ReposCheckCollaboratorCmd                    `cmd:""`
+	CheckVulnerabilityAlerts             ReposCheckVulnerabilityAlertsCmd             `cmd:""`
+	CompareCommits                       ReposCompareCommitsCmd                       `cmd:""`
+	CreateCommitComment                  ReposCreateCommitCommentCmd                  `cmd:""`
+	CreateCommitSignatureProtection      ReposCreateCommitSignatureProtectionCmd      `cmd:""`
+	CreateCommitStatus                   ReposCreateCommitStatusCmd                   `cmd:""`
+	CreateDeployKey                      ReposCreateDeployKeyCmd                      `cmd:""`
+	CreateDeployment                     ReposCreateDeploymentCmd                     `cmd:""`
+	CreateDeploymentStatus               ReposCreateDeploymentStatusCmd               `cmd:""`
+	CreateDispatchEvent                  ReposCreateDispatchEventCmd                  `cmd:""`
+	CreateForAuthenticatedUser           ReposCreateForAuthenticatedUserCmd           `cmd:""`
+	CreateFork                           ReposCreateForkCmd                           `cmd:""`
+	CreateInOrg                          ReposCreateInOrgCmd                          `cmd:""`
+	CreateOrUpdateFileContents           ReposCreateOrUpdateFileContentsCmd           `cmd:""`
+	CreatePagesSite                      ReposCreatePagesSiteCmd                      `cmd:""`
+	CreateRelease                        ReposCreateReleaseCmd                        `cmd:""`
+	CreateUsingTemplate                  ReposCreateUsingTemplateCmd                  `cmd:""`
+	CreateWebhook                        ReposCreateWebhookCmd                        `cmd:""`
+	DeclineInvitation                    ReposDeclineInvitationCmd                    `cmd:""`
+	Delete                               ReposDeleteCmd                               `cmd:""`
+	DeleteAccessRestrictions             ReposDeleteAccessRestrictionsCmd             `cmd:""`
+	DeleteAdminBranchProtection          ReposDeleteAdminBranchProtectionCmd          `cmd:""`
+	DeleteBranchProtection               ReposDeleteBranchProtectionCmd               `cmd:""`
+	DeleteCommitComment                  ReposDeleteCommitCommentCmd                  `cmd:""`
+	DeleteCommitSignatureProtection      ReposDeleteCommitSignatureProtectionCmd      `cmd:""`
+	DeleteDeployKey                      ReposDeleteDeployKeyCmd                      `cmd:""`
+	DeleteDeployment                     ReposDeleteDeploymentCmd                     `cmd:""`
+	DeleteFile                           ReposDeleteFileCmd                           `cmd:""`
+	DeleteInvitation                     ReposDeleteInvitationCmd                     `cmd:""`
+	DeletePagesSite                      ReposDeletePagesSiteCmd                      `cmd:""`
+	DeletePullRequestReviewProtection    ReposDeletePullRequestReviewProtectionCmd    `cmd:""`
+	DeleteRelease                        ReposDeleteReleaseCmd                        `cmd:""`
+	DeleteReleaseAsset                   ReposDeleteReleaseAssetCmd                   `cmd:""`
+	DeleteWebhook                        ReposDeleteWebhookCmd                        `cmd:""`
+	DisableAutomatedSecurityFixes        ReposDisableAutomatedSecurityFixesCmd        `cmd:""`
+	DisableVulnerabilityAlerts           ReposDisableVulnerabilityAlertsCmd           `cmd:""`
+	DownloadTarballArchive               ReposDownloadTarballArchiveCmd               `cmd:""`
+	DownloadZipballArchive               ReposDownloadZipballArchiveCmd               `cmd:""`
+	EnableAutomatedSecurityFixes         ReposEnableAutomatedSecurityFixesCmd         `cmd:""`
+	EnableVulnerabilityAlerts            ReposEnableVulnerabilityAlertsCmd            `cmd:""`
+	Get                                  ReposGetCmd                                  `cmd:""`
+	GetAccessRestrictions                ReposGetAccessRestrictionsCmd                `cmd:""`
+	GetAdminBranchProtection             ReposGetAdminBranchProtectionCmd             `cmd:""`
+	GetAllStatusCheckContexts            ReposGetAllStatusCheckContextsCmd            `cmd:""`
+	GetAllTopics                         ReposGetAllTopicsCmd                         `cmd:""`
+	GetAppsWithAccessToProtectedBranch   ReposGetAppsWithAccessToProtectedBranchCmd   `cmd:""`
+	GetBranch                            ReposGetBranchCmd                            `cmd:""`
+	GetBranchProtection                  ReposGetBranchProtectionCmd                  `cmd:""`
+	GetClones                            ReposGetClonesCmd                            `cmd:""`
+	GetCodeFrequencyStats                ReposGetCodeFrequencyStatsCmd                `cmd:""`
+	GetCollaboratorPermissionLevel       ReposGetCollaboratorPermissionLevelCmd       `cmd:""`
+	GetCombinedStatusForRef              ReposGetCombinedStatusForRefCmd              `cmd:""`
+	GetCommit                            ReposGetCommitCmd                            `cmd:""`
+	GetCommitActivityStats               ReposGetCommitActivityStatsCmd               `cmd:""`
+	GetCommitComment                     ReposGetCommitCommentCmd                     `cmd:""`
+	GetCommitSignatureProtection         ReposGetCommitSignatureProtectionCmd         `cmd:""`
+	GetCommunityProfileMetrics           ReposGetCommunityProfileMetricsCmd           `cmd:""`
+	GetContent                           ReposGetContentCmd                           `cmd:""`
+	GetContributorsStats                 ReposGetContributorsStatsCmd                 `cmd:""`
+	GetDeployKey                         ReposGetDeployKeyCmd                         `cmd:""`
+	GetDeployment                        ReposGetDeploymentCmd                        `cmd:""`
+	GetDeploymentStatus                  ReposGetDeploymentStatusCmd                  `cmd:""`
+	GetLatestPagesBuild                  ReposGetLatestPagesBuildCmd                  `cmd:""`
+	GetLatestRelease                     ReposGetLatestReleaseCmd                     `cmd:""`
+	GetPages                             ReposGetPagesCmd                             `cmd:""`
+	GetPagesBuild                        ReposGetPagesBuildCmd                        `cmd:""`
+	GetParticipationStats                ReposGetParticipationStatsCmd                `cmd:""`
+	GetPullRequestReviewProtection       ReposGetPullRequestReviewProtectionCmd       `cmd:""`
+	GetPunchCardStats                    ReposGetPunchCardStatsCmd                    `cmd:""`
+	GetReadme                            ReposGetReadmeCmd                            `cmd:""`
+	GetRelease                           ReposGetReleaseCmd                           `cmd:""`
+	GetReleaseAsset                      ReposGetReleaseAssetCmd                      `cmd:""`
+	GetReleaseByTag                      ReposGetReleaseByTagCmd                      `cmd:""`
+	GetStatusChecksProtection            ReposGetStatusChecksProtectionCmd            `cmd:""`
+	GetTeamsWithAccessToProtectedBranch  ReposGetTeamsWithAccessToProtectedBranchCmd  `cmd:""`
+	GetTopPaths                          ReposGetTopPathsCmd                          `cmd:""`
+	GetTopReferrers                      ReposGetTopReferrersCmd                      `cmd:""`
+	GetUsersWithAccessToProtectedBranch  ReposGetUsersWithAccessToProtectedBranchCmd  `cmd:""`
+	GetViews                             ReposGetViewsCmd                             `cmd:""`
+	GetWebhook                           ReposGetWebhookCmd                           `cmd:""`
+	ListBranches                         ReposListBranchesCmd                         `cmd:""`
+	ListBranchesForHeadCommit            ReposListBranchesForHeadCommitCmd            `cmd:""`
+	ListCollaborators                    ReposListCollaboratorsCmd                    `cmd:""`
+	ListCommentsForCommit                ReposListCommentsForCommitCmd                `cmd:""`
+	ListCommitCommentsForRepo            ReposListCommitCommentsForRepoCmd            `cmd:""`
+	ListCommitStatusesForRef             ReposListCommitStatusesForRefCmd             `cmd:""`
+	ListCommits                          ReposListCommitsCmd                          `cmd:""`
+	ListContributors                     ReposListContributorsCmd                     `cmd:""`
+	ListDeployKeys                       ReposListDeployKeysCmd                       `cmd:""`
+	ListDeploymentStatuses               ReposListDeploymentStatusesCmd               `cmd:""`
+	ListDeployments                      ReposListDeploymentsCmd                      `cmd:""`
+	ListForAuthenticatedUser             ReposListForAuthenticatedUserCmd             `cmd:""`
+	ListForOrg                           ReposListForOrgCmd                           `cmd:""`
+	ListForUser                          ReposListForUserCmd                          `cmd:""`
+	ListForks                            ReposListForksCmd                            `cmd:""`
+	ListInvitations                      ReposListInvitationsCmd                      `cmd:""`
+	ListInvitationsForAuthenticatedUser  ReposListInvitationsForAuthenticatedUserCmd  `cmd:""`
+	ListLanguages                        ReposListLanguagesCmd                        `cmd:""`
+	ListPagesBuilds                      ReposListPagesBuildsCmd                      `cmd:""`
+	ListPublic                           ReposListPublicCmd                           `cmd:""`
+	ListPullRequestsAssociatedWithCommit ReposListPullRequestsAssociatedWithCommitCmd `cmd:""`
+	ListReleaseAssets                    ReposListReleaseAssetsCmd                    `cmd:""`
+	ListReleases                         ReposListReleasesCmd                         `cmd:""`
+	ListTags                             ReposListTagsCmd                             `cmd:""`
+	ListTeams                            ReposListTeamsCmd                            `cmd:""`
+	ListWebhooks                         ReposListWebhooksCmd                         `cmd:""`
+	Merge                                ReposMergeCmd                                `cmd:""`
+	PingWebhook                          ReposPingWebhookCmd                          `cmd:""`
+	RemoveAppAccessRestrictions          ReposRemoveAppAccessRestrictionsCmd          `cmd:""`
+	RemoveCollaborator                   ReposRemoveCollaboratorCmd                   `cmd:""`
+	RemoveStatusCheckContexts            ReposRemoveStatusCheckContextsCmd            `cmd:""`
+	RemoveStatusCheckProtection          ReposRemoveStatusCheckProtectionCmd          `cmd:""`
+	RemoveTeamAccessRestrictions         ReposRemoveTeamAccessRestrictionsCmd         `cmd:""`
+	RemoveUserAccessRestrictions         ReposRemoveUserAccessRestrictionsCmd         `cmd:""`
+	ReplaceAllTopics                     ReposReplaceAllTopicsCmd                     `cmd:""`
+	RequestPagesBuild                    ReposRequestPagesBuildCmd                    `cmd:""`
+	SetAdminBranchProtection             ReposSetAdminBranchProtectionCmd             `cmd:""`
+	SetAppAccessRestrictions             ReposSetAppAccessRestrictionsCmd             `cmd:""`
+	SetStatusCheckContexts               ReposSetStatusCheckContextsCmd               `cmd:""`
+	SetTeamAccessRestrictions            ReposSetTeamAccessRestrictionsCmd            `cmd:""`
+	SetUserAccessRestrictions            ReposSetUserAccessRestrictionsCmd            `cmd:""`
+	TestPushWebhook                      ReposTestPushWebhookCmd                      `cmd:""`
+	Transfer                             ReposTransferCmd                             `cmd:""`
+	Update                               ReposUpdateCmd                               `cmd:""`
+	UpdateBranchProtection               ReposUpdateBranchProtectionCmd               `cmd:""`
+	UpdateCommitComment                  ReposUpdateCommitCommentCmd                  `cmd:""`
+	UpdateInformationAboutPagesSite      ReposUpdateInformationAboutPagesSiteCmd      `cmd:""`
+	UpdateInvitation                     ReposUpdateInvitationCmd                     `cmd:""`
+	UpdatePullRequestReviewProtection    ReposUpdatePullRequestReviewProtectionCmd    `cmd:""`
+	UpdateRelease                        ReposUpdateReleaseCmd                        `cmd:""`
+	UpdateReleaseAsset                   ReposUpdateReleaseAssetCmd                   `cmd:""`
+	UpdateStatusCheckProtection          ReposUpdateStatusCheckProtectionCmd          `cmd:""`
+	UpdateWebhook                        ReposUpdateWebhookCmd                        `cmd:""`
+	UploadReleaseAsset                   ReposUploadReleaseAssetCmd                   `cmd:""`
 }
 
 type ReposAcceptInvitationCmd struct {
@@ -161,10 +159,25 @@ func (c *ReposAcceptInvitationCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("PATCH")
 }
 
+type ReposAddAppAccessRestrictionsCmd struct {
+	Repo   string `name:"repo" required:"true"`
+	Branch string `name:"branch" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ReposAddAppAccessRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/restrictions/apps")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	return c.DoRequest("POST")
+}
+
 type ReposAddCollaboratorCmd struct {
-	Repo       string `name:"repo" required:"true"`
-	Username   string `name:"username" required:"true"`
-	Permission string `name:"permission"`
+	Repo        string `name:"repo" required:"true"`
+	Username    string `name:"username" required:"true"`
+	Permission  string `name:"permission"`
+	Permissions string `name:"permissions"`
 	internal.BaseCmd
 }
 
@@ -174,78 +187,17 @@ func (c *ReposAddCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("username", c.Username)
 	c.UpdateBody("permission", c.Permission)
+	c.UpdateBody("permissions", c.Permissions)
 	return c.DoRequest("PUT")
 }
 
-type ReposAddDeployKeyCmd struct {
-	Repo     string `name:"repo" required:"true"`
-	ReadOnly bool   `name:"read_only"`
-	Title    string `name:"title"`
-	Key      string `name:"key" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *ReposAddDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/keys")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateBody("key", c.Key)
-	c.UpdateBody("read_only", c.ReadOnly)
-	c.UpdateBody("title", c.Title)
-	return c.DoRequest("POST")
-}
-
-type ReposAddProtectedBranchAdminEnforcementCmd struct {
+type ReposAddStatusCheckContextsCmd struct {
 	Repo   string `name:"repo" required:"true"`
 	Branch string `name:"branch" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *ReposAddProtectedBranchAdminEnforcementCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/enforce_admins")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	return c.DoRequest("POST")
-}
-
-type ReposAddProtectedBranchAppRestrictionsCmd struct {
-	Repo   string `name:"repo" required:"true"`
-	Branch string `name:"branch" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *ReposAddProtectedBranchAppRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/restrictions/apps")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	return c.DoRequest("POST")
-}
-
-type ReposAddProtectedBranchRequiredSignaturesCmd struct {
-	Zzzax  bool   `name:"zzzax-preview" required:"true"`
-	Repo   string `name:"repo" required:"true"`
-	Branch string `name:"branch" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *ReposAddProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_signatures")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	c.UpdatePreview("zzzax", c.Zzzax)
-	return c.DoRequest("POST")
-}
-
-type ReposAddProtectedBranchRequiredStatusChecksContextsCmd struct {
-	Repo   string `name:"repo" required:"true"`
-	Branch string `name:"branch" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *ReposAddProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposAddStatusCheckContextsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_status_checks/contexts")
 	c.UpdateURLPath("repo", c.Repo)
@@ -253,13 +205,13 @@ func (c *ReposAddProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueSetM
 	return c.DoRequest("POST")
 }
 
-type ReposAddProtectedBranchTeamRestrictionsCmd struct {
+type ReposAddTeamAccessRestrictionsCmd struct {
 	Repo   string `name:"repo" required:"true"`
 	Branch string `name:"branch" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *ReposAddProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposAddTeamAccessRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/restrictions/teams")
 	c.UpdateURLPath("repo", c.Repo)
@@ -267,13 +219,13 @@ func (c *ReposAddProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[strin
 	return c.DoRequest("POST")
 }
 
-type ReposAddProtectedBranchUserRestrictionsCmd struct {
+type ReposAddUserAccessRestrictionsCmd struct {
 	Repo   string `name:"repo" required:"true"`
 	Branch string `name:"branch" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *ReposAddProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposAddUserAccessRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/restrictions/users")
 	c.UpdateURLPath("repo", c.Repo)
@@ -347,10 +299,67 @@ func (c *ReposCreateCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("POST")
 }
 
+type ReposCreateCommitSignatureProtectionCmd struct {
+	Zzzax  bool   `name:"zzzax-preview" required:"true"`
+	Repo   string `name:"repo" required:"true"`
+	Branch string `name:"branch" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ReposCreateCommitSignatureProtectionCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_signatures")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdatePreview("zzzax", c.Zzzax)
+	return c.DoRequest("POST")
+}
+
+type ReposCreateCommitStatusCmd struct {
+	Repo        string `name:"repo" required:"true"`
+	Sha         string `name:"sha" required:"true"`
+	Context     string `name:"context"`
+	Description string `name:"description"`
+	TargetUrl   string `name:"target_url"`
+	State       string `name:"state" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ReposCreateCommitStatusCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/statuses/{sha}")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("sha", c.Sha)
+	c.UpdateBody("context", c.Context)
+	c.UpdateBody("description", c.Description)
+	c.UpdateBody("state", c.State)
+	c.UpdateBody("target_url", c.TargetUrl)
+	return c.DoRequest("POST")
+}
+
+type ReposCreateDeployKeyCmd struct {
+	Repo     string `name:"repo" required:"true"`
+	ReadOnly bool   `name:"read_only"`
+	Title    string `name:"title"`
+	Key      string `name:"key" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ReposCreateDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/keys")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("key", c.Key)
+	c.UpdateBody("read_only", c.ReadOnly)
+	c.UpdateBody("title", c.Title)
+	return c.DoRequest("POST")
+}
+
 type ReposCreateDeploymentCmd struct {
 	AntMan                bool     `name:"ant-man-preview"`
 	Repo                  string   `name:"repo" required:"true"`
 	AutoMerge             bool     `name:"auto_merge"`
+	CreatedAt             string   `name:"created_at"`
 	Description           string   `name:"description"`
 	Environment           string   `name:"environment"`
 	Payload               string   `name:"payload"`
@@ -368,6 +377,7 @@ func (c *ReposCreateDeploymentCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdatePreview("ant-man", c.AntMan)
 	c.UpdateBody("auto_merge", c.AutoMerge)
+	c.UpdateBody("created_at", c.CreatedAt)
 	c.UpdateBody("description", c.Description)
 	c.UpdateBody("environment", c.Environment)
 	c.UpdateBody("payload", c.Payload)
@@ -437,6 +447,7 @@ type ReposCreateForAuthenticatedUserCmd struct {
 	DeleteBranchOnMerge bool   `name:"delete_branch_on_merge"`
 	Description         string `name:"description"`
 	GitignoreTemplate   string `name:"gitignore_template"`
+	HasDownloads        bool   `name:"has_downloads"`
 	HasIssues           bool   `name:"has_issues"`
 	HasProjects         bool   `name:"has_projects"`
 	HasWiki             bool   `name:"has_wiki"`
@@ -445,7 +456,6 @@ type ReposCreateForAuthenticatedUserCmd struct {
 	LicenseTemplate     string `name:"license_template"`
 	Private             bool   `name:"private"`
 	TeamId              int64  `name:"team_id"`
-	Visibility          string `name:"visibility"`
 	Name                string `name:"name" required:"true"`
 	internal.BaseCmd
 }
@@ -462,6 +472,7 @@ func (c *ReposCreateForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) 
 	c.UpdateBody("delete_branch_on_merge", c.DeleteBranchOnMerge)
 	c.UpdateBody("description", c.Description)
 	c.UpdateBody("gitignore_template", c.GitignoreTemplate)
+	c.UpdateBody("has_downloads", c.HasDownloads)
 	c.UpdateBody("has_issues", c.HasIssues)
 	c.UpdateBody("has_projects", c.HasProjects)
 	c.UpdateBody("has_wiki", c.HasWiki)
@@ -471,7 +482,6 @@ func (c *ReposCreateForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) 
 	c.UpdateBody("name", c.Name)
 	c.UpdateBody("private", c.Private)
 	c.UpdateBody("team_id", c.TeamId)
-	c.UpdateBody("visibility", c.Visibility)
 	return c.DoRequest("POST")
 }
 
@@ -486,32 +496,6 @@ func (c *ReposCreateForkCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetURLPath("/repos/{repo}/forks")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateBody("organization", c.Organization)
-	return c.DoRequest("POST")
-}
-
-type ReposCreateHookCmd struct {
-	Repo              string   `name:"repo" required:"true"`
-	Active            bool     `name:"active"`
-	ConfigContentType string   `name:"config.content_type"`
-	ConfigInsecureSsl string   `name:"config.insecure_ssl"`
-	ConfigSecret      string   `name:"config.secret"`
-	Events            []string `name:"events"`
-	Name              string   `name:"name"`
-	ConfigUrl         string   `name:"config.url" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *ReposCreateHookCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/hooks")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateBody("active", c.Active)
-	c.UpdateBody("config.content_type", c.ConfigContentType)
-	c.UpdateBody("config.insecure_ssl", c.ConfigInsecureSsl)
-	c.UpdateBody("config.secret", c.ConfigSecret)
-	c.UpdateBody("config.url", c.ConfigUrl)
-	c.UpdateBody("events", c.Events)
-	c.UpdateBody("name", c.Name)
 	return c.DoRequest("POST")
 }
 
@@ -565,12 +549,14 @@ func (c *ReposCreateInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("POST")
 }
 
-type ReposCreateOrUpdateFileCmd struct {
+type ReposCreateOrUpdateFileContentsCmd struct {
 	Repo           string `name:"repo" required:"true"`
 	Path           string `name:"path" required:"true"`
+	AuthorDate     string `name:"author.date"`
 	AuthorEmail    string `name:"author.email"`
 	AuthorName     string `name:"author.name"`
 	Branch         string `name:"branch"`
+	CommitterDate  string `name:"committer.date"`
 	CommitterEmail string `name:"committer.email"`
 	CommitterName  string `name:"committer.name"`
 	Sha            string `name:"sha"`
@@ -579,20 +565,40 @@ type ReposCreateOrUpdateFileCmd struct {
 	internal.BaseCmd
 }
 
-func (c *ReposCreateOrUpdateFileCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposCreateOrUpdateFileContentsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/contents/{path}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("path", c.Path)
+	c.UpdateBody("author.date", c.AuthorDate)
 	c.UpdateBody("author.email", c.AuthorEmail)
 	c.UpdateBody("author.name", c.AuthorName)
 	c.UpdateBody("branch", c.Branch)
+	c.UpdateBody("committer.date", c.CommitterDate)
 	c.UpdateBody("committer.email", c.CommitterEmail)
 	c.UpdateBody("committer.name", c.CommitterName)
 	c.UpdateBody("content", c.Content)
 	c.UpdateBody("message", c.Message)
 	c.UpdateBody("sha", c.Sha)
 	return c.DoRequest("PUT")
+}
+
+type ReposCreatePagesSiteCmd struct {
+	Switcheroo   bool   `name:"switcheroo-preview" required:"true"`
+	Repo         string `name:"repo" required:"true"`
+	SourceBranch string `name:"source.branch"`
+	SourcePath   string `name:"source.path"`
+	internal.BaseCmd
+}
+
+func (c *ReposCreatePagesSiteCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/pages")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdatePreview("switcheroo", c.Switcheroo)
+	c.UpdateBody("source.branch", c.SourceBranch)
+	c.UpdateBody("source.path", c.SourcePath)
+	return c.DoRequest("POST")
 }
 
 type ReposCreateReleaseCmd struct {
@@ -616,28 +622,6 @@ func (c *ReposCreateReleaseCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateBody("prerelease", c.Prerelease)
 	c.UpdateBody("tag_name", c.TagName)
 	c.UpdateBody("target_commitish", c.TargetCommitish)
-	return c.DoRequest("POST")
-}
-
-type ReposCreateStatusCmd struct {
-	Repo        string `name:"repo" required:"true"`
-	Sha         string `name:"sha" required:"true"`
-	Context     string `name:"context"`
-	Description string `name:"description"`
-	TargetUrl   string `name:"target_url"`
-	State       string `name:"state" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *ReposCreateStatusCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/statuses/{sha}")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("sha", c.Sha)
-	c.UpdateBody("context", c.Context)
-	c.UpdateBody("description", c.Description)
-	c.UpdateBody("state", c.State)
-	c.UpdateBody("target_url", c.TargetUrl)
 	return c.DoRequest("POST")
 }
 
@@ -665,6 +649,36 @@ func (c *ReposCreateUsingTemplateCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("POST")
 }
 
+type ReposCreateWebhookCmd struct {
+	Repo              string   `name:"repo" required:"true"`
+	Active            bool     `name:"active"`
+	ConfigContentType string   `name:"config.content_type"`
+	ConfigDigest      string   `name:"config.digest"`
+	ConfigInsecureSsl string   `name:"config.insecure_ssl"`
+	ConfigSecret      string   `name:"config.secret"`
+	ConfigToken       string   `name:"config.token"`
+	Events            []string `name:"events"`
+	Name              string   `name:"name"`
+	ConfigUrl         string   `name:"config.url" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ReposCreateWebhookCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/hooks")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("active", c.Active)
+	c.UpdateBody("config.content_type", c.ConfigContentType)
+	c.UpdateBody("config.digest", c.ConfigDigest)
+	c.UpdateBody("config.insecure_ssl", c.ConfigInsecureSsl)
+	c.UpdateBody("config.secret", c.ConfigSecret)
+	c.UpdateBody("config.token", c.ConfigToken)
+	c.UpdateBody("config.url", c.ConfigUrl)
+	c.UpdateBody("events", c.Events)
+	c.UpdateBody("name", c.Name)
+	return c.DoRequest("POST")
+}
+
 type ReposDeclineInvitationCmd struct {
 	InvitationId int64 `name:"invitation_id" required:"true"`
 	internal.BaseCmd
@@ -674,6 +688,48 @@ func (c *ReposDeclineInvitationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/repository_invitations/{invitation_id}")
 	c.UpdateURLPath("invitation_id", c.InvitationId)
+	return c.DoRequest("DELETE")
+}
+
+type ReposDeleteAccessRestrictionsCmd struct {
+	Repo   string `name:"repo" required:"true"`
+	Branch string `name:"branch" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ReposDeleteAccessRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/restrictions")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	return c.DoRequest("DELETE")
+}
+
+type ReposDeleteAdminBranchProtectionCmd struct {
+	Repo   string `name:"repo" required:"true"`
+	Branch string `name:"branch" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ReposDeleteAdminBranchProtectionCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/enforce_admins")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	return c.DoRequest("DELETE")
+}
+
+type ReposDeleteBranchProtectionCmd struct {
+	Repo   string `name:"repo" required:"true"`
+	Branch string `name:"branch" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ReposDeleteBranchProtectionCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("DELETE")
 }
 
@@ -703,6 +759,36 @@ func (c *ReposDeleteCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("DELETE")
 }
 
+type ReposDeleteCommitSignatureProtectionCmd struct {
+	Zzzax  bool   `name:"zzzax-preview" required:"true"`
+	Repo   string `name:"repo" required:"true"`
+	Branch string `name:"branch" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ReposDeleteCommitSignatureProtectionCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_signatures")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdatePreview("zzzax", c.Zzzax)
+	return c.DoRequest("DELETE")
+}
+
+type ReposDeleteDeployKeyCmd struct {
+	Repo  string `name:"repo" required:"true"`
+	KeyId int64  `name:"key_id" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ReposDeleteDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/keys/{key_id}")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("key_id", c.KeyId)
+	return c.DoRequest("DELETE")
+}
+
 type ReposDeleteDeploymentCmd struct {
 	Repo         string `name:"repo" required:"true"`
 	DeploymentId int64  `name:"deployment_id" required:"true"`
@@ -714,20 +800,6 @@ func (c *ReposDeleteDeploymentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetURLPath("/repos/{repo}/deployments/{deployment_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("deployment_id", c.DeploymentId)
-	return c.DoRequest("DELETE")
-}
-
-type ReposDeleteDownloadCmd struct {
-	Repo       string `name:"repo" required:"true"`
-	DownloadId int64  `name:"download_id" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *ReposDeleteDownloadCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/downloads/{download_id}")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("download_id", c.DownloadId)
 	return c.DoRequest("DELETE")
 }
 
@@ -759,20 +831,6 @@ func (c *ReposDeleteFileCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("DELETE")
 }
 
-type ReposDeleteHookCmd struct {
-	Repo   string `name:"repo" required:"true"`
-	HookId int64  `name:"hook_id" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *ReposDeleteHookCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/hooks/{hook_id}")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("hook_id", c.HookId)
-	return c.DoRequest("DELETE")
-}
-
 type ReposDeleteInvitationCmd struct {
 	Repo         string `name:"repo" required:"true"`
 	InvitationId int64  `name:"invitation_id" required:"true"`
@@ -784,6 +842,34 @@ func (c *ReposDeleteInvitationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetURLPath("/repos/{repo}/invitations/{invitation_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("invitation_id", c.InvitationId)
+	return c.DoRequest("DELETE")
+}
+
+type ReposDeletePagesSiteCmd struct {
+	Switcheroo bool   `name:"switcheroo-preview" required:"true"`
+	Repo       string `name:"repo" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ReposDeletePagesSiteCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/pages")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdatePreview("switcheroo", c.Switcheroo)
+	return c.DoRequest("DELETE")
+}
+
+type ReposDeletePullRequestReviewProtectionCmd struct {
+	Repo   string `name:"repo" required:"true"`
+	Branch string `name:"branch" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ReposDeletePullRequestReviewProtectionCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_pull_request_reviews")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("DELETE")
 }
 
@@ -815,6 +901,20 @@ func (c *ReposDeleteReleaseCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("DELETE")
 }
 
+type ReposDeleteWebhookCmd struct {
+	Repo   string `name:"repo" required:"true"`
+	HookId int64  `name:"hook_id" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ReposDeleteWebhookCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/hooks/{hook_id}")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("hook_id", c.HookId)
+	return c.DoRequest("DELETE")
+}
+
 type ReposDisableAutomatedSecurityFixesCmd struct {
 	London bool   `name:"london-preview" required:"true"`
 	Repo   string `name:"repo" required:"true"`
@@ -826,20 +926,6 @@ func (c *ReposDisableAutomatedSecurityFixesCmd) Run(isValueSetMap map[string]boo
 	c.SetURLPath("/repos/{repo}/automated-security-fixes")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdatePreview("london", c.London)
-	return c.DoRequest("DELETE")
-}
-
-type ReposDisablePagesSiteCmd struct {
-	Switcheroo bool   `name:"switcheroo-preview" required:"true"`
-	Repo       string `name:"repo" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *ReposDisablePagesSiteCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/pages")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdatePreview("switcheroo", c.Switcheroo)
 	return c.DoRequest("DELETE")
 }
 
@@ -857,6 +943,34 @@ func (c *ReposDisableVulnerabilityAlertsCmd) Run(isValueSetMap map[string]bool) 
 	return c.DoRequest("DELETE")
 }
 
+type ReposDownloadTarballArchiveCmd struct {
+	Repo string `name:"repo" required:"true"`
+	Ref  string `name:"ref" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ReposDownloadTarballArchiveCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/tarball/{ref}")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("ref", c.Ref)
+	return c.DoRequest("GET")
+}
+
+type ReposDownloadZipballArchiveCmd struct {
+	Repo string `name:"repo" required:"true"`
+	Ref  string `name:"ref" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ReposDownloadZipballArchiveCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/zipball/{ref}")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("ref", c.Ref)
+	return c.DoRequest("GET")
+}
+
 type ReposEnableAutomatedSecurityFixesCmd struct {
 	London bool   `name:"london-preview" required:"true"`
 	Repo   string `name:"repo" required:"true"`
@@ -871,24 +985,6 @@ func (c *ReposEnableAutomatedSecurityFixesCmd) Run(isValueSetMap map[string]bool
 	return c.DoRequest("PUT")
 }
 
-type ReposEnablePagesSiteCmd struct {
-	Switcheroo   bool   `name:"switcheroo-preview" required:"true"`
-	Repo         string `name:"repo" required:"true"`
-	SourceBranch string `name:"source.branch"`
-	SourcePath   string `name:"source.path"`
-	internal.BaseCmd
-}
-
-func (c *ReposEnablePagesSiteCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/pages")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdatePreview("switcheroo", c.Switcheroo)
-	c.UpdateBody("source.branch", c.SourceBranch)
-	c.UpdateBody("source.path", c.SourcePath)
-	return c.DoRequest("POST")
-}
-
 type ReposEnableVulnerabilityAlertsCmd struct {
 	Dorian bool   `name:"dorian-preview" required:"true"`
 	Repo   string `name:"repo" required:"true"`
@@ -901,6 +997,48 @@ func (c *ReposEnableVulnerabilityAlertsCmd) Run(isValueSetMap map[string]bool) e
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdatePreview("dorian", c.Dorian)
 	return c.DoRequest("PUT")
+}
+
+type ReposGetAccessRestrictionsCmd struct {
+	Repo   string `name:"repo" required:"true"`
+	Branch string `name:"branch" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ReposGetAccessRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/restrictions")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	return c.DoRequest("GET")
+}
+
+type ReposGetAdminBranchProtectionCmd struct {
+	Repo   string `name:"repo" required:"true"`
+	Branch string `name:"branch" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ReposGetAdminBranchProtectionCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/enforce_admins")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	return c.DoRequest("GET")
+}
+
+type ReposGetAllStatusCheckContextsCmd struct {
+	Repo   string `name:"repo" required:"true"`
+	Branch string `name:"branch" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ReposGetAllStatusCheckContextsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_status_checks/contexts")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	return c.DoRequest("GET")
 }
 
 type ReposGetAllTopicsCmd struct {
@@ -928,22 +1066,6 @@ func (c *ReposGetAppsWithAccessToProtectedBranchCmd) Run(isValueSetMap map[strin
 	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/restrictions/apps")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
-	return c.DoRequest("GET")
-}
-
-type ReposGetArchiveLinkCmd struct {
-	Repo          string `name:"repo" required:"true"`
-	ArchiveFormat string `name:"archive_format" required:"true"`
-	Ref           string `name:"ref" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *ReposGetArchiveLinkCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/{archive_format}/{ref}")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("archive_format", c.ArchiveFormat)
-	c.UpdateURLPath("ref", c.Ref)
 	return c.DoRequest("GET")
 }
 
@@ -1089,14 +1211,44 @@ func (c *ReposGetCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
-type ReposGetContentsCmd struct {
+type ReposGetCommitSignatureProtectionCmd struct {
+	Zzzax  bool   `name:"zzzax-preview" required:"true"`
+	Repo   string `name:"repo" required:"true"`
+	Branch string `name:"branch" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ReposGetCommitSignatureProtectionCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_signatures")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdatePreview("zzzax", c.Zzzax)
+	return c.DoRequest("GET")
+}
+
+type ReposGetCommunityProfileMetricsCmd struct {
+	BlackPanther bool   `name:"black-panther-preview" required:"true"`
+	Repo         string `name:"repo" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ReposGetCommunityProfileMetricsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/community/profile")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdatePreview("black-panther", c.BlackPanther)
+	return c.DoRequest("GET")
+}
+
+type ReposGetContentCmd struct {
 	Repo string `name:"repo" required:"true"`
 	Path string `name:"path" required:"true"`
 	Ref  string `name:"ref"`
 	internal.BaseCmd
 }
 
-func (c *ReposGetContentsCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposGetContentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/contents/{path}")
 	c.UpdateURLPath("repo", c.Repo)
@@ -1171,34 +1323,6 @@ func (c *ReposGetDeploymentStatusCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
-type ReposGetDownloadCmd struct {
-	Repo       string `name:"repo" required:"true"`
-	DownloadId int64  `name:"download_id" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *ReposGetDownloadCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/downloads/{download_id}")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("download_id", c.DownloadId)
-	return c.DoRequest("GET")
-}
-
-type ReposGetHookCmd struct {
-	Repo   string `name:"repo" required:"true"`
-	HookId int64  `name:"hook_id" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *ReposGetHookCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/hooks/{hook_id}")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("hook_id", c.HookId)
-	return c.DoRequest("GET")
-}
-
 type ReposGetLatestPagesBuildCmd struct {
 	Repo string `name:"repo" required:"true"`
 	internal.BaseCmd
@@ -1261,77 +1385,19 @@ func (c *ReposGetParticipationStatsCmd) Run(isValueSetMap map[string]bool) error
 	return c.DoRequest("GET")
 }
 
-type ReposGetProtectedBranchAdminEnforcementCmd struct {
-	Repo   string `name:"repo" required:"true"`
-	Branch string `name:"branch" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *ReposGetProtectedBranchAdminEnforcementCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/enforce_admins")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	return c.DoRequest("GET")
-}
-
-type ReposGetProtectedBranchPullRequestReviewEnforcementCmd struct {
+type ReposGetPullRequestReviewProtectionCmd struct {
 	LukeCage bool   `name:"luke-cage-preview"`
 	Repo     string `name:"repo" required:"true"`
 	Branch   string `name:"branch" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *ReposGetProtectedBranchPullRequestReviewEnforcementCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposGetPullRequestReviewProtectionCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_pull_request_reviews")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	c.UpdatePreview("luke-cage", c.LukeCage)
-	return c.DoRequest("GET")
-}
-
-type ReposGetProtectedBranchRequiredSignaturesCmd struct {
-	Zzzax  bool   `name:"zzzax-preview" required:"true"`
-	Repo   string `name:"repo" required:"true"`
-	Branch string `name:"branch" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *ReposGetProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_signatures")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	c.UpdatePreview("zzzax", c.Zzzax)
-	return c.DoRequest("GET")
-}
-
-type ReposGetProtectedBranchRequiredStatusChecksCmd struct {
-	Repo   string `name:"repo" required:"true"`
-	Branch string `name:"branch" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *ReposGetProtectedBranchRequiredStatusChecksCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_status_checks")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	return c.DoRequest("GET")
-}
-
-type ReposGetProtectedBranchRestrictionsCmd struct {
-	Repo   string `name:"repo" required:"true"`
-	Branch string `name:"branch" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *ReposGetProtectedBranchRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/restrictions")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("GET")
 }
 
@@ -1403,6 +1469,20 @@ func (c *ReposGetReleaseCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
+type ReposGetStatusChecksProtectionCmd struct {
+	Repo   string `name:"repo" required:"true"`
+	Branch string `name:"branch" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ReposGetStatusChecksProtectionCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_status_checks")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	return c.DoRequest("GET")
+}
+
 type ReposGetTeamsWithAccessToProtectedBranchCmd struct {
 	Repo   string `name:"repo" required:"true"`
 	Branch string `name:"branch" required:"true"`
@@ -1469,21 +1549,17 @@ func (c *ReposGetViewsCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
-type ReposListAssetsForReleaseCmd struct {
-	Repo      string `name:"repo" required:"true"`
-	ReleaseId int64  `name:"release_id" required:"true"`
-	Page      int64  `name:"page"`
-	PerPage   int64  `name:"per_page"`
+type ReposGetWebhookCmd struct {
+	Repo   string `name:"repo" required:"true"`
+	HookId int64  `name:"hook_id" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *ReposListAssetsForReleaseCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposGetWebhookCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/releases/{release_id}/assets")
+	c.SetURLPath("/repos/{repo}/hooks/{hook_id}")
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("release_id", c.ReleaseId)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLPath("hook_id", c.HookId)
 	return c.DoRequest("GET")
 }
 
@@ -1559,7 +1635,7 @@ func (c *ReposListCommentsForCommitCmd) Run(isValueSetMap map[string]bool) error
 	return c.DoRequest("GET")
 }
 
-type ReposListCommitCommentsCmd struct {
+type ReposListCommitCommentsForRepoCmd struct {
 	SquirrelGirl bool   `name:"squirrel-girl-preview"`
 	Repo         string `name:"repo" required:"true"`
 	Page         int64  `name:"page"`
@@ -1567,13 +1643,31 @@ type ReposListCommitCommentsCmd struct {
 	internal.BaseCmd
 }
 
-func (c *ReposListCommitCommentsCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposListCommitCommentsForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/comments")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
 	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
+	return c.DoRequest("GET")
+}
+
+type ReposListCommitStatusesForRefCmd struct {
+	Repo    string `name:"repo" required:"true"`
+	Ref     string `name:"ref" required:"true"`
+	Page    int64  `name:"page"`
+	PerPage int64  `name:"per_page"`
+	internal.BaseCmd
+}
+
+func (c *ReposListCommitStatusesForRefCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/commits/{ref}/statuses")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("ref", c.Ref)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
 }
 
@@ -1685,27 +1779,13 @@ func (c *ReposListDeploymentsCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
-type ReposListDownloadsCmd struct {
-	Repo    string `name:"repo" required:"true"`
-	Page    int64  `name:"page"`
-	PerPage int64  `name:"per_page"`
-	internal.BaseCmd
-}
-
-func (c *ReposListDownloadsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/downloads")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
 type ReposListForAuthenticatedUserCmd struct {
 	Affiliation string `name:"affiliation"`
+	Before      string `name:"before"`
 	Direction   string `name:"direction"`
 	Page        int64  `name:"page"`
 	PerPage     int64  `name:"per_page"`
+	Since       string `name:"since"`
 	Sort        string `name:"sort"`
 	Type        string `name:"type"`
 	Visibility  string `name:"visibility"`
@@ -1722,6 +1802,8 @@ func (c *ReposListForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) er
 	c.UpdateURLQuery("direction", c.Direction)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("before", c.Before)
 	return c.DoRequest("GET")
 }
 
@@ -1793,22 +1875,6 @@ func (c *ReposListForksCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
-type ReposListHooksCmd struct {
-	Repo    string `name:"repo" required:"true"`
-	Page    int64  `name:"page"`
-	PerPage int64  `name:"per_page"`
-	internal.BaseCmd
-}
-
-func (c *ReposListHooksCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/hooks")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
 type ReposListInvitationsCmd struct {
 	Repo    string `name:"repo" required:"true"`
 	Page    int64  `name:"page"`
@@ -1867,29 +1933,19 @@ func (c *ReposListPagesBuildsCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
-type ReposListProtectedBranchRequiredStatusChecksContextsCmd struct {
-	Repo   string `name:"repo" required:"true"`
-	Branch string `name:"branch" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *ReposListProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_status_checks/contexts")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	return c.DoRequest("GET")
-}
-
 type ReposListPublicCmd struct {
-	Since int64 `name:"since"`
+	PerPage    int64  `name:"per_page"`
+	Since      string `name:"since"`
+	Visibility string `name:"visibility"`
 	internal.BaseCmd
 }
 
 func (c *ReposListPublicCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repositories")
+	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("visibility", c.Visibility)
 	return c.DoRequest("GET")
 }
 
@@ -1913,6 +1969,24 @@ func (c *ReposListPullRequestsAssociatedWithCommitCmd) Run(isValueSetMap map[str
 	return c.DoRequest("GET")
 }
 
+type ReposListReleaseAssetsCmd struct {
+	Repo      string `name:"repo" required:"true"`
+	ReleaseId int64  `name:"release_id" required:"true"`
+	Page      int64  `name:"page"`
+	PerPage   int64  `name:"per_page"`
+	internal.BaseCmd
+}
+
+func (c *ReposListReleaseAssetsCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/releases/{release_id}/assets")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("release_id", c.ReleaseId)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
+}
+
 type ReposListReleasesCmd struct {
 	Repo    string `name:"repo" required:"true"`
 	Page    int64  `name:"page"`
@@ -1924,24 +1998,6 @@ func (c *ReposListReleasesCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/releases")
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type ReposListStatusesForRefCmd struct {
-	Repo    string `name:"repo" required:"true"`
-	Ref     string `name:"ref" required:"true"`
-	Page    int64  `name:"page"`
-	PerPage int64  `name:"per_page"`
-	internal.BaseCmd
-}
-
-func (c *ReposListStatusesForRefCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/commits/{ref}/statuses")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("ref", c.Ref)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
@@ -1979,6 +2035,22 @@ func (c *ReposListTeamsCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
+type ReposListWebhooksCmd struct {
+	Repo    string `name:"repo" required:"true"`
+	Page    int64  `name:"page"`
+	PerPage int64  `name:"per_page"`
+	internal.BaseCmd
+}
+
+func (c *ReposListWebhooksCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/hooks")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
+}
+
 type ReposMergeCmd struct {
 	Repo          string `name:"repo" required:"true"`
 	CommitMessage string `name:"commit_message"`
@@ -1997,13 +2069,13 @@ func (c *ReposMergeCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("POST")
 }
 
-type ReposPingHookCmd struct {
+type ReposPingWebhookCmd struct {
 	Repo   string `name:"repo" required:"true"`
 	HookId int64  `name:"hook_id" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *ReposPingHookCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposPingWebhookCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/hooks/{hook_id}/pings")
 	c.UpdateURLPath("repo", c.Repo)
@@ -2011,15 +2083,15 @@ func (c *ReposPingHookCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("POST")
 }
 
-type ReposRemoveBranchProtectionCmd struct {
+type ReposRemoveAppAccessRestrictionsCmd struct {
 	Repo   string `name:"repo" required:"true"`
 	Branch string `name:"branch" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *ReposRemoveBranchProtectionCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposRemoveAppAccessRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/branches/{branch}/protection")
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/restrictions/apps")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("DELETE")
@@ -2039,99 +2111,13 @@ func (c *ReposRemoveCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("DELETE")
 }
 
-type ReposRemoveDeployKeyCmd struct {
-	Repo  string `name:"repo" required:"true"`
-	KeyId int64  `name:"key_id" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *ReposRemoveDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/keys/{key_id}")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("key_id", c.KeyId)
-	return c.DoRequest("DELETE")
-}
-
-type ReposRemoveProtectedBranchAdminEnforcementCmd struct {
+type ReposRemoveStatusCheckContextsCmd struct {
 	Repo   string `name:"repo" required:"true"`
 	Branch string `name:"branch" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *ReposRemoveProtectedBranchAdminEnforcementCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/enforce_admins")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	return c.DoRequest("DELETE")
-}
-
-type ReposRemoveProtectedBranchAppRestrictionsCmd struct {
-	Repo   string `name:"repo" required:"true"`
-	Branch string `name:"branch" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *ReposRemoveProtectedBranchAppRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/restrictions/apps")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	return c.DoRequest("DELETE")
-}
-
-type ReposRemoveProtectedBranchPullRequestReviewEnforcementCmd struct {
-	Repo   string `name:"repo" required:"true"`
-	Branch string `name:"branch" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *ReposRemoveProtectedBranchPullRequestReviewEnforcementCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_pull_request_reviews")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	return c.DoRequest("DELETE")
-}
-
-type ReposRemoveProtectedBranchRequiredSignaturesCmd struct {
-	Zzzax  bool   `name:"zzzax-preview" required:"true"`
-	Repo   string `name:"repo" required:"true"`
-	Branch string `name:"branch" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *ReposRemoveProtectedBranchRequiredSignaturesCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_signatures")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	c.UpdatePreview("zzzax", c.Zzzax)
-	return c.DoRequest("DELETE")
-}
-
-type ReposRemoveProtectedBranchRequiredStatusChecksCmd struct {
-	Repo   string `name:"repo" required:"true"`
-	Branch string `name:"branch" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *ReposRemoveProtectedBranchRequiredStatusChecksCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_status_checks")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	return c.DoRequest("DELETE")
-}
-
-type ReposRemoveProtectedBranchRequiredStatusChecksContextsCmd struct {
-	Repo   string `name:"repo" required:"true"`
-	Branch string `name:"branch" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *ReposRemoveProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposRemoveStatusCheckContextsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_status_checks/contexts")
 	c.UpdateURLPath("repo", c.Repo)
@@ -2139,27 +2125,27 @@ func (c *ReposRemoveProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueS
 	return c.DoRequest("DELETE")
 }
 
-type ReposRemoveProtectedBranchRestrictionsCmd struct {
+type ReposRemoveStatusCheckProtectionCmd struct {
 	Repo   string `name:"repo" required:"true"`
 	Branch string `name:"branch" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *ReposRemoveProtectedBranchRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposRemoveStatusCheckProtectionCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/restrictions")
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_status_checks")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("branch", c.Branch)
 	return c.DoRequest("DELETE")
 }
 
-type ReposRemoveProtectedBranchTeamRestrictionsCmd struct {
+type ReposRemoveTeamAccessRestrictionsCmd struct {
 	Repo   string `name:"repo" required:"true"`
 	Branch string `name:"branch" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *ReposRemoveProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposRemoveTeamAccessRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/restrictions/teams")
 	c.UpdateURLPath("repo", c.Repo)
@@ -2167,13 +2153,13 @@ func (c *ReposRemoveProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[st
 	return c.DoRequest("DELETE")
 }
 
-type ReposRemoveProtectedBranchUserRestrictionsCmd struct {
+type ReposRemoveUserAccessRestrictionsCmd struct {
 	Repo   string `name:"repo" required:"true"`
 	Branch string `name:"branch" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *ReposRemoveProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposRemoveUserAccessRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/restrictions/users")
 	c.UpdateURLPath("repo", c.Repo)
@@ -2197,13 +2183,39 @@ func (c *ReposReplaceAllTopicsCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("PUT")
 }
 
-type ReposReplaceProtectedBranchAppRestrictionsCmd struct {
+type ReposRequestPagesBuildCmd struct {
+	Repo string `name:"repo" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ReposRequestPagesBuildCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/pages/builds")
+	c.UpdateURLPath("repo", c.Repo)
+	return c.DoRequest("POST")
+}
+
+type ReposSetAdminBranchProtectionCmd struct {
 	Repo   string `name:"repo" required:"true"`
 	Branch string `name:"branch" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *ReposReplaceProtectedBranchAppRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposSetAdminBranchProtectionCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/enforce_admins")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	return c.DoRequest("POST")
+}
+
+type ReposSetAppAccessRestrictionsCmd struct {
+	Repo   string `name:"repo" required:"true"`
+	Branch string `name:"branch" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ReposSetAppAccessRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/restrictions/apps")
 	c.UpdateURLPath("repo", c.Repo)
@@ -2211,13 +2223,13 @@ func (c *ReposReplaceProtectedBranchAppRestrictionsCmd) Run(isValueSetMap map[st
 	return c.DoRequest("PUT")
 }
 
-type ReposReplaceProtectedBranchRequiredStatusChecksContextsCmd struct {
+type ReposSetStatusCheckContextsCmd struct {
 	Repo   string `name:"repo" required:"true"`
 	Branch string `name:"branch" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *ReposReplaceProtectedBranchRequiredStatusChecksContextsCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposSetStatusCheckContextsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_status_checks/contexts")
 	c.UpdateURLPath("repo", c.Repo)
@@ -2225,13 +2237,13 @@ func (c *ReposReplaceProtectedBranchRequiredStatusChecksContextsCmd) Run(isValue
 	return c.DoRequest("PUT")
 }
 
-type ReposReplaceProtectedBranchTeamRestrictionsCmd struct {
+type ReposSetTeamAccessRestrictionsCmd struct {
 	Repo   string `name:"repo" required:"true"`
 	Branch string `name:"branch" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *ReposReplaceProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposSetTeamAccessRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/restrictions/teams")
 	c.UpdateURLPath("repo", c.Repo)
@@ -2239,13 +2251,13 @@ func (c *ReposReplaceProtectedBranchTeamRestrictionsCmd) Run(isValueSetMap map[s
 	return c.DoRequest("PUT")
 }
 
-type ReposReplaceProtectedBranchUserRestrictionsCmd struct {
+type ReposSetUserAccessRestrictionsCmd struct {
 	Repo   string `name:"repo" required:"true"`
 	Branch string `name:"branch" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *ReposReplaceProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposSetUserAccessRestrictionsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/restrictions/users")
 	c.UpdateURLPath("repo", c.Repo)
@@ -2253,37 +2265,13 @@ func (c *ReposReplaceProtectedBranchUserRestrictionsCmd) Run(isValueSetMap map[s
 	return c.DoRequest("PUT")
 }
 
-type ReposRequestPageBuildCmd struct {
-	Repo string `name:"repo" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *ReposRequestPageBuildCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/pages/builds")
-	c.UpdateURLPath("repo", c.Repo)
-	return c.DoRequest("POST")
-}
-
-type ReposRetrieveCommunityProfileMetricsCmd struct {
-	Repo string `name:"repo" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *ReposRetrieveCommunityProfileMetricsCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/community/profile")
-	c.UpdateURLPath("repo", c.Repo)
-	return c.DoRequest("GET")
-}
-
-type ReposTestPushHookCmd struct {
+type ReposTestPushWebhookCmd struct {
 	Repo   string `name:"repo" required:"true"`
 	HookId int64  `name:"hook_id" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *ReposTestPushHookCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposTestPushWebhookCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/hooks/{hook_id}/tests")
 	c.UpdateURLPath("repo", c.Repo)
@@ -2413,36 +2401,6 @@ func (c *ReposUpdateCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("PATCH")
 }
 
-type ReposUpdateHookCmd struct {
-	Repo              string   `name:"repo" required:"true"`
-	HookId            int64    `name:"hook_id" required:"true"`
-	Active            bool     `name:"active"`
-	AddEvents         []string `name:"add_events"`
-	ConfigContentType string   `name:"config.content_type"`
-	ConfigInsecureSsl string   `name:"config.insecure_ssl"`
-	ConfigSecret      string   `name:"config.secret"`
-	ConfigUrl         string   `name:"config.url"`
-	Events            []string `name:"events"`
-	RemoveEvents      []string `name:"remove_events"`
-	internal.BaseCmd
-}
-
-func (c *ReposUpdateHookCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/hooks/{hook_id}")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("hook_id", c.HookId)
-	c.UpdateBody("active", c.Active)
-	c.UpdateBody("add_events", c.AddEvents)
-	c.UpdateBody("config.content_type", c.ConfigContentType)
-	c.UpdateBody("config.insecure_ssl", c.ConfigInsecureSsl)
-	c.UpdateBody("config.secret", c.ConfigSecret)
-	c.UpdateBody("config.url", c.ConfigUrl)
-	c.UpdateBody("events", c.Events)
-	c.UpdateBody("remove_events", c.RemoveEvents)
-	return c.DoRequest("PATCH")
-}
-
 type ReposUpdateInformationAboutPagesSiteCmd struct {
 	Repo   string `name:"repo" required:"true"`
 	Cname  string `name:"cname"`
@@ -2475,7 +2433,7 @@ func (c *ReposUpdateInvitationCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("PATCH")
 }
 
-type ReposUpdateProtectedBranchPullRequestReviewEnforcementCmd struct {
+type ReposUpdatePullRequestReviewProtectionCmd struct {
 	LukeCage                     bool     `name:"luke-cage-preview"`
 	Repo                         string   `name:"repo" required:"true"`
 	Branch                       string   `name:"branch" required:"true"`
@@ -2487,7 +2445,7 @@ type ReposUpdateProtectedBranchPullRequestReviewEnforcementCmd struct {
 	internal.BaseCmd
 }
 
-func (c *ReposUpdateProtectedBranchPullRequestReviewEnforcementCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposUpdatePullRequestReviewProtectionCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_pull_request_reviews")
 	c.UpdateURLPath("repo", c.Repo)
@@ -2501,29 +2459,12 @@ func (c *ReposUpdateProtectedBranchPullRequestReviewEnforcementCmd) Run(isValueS
 	return c.DoRequest("PATCH")
 }
 
-type ReposUpdateProtectedBranchRequiredStatusChecksCmd struct {
-	Repo     string   `name:"repo" required:"true"`
-	Branch   string   `name:"branch" required:"true"`
-	Contexts []string `name:"contexts"`
-	Strict   bool     `name:"strict"`
-	internal.BaseCmd
-}
-
-func (c *ReposUpdateProtectedBranchRequiredStatusChecksCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_status_checks")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("branch", c.Branch)
-	c.UpdateBody("contexts", c.Contexts)
-	c.UpdateBody("strict", c.Strict)
-	return c.DoRequest("PATCH")
-}
-
 type ReposUpdateReleaseAssetCmd struct {
 	Repo    string `name:"repo" required:"true"`
 	AssetId int64  `name:"asset_id" required:"true"`
 	Label   string `name:"label"`
 	Name    string `name:"name"`
+	State   string `name:"state"`
 	internal.BaseCmd
 }
 
@@ -2534,6 +2475,7 @@ func (c *ReposUpdateReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLPath("asset_id", c.AssetId)
 	c.UpdateBody("label", c.Label)
 	c.UpdateBody("name", c.Name)
+	c.UpdateBody("state", c.State)
 	return c.DoRequest("PATCH")
 }
 
@@ -2563,6 +2505,58 @@ func (c *ReposUpdateReleaseCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("PATCH")
 }
 
+type ReposUpdateStatusCheckProtectionCmd struct {
+	Repo     string   `name:"repo" required:"true"`
+	Branch   string   `name:"branch" required:"true"`
+	Contexts []string `name:"contexts"`
+	Strict   bool     `name:"strict"`
+	internal.BaseCmd
+}
+
+func (c *ReposUpdateStatusCheckProtectionCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_status_checks")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("branch", c.Branch)
+	c.UpdateBody("contexts", c.Contexts)
+	c.UpdateBody("strict", c.Strict)
+	return c.DoRequest("PATCH")
+}
+
+type ReposUpdateWebhookCmd struct {
+	Repo              string   `name:"repo" required:"true"`
+	HookId            int64    `name:"hook_id" required:"true"`
+	Active            bool     `name:"active"`
+	AddEvents         []string `name:"add_events"`
+	ConfigAddress     string   `name:"config.address"`
+	ConfigContentType string   `name:"config.content_type"`
+	ConfigInsecureSsl string   `name:"config.insecure_ssl"`
+	ConfigRoom        string   `name:"config.room"`
+	ConfigSecret      string   `name:"config.secret"`
+	ConfigUrl         string   `name:"config.url"`
+	Events            []string `name:"events"`
+	RemoveEvents      []string `name:"remove_events"`
+	internal.BaseCmd
+}
+
+func (c *ReposUpdateWebhookCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/hooks/{hook_id}")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateURLPath("hook_id", c.HookId)
+	c.UpdateBody("active", c.Active)
+	c.UpdateBody("add_events", c.AddEvents)
+	c.UpdateBody("config.address", c.ConfigAddress)
+	c.UpdateBody("config.content_type", c.ConfigContentType)
+	c.UpdateBody("config.insecure_ssl", c.ConfigInsecureSsl)
+	c.UpdateBody("config.room", c.ConfigRoom)
+	c.UpdateBody("config.secret", c.ConfigSecret)
+	c.UpdateBody("config.url", c.ConfigUrl)
+	c.UpdateBody("events", c.Events)
+	c.UpdateBody("remove_events", c.RemoveEvents)
+	return c.DoRequest("PATCH")
+}
+
 type ReposUploadReleaseAssetCmd struct {
 	Repo          string `name:"repo" required:"true"`
 	ReleaseId     int64  `name:"release_id" required:"true"`
@@ -2578,8 +2572,6 @@ func (c *ReposUploadReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/releases/{release_id}/assets")
 	internal.ReposUploadReleaseAssetOverride(&c.BaseCmd, c.File)
-	c.AddRequestHeader("content-length", c.ContentLength)
-	c.AddRequestHeader("content-type", c.ContentType)
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("release_id", c.ReleaseId)
 	c.UpdateURLQuery("name", c.Name)

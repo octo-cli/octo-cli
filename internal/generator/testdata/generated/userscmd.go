@@ -5,49 +5,47 @@ package generated
 import internal "github.com/octo-cli/octo-cli/internal"
 
 type UsersCmd struct {
-	AddEmails                         UsersAddEmailsCmd                         `cmd:""`
-	Block                             UsersBlockCmd                             `cmd:""`
-	CheckBlocked                      UsersCheckBlockedCmd                      `cmd:""`
-	CheckFollowing                    UsersCheckFollowingCmd                    `cmd:""`
-	CheckFollowingForUser             UsersCheckFollowingForUserCmd             `cmd:""`
-	CreateGpgKey                      UsersCreateGpgKeyCmd                      `cmd:""`
-	CreatePublicKey                   UsersCreatePublicKeyCmd                   `cmd:""`
-	DeleteEmails                      UsersDeleteEmailsCmd                      `cmd:""`
-	DeleteGpgKey                      UsersDeleteGpgKeyCmd                      `cmd:""`
-	DeletePublicKey                   UsersDeletePublicKeyCmd                   `cmd:""`
-	Follow                            UsersFollowCmd                            `cmd:""`
-	GetAuthenticated                  UsersGetAuthenticatedCmd                  `cmd:""`
-	GetByUsername                     UsersGetByUsernameCmd                     `cmd:""`
-	GetContextForUser                 UsersGetContextForUserCmd                 `cmd:""`
-	GetGpgKey                         UsersGetGpgKeyCmd                         `cmd:""`
-	GetPublicKey                      UsersGetPublicKeyCmd                      `cmd:""`
-	List                              UsersListCmd                              `cmd:""`
-	ListBlocked                       UsersListBlockedCmd                       `cmd:""`
-	ListEmails                        UsersListEmailsCmd                        `cmd:""`
-	ListFollowedByAuthenticated       UsersListFollowedByAuthenticatedCmd       `cmd:""`
-	ListFollowersForAuthenticatedUser UsersListFollowersForAuthenticatedUserCmd `cmd:""`
-	ListFollowersForUser              UsersListFollowersForUserCmd              `cmd:""`
-	ListFollowingForUser              UsersListFollowingForUserCmd              `cmd:""`
-	ListGpgKeys                       UsersListGpgKeysCmd                       `cmd:""`
-	ListGpgKeysForUser                UsersListGpgKeysForUserCmd                `cmd:""`
-	ListPublicEmails                  UsersListPublicEmailsCmd                  `cmd:""`
-	ListPublicKeys                    UsersListPublicKeysCmd                    `cmd:""`
-	ListPublicKeysForUser             UsersListPublicKeysForUserCmd             `cmd:""`
-	TogglePrimaryEmailVisibility      UsersTogglePrimaryEmailVisibilityCmd      `cmd:""`
-	Unblock                           UsersUnblockCmd                           `cmd:""`
-	Unfollow                          UsersUnfollowCmd                          `cmd:""`
-	UpdateAuthenticated               UsersUpdateAuthenticatedCmd               `cmd:""`
+	AddEmailForAuthenticated                  UsersAddEmailForAuthenticatedCmd                  `cmd:""`
+	Block                                     UsersBlockCmd                                     `cmd:""`
+	CheckBlocked                              UsersCheckBlockedCmd                              `cmd:""`
+	CheckFollowingForUser                     UsersCheckFollowingForUserCmd                     `cmd:""`
+	CheckPersonIsFollowedByAuthenticated      UsersCheckPersonIsFollowedByAuthenticatedCmd      `cmd:""`
+	CreateGpgKeyForAuthenticated              UsersCreateGpgKeyForAuthenticatedCmd              `cmd:""`
+	CreatePublicSshKeyForAuthenticated        UsersCreatePublicSshKeyForAuthenticatedCmd        `cmd:""`
+	DeleteEmailForAuthenticated               UsersDeleteEmailForAuthenticatedCmd               `cmd:""`
+	DeleteGpgKeyForAuthenticated              UsersDeleteGpgKeyForAuthenticatedCmd              `cmd:""`
+	DeletePublicSshKeyForAuthenticated        UsersDeletePublicSshKeyForAuthenticatedCmd        `cmd:""`
+	Follow                                    UsersFollowCmd                                    `cmd:""`
+	GetAuthenticated                          UsersGetAuthenticatedCmd                          `cmd:""`
+	GetByUsername                             UsersGetByUsernameCmd                             `cmd:""`
+	GetContextForUser                         UsersGetContextForUserCmd                         `cmd:""`
+	GetGpgKeyForAuthenticated                 UsersGetGpgKeyForAuthenticatedCmd                 `cmd:""`
+	GetPublicSshKeyForAuthenticated           UsersGetPublicSshKeyForAuthenticatedCmd           `cmd:""`
+	List                                      UsersListCmd                                      `cmd:""`
+	ListBlockedByAuthenticated                UsersListBlockedByAuthenticatedCmd                `cmd:""`
+	ListEmailsForAuthenticated                UsersListEmailsForAuthenticatedCmd                `cmd:""`
+	ListFollowedByAuthenticated               UsersListFollowedByAuthenticatedCmd               `cmd:""`
+	ListFollowersForAuthenticatedUser         UsersListFollowersForAuthenticatedUserCmd         `cmd:""`
+	ListFollowersForUser                      UsersListFollowersForUserCmd                      `cmd:""`
+	ListFollowingForUser                      UsersListFollowingForUserCmd                      `cmd:""`
+	ListGpgKeysForAuthenticated               UsersListGpgKeysForAuthenticatedCmd               `cmd:""`
+	ListGpgKeysForUser                        UsersListGpgKeysForUserCmd                        `cmd:""`
+	ListPublicEmailsForAuthenticated          UsersListPublicEmailsForAuthenticatedCmd          `cmd:""`
+	ListPublicKeysForUser                     UsersListPublicKeysForUserCmd                     `cmd:""`
+	ListPublicSshKeysForAuthenticated         UsersListPublicSshKeysForAuthenticatedCmd         `cmd:""`
+	SetPrimaryEmailVisibilityForAuthenticated UsersSetPrimaryEmailVisibilityForAuthenticatedCmd `cmd:""`
+	Unblock                                   UsersUnblockCmd                                   `cmd:""`
+	Unfollow                                  UsersUnfollowCmd                                  `cmd:""`
+	UpdateAuthenticated                       UsersUpdateAuthenticatedCmd                       `cmd:""`
 }
 
-type UsersAddEmailsCmd struct {
-	Emails []string `name:"emails" required:"true"`
+type UsersAddEmailForAuthenticatedCmd struct {
 	internal.BaseCmd
 }
 
-func (c *UsersAddEmailsCmd) Run(isValueSetMap map[string]bool) error {
+func (c *UsersAddEmailForAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/emails")
-	c.UpdateBody("emails", c.Emails)
 	return c.DoRequest("POST")
 }
 
@@ -75,18 +73,6 @@ func (c *UsersCheckBlockedCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
-type UsersCheckFollowingCmd struct {
-	Username string `name:"username" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *UsersCheckFollowingCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/following/{username}")
-	c.UpdateURLPath("username", c.Username)
-	return c.DoRequest("GET")
-}
-
 type UsersCheckFollowingForUserCmd struct {
 	Username   string `name:"username" required:"true"`
 	TargetUser string `name:"target_user" required:"true"`
@@ -101,25 +87,37 @@ func (c *UsersCheckFollowingForUserCmd) Run(isValueSetMap map[string]bool) error
 	return c.DoRequest("GET")
 }
 
-type UsersCreateGpgKeyCmd struct {
-	ArmoredPublicKey string `name:"armored_public_key"`
+type UsersCheckPersonIsFollowedByAuthenticatedCmd struct {
+	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *UsersCreateGpgKeyCmd) Run(isValueSetMap map[string]bool) error {
+func (c *UsersCheckPersonIsFollowedByAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/following/{username}")
+	c.UpdateURLPath("username", c.Username)
+	return c.DoRequest("GET")
+}
+
+type UsersCreateGpgKeyForAuthenticatedCmd struct {
+	ArmoredPublicKey string `name:"armored_public_key" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *UsersCreateGpgKeyForAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/gpg_keys")
 	c.UpdateBody("armored_public_key", c.ArmoredPublicKey)
 	return c.DoRequest("POST")
 }
 
-type UsersCreatePublicKeyCmd struct {
-	Key   string `name:"key"`
+type UsersCreatePublicSshKeyForAuthenticatedCmd struct {
 	Title string `name:"title"`
+	Key   string `name:"key" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *UsersCreatePublicKeyCmd) Run(isValueSetMap map[string]bool) error {
+func (c *UsersCreatePublicSshKeyForAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/keys")
 	c.UpdateBody("key", c.Key)
@@ -127,36 +125,34 @@ func (c *UsersCreatePublicKeyCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("POST")
 }
 
-type UsersDeleteEmailsCmd struct {
-	Emails []string `name:"emails" required:"true"`
+type UsersDeleteEmailForAuthenticatedCmd struct {
 	internal.BaseCmd
 }
 
-func (c *UsersDeleteEmailsCmd) Run(isValueSetMap map[string]bool) error {
+func (c *UsersDeleteEmailForAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/emails")
-	c.UpdateBody("emails", c.Emails)
 	return c.DoRequest("DELETE")
 }
 
-type UsersDeleteGpgKeyCmd struct {
+type UsersDeleteGpgKeyForAuthenticatedCmd struct {
 	GpgKeyId int64 `name:"gpg_key_id" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *UsersDeleteGpgKeyCmd) Run(isValueSetMap map[string]bool) error {
+func (c *UsersDeleteGpgKeyForAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/gpg_keys/{gpg_key_id}")
 	c.UpdateURLPath("gpg_key_id", c.GpgKeyId)
 	return c.DoRequest("DELETE")
 }
 
-type UsersDeletePublicKeyCmd struct {
+type UsersDeletePublicSshKeyForAuthenticatedCmd struct {
 	KeyId int64 `name:"key_id" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *UsersDeletePublicKeyCmd) Run(isValueSetMap map[string]bool) error {
+func (c *UsersDeletePublicSshKeyForAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/keys/{key_id}")
 	c.UpdateURLPath("key_id", c.KeyId)
@@ -213,42 +209,43 @@ func (c *UsersGetContextForUserCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
-type UsersGetGpgKeyCmd struct {
+type UsersGetGpgKeyForAuthenticatedCmd struct {
 	GpgKeyId int64 `name:"gpg_key_id" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *UsersGetGpgKeyCmd) Run(isValueSetMap map[string]bool) error {
+func (c *UsersGetGpgKeyForAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/gpg_keys/{gpg_key_id}")
 	c.UpdateURLPath("gpg_key_id", c.GpgKeyId)
 	return c.DoRequest("GET")
 }
 
-type UsersGetPublicKeyCmd struct {
+type UsersGetPublicSshKeyForAuthenticatedCmd struct {
 	KeyId int64 `name:"key_id" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *UsersGetPublicKeyCmd) Run(isValueSetMap map[string]bool) error {
+func (c *UsersGetPublicSshKeyForAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/keys/{key_id}")
 	c.UpdateURLPath("key_id", c.KeyId)
 	return c.DoRequest("GET")
 }
 
-type UsersListBlockedCmd struct {
+type UsersListBlockedByAuthenticatedCmd struct {
 	internal.BaseCmd
 }
 
-func (c *UsersListBlockedCmd) Run(isValueSetMap map[string]bool) error {
+func (c *UsersListBlockedByAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/blocks")
 	return c.DoRequest("GET")
 }
 
 type UsersListCmd struct {
-	Since string `name:"since"`
+	PerPage int64  `name:"per_page"`
+	Since   string `name:"since"`
 	internal.BaseCmd
 }
 
@@ -256,16 +253,17 @@ func (c *UsersListCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/users")
 	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("per_page", c.PerPage)
 	return c.DoRequest("GET")
 }
 
-type UsersListEmailsCmd struct {
+type UsersListEmailsForAuthenticatedCmd struct {
 	Page    int64 `name:"page"`
 	PerPage int64 `name:"per_page"`
 	internal.BaseCmd
 }
 
-func (c *UsersListEmailsCmd) Run(isValueSetMap map[string]bool) error {
+func (c *UsersListEmailsForAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/emails")
 	c.UpdateURLQuery("per_page", c.PerPage)
@@ -333,13 +331,13 @@ func (c *UsersListFollowingForUserCmd) Run(isValueSetMap map[string]bool) error 
 	return c.DoRequest("GET")
 }
 
-type UsersListGpgKeysCmd struct {
+type UsersListGpgKeysForAuthenticatedCmd struct {
 	Page    int64 `name:"page"`
 	PerPage int64 `name:"per_page"`
 	internal.BaseCmd
 }
 
-func (c *UsersListGpgKeysCmd) Run(isValueSetMap map[string]bool) error {
+func (c *UsersListGpgKeysForAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/gpg_keys")
 	c.UpdateURLQuery("per_page", c.PerPage)
@@ -363,29 +361,15 @@ func (c *UsersListGpgKeysForUserCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
-type UsersListPublicEmailsCmd struct {
+type UsersListPublicEmailsForAuthenticatedCmd struct {
 	Page    int64 `name:"page"`
 	PerPage int64 `name:"per_page"`
 	internal.BaseCmd
 }
 
-func (c *UsersListPublicEmailsCmd) Run(isValueSetMap map[string]bool) error {
+func (c *UsersListPublicEmailsForAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/public_emails")
-	c.UpdateURLQuery("per_page", c.PerPage)
-	c.UpdateURLQuery("page", c.Page)
-	return c.DoRequest("GET")
-}
-
-type UsersListPublicKeysCmd struct {
-	Page    int64 `name:"page"`
-	PerPage int64 `name:"per_page"`
-	internal.BaseCmd
-}
-
-func (c *UsersListPublicKeysCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/user/keys")
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
 	return c.DoRequest("GET")
@@ -407,13 +391,27 @@ func (c *UsersListPublicKeysForUserCmd) Run(isValueSetMap map[string]bool) error
 	return c.DoRequest("GET")
 }
 
-type UsersTogglePrimaryEmailVisibilityCmd struct {
+type UsersListPublicSshKeysForAuthenticatedCmd struct {
+	Page    int64 `name:"page"`
+	PerPage int64 `name:"per_page"`
+	internal.BaseCmd
+}
+
+func (c *UsersListPublicSshKeysForAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/user/keys")
+	c.UpdateURLQuery("per_page", c.PerPage)
+	c.UpdateURLQuery("page", c.Page)
+	return c.DoRequest("GET")
+}
+
+type UsersSetPrimaryEmailVisibilityForAuthenticatedCmd struct {
 	Email      string `name:"email" required:"true"`
 	Visibility string `name:"visibility" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *UsersTogglePrimaryEmailVisibilityCmd) Run(isValueSetMap map[string]bool) error {
+func (c *UsersSetPrimaryEmailVisibilityForAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/email/visibility")
 	c.UpdateBody("email", c.Email)
@@ -446,13 +444,14 @@ func (c *UsersUnfollowCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type UsersUpdateAuthenticatedCmd struct {
-	Bio      string `name:"bio"`
-	Blog     string `name:"blog"`
-	Company  string `name:"company"`
-	Email    string `name:"email"`
-	Hireable bool   `name:"hireable"`
-	Location string `name:"location"`
-	Name     string `name:"name"`
+	Bio             string `name:"bio"`
+	Blog            string `name:"blog"`
+	Company         string `name:"company"`
+	Email           string `name:"email"`
+	Hireable        bool   `name:"hireable"`
+	Location        string `name:"location"`
+	Name            string `name:"name"`
+	TwitterUsername string `name:"twitter_username"`
 	internal.BaseCmd
 }
 
@@ -466,5 +465,6 @@ func (c *UsersUpdateAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateBody("hireable", c.Hireable)
 	c.UpdateBody("location", c.Location)
 	c.UpdateBody("name", c.Name)
+	c.UpdateBody("twitter_username", c.TwitterUsername)
 	return c.DoRequest("PATCH")
 }

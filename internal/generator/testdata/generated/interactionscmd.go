@@ -5,44 +5,12 @@ package generated
 import internal "github.com/octo-cli/octo-cli/internal"
 
 type InteractionsCmd struct {
-	AddOrUpdateRestrictionsForOrg  InteractionsAddOrUpdateRestrictionsForOrgCmd  `cmd:""`
-	AddOrUpdateRestrictionsForRepo InteractionsAddOrUpdateRestrictionsForRepoCmd `cmd:""`
-	GetRestrictionsForOrg          InteractionsGetRestrictionsForOrgCmd          `cmd:""`
-	GetRestrictionsForRepo         InteractionsGetRestrictionsForRepoCmd         `cmd:""`
-	RemoveRestrictionsForOrg       InteractionsRemoveRestrictionsForOrgCmd       `cmd:""`
-	RemoveRestrictionsForRepo      InteractionsRemoveRestrictionsForRepoCmd      `cmd:""`
-}
-
-type InteractionsAddOrUpdateRestrictionsForOrgCmd struct {
-	Sombra bool   `name:"sombra-preview" required:"true"`
-	Org    string `name:"org" required:"true"`
-	Limit  string `name:"limit" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *InteractionsAddOrUpdateRestrictionsForOrgCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/orgs/{org}/interaction-limits")
-	c.UpdateURLPath("org", c.Org)
-	c.UpdatePreview("sombra", c.Sombra)
-	c.UpdateBody("limit", c.Limit)
-	return c.DoRequest("PUT")
-}
-
-type InteractionsAddOrUpdateRestrictionsForRepoCmd struct {
-	Sombra bool   `name:"sombra-preview" required:"true"`
-	Repo   string `name:"repo" required:"true"`
-	Limit  string `name:"limit" required:"true"`
-	internal.BaseCmd
-}
-
-func (c *InteractionsAddOrUpdateRestrictionsForRepoCmd) Run(isValueSetMap map[string]bool) error {
-	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/interaction-limits")
-	c.UpdateURLPath("repo", c.Repo)
-	c.UpdatePreview("sombra", c.Sombra)
-	c.UpdateBody("limit", c.Limit)
-	return c.DoRequest("PUT")
+	GetRestrictionsForOrg     InteractionsGetRestrictionsForOrgCmd     `cmd:""`
+	GetRestrictionsForRepo    InteractionsGetRestrictionsForRepoCmd    `cmd:""`
+	RemoveRestrictionsForOrg  InteractionsRemoveRestrictionsForOrgCmd  `cmd:""`
+	RemoveRestrictionsForRepo InteractionsRemoveRestrictionsForRepoCmd `cmd:""`
+	SetRestrictionsForOrg     InteractionsSetRestrictionsForOrgCmd     `cmd:""`
+	SetRestrictionsForRepo    InteractionsSetRestrictionsForRepoCmd    `cmd:""`
 }
 
 type InteractionsGetRestrictionsForOrgCmd struct {
@@ -99,4 +67,36 @@ func (c *InteractionsRemoveRestrictionsForRepoCmd) Run(isValueSetMap map[string]
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdatePreview("sombra", c.Sombra)
 	return c.DoRequest("DELETE")
+}
+
+type InteractionsSetRestrictionsForOrgCmd struct {
+	Sombra bool   `name:"sombra-preview" required:"true"`
+	Org    string `name:"org" required:"true"`
+	Limit  string `name:"limit" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *InteractionsSetRestrictionsForOrgCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/orgs/{org}/interaction-limits")
+	c.UpdateURLPath("org", c.Org)
+	c.UpdatePreview("sombra", c.Sombra)
+	c.UpdateBody("limit", c.Limit)
+	return c.DoRequest("PUT")
+}
+
+type InteractionsSetRestrictionsForRepoCmd struct {
+	Sombra bool   `name:"sombra-preview" required:"true"`
+	Repo   string `name:"repo" required:"true"`
+	Limit  string `name:"limit" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *InteractionsSetRestrictionsForRepoCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/interaction-limits")
+	c.UpdateURLPath("repo", c.Repo)
+	c.UpdatePreview("sombra", c.Sombra)
+	c.UpdateBody("limit", c.Limit)
+	return c.DoRequest("PUT")
 }
