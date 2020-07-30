@@ -327,7 +327,7 @@ You must authenticate using an access token with the `repo` scope to use this en
 | ref | __Required__ The reference of the workflow run. The reference can be a branch, tag, or a commit SHA. |
 | repo | __Required__ repository in OWNER/REPO form |
 | workflow_id | __Required__  |
-| inputs | Input keys and values configured in the workflow file. The maximum number of properties is 10. |
+| inputs | Input keys and values configured in the workflow file. The maximum number of properties is 10. Any default properties configured in the workflow file will be used when `inputs` are omitted. |
 
 ## actions delete-artifact
 
