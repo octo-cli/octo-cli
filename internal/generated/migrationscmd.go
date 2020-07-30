@@ -140,8 +140,9 @@ func (c *MigrationsGetLargeFilesCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type MigrationsGetStatusForAuthenticatedUserCmd struct {
-	Wyandotte   bool  `name:"wyandotte-preview" required:"true"`
-	MigrationId int64 `name:"migration_id" required:"true"`
+	Wyandotte   bool     `name:"wyandotte-preview" required:"true"`
+	MigrationId int64    `name:"migration_id" required:"true"`
+	Exclude     []string `name:"exclude"`
 	internal.BaseCmd
 }
 
@@ -149,6 +150,7 @@ func (c *MigrationsGetStatusForAuthenticatedUserCmd) Run(isValueSetMap map[strin
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/migrations/{migration_id}")
 	c.UpdateURLPath("migration_id", c.MigrationId)
+	c.UpdateURLQuery("exclude", c.Exclude)
 	c.UpdatePreview("wyandotte", c.Wyandotte)
 	return c.DoRequest("GET")
 }
@@ -246,6 +248,7 @@ type MigrationsMapCommitAuthorCmd struct {
 	AuthorId int64  `name:"author_id" required:"true"`
 	Email    string `name:"email"`
 	Name     string `name:"name"`
+	RemoteId string `name:"remote_id"`
 	internal.BaseCmd
 }
 
@@ -256,6 +259,7 @@ func (c *MigrationsMapCommitAuthorCmd) Run(isValueSetMap map[string]bool) error 
 	c.UpdateURLPath("author_id", c.AuthorId)
 	c.UpdateBody("email", c.Email)
 	c.UpdateBody("name", c.Name)
+	c.UpdateBody("remote_id", c.RemoteId)
 	return c.DoRequest("PATCH")
 }
 
@@ -274,6 +278,7 @@ func (c *MigrationsSetLfsPreferenceCmd) Run(isValueSetMap map[string]bool) error
 }
 
 type MigrationsStartForAuthenticatedUserCmd struct {
+	Exclude            []string `name:"exclude"`
 	ExcludeAttachments bool     `name:"exclude_attachments"`
 	LockRepositories   bool     `name:"lock_repositories"`
 	Repositories       []string `name:"repositories" required:"true"`
@@ -283,6 +288,7 @@ type MigrationsStartForAuthenticatedUserCmd struct {
 func (c *MigrationsStartForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/migrations")
+	c.UpdateBody("exclude", c.Exclude)
 	c.UpdateBody("exclude_attachments", c.ExcludeAttachments)
 	c.UpdateBody("lock_repositories", c.LockRepositories)
 	c.UpdateBody("repositories", c.Repositories)
@@ -291,6 +297,7 @@ func (c *MigrationsStartForAuthenticatedUserCmd) Run(isValueSetMap map[string]bo
 
 type MigrationsStartForOrgCmd struct {
 	Org                string   `name:"org" required:"true"`
+	Exclude            []string `name:"exclude"`
 	ExcludeAttachments bool     `name:"exclude_attachments"`
 	LockRepositories   bool     `name:"lock_repositories"`
 	Repositories       []string `name:"repositories" required:"true"`
@@ -301,6 +308,7 @@ func (c *MigrationsStartForOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/migrations")
 	c.UpdateURLPath("org", c.Org)
+	c.UpdateBody("exclude", c.Exclude)
 	c.UpdateBody("exclude_attachments", c.ExcludeAttachments)
 	c.UpdateBody("lock_repositories", c.LockRepositories)
 	c.UpdateBody("repositories", c.Repositories)
@@ -365,6 +373,8 @@ func (c *MigrationsUnlockRepoForOrgCmd) Run(isValueSetMap map[string]bool) error
 
 type MigrationsUpdateImportCmd struct {
 	Repo        string `name:"repo" required:"true"`
+	TfvcProject string `name:"tfvc_project"`
+	Vcs         string `name:"vcs"`
 	VcsPassword string `name:"vcs_password"`
 	VcsUsername string `name:"vcs_username"`
 	internal.BaseCmd
@@ -374,6 +384,8 @@ func (c *MigrationsUpdateImportCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/import")
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("tfvc_project", c.TfvcProject)
+	c.UpdateBody("vcs", c.Vcs)
 	c.UpdateBody("vcs_password", c.VcsPassword)
 	c.UpdateBody("vcs_username", c.VcsUsername)
 	return c.DoRequest("PATCH")

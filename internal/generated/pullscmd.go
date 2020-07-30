@@ -53,10 +53,11 @@ type PullsCreateCmd struct {
 	Repo                string `name:"repo" required:"true"`
 	Body                string `name:"body"`
 	Draft               bool   `name:"draft"`
+	Issue               int64  `name:"issue"`
 	MaintainerCanModify bool   `name:"maintainer_can_modify"`
+	Title               string `name:"title"`
 	Base                string `name:"base" required:"true"`
 	Head                string `name:"head" required:"true"`
-	Title               string `name:"title" required:"true"`
 	internal.BaseCmd
 }
 
@@ -69,6 +70,7 @@ func (c *PullsCreateCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateBody("body", c.Body)
 	c.UpdateBody("draft", c.Draft)
 	c.UpdateBody("head", c.Head)
+	c.UpdateBody("issue", c.Issue)
 	c.UpdateBody("maintainer_can_modify", c.MaintainerCanModify)
 	c.UpdateBody("title", c.Title)
 	return c.DoRequest("POST")
@@ -118,13 +120,14 @@ type PullsCreateReviewCommentCmd struct {
 	ComfortFade bool   `name:"comfort-fade-preview"`
 	Repo        string `name:"repo" required:"true"`
 	PullNumber  int64  `name:"pull_number" required:"true"`
+	CommitId    string `name:"commit_id"`
+	InReplyTo   int64  `name:"in_reply_to"`
 	Line        int64  `name:"line"`
 	Position    int64  `name:"position"`
 	Side        string `name:"side"`
 	StartLine   int64  `name:"start_line"`
 	StartSide   string `name:"start_side"`
 	Body        string `name:"body" required:"true"`
-	CommitId    string `name:"commit_id" required:"true"`
 	Path        string `name:"path" required:"true"`
 	internal.BaseCmd
 }
@@ -137,6 +140,7 @@ func (c *PullsCreateReviewCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdatePreview("comfort-fade", c.ComfortFade)
 	c.UpdateBody("body", c.Body)
 	c.UpdateBody("commit_id", c.CommitId)
+	c.UpdateBody("in_reply_to", c.InReplyTo)
 	c.UpdateBody("line", c.Line)
 	c.UpdateBody("path", c.Path)
 	c.UpdateBody("position", c.Position)
@@ -180,6 +184,7 @@ type PullsDismissReviewCmd struct {
 	Repo       string `name:"repo" required:"true"`
 	PullNumber int64  `name:"pull_number" required:"true"`
 	ReviewId   int64  `name:"review_id" required:"true"`
+	Event      string `name:"event"`
 	Message    string `name:"message" required:"true"`
 	internal.BaseCmd
 }
@@ -190,6 +195,7 @@ func (c *PullsDismissReviewCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("pull_number", c.PullNumber)
 	c.UpdateURLPath("review_id", c.ReviewId)
+	c.UpdateBody("event", c.Event)
 	c.UpdateBody("message", c.Message)
 	return c.DoRequest("PUT")
 }

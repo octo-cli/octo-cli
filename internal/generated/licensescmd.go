@@ -11,12 +11,16 @@ type LicensesCmd struct {
 }
 
 type LicensesGetAllCommonlyUsedCmd struct {
+	Featured bool  `name:"featured"`
+	PerPage  int64 `name:"per_page"`
 	internal.BaseCmd
 }
 
 func (c *LicensesGetAllCommonlyUsedCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/licenses")
+	c.UpdateURLQuery("featured", c.Featured)
+	c.UpdateURLQuery("per_page", c.PerPage)
 	return c.DoRequest("GET")
 }
 

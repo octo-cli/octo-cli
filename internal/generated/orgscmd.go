@@ -139,7 +139,9 @@ type OrgsCreateWebhookCmd struct {
 	Active            bool     `name:"active"`
 	ConfigContentType string   `name:"config.content_type"`
 	ConfigInsecureSsl string   `name:"config.insecure_ssl"`
+	ConfigPassword    string   `name:"config.password"`
 	ConfigSecret      string   `name:"config.secret"`
+	ConfigUsername    string   `name:"config.username"`
 	Events            []string `name:"events"`
 	ConfigUrl         string   `name:"config.url" required:"true"`
 	Name              string   `name:"name" required:"true"`
@@ -153,8 +155,10 @@ func (c *OrgsCreateWebhookCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateBody("active", c.Active)
 	c.UpdateBody("config.content_type", c.ConfigContentType)
 	c.UpdateBody("config.insecure_ssl", c.ConfigInsecureSsl)
+	c.UpdateBody("config.password", c.ConfigPassword)
 	c.UpdateBody("config.secret", c.ConfigSecret)
 	c.UpdateBody("config.url", c.ConfigUrl)
+	c.UpdateBody("config.username", c.ConfigUsername)
 	c.UpdateBody("events", c.Events)
 	c.UpdateBody("name", c.Name)
 	return c.DoRequest("POST")
@@ -259,7 +263,8 @@ func (c *OrgsListBlockedUsersCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsListCmd struct {
-	Since int64 `name:"since"`
+	PerPage int64  `name:"per_page"`
+	Since   string `name:"since"`
 	internal.BaseCmd
 }
 
@@ -267,6 +272,7 @@ func (c *OrgsListCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/organizations")
 	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("per_page", c.PerPage)
 	return c.DoRequest("GET")
 }
 
@@ -564,6 +570,7 @@ type OrgsUpdateCmd struct {
 	Surtur                               bool   `name:"surtur-preview"`
 	Org                                  string `name:"org" required:"true"`
 	BillingEmail                         string `name:"billing_email"`
+	Blog                                 string `name:"blog"`
 	Company                              string `name:"company"`
 	DefaultRepositoryPermission          string `name:"default_repository_permission"`
 	Description                          string `name:"description"`
@@ -587,6 +594,7 @@ func (c *OrgsUpdateCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLPath("org", c.Org)
 	c.UpdatePreview("surtur", c.Surtur)
 	c.UpdateBody("billing_email", c.BillingEmail)
+	c.UpdateBody("blog", c.Blog)
 	c.UpdateBody("company", c.Company)
 	c.UpdateBody("default_repository_permission", c.DefaultRepositoryPermission)
 	c.UpdateBody("description", c.Description)
@@ -627,6 +635,7 @@ type OrgsUpdateWebhookCmd struct {
 	ConfigSecret      string   `name:"config.secret"`
 	ConfigUrl         string   `name:"config.url"`
 	Events            []string `name:"events"`
+	Name              string   `name:"name"`
 	internal.BaseCmd
 }
 
@@ -641,5 +650,6 @@ func (c *OrgsUpdateWebhookCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateBody("config.secret", c.ConfigSecret)
 	c.UpdateBody("config.url", c.ConfigUrl)
 	c.UpdateBody("events", c.Events)
+	c.UpdateBody("name", c.Name)
 	return c.DoRequest("PATCH")
 }

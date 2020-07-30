@@ -17,7 +17,7 @@ type BillingCmd struct {
 }
 
 type BillingGetGithubActionsBillingGheCmd struct {
-	EnterpriseId int64 `name:"enterprise_id" required:"true"`
+	EnterpriseId string `name:"enterprise_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -53,7 +53,7 @@ func (c *BillingGetGithubActionsBillingUserCmd) Run(isValueSetMap map[string]boo
 }
 
 type BillingGetGithubPackagesBillingGheCmd struct {
-	EnterpriseId int64 `name:"enterprise_id" required:"true"`
+	EnterpriseId string `name:"enterprise_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -89,7 +89,7 @@ func (c *BillingGetGithubPackagesBillingUserCmd) Run(isValueSetMap map[string]bo
 }
 
 type BillingGetSharedStorageBillingGheCmd struct {
-	EnterpriseId int64 `name:"enterprise_id" required:"true"`
+	EnterpriseId string `name:"enterprise_id" required:"true"`
 	internal.BaseCmd
 }
 

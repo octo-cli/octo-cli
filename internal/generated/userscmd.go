@@ -40,14 +40,12 @@ type UsersCmd struct {
 }
 
 type UsersAddEmailForAuthenticatedCmd struct {
-	Emails []string `name:"emails" required:"true"`
 	internal.BaseCmd
 }
 
 func (c *UsersAddEmailForAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/emails")
-	c.UpdateBody("emails", c.Emails)
 	return c.DoRequest("POST")
 }
 
@@ -102,7 +100,7 @@ func (c *UsersCheckPersonIsFollowedByAuthenticatedCmd) Run(isValueSetMap map[str
 }
 
 type UsersCreateGpgKeyForAuthenticatedCmd struct {
-	ArmoredPublicKey string `name:"armored_public_key"`
+	ArmoredPublicKey string `name:"armored_public_key" required:"true"`
 	internal.BaseCmd
 }
 
@@ -114,8 +112,8 @@ func (c *UsersCreateGpgKeyForAuthenticatedCmd) Run(isValueSetMap map[string]bool
 }
 
 type UsersCreatePublicSshKeyForAuthenticatedCmd struct {
-	Key   string `name:"key"`
 	Title string `name:"title"`
+	Key   string `name:"key" required:"true"`
 	internal.BaseCmd
 }
 
@@ -128,14 +126,12 @@ func (c *UsersCreatePublicSshKeyForAuthenticatedCmd) Run(isValueSetMap map[strin
 }
 
 type UsersDeleteEmailForAuthenticatedCmd struct {
-	Emails []string `name:"emails" required:"true"`
 	internal.BaseCmd
 }
 
 func (c *UsersDeleteEmailForAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/user/emails")
-	c.UpdateBody("emails", c.Emails)
 	return c.DoRequest("DELETE")
 }
 
@@ -248,7 +244,8 @@ func (c *UsersListBlockedByAuthenticatedCmd) Run(isValueSetMap map[string]bool) 
 }
 
 type UsersListCmd struct {
-	Since string `name:"since"`
+	PerPage int64  `name:"per_page"`
+	Since   string `name:"since"`
 	internal.BaseCmd
 }
 
@@ -256,6 +253,7 @@ func (c *UsersListCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/users")
 	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("per_page", c.PerPage)
 	return c.DoRequest("GET")
 }
 
