@@ -5,13 +5,14 @@ set -e
 CDPATH="" cd -- "$(dirname -- "$(dirname -- "$0")")"
 
 get_latest_version() {
-  latest_url="$(curl -s -I  -w "%{redirect_url}" -o /dev/null  https://unpkg.com/@github/openapi/dist/api.github.com.json)"
-  echo "$latest_url" | cut -d "@" -f3 | cut -d "/" -f1
+  script/octo repos get-latest-release --repo github/rest-api-description --format '{{.tag_name}}'
 }
 
 touch ./current-schema-tag.txt
 current_version="$(cat current-schema-tag.txt)"
 TARGET_SCHEMA_VERSION="${TARGET_SCHEMA_VERSION:-$(get_latest_version)}"
 [ "$current_version" = "$TARGET_SCHEMA_VERSION" ] && exit
-curl -sOL "https://unpkg.com/@github/openapi@${TARGET_SCHEMA_VERSION}/dist/api.github.com.json"
+
+# https://raw.githubusercontent.com/github/rest-api-description/%s/descriptions/api.github.com/api.github.com.json
+curl -sOL "https://raw.githubusercontent.com/github/rest-api-description/${TARGET_SCHEMA_VERSION}/descriptions/api.github.com/api.github.com.json"
 printf "%s" "$TARGET_SCHEMA_VERSION" > ./current-schema-tag.txt
