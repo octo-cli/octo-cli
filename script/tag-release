@@ -9,6 +9,7 @@ make -s bin/semver-next
 set +e
 
 bin/semver-next octo-cli/octo-cli \
+  --ref=main \
   --max-bump=MINOR \
   --require-labels \
   --require-change >/dev/null
@@ -28,6 +29,7 @@ set -e
 
 tg="$(
   bin/semver-next octo-cli/octo-cli \
+    --ref=main \
     --max-bump=MINOR \
     --require-labels \
     --require-change \
