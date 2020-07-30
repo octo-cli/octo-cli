@@ -2,7 +2,38 @@ package overrides
 
 import (
 	"github.com/dave/jennifer/jen"
+	"github.com/octo-cli/octo-cli/internal/model"
 )
+
+func OverrideEndpoints(endpoints []model.Endpoint) {
+	for i := 0; i < len(endpoints); i++ {
+		endpoint := &endpoints[i]
+		if endpointOverrides[endpoint.ID] == nil {
+			continue
+		}
+		endpointOverrides[endpoint.ID](endpoint)
+		endpoints[i] = *endpoint
+	}
+}
+
+var endpointOverrides = map[string]func(endpoint *model.Endpoint){
+	// issues/update-label shouldn't have a "name" in the body
+	"issues/update-label": func(endpoint *model.Endpoint) {
+		idx := -1
+		params := endpoint.JSONBodySchema.ObjectParams
+		for i := range params {
+			param := params[i]
+			if param.Name == "name" {
+				idx = i
+				break
+			}
+		}
+		if idx == -1 {
+			return
+		}
+		endpoint.JSONBodySchema.ObjectParams = append(params[:idx], params[idx+1:]...)
+	},
+}
 
 type ManualParamInfo struct {
 	Name        string
