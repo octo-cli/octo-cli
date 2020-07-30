@@ -16,24 +16,8 @@ func OverrideEndpoints(endpoints []model.Endpoint) {
 	}
 }
 
-var endpointOverrides = map[string]func(endpoint *model.Endpoint){
-	// issues/update-label shouldn't have a "name" in the body
-	"issues/update-label": func(endpoint *model.Endpoint) {
-		idx := -1
-		params := endpoint.JSONBodySchema.ObjectParams
-		for i := range params {
-			param := params[i]
-			if param.Name == "name" {
-				idx = i
-				break
-			}
-		}
-		if idx == -1 {
-			return
-		}
-		endpoint.JSONBodySchema.ObjectParams = append(params[:idx], params[idx+1:]...)
-	},
-}
+// no overrides are currently necessary, but if there were, they would go here.
+var endpointOverrides = map[string]func(endpoint *model.Endpoint){}
 
 type ManualParamInfo struct {
 	Name        string
