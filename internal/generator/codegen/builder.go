@@ -22,6 +22,7 @@ func Generate(routesPath, outputPath string, fs afero.Fs) error {
 	if err != nil {
 		return err
 	}
+	overrides.OverrideEndpoints(endpoints)
 	files := genFileTmpls(endpoints)
 	return writeFiles(files, outputPath, fs)
 }

@@ -87,6 +87,7 @@ func WriteDocs(schemaPath, docsPath string, fs afero.Fs) error {
 	if err != nil {
 		return err
 	}
+	overrides.OverrideEndpoints(endpoints)
 	util.RemoveOwnerParams(endpoints)
 	opDoc, err := operationsHelp(endpoints)
 	if err != nil {
