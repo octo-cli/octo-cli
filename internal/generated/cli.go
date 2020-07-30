@@ -733,7 +733,7 @@ var FlagHelps = map[string]map[string]map[string]string{
 		"create-registration-token-for-repo": {"repo": "repository in OWNER/REPO form"},
 		"create-remove-token-for-repo":       {"repo": "repository in OWNER/REPO form"},
 		"create-workflow-dispatch": {
-			"inputs": "Input keys and values configured in the workflow file. The maximum number of properties is 10.",
+			"inputs": "Input keys and values configured in the workflow file. The maximum number of properties is 10. Any default properties configured in the workflow file will be used when `inputs` are omitted.",
 			"ref":    "The reference of the workflow run. The reference can be a branch, tag, or a commit SHA.",
 			"repo":   "repository in OWNER/REPO form",
 		},
