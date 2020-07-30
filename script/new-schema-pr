@@ -40,7 +40,7 @@ git commit -m "update to schema $new_version"
 git push --set-upstream origin "$update_branch"
 
 bin/octo pulls create \
-  --base master \
+  --base main \
   --head "$update_branch" \
   --repo octo-cli/octo-cli \
   --title "Update to schema $new_version" \
