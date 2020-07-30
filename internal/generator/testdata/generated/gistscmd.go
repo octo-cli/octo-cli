@@ -41,7 +41,7 @@ func (c *GistsCheckIsStarredCmd) Run(isValueSetMap map[string]bool) error {
 
 type GistsCreateCmd struct {
 	Description string              `name:"description"`
-	Public      bool                `name:"public"`
+	Public      string              `name:"public"`
 	Files       internal.JSONObject `name:"files" required:"true"`
 	internal.BaseCmd
 }

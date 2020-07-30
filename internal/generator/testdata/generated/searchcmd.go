@@ -117,7 +117,7 @@ func (c *SearchReposCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type SearchTopicsCmd struct {
-	Mercy bool   `name:"mercy-preview"`
+	Mercy bool   `name:"mercy-preview" required:"true"`
 	Q     string `name:"q" required:"true"`
 	internal.BaseCmd
 }

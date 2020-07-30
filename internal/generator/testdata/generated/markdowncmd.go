@@ -35,6 +35,5 @@ func (c *MarkdownRenderRawCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/markdown/raw")
 	internal.MarkdownRenderRawOverride(&c.BaseCmd, c.File)
-	c.AddRequestHeader("content-type", c.ContentType)
 	return c.DoRequest("POST")
 }

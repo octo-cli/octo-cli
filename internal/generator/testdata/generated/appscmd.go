@@ -10,7 +10,7 @@ type AppsCmd struct {
 	CheckToken                                   AppsCheckTokenCmd                                   `cmd:""`
 	CreateContentAttachment                      AppsCreateContentAttachmentCmd                      `cmd:""`
 	CreateFromManifest                           AppsCreateFromManifestCmd                           `cmd:""`
-	CreateInstallationToken                      AppsCreateInstallationTokenCmd                      `cmd:""`
+	CreateInstallationAccessToken                AppsCreateInstallationAccessTokenCmd                `cmd:""`
 	DeleteAuthorization                          AppsDeleteAuthorizationCmd                          `cmd:""`
 	DeleteInstallation                           AppsDeleteInstallationCmd                           `cmd:""`
 	DeleteToken                                  AppsDeleteTokenCmd                                  `cmd:""`
@@ -29,7 +29,7 @@ type AppsCmd struct {
 	ListInstallationsForAuthenticatedUser        AppsListInstallationsForAuthenticatedUserCmd        `cmd:""`
 	ListPlans                                    AppsListPlansCmd                                    `cmd:""`
 	ListPlansStubbed                             AppsListPlansStubbedCmd                             `cmd:""`
-	ListRepos                                    AppsListReposCmd                                    `cmd:""`
+	ListReposAccessibleToInstallation            AppsListReposAccessibleToInstallationCmd            `cmd:""`
 	ListSubscriptionsForAuthenticatedUser        AppsListSubscriptionsForAuthenticatedUserCmd        `cmd:""`
 	ListSubscriptionsForAuthenticatedUserStubbed AppsListSubscriptionsForAuthenticatedUserStubbedCmd `cmd:""`
 	RemoveRepoFromInstallation                   AppsRemoveRepoFromInstallationCmd                   `cmd:""`
@@ -37,7 +37,7 @@ type AppsCmd struct {
 	ResetToken                                   AppsResetTokenCmd                                   `cmd:""`
 	RevokeAuthorizationForApplication            AppsRevokeAuthorizationForApplicationCmd            `cmd:""`
 	RevokeGrantForApplication                    AppsRevokeGrantForApplicationCmd                    `cmd:""`
-	RevokeInstallationToken                      AppsRevokeInstallationTokenCmd                      `cmd:""`
+	RevokeInstallationAccessToken                AppsRevokeInstallationAccessTokenCmd                `cmd:""`
 	SuspendInstallation                          AppsSuspendInstallationCmd                          `cmd:""`
 	UnsuspendInstallation                        AppsUnsuspendInstallationCmd                        `cmd:""`
 }
@@ -74,7 +74,7 @@ func (c *AppsCheckAuthorizationCmd) Run(isValueSetMap map[string]bool) error {
 
 type AppsCheckTokenCmd struct {
 	ClientId    string `name:"client_id" required:"true"`
-	AccessToken string `name:"access_token"`
+	AccessToken string `name:"access_token" required:"true"`
 	internal.BaseCmd
 }
 
@@ -116,20 +116,30 @@ func (c *AppsCreateFromManifestCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("POST")
 }
 
-type AppsCreateInstallationTokenCmd struct {
-	MachineMan     bool                `name:"machine-man-preview" required:"true"`
-	InstallationId int64               `name:"installation_id" required:"true"`
-	Permissions    internal.JSONObject `name:"permissions"`
-	RepositoryIds  []int64             `name:"repository_ids"`
+type AppsCreateInstallationAccessTokenCmd struct {
+	MachineMan             bool     `name:"machine-man-preview" required:"true"`
+	InstallationId         int64    `name:"installation_id" required:"true"`
+	PermissionsContents    string   `name:"permissions.contents"`
+	PermissionsDefNotARepo string   `name:"permissions.def_not_a_repo"`
+	PermissionsDeployments string   `name:"permissions.deployments"`
+	PermissionsIssues      string   `name:"permissions.issues"`
+	PermissionsSingleFile  string   `name:"permissions.single_file"`
+	Repositories           []string `name:"repositories"`
+	RepositoryIds          []int64  `name:"repository_ids"`
 	internal.BaseCmd
 }
 
-func (c *AppsCreateInstallationTokenCmd) Run(isValueSetMap map[string]bool) error {
+func (c *AppsCreateInstallationAccessTokenCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/app/installations/{installation_id}/access_tokens")
 	c.UpdateURLPath("installation_id", c.InstallationId)
 	c.UpdatePreview("machine-man", c.MachineMan)
-	c.UpdateBody("permissions", c.Permissions)
+	c.UpdateBody("permissions.contents", c.PermissionsContents)
+	c.UpdateBody("permissions.def_not_a_repo", c.PermissionsDefNotARepo)
+	c.UpdateBody("permissions.deployments", c.PermissionsDeployments)
+	c.UpdateBody("permissions.issues", c.PermissionsIssues)
+	c.UpdateBody("permissions.single_file", c.PermissionsSingleFile)
+	c.UpdateBody("repositories", c.Repositories)
 	c.UpdateBody("repository_ids", c.RepositoryIds)
 	return c.DoRequest("POST")
 }
@@ -343,9 +353,11 @@ func (c *AppsListInstallationReposForAuthenticatedUserCmd) Run(isValueSetMap map
 }
 
 type AppsListInstallationsCmd struct {
-	MachineMan bool  `name:"machine-man-preview" required:"true"`
-	Page       int64 `name:"page"`
-	PerPage    int64 `name:"per_page"`
+	MachineMan bool   `name:"machine-man-preview" required:"true"`
+	Outdated   string `name:"outdated"`
+	Page       int64  `name:"page"`
+	PerPage    int64  `name:"per_page"`
+	Since      string `name:"since"`
 	internal.BaseCmd
 }
 
@@ -354,6 +366,8 @@ func (c *AppsListInstallationsCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetURLPath("/app/installations")
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("outdated", c.Outdated)
 	c.UpdatePreview("machine-man", c.MachineMan)
 	return c.DoRequest("GET")
 }
@@ -402,7 +416,7 @@ func (c *AppsListPlansStubbedCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
-type AppsListReposCmd struct {
+type AppsListReposAccessibleToInstallationCmd struct {
 	Mercy      bool  `name:"mercy-preview"`
 	MachineMan bool  `name:"machine-man-preview" required:"true"`
 	Page       int64 `name:"page"`
@@ -410,7 +424,7 @@ type AppsListReposCmd struct {
 	internal.BaseCmd
 }
 
-func (c *AppsListReposCmd) Run(isValueSetMap map[string]bool) error {
+func (c *AppsListReposAccessibleToInstallationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/installation/repositories")
 	c.UpdateURLQuery("per_page", c.PerPage)
@@ -480,7 +494,7 @@ func (c *AppsResetAuthorizationCmd) Run(isValueSetMap map[string]bool) error {
 
 type AppsResetTokenCmd struct {
 	ClientId    string `name:"client_id" required:"true"`
-	AccessToken string `name:"access_token"`
+	AccessToken string `name:"access_token" required:"true"`
 	internal.BaseCmd
 }
 
@@ -520,11 +534,11 @@ func (c *AppsRevokeGrantForApplicationCmd) Run(isValueSetMap map[string]bool) er
 	return c.DoRequest("DELETE")
 }
 
-type AppsRevokeInstallationTokenCmd struct {
+type AppsRevokeInstallationAccessTokenCmd struct {
 	internal.BaseCmd
 }
 
-func (c *AppsRevokeInstallationTokenCmd) Run(isValueSetMap map[string]bool) error {
+func (c *AppsRevokeInstallationAccessTokenCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/installation/token")
 	return c.DoRequest("DELETE")
