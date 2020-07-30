@@ -21,8 +21,8 @@ type TeamsCmd struct {
 	CreateDiscussionCommentLegacy           TeamsCreateDiscussionCommentLegacyCmd           `cmd:""`
 	CreateDiscussionInOrg                   TeamsCreateDiscussionInOrgCmd                   `cmd:""`
 	CreateDiscussionLegacy                  TeamsCreateDiscussionLegacyCmd                  `cmd:""`
-	CreateOrUpdateIdPGroupConnectionsInOrg  TeamsCreateOrUpdateIdPGroupConnectionsInOrgCmd  `cmd:""`
-	CreateOrUpdateIdPGroupConnectionsLegacy TeamsCreateOrUpdateIdPGroupConnectionsLegacyCmd `cmd:""`
+	CreateOrUpdateIdpGroupConnectionsInOrg  TeamsCreateOrUpdateIdpGroupConnectionsInOrgCmd  `cmd:""`
+	CreateOrUpdateIdpGroupConnectionsLegacy TeamsCreateOrUpdateIdpGroupConnectionsLegacyCmd `cmd:""`
 	DeleteDiscussionCommentInOrg            TeamsDeleteDiscussionCommentInOrgCmd            `cmd:""`
 	DeleteDiscussionCommentLegacy           TeamsDeleteDiscussionCommentLegacyCmd           `cmd:""`
 	DeleteDiscussionInOrg                   TeamsDeleteDiscussionInOrgCmd                   `cmd:""`
@@ -46,9 +46,9 @@ type TeamsCmd struct {
 	ListDiscussionsInOrg                    TeamsListDiscussionsInOrgCmd                    `cmd:""`
 	ListDiscussionsLegacy                   TeamsListDiscussionsLegacyCmd                   `cmd:""`
 	ListForAuthenticatedUser                TeamsListForAuthenticatedUserCmd                `cmd:""`
-	ListIdPGroupsForLegacy                  TeamsListIdPGroupsForLegacyCmd                  `cmd:""`
-	ListIdPGroupsForOrg                     TeamsListIdPGroupsForOrgCmd                     `cmd:""`
-	ListIdPGroupsInOrg                      TeamsListIdPGroupsInOrgCmd                      `cmd:""`
+	ListIdpGroupsForLegacy                  TeamsListIdpGroupsForLegacyCmd                  `cmd:""`
+	ListIdpGroupsForOrg                     TeamsListIdpGroupsForOrgCmd                     `cmd:""`
+	ListIdpGroupsInOrg                      TeamsListIdpGroupsInOrgCmd                      `cmd:""`
 	ListMembersInOrg                        TeamsListMembersInOrgCmd                        `cmd:""`
 	ListMembersLegacy                       TeamsListMembersLegacyCmd                       `cmd:""`
 	ListPendingInvitationsInOrg             TeamsListPendingInvitationsInOrgCmd             `cmd:""`
@@ -362,14 +362,14 @@ func (c *TeamsCreateDiscussionLegacyCmd) Run(isValueSetMap map[string]bool) erro
 	return c.DoRequest("POST")
 }
 
-type TeamsCreateOrUpdateIdPGroupConnectionsInOrgCmd struct {
+type TeamsCreateOrUpdateIdpGroupConnectionsInOrgCmd struct {
 	Org      string                `name:"org" required:"true"`
 	TeamSlug string                `name:"team_slug" required:"true"`
 	Groups   []internal.JSONObject `name:"groups" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *TeamsCreateOrUpdateIdPGroupConnectionsInOrgCmd) Run(isValueSetMap map[string]bool) error {
+func (c *TeamsCreateOrUpdateIdpGroupConnectionsInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/team-sync/group-mappings")
 	c.UpdateURLPath("org", c.Org)
@@ -378,17 +378,19 @@ func (c *TeamsCreateOrUpdateIdPGroupConnectionsInOrgCmd) Run(isValueSetMap map[s
 	return c.DoRequest("PATCH")
 }
 
-type TeamsCreateOrUpdateIdPGroupConnectionsLegacyCmd struct {
-	TeamId int64                 `name:"team_id" required:"true"`
-	Groups []internal.JSONObject `name:"groups" required:"true"`
+type TeamsCreateOrUpdateIdpGroupConnectionsLegacyCmd struct {
+	TeamId   int64                 `name:"team_id" required:"true"`
+	SyncedAt string                `name:"synced_at"`
+	Groups   []internal.JSONObject `name:"groups" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *TeamsCreateOrUpdateIdPGroupConnectionsLegacyCmd) Run(isValueSetMap map[string]bool) error {
+func (c *TeamsCreateOrUpdateIdpGroupConnectionsLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/team-sync/group-mappings")
 	c.UpdateURLPath("team_id", c.TeamId)
 	c.UpdateBody("groups", c.Groups)
+	c.UpdateBody("synced_at", c.SyncedAt)
 	return c.DoRequest("PATCH")
 }
 
@@ -776,26 +778,26 @@ func (c *TeamsListForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) er
 	return c.DoRequest("GET")
 }
 
-type TeamsListIdPGroupsForLegacyCmd struct {
+type TeamsListIdpGroupsForLegacyCmd struct {
 	TeamId int64 `name:"team_id" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *TeamsListIdPGroupsForLegacyCmd) Run(isValueSetMap map[string]bool) error {
+func (c *TeamsListIdpGroupsForLegacyCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/teams/{team_id}/team-sync/group-mappings")
 	c.UpdateURLPath("team_id", c.TeamId)
 	return c.DoRequest("GET")
 }
 
-type TeamsListIdPGroupsForOrgCmd struct {
+type TeamsListIdpGroupsForOrgCmd struct {
 	Org     string `name:"org" required:"true"`
 	Page    int64  `name:"page"`
 	PerPage int64  `name:"per_page"`
 	internal.BaseCmd
 }
 
-func (c *TeamsListIdPGroupsForOrgCmd) Run(isValueSetMap map[string]bool) error {
+func (c *TeamsListIdpGroupsForOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/team-sync/groups")
 	c.UpdateURLPath("org", c.Org)
@@ -804,13 +806,13 @@ func (c *TeamsListIdPGroupsForOrgCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("GET")
 }
 
-type TeamsListIdPGroupsInOrgCmd struct {
+type TeamsListIdpGroupsInOrgCmd struct {
 	Org      string `name:"org" required:"true"`
 	TeamSlug string `name:"team_slug" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *TeamsListIdPGroupsInOrgCmd) Run(isValueSetMap map[string]bool) error {
+func (c *TeamsListIdpGroupsInOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/teams/{team_slug}/team-sync/group-mappings")
 	c.UpdateURLPath("org", c.Org)

@@ -14,8 +14,8 @@ Adds a repository to an organization secret when the `visibility` for repository
 | name | description |
 |------|-------------|
 | org | __Required__  |
-| repository_id | __Required__  |
-| secret_name | __Required__  |
+| repository_id | __Required__ repository_id parameter |
+| secret_name | __Required__ secret_name parameter |
 
 ## actions cancel-workflow-run
 
@@ -117,11 +117,11 @@ puts Base64.strict_encode64(encrypted_secret)
 | name | description |
 |------|-------------|
 | org | __Required__  |
-| secret_name | __Required__  |
+| secret_name | __Required__ secret_name parameter |
 | encrypted_value | Value for your secret, encrypted with [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages) using the public key retrieved from the [Get an organization public key](https://developer.github.com/v3/actions/secrets/#get-an-organization-public-key) endpoint. |
 | key_id | ID of the key you used to encrypt the secret. |
 | selected_repository_ids | An array of repository ids that can access the organization secret. You can only provide a list of repository ids when the `visibility` is set to `selected`. You can manage the list of selected repositories using the [List selected repositories for an organization secret](https://developer.github.com/v3/actions/secrets/#list-selected-repositories-for-an-organization-secret), [Set selected repositories for an organization secret](https://developer.github.com/v3/actions/secrets/#set-selected-repositories-for-an-organization-secret), and [Remove selected repository from an organization secret](https://developer.github.com/v3/actions/secrets/#remove-selected-repository-from-an-organization-secret) endpoints. |
-| visibility | Configures the access that repositories have to the organization secret. Can be one of:<br>\- `all` - All repositories in an organization can access the secret.<br>\- `private` - Private repositories in an organization can access the secret.<br>\- `selected` - Only specific repositories can access the secret. |
+| visibility | Configures the access that repositories have to the organization secret. Can be one of:  <br>\- `all` - All repositories in an organization can access the secret.  <br>\- `private` - Private repositories in an organization can access the secret.  <br>\- `selected` - Only specific repositories can access the secret. |
 
 ## actions create-or-update-repo-secret
 
@@ -209,7 +209,7 @@ puts Base64.strict_encode64(encrypted_secret)
 | name | description |
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
-| secret_name | __Required__  |
+| secret_name | __Required__ secret_name parameter |
 | encrypted_value | Value for your secret, encrypted with [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages) using the public key retrieved from the [Get a repository public key](https://developer.github.com/v3/actions/secrets/#get-a-repository-public-key) endpoint. |
 | key_id | ID of the key you used to encrypt the secret. |
 
@@ -317,7 +317,7 @@ You can use this endpoint to manually trigger a GitHub Actions workflow run. You
 
 You must configure your GitHub Actions workflow to run when the [`workflow_dispatch` webhook](/developers/webhooks-and-events/webhook-events-and-payloads#workflow_dispatch) event occurs. The `inputs` are configured in the workflow file. For more information about how to configure the `workflow_dispatch` event in the workflow file, see "[Events that trigger workflows](/actions/reference/events-that-trigger-workflows#workflow_dispatch)."
 
-You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint. For more information, see "[Creating a personal access token for the command line](https://docs.github.com/articles/creating-a-personal-access-token-for-the-command-line)."
+You must authenticate using an access token with the `repo` scope to use this endpoint. GitHub Apps must have the `actions:write` permission to use this endpoint. For more information, see "[Creating a personal access token for the command line](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line)."
 
 ### parameters
 
@@ -340,7 +340,7 @@ Deletes an artifact for a workflow run. You must authenticate using an access to
 
 | name | description |
 |------|-------------|
-| artifact_id | __Required__  |
+| artifact_id | __Required__ artifact_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## actions delete-org-secret
@@ -355,7 +355,7 @@ Deletes a secret in an organization using the secret name. You must authenticate
 | name | description |
 |------|-------------|
 | org | __Required__  |
-| secret_name | __Required__  |
+| secret_name | __Required__ secret_name parameter |
 
 ## actions delete-repo-secret
 
@@ -369,7 +369,7 @@ Deletes a secret in a repository using the secret name. You must authenticate us
 | name | description |
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
-| secret_name | __Required__  |
+| secret_name | __Required__ secret_name parameter |
 
 ## actions delete-self-hosted-runner-from-org
 
@@ -385,7 +385,7 @@ Forces the removal of a self-hosted runner from an organization. You can use thi
 | name | description |
 |------|-------------|
 | org | __Required__  |
-| runner_id | __Required__  |
+| runner_id | __Required__ runner_id parameter |
 
 ## actions delete-self-hosted-runner-from-repo
 
@@ -399,7 +399,7 @@ Forces the removal of a self-hosted runner from a repository. You can use this e
 | name | description |
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
-| runner_id | __Required__  |
+| runner_id | __Required__ runner_id parameter |
 
 ## actions delete-workflow-run
 
@@ -445,8 +445,8 @@ GitHub Apps must have the `actions:read` permission to use this endpoint.
 
 | name | description |
 |------|-------------|
-| archive_format | __Required__  |
-| artifact_id | __Required__  |
+| archive_format | __Required__ archive_format parameter |
+| artifact_id | __Required__ artifact_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## actions download-job-logs-for-workflow-run
@@ -463,7 +463,7 @@ have the `actions:read` permission to use this endpoint.
 
 | name | description |
 |------|-------------|
-| job_id | __Required__  |
+| job_id | __Required__ job_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## actions download-workflow-run-logs
@@ -494,7 +494,7 @@ Gets a specific artifact for a workflow run. Anyone with read access to the repo
 
 | name | description |
 |------|-------------|
-| artifact_id | __Required__  |
+| artifact_id | __Required__ artifact_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## actions get-job-for-workflow-run
@@ -508,7 +508,7 @@ Gets a specific job in a workflow run. Anyone with read access to the repository
 
 | name | description |
 |------|-------------|
-| job_id | __Required__  |
+| job_id | __Required__ job_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## actions get-org-public-key
@@ -536,7 +536,7 @@ Gets a single organization secret without revealing its encrypted value. You mus
 | name | description |
 |------|-------------|
 | org | __Required__  |
-| secret_name | __Required__  |
+| secret_name | __Required__ secret_name parameter |
 
 ## actions get-repo-public-key
 
@@ -563,7 +563,7 @@ Gets a single repository secret without revealing its encrypted value. You must 
 | name | description |
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
-| secret_name | __Required__  |
+| secret_name | __Required__ secret_name parameter |
 
 ## actions get-self-hosted-runner-for-org
 
@@ -579,7 +579,7 @@ Gets a specific self-hosted runner for an organization. You must authenticate us
 | name | description |
 |------|-------------|
 | org | __Required__  |
-| runner_id | __Required__  |
+| runner_id | __Required__ runner_id parameter |
 
 ## actions get-self-hosted-runner-for-repo
 
@@ -593,7 +593,7 @@ Gets a specific self-hosted runner. You must authenticate using an access token 
 | name | description |
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
-| runner_id | __Required__  |
+| runner_id | __Required__ runner_id parameter |
 
 ## actions get-workflow
 
@@ -629,7 +629,7 @@ https://developer.github.com/v3/actions/workflow-runs/#get-workflow-run-usage
 
 **Warning:** This GitHub Actions usage endpoint is currently in public beta and subject to change. For more information, see "[GitHub Actions API workflow usage](https://developer.github.com/changes/2020-05-15-actions-api-workflow-usage)."
 
-Gets the number of billable minutes and total run time for a specific workflow run. Billable minutes only apply to workflows in private repositories that use GitHub-hosted runners. Usage is listed for each GitHub-hosted runner operating system in milliseconds. Any job re-runs are also included in the usage. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://docs.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
+Gets the number of billable minutes and total run time for a specific workflow run. Billable minutes only apply to workflows in private repositories that use GitHub-hosted runners. Usage is listed for each GitHub-hosted runner operating system in milliseconds. Any job re-runs are also included in the usage. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
 
 Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
 
@@ -647,7 +647,7 @@ https://developer.github.com/v3/actions/workflows/#get-workflow-usage
 
 **Warning:** This GitHub Actions usage endpoint is currently in public beta and subject to change. For more information, see "[GitHub Actions API workflow usage](https://developer.github.com/changes/2020-05-15-actions-api-workflow-usage)."
 
-Gets the number of billable minutes used by a specific workflow during the current billing cycle. Billable minutes only apply to workflows in private repositories that use GitHub-hosted runners. Usage is listed for each GitHub-hosted runner operating system in milliseconds. Any job re-runs are also included in the usage. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://docs.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
+Gets the number of billable minutes used by a specific workflow during the current billing cycle. Billable minutes only apply to workflows in private repositories that use GitHub-hosted runners. Usage is listed for each GitHub-hosted runner operating system in milliseconds. Any job re-runs are also included in the usage. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
 
 You can also replace `:workflow_id` with `:workflow_file_name`. For example, you could use `main.yml`. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
 
@@ -776,7 +776,7 @@ Lists all repositories that have been selected when the `visibility` for reposit
 | name | description |
 |------|-------------|
 | org | __Required__  |
-| secret_name | __Required__  |
+| secret_name | __Required__ secret_name parameter |
 
 ## actions list-self-hosted-runners-for-org
 
@@ -843,7 +843,7 @@ Anyone with read access to the repository can use this endpoint. If the reposito
 | workflow_id | __Required__  |
 | actor | Returns someone's workflow runs. Use the login for the user who created the `push` associated with the check suite or workflow run. |
 | branch | Returns workflow runs associated with a branch. Use the name of the branch of the `push`. |
-| event | Returns workflow run triggered by the event you specify. For example, `push`, `pull_request` or `issue`. For more information, see "[Events that trigger workflows](https://docs.github.com/en/actions/automating-your-workflow-with-github-actions/events-that-trigger-workflows)." |
+| event | Returns workflow run triggered by the event you specify. For example, `push`, `pull_request` or `issue`. For more information, see "[Events that trigger workflows](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/events-that-trigger-workflows)." |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | status | Returns workflow runs associated with the check run `status` or `conclusion` you specify. For example, a conclusion can be `success` or a status can be `completed`. For more information, see the `status` and `conclusion` options available in "[Create a check run](https://developer.github.com/v3/checks/runs/#create-a-check-run)." |
@@ -864,7 +864,7 @@ Anyone with read access to the repository can use this endpoint. If the reposito
 | repo | __Required__ repository in OWNER/REPO form |
 | actor | Returns someone's workflow runs. Use the login for the user who created the `push` associated with the check suite or workflow run. |
 | branch | Returns workflow runs associated with a branch. Use the name of the branch of the `push`. |
-| event | Returns workflow run triggered by the event you specify. For example, `push`, `pull_request` or `issue`. For more information, see "[Events that trigger workflows](https://docs.github.com/en/actions/automating-your-workflow-with-github-actions/events-that-trigger-workflows)." |
+| event | Returns workflow run triggered by the event you specify. For example, `push`, `pull_request` or `issue`. For more information, see "[Events that trigger workflows](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/events-that-trigger-workflows)." |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | status | Returns workflow runs associated with the check run `status` or `conclusion` you specify. For example, a conclusion can be `success` or a status can be `completed`. For more information, see the `status` and `conclusion` options available in "[Create a check run](https://developer.github.com/v3/checks/runs/#create-a-check-run)." |
@@ -895,8 +895,8 @@ Removes a repository from an organization secret when the `visibility` for repos
 | name | description |
 |------|-------------|
 | org | __Required__  |
-| repository_id | __Required__  |
-| secret_name | __Required__  |
+| repository_id | __Required__ repository_id parameter |
+| secret_name | __Required__ secret_name parameter |
 
 ## actions set-selected-repos-for-org-secret
 
@@ -910,7 +910,7 @@ Replaces all repositories for an organization secret when the `visibility` for r
 | name | description |
 |------|-------------|
 | org | __Required__  |
-| secret_name | __Required__  |
+| secret_name | __Required__ secret_name parameter |
 | selected_repository_ids | An array of repository ids that can access the organization secret. You can only provide a list of repository ids when the `visibility` is set to `selected`. You can add and remove individual repositories using the [Set selected repositories for an organization secret](https://developer.github.com/v3/actions/secrets/#set-selected-repositories-for-an-organization-secret) and [Remove selected repository from an organization secret](https://developer.github.com/v3/actions/secrets/#remove-selected-repository-from-an-organization-secret) endpoints. |
 
 # activity
@@ -953,7 +953,7 @@ Mutes all future notifications for a conversation until you comment on the threa
 
 | name | description |
 |------|-------------|
-| thread_id | __Required__  |
+| thread_id | __Required__ thread_id parameter |
 
 ## activity get-feeds
 
@@ -995,7 +995,7 @@ https://developer.github.com/v3/activity/notifications/#get-a-thread
 
 | name | description |
 |------|-------------|
-| thread_id | __Required__  |
+| thread_id | __Required__ thread_id parameter |
 
 ## activity get-thread-subscription-for-authenticated-user
 
@@ -1010,7 +1010,7 @@ Note that subscriptions are only generated if a user is participating in a conve
 
 | name | description |
 |------|-------------|
-| thread_id | __Required__  |
+| thread_id | __Required__ thread_id parameter |
 
 ## activity list-events-for-authenticated-user
 
@@ -1293,7 +1293,8 @@ Marks all notifications as "read" removes it from the [default view on GitHub](h
 
 | name | description |
 |------|-------------|
-| last_read_at | Describes the last point that notifications were checked. Anything updated since this time will not be marked as read. If you omit this parameter, all notifications are marked as read. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. Default: The current timestamp. |
+| last_read_at | Describes the last point that notifications were checked. |
+| read | Whether the notification has been read. |
 
 ## activity mark-repo-notifications-as-read
 
@@ -1320,7 +1321,7 @@ https://developer.github.com/v3/activity/notifications/#mark-a-thread-as-read
 
 | name | description |
 |------|-------------|
-| thread_id | __Required__  |
+| thread_id | __Required__ thread_id parameter |
 
 ## activity set-repo-subscription
 
@@ -1352,8 +1353,8 @@ Unsubscribing from a conversation in a repository that you are not watching is f
 
 | name | description |
 |------|-------------|
-| thread_id | __Required__  |
-| ignored | Unsubscribes and subscribes you to a conversation. Set `ignored` to `true` to block all notifications from this thread. |
+| thread_id | __Required__ thread_id parameter |
+| ignored | Whether to block all notifications from a thread. |
 
 ## activity star-repo-for-authenticated-user
 
@@ -1390,16 +1391,16 @@ https://developer.github.com/v3/apps/installations/#add-a-repository-to-an-app-i
 
 Add a single repository to an installation. The authenticated user must have admin access to the repository.
 
-You must use a personal access token (which you can create via the [command line](https://docs.github.com/articles/creating-a-personal-access-token-for-the-command-line/) or the [OAuth Authorizations API](https://developer.github.com/v3/oauth_authorizations/#create-a-new-authorization)) or [Basic Authentication](https://developer.github.com/v3/auth/#basic-authentication) to access this endpoint.
+You must use a personal access token (which you can create via the [command line](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/) or the [OAuth Authorizations API](https://developer.github.com/v3/oauth_authorizations/#create-a-new-authorization)) or [Basic Authentication](https://developer.github.com/v3/auth/#basic-authentication) to access this endpoint.
 
 ### parameters
 
 
 | name | description |
 |------|-------------|
-| installation_id | __Required__  |
+| installation_id | __Required__ installation_id parameter |
 | machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
-| repository_id | __Required__  |
+| repository_id | __Required__ repository_id parameter |
 
 ## apps check-authorization
 
@@ -1428,8 +1429,8 @@ OAuth applications can use a special API method for checking OAuth token validit
 
 | name | description |
 |------|-------------|
+| access_token | __Required__ The access_token of the OAuth application. |
 | client_id | __Required__  |
-| access_token | The OAuth access token used to authenticate to the GitHub API. |
 
 ## apps create-content-attachment
 
@@ -1446,10 +1447,10 @@ You must use an [installation access token](https://developer.github.com/apps/bu
 
 | name | description |
 |------|-------------|
-| body | __Required__ The body text of the content attachment displayed in the body or comment of an issue or pull request. This parameter supports markdown. |
-| content_reference_id | __Required__  |
+| body | __Required__ The body of the attachment |
+| content_reference_id | __Required__ content_reference_id parameter |
 | corsair-preview | __Required__ To access the Content Attachments API during the preview period, you must set this flag. |
-| title | __Required__ The title of the content attachment displayed in the body or comment of an issue or pull request. |
+| title | __Required__ The title of the attachment |
 
 ## apps create-from-manifest
 
@@ -1462,7 +1463,7 @@ Use this endpoint to complete the handshake necessary when implementing the [Git
 
 | name | description |
 |------|-------------|
-| code | __Required__  |
+| code | __Required__ code parameter |
 
 ## apps create-installation-access-token
 
@@ -1477,17 +1478,21 @@ You must use a [JWT](https://developer.github.com/apps/building-github-apps/auth
 
 | name | description |
 |------|-------------|
-| installation_id | __Required__  |
+| installation_id | __Required__ installation_id parameter |
 | machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
-| permissions | The permissions granted to the access token. The permissions object includes the permission names and their access type. For a complete list of permissions and allowable values, see "[GitHub App permissions](https://developer.github.com/apps/building-github-apps/creating-github-apps-using-url-parameters/#github-app-permissions)." |
-| repository_ids | The `id`s of the repositories that the installation token can access. Providing repository `id`s restricts the access of an installation token to specific repositories. You can use the "[List repositories accessible to the app installation](https://developer.github.com/v3/apps/installations/#list-repositories-accessible-to-the-app-installation)" endpoint to get the `id` of all repositories that an installation can access. For example, you can select specific repositories when creating an installation token to restrict the number of repositories that can be cloned using the token. |
+| permissions.contents |  |
+| permissions.def_not_a_repo |  |
+| permissions.deployments |  |
+| permissions.issues |  |
+| permissions.single_file |  |
+| repositories | List of repository names that the token should have access to |
+| repository_ids | List of repository IDs that the token should have access to |
 
 ## apps delete-authorization
 
 https://developer.github.com/v3/apps/oauth_applications/#delete-an-app-authorization
 
 OAuth application owners can revoke a grant for their OAuth application and a specific user. You must use [Basic Authentication](https://developer.github.com/v3/auth#basic-authentication) when accessing this endpoint, using the OAuth application's `client_id` and `client_secret` as the username and password. You must also provide a valid OAuth `access_token` as an input parameter and the grant for the token's owner will be deleted.
-
 Deleting an OAuth application's grant will also delete all OAuth tokens associated with the application for the user. Once deleted, the application will have no access to the user's account and will no longer be listed on [the application authorizations settings screen within GitHub](https://github.com/settings/applications#authorized).
 
 ### parameters
@@ -1511,7 +1516,7 @@ You must use a [JWT](https://developer.github.com/apps/building-github-apps/auth
 
 | name | description |
 |------|-------------|
-| installation_id | __Required__  |
+| installation_id | __Required__ installation_id parameter |
 | machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
 
 ## apps delete-token
@@ -1549,14 +1554,14 @@ https://developer.github.com/v3/apps/#get-an-app
 
 **Note**: The `:app_slug` is just the URL-friendly name of your GitHub App. You can find this on the settings page for your GitHub App (e.g., `https://github.com/settings/apps/:app_slug`).
 
-If the GitHub App you specify is public, you can access this endpoint without authenticating. If the GitHub App you specify is private, you must authenticate with a [personal access token](https://docs.github.com/articles/creating-a-personal-access-token-for-the-command-line/) or an [installation access token](https://developer.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-an-installation) to access this endpoint.
+If the GitHub App you specify is public, you can access this endpoint without authenticating. If the GitHub App you specify is private, you must authenticate with a [personal access token](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/) or an [installation access token](https://developer.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-an-installation) to access this endpoint.
 
 ### parameters
 
 
 | name | description |
 |------|-------------|
-| app_slug | __Required__  |
+| app_slug | __Required__ app_slug parameter |
 | machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
 
 ## apps get-installation
@@ -1572,7 +1577,7 @@ You must use a [JWT](https://developer.github.com/apps/building-github-apps/auth
 
 | name | description |
 |------|-------------|
-| installation_id | __Required__  |
+| installation_id | __Required__ installation_id parameter |
 | machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
 
 ## apps get-org-installation
@@ -1620,7 +1625,7 @@ GitHub Apps must use a [JWT](https://developer.github.com/apps/building-github-a
 
 | name | description |
 |------|-------------|
-| account_id | __Required__  |
+| account_id | __Required__ account_id parameter |
 
 ## apps get-subscription-plan-for-account-stubbed
 
@@ -1635,7 +1640,7 @@ GitHub Apps must use a [JWT](https://developer.github.com/apps/building-github-a
 
 | name | description |
 |------|-------------|
-| account_id | __Required__  |
+| account_id | __Required__ account_id parameter |
 
 ## apps get-user-installation
 
@@ -1666,11 +1671,11 @@ GitHub Apps must use a [JWT](https://developer.github.com/apps/building-github-a
 
 | name | description |
 |------|-------------|
-| plan_id | __Required__  |
+| plan_id | __Required__ plan_id parameter |
 | direction | To return the oldest accounts first, set to `asc`. Can be one of `asc` or `desc`. Ignored without the `sort` parameter. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| sort | Sorts the GitHub accounts by the date they were created or last updated. Can be one of `created` or `updated`. |
+| sort | One of `created` (when the repository was starred) or `updated` (when it was last pushed to). |
 
 ## apps list-accounts-for-plan-stubbed
 
@@ -1685,11 +1690,11 @@ GitHub Apps must use a [JWT](https://developer.github.com/apps/building-github-a
 
 | name | description |
 |------|-------------|
-| plan_id | __Required__  |
+| plan_id | __Required__ plan_id parameter |
 | direction | To return the oldest accounts first, set to `asc`. Can be one of `asc` or `desc`. Ignored without the `sort` parameter. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| sort | Sorts the GitHub accounts by the date they were created or last updated. Can be one of `created` or `updated`. |
+| sort | One of `created` (when the repository was starred) or `updated` (when it was last pushed to). |
 
 ## apps list-installation-repos-for-authenticated-user
 
@@ -1708,7 +1713,7 @@ The access the user has to each repository is included in the hash under the `pe
 
 | name | description |
 |------|-------------|
-| installation_id | __Required__  |
+| installation_id | __Required__ installation_id parameter |
 | machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
 | mercy-preview | The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must set this flag. |
 | page | Page number of the results to fetch. |
@@ -1728,8 +1733,10 @@ The permissions the installation has are included under the `permissions` key.
 | name | description |
 |------|-------------|
 | machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
+| outdated |  |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
+| since | Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 
 ## apps list-installations-for-authenticated-user
 
@@ -1836,16 +1843,16 @@ https://developer.github.com/v3/apps/installations/#remove-a-repository-from-an-
 
 Remove a single repository from an installation. The authenticated user must have admin access to the repository.
 
-You must use a personal access token (which you can create via the [command line](https://docs.github.com/articles/creating-a-personal-access-token-for-the-command-line/) or the [OAuth Authorizations API](https://developer.github.com/v3/oauth_authorizations/#create-a-new-authorization)) or [Basic Authentication](https://developer.github.com/v3/auth/#basic-authentication) to access this endpoint.
+You must use a personal access token (which you can create via the [command line](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/) or the [OAuth Authorizations API](https://developer.github.com/v3/oauth_authorizations/#create-a-new-authorization)) or [Basic Authentication](https://developer.github.com/v3/auth/#basic-authentication) to access this endpoint.
 
 ### parameters
 
 
 | name | description |
 |------|-------------|
-| installation_id | __Required__  |
+| installation_id | __Required__ installation_id parameter |
 | machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
-| repository_id | __Required__  |
+| repository_id | __Required__ repository_id parameter |
 
 ## apps reset-authorization
 
@@ -1874,8 +1881,8 @@ OAuth applications can use this API method to reset a valid OAuth token without 
 
 | name | description |
 |------|-------------|
+| access_token | __Required__ The access_token of the OAuth application. |
 | client_id | __Required__  |
-| access_token | The OAuth access token used to authenticate to the GitHub API. |
 
 ## apps revoke-authorization-for-application
 
@@ -1938,7 +1945,7 @@ You must use a [JWT](https://developer.github.com/apps/building-github-apps/auth
 
 | name | description |
 |------|-------------|
-| installation_id | __Required__  |
+| installation_id | __Required__ installation_id parameter |
 
 ## apps unsuspend-installation
 
@@ -1957,7 +1964,7 @@ You must use a [JWT](https://developer.github.com/apps/building-github-apps/auth
 
 | name | description |
 |------|-------------|
-| installation_id | __Required__  |
+| installation_id | __Required__ installation_id parameter |
 
 # billing
 
@@ -1970,7 +1977,7 @@ https://developer.github.com/v3/billing/#get-github-actions-billing-for-an-enter
 
 Gets the summary of the free and paid GitHub Actions minutes used.
 
-Paid minutes only apply to workflows in private repositories that use GitHub-hosted runners. Minutes used is listed for each GitHub-hosted runner operating system. Any job re-runs are also included in the usage. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://docs.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
+Paid minutes only apply to workflows in private repositories that use GitHub-hosted runners. Minutes used is listed for each GitHub-hosted runner operating system. Any job re-runs are also included in the usage. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
 
 The authenticated user must be an enterprise admin.
 
@@ -1989,7 +1996,7 @@ https://developer.github.com/v3/billing/#get-github-actions-billing-for-an-organ
 
 Gets the summary of the free and paid GitHub Actions minutes used.
 
-Paid minutes only apply to workflows in private repositories that use GitHub-hosted runners. Minutes used is listed for each GitHub-hosted runner operating system. Any job re-runs are also included in the usage. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://docs.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
+Paid minutes only apply to workflows in private repositories that use GitHub-hosted runners. Minutes used is listed for each GitHub-hosted runner operating system. Any job re-runs are also included in the usage. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
 
 Access tokens must have the `read:org` scope.
 
@@ -2008,7 +2015,7 @@ https://developer.github.com/v3/billing/#get-github-actions-billing-for-a-user
 
 Gets the summary of the free and paid GitHub Actions minutes used.
 
-Paid minutes only apply to workflows in private repositories that use GitHub-hosted runners. Minutes used is listed for each GitHub-hosted runner operating system. Any job re-runs are also included in the usage. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://docs.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
+Paid minutes only apply to workflows in private repositories that use GitHub-hosted runners. Minutes used is listed for each GitHub-hosted runner operating system. Any job re-runs are also included in the usage. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
 
 Access tokens must have the `user` scope.
 
@@ -2027,7 +2034,7 @@ https://developer.github.com/v3/billing/#get-github-packages-billing-for-an-ente
 
 Gets the free and paid storage used for GitHub Packages in gigabytes.
 
-Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://docs.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
+Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
 
 The authenticated user must be an enterprise admin.
 
@@ -2046,7 +2053,7 @@ https://developer.github.com/v3/billing/#get-github-packages-billing-for-an-orga
 
 Gets the free and paid storage usued for GitHub Packages in gigabytes.
 
-Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://docs.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
+Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
 
 Access tokens must have the `read:org` scope.
 
@@ -2065,7 +2072,7 @@ https://developer.github.com/v3/billing/#get-github-packages-billing-for-a-user
 
 Gets the free and paid storage used for GitHub Packages in gigabytes.
 
-Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://docs.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
+Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
 
 Access tokens must have the `user` scope.
 
@@ -2084,7 +2091,7 @@ https://developer.github.com/v3/billing/#get-shared-storage-billing-for-an-enter
 
 Gets the estimated paid and estimated total storage used for GitHub Actions and Github Packages.
 
-Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://docs.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
+Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
 
 The authenticated user must be an enterprise admin.
 
@@ -2103,7 +2110,7 @@ https://developer.github.com/v3/billing/#get-shared-storage-billing-for-an-organ
 
 Gets the estimated paid and estimated total storage used for GitHub Actions and Github Packages.
 
-Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://docs.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
+Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
 
 Access tokens must have the `read:org` scope.
 
@@ -2122,7 +2129,7 @@ https://developer.github.com/v3/billing/#get-shared-storage-billing-for-a-user
 
 Gets the estimated paid and estimated total storage used for GitHub Actions and Github Packages.
 
-Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://docs.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
+Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
 
 Access tokens must have the `user` scope.
 
@@ -2155,10 +2162,10 @@ Creates a new check run for a specific commit in a repository. Your GitHub App m
 | repo | __Required__ repository in OWNER/REPO form |
 | actions | Displays a button on GitHub that can be clicked to alert your app to do additional tasks. For example, a code linting app can display a button that automatically fixes detected errors. The button created in this object is displayed after the check run completes. When a user clicks the button, GitHub sends the [`check_run.requested_action` webhook](https://developer.github.com/webhooks/event-payloads/#check_run) to your app. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://developer.github.com/v3/checks/runs/#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://developer.github.com/v3/checks/runs/#check-runs-and-requested-actions)." To learn more about check runs and requested actions, see "[Check runs and requested actions](https://developer.github.com/v3/checks/runs/#check-runs-and-requested-actions)." |
 | completed_at | The time the check completed. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
-| conclusion | **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `success`, `failure`, `neutral`, `cancelled`, `skipped`, `timed_out`, or `action_required`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.<br>**Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. Only GitHub can change a check run conclusion to `stale`. |
+| conclusion | **Required if you provide `completed_at` or a `status` of `completed`**. The final conclusion of the check. Can be one of `success`, `failure`, `neutral`, `cancelled`, `skipped`, `timed_out`, or `action_required`. When the conclusion is `action_required`, additional details should be provided on the site specified by `details_url`.  <br>**Note:** Providing `conclusion` will automatically set the `status` parameter to `completed`. Only GitHub can change a check run conclusion to `stale`. |
 | details_url | The URL of the integrator's site that has the full details of the check. If the integrator does not provide this, then the homepage of the GitHub app is used. |
 | external_id | A reference for the run on the integrator's system. |
-| output.annotations | Adds information from your analysis to specific lines of code. Annotations are visible on GitHub in the **Checks** and **Files changed** tab of the pull request. The Checks API limits the number of annotations to a maximum of 50 per API request. To create more than 50 annotations, you have to make multiple requests to the [Update a check run](https://developer.github.com/v3/checks/runs/#update-a-check-run) endpoint. Each time you update the check run, annotations are appended to the list of annotations that already exist for the check run. For details about how you can view annotations on GitHub, see "[About status checks](https://docs.github.com/articles/about-status-checks#checks)". See the [`annotations` object](https://developer.github.com/v3/checks/runs/#annotations-object) description for details about how to use this parameter. |
+| output.annotations | Adds information from your analysis to specific lines of code. Annotations are visible on GitHub in the **Checks** and **Files changed** tab of the pull request. The Checks API limits the number of annotations to a maximum of 50 per API request. To create more than 50 annotations, you have to make multiple requests to the [Update a check run](https://developer.github.com/v3/checks/runs/#update-a-check-run) endpoint. Each time you update the check run, annotations are appended to the list of annotations that already exist for the check run. For details about how you can view annotations on GitHub, see "[About status checks](https://help.github.com/articles/about-status-checks#checks)". See the [`annotations` object](https://developer.github.com/v3/checks/runs/#annotations-object) description for details about how to use this parameter. |
 | output.images | Adds images to the output displayed in the GitHub pull request UI. See the [`images` object](https://developer.github.com/v3/checks/runs/#images-object) description for details. |
 | output.summary | The summary of the check run. This parameter supports Markdown. |
 | output.text | The details of the check run. This parameter supports Markdown. |
@@ -2197,7 +2204,7 @@ Gets a single check run using its `id`. GitHub Apps must have the `checks:read` 
 | name | description |
 |------|-------------|
 | antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
-| check_run_id | __Required__  |
+| check_run_id | __Required__ check_run_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## checks get-suite
@@ -2214,7 +2221,7 @@ Gets a single check suite using its `id`. GitHub Apps must have the `checks:read
 | name | description |
 |------|-------------|
 | antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
-| check_suite_id | __Required__  |
+| check_suite_id | __Required__ check_suite_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## checks list-annotations
@@ -2229,7 +2236,7 @@ Lists annotations for a check run using the annotation `id`. GitHub Apps must ha
 | name | description |
 |------|-------------|
 | antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
-| check_run_id | __Required__  |
+| check_run_id | __Required__ check_run_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -2248,7 +2255,7 @@ Lists check runs for a commit ref. The `ref` can be a SHA, branch name, or a tag
 | name | description |
 |------|-------------|
 | antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
-| ref | __Required__  |
+| ref | __Required__ ref+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | check_name | Returns check runs with the specified `name`. |
 | filter | Filters check runs by their `completed_at` timestamp. Can be one of `latest` (returning the most recent check runs) or `all`. |
@@ -2270,7 +2277,7 @@ Lists check runs for a check suite using its `id`. GitHub Apps must have the `ch
 | name | description |
 |------|-------------|
 | antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
-| check_suite_id | __Required__  |
+| check_suite_id | __Required__ check_suite_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | check_name | Returns check runs with the specified `name`. |
 | filter | Filters check runs by their `completed_at` timestamp. Can be one of `latest` (returning the most recent check runs) or `all`. |
@@ -2292,10 +2299,10 @@ Lists check suites for a commit `ref`. The `ref` can be a SHA, branch name, or a
 | name | description |
 |------|-------------|
 | antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
-| ref | __Required__  |
+| ref | __Required__ ref+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | app_id | Filters check suites by GitHub App `id`. |
-| check_name | Filters checks suites by the name of the [check run](https://developer.github.com/v3/checks/runs/). |
+| check_name | Returns check runs with the specified `name`. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -2313,7 +2320,7 @@ To rerequest a check suite, your GitHub App must have the `checks:read` permissi
 | name | description |
 |------|-------------|
 | antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
-| check_suite_id | __Required__  |
+| check_suite_id | __Required__ check_suite_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## checks set-suites-preferences
@@ -2345,7 +2352,7 @@ Updates a check run for a specific commit in a repository. Your GitHub App must 
 | name | description |
 |------|-------------|
 | antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
-| check_run_id | __Required__  |
+| check_run_id | __Required__ check_run_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | actions | Possible further actions the integrator can perform, which a user may trigger. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://developer.github.com/v3/checks/runs/#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://developer.github.com/v3/checks/runs/#check-runs-and-requested-actions)." |
 | completed_at | The time the check completed. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
@@ -2353,7 +2360,7 @@ Updates a check run for a specific commit in a repository. Your GitHub App must 
 | details_url | The URL of the integrator's site that has the full details of the check. |
 | external_id | A reference for the run on the integrator's system. |
 | name | The name of the check. For example, "code-coverage". |
-| output.annotations | Adds information from your analysis to specific lines of code. Annotations are visible in GitHub's pull request UI. Annotations are visible in GitHub's pull request UI. The Checks API limits the number of annotations to a maximum of 50 per API request. To create more than 50 annotations, you have to make multiple requests to the [Update a check run](https://developer.github.com/v3/checks/runs/#update-a-check-run) endpoint. Each time you update the check run, annotations are appended to the list of annotations that already exist for the check run. For details about annotations in the UI, see "[About status checks](https://docs.github.com/articles/about-status-checks#checks)". See the [`annotations` object](https://developer.github.com/v3/checks/runs/#annotations-object-1) description for details. |
+| output.annotations | Adds information from your analysis to specific lines of code. Annotations are visible in GitHub's pull request UI. Annotations are visible in GitHub's pull request UI. The Checks API limits the number of annotations to a maximum of 50 per API request. To create more than 50 annotations, you have to make multiple requests to the [Update a check run](https://developer.github.com/v3/checks/runs/#update-a-check-run) endpoint. Each time you update the check run, annotations are appended to the list of annotations that already exist for the check run. For details about annotations in the UI, see "[About status checks](https://help.github.com/articles/about-status-checks#checks)". See the [`annotations` object](https://developer.github.com/v3/checks/runs/#annotations-object-1) description for details. |
 | output.images | Adds images to the output displayed in the GitHub pull request UI. See the [`images` object](https://developer.github.com/v3/checks/runs/#annotations-object-1) description for details. |
 | output.summary | Can contain Markdown. |
 | output.text | Can contain Markdown. |
@@ -2377,7 +2384,7 @@ The security `alert_id` is found at the end of the security alert's URL. For exa
 
 | name | description |
 |------|-------------|
-| alert_id | __Required__  |
+| alert_id | __Required__ alert_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## code-scanning list-alerts-for-repo
@@ -2422,7 +2429,7 @@ https://developer.github.com/v3/codes_of_conduct/#get-a-code-of-conduct
 
 | name | description |
 |------|-------------|
-| key | __Required__  |
+| key | __Required__ key parameter |
 | scarlet-witch-preview | __Required__ The Codes of Conduct API is currently available for developers to preview.<br><br>To access the API during the preview period, you must set this flag. |
 
 ## codes-of-conduct get-for-repo
@@ -2448,249 +2455,6 @@ https://developer.github.com/v3/emojis/#get-emojis
 
 Lists all the emojis available to use on GitHub.
 
-# enterprise-admin
-
-
-## enterprise-admin delete-scim-group-from-enterprise
-
-https://developer.github.com/v3/enterprise-admin/scim/#delete-a-scim-group-from-an-enterprise
-
-**Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| enterprise | __Required__  |
-| scim_group_id | __Required__ Identifier generated by the GitHub SCIM endpoint. |
-
-## enterprise-admin delete-user-from-enterprise
-
-https://developer.github.com/v3/enterprise-admin/scim/#delete-a-scim-user-from-an-enterprise
-
-**Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| enterprise | __Required__  |
-| scim_user_id | __Required__ Identifier generated by the GitHub SCIM endpoint. |
-
-## enterprise-admin get-provisioning-information-for-enterprise-group
-
-https://developer.github.com/v3/enterprise-admin/scim/#get-scim-provisioning-information-for-an-enterprise group
-
-**Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| enterprise | __Required__  |
-| scim_group_id | __Required__ Identifier generated by the GitHub SCIM endpoint. |
-
-## enterprise-admin get-provisioning-information-for-enterprise-user
-
-https://developer.github.com/v3/enterprise-admin/scim/#get-scim-provisioning-information-for-an-enterprise-user
-
-**Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| enterprise | __Required__  |
-| scim_user_id | __Required__ Identifier generated by the GitHub SCIM endpoint. |
-
-## enterprise-admin list-provisioned-groups-enterprise
-
-https://developer.github.com/v3/enterprise-admin/scim/#list-provisioned-scim groups-for-an-enterprise
-
-**Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| enterprise | __Required__  |
-| count | Used for pagination: the number of results to return. |
-| startIndex | Used for pagination: the index of the first result to return. |
-
-## enterprise-admin list-provisioned-identities-enterprise
-
-https://developer.github.com/v3/enterprise-admin/scim/#list-scim-provisioned-identities-for-an-enterprise
-
-**Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
-
-Retrieves a paginated list of all provisioned enterprise members, including pending invitations.
-
-When a user with a SAML-provisioned external identity leaves (or is removed from) an enterprise, the account's metadata is immediately removed. However, the returned list of user accounts might not always match the organization or enterprise member list you see on GitHub. This can happen in certain cases where an external identity associated with an organization will not match an organization member:
-  - When a user with a SCIM-provisioned external identity is removed from an enterprise, the account's metadata is preserved to allow the user to re-join the organization in the future.
-  - When inviting a user to join an organization, you can expect to see their external identity in the results before they accept the invitation, or if the invitation is cancelled (or never accepted).
-  - When a user is invited over SCIM, an external identity is created that matches with the invitee's email address. However, this identity is only linked to a user account when the user accepts the invitation by going through SAML SSO.
-
-The returned list of external identities can include an entry for a `null` user. These are unlinked SAML identities that are created when a user goes through the following Single Sign-On (SSO) process but does not sign in to their GitHub account after completing SSO:
-
-1. The user is granted access by the IdP and is not a member of the GitHub enterprise.
-
-1. The user attempts to access the GitHub enterprise and initiates the SAML SSO process, and is not currently signed in to their GitHub account.
-
-1. After successfully authenticating with the SAML SSO IdP, the `null` external identity entry is created and the user is prompted to sign in to their GitHub account:
-   - If the user signs in, their GitHub account is linked to this entry.
-   - If the user does not sign in (or does not create a new account when prompted), they are not added to the GitHub enterprise, and the external identity `null` entry remains in place.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| enterprise | __Required__  |
-| count | Used for pagination: the number of results to return. |
-| startIndex | Used for pagination: the index of the first result to return. |
-
-## enterprise-admin provision-and-invite-enterprise-group
-
-https://developer.github.com/v3/enterprise-admin/scim/#provision-a-scim-enterprise-group-and-invite-users
-
-**Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
-
-Provision an enterprise group, and invite users to the group. This sends invitation emails to the email address of the invited users to join the GitHub organization that the SCIM group corresponds to.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| displayName | __Required__ The name of the SCIM group. This must match the GitHub organization that the group maps to. |
-| enterprise | __Required__  |
-| schemas | __Required__ The SCIM schema URIs. |
-| members |  |
-
-## enterprise-admin provision-and-invite-enterprise-user
-
-https://developer.github.com/v3/enterprise-admin/scim/#provision-and-invite-a-scim-enterprise-user
-
-**Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
-
-Provision enterprise membership for a user, and send organization invitation emails to the email address.
-
-You can optionally include the groups a user will be invited to join. If you do not provide a list of `groups`, the user is provisioned for the enterprise, but no organization invitation emails will be sent.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| emails | __Required__ List of user emails. |
-| enterprise | __Required__  |
-| name.familyName | __Required__ The last name of the user. |
-| name.givenName | __Required__ The first name of the user. |
-| schemas | __Required__ The SCIM schema URIs. |
-| userName | __Required__ The username for the user. |
-| groups | List of SCIM group IDs the user is a member of. |
-
-## enterprise-admin set-information-for-provisioned-enterprise-group
-
-https://developer.github.com/v3/enterprise-admin/scim/#set-scim-information-for-a-provisioned-enterprise-group
-
-**Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
-
-Replaces an existing provisioned group’s information. You must provide all the information required for the group as if you were provisioning it for the first time. Any existing group information that you don't provide will be removed, including group membership. If you want to only update a specific attribute, use the [Update an attribute for a SCIM enterprise group](#update-an-attribute-for-a-scim-enterprise-group) endpoint instead.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| displayName | __Required__ The name of the SCIM group. This must match the GitHub organization that the group maps to. |
-| enterprise | __Required__  |
-| schemas | __Required__ The SCIM schema URIs. |
-| scim_group_id | __Required__ Identifier generated by the GitHub SCIM endpoint. |
-| members |  |
-
-## enterprise-admin set-information-for-provisioned-enterprise-user
-
-https://developer.github.com/v3/enterprise-admin/scim/#set-scim-information-for-a-provisioned-enterprise-user
-
-**Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
-
-Replaces an existing provisioned user's information. You must provide all the information required for the user as if you were provisioning them for the first time. Any existing user information that you don't provide will be removed. If you want to only update a specific attribute, use the [Update an attribute for a SCIM user](#update-an-attribute-for-an-enterprise-scim-user) endpoint instead.
-
-You must at least provide the required values for the user: `userName`, `name`, and `emails`.
-
-**Warning:** Setting `active: false` removes the user from the enterprise, deletes the external identity, and deletes the associated `{scim_user_id}`.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| emails | __Required__ List of user emails. |
-| enterprise | __Required__  |
-| name.familyName | __Required__ The last name of the user. |
-| name.givenName | __Required__ The first name of the user. |
-| schemas | __Required__ The SCIM schema URIs. |
-| scim_user_id | __Required__ Identifier generated by the GitHub SCIM endpoint. |
-| userName | __Required__ The username for the user. |
-| groups | List of SCIM group IDs the user is a member of. |
-
-## enterprise-admin update-attribute-for-enterprise-group
-
-https://developer.github.com/v3/enterprise-admin/scim/#update-an-attribute-for-a-scim-enterprise-group
-
-**Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
-
-Allows you to change a provisioned group’s individual attributes. To change a group’s values, you must provide a specific Operations JSON format that contains at least one of the add, remove, or replace operations. For examples and more information on the SCIM operations format, see the [SCIM specification](https://tools.ietf.org/html/rfc7644#section-3.5.2).
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| Operations | __Required__ Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2). |
-| enterprise | __Required__  |
-| schemas | __Required__ The SCIM schema URIs. |
-| scim_group_id | __Required__ Identifier generated by the GitHub SCIM endpoint. |
-
-## enterprise-admin update-attribute-for-enterprise-user
-
-https://developer.github.com/v3/enterprise-admin/scim/#update-an-attribute-for-a-scim-enterprise-user
-
-**Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
-
-Allows you to change a provisioned user's individual attributes. To change a user's values, you must provide a specific `Operations` JSON format that contains at least one of the `add`, `remove`, or `replace` operations. For examples and more information on the SCIM operations format, see the [SCIM specification](https://tools.ietf.org/html/rfc7644#section-3.5.2).
-
-**Note:** Complicated SCIM `path` selectors that include filters are not supported. For example, a `path` selector defined as `"path": "emails[type eq \"work\"]"` will not work.
-
-**Warning:** If you set `active:false` using the `replace` operation (as shown in the JSON example below), it removes the user from the enterprise, deletes the external identity, and deletes the associated `:scim_user_id`.
-
-```
-{
-  "Operations":[{
-    "op":"replace",
-    "value":{
-      "active":false
-    }
-  }]
-}
-```
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| Operations | __Required__ Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2). |
-| enterprise | __Required__  |
-| schemas | __Required__ The SCIM schema URIs. |
-| scim_user_id | __Required__ Identifier generated by the GitHub SCIM endpoint. |
-
 # gists
 
 
@@ -2705,7 +2469,7 @@ https://developer.github.com/v3/gists/#check-if-a-gist-is-starred
 
 | name | description |
 |------|-------------|
-| gist_id | __Required__  |
+| gist_id | __Required__ gist_id parameter |
 
 ## gists create
 
@@ -2720,9 +2484,9 @@ Allows you to add a new gist with one or more files.
 
 | name | description |
 |------|-------------|
-| files | __Required__ The filenames and content of each file in the gist. The keys in the `files` object represent the filename and have the type `string`. |
-| description | A descriptive name for this gist. |
-| public | When `true`, the gist will be public and available for anyone to see. |
+| files | __Required__ Names and content for the files that make up the gist |
+| description | Description of the gist |
+| public |  |
 
 ## gists create-comment
 
@@ -2736,7 +2500,7 @@ https://developer.github.com/v3/gists/comments/#create-a-gist-comment
 | name | description |
 |------|-------------|
 | body | __Required__ The comment text. |
-| gist_id | __Required__  |
+| gist_id | __Required__ gist_id parameter |
 
 ## gists delete
 
@@ -2749,7 +2513,7 @@ https://developer.github.com/v3/gists/#delete-a-gist
 
 | name | description |
 |------|-------------|
-| gist_id | __Required__  |
+| gist_id | __Required__ gist_id parameter |
 
 ## gists delete-comment
 
@@ -2762,8 +2526,8 @@ https://developer.github.com/v3/gists/comments/#delete-a-gist-comment
 
 | name | description |
 |------|-------------|
-| comment_id | __Required__  |
-| gist_id | __Required__  |
+| comment_id | __Required__ comment_id parameter |
+| gist_id | __Required__ gist_id parameter |
 
 ## gists fork
 
@@ -2776,7 +2540,7 @@ https://developer.github.com/v3/gists/#fork-a-gist
 
 | name | description |
 |------|-------------|
-| gist_id | __Required__  |
+| gist_id | __Required__ gist_id parameter |
 
 ## gists get
 
@@ -2789,7 +2553,7 @@ https://developer.github.com/v3/gists/#get-a-gist
 
 | name | description |
 |------|-------------|
-| gist_id | __Required__  |
+| gist_id | __Required__ gist_id parameter |
 
 ## gists get-comment
 
@@ -2802,8 +2566,8 @@ https://developer.github.com/v3/gists/comments/#get-a-gist-comment
 
 | name | description |
 |------|-------------|
-| comment_id | __Required__  |
-| gist_id | __Required__  |
+| comment_id | __Required__ comment_id parameter |
+| gist_id | __Required__ gist_id parameter |
 
 ## gists get-revision
 
@@ -2816,8 +2580,8 @@ https://developer.github.com/v3/gists/#get-a-gist-revision
 
 | name | description |
 |------|-------------|
-| gist_id | __Required__  |
-| sha | __Required__  |
+| gist_id | __Required__ gist_id parameter |
+| sha | __Required__ sha parameter |
 
 ## gists list
 
@@ -2832,7 +2596,7 @@ Lists the authenticated user's gists or if called anonymously, this endpoint ret
 |------|-------------|
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| since | This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. Only gists updated at or after this time are returned. |
+| since | Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 
 ## gists list-comments
 
@@ -2845,7 +2609,7 @@ https://developer.github.com/v3/gists/comments/#list-gist-comments
 
 | name | description |
 |------|-------------|
-| gist_id | __Required__  |
+| gist_id | __Required__ gist_id parameter |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -2860,7 +2624,7 @@ https://developer.github.com/v3/gists/#list-gist-commits
 
 | name | description |
 |------|-------------|
-| gist_id | __Required__  |
+| gist_id | __Required__ gist_id parameter |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -2878,7 +2642,7 @@ Lists public gists for the specified user:
 | username | __Required__  |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| since | This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. Only gists updated at or after this time are returned. |
+| since | Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 
 ## gists list-forks
 
@@ -2891,7 +2655,7 @@ https://developer.github.com/v3/gists/#list-gist-forks
 
 | name | description |
 |------|-------------|
-| gist_id | __Required__  |
+| gist_id | __Required__ gist_id parameter |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -2910,7 +2674,7 @@ Note: With [pagination](https://developer.github.com/v3/#pagination), you can fe
 |------|-------------|
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| since | This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. Only gists updated at or after this time are returned. |
+| since | Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 
 ## gists list-starred
 
@@ -2925,7 +2689,7 @@ List the authenticated user's starred gists:
 |------|-------------|
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| since | This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. Only gists updated at or after this time are returned. |
+| since | Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 
 ## gists star
 
@@ -2938,7 +2702,7 @@ Note that you'll need to set `Content-Length` to zero when calling out to this e
 
 | name | description |
 |------|-------------|
-| gist_id | __Required__  |
+| gist_id | __Required__ gist_id parameter |
 
 ## gists unstar
 
@@ -2951,7 +2715,7 @@ https://developer.github.com/v3/gists/#unstar-a-gist
 
 | name | description |
 |------|-------------|
-| gist_id | __Required__  |
+| gist_id | __Required__ gist_id parameter |
 
 ## gists update
 
@@ -2964,9 +2728,9 @@ Allows you to update or delete a gist file and rename gist files. Files from the
 
 | name | description |
 |------|-------------|
-| gist_id | __Required__  |
-| description | A descriptive name for this gist. |
-| files | The filenames and content that make up this gist. |
+| gist_id | __Required__ gist_id parameter |
+| description | Description of the gist |
+| files | Names of files to be updated |
 
 ## gists update-comment
 
@@ -2980,8 +2744,8 @@ https://developer.github.com/v3/gists/comments/#update-a-gist-comment
 | name | description |
 |------|-------------|
 | body | __Required__ The comment text. |
-| comment_id | __Required__  |
-| gist_id | __Required__  |
+| comment_id | __Required__ comment_id parameter |
+| gist_id | __Required__ gist_id parameter |
 
 # git
 
@@ -3039,7 +2803,6 @@ These are the possible values for `reason` in the `verification` object:
 | name | description |
 |------|-------------|
 | message | __Required__ The commit message |
-| parents | __Required__ The SHAs of the commits that were the parents of this commit. If omitted or empty, the commit will be written as a root commit. For a single parent, an array of one SHA should be provided; for a merge commit, an array of more than one should be provided. |
 | repo | __Required__ repository in OWNER/REPO form |
 | tree | __Required__ The SHA of the tree object this commit points to |
 | author.date | Indicates when this commit was authored (or committed). This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
@@ -3048,6 +2811,7 @@ These are the possible values for `reason` in the `verification` object:
 | committer.date | Indicates when this commit was authored (or committed). This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 | committer.email | The email of the author (or committer) of the commit |
 | committer.name | The name of the author (or committer) of the commit |
+| parents | The SHAs of the commits that were the parents of this commit. If omitted or empty, the commit will be written as a root commit. For a single parent, an array of one SHA should be provided; for a merge commit, an array of more than one should be provided. |
 | signature | The [PGP signature](https://en.wikipedia.org/wiki/Pretty_Good_Privacy) of the commit. GitHub adds the signature to the `gpgsig` header of the created commit. For a commit signature to be verifiable by Git or GitHub, it must be an ASCII-armored detached PGP signature over the string commit as it would be written to the object database. To pass a `signature` parameter, you need to first manually create a valid PGP signature, which can be complicated. You may find it easier to [use the command line](https://git-scm.com/book/id/v2/Git-Tools-Signing-Your-Work) to create signed commits. |
 
 ## git create-ref
@@ -3064,6 +2828,7 @@ Creates a reference for your repository. You are unable to create new references
 | ref | __Required__ The name of the fully qualified reference (ie: `refs/heads/master`). If it doesn't start with 'refs' and have at least two slashes, it will be rejected. |
 | repo | __Required__ repository in OWNER/REPO form |
 | sha | __Required__ The SHA1 value for this reference. |
+| key |  |
 
 ## git create-tag
 
@@ -3135,7 +2900,7 @@ https://developer.github.com/v3/git/refs/#delete-a-reference
 
 | name | description |
 |------|-------------|
-| ref | __Required__  |
+| ref | __Required__ ref+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## git get-blob
@@ -3151,7 +2916,7 @@ _Note_: This API supports blobs up to 100 megabytes in size.
 
 | name | description |
 |------|-------------|
-| file_sha | __Required__  |
+| file_sha | __Required__ file_sha parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## git get-commit
@@ -3187,7 +2952,7 @@ These are the possible values for `reason` in the `verification` object:
 
 | name | description |
 |------|-------------|
-| commit_sha | __Required__  |
+| commit_sha | __Required__ commit_sha+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## git get-ref
@@ -3203,7 +2968,7 @@ Returns a single reference from your Git database. The `:ref` in the URL must be
 
 | name | description |
 |------|-------------|
-| ref | __Required__  |
+| ref | __Required__ ref+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## git get-tag
@@ -3238,7 +3003,7 @@ These are the possible values for `reason` in the `verification` object:
 | name | description |
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
-| tag_sha | __Required__  |
+| tag_sha | __Required__ tag_sha parameter |
 
 ## git get-tree
 
@@ -3254,7 +3019,7 @@ If `truncated` is `true` in the response then the number of items in the `tree` 
 | name | description |
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
-| tree_sha | __Required__  |
+| tree_sha | __Required__ tree_sha parameter |
 | recursive | Setting this parameter to any value returns the objects or subtrees referenced by the tree specified in `:tree_sha`. For example, setting `recursive` to any of the following will enable returning objects or subtrees: `0`, `1`, `"true"`, and `"false"`. Omit this parameter to prevent recursively returning objects or subtrees. |
 
 ## git list-matching-refs
@@ -3274,7 +3039,7 @@ If you request matching references for a branch named `feature` but the branch `
 
 | name | description |
 |------|-------------|
-| ref | __Required__  |
+| ref | __Required__ ref+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -3290,7 +3055,7 @@ https://developer.github.com/v3/git/refs/#update-a-reference
 
 | name | description |
 |------|-------------|
-| ref | __Required__  |
+| ref | __Required__ ref+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | sha | __Required__ The SHA1 value to set this reference to |
 | force | Indicates whether to force the update or to make sure the update is a fast-forward update. Leaving this out or setting it to `false` will make sure you're not overwriting work. |
@@ -3309,7 +3074,6 @@ List all templates available to pass as an option when [creating a repository](h
 https://developer.github.com/v3/gitignore/#get-a-gitignore-template
 
 The API also allows fetching the source of a single template.
-
 Use the raw [media type](https://developer.github.com/v3/media/) to get the raw contents.
 
 ### parameters
@@ -3317,7 +3081,7 @@ Use the raw [media type](https://developer.github.com/v3/media/) to get the raw 
 
 | name | description |
 |------|-------------|
-| name | __Required__  |
+| name | __Required__ name parameter |
 
 # interactions
 
@@ -3422,7 +3186,7 @@ Adds up to 10 assignees to an issue. Users already assigned to an issue are not 
 
 | name | description |
 |------|-------------|
-| issue_number | __Required__  |
+| issue_number | __Required__ issue_number parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | assignees | Usernames of people to assign this issue to. _NOTE: Only users with push access can add assignees to an issue. Assignees are silently ignored otherwise._ |
 
@@ -3437,7 +3201,7 @@ https://developer.github.com/v3/issues/labels/#add-labels-to-an-issue
 
 | name | description |
 |------|-------------|
-| issue_number | __Required__  |
+| issue_number | __Required__ issue_number parameter |
 | labels | __Required__ The name of the label to add to the issue. Must contain at least one label. **Note:** Alternatively, you can pass a single label as a `string` or an `array` of labels directly, but GitHub recommends passing an object with the `labels` key. |
 | repo | __Required__ repository in OWNER/REPO form |
 
@@ -3456,16 +3220,16 @@ Otherwise a `404` status code is returned.
 
 | name | description |
 |------|-------------|
-| assignee | __Required__  |
+| assignee | __Required__ assignee parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## issues create
 
 https://developer.github.com/v3/issues/#create-an-issue
 
-Any user with pull access to a repository can create an issue. If [issues are disabled in the repository](https://docs.github.com/articles/disabling-issues/), the API returns a `410 Gone` status.
+Any user with pull access to a repository can create an issue. If [issues are disabled in the repository](https://help.github.com/articles/disabling-issues/), the API returns a `410 Gone` status.
 
-This endpoint triggers [notifications](https://docs.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
+This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
 
 ### parameters
 
@@ -3484,7 +3248,7 @@ This endpoint triggers [notifications](https://docs.github.com/articles/about-no
 
 https://developer.github.com/v3/issues/comments/#create-an-issue-comment
 
-This endpoint triggers [notifications](https://docs.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
+This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
 
 ### parameters
 
@@ -3492,7 +3256,7 @@ This endpoint triggers [notifications](https://docs.github.com/articles/about-no
 | name | description |
 |------|-------------|
 | body | __Required__ The contents of the comment. |
-| issue_number | __Required__  |
+| issue_number | __Required__ issue_number parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## issues create-label
@@ -3506,9 +3270,9 @@ https://developer.github.com/v3/issues/labels/#create-a-label
 
 | name | description |
 |------|-------------|
-| color | __Required__ The [hexadecimal color code](http://www.color-hex.com/) for the label, without the leading `#`. |
 | name | __Required__ The name of the label. Emoji can be added to label names, using either native emoji or colon-style markup. For example, typing `:strawberry:` will render the emoji ![:strawberry:](https://github.githubassets.com/images/icons/emoji/unicode/1f353.png ":strawberry:"). For a full list of available emoji and codes, see [emoji-cheat-sheet.com](http://emoji-cheat-sheet.com/). |
 | repo | __Required__ repository in OWNER/REPO form |
+| color | The [hexadecimal color code](http://www.color-hex.com/) for the label, without the leading `#`. |
 | description | A short description of the label. |
 
 ## issues create-milestone
@@ -3539,7 +3303,7 @@ https://developer.github.com/v3/issues/comments/#delete-an-issue-comment
 
 | name | description |
 |------|-------------|
-| comment_id | __Required__  |
+| comment_id | __Required__ comment_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## issues delete-label
@@ -3553,7 +3317,7 @@ https://developer.github.com/v3/issues/labels/#delete-a-label
 
 | name | description |
 |------|-------------|
-| name | __Required__  |
+| name | __Required__ name parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## issues delete-milestone
@@ -3567,7 +3331,7 @@ https://developer.github.com/v3/issues/milestones/#delete-a-milestone
 
 | name | description |
 |------|-------------|
-| milestone_number | __Required__  |
+| milestone_number | __Required__ milestone_number parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## issues get
@@ -3575,7 +3339,7 @@ https://developer.github.com/v3/issues/milestones/#delete-a-milestone
 https://developer.github.com/v3/issues/#get-an-issue
 
 The API returns a [`301 Moved Permanently` status](https://developer.github.com/v3/#http-redirects) if the issue was
-[transferred](https://docs.github.com/articles/transferring-an-issue-to-another-repository/) to another repository. If
+[transferred](https://help.github.com/articles/transferring-an-issue-to-another-repository/) to another repository. If
 the issue was transferred to or deleted from a repository where the authenticated user lacks read access, the API
 returns a `404 Not Found` status. If the issue was deleted from a repository where the authenticated user has read
 access, the API returns a `410 Gone` status. To receive webhook events for transferred and deleted issues, subscribe
@@ -3591,9 +3355,9 @@ request id, use the "[List pull requests](https://developer.github.com/v3/pulls/
 
 | name | description |
 |------|-------------|
-| issue_number | __Required__  |
+| issue_number | __Required__ issue_number parameter |
 | repo | __Required__ repository in OWNER/REPO form |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## issues get-comment
 
@@ -3606,10 +3370,10 @@ https://developer.github.com/v3/issues/comments/#get-an-issue-comment
 
 | name | description |
 |------|-------------|
-| comment_id | __Required__  |
+| comment_id | __Required__ comment_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | machine-man-preview | To access the API with your GitHub App, you must set this flag for your requests. |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## issues get-event
 
@@ -3622,11 +3386,11 @@ https://developer.github.com/v3/issues/events/#get-an-issue-event
 
 | name | description |
 |------|-------------|
-| event_id | __Required__  |
+| event_id | __Required__ event_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | machine-man-preview | To access the API with your GitHub App, you must set this flag for your requests. |
 | sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must set this flag. |
-| starfox-preview | Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](https://developer.github.com/changes/2018-09-05-project-card-events).<br><br>To receive the `project_card` attribute, project boards must be [enabled](https://docs.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must set this flag. |
+| starfox-preview | Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](https://developer.github.com/changes/2018-09-05-project-card-events).<br><br>To receive the `project_card` attribute, project boards must be [enabled](https://help.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must set this flag. |
 
 ## issues get-label
 
@@ -3639,7 +3403,7 @@ https://developer.github.com/v3/issues/labels/#get-a-label
 
 | name | description |
 |------|-------------|
-| name | __Required__  |
+| name | __Required__ name parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## issues get-milestone
@@ -3653,7 +3417,7 @@ https://developer.github.com/v3/issues/milestones/#get-a-milestone
 
 | name | description |
 |------|-------------|
-| milestone_number | __Required__  |
+| milestone_number | __Required__ milestone_number parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## issues list
@@ -3676,22 +3440,26 @@ request id, use the "[List pull requests](https://developer.github.com/v3/pulls/
 
 | name | description |
 |------|-------------|
-| direction | The direction of the sort. Can be either `asc` or `desc`. |
+| collab |  |
+| direction | One of `asc` (ascending) or `desc` (descending). |
 | filter | Indicates which sorts of issues to return. Can be one of:  <br>\* `assigned`: Issues assigned to you  <br>\* `created`: Issues created by you  <br>\* `mentioned`: Issues mentioning you  <br>\* `subscribed`: Issues you're subscribed to updates for  <br>\* `all`: All issues the authenticated user can see, regardless of participation or creation |
 | labels | A list of comma separated label names. Example: `bug,ui,@high` |
 | machine-man-preview | To access the API with your GitHub App, you must set this flag for your requests. |
+| orgs |  |
+| owned |  |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| since | Only issues updated at or after this time are returned. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
+| pulls |  |
+| since | Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 | sort | What to sort results by. Can be either `created`, `updated`, `comments`. |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | state | Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`. |
 
 ## issues list-assignees
 
 https://developer.github.com/v3/issues/assignees/#list-assignees
 
-Lists the [available assignees](https://docs.github.com/articles/assigning-issues-and-pull-requests-to-other-github-users/) for issues in a repository.
+Lists the [available assignees](https://help.github.com/articles/assigning-issues-and-pull-requests-to-other-github-users/) for issues in a repository.
 
 ### parameters
 
@@ -3713,12 +3481,12 @@ Issue Comments are ordered by ascending ID.
 
 | name | description |
 |------|-------------|
-| issue_number | __Required__  |
+| issue_number | __Required__ issue_number parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| since | Only comments updated at or after this time are returned. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| since | Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## issues list-comments-for-repo
 
@@ -3735,9 +3503,9 @@ By default, Issue Comments are ordered by ascending ID.
 | direction | Either `asc` or `desc`. Ignored without the `sort` parameter. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| since | Only comments updated at or after this time are returned. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
-| sort | Either `created` or `updated`. |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| since | Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
+| sort | One of `created` (when the repository was starred) or `updated` (when it was last pushed to). |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## issues list-events
 
@@ -3750,12 +3518,12 @@ https://developer.github.com/v3/issues/events/#list-issue-events
 
 | name | description |
 |------|-------------|
-| issue_number | __Required__  |
+| issue_number | __Required__ issue_number parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must set this flag. |
-| starfox-preview | Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](https://developer.github.com/changes/2018-09-05-project-card-events).<br><br>To receive the `project_card` attribute, project boards must be [enabled](https://docs.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must set this flag. |
+| starfox-preview | Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](https://developer.github.com/changes/2018-09-05-project-card-events).<br><br>To receive the `project_card` attribute, project boards must be [enabled](https://help.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must set this flag. |
 
 ## issues list-events-for-repo
 
@@ -3772,7 +3540,7 @@ https://developer.github.com/v3/issues/events/#list-issue-events-for-a-repositor
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must set this flag. |
-| starfox-preview | Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](https://developer.github.com/changes/2018-09-05-project-card-events).<br><br>To receive the `project_card` attribute, project boards must be [enabled](https://docs.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must set this flag. |
+| starfox-preview | Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](https://developer.github.com/changes/2018-09-05-project-card-events).<br><br>To receive the `project_card` attribute, project boards must be [enabled](https://help.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must set this flag. |
 
 ## issues list-events-for-timeline
 
@@ -3785,12 +3553,12 @@ https://developer.github.com/v3/issues/timeline/#list-timeline-events-for-an-iss
 
 | name | description |
 |------|-------------|
-| issue_number | __Required__  |
+| issue_number | __Required__ issue_number parameter |
 | mockingbird-preview | __Required__ The API to get issue timeline events is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-23-timeline-preview-api/) for full details. To access the API you must set this flag. |
 | repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| starfox-preview | Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](https://developer.github.com/changes/2018-09-05-project-card-events).<br><br>To receive the `project_card` attribute, project boards must be [enabled](https://docs.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must set this flag. |
+| starfox-preview | Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](https://developer.github.com/changes/2018-09-05-project-card-events).<br><br>To receive the `project_card` attribute, project boards must be [enabled](https://help.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must set this flag. |
 
 ## issues list-for-authenticated-user
 
@@ -3808,15 +3576,15 @@ request id, use the "[List pull requests](https://developer.github.com/v3/pulls/
 
 | name | description |
 |------|-------------|
-| direction | The direction of the sort. Can be either `asc` or `desc`. |
+| direction | One of `asc` (ascending) or `desc` (descending). |
 | filter | Indicates which sorts of issues to return. Can be one of:  <br>\* `assigned`: Issues assigned to you  <br>\* `created`: Issues created by you  <br>\* `mentioned`: Issues mentioning you  <br>\* `subscribed`: Issues you're subscribed to updates for  <br>\* `all`: All issues the authenticated user can see, regardless of participation or creation |
 | labels | A list of comma separated label names. Example: `bug,ui,@high` |
 | machine-man-preview | To access the API with your GitHub App, you must set this flag for your requests. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| since | Only issues updated at or after this time are returned. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
+| since | Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 | sort | What to sort results by. Can be either `created`, `updated`, `comments`. |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | state | Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`. |
 
 ## issues list-for-org
@@ -3836,15 +3604,15 @@ request id, use the "[List pull requests](https://developer.github.com/v3/pulls/
 | name | description |
 |------|-------------|
 | org | __Required__  |
-| direction | The direction of the sort. Can be either `asc` or `desc`. |
+| direction | One of `asc` (ascending) or `desc` (descending). |
 | filter | Indicates which sorts of issues to return. Can be one of:  <br>\* `assigned`: Issues assigned to you  <br>\* `created`: Issues created by you  <br>\* `mentioned`: Issues mentioning you  <br>\* `subscribed`: Issues you're subscribed to updates for  <br>\* `all`: All issues the authenticated user can see, regardless of participation or creation |
 | labels | A list of comma separated label names. Example: `bug,ui,@high` |
 | machine-man-preview | To access the API with your GitHub App, you must set this flag for your requests. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| since | Only issues updated at or after this time are returned. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
+| since | Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 | sort | What to sort results by. Can be either `created`, `updated`, `comments`. |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | state | Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`. |
 
 ## issues list-for-repo
@@ -3866,16 +3634,16 @@ request id, use the "[List pull requests](https://developer.github.com/v3/pulls/
 | repo | __Required__ repository in OWNER/REPO form |
 | assignee | Can be the name of a user. Pass in `none` for issues with no assigned user, and `*` for issues assigned to any user. |
 | creator | The user that created the issue. |
-| direction | The direction of the sort. Can be either `asc` or `desc`. |
+| direction | One of `asc` (ascending) or `desc` (descending). |
 | labels | A list of comma separated label names. Example: `bug,ui,@high` |
 | machine-man-preview | To access the API with your GitHub App, you must set this flag for your requests. |
 | mentioned | A user that's mentioned in the issue. |
 | milestone | If an `integer` is passed, it should refer to a milestone by its `number` field. If the string `*` is passed, issues with any milestone are accepted. If the string `none` is passed, issues without milestones are returned. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| since | Only issues updated at or after this time are returned. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
+| since | Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 | sort | What to sort results by. Can be either `created`, `updated`, `comments`. |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | state | Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`. |
 
 ## issues list-labels-for-milestone
@@ -3889,7 +3657,7 @@ https://developer.github.com/v3/issues/labels/#list-labels-for-issues-in-a-miles
 
 | name | description |
 |------|-------------|
-| milestone_number | __Required__  |
+| milestone_number | __Required__ milestone_number parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -3920,7 +3688,7 @@ https://developer.github.com/v3/issues/labels/#list-labels-for-an-issue
 
 | name | description |
 |------|-------------|
-| issue_number | __Required__  |
+| issue_number | __Required__ issue_number parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -3956,7 +3724,7 @@ Note that, if you choose not to pass any parameters, you'll need to set `Content
 
 | name | description |
 |------|-------------|
-| issue_number | __Required__  |
+| issue_number | __Required__ issue_number parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | lock_reason | The reason for locking the issue or pull request conversation. Lock will fail if you don't use one of these reasons:  <br>\* `off-topic`  <br>\* `too heated`  <br>\* `resolved`  <br>\* `spam` |
 | sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must set this flag. |
@@ -3972,7 +3740,7 @@ https://developer.github.com/v3/issues/labels/#remove-all-labels-from-an-issue
 
 | name | description |
 |------|-------------|
-| issue_number | __Required__  |
+| issue_number | __Required__ issue_number parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## issues remove-assignees
@@ -3986,7 +3754,7 @@ Removes one or more assignees from an issue.
 
 | name | description |
 |------|-------------|
-| issue_number | __Required__  |
+| issue_number | __Required__ issue_number parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | assignees | Usernames of assignees to remove from an issue. _NOTE: Only users with push access can remove assignees from an issue. Assignees are silently ignored otherwise._ |
 
@@ -4001,8 +3769,8 @@ Removes the specified label from the issue, and returns the remaining labels on 
 
 | name | description |
 |------|-------------|
-| issue_number | __Required__  |
-| name | __Required__  |
+| issue_number | __Required__ issue_number parameter |
+| name | __Required__ name parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## issues set-labels
@@ -4016,7 +3784,7 @@ Removes any previous labels and sets the new labels for an issue.
 
 | name | description |
 |------|-------------|
-| issue_number | __Required__  |
+| issue_number | __Required__ issue_number parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | labels | The names of the labels to add to the issue. You can pass an empty array to remove all labels. **Note:** Alternatively, you can pass a single label as a `string` or an `array` of labels directly, but GitHub recommends passing an object with the `labels` key. |
 
@@ -4031,7 +3799,7 @@ Users with push access can unlock an issue's conversation.
 
 | name | description |
 |------|-------------|
-| issue_number | __Required__  |
+| issue_number | __Required__ issue_number parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## issues update
@@ -4045,7 +3813,7 @@ Issue owners and users with push access can edit an issue.
 
 | name | description |
 |------|-------------|
-| issue_number | __Required__  |
+| issue_number | __Required__ issue_number parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | assignee | Login for the user that this issue should be assigned to. **This field is deprecated.** |
 | assignees | Logins for Users to assign to this issue. Pass one or more user logins to _replace_ the set of assignees on this Issue. Send an empty array (`[]`) to clear all assignees from the Issue. _NOTE: Only users with push access can set assignees for new issues. Assignees are silently dropped otherwise._ |
@@ -4067,7 +3835,7 @@ https://developer.github.com/v3/issues/comments/#update-an-issue-comment
 | name | description |
 |------|-------------|
 | body | __Required__ The contents of the comment. |
-| comment_id | __Required__  |
+| comment_id | __Required__ comment_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## issues update-label
@@ -4081,7 +3849,7 @@ https://developer.github.com/v3/issues/labels/#update-a-label
 
 | name | description |
 |------|-------------|
-| name | __Required__  |
+| name | __Required__ name parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | color | The [hexadecimal color code](http://www.color-hex.com/) for the label, without the leading `#`. |
 | description | A short description of the label. |
@@ -4098,7 +3866,7 @@ https://developer.github.com/v3/issues/milestones/#update-a-milestone
 
 | name | description |
 |------|-------------|
-| milestone_number | __Required__  |
+| milestone_number | __Required__ milestone_number parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | description | A description of the milestone. |
 | due_on | The milestone due date. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
@@ -4119,13 +3887,21 @@ https://developer.github.com/v3/licenses/#get-a-license
 
 | name | description |
 |------|-------------|
-| license | __Required__  |
+| license | __Required__ license parameter |
 
 ## licenses get-all-commonly-used
 
 https://developer.github.com/v3/licenses/#get-all-commonly-used-licenses
 
 
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| featured |  |
+| per_page | Results per page (max 100) |
 
 ## licenses get-for-repo
 
@@ -4156,9 +3932,9 @@ https://developer.github.com/v3/markdown/#render-a-markdown-document
 
 | name | description |
 |------|-------------|
-| text | __Required__ The Markdown text to render in HTML. Markdown content must be 400 KB or less. |
-| context | The repository context to use when creating references in `gfm` mode. Omit this parameter when using `markdown` mode. |
-| mode | The rendering mode. Can be either:  <br>\* `markdown` to render a document in plain Markdown, just like README.md files are rendered.  <br>\* `gfm` to render a document in [GitHub Flavored Markdown](https://github.github.com/gfm/), which creates links for user mentions as well as references to SHA-1 hashes, issues, and pull requests. |
+| text | __Required__ The Markdown text to render in HTML. |
+| context | The repository context to use when creating references in `gfm` mode. |
+| mode | The rendering mode. |
 
 ## markdown render-raw
 
@@ -4180,7 +3956,32 @@ You must send Markdown as plain text (using a `Content-Type` header of `text/pla
 
 https://developer.github.com/v3/meta/#get-github-meta-information
 
-This endpoint provides a list of GitHub's IP addresses. For more information, see "[About GitHub's IP addresses](https://docs.github.com/articles/about-github-s-ip-addresses/)."
+This endpoint provides a list of GitHub's IP addresses. For more information, see "[About GitHub's IP addresses](https://help.github.com/articles/about-github-s-ip-addresses/)."
+
+## meta get-octocat
+
+
+
+Get the octocat as ASCII art
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| s | The words to show in Octocat's speech bubble |
+
+## meta get-zen
+
+
+
+Get a random sentence from the Zen of GitHub
+
+## meta root
+
+
+
+Get Hypermedia links to resources accessible in GitHub's REST API
 
 # migrations
 
@@ -4209,7 +4010,7 @@ Deletes a previous migration archive. Downloadable migration archives are automa
 
 | name | description |
 |------|-------------|
-| migration_id | __Required__  |
+| migration_id | __Required__ migration_id parameter |
 | wyandotte-preview | __Required__ To access the Migrations API, you must set this flag. |
 
 ## migrations delete-archive-for-org
@@ -4223,7 +4024,7 @@ Deletes a previous migration archive. Migration archives are automatically delet
 
 | name | description |
 |------|-------------|
-| migration_id | __Required__  |
+| migration_id | __Required__ migration_id parameter |
 | org | __Required__  |
 | wyandotte-preview | __Required__ To access the Migrations API, you must set this flag. |
 
@@ -4238,7 +4039,7 @@ Fetches the URL to a migration archive.
 
 | name | description |
 |------|-------------|
-| migration_id | __Required__  |
+| migration_id | __Required__ migration_id parameter |
 | org | __Required__  |
 | wyandotte-preview | __Required__ To access the Migrations API, you must set this flag. |
 
@@ -4273,7 +4074,7 @@ The archive will also contain an `attachments` directory that includes all attac
 
 | name | description |
 |------|-------------|
-| migration_id | __Required__  |
+| migration_id | __Required__ migration_id parameter |
 | wyandotte-preview | __Required__ To access the Migrations API, you must set this flag. |
 
 ## migrations get-commit-authors
@@ -4290,7 +4091,7 @@ This endpoint and the [Map a commit author](https://developer.github.com/v3/migr
 | name | description |
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
-| since | Only authors found after this id are returned. Provide the highest author ID you've seen so far. New authors may be added to the list at any point while the importer is performing the `raw` step. |
+| since | Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 
 ## migrations get-import-status
 
@@ -4369,8 +4170,9 @@ Once the migration has been `exported` you can [download the migration archive](
 
 | name | description |
 |------|-------------|
-| migration_id | __Required__  |
+| migration_id | __Required__ migration_id parameter |
 | wyandotte-preview | __Required__ To access the Migrations API, you must set this flag. |
+| exclude |  |
 
 ## migrations get-status-for-org
 
@@ -4390,7 +4192,7 @@ The `state` of a migration can be one of the following values:
 
 | name | description |
 |------|-------------|
-| migration_id | __Required__  |
+| migration_id | __Required__ migration_id parameter |
 | org | __Required__  |
 | wyandotte-preview | __Required__ To access the Migrations API, you must set this flag. |
 
@@ -4436,7 +4238,7 @@ List all the repositories for this organization migration.
 
 | name | description |
 |------|-------------|
-| migration_id | __Required__  |
+| migration_id | __Required__ migration_id parameter |
 | org | __Required__  |
 | wyandotte-preview | __Required__ To access the Migrations API, you must set this flag. |
 | page | Page number of the results to fetch. |
@@ -4453,7 +4255,7 @@ Lists all the repositories for this user migration.
 
 | name | description |
 |------|-------------|
-| migration_id | __Required__  |
+| migration_id | __Required__ migration_id parameter |
 | wyandotte-preview | __Required__ To access the Migrations API, you must set this flag. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -4469,16 +4271,17 @@ Update an author's identity for the import. Your application can continue updati
 
 | name | description |
 |------|-------------|
-| author_id | __Required__  |
+| author_id | __Required__ author_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | email | The new Git author email. |
 | name | The new Git author name. |
+| remote_id |  |
 
 ## migrations set-lfs-preference
 
 https://developer.github.com/v3/migrations/source_imports/#update-git-lfs-preference
 
-You can import repositories from Subversion, Mercurial, and TFS that include files larger than 100MB. This ability is powered by [Git LFS](https://git-lfs.github.com). You can learn more about our LFS feature and working with large files [on our help site](https://docs.github.com/articles/versioning-large-files/).
+You can import repositories from Subversion, Mercurial, and TFS that include files larger than 100MB. This ability is powered by [Git LFS](https://git-lfs.github.com). You can learn more about our LFS feature and working with large files [on our help site](https://help.github.com/articles/versioning-large-files/).
 
 ### parameters
 
@@ -4499,9 +4302,10 @@ Initiates the generation of a user migration archive.
 
 | name | description |
 |------|-------------|
-| repositories | __Required__ An array of repositories to include in the migration. |
-| exclude_attachments | Does not include attachments uploaded to GitHub.com in the migration data when set to `true`. Excluding attachments will reduce the migration archive file size. |
-| lock_repositories | Locks the `repositories` to prevent changes during the migration when set to `true`. |
+| repositories | __Required__  |
+| exclude | Exclude attributes from the API response to improve performance |
+| exclude_attachments | Do not include attachments in the migration |
+| lock_repositories | Lock the repositories being migrated at the start of the migration |
 
 ## migrations start-for-org
 
@@ -4516,6 +4320,7 @@ Initiates the generation of a migration archive.
 |------|-------------|
 | org | __Required__  |
 | repositories | __Required__ A list of arrays indicating which repositories should be migrated. |
+| exclude |  |
 | exclude_attachments | Indicates whether attachments should be excluded from the migration (to reduce migration archive file size). |
 | lock_repositories | Indicates whether repositories should be locked (to prevent manipulation) while migrating data. |
 
@@ -4548,8 +4353,8 @@ Unlocks a repository. You can lock repositories when you [start a user migration
 
 | name | description |
 |------|-------------|
-| migration_id | __Required__  |
-| repo_name | __Required__  |
+| migration_id | __Required__ migration_id parameter |
+| repo_name | __Required__ repo_name parameter |
 | wyandotte-preview | __Required__ To access the Migrations API, you must set this flag. |
 
 ## migrations unlock-repo-for-org
@@ -4563,9 +4368,9 @@ Unlocks a repository that was locked for migration. You should unlock each migra
 
 | name | description |
 |------|-------------|
-| migration_id | __Required__  |
+| migration_id | __Required__ migration_id parameter |
 | org | __Required__  |
-| repo_name | __Required__  |
+| repo_name | __Required__ repo_name parameter |
 | wyandotte-preview | __Required__ To access the Migrations API, you must set this flag. |
 
 ## migrations update-import
@@ -4581,6 +4386,8 @@ request. If no parameters are provided, the import will be restarted.
 | name | description |
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
+| tfvc_project |  |
+| vcs |  |
 | vcs_password | The password to provide to the originating repository. |
 | vcs_username | The username to provide to the originating repository. |
 
@@ -4599,19 +4406,19 @@ Creates OAuth tokens using [Basic Authentication](https://developer.github.com/v
 
 To create tokens for a particular OAuth application using this endpoint, you must authenticate as the user you want to create an authorization for and provide the app's client ID and secret, found on your OAuth application's settings page. If your OAuth application intends to create multiple tokens for one user, use `fingerprint` to differentiate between them.
 
-You can also create tokens on GitHub from the [personal access tokens settings](https://github.com/settings/tokens) page. Read more about these tokens in [the GitHub Help documentation](https://docs.github.com/articles/creating-an-access-token-for-command-line-use).
+You can also create tokens on GitHub from the [personal access tokens settings](https://github.com/settings/tokens) page. Read more about these tokens in [the GitHub Help documentation](https://help.github.com/articles/creating-an-access-token-for-command-line-use).
 
-Organizations that enforce SAML SSO require personal access tokens to be whitelisted. Read more about whitelisting tokens in [the GitHub Help documentation](https://docs.github.com/articles/about-identity-and-access-management-with-saml-single-sign-on).
+Organizations that enforce SAML SSO require personal access tokens to be allowed. Read more about allowing tokens in [the GitHub Help documentation](https://help.github.com/articles/about-identity-and-access-management-with-saml-single-sign-on).
 
 ### parameters
 
 
 | name | description |
 |------|-------------|
-| note | __Required__ A note to remind you what the OAuth token is for. Tokens not associated with a specific OAuth application (i.e. personal access tokens) must have a unique note. |
-| client_id | The 20 character OAuth app client key for which to create the token. |
-| client_secret | The 40 character OAuth app client secret for which to create the token. |
+| client_id | The OAuth app client key for which to create the token. |
+| client_secret | The OAuth app client secret for which to create the token. |
 | fingerprint | A unique string to distinguish an authorization from others created for the same client ID and user. |
+| note | A note to remind you what the OAuth token is for. |
 | note_url | A URL to remind you what app the OAuth token is for. |
 | scopes | A list of scopes that this authorization is in. |
 
@@ -4626,7 +4433,7 @@ https://developer.github.com/v3/oauth_authorizations/#delete-an-authorization
 
 | name | description |
 |------|-------------|
-| authorization_id | __Required__  |
+| authorization_id | __Required__ authorization_id parameter |
 
 ## oauth-authorizations delete-grant
 
@@ -4641,7 +4448,7 @@ Deleting an OAuth application's grant will also delete all OAuth tokens associat
 
 | name | description |
 |------|-------------|
-| grant_id | __Required__  |
+| grant_id | __Required__ grant_id parameter |
 
 ## oauth-authorizations get-authorization
 
@@ -4654,7 +4461,7 @@ https://developer.github.com/v3/oauth_authorizations/#get-a-single-authorization
 
 | name | description |
 |------|-------------|
-| authorization_id | __Required__  |
+| authorization_id | __Required__ authorization_id parameter |
 
 ## oauth-authorizations get-grant
 
@@ -4667,7 +4474,7 @@ https://developer.github.com/v3/oauth_authorizations/#get-a-single-grant
 
 | name | description |
 |------|-------------|
-| grant_id | __Required__  |
+| grant_id | __Required__ grant_id parameter |
 
 ## oauth-authorizations get-or-create-authorization-for-app
 
@@ -4689,8 +4496,8 @@ If you have two-factor authentication setup, Basic Authentication for this endpo
 | name | description |
 |------|-------------|
 | client_id | __Required__  |
-| client_secret | __Required__ The 40 character OAuth app client secret associated with the client ID specified in the URL. |
-| fingerprint | A unique string to distinguish an authorization from others created for the same client and user. If provided, this API is functionally equivalent to [Get-or-create an authorization for a specific app and fingerprint](https://developer.github.com/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint). |
+| client_secret | __Required__ The OAuth app client secret for which to create the token. |
+| fingerprint | A unique string to distinguish an authorization from others created for the same client ID and user. |
 | note | A note to remind you what the OAuth token is for. |
 | note_url | A URL to remind you what app the OAuth token is for. |
 | scopes | A list of scopes that this authorization is in. |
@@ -4713,8 +4520,8 @@ If you have two-factor authentication setup, Basic Authentication for this endpo
 | name | description |
 |------|-------------|
 | client_id | __Required__  |
-| client_secret | __Required__ The 40 character OAuth app client secret associated with the client ID specified in the URL. |
-| fingerprint | __Required__  |
+| client_secret | __Required__ The OAuth app client secret for which to create the token. |
+| fingerprint | __Required__ fingerprint parameter |
 | note | A note to remind you what the OAuth token is for. |
 | note_url | A URL to remind you what app the OAuth token is for. |
 | scopes | A list of scopes that this authorization is in. |
@@ -4764,13 +4571,13 @@ You can only send one of these scope keys at a time.
 
 | name | description |
 |------|-------------|
-| authorization_id | __Required__  |
+| authorization_id | __Required__ authorization_id parameter |
 | add_scopes | A list of scopes to add to this authorization. |
 | fingerprint | A unique string to distinguish an authorization from others created for the same client ID and user. |
-| note | A note to remind you what the OAuth token is for. Tokens not associated with a specific OAuth application (i.e. personal access tokens) must have a unique note. |
+| note | A note to remind you what the OAuth token is for. |
 | note_url | A URL to remind you what app the OAuth token is for. |
 | remove_scopes | A list of scopes to remove from this authorization. |
-| scopes | Replaces the authorization scopes with these. |
+| scopes | A list of scopes that this authorization is in. |
 
 # orgs
 
@@ -4835,7 +4642,7 @@ https://developer.github.com/v3/orgs/members/#check-public-organization-membersh
 
 https://developer.github.com/v3/orgs/outside_collaborators/#convert-an-organization-member-to-outside-collaborator
 
-When an organization member is converted to an outside collaborator, they'll only have access to the repositories that their current team membership allows. The user will no longer be a member of the organization. For more information, see "[Converting an organization member to an outside collaborator](https://docs.github.com/articles/converting-an-organization-member-to-an-outside-collaborator/)".
+When an organization member is converted to an outside collaborator, they'll only have access to the repositories that their current team membership allows. The user will no longer be a member of the organization. For more information, see "[Converting an organization member to an outside collaborator](https://help.github.com/articles/converting-an-organization-member-to-an-outside-collaborator/)".
 
 ### parameters
 
@@ -4851,7 +4658,7 @@ https://developer.github.com/v3/orgs/members/#create-an-organization-invitation
 
 Invite people to an organization by using their GitHub user ID or their email address. In order to create invitations in an organization, the authenticated user must be an organization owner.
 
-This endpoint triggers [notifications](https://docs.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
+This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
 
 ### parameters
 
@@ -4881,7 +4688,9 @@ Here's how you can create a hook that posts payloads in JSON format:
 | active | Determines if notifications are sent when the webhook is triggered. Set to `true` to send notifications. |
 | config.content_type | The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`. |
 | config.insecure_ssl | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. **We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.** |
+| config.password |  |
 | config.secret | If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value in the [`X-Hub-Signature`](https://developer.github.com/webhooks/event-payloads/#delivery-headers) header. |
+| config.username |  |
 | events | Determines what [events](https://developer.github.com/webhooks/event-payloads) the hook is triggered for. |
 
 ## orgs delete-webhook
@@ -4902,7 +4711,7 @@ https://developer.github.com/v3/orgs/hooks/#delete-an-organization-webhook
 
 https://developer.github.com/v3/orgs/#get-an-organization
 
-To see many of the organization response values, you need to be an authenticated organization owner with the `admin:org` scope. When the value of `two_factor_requirement_enabled` is `true`, the organization requires all members, billing managers, and outside collaborators to enable [two-factor authentication](https://docs.github.com/articles/securing-your-account-with-two-factor-authentication-2fa/).
+To see many of the organization response values, you need to be an authenticated organization owner with the `admin:org` scope. When the value of `two_factor_requirement_enabled` is `true`, the organization requires all members, billing managers, and outside collaborators to enable [two-factor authentication](https://help.github.com/articles/securing-your-account-with-two-factor-authentication-2fa/).
 
 GitHub Apps with the `Organization plan` permission can use this endpoint to retrieve information about an organization's GitHub plan. See "[Authenticating with GitHub Apps](https://developer.github.com/apps/building-github-apps/authenticating-with-github-apps/)" for details. For an example response, see "[Response with GitHub plan information](https://developer.github.com/v3/orgs/#response-with-github-plan-information)."
 
@@ -4968,7 +4777,8 @@ Lists all organizations, in the order that they were created on GitHub.
 
 | name | description |
 |------|-------------|
-| since | The integer ID of the last organization that you've seen. |
+| per_page | Results per page (max 100) |
+| since | Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 
 ## orgs list-app-installations
 
@@ -5021,7 +4831,7 @@ This only lists organizations that your authorization allows you to operate on i
 
 https://developer.github.com/v3/orgs/#list-organizations-for-a-user
 
-List [public organization memberships](https://docs.github.com/articles/publicizing-or-concealing-organization-membership) for the specified user.
+List [public organization memberships](https://help.github.com/articles/publicizing-or-concealing-organization-membership) for the specified user.
 
 This method only lists _public_ memberships, regardless of authentication. If you need to fetch all of the organization memberships (public and private) for the authenticated user, use the [List organizations for the authenticated user](https://developer.github.com/v3/orgs/#list-organizations-for-the-authenticated-user) API instead.
 
@@ -5045,7 +4855,7 @@ List all teams associated with an invitation. In order to see invitations in an 
 
 | name | description |
 |------|-------------|
-| invitation_id | __Required__  |
+| invitation_id | __Required__ invitation_id parameter |
 | org | __Required__  |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -5132,9 +4942,9 @@ Members of an organization can choose to have their membership publicized or not
 
 https://developer.github.com/v3/orgs/#list-saml-sso-authorizations-for-an-organization
 
-Listing and deleting credential authorizations is available to organizations with GitHub Enterprise Cloud. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products).
+Listing and deleting credential authorizations is available to organizations with GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products).
 
-An authenticated organization owner with the `read:org` scope can list all credential authorizations for an organization that uses SAML single sign-on (SSO). The credentials are either personal access tokens or SSH keys that organization members have authorized for the organization. For more information, see [About authentication with SAML single sign-on](https://docs.github.com/en/articles/about-authentication-with-saml-single-sign-on).
+An authenticated organization owner with the `read:org` scope can list all credential authorizations for an organization that uses SAML single sign-on (SSO). The credentials are either personal access tokens or SSH keys that organization members have authorized for the organization. For more information, see [About authentication with SAML single sign-on](https://help.github.com/en/articles/about-authentication-with-saml-single-sign-on).
 
 ### parameters
 
@@ -5234,7 +5044,7 @@ https://developer.github.com/v3/orgs/members/#remove-public-organization-members
 
 https://developer.github.com/v3/orgs/#remove-a-saml-sso-authorization-for-an-organization
 
-Listing and deleting credential authorizations is available to organizations with GitHub Enterprise Cloud. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products).
+Listing and deleting credential authorizations is available to organizations with GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products).
 
 An authenticated organization owner with the `admin:org` scope can remove a credential authorization for an organization that uses SAML SSO. Once you remove someone's credential authorization, they will need to create a new personal access token or SSH key and authorize it for the organization they want to access.
 
@@ -5243,7 +5053,7 @@ An authenticated organization owner with the `admin:org` scope can remove a cred
 
 | name | description |
 |------|-------------|
-| credential_id | __Required__  |
+| credential_id | __Required__ credential_id parameter |
 | org | __Required__  |
 
 ## orgs set-membership-for-user
@@ -5314,6 +5124,7 @@ Enables an authenticated organization owner with the `admin:org` scope to update
 |------|-------------|
 | org | __Required__  |
 | billing_email | Billing email address. This address is not publicized. |
+| blog |  |
 | company | The company name. |
 | default_repository_permission | Default permission level members have for organization repositories:  <br>\* `read` - can pull, but not push to or administer this repository.  <br>\* `write` - can pull and push, but not administer this repository.  <br>\* `admin` - can pull, push, and administer this repository.  <br>\* `none` - no permissions granted by default. |
 | description | The description of the company. |
@@ -5322,9 +5133,9 @@ Enables an authenticated organization owner with the `admin:org` scope to update
 | has_repository_projects | Toggles whether repositories that belong to the organization can use repository projects. |
 | location | The location. |
 | members_allowed_repository_creation_type | Specifies which types of repositories non-admin organization members can create. Can be one of:  <br>\* `all` - all organization members can create public and private repositories.  <br>\* `private` - members can create private repositories. This option is only available to repositories that are part of an organization on GitHub Enterprise Cloud.  <br>\* `none` - only admin members can create repositories.  <br>**Note:** This parameter is deprecated and will be removed in the future. Its return value ignores internal repositories. Using this parameter overrides values set in `members_can_create_repositories`. See [this note](https://developer.github.com/v3/orgs/#members_can_create_repositories) for details. |
-| members_can_create_internal_repositories | Toggles whether organization members can create internal repositories, which are visible to all enterprise members. You can only allow members to create internal repositories if your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+. Can be one of:  <br>\* `true` - all organization members can create internal repositories.  <br>\* `false` - only organization owners can create internal repositories.  <br>Default: `true`. For more information, see "[Restricting repository creation in your organization](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/restricting-repository-creation-in-your-organization)". |
-| members_can_create_private_repositories | Toggles whether organization members can create private repositories, which are visible to organization members with permission. Can be one of:  <br>\* `true` - all organization members can create private repositories.  <br>\* `false` - only organization owners can create private repositories.  <br>Default: `true`. For more information, see "[Restricting repository creation in your organization](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/restricting-repository-creation-in-your-organization)". |
-| members_can_create_public_repositories | Toggles whether organization members can create public repositories, which are visible to anyone. Can be one of:  <br>\* `true` - all organization members can create public repositories.  <br>\* `false` - only organization owners can create public repositories.  <br>Default: `true`. For more information, see "[Restricting repository creation in your organization](https://docs.github.com/github/setting-up-and-managing-organizations-and-teams/restricting-repository-creation-in-your-organization)". |
+| members_can_create_internal_repositories | Toggles whether organization members can create internal repositories, which are visible to all enterprise members. You can only allow members to create internal repositories if your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+. Can be one of:  <br>\* `true` - all organization members can create internal repositories.  <br>\* `false` - only organization owners can create internal repositories.  <br>Default: `true`. For more information, see "[Restricting repository creation in your organization](https://help.github.com/github/setting-up-and-managing-organizations-and-teams/restricting-repository-creation-in-your-organization)" in the GitHub Help documentation. |
+| members_can_create_private_repositories | Toggles whether organization members can create private repositories, which are visible to organization members with permission. Can be one of:  <br>\* `true` - all organization members can create private repositories.  <br>\* `false` - only organization owners can create private repositories.  <br>Default: `true`. For more information, see "[Restricting repository creation in your organization](https://help.github.com/github/setting-up-and-managing-organizations-and-teams/restricting-repository-creation-in-your-organization)" in the GitHub Help documentation. |
+| members_can_create_public_repositories | Toggles whether organization members can create public repositories, which are visible to anyone. Can be one of:  <br>\* `true` - all organization members can create public repositories.  <br>\* `false` - only organization owners can create public repositories.  <br>Default: `true`. For more information, see "[Restricting repository creation in your organization](https://help.github.com/github/setting-up-and-managing-organizations-and-teams/restricting-repository-creation-in-your-organization)" in the GitHub Help documentation. |
 | members_can_create_repositories | Toggles the ability of non-admin organization members to create repositories. Can be one of:  <br>\* `true` - all organization members can create repositories.  <br>\* `false` - only organization owners can create repositories.  <br>Default: `true`  <br>**Note:** A parameter can override this parameter. See `members_allowed_repository_creation_type` in this table for details. **Note:** A parameter can override this parameter. See `members_allowed_repository_creation_type` in this table for details. |
 | name | The shorthand name of the company. |
 | surtur-preview | New repository creation permissions are available to preview. You can now use `members_can_create_public_repositories`, `members_can_create_private_repositories`, and `members_can_create_internal_repositories`. You can only allow members to create internal repositories if your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+. These parameters provide more granular permissions to configure the type of repositories organization members can create.<br><br>To access these new parameters during the preview period, you must set this flag. |
@@ -5363,6 +5174,7 @@ https://developer.github.com/v3/orgs/hooks/#update-an-organization-webhook
 | config.secret | If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value in the [`X-Hub-Signature`](https://developer.github.com/webhooks/event-payloads/#delivery-headers) header. |
 | config.url | The URL to which the payloads will be delivered. |
 | events | Determines what [events](https://developer.github.com/webhooks/event-payloads) the hook is triggered for. |
+| name |  |
 
 # projects
 
@@ -5381,7 +5193,7 @@ Adds a collaborator to an organization project and sets their permission level. 
 | inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | project_id | __Required__  |
 | username | __Required__  |
-| permission | The permission to grant the collaborator. Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://developer.github.com/v3/#http-verbs)." Can be one of:  <br>\* `read` - can read, but not write to or administer this project.  <br>\* `write` - can read and write, but not administer this project.  <br>\* `admin` - can read, write and administer this project. |
+| permission | The permission to grant the collaborator. |
 
 ## projects create-card
 
@@ -5396,11 +5208,8 @@ Be aware that the `id` of a pull request returned from "Issues" endpoints will b
 
 | name | description |
 |------|-------------|
-| column_id | __Required__  |
+| column_id | __Required__ column_id parameter |
 | inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
-| content_id | The issue or pull request id you want to associate with this card. You can use the [List repository issues](https://developer.github.com/v3/issues/#list-repository-issues) and [List pull requests](https://developer.github.com/v3/pulls/#list-pull-requests) endpoints to find this id.  <br>**Note:** Depending on whether you use the issue id or pull request id, you will need to specify `Issue` or `PullRequest` as the `content_type`. |
-| content_type | **Required if you provide `content_id`**. The type of content you want to associate with this card. Use `Issue` when `content_id` is an issue id and use `PullRequest` when `content_id` is a pull request id. |
-| note | The card's note content. Only valid for cards without another type of content, so you must omit when specifying `content_id` and `content_type`. |
 
 ## projects create-column
 
@@ -5414,7 +5223,7 @@ https://developer.github.com/v3/projects/columns/#create-a-project-column
 | name | description |
 |------|-------------|
 | inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
-| name | __Required__ The name of the column. |
+| name | __Required__ Name of the project column |
 | project_id | __Required__  |
 
 ## projects create-for-authenticated-user
@@ -5429,8 +5238,8 @@ https://developer.github.com/v3/projects/#create-a-user-project
 | name | description |
 |------|-------------|
 | inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
-| name | __Required__ The name of the project. |
-| body | The description of the project. |
+| name | __Required__ Name of the project |
+| body | Body of the project |
 
 ## projects create-for-org
 
@@ -5489,7 +5298,7 @@ https://developer.github.com/v3/projects/cards/#delete-a-project-card
 
 | name | description |
 |------|-------------|
-| card_id | __Required__  |
+| card_id | __Required__ card_id parameter |
 | inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 
 ## projects delete-column
@@ -5503,7 +5312,7 @@ https://developer.github.com/v3/projects/columns/#delete-a-project-column
 
 | name | description |
 |------|-------------|
-| column_id | __Required__  |
+| column_id | __Required__ column_id parameter |
 | inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 
 ## projects get
@@ -5531,7 +5340,7 @@ https://developer.github.com/v3/projects/cards/#get-a-project-card
 
 | name | description |
 |------|-------------|
-| card_id | __Required__  |
+| card_id | __Required__ card_id parameter |
 | inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 
 ## projects get-column
@@ -5545,7 +5354,7 @@ https://developer.github.com/v3/projects/columns/#get-a-project-column
 
 | name | description |
 |------|-------------|
-| column_id | __Required__  |
+| column_id | __Required__ column_id parameter |
 | inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 
 ## projects get-permission-for-user
@@ -5574,7 +5383,7 @@ https://developer.github.com/v3/projects/cards/#list-project-cards
 
 | name | description |
 |------|-------------|
-| column_id | __Required__  |
+| column_id | __Required__ column_id parameter |
 | inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | archived_state | Filters the project cards that are returned by the card's state. Can be one of `all`,`archived`, or `not_archived`. |
 | page | Page number of the results to fetch. |
@@ -5675,10 +5484,10 @@ https://developer.github.com/v3/projects/cards/#move-a-project-card
 
 | name | description |
 |------|-------------|
-| card_id | __Required__  |
+| card_id | __Required__ card_id parameter |
 | inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
-| position | __Required__ Can be one of `top`, `bottom`, or `after:<card_id>`, where `<card_id>` is the `id` value of a card in the same column, or in the new column specified by `column_id`. |
-| column_id | The `id` value of a column in the same project. |
+| position | __Required__ The position of the card in a column |
+| column_id | The unique identifier of the column the card should be moved to |
 
 ## projects move-column
 
@@ -5691,9 +5500,9 @@ https://developer.github.com/v3/projects/columns/#move-a-project-column
 
 | name | description |
 |------|-------------|
-| column_id | __Required__  |
+| column_id | __Required__ column_id parameter |
 | inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
-| position | __Required__ Can be one of `first`, `last`, or `after:<column_id>`, where `<column_id>` is the `id` value of a column in the same project. |
+| position | __Required__ The position of the column in a project |
 
 ## projects remove-collaborator
 
@@ -5723,11 +5532,11 @@ Updates a project board's information. Returns a `404 Not Found` status if proje
 |------|-------------|
 | inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | project_id | __Required__  |
-| body | The description of the project. |
-| name | The name of the project. |
-| organization_permission | The permission level that determines whether all members of the project's organization can see and/or make changes to the project. Setting `organization_permission` is only available for organization projects. If an organization member belongs to a team with a higher level of access or is a collaborator with a higher level of access, their permission level is not lowered by `organization_permission`. For information on changing access for a team or collaborator, see [Add or update team project permissions](https://developer.github.com/v3/teams/#add-or-update-team-project-permissions) or [Add project collaborator](https://developer.github.com/v3/projects/collaborators/#add-project-collaborator).  <br>  <br>**Note:** Updating a project's `organization_permission` requires `admin` access to the project.  <br>  <br>Can be one of:  <br>\* `read` - Organization members can read, but not write to or administer this project.  <br>\* `write` - Organization members can read and write, but not administer this project.  <br>\* `admin` - Organization members can read, write and administer this project.  <br>\* `none` - Organization members can only see this project if it is public. |
-| private | Sets the visibility of a project board. Setting `private` is only available for organization and user projects. **Note:** Updating a project's visibility requires `admin` access to the project.  <br>  <br>Can be one of:  <br>\* `false` - Anyone can see the project.  <br>\* `true` - Only the user can view a project board created on a user account. Organization members with the appropriate `organization_permission` can see project boards in an organization account. |
-| state | State of the project. Either `open` or `closed`. |
+| body | Body of the project |
+| name | Name of the project |
+| organization_permission | The baseline permission that all organization members have on this project |
+| private | Whether or not this project can be seen by everyone. |
+| state | State of the project; either 'open' or 'closed' |
 
 ## projects update-card
 
@@ -5740,10 +5549,10 @@ https://developer.github.com/v3/projects/cards/#update-a-project-card
 
 | name | description |
 |------|-------------|
-| card_id | __Required__  |
+| card_id | __Required__ card_id parameter |
 | inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
-| archived | Use `true` to archive a project card. Specify `false` if you need to restore a previously archived project card. |
-| note | The card's note content. Only valid for cards without another type of content, so this cannot be specified if the card already has a `content_id` and `content_type`. |
+| archived | Whether or not the card is archived |
+| note | The project card's note |
 
 ## projects update-column
 
@@ -5756,9 +5565,9 @@ https://developer.github.com/v3/projects/columns/#update-a-project-column
 
 | name | description |
 |------|-------------|
-| column_id | __Required__  |
+| column_id | __Required__ column_id parameter |
 | inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
-| name | __Required__ The new name of the column. |
+| name | __Required__ Name of the project column |
 
 # pulls
 
@@ -5781,13 +5590,13 @@ https://developer.github.com/v3/pulls/#check-if-a-pull-request-has-been-merged
 
 https://developer.github.com/v3/pulls/#create-a-pull-request
 
-Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 To open or update a pull request in a public repository, you must have write access to the head or the source branch. For organization-owned repositories, you must be a member of the organization that owns the repository to open or update a pull request.
 
 You can create a new pull request.
 
-This endpoint triggers [notifications](https://docs.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
+This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
 
 ### parameters
 
@@ -5797,11 +5606,12 @@ This endpoint triggers [notifications](https://docs.github.com/articles/about-no
 | base | __Required__ The name of the branch you want the changes pulled into. This should be an existing branch on the current repository. You cannot submit a pull request to one repository that requests a merge to a base of another repository. |
 | head | __Required__ The name of the branch where your changes are implemented. For cross-repository pull requests in the same network, namespace `head` with a user like this: `username:branch`. |
 | repo | __Required__ repository in OWNER/REPO form |
-| title | __Required__ The title of the new pull request. |
 | body | The contents of the pull request. |
-| draft | Indicates whether the pull request is a draft. See "[Draft Pull Requests](https://docs.github.com/en/articles/about-pull-requests#draft-pull-requests)" in the GitHub Help documentation to learn more. |
-| maintainer_can_modify | Indicates whether [maintainers can modify](https://docs.github.com/articles/allowing-changes-to-a-pull-request-branch-created-from-a-fork/) the pull request. |
+| draft | Indicates whether the pull request is a draft. See "[Draft Pull Requests](https://help.github.com/en/articles/about-pull-requests#draft-pull-requests)" in the GitHub Help documentation to learn more. |
+| issue |  |
+| maintainer_can_modify | Indicates whether [maintainers can modify](https://help.github.com/articles/allowing-changes-to-a-pull-request-branch-created-from-a-fork/) the pull request. |
 | sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must set this flag. |
+| title | The title of the new pull request. |
 
 ## pulls create-reply-for-review-comment
 
@@ -5809,7 +5619,7 @@ https://developer.github.com/v3/pulls/comments/#create-a-reply-for-a-review-comm
 
 Creates a reply to a review comment for a pull request. For the `comment_id`, provide the ID of the review comment you are replying to. This must be the ID of a _top-level review comment_, not a reply to that comment. Replies to replies are not supported.
 
-This endpoint triggers [notifications](https://docs.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
+This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
 
 ### parameters
 
@@ -5817,7 +5627,7 @@ This endpoint triggers [notifications](https://docs.github.com/articles/about-no
 | name | description |
 |------|-------------|
 | body | __Required__ The text of the review comment. |
-| comment_id | __Required__  |
+| comment_id | __Required__ comment_id parameter |
 | pull_number | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
@@ -5825,7 +5635,7 @@ This endpoint triggers [notifications](https://docs.github.com/articles/about-no
 
 https://developer.github.com/v3/pulls/reviews/#create-a-review-for-a-pull-request
 
-This endpoint triggers [notifications](https://docs.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
+This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
 
 Pull request reviews created in the `PENDING` state do not include the `submitted_at` property in the response.
 
@@ -5857,7 +5667,7 @@ You can still create a review comment using the `position` parameter. When you u
 
 **Note:** The position value equals the number of lines down from the first "@@" hunk header in the file you want to add a comment. The line just below the "@@" line is position 1, the next line is position 2, and so on. The position in the diff continues to increase through lines of whitespace and additional hunks until the beginning of a new file.
 
-This endpoint triggers [notifications](https://docs.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
+This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
 
 **Multi-line comment summary**
 
@@ -5881,16 +5691,17 @@ If you don't use the `comfort-fade` preview header, multi-line and single-line c
 | name | description |
 |------|-------------|
 | body | __Required__ The text of the review comment. |
-| commit_id | __Required__ The SHA of the commit needing a comment. Not using the latest commit SHA may render your comment outdated if a subsequent commit modifies the line you specify as the `position`. |
 | path | __Required__ The relative path to the file that necessitates a comment. |
 | pull_number | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 | comfort-fade-preview | Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must set this flag. |
+| commit_id | The SHA of the commit needing a comment. Not using the latest commit SHA may render your comment outdated if a subsequent commit modifies the line you specify as the `position`. |
+| in_reply_to |  |
 | line | **Required with `comfort-fade` preview**. The line of the blob in the pull request diff that the comment applies to. For a multi-line comment, the last line of the range that your comment applies to. |
 | position | **Required without `comfort-fade` preview**. The position in the diff where you want to add a review comment. Note this value is not the same as the line number in the file. For help finding the position value, read the note above. |
-| side | **Required with `comfort-fade` preview**. In a split diff view, the side of the diff that the pull request's changes appear on. Can be `LEFT` or `RIGHT`. Use `LEFT` for deletions that appear in red. Use `RIGHT` for additions that appear in green or unchanged lines that appear in white and are shown for context. For a multi-line comment, side represents whether the last line of the comment range is a deletion or addition. For more information, see "[Diff view options](https://docs.github.com/en/articles/about-comparing-branches-in-pull-requests#diff-view-options)". |
-| start_line | **Required when using multi-line comments**. To create multi-line comments, you must use the `comfort-fade` preview header. The `start_line` is the first line in the pull request diff that your multi-line comment applies to. To learn more about multi-line comments, see "[Commenting on a pull request](https://docs.github.com/en/articles/commenting-on-a-pull-request#adding-line-comments-to-a-pull-request)". |
-| start_side | **Required when using multi-line comments**. To create multi-line comments, you must use the `comfort-fade` preview header. The `start_side` is the starting side of the diff that the comment applies to. Can be `LEFT` or `RIGHT`. To learn more about multi-line comments, see "[Commenting on a pull request](https://docs.github.com/en/articles/commenting-on-a-pull-request#adding-line-comments-to-a-pull-request)". See `side` in this table for additional context. |
+| side | **Required with `comfort-fade` preview**. In a split diff view, the side of the diff that the pull request's changes appear on. Can be `LEFT` or `RIGHT`. Use `LEFT` for deletions that appear in red. Use `RIGHT` for additions that appear in green or unchanged lines that appear in white and are shown for context. For a multi-line comment, side represents whether the last line of the comment range is a deletion or addition. For more information, see "[Diff view options](https://help.github.com/en/articles/about-comparing-branches-in-pull-requests#diff-view-options)" in the GitHub Help documentation. |
+| start_line | **Required when using multi-line comments**. To create multi-line comments, you must use the `comfort-fade` preview header. The `start_line` is the first line in the pull request diff that your multi-line comment applies to. To learn more about multi-line comments, see "[Commenting on a pull request](https://help.github.com/en/articles/commenting-on-a-pull-request#adding-line-comments-to-a-pull-request)" in the GitHub Help documentation. |
+| start_side | **Required when using multi-line comments**. To create multi-line comments, you must use the `comfort-fade` preview header. The `start_side` is the starting side of the diff that the comment applies to. Can be `LEFT` or `RIGHT`. To learn more about multi-line comments, see "[Commenting on a pull request](https://help.github.com/en/articles/commenting-on-a-pull-request#adding-line-comments-to-a-pull-request)" in the GitHub Help documentation. See `side` in this table for additional context. |
 
 ## pulls delete-pending-review
 
@@ -5905,7 +5716,7 @@ https://developer.github.com/v3/pulls/reviews/#delete-a-pending-review-for-a-pul
 |------|-------------|
 | pull_number | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| review_id | __Required__  |
+| review_id | __Required__ review_id parameter |
 
 ## pulls delete-review-comment
 
@@ -5918,7 +5729,7 @@ Deletes a review comment.
 
 | name | description |
 |------|-------------|
-| comment_id | __Required__  |
+| comment_id | __Required__ comment_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## pulls dismiss-review
@@ -5935,13 +5746,14 @@ https://developer.github.com/v3/pulls/reviews/#dismiss-a-review-for-a-pull-reque
 | message | __Required__ The message for the pull request review dismissal |
 | pull_number | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| review_id | __Required__  |
+| review_id | __Required__ review_id parameter |
+| event |  |
 
 ## pulls get
 
 https://developer.github.com/v3/pulls/#get-a-pull-request
 
-Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 Lists details of a pull request by providing its number.
 
@@ -5951,9 +5763,9 @@ The value of the `mergeable` attribute can be `true`, `false`, or `null`. If the
 
 The value of the `merge_commit_sha` attribute changes depending on the state of the pull request. Before merging a pull request, the `merge_commit_sha` attribute holds the SHA of the _test_ merge commit. After merging a pull request, the `merge_commit_sha` attribute changes depending on how you merged the pull request:
 
-*   If merged as a [merge commit](https://docs.github.com/articles/about-merge-methods-on-github/), `merge_commit_sha` represents the SHA of the merge commit.
-*   If merged via a [squash](https://docs.github.com/articles/about-merge-methods-on-github/#squashing-your-merge-commits), `merge_commit_sha` represents the SHA of the squashed commit on the base branch.
-*   If [rebased](https://docs.github.com/articles/about-merge-methods-on-github/#rebasing-and-merging-your-commits), `merge_commit_sha` represents the commit that the base branch was updated to.
+*   If merged as a [merge commit](https://help.github.com/articles/about-merge-methods-on-github/), `merge_commit_sha` represents the SHA of the merge commit.
+*   If merged via a [squash](https://help.github.com/articles/about-merge-methods-on-github/#squashing-your-merge-commits), `merge_commit_sha` represents the SHA of the squashed commit on the base branch.
+*   If [rebased](https://help.github.com/articles/about-merge-methods-on-github/#rebasing-and-merging-your-commits), `merge_commit_sha` represents the commit that the base branch was updated to.
 
 Pass the appropriate [media type](https://developer.github.com/v3/media/#commits-commit-comparison-and-pull-requests) to fetch diff and patch formats.
 
@@ -5979,7 +5791,7 @@ https://developer.github.com/v3/pulls/reviews/#get-a-review-for-a-pull-request
 |------|-------------|
 | pull_number | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| review_id | __Required__  |
+| review_id | __Required__ review_id parameter |
 
 ## pulls get-review-comment
 
@@ -6012,16 +5824,16 @@ The `reactions` key will have the following payload where `url` can be used to c
 
 | name | description |
 |------|-------------|
-| comment_id | __Required__  |
+| comment_id | __Required__ comment_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | comfort-fade-preview | Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must set this flag. |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## pulls list
 
 https://developer.github.com/v3/pulls/#list-pull-requests
 
-Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 ### parameters
 
@@ -6051,7 +5863,7 @@ List comments for a specific pull request review.
 |------|-------------|
 | pull_number | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| review_id | __Required__  |
+| review_id | __Required__ review_id parameter |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -6140,9 +5952,9 @@ The `reactions` key will have the following payload where `url` can be used to c
 | direction | Can be either `asc` or `desc`. Ignored without `sort` parameter. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| since | This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. Only returns comments `updated` at or after this time. |
-| sort | Can be either `created` or `updated` comments. |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| since | Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
+| sort | One of `created` (when the repository was starred) or `updated` (when it was last pushed to). |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## pulls list-review-comments-for-repo
 
@@ -6180,9 +5992,9 @@ The `reactions` key will have the following payload where `url` can be used to c
 | direction | Can be either `asc` or `desc`. Ignored without `sort` parameter. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| since | This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. Only returns comments `updated` at or after this time. |
-| sort | Can be either `created` or `updated` comments. |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| since | Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
+| sort | One of `created` (when the repository was starred) or `updated` (when it was last pushed to). |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## pulls list-reviews
 
@@ -6204,7 +6016,7 @@ The list of reviews returns in chronological order.
 
 https://developer.github.com/v3/pulls/#merge-a-pull-request
 
-This endpoint triggers [notifications](https://docs.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
+This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
 
 ### parameters
 
@@ -6238,7 +6050,7 @@ https://developer.github.com/v3/pulls/review_requests/#remove-requested-reviewer
 
 https://developer.github.com/v3/pulls/review_requests/#request-reviewers-for-a-pull-request
 
-This endpoint triggers [notifications](https://docs.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
+This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
 
 ### parameters
 
@@ -6264,14 +6076,14 @@ https://developer.github.com/v3/pulls/reviews/#submit-a-review-for-a-pull-reques
 | event | __Required__ The review action you want to perform. The review actions include: `APPROVE`, `REQUEST_CHANGES`, or `COMMENT`. When you leave this blank, the API returns _HTTP 422 (Unrecognizable entity)_ and sets the review action state to `PENDING`, which means you will need to re-submit the pull request review using a review action. |
 | pull_number | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| review_id | __Required__  |
+| review_id | __Required__ review_id parameter |
 | body | The body text of the pull request review |
 
 ## pulls update
 
 https://developer.github.com/v3/pulls/#update-a-pull-request
 
-Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Draft pull requests are available in public repositories with GitHub Free and GitHub Free for organizations, GitHub Pro, and legacy per-repository billing plans, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 To open or update a pull request in a public repository, you must have write access to the head or the source branch. For organization-owned repositories, you must be a member of the organization that owns the repository to open or update a pull request.
 
@@ -6284,7 +6096,7 @@ To open or update a pull request in a public repository, you must have write acc
 | repo | __Required__ repository in OWNER/REPO form |
 | base | The name of the branch you want your changes pulled into. This should be an existing branch on the current repository. You cannot update the base branch on a pull request to point to another repository. |
 | body | The contents of the pull request. |
-| maintainer_can_modify | Indicates whether [maintainers can modify](https://docs.github.com/articles/allowing-changes-to-a-pull-request-branch-created-from-a-fork/) the pull request. |
+| maintainer_can_modify | Indicates whether [maintainers can modify](https://help.github.com/articles/allowing-changes-to-a-pull-request-branch-created-from-a-fork/) the pull request. |
 | sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must set this flag. |
 | state | State of this Pull Request. Either `open` or `closed`. |
 | title | The title of the pull request. |
@@ -6319,7 +6131,7 @@ Update the review summary comment with new text.
 | body | __Required__ The body text of the pull request review. |
 | pull_number | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| review_id | __Required__  |
+| review_id | __Required__ review_id parameter |
 
 ## pulls update-review-comment
 
@@ -6351,7 +6163,7 @@ If you don't use the `comfort-fade` preview header, multi-line and single-line c
 | name | description |
 |------|-------------|
 | body | __Required__ The text of the reply to the review comment. |
-| comment_id | __Required__  |
+| comment_id | __Required__ comment_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | comfort-fade-preview | Multi-line comments in a pull request diff is currently available for developers to preview. To access the new response fields during the preview period, you must set this flag. |
 
@@ -6380,10 +6192,10 @@ Create a reaction to a [commit comment](https://developer.github.com/v3/repos/co
 
 | name | description |
 |------|-------------|
-| comment_id | __Required__  |
+| comment_id | __Required__ comment_id parameter |
 | content | __Required__ The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the commit comment. |
 | repo | __Required__ repository in OWNER/REPO form |
-| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## reactions create-for-issue
 
@@ -6397,9 +6209,9 @@ Create a reaction to an [issue](https://developer.github.com/v3/issues/). A resp
 | name | description |
 |------|-------------|
 | content | __Required__ The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the issue. |
-| issue_number | __Required__  |
+| issue_number | __Required__ issue_number parameter |
 | repo | __Required__ repository in OWNER/REPO form |
-| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## reactions create-for-issue-comment
 
@@ -6412,10 +6224,10 @@ Create a reaction to an [issue comment](https://developer.github.com/v3/issues/c
 
 | name | description |
 |------|-------------|
-| comment_id | __Required__  |
+| comment_id | __Required__ comment_id parameter |
 | content | __Required__ The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the issue comment. |
 | repo | __Required__ repository in OWNER/REPO form |
-| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## reactions create-for-pull-request-review-comment
 
@@ -6428,10 +6240,10 @@ Create a reaction to a [pull request review comment](https://developer.github.co
 
 | name | description |
 |------|-------------|
-| comment_id | __Required__  |
+| comment_id | __Required__ comment_id parameter |
 | content | __Required__ The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the pull request review comment. |
 | repo | __Required__ repository in OWNER/REPO form |
-| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## reactions create-for-team-discussion-comment-in-org
 
@@ -6450,8 +6262,8 @@ Create a reaction to a [team discussion comment](https://developer.github.com/v3
 | content | __Required__ The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the team discussion comment. |
 | discussion_number | __Required__  |
 | org | __Required__  |
-| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
-| team_slug | __Required__  |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
+| team_slug | __Required__ team_slug parameter |
 
 ## reactions create-for-team-discussion-comment-legacy
 
@@ -6469,7 +6281,7 @@ Create a reaction to a [team discussion comment](https://developer.github.com/v3
 | comment_number | __Required__  |
 | content | __Required__ The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the team discussion comment. |
 | discussion_number | __Required__  |
-| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | team_id | __Required__  |
 
 ## reactions create-for-team-discussion-in-org
@@ -6488,8 +6300,8 @@ Create a reaction to a [team discussion](https://developer.github.com/v3/teams/d
 | content | __Required__ The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the team discussion. |
 | discussion_number | __Required__  |
 | org | __Required__  |
-| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
-| team_slug | __Required__  |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
+| team_slug | __Required__ team_slug parameter |
 
 ## reactions create-for-team-discussion-legacy
 
@@ -6506,7 +6318,7 @@ Create a reaction to a [team discussion](https://developer.github.com/v3/teams/d
 |------|-------------|
 | content | __Required__ The [reaction type](https://developer.github.com/v3/reactions/#reaction-types) to add to the team discussion. |
 | discussion_number | __Required__  |
-| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | team_id | __Required__  |
 
 ## reactions delete-for-commit-comment
@@ -6522,10 +6334,10 @@ Delete a reaction to a [commit comment](https://developer.github.com/v3/repos/co
 
 | name | description |
 |------|-------------|
-| comment_id | __Required__  |
+| comment_id | __Required__ comment_id parameter |
 | reaction_id | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## reactions delete-for-issue
 
@@ -6540,10 +6352,10 @@ Delete a reaction to an [issue](https://developer.github.com/v3/issues/).
 
 | name | description |
 |------|-------------|
-| issue_number | __Required__  |
+| issue_number | __Required__ issue_number parameter |
 | reaction_id | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## reactions delete-for-issue-comment
 
@@ -6558,10 +6370,10 @@ Delete a reaction to an [issue comment](https://developer.github.com/v3/issues/c
 
 | name | description |
 |------|-------------|
-| comment_id | __Required__  |
+| comment_id | __Required__ comment_id parameter |
 | reaction_id | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## reactions delete-for-pull-request-comment
 
@@ -6576,10 +6388,10 @@ Delete a reaction to a [pull request review comment](https://developer.github.co
 
 | name | description |
 |------|-------------|
-| comment_id | __Required__  |
+| comment_id | __Required__ comment_id parameter |
 | reaction_id | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## reactions delete-for-team-discussion
 
@@ -6597,8 +6409,8 @@ Delete a reaction to a [team discussion](https://developer.github.com/v3/teams/d
 | discussion_number | __Required__  |
 | org | __Required__  |
 | reaction_id | __Required__  |
-| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
-| team_slug | __Required__  |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
+| team_slug | __Required__ team_slug parameter |
 
 ## reactions delete-for-team-discussion-comment
 
@@ -6617,8 +6429,8 @@ Delete a reaction to a [team discussion comment](https://developer.github.com/v3
 | discussion_number | __Required__  |
 | org | __Required__  |
 | reaction_id | __Required__  |
-| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
-| team_slug | __Required__  |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
+| team_slug | __Required__ team_slug parameter |
 
 ## reactions delete-legacy
 
@@ -6634,7 +6446,7 @@ OAuth access tokens require the `write:discussion` [scope](https://developer.git
 | name | description |
 |------|-------------|
 | reaction_id | __Required__  |
-| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## reactions list-for-commit-comment
 
@@ -6647,9 +6459,9 @@ List the reactions to a [commit comment](https://developer.github.com/v3/repos/c
 
 | name | description |
 |------|-------------|
-| comment_id | __Required__  |
+| comment_id | __Required__ comment_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
-| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | content | Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to a commit comment. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -6665,9 +6477,9 @@ List the reactions to an [issue](https://developer.github.com/v3/issues/).
 
 | name | description |
 |------|-------------|
-| issue_number | __Required__  |
+| issue_number | __Required__ issue_number parameter |
 | repo | __Required__ repository in OWNER/REPO form |
-| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | content | Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to an issue. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -6683,9 +6495,9 @@ List the reactions to an [issue comment](https://developer.github.com/v3/issues/
 
 | name | description |
 |------|-------------|
-| comment_id | __Required__  |
+| comment_id | __Required__ comment_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
-| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | content | Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to an issue comment. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -6701,9 +6513,9 @@ List the reactions to a [pull request review comment](https://developer.github.c
 
 | name | description |
 |------|-------------|
-| comment_id | __Required__  |
+| comment_id | __Required__ comment_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
-| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | content | Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to a pull request review comment. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -6724,8 +6536,8 @@ List the reactions to a [team discussion comment](https://developer.github.com/v
 | comment_number | __Required__  |
 | discussion_number | __Required__  |
 | org | __Required__  |
-| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
-| team_slug | __Required__  |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
+| team_slug | __Required__ team_slug parameter |
 | content | Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to a team discussion comment. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -6745,7 +6557,7 @@ List the reactions to a [team discussion comment](https://developer.github.com/v
 |------|-------------|
 | comment_number | __Required__  |
 | discussion_number | __Required__  |
-| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | team_id | __Required__  |
 | content | Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to a team discussion comment. |
 | page | Page number of the results to fetch. |
@@ -6766,8 +6578,8 @@ List the reactions to a [team discussion](https://developer.github.com/v3/teams/
 |------|-------------|
 | discussion_number | __Required__  |
 | org | __Required__  |
-| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
-| team_slug | __Required__  |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
+| team_slug | __Required__ team_slug parameter |
 | content | Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to a team discussion. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -6786,7 +6598,7 @@ List the reactions to a [team discussion](https://developer.github.com/v3/teams/
 | name | description |
 |------|-------------|
 | discussion_number | __Required__  |
-| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | __Required__ An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | team_id | __Required__  |
 | content | Returns a single [reaction type](https://developer.github.com/v3/reactions/#reaction-types). Omit this parameter to list all reactions to a team discussion. |
 | page | Page number of the results to fetch. |
@@ -6806,13 +6618,13 @@ https://developer.github.com/v3/repos/invitations/#accept-a-repository-invitatio
 
 | name | description |
 |------|-------------|
-| invitation_id | __Required__  |
+| invitation_id | __Required__ invitation_id parameter |
 
 ## repos add-app-access-restrictions
 
 https://developer.github.com/v3/repos/branches/#add-app-access-restrictions
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 Grants the specified apps push access for this branch. Only installed GitHub Apps with `write` access to the `contents` permission can be added as authorized actors on a protected branch.
 
@@ -6825,16 +6637,16 @@ Grants the specified apps push access for this branch. Only installed GitHub App
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos add-collaborator
 
 https://developer.github.com/v3/repos/collaborators/#add-a-repository-collaborator
 
-This endpoint triggers [notifications](https://docs.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
+This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
 
-For more information the permission levels, see "[Repository permission levels for an organization](https://docs.github.com/en/github/setting-up-and-managing-organizations-and-teams/repository-permission-levels-for-an-organization#permission-levels-for-repositories-owned-by-an-organization)".
+For more information the permission levels, see "[Repository permission levels for an organization](https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/repository-permission-levels-for-an-organization#permission-levels-for-repositories-owned-by-an-organization)".
 
 Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://developer.github.com/v3/#http-verbs)."
 
@@ -6852,26 +6664,27 @@ To prevent abuse, you are limited to sending 50 invitations to a repository per 
 | repo | __Required__ repository in OWNER/REPO form |
 | username | __Required__  |
 | permission | The permission to grant the collaborator. **Only valid on organization-owned repositories.** Can be one of:  <br>\* `pull` - can pull, but not push to or administer this repository.  <br>\* `push` - can pull and push, but not administer this repository.  <br>\* `admin` - can pull, push and administer this repository.  <br>\* `maintain` - Recommended for project managers who need to manage the repository without access to sensitive or destructive actions.  <br>\* `triage` - Recommended for contributors who need to proactively manage issues and pull requests without write access. |
+| permissions |  |
 
 ## repos add-status-check-contexts
 
 https://developer.github.com/v3/repos/branches/#add-status-check-contexts
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 ### parameters
 
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos add-team-access-restrictions
 
 https://developer.github.com/v3/repos/branches/#add-team-access-restrictions
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 Grants the specified teams push access for this branch. You can also give push access to child teams.
 
@@ -6884,14 +6697,14 @@ Grants the specified teams push access for this branch. You can also give push a
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos add-user-access-restrictions
 
 https://developer.github.com/v3/repos/branches/#add-user-access-restrictions
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 Grants the specified people push access for this branch.
 
@@ -6904,7 +6717,7 @@ Grants the specified people push access for this branch.
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos check-collaborator
@@ -6927,7 +6740,7 @@ Team members will include the members of child teams.
 
 https://developer.github.com/v3/repos/#check-if-vulnerability-alerts-are-enabled-for-a-repository
 
-Shows whether dependency alerts are enabled or disabled for a repository. The authenticated user must have admin access to the repository. For more information, see "[About security alerts for vulnerable dependencies](https://docs.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies)".
+Shows whether dependency alerts are enabled or disabled for a repository. The authenticated user must have admin access to the repository. For more information, see "[About security alerts for vulnerable dependencies](https://help.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies)".
 
 ### parameters
 
@@ -6980,8 +6793,8 @@ These are the possible values for `reason` in the `verification` object:
 
 | name | description |
 |------|-------------|
-| base | __Required__  |
-| head | __Required__  |
+| base | __Required__ base parameter |
+| head | __Required__ head parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos create-commit-comment
@@ -6990,7 +6803,7 @@ https://developer.github.com/v3/repos/comments/#create-a-commit-comment
 
 Create a comment for a commit using its `:commit_sha`.
 
-This endpoint triggers [notifications](https://docs.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
+This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
 
 ### parameters
 
@@ -6998,7 +6811,7 @@ This endpoint triggers [notifications](https://docs.github.com/articles/about-no
 | name | description |
 |------|-------------|
 | body | __Required__ The contents of the comment. |
-| commit_sha | __Required__  |
+| commit_sha | __Required__ commit_sha+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | line | **Deprecated**. Use **position** parameter instead. Line number in the file to comment on. |
 | path | Relative path of the file to comment on. |
@@ -7008,7 +6821,7 @@ This endpoint triggers [notifications](https://docs.github.com/articles/about-no
 
 https://developer.github.com/v3/repos/branches/#create-commit-signature-protection
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 When authenticated with admin or owner permissions to the repository, you can use this endpoint to require signed commits on a branch. You must enable branch protection to require signed commits.
 
@@ -7017,7 +6830,7 @@ When authenticated with admin or owner permissions to the repository, you can us
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | zzzax-preview | __Required__ Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must set this flag. |
 
@@ -7035,7 +6848,7 @@ Note: there is a limit of 1000 statuses per `sha` and `context` within a reposit
 | name | description |
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
-| sha | __Required__  |
+| sha | __Required__ sha parameter |
 | state | __Required__ The state of the status. Can be one of `error`, `failure`, `pending`, or `success`. |
 | context | A string label to differentiate this status from the status of other systems. |
 | description | A short description of the status. |
@@ -7054,7 +6867,7 @@ You can create a read-only deploy key.
 |------|-------------|
 | key | __Required__ The contents of the key. |
 | repo | __Required__ repository in OWNER/REPO form |
-| read_only | If `true`, the key will only be able to read repository contents. Otherwise, the key will be able to read and write.  <br>  <br>Deploy keys with write access can perform the same actions as an organization member with admin access, or a collaborator on a personal repository. For more information, see "[Repository permission levels for an organization](https://docs.github.com/articles/repository-permission-levels-for-an-organization/)" and "[Permission levels for a user account repository](https://docs.github.com/articles/permission-levels-for-a-user-account-repository/)." |
+| read_only | If `true`, the key will only be able to read repository contents. Otherwise, the key will be able to read and write.  <br>  <br>Deploy keys with write access can perform the same actions as an organization member with admin access, or a collaborator on a personal repository. For more information, see "[Repository permission levels for an organization](https://help.github.com/articles/repository-permission-levels-for-an-organization/)" and "[Permission levels for a user account repository](https://help.github.com/articles/permission-levels-for-a-user-account-repository/)." |
 | title | A name for the key. |
 
 ## repos create-deployment
@@ -7116,13 +6929,14 @@ status for the commit to be deployed, but one or more of the required contexts d
 | repo | __Required__ repository in OWNER/REPO form |
 | ant-man-preview | The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must set this flag. |
 | auto_merge | Attempts to automatically merge the default branch into the requested ref, if it's behind the default branch. |
+| created_at |  |
 | description | Short description of the deployment. |
 | environment | Name for the target deployment environment (e.g., `production`, `staging`, `qa`). |
 | payload | JSON payload with extra information about the deployment. |
-| production_environment | Specifies if the given environment is one that end-users directly interact with. Default: `true` when `environment` is `production` and `false` otherwise.<br>**Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. |
+| production_environment | Specifies if the given environment is one that end-users directly interact with. Default: `true` when `environment` is `production` and `false` otherwise.  <br>**Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. |
 | required_contexts | The [status](https://developer.github.com/v3/repos/statuses/) contexts to verify against commit status checks. If you omit this parameter, GitHub verifies all unique contexts before creating a deployment. To bypass checking entirely, pass an empty array. Defaults to all unique contexts. |
 | task | Specifies a task to execute (e.g., `deploy` or `deploy:migrations`). |
-| transient_environment | Specifies if the given environment is specific to the deployment and will no longer exist at some point in the future. Default: `false`<br>**Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. **Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. |
+| transient_environment | Specifies if the given environment is specific to the deployment and will no longer exist at some point in the future. Default: `false`  <br>**Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. **Note:** This parameter requires you to use the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. |
 
 ## repos create-deployment-status
 
@@ -7137,7 +6951,7 @@ GitHub Apps require `read & write` access to "Deployments" and `read-only` acces
 
 | name | description |
 |------|-------------|
-| deployment_id | __Required__  |
+| deployment_id | __Required__ deployment_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | state | __Required__ The state of the status. Can be one of `error`, `failure`, `inactive`, `in_progress`, `queued` `pending`, or `success`. **Note:** To use the `inactive` state, you must provide the [`application/vnd.github.ant-man-preview+json`](https://developer.github.com/v3/previews/#enhanced-deployments) custom media type. To use the `in_progress` and `queued` states, you must provide the [`application/vnd.github.flash-preview+json`](https://developer.github.com/v3/previews/#deployment-statuses) custom media type. When you set a transient deployment to `inactive`, the deployment will be shown as `destroyed` in GitHub. |
 | ant-man-preview | The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must set this flag. |
@@ -7157,7 +6971,7 @@ You can use this endpoint to trigger a webhook event called `repository_dispatch
 
 The `client_payload` parameter is available for any extra information that your workflow might need. This parameter is a JSON payload that will be passed on when the webhook event is dispatched. For example, the `client_payload` can include a message that a user would like to send using a GitHub Actions workflow. Or the `client_payload` can be used as a test to debug your workflow. For a test example, see the [input example](https://developer.github.com/v3/repos/#example-4).
 
-To give you write access to the repository, you must use a personal access token with the `repo` scope. For more information, see "[Creating a personal access token for the command line](https://docs.github.com/articles/creating-a-personal-access-token-for-the-command-line)" in the GitHub Help documentation.
+To give you write access to the repository, you must use a personal access token with the `repo` scope. For more information, see "[Creating a personal access token for the command line](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line)" in the GitHub Help documentation.
 
 This input example shows how you can use the `client_payload` as a test to debug your workflow.
 
@@ -7166,9 +6980,9 @@ This input example shows how you can use the `client_payload` as a test to debug
 
 | name | description |
 |------|-------------|
-| event_type | __Required__ **Required:** A custom webhook event name. |
 | repo | __Required__ repository in OWNER/REPO form |
 | client_payload | JSON payload with extra information about the webhook event that your action or worklow may use. |
+| event_type | **Required:** A custom webhook event name. |
 
 ## repos create-for-authenticated-user
 
@@ -7189,24 +7003,24 @@ When using [OAuth](https://developer.github.com/apps/building-oauth-apps/underst
 | name | description |
 |------|-------------|
 | name | __Required__ The name of the repository. |
-| allow_merge_commit | Either `true` to allow merging pull requests with a merge commit, or `false` to prevent merging pull requests with merge commits. |
-| allow_rebase_merge | Either `true` to allow rebase-merging pull requests, or `false` to prevent rebase-merging. |
-| allow_squash_merge | Either `true` to allow squash-merging pull requests, or `false` to prevent squash-merging. |
-| auto_init | Pass `true` to create an initial commit with empty README. |
+| allow_merge_commit | Whether to allow merge commits for pull requests. |
+| allow_rebase_merge | Whether to allow rebase merges for pull requests. |
+| allow_squash_merge | Whether to allow squash merges for pull requests. |
+| auto_init | Whether the repository is initialized with a minimal README. |
 | baptiste-preview | The `is_template` and `template_repository` keys are currently available for developer to preview. See [Create a repository using a template](https://developer.github.com/v3/repos/#create-a-repository-using-a-template) to learn how to create template repositories. To access these new response keys during the preview period, you must set this flag. |
-| delete_branch_on_merge | Either `true` to allow automatically deleting head branches when pull requests are merged, or `false` to prevent automatic deletion. |
+| delete_branch_on_merge | Whether to delete head branches when pull requests are merged |
 | description | A short description of the repository. |
-| gitignore_template | Desired language or platform [.gitignore template](https://github.com/github/gitignore) to apply. Use the name of the template without the extension. For example, "Haskell". |
-| has_issues | Either `true` to enable issues for this repository or `false` to disable them. |
-| has_projects | Either `true` to enable projects for this repository or `false` to disable them. **Note:** If you're creating a repository in an organization that has disabled repository projects, the default is `false`, and if you pass `true`, the API returns an error. |
-| has_wiki | Either `true` to enable the wiki for this repository or `false` to disable it. |
+| gitignore_template | The desired language or platform to apply to the .gitignore. |
+| has_downloads | Whether downloads are enabled. |
+| has_issues | Whether issues are enabled. |
+| has_projects | Whether projects are enabled. |
+| has_wiki | Whether the wiki is enabled. |
 | homepage | A URL with more information about the repository. |
-| is_template | Either `true` to make this repo available as a template repository or `false` to prevent it. |
-| license_template | Choose an [open source license template](https://choosealicense.com/) that best suits your needs, and then use the [license keyword](https://docs.github.com/articles/licensing-a-repository/#searching-github-by-license-type) as the `license_template` string. For example, "mit" or "mpl-2.0". |
+| is_template | Whether this repository acts as a template that can be used to generate new repositories. |
+| license_template | The license keyword of the open source license for this repository. |
 | nebula-preview | You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).<br><br>To access repository visibility during the preview period, you must set this flag. |
-| private | Either `true` to create a private repository or `false` to create a public one. |
+| private | Whether the repository is private or public. |
 | team_id | The id of the team that will be granted access to this repository. This is only valid when creating a repository in an organization. |
-| visibility | Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. For more information, see "[Creating an internal repository](https://docs.github.com/github/creating-cloning-and-archiving-repositories/creating-an-internal-repository)".  <br>The `visibility` parameter overrides the `private` parameter when you use both parameters with the `nebula-preview` preview header. |
 
 ## repos create-fork
 
@@ -7257,11 +7071,11 @@ When using [OAuth](https://developer.github.com/apps/building-oauth-apps/underst
 | has_wiki | Either `true` to enable the wiki for this repository or `false` to disable it. |
 | homepage | A URL with more information about the repository. |
 | is_template | Either `true` to make this repo available as a template repository or `false` to prevent it. |
-| license_template | Choose an [open source license template](https://choosealicense.com/) that best suits your needs, and then use the [license keyword](https://docs.github.com/articles/licensing-a-repository/#searching-github-by-license-type) as the `license_template` string. For example, "mit" or "mpl-2.0". |
+| license_template | Choose an [open source license template](https://choosealicense.com/) that best suits your needs, and then use the [license keyword](https://help.github.com/articles/licensing-a-repository/#searching-github-by-license-type) as the `license_template` string. For example, "mit" or "mpl-2.0". |
 | nebula-preview | You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).<br><br>To access repository visibility during the preview period, you must set this flag. |
 | private | Either `true` to create a private repository or `false` to create a public one. |
 | team_id | The id of the team that will be granted access to this repository. This is only valid when creating a repository in an organization. |
-| visibility | Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. For more information, see "[Creating an internal repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/about-repository-visibility#about-internal-repositories)".  <br>The `visibility` parameter overrides the `private` parameter when you use both parameters with the `nebula-preview` preview header. |
+| visibility | Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. For more information, see "[Creating an internal repository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-repository-visibility#about-internal-repositories)" in the GitHub Help documentation.  <br>The `visibility` parameter overrides the `private` parameter when you use both parameters with the `nebula-preview` preview header. |
 
 ## repos create-or-update-file-contents
 
@@ -7276,11 +7090,13 @@ Creates a new file or replaces an existing file in a repository.
 |------|-------------|
 | content | __Required__ The new file content, using Base64 encoding. |
 | message | __Required__ The commit message. |
-| path | __Required__  |
+| path | __Required__ path+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
+| author.date |  |
 | author.email | The email of the author or committer of the commit. You'll receive a `422` status code if `email` is omitted. |
 | author.name | The name of the author or committer of the commit. You'll receive a `422` status code if `name` is omitted. |
 | branch | The branch name. Default: the repository’s default branch (usually `master`) |
+| committer.date |  |
 | committer.email | The email of the author or committer of the commit. You'll receive a `422` status code if `email` is omitted. |
 | committer.name | The name of the author or committer of the commit. You'll receive a `422` status code if `name` is omitted. |
 | sha | **Required if you are updating a file**. The blob SHA of the file being replaced. |
@@ -7298,7 +7114,7 @@ https://developer.github.com/v3/repos/pages/#create-a-github-pages-site
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
 | switcheroo-preview | __Required__ Enabling and disabling Pages in the Pages API is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2019-03-14-enabling-disabling-pages/) preview for more details. To access the new endpoints during the preview period, you must set this flag. |
-| source.branch | The repository branch used to publish your [site's source files](https://docs.github.com/articles/configuring-a-publishing-source-for-github-pages/). Can be either `master` or `gh-pages`. |
+| source.branch | The repository branch used to publish your [site's source files](https://help.github.com/articles/configuring-a-publishing-source-for-github-pages/). Can be either `master` or `gh-pages`. |
 | source.path | The repository directory that includes the source files for the Pages site. When `branch` is `master`, you can change `path` to `/docs`. When `branch` is `gh-pages`, you are unable to specify a `path` other than `/`. |
 
 ## repos create-release
@@ -7307,7 +7123,7 @@ https://developer.github.com/v3/repos/releases/#create-a-release
 
 Users with push access to the repository can create a release.
 
-This endpoint triggers [notifications](https://docs.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
+This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
 
 ### parameters
 
@@ -7342,8 +7158,8 @@ When using [OAuth](https://developer.github.com/apps/building-oauth-apps/underst
 |------|-------------|
 | baptiste-preview | __Required__ The `is_template` and `template_repository` keys are currently available for developer to preview. See [Create a repository using a template](https://developer.github.com/v3/repos/#create-a-repository-using-a-template) to learn how to create template repositories. To access these new response keys during the preview period, you must set this flag. |
 | name | __Required__ The name of the new repository. |
-| template_owner | __Required__  |
-| template_repo | __Required__  |
+| template_owner | __Required__ template_owner parameter |
+| template_repo | __Required__ template_repo parameter |
 | description | A short description of the new repository. |
 | owner | The organization or person who will own the new repository. To create a new repository in an organization, the authenticated user must be a member of the specified organization. |
 | private | Either `true` to create a new private repository or `false` to create a new public one. |
@@ -7364,8 +7180,10 @@ share the same `config` as long as those webhooks do not have any `events` that 
 | repo | __Required__ repository in OWNER/REPO form |
 | active | Determines if notifications are sent when the webhook is triggered. Set to `true` to send notifications. |
 | config.content_type | The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`. |
+| config.digest |  |
 | config.insecure_ssl | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. **We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.** |
 | config.secret | If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value in the [`X-Hub-Signature`](https://developer.github.com/webhooks/event-payloads/#delivery-headers) header. |
+| config.token |  |
 | events | Determines what [events](https://developer.github.com/webhooks/event-payloads) the hook is triggered for. |
 | name | Use `web` to create a webhook. Default: `web`. This parameter only accepts the value `web`. |
 
@@ -7380,7 +7198,7 @@ https://developer.github.com/v3/repos/invitations/#decline-a-repository-invitati
 
 | name | description |
 |------|-------------|
-| invitation_id | __Required__  |
+| invitation_id | __Required__ invitation_id parameter |
 
 ## repos delete
 
@@ -7402,7 +7220,7 @@ repositories, you will get a `403 Forbidden` response.
 
 https://developer.github.com/v3/repos/branches/#delete-access-restrictions
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 Disables the ability to restrict who can push to this branch.
 
@@ -7411,14 +7229,14 @@ Disables the ability to restrict who can push to this branch.
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos delete-admin-branch-protection
 
 https://developer.github.com/v3/repos/branches/#delete-admin-branch-protection
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 Removing admin enforcement requires admin or owner permissions to the repository and branch protection to be enabled.
 
@@ -7427,21 +7245,21 @@ Removing admin enforcement requires admin or owner permissions to the repository
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos delete-branch-protection
 
 https://developer.github.com/v3/repos/branches/#delete-branch-protection
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 ### parameters
 
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos delete-commit-comment
@@ -7455,14 +7273,14 @@ https://developer.github.com/v3/repos/comments/#delete-a-commit-comment
 
 | name | description |
 |------|-------------|
-| comment_id | __Required__  |
+| comment_id | __Required__ comment_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos delete-commit-signature-protection
 
 https://developer.github.com/v3/repos/branches/#delete-commit-signature-protection
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 When authenticated with admin or owner permissions to the repository, you can use this endpoint to disable required signed commits on a branch. You must enable branch protection to require signed commits.
 
@@ -7471,7 +7289,7 @@ When authenticated with admin or owner permissions to the repository, you can us
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | zzzax-preview | __Required__ Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must set this flag. |
 
@@ -7486,7 +7304,7 @@ Deploy keys are immutable. If you need to update a key, remove the key and creat
 
 | name | description |
 |------|-------------|
-| key_id | __Required__  |
+| key_id | __Required__ key_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos delete-deployment
@@ -7507,7 +7325,7 @@ For more information, see "[Create a deployment](https://developer.github.com/v3
 
 | name | description |
 |------|-------------|
-| deployment_id | __Required__  |
+| deployment_id | __Required__ deployment_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos delete-file
@@ -7528,7 +7346,7 @@ You must provide values for both `name` and `email`, whether you choose to use `
 | name | description |
 |------|-------------|
 | message | __Required__ The commit message. |
-| path | __Required__  |
+| path | __Required__ path+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | sha | __Required__ The blob SHA of the file being replaced. |
 | author.email | The email of the author (or committer) of the commit |
@@ -7548,7 +7366,7 @@ https://developer.github.com/v3/repos/invitations/#delete-a-repository-invitatio
 
 | name | description |
 |------|-------------|
-| invitation_id | __Required__  |
+| invitation_id | __Required__ invitation_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos delete-pages-site
@@ -7569,14 +7387,14 @@ https://developer.github.com/v3/repos/pages/#delete-a-github-pages-site
 
 https://developer.github.com/v3/repos/branches/#delete-pull-request-review-protection
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 ### parameters
 
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos delete-release
@@ -7590,7 +7408,7 @@ Users with push access to the repository can delete a release.
 
 | name | description |
 |------|-------------|
-| release_id | __Required__  |
+| release_id | __Required__ release_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos delete-release-asset
@@ -7604,7 +7422,7 @@ https://developer.github.com/v3/repos/releases/#delete-a-release-asset
 
 | name | description |
 |------|-------------|
-| asset_id | __Required__  |
+| asset_id | __Required__ asset_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos delete-webhook
@@ -7625,7 +7443,7 @@ https://developer.github.com/v3/repos/hooks/#delete-a-repository-webhook
 
 https://developer.github.com/v3/repos/#disable-automated-security-fixes
 
-Disables automated security fixes for a repository. The authenticated user must have admin access to the repository. For more information, see "[Configuring automated security fixes](https://docs.github.com/en/articles/configuring-automated-security-fixes)".
+Disables automated security fixes for a repository. The authenticated user must have admin access to the repository. For more information, see "[Configuring automated security fixes](https://help.github.com/en/articles/configuring-automated-security-fixes)".
 
 ### parameters
 
@@ -7639,7 +7457,7 @@ Disables automated security fixes for a repository. The authenticated user must 
 
 https://developer.github.com/v3/repos/#disable-vulnerability-alerts
 
-Disables dependency alerts and the dependency graph for a repository. The authenticated user must have admin access to the repository. For more information, see "[About security alerts for vulnerable dependencies](https://docs.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies)".
+Disables dependency alerts and the dependency graph for a repository. The authenticated user must have admin access to the repository. For more information, see "[About security alerts for vulnerable dependencies](https://help.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies)".
 
 ### parameters
 
@@ -7649,15 +7467,13 @@ Disables dependency alerts and the dependency graph for a repository. The authen
 | dorian-preview | __Required__ Enabling and disabling dependency alerts for a repository using the REST API is currently available for developers to preview. To access these new endpoints during the preview period, you must set this flag. |
 | repo | __Required__ repository in OWNER/REPO form |
 
-## repos download-archive
+## repos download-tarball-archive
 
 https://developer.github.com/v3/repos/contents/#download-a-repository-archive
 
-Gets a redirect URL to download an archive for a repository. The `:archive_format` can be either `tarball` or
-`zipball`. The `:ref` must be a valid Git reference. If you omit `:ref`, the repository’s default branch (usually
+Gets a redirect URL to download a tar archive for a repository. If you omit `:ref`, the repository’s default branch (usually
 `master`) will be used. Please make sure your HTTP framework is configured to follow redirects or you will need to use
 the `Location` header to make a second `GET` request.
-
 **Note**: For private repositories, these links are temporary and expire after five minutes.
 
 ### parameters
@@ -7665,15 +7481,31 @@ the `Location` header to make a second `GET` request.
 
 | name | description |
 |------|-------------|
-| archive_format | __Required__  |
-| ref | __Required__  |
+| ref | __Required__ ref parameter |
+| repo | __Required__ repository in OWNER/REPO form |
+
+## repos download-zipball-archive
+
+https://developer.github.com/v3/repos/contents/#download-a-repository-archive
+
+Gets a redirect URL to download a zip archive for a repository. If you omit `:ref`, the repository’s default branch (usually
+`master`) will be used. Please make sure your HTTP framework is configured to follow redirects or you will need to use
+the `Location` header to make a second `GET` request.
+**Note**: For private repositories, these links are temporary and expire after five minutes.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| ref | __Required__ ref parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos enable-automated-security-fixes
 
 https://developer.github.com/v3/repos/#enable-automated-security-fixes
 
-Enables automated security fixes for a repository. The authenticated user must have admin access to the repository. For more information, see "[Configuring automated security fixes](https://docs.github.com/en/articles/configuring-automated-security-fixes)".
+Enables automated security fixes for a repository. The authenticated user must have admin access to the repository. For more information, see "[Configuring automated security fixes](https://help.github.com/en/articles/configuring-automated-security-fixes)".
 
 ### parameters
 
@@ -7687,7 +7519,7 @@ Enables automated security fixes for a repository. The authenticated user must h
 
 https://developer.github.com/v3/repos/#enable-vulnerability-alerts
 
-Enables dependency alerts and the dependency graph for a repository. The authenticated user must have admin access to the repository. For more information, see "[About security alerts for vulnerable dependencies](https://docs.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies)".
+Enables dependency alerts and the dependency graph for a repository. The authenticated user must have admin access to the repository. For more information, see "[About security alerts for vulnerable dependencies](https://help.github.com/en/articles/about-security-alerts-for-vulnerable-dependencies)".
 
 ### parameters
 
@@ -7718,7 +7550,7 @@ The `parent` and `source` objects are present when the repository is a fork. `pa
 
 https://developer.github.com/v3/repos/branches/#get-access-restrictions
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 Lists who has access to this protected branch.
 
@@ -7729,35 +7561,35 @@ Lists who has access to this protected branch.
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-admin-branch-protection
 
 https://developer.github.com/v3/repos/branches/#get-admin-branch-protection
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 ### parameters
 
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-all-status-check-contexts
 
 https://developer.github.com/v3/repos/branches/#get-all-status-check-contexts
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 ### parameters
 
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-all-topics
@@ -7778,7 +7610,7 @@ https://developer.github.com/v3/repos/#get-all-repository-topics
 
 https://developer.github.com/v3/repos/branches/#list-apps-with-access-to-the-protected-branch
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 Lists the GitHub Apps that have push access to this branch. Only installed GitHub Apps with `write` access to the `contents` permission can be added as authorized actors on a protected branch.
 
@@ -7787,7 +7619,7 @@ Lists the GitHub Apps that have push access to this branch. Only installed GitHu
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-branch
@@ -7801,21 +7633,21 @@ https://developer.github.com/v3/repos/branches/#get-a-branch
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-branch-protection
 
 https://developer.github.com/v3/repos/branches/#get-branch-protection
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 ### parameters
 
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | luke-cage-preview | The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must set this flag. |
 
@@ -7879,7 +7711,7 @@ Additionally, a combined `state` is returned. The `state` is one of:
 
 | name | description |
 |------|-------------|
-| ref | __Required__  |
+| ref | __Required__ ref+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-commit
@@ -7919,7 +7751,7 @@ These are the possible values for `reason` in the `verification` object:
 
 | name | description |
 |------|-------------|
-| ref | __Required__  |
+| ref | __Required__ ref+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-commit-activity-stats
@@ -7946,17 +7778,17 @@ https://developer.github.com/v3/repos/comments/#get-a-commit-comment
 
 | name | description |
 |------|-------------|
-| comment_id | __Required__  |
+| comment_id | __Required__ comment_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## repos get-commit-signature-protection
 
 https://developer.github.com/v3/repos/branches/#get-commit-signature-protection
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
-When authenticated with admin or owner permissions to the repository, you can use this endpoint to check whether a branch requires signed commits. An enabled status of `true` indicates you must sign commits on this branch. For more information, see [Signing commits with GPG](https://docs.github.com/articles/signing-commits-with-gpg) in GitHub Help.
+When authenticated with admin or owner permissions to the repository, you can use this endpoint to check whether a branch requires signed commits. An enabled status of `true` indicates you must sign commits on this branch. For more information, see [Signing commits with GPG](https://help.github.com/articles/signing-commits-with-gpg) in GitHub Help.
 
 **Note**: You must enable branch protection to require signed commits.
 
@@ -7965,7 +7797,7 @@ When authenticated with admin or owner permissions to the repository, you can us
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | zzzax-preview | __Required__ Protected Branches API can now manage a setting for requiring signed commits. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-02-22-protected-branches-required-signatures) for full details. To access the API during the preview period, you must set this flag. |
 
@@ -7980,7 +7812,7 @@ This endpoint will return all community profile metrics, including an overall he
 
 | name | description |
 |------|-------------|
-| black-panther-preview | __Required__ We're currently offering a preview of the Community Profile API (also known as community health). To access the API during the preview period, you must provide a custom [media type](https://developer.github.com/v3/media) in the  `Accept` header. |
+| black-panther-preview | __Required__ We're currently offering a preview of the Community Profile API (also known as community health). To access the API during the preview period, you must set this flag. |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-content
@@ -8025,7 +7857,7 @@ github.com URLs (`html_url` and `_links["html"]`) will have null values.
 
 | name | description |
 |------|-------------|
-| path | __Required__  |
+| path | __Required__ path+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | ref | The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`) |
 
@@ -8059,7 +7891,7 @@ https://developer.github.com/v3/repos/keys/#get-a-deploy-key
 
 | name | description |
 |------|-------------|
-| key_id | __Required__  |
+| key_id | __Required__ key_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-deployment
@@ -8073,7 +7905,7 @@ https://developer.github.com/v3/repos/deployments/#get-a-deployment
 
 | name | description |
 |------|-------------|
-| deployment_id | __Required__  |
+| deployment_id | __Required__ deployment_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | ant-man-preview | The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must set this flag. |
 | machine-man-preview | To access the API with your GitHub App, you must set this flag for your requests. |
@@ -8089,9 +7921,9 @@ Users with pull access can view a deployment status for a deployment:
 
 | name | description |
 |------|-------------|
-| deployment_id | __Required__  |
+| deployment_id | __Required__ deployment_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
-| status_id | __Required__  |
+| status_id | __Required__ status_id parameter |
 | ant-man-preview | The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must set this flag. |
 | flash-preview | New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](https://developer.github.com/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.<br><br>To access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must set this flag. |
 | machine-man-preview | To access the API with your GitHub App, you must set this flag for your requests. |
@@ -8148,7 +7980,7 @@ https://developer.github.com/v3/repos/pages/#get-github-pages-build
 
 | name | description |
 |------|-------------|
-| build_id | __Required__  |
+| build_id | __Required__ build_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-participation-stats
@@ -8170,14 +8002,14 @@ The array order is oldest week (index 0) to most recent week.
 
 https://developer.github.com/v3/repos/branches/#get-pull-request-review-protection
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 ### parameters
 
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | luke-cage-preview | The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must set this flag. |
 
@@ -8227,7 +8059,7 @@ https://developer.github.com/v3/repos/releases/#get-a-release
 
 | name | description |
 |------|-------------|
-| release_id | __Required__  |
+| release_id | __Required__ release_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-release-asset
@@ -8241,7 +8073,7 @@ To download the asset's binary content, set the `Accept` header of the request t
 
 | name | description |
 |------|-------------|
-| asset_id | __Required__  |
+| asset_id | __Required__ asset_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-release-by-tag
@@ -8256,27 +8088,27 @@ Get a published release with the specified tag.
 | name | description |
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
-| tag | __Required__  |
+| tag | __Required__ tag+ parameter |
 
 ## repos get-status-checks-protection
 
 https://developer.github.com/v3/repos/branches/#get-status-checks-protection
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 ### parameters
 
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-teams-with-access-to-protected-branch
 
 https://developer.github.com/v3/repos/branches/#list-teams-with-access-to-the-protected-branch
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 Lists the teams who have push access to this branch. The list includes child teams.
 
@@ -8285,7 +8117,7 @@ Lists the teams who have push access to this branch. The list includes child tea
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-top-paths
@@ -8318,7 +8150,7 @@ Get the top 10 referrers over the last 14 days.
 
 https://developer.github.com/v3/repos/branches/#list-users-with-access-to-the-protected-branch
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 Lists the people who have push access to this branch.
 
@@ -8327,7 +8159,7 @@ Lists the people who have push access to this branch.
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-views
@@ -8378,7 +8210,7 @@ https://developer.github.com/v3/repos/branches/#list-branches
 
 https://developer.github.com/v3/repos/commits/#list-branches-for-head-commit
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 Returns all branches where the given commit SHA is the HEAD, or latest commit for the branch.
 
@@ -8387,7 +8219,7 @@ Returns all branches where the given commit SHA is the HEAD, or latest commit fo
 
 | name | description |
 |------|-------------|
-| commit_sha | __Required__  |
+| commit_sha | __Required__ commit_sha+ parameter |
 | groot-preview | __Required__ Listing branches or pull requests for a commit in the Commits API is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2019-04-11-pulls-branches-for-commit/) for more details. To access the new endpoints during the preview period, you must set this flag. |
 | repo | __Required__ repository in OWNER/REPO form |
 
@@ -8420,11 +8252,11 @@ Use the `:commit_sha` to specify the commit that will have its comments listed.
 
 | name | description |
 |------|-------------|
-| commit_sha | __Required__  |
+| commit_sha | __Required__ commit_sha+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## repos list-commit-comments-for-repo
 
@@ -8442,7 +8274,7 @@ Comments are ordered by ascending ID.
 | repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## repos list-commit-statuses-for-ref
 
@@ -8457,7 +8289,7 @@ This resource is also available via a legacy route: `GET /repos/:owner/:repo/sta
 
 | name | description |
 |------|-------------|
-| ref | __Required__  |
+| ref | __Required__ ref+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -8499,7 +8331,7 @@ These are the possible values for `reason` in the `verification` object:
 | path | Only commits containing this file path will be returned. |
 | per_page | Results per page (max 100) |
 | sha | SHA or branch to start listing commits from. Default: the repository’s default branch (usually `master`). |
-| since | Only commits after this date will be returned. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
+| since | Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 | until | Only commits before this date will be returned. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 
 ## repos list-contributors
@@ -8546,7 +8378,7 @@ Users with pull access can view deployment statuses for a deployment:
 
 | name | description |
 |------|-------------|
-| deployment_id | __Required__  |
+| deployment_id | __Required__ deployment_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | ant-man-preview | The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must set this flag. |
 | flash-preview | New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](https://developer.github.com/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.<br><br>To access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must set this flag. |
@@ -8587,9 +8419,11 @@ The authenticated user has explicit permission to access repositories they own, 
 | name | description |
 |------|-------------|
 | affiliation | Comma-separated list of values. Can include:  <br>\* `owner`: Repositories that are owned by the authenticated user.  <br>\* `collaborator`: Repositories that the user has been added to as a collaborator.  <br>\* `organization_member`: Repositories that the user has access to through being a member of an organization. This includes every repository on every team that the user is on. |
+| before | Only show notifications updated before the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 | direction | Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc` |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
+| since | Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 | sort | Can be one of `created`, `updated`, `pushed`, `full_name`. |
 | type | Can be one of `all`, `owner`, `public`, `private`, `member`. Default: `all`  <br>  <br>Will cause a `422` error if used in the same request as **visibility** or **affiliation**. Will cause a `422` error if used in the same request as **visibility** or **affiliation**. |
 | visibility | Can be one of `all`, `public`, or `private`. |
@@ -8719,7 +8553,9 @@ Note: Pagination is powered exclusively by the `since` parameter. Use the [Link 
 
 | name | description |
 |------|-------------|
-| since | The integer ID of the last repository that you've seen. |
+| per_page | Results per page (max 100) |
+| since | Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
+| visibility |  |
 
 ## repos list-pull-requests-associated-with-commit
 
@@ -8732,7 +8568,7 @@ Lists all pull requests containing the provided commit SHA, which can be from an
 
 | name | description |
 |------|-------------|
-| commit_sha | __Required__  |
+| commit_sha | __Required__ commit_sha+ parameter |
 | groot-preview | __Required__ Listing branches or pull requests for a commit in the Commits API is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2019-04-11-pulls-branches-for-commit/) for more details. To access the new endpoints during the preview period, you must set this flag. |
 | repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
@@ -8749,7 +8585,7 @@ https://developer.github.com/v3/repos/releases/#list-release-assets
 
 | name | description |
 |------|-------------|
-| release_id | __Required__  |
+| release_id | __Required__ release_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -8850,7 +8686,7 @@ This will trigger a [ping event](https://developer.github.com/webhooks/#ping-eve
 
 https://developer.github.com/v3/repos/branches/#remove-app-access-restrictions
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 Removes the ability of an app to push to this branch. Only installed GitHub Apps with `write` access to the `contents` permission can be added as authorized actors on a protected branch.
 
@@ -8863,7 +8699,7 @@ Removes the ability of an app to push to this branch. Only installed GitHub Apps
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos remove-collaborator
@@ -8884,35 +8720,35 @@ https://developer.github.com/v3/repos/collaborators/#remove-a-repository-collabo
 
 https://developer.github.com/v3/repos/branches/#remove-status-check-contexts
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 ### parameters
 
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos remove-status-check-protection
 
 https://developer.github.com/v3/repos/branches/#remove-status-check-protection
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 ### parameters
 
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos remove-team-access-restrictions
 
 https://developer.github.com/v3/repos/branches/#remove-team-access-restrictions
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 Removes the ability of a team to push to this branch. You can also remove push access for child teams.
 
@@ -8925,14 +8761,14 @@ Removes the ability of a team to push to this branch. You can also remove push a
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos remove-user-access-restrictions
 
 https://developer.github.com/v3/repos/branches/#remove-user-access-restrictions
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 Removes the ability of a user to push to this branch.
 
@@ -8945,7 +8781,7 @@ Removes the ability of a user to push to this branch.
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos replace-all-topics
@@ -8982,7 +8818,7 @@ Build requests are limited to one concurrent build per repository and one concur
 
 https://developer.github.com/v3/repos/branches/#set-admin-branch-protection
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 Adding admin enforcement requires admin or owner permissions to the repository and branch protection to be enabled.
 
@@ -8991,14 +8827,14 @@ Adding admin enforcement requires admin or owner permissions to the repository a
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos set-app-access-restrictions
 
 https://developer.github.com/v3/repos/branches/#set-app-access-restrictions
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 Replaces the list of apps that have push access to this branch. This removes all apps that previously had push access and grants push access to the new list of apps. Only installed GitHub Apps with `write` access to the `contents` permission can be added as authorized actors on a protected branch.
 
@@ -9011,28 +8847,28 @@ Replaces the list of apps that have push access to this branch. This removes all
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos set-status-check-contexts
 
 https://developer.github.com/v3/repos/branches/#set-status-check-contexts
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 ### parameters
 
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos set-team-access-restrictions
 
 https://developer.github.com/v3/repos/branches/#set-team-access-restrictions
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 Replaces the list of teams that have push access to this branch. This removes all teams that previously had push access and grants push access to the new list of teams. Team restrictions include child teams.
 
@@ -9045,14 +8881,14 @@ Replaces the list of teams that have push access to this branch. This removes al
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos set-user-access-restrictions
 
 https://developer.github.com/v3/repos/branches/#set-user-access-restrictions
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 Replaces the list of people that have push access to this branch. This removes all people that previously had push access and grants push access to the new list of people.
 
@@ -9065,7 +8901,7 @@ Replaces the list of people that have push access to this branch. This removes a
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos test-push-webhook
@@ -9088,7 +8924,7 @@ This will trigger the hook with the latest push to the current repository if the
 
 https://developer.github.com/v3/repos/#transfer-a-repository
 
-A transfer request will need to be accepted by the new owner when transferring a personal repository to another user. The response will contain the original `owner`, and the transfer will continue asynchronously. For more details on the requirements to transfer personal and organization-owned repositories, see [about repository transfers](https://docs.github.com/articles/about-repository-transfers/).
+A transfer request will need to be accepted by the new owner when transferring a personal repository to another user. The response will contain the original `owner`, and the transfer will continue asynchronously. For more details on the requirements to transfer personal and organization-owned repositories, see [about repository transfers](https://help.github.com/articles/about-repository-transfers/).
 
 ### parameters
 
@@ -9126,14 +8962,14 @@ https://developer.github.com/v3/repos/#update-a-repository
 | is_template | Either `true` to make this repo available as a template repository or `false` to prevent it. |
 | name | The name of the repository. |
 | nebula-preview | You can set the visibility of a repository using the new `visibility` parameter in the [Repositories API](https://developer.github.com/v3/repos/), and get a repository's visibility with a new response key. For more information, see the [blog post](https://developer.github.com/changes/2019-12-03-internal-visibility-changes/).<br><br>To access repository visibility during the preview period, you must set this flag. |
-| private | Either `true` to make the repository private or `false` to make it public. Default: `false`.  <br>**Note**: You will get a `422` error if the organization restricts [changing repository visibility](https://docs.github.com/articles/repository-permission-levels-for-an-organization#changing-the-visibility-of-repositories) to organization owners and a non-owner tries to change the value of private. **Note**: You will get a `422` error if the organization restricts [changing repository visibility](https://docs.github.com/articles/repository-permission-levels-for-an-organization#changing-the-visibility-of-repositories) to organization owners and a non-owner tries to change the value of private. |
+| private | Either `true` to make the repository private or `false` to make it public. Default: `false`.  <br>**Note**: You will get a `422` error if the organization restricts [changing repository visibility](https://help.github.com/articles/repository-permission-levels-for-an-organization#changing-the-visibility-of-repositories) to organization owners and a non-owner tries to change the value of private. **Note**: You will get a `422` error if the organization restricts [changing repository visibility](https://help.github.com/articles/repository-permission-levels-for-an-organization#changing-the-visibility-of-repositories) to organization owners and a non-owner tries to change the value of private. |
 | visibility | Can be `public` or `private`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `visibility` can also be `internal`. The `visibility` parameter overrides the `private` parameter when you use both along with the `nebula-preview` preview header. |
 
 ## repos update-branch-protection
 
 https://developer.github.com/v3/repos/branches/#update-branch-protection
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 Protecting a branch requires admin or owner permissions to the repository.
 
@@ -9146,21 +8982,21 @@ Protecting a branch requires admin or owner permissions to the repository.
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | enforce_admins | __Required__ Enforce all configured restrictions for administrators. Set to `true` to enforce required status checks for repository administrators. Set to `null` to disable. |
 | repo | __Required__ repository in OWNER/REPO form |
 | required_status_checks.contexts | __Required__ The list of status checks to require in order to merge into this branch |
 | required_status_checks.strict | __Required__ Require branches to be up to date before merging. |
 | restrictions.teams | __Required__ The list of team `slug`s with push access |
 | restrictions.users | __Required__ The list of user `login`s with push access |
-| allow_deletions | Allows deletion of the protected branch by anyone with write access to the repository. Set to `false` to prevent deletion of the protected branch. Default: `false`. For more information, see "[Enabling force pushes to a protected branch](https://docs.github.com/en/github/administering-a-repository/enabling-force-pushes-to-a-protected-branch)". |
-| allow_force_pushes | Permits force pushes to the protected branch by anyone with write access to the repository. Set to `true` to allow force pushes. Set to `false` or `null` to block force pushes. Default: `false`. For more information, see "[Enabling force pushes to a protected branch](https://docs.github.com/en/github/administering-a-repository/enabling-force-pushes-to-a-protected-branch)". |
+| allow_deletions | Allows deletion of the protected branch by anyone with write access to the repository. Set to `false` to prevent deletion of the protected branch. Default: `false`. For more information, see "[Enabling force pushes to a protected branch](https://help.github.com/en/github/administering-a-repository/enabling-force-pushes-to-a-protected-branch)" in the GitHub Help documentation. |
+| allow_force_pushes | Permits force pushes to the protected branch by anyone with write access to the repository. Set to `true` to allow force pushes. Set to `false` or `null` to block force pushes. Default: `false`. For more information, see "[Enabling force pushes to a protected branch](https://help.github.com/en/github/administering-a-repository/enabling-force-pushes-to-a-protected-branch)" in the GitHub Help documentation." |
 | luke-cage-preview | The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must set this flag. |
-| required_linear_history | Enforces a linear commit Git history, which prevents anyone from pushing merge commits to a branch. Set to `true` to enforce a linear commit history. Set to `false` to disable a linear commit Git history. Your repository must allow squash merging or rebase merging before you can enable a linear commit history. Default: `false`. For more information, see "[Requiring a linear commit history](https://docs.github.com/github/administering-a-repository/requiring-a-linear-commit-history)". |
+| required_linear_history | Enforces a linear commit Git history, which prevents anyone from pushing merge commits to a branch. Set to `true` to enforce a linear commit history. Set to `false` to disable a linear commit Git history. Your repository must allow squash merging or rebase merging before you can enable a linear commit history. Default: `false`. For more information, see "[Requiring a linear commit history](https://help.github.com/github/administering-a-repository/requiring-a-linear-commit-history)" in the GitHub Help documentation. |
 | required_pull_request_reviews.dismiss_stale_reviews | Set to `true` if you want to automatically dismiss approving reviews when someone pushes a new commit. |
 | required_pull_request_reviews.dismissal_restrictions.teams | The list of team `slug`s with dismissal access |
 | required_pull_request_reviews.dismissal_restrictions.users | The list of user `login`s with dismissal access |
-| required_pull_request_reviews.require_code_owner_reviews | Blocks merging pull requests until [code owners](https://docs.github.com/articles/about-code-owners/) review them. |
+| required_pull_request_reviews.require_code_owner_reviews | Blocks merging pull requests until [code owners](https://help.github.com/articles/about-code-owners/) review them. |
 | required_pull_request_reviews.required_approving_review_count | Specify the number of reviewers required to approve pull requests. Use a number between 1 and 6. |
 | restrictions.apps | The list of app `slug`s with push access |
 
@@ -9176,7 +9012,7 @@ https://developer.github.com/v3/repos/comments/#update-a-commit-comment
 | name | description |
 |------|-------------|
 | body | __Required__ The contents of the comment |
-| comment_id | __Required__  |
+| comment_id | __Required__ comment_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos update-information-about-pages-site
@@ -9191,8 +9027,8 @@ https://developer.github.com/v3/repos/pages/#update-information-about-a-github-p
 | name | description |
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
-| cname | Specify a custom domain for the repository. Sending a `null` value will remove the custom domain. For more about custom domains, see "[Using a custom domain with GitHub Pages](https://docs.github.com/articles/using-a-custom-domain-with-github-pages/)." |
-| source | Update the source for the repository. Must include the branch name, and may optionally specify the subdirectory `/docs`. Possible values are `"gh-pages"`, `"master"`, and `"master /docs"`. |
+| cname | Specify a custom domain for the repository. Sending a `null` value will remove the custom domain. For more about custom domains, see "[Using a custom domain with GitHub Pages](https://help.github.com/articles/using-a-custom-domain-with-github-pages/)." |
+| source |  |
 
 ## repos update-invitation
 
@@ -9205,7 +9041,7 @@ https://developer.github.com/v3/repos/invitations/#update-a-repository-invitatio
 
 | name | description |
 |------|-------------|
-| invitation_id | __Required__  |
+| invitation_id | __Required__ invitation_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | permissions | The permissions that the associated user will have on the repository. Valid values are `read`, `write`, `maintain`, `triage`, and `admin`. |
 
@@ -9213,7 +9049,7 @@ https://developer.github.com/v3/repos/invitations/#update-a-repository-invitatio
 
 https://developer.github.com/v3/repos/branches/#update-pull-request-review-protection
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 Updating pull request review enforcement requires admin or owner permissions to the repository and branch protection to be enabled.
 
@@ -9224,13 +9060,13 @@ Updating pull request review enforcement requires admin or owner permissions to 
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | dismiss_stale_reviews | Set to `true` if you want to automatically dismiss approving reviews when someone pushes a new commit. |
 | dismissal_restrictions.teams | The list of team `slug`s with dismissal access |
 | dismissal_restrictions.users | The list of user `login`s with dismissal access |
 | luke-cage-preview | The Protected Branches API now has a setting for requiring a specified number of approving pull request reviews before merging. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-03-16-protected-branches-required-approving-reviews) for full details. To access the API during the preview period, you must set this flag. |
-| require_code_owner_reviews | Blocks merging pull requests until [code owners](https://docs.github.com/articles/about-code-owners/) have reviewed. |
+| require_code_owner_reviews | Blocks merging pull requests until [code owners](https://help.github.com/articles/about-code-owners/) have reviewed. |
 | required_approving_review_count | Specifies the number of reviewers required to approve pull requests. Use a number between 1 and 6. |
 
 ## repos update-release
@@ -9244,7 +9080,7 @@ Users with push access to the repository can edit a release.
 
 | name | description |
 |------|-------------|
-| release_id | __Required__  |
+| release_id | __Required__ release_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | body | Text describing the contents of the tag. |
 | draft | `true` makes the release a draft, and `false` publishes the release. |
@@ -9264,16 +9100,17 @@ Users with push access to the repository can edit a release asset.
 
 | name | description |
 |------|-------------|
-| asset_id | __Required__  |
+| asset_id | __Required__ asset_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | label | An alternate short description of the asset. Used in place of the filename. |
 | name | The file name of the asset. |
+| state |  |
 
-## repos update-status-check-potection
+## repos update-status-check-protection
 
 https://developer.github.com/v3/repos/branches/#update-status-check-potection
 
-Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Protected branches are available in public repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub Pro, GitHub Team, GitHub Enterprise Cloud, and GitHub Enterprise Server. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 Updating required status checks requires admin or owner permissions to the repository and branch protection to be enabled.
 
@@ -9282,7 +9119,7 @@ Updating required status checks requires admin or owner permissions to the repos
 
 | name | description |
 |------|-------------|
-| branch | __Required__  |
+| branch | __Required__ branch+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | contexts | The list of status checks to require in order to merge into this branch |
 | strict | Require branches to be up to date before merging. |
@@ -9302,8 +9139,10 @@ https://developer.github.com/v3/repos/hooks/#update-a-repository-webhook
 | repo | __Required__ repository in OWNER/REPO form |
 | active | Determines if notifications are sent when the webhook is triggered. Set to `true` to send notifications. |
 | add_events | Determines a list of events to be added to the list of events that the Hook triggers for. |
+| config.address |  |
 | config.content_type | The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`. |
 | config.insecure_ssl | Determines whether the SSL certificate of the host for `url` will be verified when delivering payloads. Supported values include `0` (verification is performed) and `1` (verification is not performed). The default is `0`. **We strongly recommend not setting this to `1` as you are subject to man-in-the-middle and other attacks.** |
+| config.room |  |
 | config.secret | If provided, the `secret` will be used as the `key` to generate the HMAC hex digest value in the [`X-Hub-Signature`](https://developer.github.com/webhooks/event-payloads/#delivery-headers) header. |
 | config.url | The URL to which the payloads will be delivered. |
 | events | Determines what [events](https://developer.github.com/webhooks/event-payloads) the hook is triggered for. This replaces the entire array of events. |
@@ -9359,7 +9198,7 @@ https://developer.github.com/v3/scim/#delete-a-scim-user-from-an-organization
 | name | description |
 |------|-------------|
 | org | __Required__  |
-| scim_user_id | __Required__ Identifier generated by the GitHub SCIM endpoint. |
+| scim_user_id | __Required__ scim_user_id parameter |
 
 ## scim get-provisioning-information-for-user
 
@@ -9373,7 +9212,7 @@ https://developer.github.com/v3/scim/#get-scim-provisioning-information-for-a-us
 | name | description |
 |------|-------------|
 | org | __Required__  |
-| scim_user_id | __Required__ Identifier generated by the GitHub SCIM endpoint. |
+| scim_user_id | __Required__ scim_user_id parameter |
 
 ## scim list-provisioned-identities
 
@@ -9417,12 +9256,16 @@ Provision organization membership for a user, and send an activation email to th
 
 | name | description |
 |------|-------------|
-| emails | __Required__ List of user emails. |
-| name.familyName | __Required__ The last name of the user. |
-| name.givenName | __Required__ The first name of the user. |
+| emails | __Required__ user emails |
+| name.familyName | __Required__  |
+| name.givenName | __Required__  |
 | org | __Required__  |
-| schemas | __Required__ The SCIM schema URIs. |
-| userName | __Required__ The username for the user. |
+| userName | __Required__ Configured by the admin. Could be an email, login, or username |
+| active |  |
+| displayName |  |
+| externalId |  |
+| groups |  |
+| schemas |  |
 
 ## scim set-information-for-provisioned-user
 
@@ -9439,13 +9282,17 @@ You must at least provide the required values for the user: `userName`, `name`, 
 
 | name | description |
 |------|-------------|
-| emails | __Required__ List of user emails. |
-| name.familyName | __Required__ The last name of the user. |
-| name.givenName | __Required__ The first name of the user. |
+| emails | __Required__ user emails |
+| name.familyName | __Required__  |
+| name.givenName | __Required__  |
 | org | __Required__  |
-| schemas | __Required__ The SCIM schema URIs. |
-| scim_user_id | __Required__ Identifier generated by the GitHub SCIM endpoint. |
-| userName | __Required__ The username for the user. |
+| scim_user_id | __Required__ scim_user_id parameter |
+| userName | __Required__ Configured by the admin. Could be an email, login, or username |
+| active |  |
+| displayName |  |
+| externalId |  |
+| groups |  |
+| schemas |  |
 
 ## scim update-attribute-for-user
 
@@ -9473,10 +9320,10 @@ Allows you to change a provisioned user's individual attributes. To change a use
 
 | name | description |
 |------|-------------|
-| Operations | __Required__ Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2). |
+| Operations | __Required__ Set of operations to be performed |
 | org | __Required__  |
-| schemas | __Required__ The SCIM schema URIs. |
-| scim_user_id | __Required__ Identifier generated by the GitHub SCIM endpoint. |
+| scim_user_id | __Required__ scim_user_id parameter |
+| schemas |  |
 
 # search
 
@@ -9509,7 +9356,7 @@ language:go`](https://github.com/search?utf8=%E2%9C%93&q=amazing+language%3Ago&t
 
 | name | description |
 |------|-------------|
-| q | __Required__ The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://developer.github.com/v3/search/#constructing-a-search-query). See "[Searching code](https://docs.github.com/articles/searching-code/)" for a detailed list of qualifiers. |
+| q | __Required__ The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://developer.github.com/v3/search/#constructing-a-search-query). See "[Searching code](https://help.github.com/articles/searching-code/)" for a detailed list of qualifiers. |
 | order | Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -9534,7 +9381,7 @@ For example, if you want to find commits related to CSS in the [octocat/Spoon-Kn
 | name | description |
 |------|-------------|
 | cloak-preview | __Required__ The Commit Search API is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2017-01-05-commit-search-api/) for full details.<br><br>To access the API you must set this flag. |
-| q | __Required__ The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://developer.github.com/v3/search/#constructing-a-search-query). See "[Searching commits](https://docs.github.com/articles/searching-commits/)" for a detailed list of qualifiers. |
+| q | __Required__ The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://developer.github.com/v3/search/#constructing-a-search-query). See "[Searching commits](https://help.github.com/articles/searching-commits/)" for a detailed list of qualifiers. |
 | order | Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -9560,7 +9407,7 @@ This query searches for the keyword `windows`, within any open issue that is lab
 
 | name | description |
 |------|-------------|
-| q | __Required__ The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://developer.github.com/v3/search/#constructing-a-search-query). See "[Searching issues and pull requests](https://docs.github.com/articles/searching-issues-and-pull-requests/)" for a detailed list of qualifiers. |
+| q | __Required__ The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://developer.github.com/v3/search/#constructing-a-search-query). See "[Searching issues and pull requests](https://help.github.com/articles/searching-issues-and-pull-requests/)" for a detailed list of qualifiers. |
 | order | Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -9613,7 +9460,7 @@ When you include the `mercy` preview header, you can also search for multiple to
 
 | name | description |
 |------|-------------|
-| q | __Required__ The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://developer.github.com/v3/search/#constructing-a-search-query). See "[Searching for repositories](https://docs.github.com/articles/searching-for-repositories/)" for a detailed list of qualifiers. |
+| q | __Required__ The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://developer.github.com/v3/search/#constructing-a-search-query). See "[Searching for repositories](https://help.github.com/articles/searching-for-repositories/)" for a detailed list of qualifiers. |
 | mercy-preview | The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must set this flag. |
 | order | Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`. |
 | page | Page number of the results to fetch. |
@@ -9624,7 +9471,7 @@ When you include the `mercy` preview header, you can also search for multiple to
 
 https://developer.github.com/v3/search/#search-topics
 
-Find topics via various criteria. Results are sorted by best match. This method returns up to 100 results [per page](https://developer.github.com/v3/#pagination). See "[Searching topics](https://docs.github.com/articles/searching-topics/)" for a detailed list of qualifiers.
+Find topics via various criteria. Results are sorted by best match. This method returns up to 100 results [per page](https://developer.github.com/v3/#pagination). See "[Searching topics](https://help.github.com/articles/searching-topics/)" for a detailed list of qualifiers.
 
 When searching for topics, you can get text match metadata for the topic's **short\_description**, **description**, **name**, or **display\_name** field when you pass the `text-match` media type. For more details about how to receive highlighted search results, see [Text match metadata](https://developer.github.com/v3/search/#text-match-metadata).
 
@@ -9661,7 +9508,7 @@ This query searches for users with the name `tom`. The results are restricted to
 
 | name | description |
 |------|-------------|
-| q | __Required__ The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://developer.github.com/v3/search/#constructing-a-search-query). See "[Searching users](https://docs.github.com/articles/searching-users/)" for a detailed list of qualifiers. |
+| q | __Required__ The query contains one or more search keywords and qualifiers. Qualifiers allow you to limit your search to specific areas of GitHub. The REST API supports the same qualifiers as GitHub.com. To learn more about the format of the query, see [Constructing a search query](https://developer.github.com/v3/search/#constructing-a-search-query). See "[Searching users](https://help.github.com/articles/searching-users/)" for a detailed list of qualifiers. |
 | order | Determines whether the first search result returned is the highest number of matches (`desc`) or lowest number of matches (`asc`). This parameter is ignored unless you provide `sort`. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -9678,11 +9525,11 @@ The "Add team member" endpoint (described below) is deprecated.
 
 We recommend using the [Add or update team membership for a user](https://developer.github.com/v3/teams/members/#add-or-update-team-membership-for-a-user) endpoint instead. It allows you to invite new organization members to your teams.
 
-Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 To add someone to a team, the authenticated user must be an organization owner or a team maintainer in the team they're changing. The person being added to the team must be a member of the team's organization.
 
-**Note:** When you have team synchronization set up for a team with your organization's identity provider (IdP), you will see an error if you attempt to use the API for making changes to the team's membership. If you have access to manage group membership in your IdP, you can manage GitHub team membership through your identity provider, which automatically adds and removes team members in an organization. For more information, see "[Synchronizing teams between your identity provider and GitHub](https://docs.github.com/articles/synchronizing-teams-between-your-identity-provider-and-github/)."
+**Note:** When you have team synchronization set up for a team with your organization's identity provider (IdP), you will see an error if you attempt to use the API for making changes to the team's membership. If you have access to manage group membership in your IdP, you can manage GitHub team membership through your identity provider, which automatically adds and removes team members in an organization. For more information, see "[Synchronizing teams between your identity provider and GitHub](https://help.github.com/articles/synchronizing-teams-between-your-identity-provider-and-github/)."
 
 Note that you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://developer.github.com/v3/#http-verbs)."
 
@@ -9698,11 +9545,11 @@ Note that you'll need to set `Content-Length` to zero when calling out to this e
 
 https://developer.github.com/v3/teams/members/#add-or-update-team-membership-for-a-user
 
-Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 Adds an organization member to a team. An authenticated organization owner or team maintainer can add organization members to a team.
 
-**Note:** When you have team synchronization set up for a team with your organization's identity provider (IdP), you will see an error if you attempt to use the API for making changes to the team's membership. If you have access to manage group membership in your IdP, you can manage GitHub team membership through your identity provider, which automatically adds and removes team members in an organization. For more information, see "[Synchronizing teams between your identity provider and GitHub](https://docs.github.com/articles/synchronizing-teams-between-your-identity-provider-and-github/)."
+**Note:** When you have team synchronization set up for a team with your organization's identity provider (IdP), you will see an error if you attempt to use the API for making changes to the team's membership. If you have access to manage group membership in your IdP, you can manage GitHub team membership through your identity provider, which automatically adds and removes team members in an organization. For more information, see "[Synchronizing teams between your identity provider and GitHub](https://help.github.com/articles/synchronizing-teams-between-your-identity-provider-and-github/)."
 
 An organization owner can add someone who is not part of the team's organization to a team. When an organization owner adds someone to a team who is not an organization member, this endpoint will send an invitation to the person via email. This newly-created membership will be in the "pending" state until the person accepts the invitation, at which point the membership will transition to the "active" state and the user will be added as a member of the team.
 
@@ -9716,7 +9563,7 @@ If the user is already a member of the team, this endpoint will update the role 
 | name | description |
 |------|-------------|
 | org | __Required__  |
-| team_slug | __Required__  |
+| team_slug | __Required__ team_slug parameter |
 | username | __Required__  |
 | role | The role that this user should have in the team. Can be one of:  <br>\* `member` - a normal member of the team.  <br>\* `maintainer` - a team maintainer. Able to add/remove other team members, promote other team members to team maintainer, and edit the team's name and description. |
 
@@ -9726,11 +9573,11 @@ https://developer.github.com/v3/teams/members/#add-or-update-team-membership-for
 
 **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Add or update team membership for a user](https://developer.github.com/v3/teams/members/#add-or-update-team-membership-for-a-user) endpoint.
 
-Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 If the user is already a member of the team's organization, this endpoint will add the user to the team. To add a membership between an organization member and a team, the authenticated user must be an organization owner or a team maintainer.
 
-**Note:** When you have team synchronization set up for a team with your organization's identity provider (IdP), you will see an error if you attempt to use the API for making changes to the team's membership. If you have access to manage group membership in your IdP, you can manage GitHub team membership through your identity provider, which automatically adds and removes team members in an organization. For more information, see "[Synchronizing teams between your identity provider and GitHub](https://docs.github.com/articles/synchronizing-teams-between-your-identity-provider-and-github/)."
+**Note:** When you have team synchronization set up for a team with your organization's identity provider (IdP), you will see an error if you attempt to use the API for making changes to the team's membership. If you have access to manage group membership in your IdP, you can manage GitHub team membership through your identity provider, which automatically adds and removes team members in an organization. For more information, see "[Synchronizing teams between your identity provider and GitHub](https://help.github.com/articles/synchronizing-teams-between-your-identity-provider-and-github/)."
 
 If the user is unaffiliated with the team's organization, this endpoint will send an invitation to the user via email. This newly-created membership will be in the "pending" state until the user accepts the invitation, at which point the membership will transition to the "active" state and the user will be added as a member of the team. To add a membership between an unaffiliated user and a team, the authenticated user must be an organization owner.
 
@@ -9761,7 +9608,7 @@ Adds an organization project to a team. To add a project to a team or update the
 | inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | org | __Required__  |
 | project_id | __Required__  |
-| team_slug | __Required__  |
+| team_slug | __Required__ team_slug parameter |
 | permission | The permission to grant to the team for this project. Can be one of:  <br>\* `read` - team members can read, but not write to or administer this project.  <br>\* `write` - team members can read and write, but not administer this project.  <br>\* `admin` - team members can read, write and administer this project.  <br>Default: the team's `permission` attribute will be used to determine what permission to grant the team on this project. Note that, if you choose not to pass any parameters, you'll need to set `Content-Length` to zero when calling out to this endpoint. For more information, see "[HTTP verbs](https://developer.github.com/v3/#http-verbs)." |
 
 ## teams add-or-update-project-permissions-legacy
@@ -9790,7 +9637,7 @@ To add a repository to a team or update the team's permission on a repository, t
 
 **Note:** You can also specify a team by `org_id` and `team_id` using the route `PUT /organizations/{org_id}/team/{team_id}/repos/{owner}/{repo}`.
 
-For more information about the permission levels, see "[Repository permission levels for an organization](https://docs.github.com/en/github/setting-up-and-managing-organizations-and-teams/repository-permission-levels-for-an-organization#permission-levels-for-repositories-owned-by-an-organization)".
+For more information about the permission levels, see "[Repository permission levels for an organization](https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/repository-permission-levels-for-an-organization#permission-levels-for-repositories-owned-by-an-organization)".
 
 ### parameters
 
@@ -9799,7 +9646,7 @@ For more information about the permission levels, see "[Repository permission le
 |------|-------------|
 | org | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| team_slug | __Required__  |
+| team_slug | __Required__ team_slug parameter |
 | permission | The permission to grant the team on this repository. Can be one of:  <br>\* `pull` - team members can pull, but not push to or administer this repository.  <br>\* `push` - team members can pull and push, but not administer this repository.  <br>\* `admin` - team members can pull, push and administer this repository.  <br>\* `maintain` - team members can manage the repository without access to sensitive or destructive actions. Recommended for project managers. Only applies to repositories owned by organizations.  <br>\* `triage` - team members can proactively manage issues and pull requests without write access. Recommended for contributors who triage a repository. Only applies to repositories owned by organizations.  <br>  <br>If no permission is specified, the team's `permission` attribute will be used to determine what permission to grant the team on this repository. |
 
 ## teams add-or-update-repo-permissions-legacy
@@ -9837,7 +9684,7 @@ Checks whether a team has `read`, `write`, or `admin` permissions for an organiz
 | inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | org | __Required__  |
 | project_id | __Required__  |
-| team_slug | __Required__  |
+| team_slug | __Required__ team_slug parameter |
 
 ## teams check-permissions-for-project-legacy
 
@@ -9875,7 +9722,7 @@ If a team doesn't have permission for the repository, you will receive a `404 No
 |------|-------------|
 | org | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| team_slug | __Required__  |
+| team_slug | __Required__ team_slug parameter |
 
 ## teams check-permissions-for-repo-legacy
 
@@ -9899,9 +9746,9 @@ You can also get information about the specified repository, including what perm
 
 https://developer.github.com/v3/teams/#create-a-team
 
-To create a team, the authenticated user must be a member or owner of `{org}`. By default, organization members can create teams. Organization owners can limit team creation to organization owners. For more information, see "[Setting team creation permissions](https://docs.github.com/en/articles/setting-team-creation-permissions-in-your-organization)."
+To create a team, the authenticated user must be a member or owner of `{org}`. By default, organization members can create teams. Organization owners can limit team creation to organization owners. For more information, see "[Setting team creation permissions](https://help.github.com/en/articles/setting-team-creation-permissions-in-your-organization)."
 
-When you create a new team, you automatically become a team maintainer without explicitly adding yourself to the optional array of `maintainers`. For more information, see "[About teams](https://docs.github.com/en/github/setting-up-and-managing-organizations-and-teams/about-teams)".
+When you create a new team, you automatically become a team maintainer without explicitly adding yourself to the optional array of `maintainers`. For more information, see "[About teams](https://help.github.com/en/github/setting-up-and-managing-organizations-and-teams/about-teams)".
 
 ### parameters
 
@@ -9923,7 +9770,7 @@ https://developer.github.com/v3/teams/discussion_comments/#create-a-discussion-c
 
 Creates a new comment on a team discussion. OAuth access tokens require the `write:discussion` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
-This endpoint triggers [notifications](https://docs.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
+This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
 
 **Note:** You can also specify a team by `org_id` and `team_id` using the route `POST /organizations/{org_id}/team/{team_id}/discussions/{discussion_number}/comments`.
 
@@ -9935,8 +9782,8 @@ This endpoint triggers [notifications](https://docs.github.com/articles/about-no
 | body | __Required__ The discussion comment's body text. |
 | discussion_number | __Required__  |
 | org | __Required__  |
-| team_slug | __Required__  |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| team_slug | __Required__ team_slug parameter |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## teams create-discussion-comment-legacy
 
@@ -9946,7 +9793,7 @@ https://developer.github.com/v3/teams/discussion_comments/#create-a-discussion-c
 
 Creates a new comment on a team discussion. OAuth access tokens require the `write:discussion` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
-This endpoint triggers [notifications](https://docs.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
+This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
 
 ### parameters
 
@@ -9956,7 +9803,7 @@ This endpoint triggers [notifications](https://docs.github.com/articles/about-no
 | body | __Required__ The discussion comment's body text. |
 | discussion_number | __Required__  |
 | team_id | __Required__  |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## teams create-discussion-in-org
 
@@ -9964,7 +9811,7 @@ https://developer.github.com/v3/teams/discussions/#create-a-discussion
 
 Creates a new discussion post on a team's page. OAuth access tokens require the `write:discussion` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
-This endpoint triggers [notifications](https://docs.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
+This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
 
 **Note:** You can also specify a team by `org_id` and `team_id` using the route `POST /organizations/{org_id}/team/{team_id}/discussions`.
 
@@ -9975,10 +9822,10 @@ This endpoint triggers [notifications](https://docs.github.com/articles/about-no
 |------|-------------|
 | body | __Required__ The discussion post's body text. |
 | org | __Required__  |
-| team_slug | __Required__  |
+| team_slug | __Required__ team_slug parameter |
 | title | __Required__ The discussion post's title. |
 | private | Private posts are only visible to team members, organization owners, and team maintainers. Public posts are visible to all members of the organization. Set to `true` to create a private post. |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## teams create-discussion-legacy
 
@@ -9988,7 +9835,7 @@ https://developer.github.com/v3/teams/discussions/#create-a-discussion-legacy
 
 Creates a new discussion post on a team's page. OAuth access tokens require the `write:discussion` [scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/).
 
-This endpoint triggers [notifications](https://docs.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
+This endpoint triggers [notifications](https://help.github.com/articles/about-notifications/). Creating content too quickly using this endpoint may result in abuse rate limiting. See "[Abuse rate limits](https://developer.github.com/v3/#abuse-rate-limits)" and "[Dealing with abuse rate limits](https://developer.github.com/v3/guides/best-practices-for-integrators/#dealing-with-abuse-rate-limits)" for details.
 
 ### parameters
 
@@ -9999,13 +9846,13 @@ This endpoint triggers [notifications](https://docs.github.com/articles/about-no
 | team_id | __Required__  |
 | title | __Required__ The discussion post's title. |
 | private | Private posts are only visible to team members, organization owners, and team maintainers. Public posts are visible to all members of the organization. Set to `true` to create a private post. |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
-## teams create-or-update-id-p-group-connections-in-org
+## teams create-or-update-idp-group-connections-in-org
 
 https://developer.github.com/v3/teams/team_sync/#create-or-update-idp-group-connections
 
-Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 Creates, updates, or removes a connection between a team and an IdP group. When adding groups to a team, you must include all new and existing groups to avoid replacing existing groups with the new ones. Specifying an empty `groups` array will remove all connections for a team.
 
@@ -10018,15 +9865,15 @@ Creates, updates, or removes a connection between a team and an IdP group. When 
 |------|-------------|
 | groups | __Required__ The IdP groups you want to connect to a GitHub team. When updating, the new `groups` object will replace the original one. You must include any existing groups that you don't want to remove. |
 | org | __Required__  |
-| team_slug | __Required__  |
+| team_slug | __Required__ team_slug parameter |
 
-## teams create-or-update-id-p-group-connections-legacy
+## teams create-or-update-idp-group-connections-legacy
 
 https://developer.github.com/v3/teams/team_sync/#create-or-update-idp-group-connections-legacy
 
 **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`Create or update IdP group connections`](https://developer.github.com/v3/teams/team_sync/#create-or-update-idp-group-connections) endpoint.
 
-Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 Creates, updates, or removes a connection between a team and an IdP group. When adding groups to a team, you must include all new and existing groups to avoid replacing existing groups with the new ones. Specifying an empty `groups` array will remove all connections for a team.
 
@@ -10037,6 +9884,7 @@ Creates, updates, or removes a connection between a team and an IdP group. When 
 |------|-------------|
 | groups | __Required__ The IdP groups you want to connect to a GitHub team. When updating, the new `groups` object will replace the original one. You must include any existing groups that you don't want to remove. |
 | team_id | __Required__  |
+| synced_at |  |
 
 ## teams delete-discussion-comment-in-org
 
@@ -10054,7 +9902,7 @@ Deletes a comment on a team discussion. OAuth access tokens require the `write:d
 | comment_number | __Required__  |
 | discussion_number | __Required__  |
 | org | __Required__  |
-| team_slug | __Required__  |
+| team_slug | __Required__ team_slug parameter |
 
 ## teams delete-discussion-comment-legacy
 
@@ -10088,7 +9936,7 @@ Delete a discussion from a team's page. OAuth access tokens require the `write:d
 |------|-------------|
 | discussion_number | __Required__  |
 | org | __Required__  |
-| team_slug | __Required__  |
+| team_slug | __Required__ team_slug parameter |
 
 ## teams delete-discussion-legacy
 
@@ -10122,7 +9970,7 @@ If you are an organization owner, deleting a parent team will delete all of its 
 | name | description |
 |------|-------------|
 | org | __Required__  |
-| team_slug | __Required__  |
+| team_slug | __Required__ team_slug parameter |
 
 ## teams delete-legacy
 
@@ -10155,7 +10003,7 @@ Gets a team using the team's `slug`. GitHub generates the `slug` from the team `
 | name | description |
 |------|-------------|
 | org | __Required__  |
-| team_slug | __Required__  |
+| team_slug | __Required__ team_slug parameter |
 
 ## teams get-discussion-comment-in-org
 
@@ -10173,8 +10021,8 @@ Get a specific comment on a team discussion. OAuth access tokens require the `re
 | comment_number | __Required__  |
 | discussion_number | __Required__  |
 | org | __Required__  |
-| team_slug | __Required__  |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| team_slug | __Required__ team_slug parameter |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## teams get-discussion-comment-legacy
 
@@ -10192,7 +10040,7 @@ Get a specific comment on a team discussion. OAuth access tokens require the `re
 | comment_number | __Required__  |
 | discussion_number | __Required__  |
 | team_id | __Required__  |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## teams get-discussion-in-org
 
@@ -10209,8 +10057,8 @@ Get a specific discussion on a team's page. OAuth access tokens require the `rea
 |------|-------------|
 | discussion_number | __Required__  |
 | org | __Required__  |
-| team_slug | __Required__  |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| team_slug | __Required__ team_slug parameter |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## teams get-discussion-legacy
 
@@ -10227,7 +10075,7 @@ Get a specific discussion on a team's page. OAuth access tokens require the `rea
 |------|-------------|
 | discussion_number | __Required__  |
 | team_id | __Required__  |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## teams get-legacy
 
@@ -10278,7 +10126,7 @@ To get a user's membership with a team, the team must be visible to the authenti
 | name | description |
 |------|-------------|
 | org | __Required__  |
-| team_slug | __Required__  |
+| team_slug | __Required__ team_slug parameter |
 | username | __Required__  |
 
 ## teams get-membership-for-user-legacy
@@ -10330,7 +10178,7 @@ Lists the child teams of the team specified by `{team_slug}`.
 | name | description |
 |------|-------------|
 | org | __Required__  |
-| team_slug | __Required__  |
+| team_slug | __Required__ team_slug parameter |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -10364,11 +10212,11 @@ List all comments on a team discussion. OAuth access tokens require the `read:di
 |------|-------------|
 | discussion_number | __Required__  |
 | org | __Required__  |
-| team_slug | __Required__  |
-| direction | Sorts the discussion comments by the date they were created. To return the oldest comments first, set to `asc`. Can be one of `asc` or `desc`. |
+| team_slug | __Required__ team_slug parameter |
+| direction | One of `asc` (ascending) or `desc` (descending). |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## teams list-discussion-comments-legacy
 
@@ -10385,10 +10233,10 @@ List all comments on a team discussion. OAuth access tokens require the `read:di
 |------|-------------|
 | discussion_number | __Required__  |
 | team_id | __Required__  |
-| direction | Sorts the discussion comments by the date they were created. To return the oldest comments first, set to `asc`. Can be one of `asc` or `desc`. |
+| direction | One of `asc` (ascending) or `desc` (descending). |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## teams list-discussions-in-org
 
@@ -10404,11 +10252,11 @@ List all discussions on a team's page. OAuth access tokens require the `read:dis
 | name | description |
 |------|-------------|
 | org | __Required__  |
-| team_slug | __Required__  |
-| direction | Sorts the discussion comments by the date they were created. To return the oldest comments first, set to `asc`. Can be one of `asc` or `desc`. |
+| team_slug | __Required__ team_slug parameter |
+| direction | One of `asc` (ascending) or `desc` (descending). |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## teams list-discussions-legacy
 
@@ -10424,10 +10272,10 @@ List all discussions on a team's page. OAuth access tokens require the `read:dis
 | name | description |
 |------|-------------|
 | team_id | __Required__  |
-| direction | Sorts the discussion comments by the date they were created. To return the oldest comments first, set to `asc`. Can be one of `asc` or `desc`. |
+| direction | One of `asc` (ascending) or `desc` (descending). |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## teams list-for-authenticated-user
 
@@ -10443,13 +10291,13 @@ List all of the teams across all of the organizations to which the authenticated
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
-## teams list-id-p-groups-for-legacy
+## teams list-idp-groups-for-legacy
 
 https://developer.github.com/v3/teams/team_sync/#list-idp-groups-for-a-team-legacy
 
 **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [`List IdP groups for a team`](https://developer.github.com/v3/teams/team_sync/#list-idp-groups-for-a-team) endpoint.
 
-Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 List IdP groups connected to a team on GitHub.
 
@@ -10460,11 +10308,11 @@ List IdP groups connected to a team on GitHub.
 |------|-------------|
 | team_id | __Required__  |
 
-## teams list-id-p-groups-for-org
+## teams list-idp-groups-for-org
 
 https://developer.github.com/v3/teams/team_sync/#list-idp-groups-for-an-organization
 
-Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 List IdP groups available in an organization. You can limit your page results using the `per_page` parameter. GitHub generates a url-encoded `page` token using a cursor value for where the next page begins. For more information on cursor pagination, see "[Offset and Cursor Pagination explained](https://dev.to/jackmarchant/offset-and-cursor-pagination-explained-b89)."
 
@@ -10479,11 +10327,11 @@ The `per_page` parameter provides pagination for a list of IdP groups the authen
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
-## teams list-id-p-groups-in-org
+## teams list-idp-groups-in-org
 
 https://developer.github.com/v3/teams/team_sync/#list-idp-groups-for-a-team
 
-Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 List IdP groups connected to a team on GitHub.
 
@@ -10495,7 +10343,7 @@ List IdP groups connected to a team on GitHub.
 | name | description |
 |------|-------------|
 | org | __Required__  |
-| team_slug | __Required__  |
+| team_slug | __Required__ team_slug parameter |
 
 ## teams list-members-in-org
 
@@ -10511,7 +10359,7 @@ To list members in a team, the team must be visible to the authenticated user.
 | name | description |
 |------|-------------|
 | org | __Required__  |
-| team_slug | __Required__  |
+| team_slug | __Required__ team_slug parameter |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | role | Filters members returned by their role in the team. Can be one of:  <br>\* `member` - normal members of the team.  <br>\* `maintainer` - team maintainers.  <br>\* `all` - all members of the team. |
@@ -10548,7 +10396,7 @@ The return hash contains a `role` field which refers to the Organization Invitat
 | name | description |
 |------|-------------|
 | org | __Required__  |
-| team_slug | __Required__  |
+| team_slug | __Required__ team_slug parameter |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -10584,7 +10432,7 @@ Lists the organization projects for a team.
 |------|-------------|
 | inertia-preview | __Required__ The Projects API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-10-27-changes-to-projects-api) for full details. To access the API during the preview period, you must set this flag. |
 | org | __Required__  |
-| team_slug | __Required__  |
+| team_slug | __Required__ team_slug parameter |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -10620,7 +10468,7 @@ Lists a team's repositories visible to the authenticated user.
 | name | description |
 |------|-------------|
 | org | __Required__  |
-| team_slug | __Required__  |
+| team_slug | __Required__ team_slug parameter |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -10647,11 +10495,11 @@ The "Remove team member" endpoint (described below) is deprecated.
 
 We recommend using the [Remove team membership for a user](https://developer.github.com/v3/teams/members/#remove-team-membership-for-a-user) endpoint instead. It allows you to remove both active and pending memberships.
 
-Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 To remove a team member, the authenticated user must have 'admin' permissions to the team or be an owner of the org that the team is associated with. Removing a team member does not delete the user, it just removes them from the team.
 
-**Note:** When you have team synchronization set up for a team with your organization's identity provider (IdP), you will see an error if you attempt to use the API for making changes to the team's membership. If you have access to manage group membership in your IdP, you can manage GitHub team membership through your identity provider, which automatically adds and removes team members in an organization. For more information, see "[Synchronizing teams between your identity provider and GitHub](https://docs.github.com/articles/synchronizing-teams-between-your-identity-provider-and-github/)."
+**Note:** When you have team synchronization set up for a team with your organization's identity provider (IdP), you will see an error if you attempt to use the API for making changes to the team's membership. If you have access to manage group membership in your IdP, you can manage GitHub team membership through your identity provider, which automatically adds and removes team members in an organization. For more information, see "[Synchronizing teams between your identity provider and GitHub](https://help.github.com/articles/synchronizing-teams-between-your-identity-provider-and-github/)."
 
 ### parameters
 
@@ -10665,11 +10513,11 @@ To remove a team member, the authenticated user must have 'admin' permissions to
 
 https://developer.github.com/v3/teams/members/#remove-team-membership-for-a-user
 
-Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 To remove a membership between a user and a team, the authenticated user must have 'admin' permissions to the team or be an owner of the organization that the team is associated with. Removing team membership does not delete the user, it just removes their membership from the team.
 
-**Note:** When you have team synchronization set up for a team with your organization's identity provider (IdP), you will see an error if you attempt to use the API for making changes to the team's membership. If you have access to manage group membership in your IdP, you can manage GitHub team membership through your identity provider, which automatically adds and removes team members in an organization. For more information, see "[Synchronizing teams between your identity provider and GitHub](https://docs.github.com/articles/synchronizing-teams-between-your-identity-provider-and-github/)."
+**Note:** When you have team synchronization set up for a team with your organization's identity provider (IdP), you will see an error if you attempt to use the API for making changes to the team's membership. If you have access to manage group membership in your IdP, you can manage GitHub team membership through your identity provider, which automatically adds and removes team members in an organization. For more information, see "[Synchronizing teams between your identity provider and GitHub](https://help.github.com/articles/synchronizing-teams-between-your-identity-provider-and-github/)."
 
 **Note:** You can also specify a team by `org_id` and `team_id` using the route `DELETE /organizations/{org_id}/team/{team_id}/memberships/{username}`.
 
@@ -10679,7 +10527,7 @@ To remove a membership between a user and a team, the authenticated user must ha
 | name | description |
 |------|-------------|
 | org | __Required__  |
-| team_slug | __Required__  |
+| team_slug | __Required__ team_slug parameter |
 | username | __Required__  |
 
 ## teams remove-membership-for-user-legacy
@@ -10688,11 +10536,11 @@ https://developer.github.com/v3/teams/members/#remove-team-membership-for-a-user
 
 **Deprecation Notice:** This endpoint route is deprecated and will be removed from the Teams API. We recommend migrating your existing code to use the new [Remove team membership for a user](https://developer.github.com/v3/teams/members/#remove-team-membership-for-a-user) endpoint.
 
-Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
+Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see [GitHub's products](https://help.github.com/github/getting-started-with-github/githubs-products) in the GitHub Help documentation.
 
 To remove a membership between a user and a team, the authenticated user must have 'admin' permissions to the team or be an owner of the organization that the team is associated with. Removing team membership does not delete the user, it just removes their membership from the team.
 
-**Note:** When you have team synchronization set up for a team with your organization's identity provider (IdP), you will see an error if you attempt to use the API for making changes to the team's membership. If you have access to manage group membership in your IdP, you can manage GitHub team membership through your identity provider, which automatically adds and removes team members in an organization. For more information, see "[Synchronizing teams between your identity provider and GitHub](https://docs.github.com/articles/synchronizing-teams-between-your-identity-provider-and-github/)."
+**Note:** When you have team synchronization set up for a team with your organization's identity provider (IdP), you will see an error if you attempt to use the API for making changes to the team's membership. If you have access to manage group membership in your IdP, you can manage GitHub team membership through your identity provider, which automatically adds and removes team members in an organization. For more information, see "[Synchronizing teams between your identity provider and GitHub](https://help.github.com/articles/synchronizing-teams-between-your-identity-provider-and-github/)."
 
 ### parameters
 
@@ -10717,7 +10565,7 @@ Removes an organization project from a team. An organization owner or a team mai
 |------|-------------|
 | org | __Required__  |
 | project_id | __Required__  |
-| team_slug | __Required__  |
+| team_slug | __Required__ team_slug parameter |
 
 ## teams remove-project-legacy
 
@@ -10750,7 +10598,7 @@ If the authenticated user is an organization owner or a team maintainer, they ca
 |------|-------------|
 | org | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| team_slug | __Required__  |
+| team_slug | __Required__ team_slug parameter |
 
 ## teams remove-repo-legacy
 
@@ -10785,8 +10633,8 @@ Edits the body text of a discussion comment. OAuth access tokens require the `wr
 | comment_number | __Required__  |
 | discussion_number | __Required__  |
 | org | __Required__  |
-| team_slug | __Required__  |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| team_slug | __Required__ team_slug parameter |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## teams update-discussion-comment-legacy
 
@@ -10805,7 +10653,7 @@ Edits the body text of a discussion comment. OAuth access tokens require the `wr
 | comment_number | __Required__  |
 | discussion_number | __Required__  |
 | team_id | __Required__  |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## teams update-discussion-in-org
 
@@ -10822,9 +10670,9 @@ Edits the title and body text of a discussion post. Only the parameters you prov
 |------|-------------|
 | discussion_number | __Required__  |
 | org | __Required__  |
-| team_slug | __Required__  |
+| team_slug | __Required__ team_slug parameter |
 | body | The discussion post's body text. |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | title | The discussion post's title. |
 
 ## teams update-discussion-legacy
@@ -10843,7 +10691,7 @@ Edits the title and body text of a discussion post. Only the parameters you prov
 | discussion_number | __Required__  |
 | team_id | __Required__  |
 | body | The discussion post's body text. |
-| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During<br>the preview period, the APIs may change without advance notice. Please see the [blog<br>post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br><br>To access the API you must set this flag. |
+| squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 | title | The discussion post's title. |
 
 ## teams update-in-org
@@ -10861,7 +10709,7 @@ To edit a team, the authenticated user must either be an organization owner or a
 |------|-------------|
 | name | __Required__ The name of the team. |
 | org | __Required__  |
-| team_slug | __Required__  |
+| team_slug | __Required__ team_slug parameter |
 | description | The description of the team. |
 | parent_team_id | The ID of a team to set as the parent team. |
 | permission | **Deprecated**. The permission that new repositories will be added to the team with when none is specified. Can be one of:  <br>\* `pull` - team members can pull, but not push to or administer newly-added repositories.  <br>\* `push` - team members can pull and push, but not administer newly-added repositories.  <br>\* `admin` - team members can pull, push and administer newly-added repositories. |
@@ -10897,13 +10745,6 @@ To edit a team, the authenticated user must either be an organization owner or a
 https://developer.github.com/v3/users/emails/#add-an-email-address-for-the-authenticated-user
 
 This endpoint is accessible with the `user` scope.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| emails | __Required__ Adds one or more email addresses to your GitHub account. Must contain at least one email address. **Note:** Alternatively, you can pass a single email address or an `array` of emails addresses directly, but we recommend that you pass an object using the `emails` key. |
 
 ## users block
 
@@ -10944,7 +10785,7 @@ https://developer.github.com/v3/users/followers/#check-if-a-user-follows-another
 
 | name | description |
 |------|-------------|
-| target_user | __Required__  |
+| target_user | __Required__ target_user parameter |
 | username | __Required__  |
 
 ## users check-person-is-followed-by-authenticated
@@ -10971,7 +10812,7 @@ Adds a GPG key to the authenticated user's GitHub account. Requires that you are
 
 | name | description |
 |------|-------------|
-| armored_public_key | Your GPG key, generated in ASCII-armored format. See "[Generating a new GPG key](https://docs.github.com/articles/generating-a-new-gpg-key/)" for help creating a GPG key. |
+| armored_public_key | __Required__ A GPG key in ASCII-armored format. |
 
 ## users create-public-ssh-key-for-authenticated
 
@@ -10984,21 +10825,14 @@ Adds a public SSH key to the authenticated user's GitHub account. Requires that 
 
 | name | description |
 |------|-------------|
-| key | The public SSH key to add to your GitHub account. See "[Generating a new SSH key](https://docs.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)" for guidance on how to create a public SSH key. |
-| title | A descriptive name for the new key. Use a name that will help you recognize this key in your GitHub account. For example, if you're using a personal Mac, you might call this key "Personal MacBook Air". |
+| key | __Required__ The public SSH key to add to your GitHub account. |
+| title | A descriptive name for the new key. |
 
 ## users delete-email-for-authenticated
 
 https://developer.github.com/v3/users/emails/#delete-an-email-address-for-the-authenticated-user
 
 This endpoint is accessible with the `user` scope.
-
-### parameters
-
-
-| name | description |
-|------|-------------|
-| emails | __Required__ Deletes one or more email addresses from your GitHub account. Must contain at least one email address. **Note:** Alternatively, you can pass a single email address or an `array` of emails addresses directly, but we recommend that you pass an object using the `emails` key. |
 
 ## users delete-gpg-key-for-authenticated
 
@@ -11011,7 +10845,7 @@ Removes a GPG key from the authenticated user's GitHub account. Requires that yo
 
 | name | description |
 |------|-------------|
-| gpg_key_id | __Required__  |
+| gpg_key_id | __Required__ gpg_key_id parameter |
 
 ## users delete-public-ssh-key-for-authenticated
 
@@ -11024,7 +10858,7 @@ Removes a public SSH key from the authenticated user's GitHub account. Requires 
 
 | name | description |
 |------|-------------|
-| key_id | __Required__  |
+| key_id | __Required__ key_id parameter |
 
 ## users follow
 
@@ -11101,7 +10935,7 @@ View extended details for a single GPG key. Requires that you are authenticated 
 
 | name | description |
 |------|-------------|
-| gpg_key_id | __Required__  |
+| gpg_key_id | __Required__ gpg_key_id parameter |
 
 ## users get-public-ssh-key-for-authenticated
 
@@ -11114,7 +10948,7 @@ View extended details for a single public SSH key. Requires that you are authent
 
 | name | description |
 |------|-------------|
-| key_id | __Required__  |
+| key_id | __Required__ key_id parameter |
 
 ## users list
 
@@ -11129,7 +10963,8 @@ Note: Pagination is powered exclusively by the `since` parameter. Use the [Link 
 
 | name | description |
 |------|-------------|
-| since | The integer ID of the last User that you've seen. |
+| per_page | Results per page (max 100) |
+| since | Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 
 ## users list-blocked-by-authenticated
 
@@ -11292,8 +11127,8 @@ Sets the visibility for your primary email addresses.
 
 | name | description |
 |------|-------------|
-| email | __Required__ Specify the _primary_ email address that needs a visibility change. |
-| visibility | __Required__ Use `public` to enable an authenticated user to view the specified email address, or use `private` so this primary email address cannot be seen publicly. |
+| email | __Required__ An email address associated with the GitHub user account to manage. |
+| visibility | __Required__ Denotes whether an email is publically visible. |
 
 ## users unblock
 

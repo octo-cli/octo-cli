@@ -134,8 +134,8 @@ func (c *IssuesCreateCommentCmd) Run(isValueSetMap map[string]bool) error {
 
 type IssuesCreateLabelCmd struct {
 	Repo        string `name:"repo" required:"true"`
+	Color       string `name:"color"`
 	Description string `name:"description"`
-	Color       string `name:"color" required:"true"`
 	Name        string `name:"name" required:"true"`
 	internal.BaseCmd
 }
@@ -313,11 +313,15 @@ func (c *IssuesListAssigneesCmd) Run(isValueSetMap map[string]bool) error {
 type IssuesListCmd struct {
 	MachineMan   bool   `name:"machine-man-preview"`
 	SquirrelGirl bool   `name:"squirrel-girl-preview"`
+	Collab       bool   `name:"collab"`
 	Direction    string `name:"direction"`
 	Filter       string `name:"filter"`
 	Labels       string `name:"labels"`
+	Orgs         bool   `name:"orgs"`
+	Owned        bool   `name:"owned"`
 	Page         int64  `name:"page"`
 	PerPage      int64  `name:"per_page"`
+	Pulls        bool   `name:"pulls"`
 	Since        string `name:"since"`
 	Sort         string `name:"sort"`
 	State        string `name:"state"`
@@ -333,6 +337,10 @@ func (c *IssuesListCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLQuery("sort", c.Sort)
 	c.UpdateURLQuery("direction", c.Direction)
 	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("collab", c.Collab)
+	c.UpdateURLQuery("orgs", c.Orgs)
+	c.UpdateURLQuery("owned", c.Owned)
+	c.UpdateURLQuery("pulls", c.Pulls)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
 	c.UpdatePreview("machine-man", c.MachineMan)

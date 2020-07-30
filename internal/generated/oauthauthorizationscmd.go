@@ -21,9 +21,9 @@ type OauthAuthorizationsCreateAuthorizationCmd struct {
 	ClientId     string   `name:"client_id"`
 	ClientSecret string   `name:"client_secret"`
 	Fingerprint  string   `name:"fingerprint"`
+	Note         string   `name:"note"`
 	NoteUrl      string   `name:"note_url"`
 	Scopes       []string `name:"scopes"`
-	Note         string   `name:"note" required:"true"`
 	internal.BaseCmd
 }
 

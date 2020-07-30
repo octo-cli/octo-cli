@@ -412,6 +412,7 @@ func (c *ActivityListWatchersForRepoCmd) Run(isValueSetMap map[string]bool) erro
 
 type ActivityMarkNotificationsAsReadCmd struct {
 	LastReadAt string `name:"last_read_at"`
+	Read       bool   `name:"read"`
 	internal.BaseCmd
 }
 
@@ -419,6 +420,7 @@ func (c *ActivityMarkNotificationsAsReadCmd) Run(isValueSetMap map[string]bool) 
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/notifications")
 	c.UpdateBody("last_read_at", c.LastReadAt)
+	c.UpdateBody("read", c.Read)
 	return c.DoRequest("PUT")
 }
 

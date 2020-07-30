@@ -5,7 +5,10 @@ package generated
 import internal "github.com/octo-cli/octo-cli/internal"
 
 type MetaCmd struct {
-	Get MetaGetCmd `cmd:""`
+	Get        MetaGetCmd        `cmd:""`
+	GetOctocat MetaGetOctocatCmd `cmd:""`
+	GetZen     MetaGetZenCmd     `cmd:""`
+	Root       MetaRootCmd       `cmd:""`
 }
 
 type MetaGetCmd struct {
@@ -15,5 +18,37 @@ type MetaGetCmd struct {
 func (c *MetaGetCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/meta")
+	return c.DoRequest("GET")
+}
+
+type MetaGetOctocatCmd struct {
+	S string `name:"s"`
+	internal.BaseCmd
+}
+
+func (c *MetaGetOctocatCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/octocat")
+	c.UpdateURLQuery("s", c.S)
+	return c.DoRequest("GET")
+}
+
+type MetaGetZenCmd struct {
+	internal.BaseCmd
+}
+
+func (c *MetaGetZenCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/zen")
+	return c.DoRequest("GET")
+}
+
+type MetaRootCmd struct {
+	internal.BaseCmd
+}
+
+func (c *MetaRootCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/")
 	return c.DoRequest("GET")
 }

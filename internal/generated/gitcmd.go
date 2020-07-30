@@ -44,9 +44,9 @@ type GitCreateCommitCmd struct {
 	CommitterDate  string   `name:"committer.date"`
 	CommitterEmail string   `name:"committer.email"`
 	CommitterName  string   `name:"committer.name"`
+	Parents        []string `name:"parents"`
 	Signature      string   `name:"signature"`
 	Message        string   `name:"message" required:"true"`
-	Parents        []string `name:"parents" required:"true"`
 	Tree           string   `name:"tree" required:"true"`
 	internal.BaseCmd
 }
@@ -70,6 +70,7 @@ func (c *GitCreateCommitCmd) Run(isValueSetMap map[string]bool) error {
 
 type GitCreateRefCmd struct {
 	Repo string `name:"repo" required:"true"`
+	Key  string `name:"key"`
 	Ref  string `name:"ref" required:"true"`
 	Sha  string `name:"sha" required:"true"`
 	internal.BaseCmd
@@ -79,6 +80,7 @@ func (c *GitCreateRefCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/git/refs")
 	c.UpdateURLPath("repo", c.Repo)
+	c.UpdateBody("key", c.Key)
 	c.UpdateBody("ref", c.Ref)
 	c.UpdateBody("sha", c.Sha)
 	return c.DoRequest("POST")

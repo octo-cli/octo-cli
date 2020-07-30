@@ -85,12 +85,12 @@ func (c *ActionsCancelWorkflowRunCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ActionsCreateOrUpdateOrgSecretCmd struct {
-	Org                   string  `name:"org" required:"true"`
-	SecretName            string  `name:"secret_name" required:"true"`
-	EncryptedValue        string  `name:"encrypted_value"`
-	KeyId                 string  `name:"key_id"`
-	SelectedRepositoryIds []int64 `name:"selected_repository_ids"`
-	Visibility            string  `name:"visibility"`
+	Org                   string   `name:"org" required:"true"`
+	SecretName            string   `name:"secret_name" required:"true"`
+	EncryptedValue        string   `name:"encrypted_value"`
+	KeyId                 string   `name:"key_id"`
+	SelectedRepositoryIds []string `name:"selected_repository_ids"`
+	Visibility            string   `name:"visibility"`
 	internal.BaseCmd
 }
 

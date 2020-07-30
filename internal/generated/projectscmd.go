@@ -51,11 +51,8 @@ func (c *ProjectsAddCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ProjectsCreateCardCmd struct {
-	Inertia     bool   `name:"inertia-preview" required:"true"`
-	ColumnId    int64  `name:"column_id" required:"true"`
-	ContentId   int64  `name:"content_id"`
-	ContentType string `name:"content_type"`
-	Note        string `name:"note"`
+	Inertia  bool  `name:"inertia-preview" required:"true"`
+	ColumnId int64 `name:"column_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -64,9 +61,6 @@ func (c *ProjectsCreateCardCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetURLPath("/projects/columns/{column_id}/cards")
 	c.UpdateURLPath("column_id", c.ColumnId)
 	c.UpdatePreview("inertia", c.Inertia)
-	c.UpdateBody("content_id", c.ContentId)
-	c.UpdateBody("content_type", c.ContentType)
-	c.UpdateBody("note", c.Note)
 	return c.DoRequest("POST")
 }
 

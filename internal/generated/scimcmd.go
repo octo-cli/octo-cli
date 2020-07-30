@@ -61,10 +61,14 @@ func (c *ScimListProvisionedIdentitiesCmd) Run(isValueSetMap map[string]bool) er
 
 type ScimProvisionAndInviteUserCmd struct {
 	Org            string                `name:"org" required:"true"`
+	Active         bool                  `name:"active"`
+	DisplayName    string                `name:"displayName"`
+	ExternalId     string                `name:"externalId"`
+	Groups         []string              `name:"groups"`
+	Schemas        []string              `name:"schemas"`
 	Emails         []internal.JSONObject `name:"emails" required:"true"`
 	NameFamilyName string                `name:"name.familyName" required:"true"`
 	NameGivenName  string                `name:"name.givenName" required:"true"`
-	Schemas        []string              `name:"schemas" required:"true"`
 	UserName       string                `name:"userName" required:"true"`
 	internal.BaseCmd
 }
@@ -73,7 +77,11 @@ func (c *ScimProvisionAndInviteUserCmd) Run(isValueSetMap map[string]bool) error
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/scim/v2/organizations/{org}/Users")
 	c.UpdateURLPath("org", c.Org)
+	c.UpdateBody("active", c.Active)
+	c.UpdateBody("displayName", c.DisplayName)
 	c.UpdateBody("emails", c.Emails)
+	c.UpdateBody("externalId", c.ExternalId)
+	c.UpdateBody("groups", c.Groups)
 	c.UpdateBody("name.familyName", c.NameFamilyName)
 	c.UpdateBody("name.givenName", c.NameGivenName)
 	c.UpdateBody("schemas", c.Schemas)
@@ -84,10 +92,14 @@ func (c *ScimProvisionAndInviteUserCmd) Run(isValueSetMap map[string]bool) error
 type ScimSetInformationForProvisionedUserCmd struct {
 	Org            string                `name:"org" required:"true"`
 	ScimUserId     string                `name:"scim_user_id" required:"true"`
+	Active         bool                  `name:"active"`
+	DisplayName    string                `name:"displayName"`
+	ExternalId     string                `name:"externalId"`
+	Groups         []string              `name:"groups"`
+	Schemas        []string              `name:"schemas"`
 	Emails         []internal.JSONObject `name:"emails" required:"true"`
 	NameFamilyName string                `name:"name.familyName" required:"true"`
 	NameGivenName  string                `name:"name.givenName" required:"true"`
-	Schemas        []string              `name:"schemas" required:"true"`
 	UserName       string                `name:"userName" required:"true"`
 	internal.BaseCmd
 }
@@ -97,7 +109,11 @@ func (c *ScimSetInformationForProvisionedUserCmd) Run(isValueSetMap map[string]b
 	c.SetURLPath("/scim/v2/organizations/{org}/Users/{scim_user_id}")
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLPath("scim_user_id", c.ScimUserId)
+	c.UpdateBody("active", c.Active)
+	c.UpdateBody("displayName", c.DisplayName)
 	c.UpdateBody("emails", c.Emails)
+	c.UpdateBody("externalId", c.ExternalId)
+	c.UpdateBody("groups", c.Groups)
 	c.UpdateBody("name.familyName", c.NameFamilyName)
 	c.UpdateBody("name.givenName", c.NameGivenName)
 	c.UpdateBody("schemas", c.Schemas)
@@ -108,8 +124,8 @@ func (c *ScimSetInformationForProvisionedUserCmd) Run(isValueSetMap map[string]b
 type ScimUpdateAttributeForUserCmd struct {
 	Org        string                `name:"org" required:"true"`
 	ScimUserId string                `name:"scim_user_id" required:"true"`
+	Schemas    []string              `name:"schemas"`
 	Operations []internal.JSONObject `name:"Operations" required:"true"`
-	Schemas    []string              `name:"schemas" required:"true"`
 	internal.BaseCmd
 }
 

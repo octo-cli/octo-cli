@@ -47,7 +47,8 @@ type ReposCmd struct {
 	DeleteWebhook                        ReposDeleteWebhookCmd                        `cmd:""`
 	DisableAutomatedSecurityFixes        ReposDisableAutomatedSecurityFixesCmd        `cmd:""`
 	DisableVulnerabilityAlerts           ReposDisableVulnerabilityAlertsCmd           `cmd:""`
-	DownloadArchive                      ReposDownloadArchiveCmd                      `cmd:""`
+	DownloadTarballArchive               ReposDownloadTarballArchiveCmd               `cmd:""`
+	DownloadZipballArchive               ReposDownloadZipballArchiveCmd               `cmd:""`
 	EnableAutomatedSecurityFixes         ReposEnableAutomatedSecurityFixesCmd         `cmd:""`
 	EnableVulnerabilityAlerts            ReposEnableVulnerabilityAlertsCmd            `cmd:""`
 	Get                                  ReposGetCmd                                  `cmd:""`
@@ -141,7 +142,7 @@ type ReposCmd struct {
 	UpdatePullRequestReviewProtection    ReposUpdatePullRequestReviewProtectionCmd    `cmd:""`
 	UpdateRelease                        ReposUpdateReleaseCmd                        `cmd:""`
 	UpdateReleaseAsset                   ReposUpdateReleaseAssetCmd                   `cmd:""`
-	UpdateStatusCheckPotection           ReposUpdateStatusCheckPotectionCmd           `cmd:""`
+	UpdateStatusCheckProtection          ReposUpdateStatusCheckProtectionCmd          `cmd:""`
 	UpdateWebhook                        ReposUpdateWebhookCmd                        `cmd:""`
 	UploadReleaseAsset                   ReposUploadReleaseAssetCmd                   `cmd:""`
 }
@@ -173,9 +174,10 @@ func (c *ReposAddAppAccessRestrictionsCmd) Run(isValueSetMap map[string]bool) er
 }
 
 type ReposAddCollaboratorCmd struct {
-	Repo       string `name:"repo" required:"true"`
-	Username   string `name:"username" required:"true"`
-	Permission string `name:"permission"`
+	Repo        string `name:"repo" required:"true"`
+	Username    string `name:"username" required:"true"`
+	Permission  string `name:"permission"`
+	Permissions string `name:"permissions"`
 	internal.BaseCmd
 }
 
@@ -185,6 +187,7 @@ func (c *ReposAddCollaboratorCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("username", c.Username)
 	c.UpdateBody("permission", c.Permission)
+	c.UpdateBody("permissions", c.Permissions)
 	return c.DoRequest("PUT")
 }
 
@@ -356,6 +359,7 @@ type ReposCreateDeploymentCmd struct {
 	AntMan                bool     `name:"ant-man-preview"`
 	Repo                  string   `name:"repo" required:"true"`
 	AutoMerge             bool     `name:"auto_merge"`
+	CreatedAt             string   `name:"created_at"`
 	Description           string   `name:"description"`
 	Environment           string   `name:"environment"`
 	Payload               string   `name:"payload"`
@@ -373,6 +377,7 @@ func (c *ReposCreateDeploymentCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdatePreview("ant-man", c.AntMan)
 	c.UpdateBody("auto_merge", c.AutoMerge)
+	c.UpdateBody("created_at", c.CreatedAt)
 	c.UpdateBody("description", c.Description)
 	c.UpdateBody("environment", c.Environment)
 	c.UpdateBody("payload", c.Payload)
@@ -419,7 +424,7 @@ func (c *ReposCreateDeploymentStatusCmd) Run(isValueSetMap map[string]bool) erro
 type ReposCreateDispatchEventCmd struct {
 	Repo          string              `name:"repo" required:"true"`
 	ClientPayload internal.JSONObject `name:"client_payload"`
-	EventType     string              `name:"event_type" required:"true"`
+	EventType     string              `name:"event_type"`
 	internal.BaseCmd
 }
 
@@ -442,6 +447,7 @@ type ReposCreateForAuthenticatedUserCmd struct {
 	DeleteBranchOnMerge bool   `name:"delete_branch_on_merge"`
 	Description         string `name:"description"`
 	GitignoreTemplate   string `name:"gitignore_template"`
+	HasDownloads        bool   `name:"has_downloads"`
 	HasIssues           bool   `name:"has_issues"`
 	HasProjects         bool   `name:"has_projects"`
 	HasWiki             bool   `name:"has_wiki"`
@@ -450,7 +456,6 @@ type ReposCreateForAuthenticatedUserCmd struct {
 	LicenseTemplate     string `name:"license_template"`
 	Private             bool   `name:"private"`
 	TeamId              int64  `name:"team_id"`
-	Visibility          string `name:"visibility"`
 	Name                string `name:"name" required:"true"`
 	internal.BaseCmd
 }
@@ -467,6 +472,7 @@ func (c *ReposCreateForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) 
 	c.UpdateBody("delete_branch_on_merge", c.DeleteBranchOnMerge)
 	c.UpdateBody("description", c.Description)
 	c.UpdateBody("gitignore_template", c.GitignoreTemplate)
+	c.UpdateBody("has_downloads", c.HasDownloads)
 	c.UpdateBody("has_issues", c.HasIssues)
 	c.UpdateBody("has_projects", c.HasProjects)
 	c.UpdateBody("has_wiki", c.HasWiki)
@@ -476,7 +482,6 @@ func (c *ReposCreateForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) 
 	c.UpdateBody("name", c.Name)
 	c.UpdateBody("private", c.Private)
 	c.UpdateBody("team_id", c.TeamId)
-	c.UpdateBody("visibility", c.Visibility)
 	return c.DoRequest("POST")
 }
 
@@ -547,9 +552,11 @@ func (c *ReposCreateInOrgCmd) Run(isValueSetMap map[string]bool) error {
 type ReposCreateOrUpdateFileContentsCmd struct {
 	Repo           string `name:"repo" required:"true"`
 	Path           string `name:"path" required:"true"`
+	AuthorDate     string `name:"author.date"`
 	AuthorEmail    string `name:"author.email"`
 	AuthorName     string `name:"author.name"`
 	Branch         string `name:"branch"`
+	CommitterDate  string `name:"committer.date"`
 	CommitterEmail string `name:"committer.email"`
 	CommitterName  string `name:"committer.name"`
 	Sha            string `name:"sha"`
@@ -563,9 +570,11 @@ func (c *ReposCreateOrUpdateFileContentsCmd) Run(isValueSetMap map[string]bool) 
 	c.SetURLPath("/repos/{repo}/contents/{path}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("path", c.Path)
+	c.UpdateBody("author.date", c.AuthorDate)
 	c.UpdateBody("author.email", c.AuthorEmail)
 	c.UpdateBody("author.name", c.AuthorName)
 	c.UpdateBody("branch", c.Branch)
+	c.UpdateBody("committer.date", c.CommitterDate)
 	c.UpdateBody("committer.email", c.CommitterEmail)
 	c.UpdateBody("committer.name", c.CommitterName)
 	c.UpdateBody("content", c.Content)
@@ -644,8 +653,10 @@ type ReposCreateWebhookCmd struct {
 	Repo              string   `name:"repo" required:"true"`
 	Active            bool     `name:"active"`
 	ConfigContentType string   `name:"config.content_type"`
+	ConfigDigest      string   `name:"config.digest"`
 	ConfigInsecureSsl string   `name:"config.insecure_ssl"`
 	ConfigSecret      string   `name:"config.secret"`
+	ConfigToken       string   `name:"config.token"`
 	Events            []string `name:"events"`
 	Name              string   `name:"name"`
 	ConfigUrl         string   `name:"config.url" required:"true"`
@@ -658,8 +669,10 @@ func (c *ReposCreateWebhookCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateBody("active", c.Active)
 	c.UpdateBody("config.content_type", c.ConfigContentType)
+	c.UpdateBody("config.digest", c.ConfigDigest)
 	c.UpdateBody("config.insecure_ssl", c.ConfigInsecureSsl)
 	c.UpdateBody("config.secret", c.ConfigSecret)
+	c.UpdateBody("config.token", c.ConfigToken)
 	c.UpdateBody("config.url", c.ConfigUrl)
 	c.UpdateBody("events", c.Events)
 	c.UpdateBody("name", c.Name)
@@ -930,18 +943,30 @@ func (c *ReposDisableVulnerabilityAlertsCmd) Run(isValueSetMap map[string]bool) 
 	return c.DoRequest("DELETE")
 }
 
-type ReposDownloadArchiveCmd struct {
-	Repo          string `name:"repo" required:"true"`
-	ArchiveFormat string `name:"archive_format" required:"true"`
-	Ref           string `name:"ref" required:"true"`
+type ReposDownloadTarballArchiveCmd struct {
+	Repo string `name:"repo" required:"true"`
+	Ref  string `name:"ref" required:"true"`
 	internal.BaseCmd
 }
 
-func (c *ReposDownloadArchiveCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposDownloadTarballArchiveCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/repos/{repo}/{archive_format}/{ref}")
+	c.SetURLPath("/repos/{repo}/tarball/{ref}")
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdateURLPath("archive_format", c.ArchiveFormat)
+	c.UpdateURLPath("ref", c.Ref)
+	return c.DoRequest("GET")
+}
+
+type ReposDownloadZipballArchiveCmd struct {
+	Repo string `name:"repo" required:"true"`
+	Ref  string `name:"ref" required:"true"`
+	internal.BaseCmd
+}
+
+func (c *ReposDownloadZipballArchiveCmd) Run(isValueSetMap map[string]bool) error {
+	c.SetIsValueSetMap(isValueSetMap)
+	c.SetURLPath("/repos/{repo}/zipball/{ref}")
+	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("ref", c.Ref)
 	return c.DoRequest("GET")
 }
@@ -1756,9 +1781,11 @@ func (c *ReposListDeploymentsCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposListForAuthenticatedUserCmd struct {
 	Affiliation string `name:"affiliation"`
+	Before      string `name:"before"`
 	Direction   string `name:"direction"`
 	Page        int64  `name:"page"`
 	PerPage     int64  `name:"per_page"`
+	Since       string `name:"since"`
 	Sort        string `name:"sort"`
 	Type        string `name:"type"`
 	Visibility  string `name:"visibility"`
@@ -1775,6 +1802,8 @@ func (c *ReposListForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) er
 	c.UpdateURLQuery("direction", c.Direction)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
+	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("before", c.Before)
 	return c.DoRequest("GET")
 }
 
@@ -1905,14 +1934,18 @@ func (c *ReposListPagesBuildsCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ReposListPublicCmd struct {
-	Since int64 `name:"since"`
+	PerPage    int64  `name:"per_page"`
+	Since      string `name:"since"`
+	Visibility string `name:"visibility"`
 	internal.BaseCmd
 }
 
 func (c *ReposListPublicCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repositories")
+	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("since", c.Since)
+	c.UpdateURLQuery("visibility", c.Visibility)
 	return c.DoRequest("GET")
 }
 
@@ -2431,6 +2464,7 @@ type ReposUpdateReleaseAssetCmd struct {
 	AssetId int64  `name:"asset_id" required:"true"`
 	Label   string `name:"label"`
 	Name    string `name:"name"`
+	State   string `name:"state"`
 	internal.BaseCmd
 }
 
@@ -2441,6 +2475,7 @@ func (c *ReposUpdateReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLPath("asset_id", c.AssetId)
 	c.UpdateBody("label", c.Label)
 	c.UpdateBody("name", c.Name)
+	c.UpdateBody("state", c.State)
 	return c.DoRequest("PATCH")
 }
 
@@ -2470,7 +2505,7 @@ func (c *ReposUpdateReleaseCmd) Run(isValueSetMap map[string]bool) error {
 	return c.DoRequest("PATCH")
 }
 
-type ReposUpdateStatusCheckPotectionCmd struct {
+type ReposUpdateStatusCheckProtectionCmd struct {
 	Repo     string   `name:"repo" required:"true"`
 	Branch   string   `name:"branch" required:"true"`
 	Contexts []string `name:"contexts"`
@@ -2478,7 +2513,7 @@ type ReposUpdateStatusCheckPotectionCmd struct {
 	internal.BaseCmd
 }
 
-func (c *ReposUpdateStatusCheckPotectionCmd) Run(isValueSetMap map[string]bool) error {
+func (c *ReposUpdateStatusCheckProtectionCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/branches/{branch}/protection/required_status_checks")
 	c.UpdateURLPath("repo", c.Repo)
@@ -2493,8 +2528,10 @@ type ReposUpdateWebhookCmd struct {
 	HookId            int64    `name:"hook_id" required:"true"`
 	Active            bool     `name:"active"`
 	AddEvents         []string `name:"add_events"`
+	ConfigAddress     string   `name:"config.address"`
 	ConfigContentType string   `name:"config.content_type"`
 	ConfigInsecureSsl string   `name:"config.insecure_ssl"`
+	ConfigRoom        string   `name:"config.room"`
 	ConfigSecret      string   `name:"config.secret"`
 	ConfigUrl         string   `name:"config.url"`
 	Events            []string `name:"events"`
@@ -2509,8 +2546,10 @@ func (c *ReposUpdateWebhookCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLPath("hook_id", c.HookId)
 	c.UpdateBody("active", c.Active)
 	c.UpdateBody("add_events", c.AddEvents)
+	c.UpdateBody("config.address", c.ConfigAddress)
 	c.UpdateBody("config.content_type", c.ConfigContentType)
 	c.UpdateBody("config.insecure_ssl", c.ConfigInsecureSsl)
+	c.UpdateBody("config.room", c.ConfigRoom)
 	c.UpdateBody("config.secret", c.ConfigSecret)
 	c.UpdateBody("config.url", c.ConfigUrl)
 	c.UpdateBody("events", c.Events)
@@ -2533,8 +2572,6 @@ func (c *ReposUploadReleaseAssetCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/releases/{release_id}/assets")
 	internal.ReposUploadReleaseAssetOverride(&c.BaseCmd, c.File)
-	c.AddRequestHeader("content-length", c.ContentLength)
-	c.AddRequestHeader("content-type", c.ContentType)
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("release_id", c.ReleaseId)
 	c.UpdateURLQuery("name", c.Name)
