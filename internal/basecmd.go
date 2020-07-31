@@ -6,6 +6,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"io/ioutil"
+	"mime"
 	"net/http"
 	"net/url"
 	"os"
@@ -43,6 +45,7 @@ type BaseCmd struct {
 	APIBaseURL    string `env:"GITHUB_API_BASE_URL" default:"https://api.github.com"`
 	RawOutput     bool   `help:"don't format json output."`
 	Format        string `help:"format json output with a go template"`
+	OutputEach    string `help:"output each item at the given path"`
 	Curl          bool   `help:"returns a corresponding curl request"`
 	curler        func(req *http.Request) (string, error)
 }
@@ -278,5 +281,43 @@ func (c *BaseCmd) DoRequest(method string) error {
 		return err
 	}
 
-	return OutputResult(resp, c.RawOutput, c.Format, Stdout)
+	return c.OutputResult(resp, Stdout)
+}
+
+func (c *BaseCmd) OutputResult(resp *http.Response, stdout io.Writer) error {
+	contentType, _, err := mime.ParseMediaType(resp.Header.Get("content-type"))
+	_ = err //nolint:errcheck //just treat it like raw text if we can't get a media type
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return err
+	}
+	err = resp.Body.Close()
+	if err != nil {
+		return err
+	}
+	if len(body) == 0 {
+		return nil
+	}
+	switch {
+	case c.Format != "", c.OutputEach != "":
+		format := c.Format
+		if format == "" {
+			format = "{{ json . }}\n"
+		}
+		body, err = formatOutput(body, format, c.OutputEach)
+		if err != nil {
+			return err
+		}
+		if bytes.HasSuffix(body, []byte("\n")) {
+			body = body[:len(body)-1]
+		}
+	case contentType == "application/json" && !c.RawOutput:
+		body, err = prettyPrintJSON(body)
+		if err != nil {
+			return err
+		}
+	}
+
+	_, err = fmt.Fprintln(stdout, string(body))
+	return err
 }

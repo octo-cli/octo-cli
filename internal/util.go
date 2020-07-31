@@ -4,12 +4,10 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"io"
-	"io/ioutil"
-	"mime"
-	"net/http"
+	"strings"
 	"text/template"
 
+	"github.com/ghodss/yaml"
 	"github.com/pkg/errors"
 )
 
@@ -23,13 +21,43 @@ func prettyPrintJSON(jsonBytes []byte) ([]byte, error) {
 	return out, errors.Wrap(err, "failed marshalling json")
 }
 
-func formatOutput(jsonBytes []byte, format string) ([]byte, error) {
+var templateFuncs = template.FuncMap{
+	"json": func(v interface{}) (string, error) {
+		var buf bytes.Buffer
+		encoder := json.NewEncoder(&buf)
+		encoder.SetEscapeHTML(false)
+		err := encoder.Encode(v)
+		if err != nil {
+			return "", err
+		}
+		return strings.TrimSpace(buf.String()), nil
+	},
+	"yaml": func(v interface{}) (string, error) {
+		r, err := yaml.Marshal(v)
+		if err != nil {
+			return "", err
+		}
+		return string(r), nil
+	},
+	"split": strings.Split,
+	"join":  strings.Join,
+	"title": strings.Title,
+	"lower": strings.ToLower,
+	"upper": strings.ToUpper,
+}
+
+func formatOutput(jsonBytes []byte, format, outputEach string) ([]byte, error) {
 	var it interface{}
 	err := json.Unmarshal(jsonBytes, &it)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed unmarshalling json")
 	}
-	tmpl, err := template.New("").Parse(format)
+	format = strings.ReplaceAll(format, `\n`, "\n")
+	format = strings.ReplaceAll(format, `\t`, "\t")
+	if outputEach != "" {
+		format = fmt.Sprintf("{{ range %s }}%s{{ end}}", outputEach, format)
+	}
+	tmpl, err := template.New("").Funcs(templateFuncs).Parse(format)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed parsing format template")
 	}
@@ -39,37 +67,4 @@ func formatOutput(jsonBytes []byte, format string) ([]byte, error) {
 		return nil, errors.Wrap(err, "failed executing template")
 	}
 	return buf.Bytes(), err
-}
-
-//OutputResult writes the body of an http.Response to stdout
-func OutputResult(resp *http.Response, rawOutput bool, format string, stdout io.Writer) error {
-	contentType, _, err := mime.ParseMediaType(resp.Header.Get("content-type"))
-	_ = err //nolint:errcheck //just treat it like raw text if we can't get a media type
-
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return err
-	}
-	err = resp.Body.Close()
-	if err != nil {
-		return err
-	}
-	if len(body) == 0 {
-		return nil
-	}
-	switch {
-	case format != "":
-		body, err = formatOutput(body, format)
-		if err != nil {
-			return err
-		}
-	case contentType == "application/json" && !rawOutput:
-		body, err = prettyPrintJSON(body)
-		if err != nil {
-			return err
-		}
-	}
-
-	_, err = fmt.Fprintln(stdout, string(body))
-	return err
 }
