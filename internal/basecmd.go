@@ -15,6 +15,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/octo-cli/octo-cli/internal/jsonoutput"
 	"golang.org/x/oauth2"
 	"moul.io/http2curl/v2"
 )
@@ -285,8 +286,7 @@ func (c *BaseCmd) DoRequest(method string) error {
 }
 
 func (c *BaseCmd) OutputResult(resp *http.Response, stdout io.Writer) error {
-	contentType, _, err := mime.ParseMediaType(resp.Header.Get("content-type"))
-	_ = err //nolint:errcheck //just treat it like raw text if we can't get a media type
+
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return err
@@ -298,26 +298,31 @@ func (c *BaseCmd) OutputResult(resp *http.Response, stdout io.Writer) error {
 	if len(body) == 0 {
 		return nil
 	}
-	switch {
-	case c.Format != "", c.OutputEach != "":
-		format := c.Format
-		if format == "" {
-			format = "{{ json . }}\n"
-		}
-		body, err = formatOutput(body, format, c.OutputEach)
-		if err != nil {
-			return err
-		}
-		if bytes.HasSuffix(body, []byte("\n")) {
-			body = body[:len(body)-1]
-		}
-	case contentType == "application/json" && !c.RawOutput:
-		body, err = prettyPrintJSON(body)
-		if err != nil {
-			return err
-		}
+
+	if c.RawOutput {
+		_, err = fmt.Fprintln(stdout, string(body))
+		return err
 	}
 
-	_, err = fmt.Fprintln(stdout, string(body))
+	contentType, _, err := mime.ParseMediaType(resp.Header.Get("content-type"))
+	_ = err //nolint:errcheck //just treat it like raw text if we can't get a media type
+	if strings.HasSuffix(contentType, "json") {
+		format := c.Format
+		if format == "" {
+			format = "{{ toPrettyJson . }}"
+		}
+		body, err = jsonoutput.FormatJSONOutput(body, format, c.OutputEach)
+		if err != nil {
+			return err
+		}
+	} else {
+		body = append(body, '\n')
+	}
+
+	if !bytes.HasSuffix(body, []byte("\n")) {
+		body = append(body, '\n')
+	}
+
+	_, err = fmt.Fprint(stdout, string(body))
 	return err
 }
