@@ -1,11 +1,17 @@
 package jsonoutput
 
 import (
+	"bufio"
 	"bytes"
 	"fmt"
 	"math"
+	"os"
+	"path/filepath"
+	"sort"
+	"strings"
 	"testing"
 
+	"github.com/killa-beez/gopkgs/sets/builtins"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -148,22 +154,6 @@ func Test_FormatJSONOutput_funcs(t *testing.T) {
 		assertFormatJSONOutput(t, jsonTwelve, `{{ . | toStrings }}`, "[12]")
 	})
 
-	t.Run("base", func(t *testing.T) {
-		assertFormatJSONOutput(t, `"foo/bar/baz.txt"`, `{{ . | base }}`, "baz.txt")
-	})
-
-	t.Run("dir", func(t *testing.T) {
-		assertFormatJSONOutput(t, `"foo/bar/baz.txt"`, `{{ . | dir }}`, "foo/bar")
-	})
-
-	t.Run("clean", func(t *testing.T) {
-		assertFormatJSONOutput(t, `"foo/bar/../baz.txt"`, `{{ . | clean }}`, "foo/baz.txt")
-	})
-
-	t.Run("ext", func(t *testing.T) {
-		assertFormatJSONOutput(t, `"foo/bar/baz.txt"`, `{{ . | ext }}`, ".txt")
-	})
-
 	t.Run("keys", func(t *testing.T) {
 		assertFormatJSONOutput(t, jsonMap, `{{ keys . | sortAlpha }}`, "[one three two]")
 	})
@@ -229,6 +219,11 @@ func Test_FormatJSONOutput_funcs(t *testing.T) {
 	t.Run("slice", func(t *testing.T) {
 		data := `[1,2,3,4,5]`
 		assertFormatJSONOutput(t, data, `{{ slice . 1 4 }}`, "[2 3 4]")
+	})
+
+	t.Run("obj", func(t *testing.T) {
+		assertFormatJSONOutput(t, jsonNull, `{{obj}}`, `map[]`)
+		assertFormatJSONOutput(t, jsonNull, `{{obj "foo" "bar" "one" 1 "bool" false}}`, `map[bool:false foo:bar one:1]`)
 	})
 }
 
@@ -359,6 +354,39 @@ func Test_writeCsv(t *testing.T) {
 	})
 }
 
+// test that all defined functions have a heading in docs/format.md and all function headings exist as functions
+func Test_documentation(t *testing.T) {
+	definedFuncs := builtins.NewStringSet(len(funcMap))
+	for nm := range funcMap {
+		definedFuncs.Add(nm)
+	}
+	sections := readDocSections(t)
+	documentedFuncs := builtins.NewStringSet(definedFuncs.Len())
+	for _, vals := range sections {
+		documentedFuncs.Add(vals...)
+	}
+
+	t.Run("all funcs are documented", func(t *testing.T) {
+		require.Empty(t, definedFuncs.Diff(documentedFuncs).Values())
+	})
+
+	t.Run("all documented functions exist", func(t *testing.T) {
+		require.Empty(t, documentedFuncs.Diff(definedFuncs).Values())
+	})
+
+	t.Run("docs are alphabetized", func(t *testing.T) {
+		for sectionName, funcs := range sections {
+			if len(funcs) < 2 {
+				continue
+			}
+			sorted := make([]string, len(funcs))
+			copy(sorted, funcs)
+			sort.Strings(sorted)
+			assert.Equalf(t, sorted, funcs, "%s has unsorted functions", sectionName)
+		}
+	})
+}
+
 type dummyCsvWriter struct {
 	flush func()
 	error func() error
@@ -375,4 +403,46 @@ func (d *dummyCsvWriter) Error() error {
 
 func (d *dummyCsvWriter) Write(record []string) error {
 	return d.write(record)
+}
+
+func readDocSections(t *testing.T) map[string][]string {
+	t.Helper()
+	result := map[string][]string{}
+	var currentSection string
+	allFuncs := builtins.NewStringSet(0)
+	var started, ended bool
+	file, err := os.Open(filepath.FromSlash("../../docs/format.md"))
+	require.NoError(t, err)
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		line := strings.TrimSpace(scanner.Text())
+		if line == `<!--- start function list --->` {
+			started = true
+			continue
+		}
+		if !started {
+			continue
+		}
+		if line == `<!--- end function list --->` {
+			ended = true
+			break
+		}
+		if strings.HasPrefix(line, `## `) {
+			currentSection = strings.TrimPrefix(line, `## `)
+			_, exists := result[currentSection]
+			require.Falsef(t, exists, "%s is duplicated", currentSection)
+			result[currentSection] = []string{}
+			continue
+		}
+		if strings.HasPrefix(line, `### `) {
+			require.NotEmpty(t, currentSection, "function is defined before the first section")
+			funcName := strings.TrimPrefix(line, `### `)
+			require.Falsef(t, allFuncs.Contains(funcName), "duplicated func documentation: %s", funcName)
+			allFuncs.Add(funcName)
+			result[currentSection] = append(result[currentSection], funcName)
+		}
+	}
+	require.True(t, started)
+	require.True(t, ended)
+	return result
 }
