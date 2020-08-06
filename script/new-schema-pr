@@ -12,7 +12,7 @@ git diff --stat --exit-code current-schema-tag.txt || (echo "clean your tree bef
 script/update-schema
 
 updated=
-git diff --stat --exit-code current-schema-version.txt || updated=1
+git diff --stat --exit-code current-schema-tag.txt || updated=1
 if [ -z "$updated" ]; then
   echo "already up to date"
   exit
