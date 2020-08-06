@@ -354,7 +354,6 @@ func Test_writeCsv(t *testing.T) {
 	})
 }
 
-// test that all defined functions have a heading in docs/format.md and all function headings exist as functions
 func Test_documentation(t *testing.T) {
 	definedFuncs := builtins.NewStringSet(len(funcMap))
 	for nm := range funcMap {
@@ -411,7 +410,7 @@ func readDocSections(t *testing.T) map[string][]string {
 	var currentSection string
 	allFuncs := builtins.NewStringSet(0)
 	var started, ended bool
-	file, err := os.Open(filepath.FromSlash("../../docs/format.md"))
+	file, err := os.Open(filepath.FromSlash("../../docs/template-functions.md"))
 	require.NoError(t, err)
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {

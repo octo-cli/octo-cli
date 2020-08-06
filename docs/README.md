@@ -229,7 +229,7 @@ curl -X 'POST' -d '{"draft":true,"name":"my release","tag_name":"v0.0.1"}' -H 'A
 
 ## Formatting output
 
-See [Formatting Output](format.md) for a more detailed description.
+See [Formatting Output](template-functions.md) for a more detailed description.
 
 By default, octo-cli outputs formatted json results with line-breaks and indenting.
 

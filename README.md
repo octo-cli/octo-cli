@@ -227,30 +227,10 @@ curl -X 'POST' -d '{"draft":true,"name":"my release","tag_name":"v0.0.1"}' -H 'A
 'https://api.github.com/repos/foo/bar/releases'
 ```
 
-## Formatting output
+## Output
 
-See [Formatting Output](docs/format.md) for a more detailed description.
-
-By default, octo-cli outputs formatted json results with line-breaks and indenting.
-
-You can modify the output with the `--format`, `--output-each` and `--raw-output` flags.
-
-### --raw-output
-
-This causes octo to output the body of the response without trying to apply its usual pretty formatting rules.
-The `--raw-output` flag is ignored when `--format` or `--output-each` are set.
-
-### --format
-
-The `--format` flag allows you to format output using [go templates](https://golang.org/pkg/text/template/). For 
-example, you can output just the title of an issue with `--format '{{.title}}'`. To see the login of the issue submitter 
-use `--format '{{.user.login}}'`
-
-### --output-each
-
-You can use `--output-each` to set the path to an array to iterate over. For `list-*` commands that return an array 
-at the top level, you would use `--output-each .`.  For example, to see the issue number and title from 
-"issues list-for-repo", you would use `--output-each . --format '{{.number}}\t{{.title}}\n`
+Octo-cli outputs prettified json. You can modify the output with `--format`, `--output-each` and 
+`--raw-output` flags. See [Formatting Output](docs/template-functions.md).
 
 ## Preview flags
 

@@ -1,340 +1,85 @@
+By default, octo-cli outputs formatted json results with line-breaks and indenting. That
+may be all you need. If you are so inclined, you can pipe the output to something like `jq` and 
+ignore the rest of this page. That's a perfectly valid approach, especially if you are already
+familiar with `jq`.
 
-<!--- start function list --->
+## Flags
 
-## General Functions
+There are three flags that control the output.
 
-### coalesce
+### `--format <template>`
 
-Returns the first non-empty argument.
+The `--format` flag allows you to format output using [go templates](https://golang.org/pkg/text/template/). For 
+example, you can output just the title of an issue with `--format '{{.title}}'`. To see the login of the issue submitter 
+use `--format '{{.user.login}}'`
 
-`{{coalesce 0 1 2}}` outputs `1`
+There are quite a few template functions available to use. See them in [Template Functions](template-functions.md)
 
-### default
+### `--output-each <path>`
 
-Returns a default value if the given value is empty, zero or false.
+Instead of outputting the response body as one entity, iterate over an array found at `<path>`.
 
-`{{ default "foo" "bar"}}` outputs `bar`
+If you are making a request that returns a list, you may want to use `--output-each .`.
 
-`{{ default "foo" ""}}` outputs `foo` because `""` is an empty string.
+On a command that returns a pull request, if you are only interested in its labels, you may
+want to use `--output-each .labels`
 
-`{{ default "foo" 12}}` outputs `12`
+`--output-each` is primarily useful in conjunction with `--format`.
 
-`{{ default "foo" 0}}` outputs `foo` because `0` is a zero value string.
+### `--raw-output`
 
-`{{ list 1 2 3 | default "foo" }}` outputs `[1 2 3]`
+Don't do any formatting. Just output the response body exactly as-is. When `--raw-output` is set,
+`--format` and `--output-each` are ignored.
 
-`{{ list | default "foo" }}` outputs `foo` because `list` with no arguments returns an empty array.
+## Examples
 
-`{{ default "foo" (obj "foo" "bar")}}` outputs `map[foo: bar]`
+- List numbers for open issues
 
-`{{ default "foo" (obj) }}` outputs `foo` because `obj` with no arguments returns an empty map.
+```shell
+$ octo issues list-for-repo --repo golang/go --per_page 3 \
+    --output-each . \
+    --format '{{.number | newLine}}'
 
-`{{ default "foo" nil }}` outputs `foo` because `nil` is treated as empty
+40576
+40575
+40574
+```
 
-### empty
+`--output-each .` causes it to iterate over each item in the result,
+`.number` outputs the issue number and `| newLine` appends "\n".
 
-Returns `true` if its argument is empty.
+- Output tsv
 
-`{{ empty "" }}` outputs `true`
+```shell
+octo pulls get --repo octo-cli/octo-cli --pull_number 5 \
+    --format '{{ toTsv .user.login .title }}'
 
-`{{ empty "foo" }}` outputs `false`
+WillAbides	Add MIT license
+```
 
-### ternary
+You can use this in bash to set multiple environment variables from one response:
 
-Takes two values and a test value. Returns the first value if the test value is true 
-or the second value if the test value is false.
+```shell
+$ read -r PR_AUTHOR PR_TITLE <<< "$(octo pulls get \
+    --repo octo-cli/octo-cli --pull_number 5 \
+    --format '{{ toTsv .user.login .title }}')"
+$ echo $PR_AUTHOR
+WillAbides
+$ echo $PR_TITLE
+Add MIT license
+```
 
-`{{ ternary "foo" "bar" true }}` outputs `foo`
+Use `toTsv` with `column -ts $'\t'` to output a human-readable table:
 
-`{{ ternary "foo" "bar" false }}` outputs `bar`
+```shell script
+$ octo issues list-for-repo --repo golang/go --direction asc --per_page 5  \
+    --output-each . \
+    --format '{{toTsv .number .title .user.login}}' \
+    | column -ts $'\t'
 
-### toCsv
-
-Renders its arguments as a line in csv format (including a trailing `\n` which is omitted from the examples below)
-
-`{{ toCsv "foo", "bar" }}` outputs `foo,bar`
-
-If its only argument is a list, it expands the list and treats that as its argument list.
-
-`{{ list "foo", "bar" | toCsv }}` outputs `foo,bar`
-
-### toJson
-
-Returns a json representation of its argument.
-
-`{{ obj "foo" "bar" | toJson }}` outputs `{"foo": "bar"}`
-
-### toPrettyJson
-
-Like `toJson` but adds indentation and linebreaks to make the output pretty.
-
-### toRawJson
-
-Like `toJson` but doesn't escape `&`, `<` and `>` in quoted strings.
-
-### toTsv
-
-Renders its arguments as a line in tsv format (including a trailing `\n` which is omitted from the examples below)
-
-`{{ toTsv "foo", "bar" }}` outputs `foo bar` (the whitespace between `foo` and `bar` is a tab).
-
-If its only argument is a list, it expands the list and treats that as its argument list.
-
-`{{ list "foo", "bar" | toTsv }}` outputs `foo bar` (the whitespace between `foo` and `bar` is a tab).
-
-### toYaml
-
-Returns a yaml representation of its argument.
-
-`{{ obj "foo" "bar" | toYaml }}` outputs: `foo: bar`
-
-## String Functions
-
-### cat
-
-The `cat` function concatenates multiple strings together into one, separating
-them with spaces:
-
-`{{cat "hello" "beautiful" "world"}}` outputs `hello beautiful world`
-
-### contains
-
-Test to see if one string is contained inside of another:
-
-`{{contains "cat" "catch"}}` outputs `true`.
-
-`{{contains "dog" "catch"}}` outputs `false`.
-
-
-### fromBase64
-
-Decodes a base64 string:
-
-`{{fromBase64 "aGVsbG8gd29ybGQ="}}` outputs `hello world`
-
-### lower
-
-Convert the entire string to lowercase:
-
-`{{lower "HELLO"}}` outputs `hello`
-
-### newLine
-
-Appends a `\n` to the end of a string:
-
-`{{newLine "hello world"}}` outputs `hello world\n`
-
-### replace
-
-Perform simple string replacement.
-
-It takes three arguments:
-
-- string to replace
-- string to replace with
-- source string
-
-`{{"I Am Henry VIII" | replace " " "-"}}` outputs `I-Am-Henry-VIII`
-
-### split
-
-Splits a string into an array of strings:
-
-`{{split "$" "foo$bar$baz"}}` outputs `[foo bar baz]`
-
-### substr
-
-Get a substring from a string. It takes three parameters:
-
-- start (int)
-- end (int)
-- string (string)
-
-`{{substr 0 5 "hello world"}}` outputs `hello`
-
-### toString
-
-Converts an object to a string.
-
-### trim
-
-The `trim` function removes space from either side of a string:
-
-`{{trim "   hello    "}}` outputs `hello`
-
-### trimAll
-
-Remove given characters from the front or back of a string:
-
-`{{trimAll "$" "$5.00"}}` outputs `5.00`.
-
-### trimPrefix
-
-Trim just the prefix from a string:
-
-`{{trimPrefix "-" "-hello"}}` outputs `hello`
-
-### trimSuffix
-
-Trim just the suffix from a string:
-
-`{{trimSuffix "-" "hello-"}}` outputs `hello`
-
-### trunc
-
-Truncate a string (and add no suffix)
-
-`{{trunc 5 "hello world"}}` outputs `hello`.
-
-`{{trunc -5 "hello world"}}` outputs `world`.
-
-### upper
-
-Convert the entire string to uppercase:
-
-`{{upper "hello"}}` outputs `HELLO`
-
-## Array Functions
-
-### compact
-
-Returns a copy of an array with empty values removed. 
-
-`{{list 1 "a" "foo" "" | compact}}` outputs `[1 a foo]`
-
-### first
-
-Returns the first item in an array.
-
-`{{first list(1 2 3)}}` outputs `1`
-
-### has
-
-Tests whether an array has a particular element.
-
-`{{ list 1 2 3 | has 1 }}` outputs `true`
-
-`{{ list 1 2 3 | has 4 }}` outputs `false`
-
-### join
-
-Joins an array into a single string with the given separator.
-
-`{{ list "hello" "world" | join "_" }}` outputs `hello_world`
-
-If it has multiple value arguments, it will treat them as if they were values in an array.
-
-`{{ join "_" "hello" "world" }}` outputs `hello_world`
-
-### last
-
-Returns the last item in an array.
-
-`{{last list(1 2 3)}}` outputs `3`. 
-
-### list
-
-Turn a sequence of items into an array slice:
-
-`{{$myList := list 1 2 3 4 5}}` outputs `[1 2 3 4 5]`.
-
-### slice
-
-Returns a slice of an array the first argument after the array is the index 
-of the first item to return and the second argument is the index of the last
-item to return. If the last argument is omitted, the returned slice will contain
-all values after the first argument. 
-
-`{{slice (list 1 2 3 4 5) 3}}` outputs `[4 5]`.
-
-`{{slice (list 1 2 3 4 5) 1 3}}` outputs `[2 3]`.
-
-`{{slice (list 1 2 3 4 5) 0 3}}` outputs `[1 2 3]`.
-
-### sortAlpha
-
-Sorts a list of strings into alphabetical (lexicographical) order.
-
-`{{list "z" "x" "y" | sortAlpha}}` outputs `[x y z]`
-
-### toStrings
-
-Convert a list, slice, or array to a list of strings.
-
-### uniq
-
-Returns a copy of an array with all the duplicates removed:
-
-`{{list 1 1 1 2 | uniq}}` outputs `[1 2]`
-
-## Object Functions
-
-"Object" refers to a json object. Sprig refers to these as dictionary functions, but 
-we are dealing in json here, so this uses the json terminology.
-
-In the examples below, the variable `$myObject` will contain an object unmarshalled from <br/> 
-`{ "foo": "bar", "baz": "qux", "hey": "bear" }` and `$myOtherObject` is from <br/> 
-`{ "one": 1, "two": 2, "hey": "bear" }`.
-
-### get
-
-Returns the value from one key in an object.
-
-`{{get $myObject "foo"}}` outputs `bar`
-
-### hasKey
-
-Returns true or false depending on whether the object contains the given key.
-
-`{{hasKey $myObject "foo}}` outputs `true`
-
-`{{hasKey $myObject "missing key}}` outputs `false`
-
-### keys
-
-Returns a list of all the keys in one or more objects.
-Since object keys are _unordered_, the keys will not be in a predictable order.
-They can be sorted with `sortAlpha`.
-
-`{{keys $myObject | sortAlpha}}` outputs `[baz foo hey]`
-
-Multiple objects, will have their keys concatenated. Use the `uniq`
-function along with `sortAlpha` to get a unique, sorted list of keys.
-
-`{{keys $myObject $myObject $myOtherObject | uniq | sortAlpha }}` outputs `[baz foo hey one two]`
-
-### obj
-
-Creates an object based on key/value pairs. 
-
-`{{obj "foo" "bar" "one" 1 "bool" false}}` outputs `map[bool:false foo:bar one:1]`
-
-### omit
-
-Returns a copy of the object with the given keys omitted.
-
-`{{omit $myObject "foo" "baz"}}` outputs `{hey: bear}`
-
-### pick
-
-Selects just the given keys out of an object, creating a new object.
-
-`{{pick $myObject "foo" "baz"}}` outputs `{baz: qux, foo: bar}`
-
-### pluck
-
-Given multiple objects and one key, pluck returns a list of values from all objects
-that contain the key. If an object does not contain the key, that object will not have
-an item in the list and the list will be shorter than the number of objects in the `pluck`
-call.
-
-`{{pluck "hey" $myObject $myOtherObject}}` outputs `[bear bear]`
-
-`{{pluck "one" $myObject $myOtherObject}}` outputs `[1]`
-
-When `pluck`'s only argument is a list of objects, it treats the call as if the objects in 
-that list were its arguments.
-
-`{{list $myObject $myOtherObject | pluck "hey"}}` outputs `[bear bear]`
-
-<!--- end function list --->
+101  doc: manual pages for Go tools                                                       gopherbot
+377  proposal: spec: various changes to :=                                                agl
+395  proposal: spec: use (*[4]int)(x) to convert slice x into array pointer               rogpeppe
+449  cmd/vet: warn about unused struct or array, ignoring assignment to field or element  gopherbot
+463  gccgo: compilation fails on Darwin                                                   gopherbot
+```
