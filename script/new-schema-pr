@@ -12,6 +12,7 @@ git diff --stat --exit-code current-schema-tag.txt || (echo "clean your tree bef
 script/update-schema
 
 [ -n "$(git diff --stat --exit-code current-schema-tag.txt || echo updated)" ] || (echo "already up to date" && exit)
+git diff --stat --exit-code current-schema-tag.txt
 
 new_version="$(cat current-schema-tag.txt)"
 update_branch="update-schema-release-$new_version"
