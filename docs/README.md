@@ -229,8 +229,10 @@ curl -X 'POST' -d '{"draft":true,"name":"my release","tag_name":"v0.0.1"}' -H 'A
 
 ## Output
 
+__See [Formatting Output](format.md)__
+
 Octo-cli outputs prettified json. You can modify the output with `--format`, `--output-each` and 
-`--raw-output` flags. See [Formatting Output](template-functions.md).
+`--raw-output` flags. 
 
 ## Preview flags
 
