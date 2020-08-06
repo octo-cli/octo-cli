@@ -21,5 +21,7 @@ if [ "$1" = "--check" ]; then
 fi
 
 go run ./docgen.go -schema api.github.com.json -out ./docs
-cp README.md docs/README.md
-cp CONTRIBUTING.md docs/CONTRIBUTING.md
+
+for f in README.md CONTRIBUTING.md; do
+  sed 's+\](docs/+](+g' "$f" > "docs/$f"
+done

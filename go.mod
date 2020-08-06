@@ -11,6 +11,7 @@ require (
 	github.com/getkin/kin-openapi v0.8.0
 	github.com/ghodss/yaml v1.0.0
 	github.com/joho/godotenv v1.3.0
+	github.com/killa-beez/gopkgs/sets/builtins v0.0.0-20191206232703-3018f97f77a9
 	github.com/kr/pretty v0.1.0 // indirect
 	github.com/pkg/errors v0.9.1
 	github.com/spf13/afero v1.2.2

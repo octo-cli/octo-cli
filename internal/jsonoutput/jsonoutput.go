@@ -66,9 +66,6 @@ var directFromSprig = []string{
 	// type conversion
 	"toString", "toStrings",
 
-	// file path
-	"base", "dir", "clean", "ext",
-
 	// dicts
 	"keys", "pick", "omit", "get", "hasKey",
 
@@ -93,9 +90,7 @@ var customFuncs = template.FuncMap{
 	"pluck":        pluck,
 	"join":         join,
 	"toCsv":        csvFunc(','),
-	"csvVals":      csvFunc(','),
 	"toTsv":        csvFunc('\t'),
-	"tsvVals":      csvFunc('\t'),
 	"toYaml":       toYaml,
 	"toJson":       sprigFuncs["mustToJson"],
 	"toPrettyJson": sprigFuncs["mustToPrettyJson"],
@@ -107,6 +102,7 @@ var customFuncs = template.FuncMap{
 	"compact":      sprigFuncs["mustCompact"],
 	"slice":        sprigFuncs["mustSlice"],
 	"split":        sprigFuncs["splitList"],
+	"obj":          sprigFuncs["dict"],
 }
 
 func newLine(v interface{}) string {
