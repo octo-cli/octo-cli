@@ -25,6 +25,3 @@ go run ./docgen.go -schema api.github.com.json -out ./docs
 for f in README.md CONTRIBUTING.md; do
   sed 's+\](docs/+](+g' "$f" > "docs/$f"
 done
-#cp README.md docs/README.md
-#
-#cp CONTRIBUTING.md docs/CONTRIBUTING.md
