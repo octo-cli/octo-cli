@@ -165,7 +165,7 @@ happen to have curl available on your system? I may have the answer for you.
 Just run the following command to download octo to your current directory:
 
 ```
-curl https://raw.githubusercontent.com/octo-cli/octo-cli/master/download.sh | sh
+curl https://raw.githubusercontent.com/octo-cli/octo-cli/main/download.sh | sh
 ```
 
 #### The slightly harder and slightly less trusting way
