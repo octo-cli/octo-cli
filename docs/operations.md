@@ -9262,9 +9262,10 @@ Provision organization membership for a user, and send an activation email to th
 | org | __Required__  |
 | userName | __Required__ Configured by the admin. Could be an email, login, or username |
 | active |  |
-| displayName |  |
+| displayName | The name of the user, suitable for display to end-users |
 | externalId |  |
 | groups |  |
+| name.formatted |  |
 | schemas |  |
 
 ## scim set-information-for-provisioned-user
@@ -9289,9 +9290,10 @@ You must at least provide the required values for the user: `userName`, `name`, 
 | scim_user_id | __Required__ scim_user_id parameter |
 | userName | __Required__ Configured by the admin. Could be an email, login, or username |
 | active |  |
-| displayName |  |
+| displayName | The name of the user, suitable for display to end-users |
 | externalId |  |
 | groups |  |
+| name.formatted |  |
 | schemas |  |
 
 ## scim update-attribute-for-user

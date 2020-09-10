@@ -65,6 +65,7 @@ type ScimProvisionAndInviteUserCmd struct {
 	DisplayName    string                `name:"displayName"`
 	ExternalId     string                `name:"externalId"`
 	Groups         []string              `name:"groups"`
+	NameFormatted  string                `name:"name.formatted"`
 	Schemas        []string              `name:"schemas"`
 	Emails         []internal.JSONObject `name:"emails" required:"true"`
 	NameFamilyName string                `name:"name.familyName" required:"true"`
@@ -83,6 +84,7 @@ func (c *ScimProvisionAndInviteUserCmd) Run(isValueSetMap map[string]bool) error
 	c.UpdateBody("externalId", c.ExternalId)
 	c.UpdateBody("groups", c.Groups)
 	c.UpdateBody("name.familyName", c.NameFamilyName)
+	c.UpdateBody("name.formatted", c.NameFormatted)
 	c.UpdateBody("name.givenName", c.NameGivenName)
 	c.UpdateBody("schemas", c.Schemas)
 	c.UpdateBody("userName", c.UserName)
@@ -96,6 +98,7 @@ type ScimSetInformationForProvisionedUserCmd struct {
 	DisplayName    string                `name:"displayName"`
 	ExternalId     string                `name:"externalId"`
 	Groups         []string              `name:"groups"`
+	NameFormatted  string                `name:"name.formatted"`
 	Schemas        []string              `name:"schemas"`
 	Emails         []internal.JSONObject `name:"emails" required:"true"`
 	NameFamilyName string                `name:"name.familyName" required:"true"`
@@ -115,6 +118,7 @@ func (c *ScimSetInformationForProvisionedUserCmd) Run(isValueSetMap map[string]b
 	c.UpdateBody("externalId", c.ExternalId)
 	c.UpdateBody("groups", c.Groups)
 	c.UpdateBody("name.familyName", c.NameFamilyName)
+	c.UpdateBody("name.formatted", c.NameFormatted)
 	c.UpdateBody("name.givenName", c.NameGivenName)
 	c.UpdateBody("schemas", c.Schemas)
 	c.UpdateBody("userName", c.UserName)

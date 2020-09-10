@@ -3046,10 +3046,12 @@ var FlagHelps = map[string]map[string]map[string]string{
 			"startIndex": "Used for pagination: the index of the first result to return.",
 		},
 		"provision-and-invite-user": {
-			"emails":   "user emails",
-			"userName": "Configured by the admin. Could be an email, login, or username",
+			"displayName": "The name of the user, suitable for display to end-users",
+			"emails":      "user emails",
+			"userName":    "Configured by the admin. Could be an email, login, or username",
 		},
 		"set-information-for-provisioned-user": {
+			"displayName":  "The name of the user, suitable for display to end-users",
 			"emails":       "user emails",
 			"scim_user_id": "scim_user_id parameter",
 			"userName":     "Configured by the admin. Could be an email, login, or username",
