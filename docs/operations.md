@@ -2,6 +2,27 @@
 # actions
 
 
+## actions add-repo-access-to-self-hosted-runner-group-in-org
+
+https://developer.github.com/v3/actions/self-hosted-runner-groups/#add-repository-acess-to-a-self-hosted-runner-group-in-an-organization
+
+The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
+
+
+Adds a repository to the list of selected repositories that can access a self-hosted runner group. The runner group must have `visibility` set to `selected`. For more information, see "[Create a self-hosted runner group for an organization](#create-a-self-hosted-runner-group-for-an-organization)."
+
+You must authenticate using an access token with the `admin:org`
+scope to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| org | __Required__  |
+| repository_id | __Required__  |
+| runner_group_id | __Required__ Unique identifier of the self-hosted runner group. |
+
 ## actions add-selected-repo-to-org-secret
 
 https://developer.github.com/v3/actions/secrets/#add-selected-repository-to-an-organization-secret
@@ -14,8 +35,29 @@ Adds a repository to an organization secret when the `visibility` for repository
 | name | description |
 |------|-------------|
 | org | __Required__  |
-| repository_id | __Required__ repository_id parameter |
+| repository_id | __Required__  |
 | secret_name | __Required__ secret_name parameter |
+
+## actions add-self-hosted-runner-to-group-for-org
+
+https://developer.github.com/v3/actions/self-hosted-runner-groups/#add-a-self-hosted-runner-to-a-group-for-an-organization
+
+The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
+
+
+Adds a self-hosted runner to a runner group configured in an organization.
+
+You must authenticate using an access token with the `admin:org`
+scope to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| org | __Required__  |
+| runner_group_id | __Required__ Unique identifier of the self-hosted runner group. |
+| runner_id | __Required__ Unique identifier of the self-hosted runner. |
 
 ## actions cancel-workflow-run
 
@@ -217,11 +259,9 @@ puts Base64.strict_encode64(encrypted_secret)
 
 https://developer.github.com/v3/actions/self-hosted-runners/#create-a-registration-token-for-an-organization
 
-**Warning:** The self-hosted runners API for organizations is currently in public beta and subject to change.
+Returns a token that you can pass to the `config` script. The token expires after one hour.
 
-
-Returns a token that you can pass to the `config` script. The token expires after one hour. You must authenticate
-using an access token with the `admin:org` scope to use this endpoint.
+You must authenticate using an access token with the `admin:org` scope to use this endpoint.
 
 #### Example using registration token
 
@@ -264,12 +304,9 @@ Configure your self-hosted runner, replacing `TOKEN` with the registration token
 
 https://developer.github.com/v3/actions/self-hosted-runners/#create-a-remove-token-for-an-organization
 
-**Warning:** The self-hosted runners API for organizations is currently in public beta and subject to change.
+Returns a token that you can pass to the `config` script to remove a self-hosted runner from an organization. The token expires after one hour.
 
-
-Returns a token that you can pass to the `config` script to remove a self-hosted runner from an organization. The
-token expires after one hour. You must authenticate using an access token with the `admin:org` scope to use this
-endpoint.
+You must authenticate using an access token with the `admin:org` scope to use this endpoint.
 
 #### Example using remove token
 
@@ -309,11 +346,32 @@ To remove your self-hosted runner from a repository, replace TOKEN with the remo
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
 
+## actions create-self-hosted-runner-group-for-org
+
+https://developer.github.com/v3/actions/self-hosted-runner-groups/#create-a-self-hosted-runner-group-for-an-organization
+
+The self-hosted runner groups REST API is available with GitHub Enterprise Cloud and GitHub Enterprise Server. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
+
+Creates a new self-hosted runner group for an organization.
+
+You must authenticate using an access token with the `admin:org` scope to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| name | __Required__ Name of the runner group. |
+| org | __Required__  |
+| runners | List of runner IDs to add to the runner group. |
+| selected_repository_ids | List of repository IDs that can access the runner group. |
+| visibility | Visibility of a runner group. You can select all repositories, select individual repositories, or limit access to private repositories. Can be one of: `all`, `selected`, or `private`. |
+
 ## actions create-workflow-dispatch
 
 https://developer.github.com/v3/actions/workflows/#create-a-workflow-dispatch-event
 
-You can use this endpoint to manually trigger a GitHub Actions workflow run. You can also replace `{workflow_id}` with the workflow file name. For example, you could use `main.yml`.
+You can use this endpoint to manually trigger a GitHub Actions workflow run. You can also replace `{workflow_id}` with the workflow file name. For example, you could use `main.yaml`.
 
 You must configure your GitHub Actions workflow to run when the [`workflow_dispatch` webhook](/developers/webhooks-and-events/webhook-events-and-payloads#workflow_dispatch) event occurs. The `inputs` are configured in the workflow file. For more information about how to configure the `workflow_dispatch` event in the workflow file, see "[Events that trigger workflows](/actions/reference/events-that-trigger-workflows#workflow_dispatch)."
 
@@ -326,7 +384,7 @@ You must authenticate using an access token with the `repo` scope to use this en
 |------|-------------|
 | ref | __Required__ The reference of the workflow run. The reference can be a branch, tag, or a commit SHA. |
 | repo | __Required__ repository in OWNER/REPO form |
-| workflow_id | __Required__  |
+| workflow_id | __Required__ The ID of the workflow. You can also pass the workflow file name as a string. |
 | inputs | Input keys and values configured in the workflow file. The maximum number of properties is 10. Any default properties configured in the workflow file will be used when `inputs` are omitted. |
 
 ## actions delete-artifact
@@ -375,9 +433,9 @@ Deletes a secret in a repository using the secret name. You must authenticate us
 
 https://developer.github.com/v3/actions/self-hosted-runners/#delete-a-self-hosted-runner-from-an-organization
 
-**Warning:** The self-hosted runners API for organizations is currently in public beta and subject to change.
+Forces the removal of a self-hosted runner from an organization. You can use this endpoint to completely remove the runner when the machine you were using no longer exists.
 
-Forces the removal of a self-hosted runner from an organization. You can use this endpoint to completely remove the runner when the machine you were using no longer exists. You must authenticate using an access token with the `admin:org` scope to use this endpoint.
+You must authenticate using an access token with the `admin:org` scope to use this endpoint.
 
 ### parameters
 
@@ -385,13 +443,16 @@ Forces the removal of a self-hosted runner from an organization. You can use thi
 | name | description |
 |------|-------------|
 | org | __Required__  |
-| runner_id | __Required__ runner_id parameter |
+| runner_id | __Required__ Unique identifier of the self-hosted runner. |
 
 ## actions delete-self-hosted-runner-from-repo
 
 https://developer.github.com/v3/actions/self-hosted-runners/#delete-a-self-hosted-runner-from-a-repository
 
-Forces the removal of a self-hosted runner from a repository. You can use this endpoint to completely remove the runner when the machine you were using no longer exists. You must authenticate using an access token with the `repo` scope to use this endpoint.
+Forces the removal of a self-hosted runner from a repository. You can use this endpoint to completely remove the runner when the machine you were using no longer exists.
+
+You must authenticate using an access token with the `repo`
+scope to use this endpoint.
 
 ### parameters
 
@@ -399,7 +460,25 @@ Forces the removal of a self-hosted runner from a repository. You can use this e
 | name | description |
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
-| runner_id | __Required__ runner_id parameter |
+| runner_id | __Required__ Unique identifier of the self-hosted runner. |
+
+## actions delete-self-hosted-runner-group-from-org
+
+https://developer.github.com/v3/actions/self-hosted-runner-groups/#delete-a-self-hosted-runner-group-from-an-organization
+
+The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
+
+Deletes a self-hosted runner group for an organization.
+
+You must authenticate using an access token with the `admin:org` scope to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| org | __Required__  |
+| runner_group_id | __Required__ Unique identifier of the self-hosted runner group. |
 
 ## actions delete-workflow-run
 
@@ -445,7 +524,7 @@ GitHub Apps must have the `actions:read` permission to use this endpoint.
 
 | name | description |
 |------|-------------|
-| archive_format | __Required__ archive_format parameter |
+| archive_format | __Required__  |
 | artifact_id | __Required__ artifact_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
@@ -569,9 +648,9 @@ Gets a single repository secret without revealing its encrypted value. You must 
 
 https://developer.github.com/v3/actions/self-hosted-runners/#get-a-self-hosted-runner-for-an-organization
 
-**Warning:** The self-hosted runners API for organizations is currently in public beta and subject to change.
+Gets a specific self-hosted runner configured in an organization.
 
-Gets a specific self-hosted runner for an organization. You must authenticate using an access token with the `admin:org` scope to use this endpoint.
+You must authenticate using an access token with the `admin:org` scope to use this endpoint.
 
 ### parameters
 
@@ -579,13 +658,16 @@ Gets a specific self-hosted runner for an organization. You must authenticate us
 | name | description |
 |------|-------------|
 | org | __Required__  |
-| runner_id | __Required__ runner_id parameter |
+| runner_id | __Required__ Unique identifier of the self-hosted runner. |
 
 ## actions get-self-hosted-runner-for-repo
 
 https://developer.github.com/v3/actions/self-hosted-runners/#get-a-self-hosted-runner-for-a-repository
 
-Gets a specific self-hosted runner. You must authenticate using an access token with the `repo` scope to use this endpoint.
+Gets a specific self-hosted runner configured in a repository.
+
+You must authenticate using an access token with the `repo` scope to use this
+endpoint.
 
 ### parameters
 
@@ -593,13 +675,31 @@ Gets a specific self-hosted runner. You must authenticate using an access token 
 | name | description |
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
-| runner_id | __Required__ runner_id parameter |
+| runner_id | __Required__ Unique identifier of the self-hosted runner. |
+
+## actions get-self-hosted-runner-group-for-org
+
+https://developer.github.com/v3/actions/self-hosted-runner-groups/#get-a-self-hosted-runner-group-for-an-organization
+
+The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
+
+Gets a specific self-hosted runner group for an organization.
+
+You must authenticate using an access token with the `admin:org` scope to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| org | __Required__  |
+| runner_group_id | __Required__ Unique identifier of the self-hosted runner group. |
 
 ## actions get-workflow
 
 https://developer.github.com/v3/actions/workflows/#get-a-workflow
 
-Gets a specific workflow. You can also replace `:workflow_id` with `:workflow_file_name`. For example, you could use `main.yml`. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
+Gets a specific workflow. You can also replace `:workflow_id` with `:workflow_file_name`. For example, you could use `main.yaml`. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
 
 ### parameters
 
@@ -607,7 +707,7 @@ Gets a specific workflow. You can also replace `:workflow_id` with `:workflow_fi
 | name | description |
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
-| workflow_id | __Required__  |
+| workflow_id | __Required__ The ID of the workflow. You can also pass the workflow file name as a string. |
 
 ## actions get-workflow-run
 
@@ -649,7 +749,7 @@ https://developer.github.com/v3/actions/workflows/#get-workflow-usage
 
 Gets the number of billable minutes used by a specific workflow during the current billing cycle. Billable minutes only apply to workflows in private repositories that use GitHub-hosted runners. Usage is listed for each GitHub-hosted runner operating system in milliseconds. Any job re-runs are also included in the usage. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
 
-You can also replace `:workflow_id` with `:workflow_file_name`. For example, you could use `main.yml`. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
+You can also replace `:workflow_id` with `:workflow_file_name`. For example, you could use `main.yaml`. Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope. GitHub Apps must have the `actions:read` permission to use this endpoint.
 
 ### parameters
 
@@ -657,7 +757,7 @@ You can also replace `:workflow_id` with `:workflow_file_name`. For example, you
 | name | description |
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
-| workflow_id | __Required__  |
+| workflow_id | __Required__ The ID of the workflow. You can also pass the workflow file name as a string. |
 
 ## actions list-artifacts-for-repo
 
@@ -706,6 +806,24 @@ Lists all secrets available in an organization without revealing their encrypted
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
+## actions list-repo-access-to-self-hosted-runner-group-in-org
+
+https://developer.github.com/v3/actions/self-hosted-runner-groups/#list-repository-access-to-a-self-hosted-runner-group-in-an-organization
+
+The self-hosted runner groups REST API is available with GitHub Enterprise Cloud and GitHub Enterprise Server. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
+
+Lists the repositories with access to a self-hosted runner group configured in an organization.
+
+You must authenticate using an access token with the `admin:org` scope to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| org | __Required__  |
+| runner_group_id | __Required__ Unique identifier of the self-hosted runner group. |
+
 ## actions list-repo-secrets
 
 https://developer.github.com/v3/actions/secrets/#list-repository-secrets
@@ -740,9 +858,9 @@ Lists the workflows in a repository. Anyone with read access to the repository c
 
 https://developer.github.com/v3/actions/self-hosted-runners/#list-runner-applications-for-an-organization
 
-**Warning:** The self-hosted runners API for organizations is currently in public beta and subject to change.
+Lists binaries for the runner application that you can download and run.
 
-Lists binaries for the runner application that you can download and run. You must authenticate using an access token with the `admin:org` scope to use this endpoint.
+You must authenticate using an access token with the `admin:org` scope to use this endpoint.
 
 ### parameters
 
@@ -755,7 +873,9 @@ Lists binaries for the runner application that you can download and run. You mus
 
 https://developer.github.com/v3/actions/self-hosted-runners/#list-runner-applications-for-a-repository
 
-Lists binaries for the runner application that you can download and run. You must authenticate using an access token with the `repo` scope to use this endpoint.
+Lists binaries for the runner application that you can download and run.
+
+You must authenticate using an access token with the `repo` scope to use this endpoint.
 
 ### parameters
 
@@ -778,13 +898,32 @@ Lists all repositories that have been selected when the `visibility` for reposit
 | org | __Required__  |
 | secret_name | __Required__ secret_name parameter |
 
+## actions list-self-hosted-runner-groups-for-org
+
+https://developer.github.com/v3/actions/self-hosted-runner-groups/#list-self-hosted-runner-groups-for-an-organization
+
+The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
+
+Lists all self-hosted runner groups configured in an organization and inherited from an enterprise.
+
+You must authenticate using an access token with the `admin:org` scope to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| org | __Required__  |
+| page | Page number of the results to fetch. |
+| per_page | Results per page (max 100) |
+
 ## actions list-self-hosted-runners-for-org
 
 https://developer.github.com/v3/actions/self-hosted-runners/#list-self-hosted-runners-for-an-organization
 
-**Warning:** The self-hosted runners API for organizations is currently in public beta and subject to change.
+Lists all self-hosted runners configured in an organization.
 
-Lists all self-hosted runners for an organization. You must authenticate using an access token with the `admin:org` scope to use this endpoint.
+You must authenticate using an access token with the `admin:org` scope to use this endpoint.
 
 ### parameters
 
@@ -799,7 +938,7 @@ Lists all self-hosted runners for an organization. You must authenticate using a
 
 https://developer.github.com/v3/actions/self-hosted-runners/#list-self-hosted-runners-for-a-repository
 
-Lists all self-hosted runners for a repository. You must authenticate using an access token with the `repo` scope to use this endpoint.
+Lists all self-hosted runners configured in a repository. You must authenticate using an access token with the `repo` scope to use this endpoint.
 
 ### parameters
 
@@ -807,6 +946,26 @@ Lists all self-hosted runners for a repository. You must authenticate using an a
 | name | description |
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
+| page | Page number of the results to fetch. |
+| per_page | Results per page (max 100) |
+
+## actions list-self-hosted-runners-in-group-for-org
+
+https://developer.github.com/v3/actions/self-hosted-runner-groups/#list-self-hosted-runners-in-a-group-for-an-organization
+
+The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
+
+Lists self-hosted runners that are in a specific organization group.
+
+You must authenticate using an access token with the `admin:org` scope to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| org | __Required__  |
+| runner_group_id | __Required__ Unique identifier of the self-hosted runner group. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -830,7 +989,7 @@ Lists artifacts for a workflow run. Anyone with read access to the repository ca
 
 https://developer.github.com/v3/actions/workflow-runs/#list-workflow-runs
 
-List all workflow runs for a workflow. You can also replace `:workflow_id` with `:workflow_file_name`. For example, you could use `main.yml`. You can use parameters to narrow the list of results. For more information about using parameters, see [Parameters](https://developer.github.com/v3/#parameters).
+List all workflow runs for a workflow. You can also replace `:workflow_id` with `:workflow_file_name`. For example, you could use `main.yaml`. You can use parameters to narrow the list of results. For more information about using parameters, see [Parameters](https://developer.github.com/v3/#parameters).
 
 Anyone with read access to the repository can use this endpoint. If the repository is private you must use an access token with the `repo` scope.
 
@@ -840,7 +999,7 @@ Anyone with read access to the repository can use this endpoint. If the reposito
 | name | description |
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
-| workflow_id | __Required__  |
+| workflow_id | __Required__ The ID of the workflow. You can also pass the workflow file name as a string. |
 | actor | Returns someone's workflow runs. Use the login for the user who created the `push` associated with the check suite or workflow run. |
 | branch | Returns workflow runs associated with a branch. Use the name of the branch of the `push`. |
 | event | Returns workflow run triggered by the event you specify. For example, `push`, `pull_request` or `issue`. For more information, see "[Events that trigger workflows](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/events-that-trigger-workflows)." |
@@ -883,6 +1042,26 @@ Re-runs your workflow run using its `id`. You must authenticate using an access 
 | repo | __Required__ repository in OWNER/REPO form |
 | run_id | __Required__  |
 
+## actions remove-repo-access-to-self-hosted-runner-group-in-org
+
+https://developer.github.com/v3/actions/self-hosted-runner-groups/#remove-repository-access-to-a-self-hosted-runner-group-in-an-organization
+
+The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
+
+
+Removes a repository from the list of selected repositories that can access a self-hosted runner group. The runner group must have `visibility` set to `selected`. For more information, see "[Create a self-hosted runner group for an organization](#create-a-self-hosted-runner-group-for-an-organization)."
+
+You must authenticate using an access token with the `admin:org` scope to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| org | __Required__  |
+| repository_id | __Required__  |
+| runner_group_id | __Required__ Unique identifier of the self-hosted runner group. |
+
 ## actions remove-selected-repo-from-org-secret
 
 https://developer.github.com/v3/actions/secrets/#remove-selected-repository-from-an-organization-secret
@@ -895,8 +1074,47 @@ Removes a repository from an organization secret when the `visibility` for repos
 | name | description |
 |------|-------------|
 | org | __Required__  |
-| repository_id | __Required__ repository_id parameter |
+| repository_id | __Required__  |
 | secret_name | __Required__ secret_name parameter |
+
+## actions remove-self-hosted-runner-from-group-for-org
+
+https://developer.github.com/v3/actions/self-hosted-runner-groups/#remove-a-self-hosted-runner-from-a-group-for-an-organization
+
+The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
+
+
+Removes a self-hosted runner from a group configured in an organization. The runner is then returned to the default group.
+
+You must authenticate using an access token with the `admin:org` scope to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| org | __Required__  |
+| runner_group_id | __Required__ Unique identifier of the self-hosted runner group. |
+| runner_id | __Required__ Unique identifier of the self-hosted runner. |
+
+## actions set-repo-access-to-self-hosted-runner-group-in-org
+
+https://developer.github.com/v3/actions/self-hosted-runner-groups/#set-repository-access-to-a-self-hosted-runner-group-in-an-organization
+
+The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
+
+Replaces the list of repositories that have access to a self-hosted runner group configured in an organization.
+
+You must authenticate using an access token with the `admin:org` scope to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| org | __Required__  |
+| runner_group_id | __Required__ Unique identifier of the self-hosted runner group. |
+| selected_repository_ids | __Required__ List of repository IDs that can access the runner group. |
 
 ## actions set-selected-repos-for-org-secret
 
@@ -912,6 +1130,45 @@ Replaces all repositories for an organization secret when the `visibility` for r
 | org | __Required__  |
 | secret_name | __Required__ secret_name parameter |
 | selected_repository_ids | An array of repository ids that can access the organization secret. You can only provide a list of repository ids when the `visibility` is set to `selected`. You can add and remove individual repositories using the [Set selected repositories for an organization secret](https://developer.github.com/v3/actions/secrets/#set-selected-repositories-for-an-organization-secret) and [Remove selected repository from an organization secret](https://developer.github.com/v3/actions/secrets/#remove-selected-repository-from-an-organization-secret) endpoints. |
+
+## actions set-self-hosted-runners-in-group-for-org
+
+https://developer.github.com/v3/actions/self-hosted-runner-groups/#set-self-hosted-runners-in-a-group-for-an-organization
+
+The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
+
+Replaces the list of self-hosted runners that are part of an organization runner group.
+
+You must authenticate using an access token with the `admin:org` scope to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| org | __Required__  |
+| runner_group_id | __Required__ Unique identifier of the self-hosted runner group. |
+| runners | __Required__ List of runner IDs to add to the runner group. |
+
+## actions update-self-hosted-runner-group-for-org
+
+https://developer.github.com/v3/actions/self-hosted-runner-groups/#update-a-self-hosted-runner-group-for-an-organization
+
+The self-hosted runner groups REST API is available with GitHub Enterprise Cloud. For more information, see "[GitHub's products](https://docs.github.com/github/getting-started-with-github/githubs-products)."
+
+Updates the `name` and `visibility` of a self-hosted runner group in an organization.
+
+You must authenticate using an access token with the `admin:org` scope to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| org | __Required__  |
+| runner_group_id | __Required__ Unique identifier of the self-hosted runner group. |
+| name | Name of the runner group. |
+| visibility | Visibility of a runner group. You can select all repositories, select individual repositories, or all private repositories. Can be one of: `all`, `selected`, or `private`. |
 
 # activity
 
@@ -1399,8 +1656,7 @@ You must use a personal access token (which you can create via the [command line
 | name | description |
 |------|-------------|
 | installation_id | __Required__ installation_id parameter |
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
-| repository_id | __Required__ repository_id parameter |
+| repository_id | __Required__  |
 
 ## apps check-authorization
 
@@ -1448,7 +1704,7 @@ You must use an [installation access token](https://developer.github.com/apps/bu
 | name | description |
 |------|-------------|
 | body | __Required__ The body of the attachment |
-| content_reference_id | __Required__ content_reference_id parameter |
+| content_reference_id | __Required__  |
 | corsair-preview | __Required__ To access the Content Attachments API during the preview period, you must set this flag. |
 | title | __Required__ The title of the attachment |
 
@@ -1463,7 +1719,7 @@ Use this endpoint to complete the handshake necessary when implementing the [Git
 
 | name | description |
 |------|-------------|
-| code | __Required__ code parameter |
+| code | __Required__  |
 
 ## apps create-installation-access-token
 
@@ -1479,7 +1735,6 @@ You must use a [JWT](https://developer.github.com/apps/building-github-apps/auth
 | name | description |
 |------|-------------|
 | installation_id | __Required__ installation_id parameter |
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
 | permissions.contents |  |
 | permissions.def_not_a_repo |  |
 | permissions.deployments |  |
@@ -1517,7 +1772,6 @@ You must use a [JWT](https://developer.github.com/apps/building-github-apps/auth
 | name | description |
 |------|-------------|
 | installation_id | __Required__ installation_id parameter |
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
 
 ## apps delete-token
 
@@ -1541,13 +1795,6 @@ Returns the GitHub App associated with the authentication credentials used. To s
 
 You must use a [JWT](https://developer.github.com/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-a-github-app) to access this endpoint.
 
-### parameters
-
-
-| name | description |
-|------|-------------|
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
-
 ## apps get-by-slug
 
 https://developer.github.com/v3/apps/#get-an-app
@@ -1561,8 +1808,7 @@ If the GitHub App you specify is public, you can access this endpoint without au
 
 | name | description |
 |------|-------------|
-| app_slug | __Required__ app_slug parameter |
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
+| app_slug | __Required__  |
 
 ## apps get-installation
 
@@ -1578,7 +1824,6 @@ You must use a [JWT](https://developer.github.com/apps/building-github-apps/auth
 | name | description |
 |------|-------------|
 | installation_id | __Required__ installation_id parameter |
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
 
 ## apps get-org-installation
 
@@ -1593,7 +1838,6 @@ You must use a [JWT](https://developer.github.com/apps/building-github-apps/auth
 
 | name | description |
 |------|-------------|
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
 | org | __Required__  |
 
 ## apps get-repo-installation
@@ -1609,7 +1853,6 @@ You must use a [JWT](https://developer.github.com/apps/building-github-apps/auth
 
 | name | description |
 |------|-------------|
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## apps get-subscription-plan-for-account
@@ -1655,7 +1898,6 @@ You must use a [JWT](https://developer.github.com/apps/building-github-apps/auth
 
 | name | description |
 |------|-------------|
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
 | username | __Required__  |
 
 ## apps list-accounts-for-plan
@@ -1714,7 +1956,6 @@ The access the user has to each repository is included in the hash under the `pe
 | name | description |
 |------|-------------|
 | installation_id | __Required__ installation_id parameter |
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
 | mercy-preview | The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must set this flag. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -1732,7 +1973,6 @@ The permissions the installation has are included under the `permissions` key.
 
 | name | description |
 |------|-------------|
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
 | outdated |  |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -1755,7 +1995,6 @@ You can find the permissions for the installation under the `permissions` key.
 
 | name | description |
 |------|-------------|
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 
@@ -1804,7 +2043,6 @@ You must use an [installation access token](https://developer.github.com/apps/bu
 
 | name | description |
 |------|-------------|
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
 | mercy-preview | The `topics` property for repositories on GitHub is currently available for developers to preview. To view the `topics` property in calls that return repository results, you must set this flag. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -1851,8 +2089,7 @@ You must use a personal access token (which you can create via the [command line
 | name | description |
 |------|-------------|
 | installation_id | __Required__ installation_id parameter |
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
-| repository_id | __Required__ repository_id parameter |
+| repository_id | __Required__  |
 
 ## apps reset-authorization
 
@@ -1973,8 +2210,6 @@ You must use a [JWT](https://developer.github.com/apps/building-github-apps/auth
 
 https://developer.github.com/v3/billing/#get-github-actions-billing-for-an-enterprise
 
-**Warning:** The Billing API is currently in public beta and subject to change.
-
 Gets the summary of the free and paid GitHub Actions minutes used.
 
 Paid minutes only apply to workflows in private repositories that use GitHub-hosted runners. Minutes used is listed for each GitHub-hosted runner operating system. Any job re-runs are also included in the usage. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
@@ -1986,13 +2221,11 @@ The authenticated user must be an enterprise admin.
 
 | name | description |
 |------|-------------|
-| enterprise_id | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
 
 ## billing get-github-actions-billing-org
 
 https://developer.github.com/v3/billing/#get-github-actions-billing-for-an-organization
-
-**Warning:** The Billing API is currently in public beta and subject to change.
 
 Gets the summary of the free and paid GitHub Actions minutes used.
 
@@ -2011,8 +2244,6 @@ Access tokens must have the `read:org` scope.
 
 https://developer.github.com/v3/billing/#get-github-actions-billing-for-a-user
 
-**Warning:** The Billing API is currently in public beta and subject to change.
-
 Gets the summary of the free and paid GitHub Actions minutes used.
 
 Paid minutes only apply to workflows in private repositories that use GitHub-hosted runners. Minutes used is listed for each GitHub-hosted runner operating system. Any job re-runs are also included in the usage. The usage does not include the multiplier for macOS and Windows runners and is not rounded up to the nearest whole minute. For more information, see "[Managing billing for GitHub Actions](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-actions)".
@@ -2030,8 +2261,6 @@ Access tokens must have the `user` scope.
 
 https://developer.github.com/v3/billing/#get-github-packages-billing-for-an-enterprise
 
-**Warning:** The Billing API is currently in public beta and subject to change.
-
 Gets the free and paid storage used for GitHub Packages in gigabytes.
 
 Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
@@ -2043,13 +2272,11 @@ The authenticated user must be an enterprise admin.
 
 | name | description |
 |------|-------------|
-| enterprise_id | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
 
 ## billing get-github-packages-billing-org
 
 https://developer.github.com/v3/billing/#get-github-packages-billing-for-an-organization
-
-**Warning:** The Billing API is currently in public beta and subject to change.
 
 Gets the free and paid storage usued for GitHub Packages in gigabytes.
 
@@ -2068,8 +2295,6 @@ Access tokens must have the `read:org` scope.
 
 https://developer.github.com/v3/billing/#get-github-packages-billing-for-a-user
 
-**Warning:** The Billing API is currently in public beta and subject to change.
-
 Gets the free and paid storage used for GitHub Packages in gigabytes.
 
 Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
@@ -2087,8 +2312,6 @@ Access tokens must have the `user` scope.
 
 https://developer.github.com/v3/billing/#get-shared-storage-billing-for-an-enterprise
 
-**Warning:** The Billing API is currently in public beta and subject to change.
-
 Gets the estimated paid and estimated total storage used for GitHub Actions and Github Packages.
 
 Paid minutes only apply to packages stored for private repositories. For more information, see "[Managing billing for GitHub Packages](https://help.github.com/github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-packages)."
@@ -2100,13 +2323,11 @@ The authenticated user must be an enterprise admin.
 
 | name | description |
 |------|-------------|
-| enterprise_id | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
 
 ## billing get-shared-storage-billing-org
 
 https://developer.github.com/v3/billing/#get-shared-storage-billing-for-an-organization
-
-**Warning:** The Billing API is currently in public beta and subject to change.
 
 Gets the estimated paid and estimated total storage used for GitHub Actions and Github Packages.
 
@@ -2124,8 +2345,6 @@ Access tokens must have the `read:org` scope.
 ## billing get-shared-storage-billing-user
 
 https://developer.github.com/v3/billing/#get-shared-storage-billing-for-a-user
-
-**Warning:** The Billing API is currently in public beta and subject to change.
 
 Gets the estimated paid and estimated total storage used for GitHub Actions and Github Packages.
 
@@ -2156,7 +2375,6 @@ Creates a new check run for a specific commit in a repository. Your GitHub App m
 
 | name | description |
 |------|-------------|
-| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | head_sha | __Required__ The SHA of the commit. |
 | name | __Required__ The name of the check. For example, "code-coverage". |
 | repo | __Required__ repository in OWNER/REPO form |
@@ -2186,7 +2404,6 @@ By default, check suites are automatically created when you create a [check run]
 
 | name | description |
 |------|-------------|
-| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | head_sha | __Required__ The sha of the head commit. |
 | repo | __Required__ repository in OWNER/REPO form |
 
@@ -2203,7 +2420,6 @@ Gets a single check run using its `id`. GitHub Apps must have the `checks:read` 
 
 | name | description |
 |------|-------------|
-| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | check_run_id | __Required__ check_run_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
@@ -2220,7 +2436,6 @@ Gets a single check suite using its `id`. GitHub Apps must have the `checks:read
 
 | name | description |
 |------|-------------|
-| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | check_suite_id | __Required__ check_suite_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
@@ -2235,7 +2450,6 @@ Lists annotations for a check run using the annotation `id`. GitHub Apps must ha
 
 | name | description |
 |------|-------------|
-| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | check_run_id | __Required__ check_run_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
@@ -2254,7 +2468,6 @@ Lists check runs for a commit ref. The `ref` can be a SHA, branch name, or a tag
 
 | name | description |
 |------|-------------|
-| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | ref | __Required__ ref+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | check_name | Returns check runs with the specified `name`. |
@@ -2276,7 +2489,6 @@ Lists check runs for a check suite using its `id`. GitHub Apps must have the `ch
 
 | name | description |
 |------|-------------|
-| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | check_suite_id | __Required__ check_suite_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | check_name | Returns check runs with the specified `name`. |
@@ -2298,7 +2510,6 @@ Lists check suites for a commit `ref`. The `ref` can be a SHA, branch name, or a
 
 | name | description |
 |------|-------------|
-| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | ref | __Required__ ref+ parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | app_id | Filters check suites by GitHub App `id`. |
@@ -2319,7 +2530,6 @@ To rerequest a check suite, your GitHub App must have the `checks:read` permissi
 
 | name | description |
 |------|-------------|
-| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | check_suite_id | __Required__ check_suite_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 
@@ -2334,7 +2544,6 @@ Changes the default automatic flow when creating check suites. By default, a che
 
 | name | description |
 |------|-------------|
-| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | repo | __Required__ repository in OWNER/REPO form |
 | auto_trigger_checks | Enables or disables automatic creation of CheckSuite events upon pushes to the repository. Enabled by default. See the [`auto_trigger_checks` object](https://developer.github.com/v3/checks/suites/#auto_trigger_checks-object) description for details. |
 
@@ -2351,7 +2560,6 @@ Updates a check run for a specific commit in a repository. Your GitHub App must 
 
 | name | description |
 |------|-------------|
-| antiope-preview | __Required__ The Checks API is currently available for developers to preview. During the preview period, the API may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2018-05-07-new-checks-api-public-beta/) for full details. To access the API during the preview period, you must set this flag. |
 | check_run_id | __Required__ check_run_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | actions | Possible further actions the integrator can perform, which a user may trigger. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://developer.github.com/v3/checks/runs/#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://developer.github.com/v3/checks/runs/#check-runs-and-requested-actions)." |
@@ -2377,21 +2585,21 @@ https://developer.github.com/v3/code-scanning/#get-a-code-scanning-alert
 
 Gets a single code scanning alert. You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` read permission to use this endpoint.
 
-The security `alert_id` is found at the end of the security alert's URL. For example, the security alert ID for `https://github.com/Octo-org/octo-repo/security/code-scanning/88` is `88`.
+The security `alert_number` is found at the end of the security alert's URL. For example, the security alert ID for `https://github.com/Octo-org/octo-repo/security/code-scanning/88` is `88`.
 
 ### parameters
 
 
 | name | description |
 |------|-------------|
-| alert_id | __Required__ alert_id parameter |
+| alert_number | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## code-scanning list-alerts-for-repo
 
 https://developer.github.com/v3/code-scanning/#list-code-scanning-alerts-for-a-repository
 
-Lists all open code scanning alerts for the default branch (usually `master`) and protected branches in a repository. You must use an access token with the `security_events` scope to use this endpoint. GitHub Apps must have the `security_events` read permission to use this endpoint.
+Lists all open code scanning alerts for the default branch (usually `master`) and protected branches in a repository. For private repos, you must use an access token with the `repo` scope. For public repos, you must use an access token with `public_repo` and `repo:security_events` scopes. GitHub Apps must have the `security_events` read permission to use this endpoint.
 
 ### parameters
 
@@ -2399,8 +2607,60 @@ Lists all open code scanning alerts for the default branch (usually `master`) an
 | name | description |
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
-| ref | Returns a list of code scanning alerts for a specific brach reference. The `ref` must be formatted as `heads/<branch name>`. |
-| state | Set to `closed` to list only closed code scanning alerts. |
+| ref | Set a full Git reference to list alerts for a specific branch. The `ref` must be formatted as `refs/heads/<branch name>`. |
+| state | Set to `open`, `fixed`, or `dismissed` to list code scanning alerts in a specific state. |
+
+## code-scanning list-recent-analyses
+
+https://developer.github.com/v3/code-scanning/#list-recent-analyses
+
+List the details of recent code scanning analyses for a repository. For private repos, you must use an access token with the `repo` scope. For public repos, you must use an access token with `public_repo` and `repo:security_events` scopes. GitHub Apps must have the `security_events` read permission to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| repo | __Required__ repository in OWNER/REPO form |
+| ref | Set a full Git reference to list alerts for a specific branch. The `ref` must be formatted as `refs/heads/<branch name>`. |
+| tool_name | Set a single code scanning tool name to filter alerts by tool. |
+
+## code-scanning update-alert
+
+https://developer.github.com/v3/code-scanning/#upload-a-code-scanning-alert
+
+Updates the status of a single code scanning alert. For private repos, you must use an access token with the `repo` scope. For public repos, you must use an access token with `public_repo` and `repo:security_events` scopes.
+GitHub Apps must have the `security_events` write permission to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| alert_number | __Required__ The code scanning alert number. |
+| repo | __Required__ repository in OWNER/REPO form |
+| state | __Required__ Sets the state of the code scanning alert. Can be one of `open` or `dismissed`. You must provide `dismissed_reason` when you set the state to `dismissed`. |
+| dismissed_reason | **Required when the state is dismissed.** The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`. |
+
+## code-scanning upload-sarif
+
+https://developer.github.com/v3/code-scanning/#upload-a-sarif-analysis
+
+Upload a SARIF file containing the results of a code scanning analysis to make the results available in a repository.
+For private repos, you must use an access token with the `repo` scope. For public repos, you must use an access token with `public_repo` and `repo:security_events` scopes. GitHub Apps must have the `security_events` write permission to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| commit_sha | __Required__ The commit SHA of the code scanning analysis file. |
+| ref | __Required__ The full Git reference of the code scanning analysis file, formatted as `refs/heads/<branch name>`. |
+| repo | __Required__ repository in OWNER/REPO form |
+| sarif | __Required__ A Base64 string representing the SARIF file to upload. You must first compress your SARIF file using [`gzip`](http://www.gnu.org/software/gzip/manual/gzip.html) and then translate the contents of the file into a Base64 encoding string. |
+| tool_name | __Required__ The name of the tool used to generate the code scanning analysis alert. |
+| checkout_uri | The base directory used in the analysis, as it appears in the SARIF file.<br>This property is used to convert file paths from absolute to relative, so that alerts can be mapped to their correct location in the repository. |
+| started_at | The time that the analysis run began. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
 
 # codes-of-conduct
 
@@ -2429,7 +2689,7 @@ https://developer.github.com/v3/codes_of_conduct/#get-a-code-of-conduct
 
 | name | description |
 |------|-------------|
-| key | __Required__ key parameter |
+| key | __Required__  |
 | scarlet-witch-preview | __Required__ The Codes of Conduct API is currently available for developers to preview.<br><br>To access the API during the preview period, you must set this flag. |
 
 ## codes-of-conduct get-for-repo
@@ -2454,6 +2714,585 @@ This method returns the contents of the repository's code of conduct file, if on
 https://developer.github.com/v3/emojis/#get-emojis
 
 Lists all the emojis available to use on GitHub.
+
+# enterprise-admin
+
+
+## enterprise-admin add-org-access-to-self-hosted-runner-group-in-enterprise
+
+https://developer.github.com/v3/enterprise-admin/actions/#add-organization-access-to-a-self-hosted-runner-group-in-an-enterprise
+
+Adds an organization to the list of selected organizations that can access a self-hosted runner group. The runner group must have `visibility` set to `selected`. For more information, see "[Create a self-hosted runner group for an enterprise](#create-a-self-hosted-runner-group-for-an-enterprise)."
+
+You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+| org_id | __Required__ Unique identifier of an organization. |
+| runner_group_id | __Required__ Unique identifier of the self-hosted runner group. |
+
+## enterprise-admin add-self-hosted-runner-to-group-for-enterprise
+
+https://developer.github.com/v3/enterprise-admin/actions/#add-a-self-hosted-runner-to-a-group-for-an-enterprise
+
+Adds a self-hosted runner to a runner group configured in an enterprise.
+
+You must authenticate using an access token with the `admin:enterprise`
+scope to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+| runner_group_id | __Required__ Unique identifier of the self-hosted runner group. |
+| runner_id | __Required__ Unique identifier of the self-hosted runner. |
+
+## enterprise-admin create-registration-token-for-enterprise
+
+https://developer.github.com/v3/enterprise-admin/actions/#create-a-registration-token-for-an-enterprise
+
+Returns a token that you can pass to the `config` script. The token expires after one hour.
+
+You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
+
+#### Example using registration token
+
+Configure your self-hosted runner, replacing `TOKEN` with the registration token provided by this endpoint.
+
+```
+./config.sh --url https://github.com/enterpises/octo-enterprise --token TOKEN
+```
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+
+## enterprise-admin create-remove-token-for-enterprise
+
+https://developer.github.com/v3/enterprise-admin/actions/#create-a-remove-token-for-an-enterprise
+
+Returns a token that you can pass to the `config` script to remove a self-hosted runner from an enterprise. The token expires after one hour.
+
+You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
+
+#### Example using remove token
+
+To remove your self-hosted runner from an enterprise, replace `TOKEN` with the remove token provided by this
+endpoint.
+
+```
+./config.sh remove --token TOKEN
+```
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+
+## enterprise-admin create-self-hosted-runner-group-for-enterprise
+
+https://developer.github.com/v3/enterprise-admin/actions/#create-self-hosted-runner-group-for-an-enterprise
+
+Creates a new self-hosted runner group for an enterprise.
+
+You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+| name | __Required__ Name of the runner group. |
+| runners | List of runner IDs to add to the runner group. |
+| selected_organization_ids | List of organization IDs that can access the runner group. |
+| visibility | Visibility of a runner group. You can select all organizations or select individual organization. Can be one of: `all` or `selected` |
+
+## enterprise-admin delete-scim-group-from-enterprise
+
+https://developer.github.com/v3/enterprise-admin/scim/#delete-a-scim-group-from-an-enterprise
+
+**Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+| scim_group_id | __Required__ Identifier generated by the GitHub SCIM endpoint. |
+
+## enterprise-admin delete-self-hosted-runner-from-enterprise
+
+https://developer.github.com/v3/enterprise-admin/actions/#delete-self-hosted-runner-from-an-enterprise
+
+Forces the removal of a self-hosted runner from an enterprise. You can use this endpoint to completely remove the runner when the machine you were using no longer exists.
+
+You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+| runner_id | __Required__ Unique identifier of the self-hosted runner. |
+
+## enterprise-admin delete-self-hosted-runner-group-from-enterprise
+
+https://developer.github.com/v3/enterprise-admin/actions/#delete-a-self-hosted-runner-group-from-an-enterprise
+
+Deletes a self-hosted runner group for an enterprise.
+
+You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+| runner_group_id | __Required__ Unique identifier of the self-hosted runner group. |
+
+## enterprise-admin delete-user-from-enterprise
+
+https://developer.github.com/v3/enterprise-admin/scim/#delete-a-scim-user-from-an-enterprise
+
+**Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+| scim_user_id | __Required__ scim_user_id parameter |
+
+## enterprise-admin get-provisioning-information-for-enterprise-group
+
+https://developer.github.com/v3/enterprise-admin/scim/#get-scim-provisioning-information-for-an-enterprise group
+
+**Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+| scim_group_id | __Required__ Identifier generated by the GitHub SCIM endpoint. |
+
+## enterprise-admin get-provisioning-information-for-enterprise-user
+
+https://developer.github.com/v3/enterprise-admin/scim/#get-scim-provisioning-information-for-an-enterprise-user
+
+**Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+| scim_user_id | __Required__ scim_user_id parameter |
+
+## enterprise-admin get-self-hosted-runner-for-enterprise
+
+https://developer.github.com/v3/enterprise-admin/actions/#get-a-self-hosted-runner-for-an-enterprise
+
+Gets a specific self-hosted runner configured in an enterprise.
+
+You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+| runner_id | __Required__ Unique identifier of the self-hosted runner. |
+
+## enterprise-admin get-self-hosted-runner-group-for-enterprise
+
+https://developer.github.com/v3/enterprise-admin/actions/#get-a-self-hosted-runner-group-for-an-enterprise
+
+Gets a specific self-hosted runner group for an enterprise.
+
+You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+| runner_group_id | __Required__ Unique identifier of the self-hosted runner group. |
+
+## enterprise-admin list-org-access-to-self-hosted-runner-group-in-enterprise
+
+https://developer.github.com/v3/enterprise-admin/actions/#list-organization-access-to-a-self-hosted-runner-group-in-a-enterprise
+
+Lists the organizations with access to a self-hosted runner group.
+
+You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+| runner_group_id | __Required__ Unique identifier of the self-hosted runner group. |
+| page | Page number of the results to fetch. |
+| per_page | Results per page (max 100) |
+
+## enterprise-admin list-provisioned-groups-enterprise
+
+https://developer.github.com/v3/enterprise-admin/scim/#list-provisioned-scim groups-for-an-enterprise
+
+**Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+| count | Used for pagination: the number of results to return. |
+| startIndex | Used for pagination: the index of the first result to return. |
+
+## enterprise-admin list-provisioned-identities-enterprise
+
+https://developer.github.com/v3/enterprise-admin/scim/#list-scim-provisioned-identities-for-an-enterprise
+
+**Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
+
+Retrieves a paginated list of all provisioned enterprise members, including pending invitations.
+
+When a user with a SAML-provisioned external identity leaves (or is removed from) an enterprise, the account's metadata is immediately removed. However, the returned list of user accounts might not always match the organization or enterprise member list you see on GitHub. This can happen in certain cases where an external identity associated with an organization will not match an organization member:
+  - When a user with a SCIM-provisioned external identity is removed from an enterprise, the account's metadata is preserved to allow the user to re-join the organization in the future.
+  - When inviting a user to join an organization, you can expect to see their external identity in the results before they accept the invitation, or if the invitation is cancelled (or never accepted).
+  - When a user is invited over SCIM, an external identity is created that matches with the invitee's email address. However, this identity is only linked to a user account when the user accepts the invitation by going through SAML SSO.
+
+The returned list of external identities can include an entry for a `null` user. These are unlinked SAML identities that are created when a user goes through the following Single Sign-On (SSO) process but does not sign in to their GitHub account after completing SSO:
+
+1. The user is granted access by the IdP and is not a member of the GitHub enterprise.
+
+1. The user attempts to access the GitHub enterprise and initiates the SAML SSO process, and is not currently signed in to their GitHub account.
+
+1. After successfully authenticating with the SAML SSO IdP, the `null` external identity entry is created and the user is prompted to sign in to their GitHub account:
+   - If the user signs in, their GitHub account is linked to this entry.
+   - If the user does not sign in (or does not create a new account when prompted), they are not added to the GitHub enterprise, and the external identity `null` entry remains in place.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+| count | Used for pagination: the number of results to return. |
+| startIndex | Used for pagination: the index of the first result to return. |
+
+## enterprise-admin list-runner-applications-for-enterprise
+
+https://developer.github.com/v3/enterprise-admin/actions/#list-runner-applications-for-an-enterprise
+
+Lists binaries for the runner application that you can download and run.
+
+You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+
+## enterprise-admin list-self-hosted-runner-groups-for-enterprise
+
+https://developer.github.com/v3/enterprise-admin/actions/#list-self-hosted-runner-groups-for-an-enterprise
+
+Lists all self-hosted runner groups for an enterprise.
+
+You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+| page | Page number of the results to fetch. |
+| per_page | Results per page (max 100) |
+
+## enterprise-admin list-self-hosted-runners-for-enterprise
+
+https://developer.github.com/v3/enterprise-admin/actions/#list-self-hosted-runners-for-an-enterprise
+
+Lists all self-hosted runners configured for an enterprise.
+
+You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+| page | Page number of the results to fetch. |
+| per_page | Results per page (max 100) |
+
+## enterprise-admin list-self-hosted-runners-in-group-for-enterprise
+
+https://developer.github.com/v3/enterprise-admin/actions/#list-self-hosted-runners-in-a-group-for-an-enterprise
+
+Lists the self-hosted runners that are in a specific enterprise group.
+
+You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+| runner_group_id | __Required__ Unique identifier of the self-hosted runner group. |
+| page | Page number of the results to fetch. |
+| per_page | Results per page (max 100) |
+
+## enterprise-admin provision-and-invite-enterprise-group
+
+https://developer.github.com/v3/enterprise-admin/scim/#provision-a-scim-enterprise-group-and-invite-users
+
+**Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
+
+Provision an enterprise group, and invite users to the group. This sends invitation emails to the email address of the invited users to join the GitHub organization that the SCIM group corresponds to.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| displayName | __Required__ The name of the SCIM group. This must match the GitHub organization that the group maps to. |
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+| schemas | __Required__ The SCIM schema URIs. |
+| members |  |
+
+## enterprise-admin provision-and-invite-enterprise-user
+
+https://developer.github.com/v3/enterprise-admin/scim/#provision-and-invite-a-scim-enterprise-user
+
+**Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
+
+Provision enterprise membership for a user, and send organization invitation emails to the email address.
+
+You can optionally include the groups a user will be invited to join. If you do not provide a list of `groups`, the user is provisioned for the enterprise, but no organization invitation emails will be sent.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| emails | __Required__ List of user emails. |
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+| name.familyName | __Required__ The last name of the user. |
+| name.givenName | __Required__ The first name of the user. |
+| schemas | __Required__ The SCIM schema URIs. |
+| userName | __Required__ The username for the user. |
+| groups | List of SCIM group IDs the user is a member of. |
+
+## enterprise-admin remove-org-access-to-self-hosted-runner-group-in-enterprise
+
+https://developer.github.com/v3/enterprise-admin/actions/#remove-organization-access-to-a-self-hosted-runner-group-in-an-enterprise
+
+Removes an organization from the list of selected organizations that can access a self-hosted runner group. The runner group must have `visibility` set to `selected`. For more information, see "[Create a self-hosted runner group for an enterprise](#create-a-self-hosted-runner-group-for-an-enterprise)."
+
+You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+| org_id | __Required__ Unique identifier of an organization. |
+| runner_group_id | __Required__ Unique identifier of the self-hosted runner group. |
+
+## enterprise-admin remove-self-hosted-runner-from-group-for-enterprise
+
+https://developer.github.com/v3/enterprise-admin/actions/#remove-a-self-hosted-runner-from-a-group-for-an-enterprise
+
+Removes a self-hosted runner from a group configured in an enterprise. The runner is then returned to the default group.
+
+You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+| runner_group_id | __Required__ Unique identifier of the self-hosted runner group. |
+| runner_id | __Required__ Unique identifier of the self-hosted runner. |
+
+## enterprise-admin set-information-for-provisioned-enterprise-group
+
+https://developer.github.com/v3/enterprise-admin/scim/#set-scim-information-for-a-provisioned-enterprise-group
+
+**Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
+
+Replaces an existing provisioned group’s information. You must provide all the information required for the group as if you were provisioning it for the first time. Any existing group information that you don't provide will be removed, including group membership. If you want to only update a specific attribute, use the [Update an attribute for a SCIM enterprise group](#update-an-attribute-for-a-scim-enterprise-group) endpoint instead.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| displayName | __Required__ The name of the SCIM group. This must match the GitHub organization that the group maps to. |
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+| schemas | __Required__ The SCIM schema URIs. |
+| scim_group_id | __Required__ Identifier generated by the GitHub SCIM endpoint. |
+| members |  |
+
+## enterprise-admin set-information-for-provisioned-enterprise-user
+
+https://developer.github.com/v3/enterprise-admin/scim/#set-scim-information-for-a-provisioned-enterprise-user
+
+**Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
+
+Replaces an existing provisioned user's information. You must provide all the information required for the user as if you were provisioning them for the first time. Any existing user information that you don't provide will be removed. If you want to only update a specific attribute, use the [Update an attribute for a SCIM user](#update-an-attribute-for-an-enterprise-scim-user) endpoint instead.
+
+You must at least provide the required values for the user: `userName`, `name`, and `emails`.
+
+**Warning:** Setting `active: false` removes the user from the enterprise, deletes the external identity, and deletes the associated `{scim_user_id}`.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| emails | __Required__ List of user emails. |
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+| name.familyName | __Required__ The last name of the user. |
+| name.givenName | __Required__ The first name of the user. |
+| schemas | __Required__ The SCIM schema URIs. |
+| scim_user_id | __Required__ scim_user_id parameter |
+| userName | __Required__ The username for the user. |
+| groups | List of SCIM group IDs the user is a member of. |
+
+## enterprise-admin set-org-access-to-self-hosted-runner-group-in-enterprise
+
+https://developer.github.com/v3/enterprise-admin/actions/#set-organization-access-to-a-self-hosted-runner-group-in-an-enterprise
+
+Replaces the list of organizations that have access to a self-hosted runner configured in an enterprise.
+
+You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+| runner_group_id | __Required__ Unique identifier of the self-hosted runner group. |
+| selected_organization_ids | __Required__ List of organization IDs that can access the runner group. |
+
+## enterprise-admin set-self-hosted-runners-in-group-for-enterprise
+
+https://developer.github.com/v3/enterprise-admin/actions/#set-self-hosted-runners-in-a-group-for-an-enterprise
+
+Replaces the list of self-hosted runners that that are part of an enterprise runner group.
+
+You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+| runner_group_id | __Required__ Unique identifier of the self-hosted runner group. |
+| runners | __Required__ List of runner IDs to add to the runner group. |
+
+## enterprise-admin update-attribute-for-enterprise-group
+
+https://developer.github.com/v3/enterprise-admin/scim/#update-an-attribute-for-a-scim-enterprise-group
+
+**Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
+
+Allows you to change a provisioned group’s individual attributes. To change a group’s values, you must provide a specific Operations JSON format that contains at least one of the add, remove, or replace operations. For examples and more information on the SCIM operations format, see the [SCIM specification](https://tools.ietf.org/html/rfc7644#section-3.5.2).
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| Operations | __Required__ Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2). |
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+| schemas | __Required__ The SCIM schema URIs. |
+| scim_group_id | __Required__ Identifier generated by the GitHub SCIM endpoint. |
+
+## enterprise-admin update-attribute-for-enterprise-user
+
+https://developer.github.com/v3/enterprise-admin/scim/#update-an-attribute-for-a-scim-enterprise-user
+
+**Note:** The SCIM API endpoints for enterprise accounts are currently in beta and are subject to change.
+
+Allows you to change a provisioned user's individual attributes. To change a user's values, you must provide a specific `Operations` JSON format that contains at least one of the `add`, `remove`, or `replace` operations. For examples and more information on the SCIM operations format, see the [SCIM specification](https://tools.ietf.org/html/rfc7644#section-3.5.2).
+
+**Note:** Complicated SCIM `path` selectors that include filters are not supported. For example, a `path` selector defined as `"path": "emails[type eq \"work\"]"` will not work.
+
+**Warning:** If you set `active:false` using the `replace` operation (as shown in the JSON example below), it removes the user from the enterprise, deletes the external identity, and deletes the associated `:scim_user_id`.
+
+```
+{
+  "Operations":[{
+    "op":"replace",
+    "value":{
+      "active":false
+    }
+  }]
+}
+```
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| Operations | __Required__ Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2). |
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+| schemas | __Required__ The SCIM schema URIs. |
+| scim_user_id | __Required__ scim_user_id parameter |
+
+## enterprise-admin update-self-hosted-runner-group-for-enterprise
+
+https://developer.github.com/v3/enterprise-admin/actions/#update-a-self-hosted-runner-group-for-an-enterprise
+
+Updates the `name` and `visibility` of a self-hosted runner group in an enterprise.
+
+You must authenticate using an access token with the `admin:enterprise` scope to use this endpoint.
+
+### parameters
+
+
+| name | description |
+|------|-------------|
+| enterprise | __Required__ Unique identifier of the GitHub Enterprise Cloud instance. |
+| runner_group_id | __Required__ Unique identifier of the self-hosted runner group. |
+| name | Name of the runner group. |
+| visibility | Visibility of a runner group. You can select all organizations or select individual organizations. Can be one of: `all` or `selected` |
 
 # gists
 
@@ -2581,7 +3420,7 @@ https://developer.github.com/v3/gists/#get-a-gist-revision
 | name | description |
 |------|-------------|
 | gist_id | __Required__ gist_id parameter |
-| sha | __Required__ sha parameter |
+| sha | __Required__  |
 
 ## gists list
 
@@ -2770,32 +3609,30 @@ https://developer.github.com/v3/git/blobs/#create-a-blob
 https://developer.github.com/v3/git/commits/#create-a-commit
 
 Creates a new Git [commit object](https://git-scm.com/book/en/v1/Git-Internals-Git-Objects#Commit-Objects).
-
-In this example, the payload of the signature would be:
-
-
-
 **Signature verification object**
-
 The response will include a `verification` object that describes the result of verifying the commit's signature. The following fields are included in the `verification` object:
-
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `verified` | `boolean` | Indicates whether GitHub considers the signature in this commit to be verified. |
+| `reason` | `string` | The reason for verified value. Possible values and their meanings are enumerated in table below. |
+| `signature` | `string` | The signature that was extracted from the commit. |
+| `payload` | `string` | The value that was signed. |
 These are the possible values for `reason` in the `verification` object:
-
-| Value                    | Description                                                                                                                       |
-| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
-| `expired_key`            | The key that made the signature is expired.                                                                                       |
-| `not_signing_key`        | The "signing" flag is not among the usage flags in the GPG key that made the signature.                                           |
-| `gpgverify_error`        | There was an error communicating with the signature verification service.                                                         |
-| `gpgverify_unavailable`  | The signature verification service is currently unavailable.                                                                      |
-| `unsigned`               | The object does not include a signature.                                                                                          |
-| `unknown_signature_type` | A non-PGP signature was found in the commit.                                                                                      |
-| `no_user`                | No user was associated with the `committer` email address in the commit.                                                          |
-| `unverified_email`       | The `committer` email address in the commit was associated with a user, but the email address is not verified on her/his account. |
-| `bad_email`              | The `committer` email address in the commit is not included in the identities of the PGP key that made the signature.             |
-| `unknown_key`            | The key that made the signature has not been registered with any user's account.                                                  |
-| `malformed_signature`    | There was an error parsing the signature.                                                                                         |
-| `invalid`                | The signature could not be cryptographically verified using the key whose key-id was found in the signature.                      |
-| `valid`                  | None of the above errors applied, so the signature is considered to be verified.                                                  |
+| Value | Description |
+| ----- | ----------- |
+| `expired_key` | The key that made the signature is expired. |
+| `not_signing_key` | The "signing" flag is not among the usage flags in the GPG key that made the signature. |
+| `gpgverify_error` | There was an error communicating with the signature verification service. |
+| `gpgverify_unavailable` | The signature verification service is currently unavailable. |
+| `unsigned` | The object does not include a signature. |
+| `unknown_signature_type` | A non-PGP signature was found in the commit. |
+| `no_user` | No user was associated with the `committer` email address in the commit. |
+| `unverified_email` | The `committer` email address in the commit was associated with a user, but the email address is not verified on her/his account. |
+| `bad_email` | The `committer` email address in the commit is not included in the identities of the PGP key that made the signature. |
+| `unknown_key` | The key that made the signature has not been registered with any user's account. |
+| `malformed_signature` | There was an error parsing the signature. |
+| `invalid` | The signature could not be cryptographically verified using the key whose key-id was found in the signature. |
+| `valid` | None of the above errors applied, so the signature is considered to be verified. |
 
 ### parameters
 
@@ -2835,28 +3672,30 @@ Creates a reference for your repository. You are unable to create new references
 https://developer.github.com/v3/git/tags/#create-a-tag-object
 
 Note that creating a tag object does not create the reference that makes a tag in Git. If you want to create an annotated tag in Git, you have to do this call to create the tag object, and then [create](https://developer.github.com/v3/git/refs/#create-a-reference) the `refs/tags/[tag]` reference. If you want to create a lightweight tag, you only have to [create](https://developer.github.com/v3/git/refs/#create-a-reference) the tag reference - this call would be unnecessary.
-
 **Signature verification object**
-
 The response will include a `verification` object that describes the result of verifying the commit's signature. The following fields are included in the `verification` object:
-
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `verified` | `boolean` | Indicates whether GitHub considers the signature in this commit to be verified. |
+| `reason` | `string` | The reason for verified value. Possible values and their meanings are enumerated in table below. |
+| `signature` | `string` | The signature that was extracted from the commit. |
+| `payload` | `string` | The value that was signed. |
 These are the possible values for `reason` in the `verification` object:
-
-| Value                    | Description                                                                                                                       |
-| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
-| `expired_key`            | The key that made the signature is expired.                                                                                       |
-| `not_signing_key`        | The "signing" flag is not among the usage flags in the GPG key that made the signature.                                           |
-| `gpgverify_error`        | There was an error communicating with the signature verification service.                                                         |
-| `gpgverify_unavailable`  | The signature verification service is currently unavailable.                                                                      |
-| `unsigned`               | The object does not include a signature.                                                                                          |
-| `unknown_signature_type` | A non-PGP signature was found in the commit.                                                                                      |
-| `no_user`                | No user was associated with the `committer` email address in the commit.                                                          |
-| `unverified_email`       | The `committer` email address in the commit was associated with a user, but the email address is not verified on her/his account. |
-| `bad_email`              | The `committer` email address in the commit is not included in the identities of the PGP key that made the signature.             |
-| `unknown_key`            | The key that made the signature has not been registered with any user's account.                                                  |
-| `malformed_signature`    | There was an error parsing the signature.                                                                                         |
-| `invalid`                | The signature could not be cryptographically verified using the key whose key-id was found in the signature.                      |
-| `valid`                  | None of the above errors applied, so the signature is considered to be verified.                                                  |
+| Value | Description |
+| ----- | ----------- |
+| `expired_key` | The key that made the signature is expired. |
+| `not_signing_key` | The "signing" flag is not among the usage flags in the GPG key that made the signature. |
+| `gpgverify_error` | There was an error communicating with the signature verification service. |
+| `gpgverify_unavailable` | The signature verification service is currently unavailable. |
+| `unsigned` | The object does not include a signature. |
+| `unknown_signature_type` | A non-PGP signature was found in the commit. |
+| `no_user` | No user was associated with the `committer` email address in the commit. |
+| `unverified_email` | The `committer` email address in the commit was associated with a user, but the email address is not verified on her/his account. |
+| `bad_email` | The `committer` email address in the commit is not included in the identities of the PGP key that made the signature. |
+| `unknown_key` | The key that made the signature has not been registered with any user's account. |
+| `malformed_signature` | There was an error parsing the signature. |
+| `invalid` | The signature could not be cryptographically verified using the key whose key-id was found in the signature. |
+| `valid` | None of the above errors applied, so the signature is considered to be verified. |
 
 ### parameters
 
@@ -2916,7 +3755,7 @@ _Note_: This API supports blobs up to 100 megabytes in size.
 
 | name | description |
 |------|-------------|
-| file_sha | __Required__ file_sha parameter |
+| file_sha | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## git get-commit
@@ -2924,28 +3763,30 @@ _Note_: This API supports blobs up to 100 megabytes in size.
 https://developer.github.com/v3/git/commits/#get-a-commit
 
 Gets a Git [commit object](https://git-scm.com/book/en/v1/Git-Internals-Git-Objects#Commit-Objects).
-
 **Signature verification object**
-
 The response will include a `verification` object that describes the result of verifying the commit's signature. The following fields are included in the `verification` object:
-
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `verified` | `boolean` | Indicates whether GitHub considers the signature in this commit to be verified. |
+| `reason` | `string` | The reason for verified value. Possible values and their meanings are enumerated in table below. |
+| `signature` | `string` | The signature that was extracted from the commit. |
+| `payload` | `string` | The value that was signed. |
 These are the possible values for `reason` in the `verification` object:
-
-| Value                    | Description                                                                                                                       |
-| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
-| `expired_key`            | The key that made the signature is expired.                                                                                       |
-| `not_signing_key`        | The "signing" flag is not among the usage flags in the GPG key that made the signature.                                           |
-| `gpgverify_error`        | There was an error communicating with the signature verification service.                                                         |
-| `gpgverify_unavailable`  | The signature verification service is currently unavailable.                                                                      |
-| `unsigned`               | The object does not include a signature.                                                                                          |
-| `unknown_signature_type` | A non-PGP signature was found in the commit.                                                                                      |
-| `no_user`                | No user was associated with the `committer` email address in the commit.                                                          |
-| `unverified_email`       | The `committer` email address in the commit was associated with a user, but the email address is not verified on her/his account. |
-| `bad_email`              | The `committer` email address in the commit is not included in the identities of the PGP key that made the signature.             |
-| `unknown_key`            | The key that made the signature has not been registered with any user's account.                                                  |
-| `malformed_signature`    | There was an error parsing the signature.                                                                                         |
-| `invalid`                | The signature could not be cryptographically verified using the key whose key-id was found in the signature.                      |
-| `valid`                  | None of the above errors applied, so the signature is considered to be verified.                                                  |
+| Value | Description |
+| ----- | ----------- |
+| `expired_key` | The key that made the signature is expired. |
+| `not_signing_key` | The "signing" flag is not among the usage flags in the GPG key that made the signature. |
+| `gpgverify_error` | There was an error communicating with the signature verification service. |
+| `gpgverify_unavailable` | The signature verification service is currently unavailable. |
+| `unsigned` | The object does not include a signature. |
+| `unknown_signature_type` | A non-PGP signature was found in the commit. |
+| `no_user` | No user was associated with the `committer` email address in the commit. |
+| `unverified_email` | The `committer` email address in the commit was associated with a user, but the email address is not verified on her/his account. |
+| `bad_email` | The `committer` email address in the commit is not included in the identities of the PGP key that made the signature. |
+| `unknown_key` | The key that made the signature has not been registered with any user's account. |
+| `malformed_signature` | There was an error parsing the signature. |
+| `invalid` | The signature could not be cryptographically verified using the key whose key-id was found in the signature. |
+| `valid` | None of the above errors applied, so the signature is considered to be verified. |
 
 ### parameters
 
@@ -2976,26 +3817,29 @@ Returns a single reference from your Git database. The `:ref` in the URL must be
 https://developer.github.com/v3/git/tags/#get-a-tag
 
 **Signature verification object**
-
 The response will include a `verification` object that describes the result of verifying the commit's signature. The following fields are included in the `verification` object:
-
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `verified` | `boolean` | Indicates whether GitHub considers the signature in this commit to be verified. |
+| `reason` | `string` | The reason for verified value. Possible values and their meanings are enumerated in table below. |
+| `signature` | `string` | The signature that was extracted from the commit. |
+| `payload` | `string` | The value that was signed. |
 These are the possible values for `reason` in the `verification` object:
-
-| Value                    | Description                                                                                                                       |
-| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
-| `expired_key`            | The key that made the signature is expired.                                                                                       |
-| `not_signing_key`        | The "signing" flag is not among the usage flags in the GPG key that made the signature.                                           |
-| `gpgverify_error`        | There was an error communicating with the signature verification service.                                                         |
-| `gpgverify_unavailable`  | The signature verification service is currently unavailable.                                                                      |
-| `unsigned`               | The object does not include a signature.                                                                                          |
-| `unknown_signature_type` | A non-PGP signature was found in the commit.                                                                                      |
-| `no_user`                | No user was associated with the `committer` email address in the commit.                                                          |
-| `unverified_email`       | The `committer` email address in the commit was associated with a user, but the email address is not verified on her/his account. |
-| `bad_email`              | The `committer` email address in the commit is not included in the identities of the PGP key that made the signature.             |
-| `unknown_key`            | The key that made the signature has not been registered with any user's account.                                                  |
-| `malformed_signature`    | There was an error parsing the signature.                                                                                         |
-| `invalid`                | The signature could not be cryptographically verified using the key whose key-id was found in the signature.                      |
-| `valid`                  | None of the above errors applied, so the signature is considered to be verified.                                                  |
+| Value | Description |
+| ----- | ----------- |
+| `expired_key` | The key that made the signature is expired. |
+| `not_signing_key` | The "signing" flag is not among the usage flags in the GPG key that made the signature. |
+| `gpgverify_error` | There was an error communicating with the signature verification service. |
+| `gpgverify_unavailable` | The signature verification service is currently unavailable. |
+| `unsigned` | The object does not include a signature. |
+| `unknown_signature_type` | A non-PGP signature was found in the commit. |
+| `no_user` | No user was associated with the `committer` email address in the commit. |
+| `unverified_email` | The `committer` email address in the commit was associated with a user, but the email address is not verified on her/his account. |
+| `bad_email` | The `committer` email address in the commit is not included in the identities of the PGP key that made the signature. |
+| `unknown_key` | The key that made the signature has not been registered with any user's account. |
+| `malformed_signature` | There was an error parsing the signature. |
+| `invalid` | The signature could not be cryptographically verified using the key whose key-id was found in the signature. |
+| `valid` | None of the above errors applied, so the signature is considered to be verified. |
 
 ### parameters
 
@@ -3003,7 +3847,7 @@ These are the possible values for `reason` in the `verification` object:
 | name | description |
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
-| tag_sha | __Required__ tag_sha parameter |
+| tag_sha | __Required__  |
 
 ## git get-tree
 
@@ -3019,7 +3863,7 @@ If `truncated` is `true` in the response then the number of items in the `tree` 
 | name | description |
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
-| tree_sha | __Required__ tree_sha parameter |
+| tree_sha | __Required__  |
 | recursive | Setting this parameter to any value returns the objects or subtrees referenced by the tree specified in `:tree_sha`. For example, setting `recursive` to any of the following will enable returning objects or subtrees: `0`, `1`, `"true"`, and `"false"`. Omit this parameter to prevent recursively returning objects or subtrees. |
 
 ## git list-matching-refs
@@ -3081,7 +3925,7 @@ Use the raw [media type](https://developer.github.com/v3/media/) to get the raw 
 
 | name | description |
 |------|-------------|
-| name | __Required__ name parameter |
+| name | __Required__  |
 
 # interactions
 
@@ -3220,7 +4064,7 @@ Otherwise a `404` status code is returned.
 
 | name | description |
 |------|-------------|
-| assignee | __Required__ assignee parameter |
+| assignee | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## issues create
@@ -3317,7 +4161,7 @@ https://developer.github.com/v3/issues/labels/#delete-a-label
 
 | name | description |
 |------|-------------|
-| name | __Required__ name parameter |
+| name | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## issues delete-milestone
@@ -3372,7 +4216,6 @@ https://developer.github.com/v3/issues/comments/#get-an-issue-comment
 |------|-------------|
 | comment_id | __Required__ comment_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
-| machine-man-preview | To access the API with your GitHub App, you must set this flag for your requests. |
 | squirrel-girl-preview | An additional `reactions` object in the issue comment payload is currently available for developers to preview. During the preview period, the APIs may change without advance notice. Please see the [blog post](https://developer.github.com/changes/2016-05-12-reactions-api-preview) for full details.<br><br>To access the API you must set this flag. |
 
 ## issues get-event
@@ -3386,10 +4229,8 @@ https://developer.github.com/v3/issues/events/#get-an-issue-event
 
 | name | description |
 |------|-------------|
-| event_id | __Required__ event_id parameter |
+| event_id | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| machine-man-preview | To access the API with your GitHub App, you must set this flag for your requests. |
-| sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must set this flag. |
 | starfox-preview | Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](https://developer.github.com/changes/2018-09-05-project-card-events).<br><br>To receive the `project_card` attribute, project boards must be [enabled](https://help.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must set this flag. |
 
 ## issues get-label
@@ -3403,7 +4244,7 @@ https://developer.github.com/v3/issues/labels/#get-a-label
 
 | name | description |
 |------|-------------|
-| name | __Required__ name parameter |
+| name | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## issues get-milestone
@@ -3444,7 +4285,6 @@ request id, use the "[List pull requests](https://developer.github.com/v3/pulls/
 | direction | One of `asc` (ascending) or `desc` (descending). |
 | filter | Indicates which sorts of issues to return. Can be one of:  <br>\* `assigned`: Issues assigned to you  <br>\* `created`: Issues created by you  <br>\* `mentioned`: Issues mentioning you  <br>\* `subscribed`: Issues you're subscribed to updates for  <br>\* `all`: All issues the authenticated user can see, regardless of participation or creation |
 | labels | A list of comma separated label names. Example: `bug,ui,@high` |
-| machine-man-preview | To access the API with your GitHub App, you must set this flag for your requests. |
 | orgs |  |
 | owned |  |
 | page | Page number of the results to fetch. |
@@ -3522,7 +4362,6 @@ https://developer.github.com/v3/issues/events/#list-issue-events
 | repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must set this flag. |
 | starfox-preview | Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](https://developer.github.com/changes/2018-09-05-project-card-events).<br><br>To receive the `project_card` attribute, project boards must be [enabled](https://help.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must set this flag. |
 
 ## issues list-events-for-repo
@@ -3539,7 +4378,6 @@ https://developer.github.com/v3/issues/events/#list-issue-events-for-a-repositor
 | repo | __Required__ repository in OWNER/REPO form |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must set this flag. |
 | starfox-preview | Project card details are now shown in REST API v3 responses for project-related issue and timeline events. This feature is now available for developers to preview. For details, see the [blog post](https://developer.github.com/changes/2018-09-05-project-card-events).<br><br>To receive the `project_card` attribute, project boards must be [enabled](https://help.github.com/articles/disabling-project-boards-in-a-repository) for a repository, and you must set this flag. |
 
 ## issues list-events-for-timeline
@@ -3579,7 +4417,6 @@ request id, use the "[List pull requests](https://developer.github.com/v3/pulls/
 | direction | One of `asc` (ascending) or `desc` (descending). |
 | filter | Indicates which sorts of issues to return. Can be one of:  <br>\* `assigned`: Issues assigned to you  <br>\* `created`: Issues created by you  <br>\* `mentioned`: Issues mentioning you  <br>\* `subscribed`: Issues you're subscribed to updates for  <br>\* `all`: All issues the authenticated user can see, regardless of participation or creation |
 | labels | A list of comma separated label names. Example: `bug,ui,@high` |
-| machine-man-preview | To access the API with your GitHub App, you must set this flag for your requests. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | since | Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
@@ -3607,7 +4444,6 @@ request id, use the "[List pull requests](https://developer.github.com/v3/pulls/
 | direction | One of `asc` (ascending) or `desc` (descending). |
 | filter | Indicates which sorts of issues to return. Can be one of:  <br>\* `assigned`: Issues assigned to you  <br>\* `created`: Issues created by you  <br>\* `mentioned`: Issues mentioning you  <br>\* `subscribed`: Issues you're subscribed to updates for  <br>\* `all`: All issues the authenticated user can see, regardless of participation or creation |
 | labels | A list of comma separated label names. Example: `bug,ui,@high` |
-| machine-man-preview | To access the API with your GitHub App, you must set this flag for your requests. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
 | since | Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. |
@@ -3636,7 +4472,6 @@ request id, use the "[List pull requests](https://developer.github.com/v3/pulls/
 | creator | The user that created the issue. |
 | direction | One of `asc` (ascending) or `desc` (descending). |
 | labels | A list of comma separated label names. Example: `bug,ui,@high` |
-| machine-man-preview | To access the API with your GitHub App, you must set this flag for your requests. |
 | mentioned | A user that's mentioned in the issue. |
 | milestone | If an `integer` is passed, it should refer to a milestone by its `number` field. If the string `*` is passed, issues with any milestone are accepted. If the string `none` is passed, issues without milestones are returned. |
 | page | Page number of the results to fetch. |
@@ -3727,7 +4562,6 @@ Note that, if you choose not to pass any parameters, you'll need to set `Content
 | issue_number | __Required__ issue_number parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | lock_reason | The reason for locking the issue or pull request conversation. Lock will fail if you don't use one of these reasons:  <br>\* `off-topic`  <br>\* `too heated`  <br>\* `resolved`  <br>\* `spam` |
-| sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must set this flag. |
 
 ## issues remove-all-labels
 
@@ -3770,7 +4604,7 @@ Removes the specified label from the issue, and returns the remaining labels on 
 | name | description |
 |------|-------------|
 | issue_number | __Required__ issue_number parameter |
-| name | __Required__ name parameter |
+| name | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## issues set-labels
@@ -3849,7 +4683,7 @@ https://developer.github.com/v3/issues/labels/#update-a-label
 
 | name | description |
 |------|-------------|
-| name | __Required__ name parameter |
+| name | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 | color | The [hexadecimal color code](http://www.color-hex.com/) for the label, without the leading `#`. |
 | description | A short description of the label. |
@@ -3887,7 +4721,7 @@ https://developer.github.com/v3/licenses/#get-a-license
 
 | name | description |
 |------|-------------|
-| license | __Required__ license parameter |
+| license | __Required__  |
 
 ## licenses get-all-commonly-used
 
@@ -4271,7 +5105,7 @@ Update an author's identity for the import. Your application can continue updati
 
 | name | description |
 |------|-------------|
-| author_id | __Required__ author_id parameter |
+| author_id | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 | email | The new Git author email. |
 | name | The new Git author name. |
@@ -4521,7 +5355,7 @@ If you have two-factor authentication setup, Basic Authentication for this endpo
 |------|-------------|
 | client_id | __Required__  |
 | client_secret | __Required__ The OAuth app client secret for which to create the token. |
-| fingerprint | __Required__ fingerprint parameter |
+| fingerprint | __Required__  |
 | note | A note to remind you what the OAuth token is for. |
 | note_url | A URL to remind you what app the OAuth token is for. |
 | scopes | A list of scopes that this authorization is in. |
@@ -4791,7 +5625,6 @@ Lists all GitHub Apps in an organization. The installation count includes all Gi
 
 | name | description |
 |------|-------------|
-| machine-man-preview | __Required__ To access the API with your GitHub App, you must set this flag for your requests. |
 | org | __Required__  |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
@@ -5053,7 +5886,7 @@ An authenticated organization owner with the `admin:org` scope can remove a cred
 
 | name | description |
 |------|-------------|
-| credential_id | __Required__ credential_id parameter |
+| credential_id | __Required__  |
 | org | __Required__  |
 
 ## orgs set-membership-for-user
@@ -5134,6 +5967,7 @@ Enables an authenticated organization owner with the `admin:org` scope to update
 | location | The location. |
 | members_allowed_repository_creation_type | Specifies which types of repositories non-admin organization members can create. Can be one of:  <br>\* `all` - all organization members can create public and private repositories.  <br>\* `private` - members can create private repositories. This option is only available to repositories that are part of an organization on GitHub Enterprise Cloud.  <br>\* `none` - only admin members can create repositories.  <br>**Note:** This parameter is deprecated and will be removed in the future. Its return value ignores internal repositories. Using this parameter overrides values set in `members_can_create_repositories`. See [this note](https://developer.github.com/v3/orgs/#members_can_create_repositories) for details. |
 | members_can_create_internal_repositories | Toggles whether organization members can create internal repositories, which are visible to all enterprise members. You can only allow members to create internal repositories if your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+. Can be one of:  <br>\* `true` - all organization members can create internal repositories.  <br>\* `false` - only organization owners can create internal repositories.  <br>Default: `true`. For more information, see "[Restricting repository creation in your organization](https://help.github.com/github/setting-up-and-managing-organizations-and-teams/restricting-repository-creation-in-your-organization)" in the GitHub Help documentation. |
+| members_can_create_pages | Toggles whether organization members can create GitHub Pages sites. Can be one of:  <br>\* `true` - all organization members can create GitHub Pages sites.  <br>\* `false` - no organization members can create GitHub Pages sites. Existing published sites will not be impacted.  <br>Default: `true`.  |
 | members_can_create_private_repositories | Toggles whether organization members can create private repositories, which are visible to organization members with permission. Can be one of:  <br>\* `true` - all organization members can create private repositories.  <br>\* `false` - only organization owners can create private repositories.  <br>Default: `true`. For more information, see "[Restricting repository creation in your organization](https://help.github.com/github/setting-up-and-managing-organizations-and-teams/restricting-repository-creation-in-your-organization)" in the GitHub Help documentation. |
 | members_can_create_public_repositories | Toggles whether organization members can create public repositories, which are visible to anyone. Can be one of:  <br>\* `true` - all organization members can create public repositories.  <br>\* `false` - only organization owners can create public repositories.  <br>Default: `true`. For more information, see "[Restricting repository creation in your organization](https://help.github.com/github/setting-up-and-managing-organizations-and-teams/restricting-repository-creation-in-your-organization)" in the GitHub Help documentation. |
 | members_can_create_repositories | Toggles the ability of non-admin organization members to create repositories. Can be one of:  <br>\* `true` - all organization members can create repositories.  <br>\* `false` - only organization owners can create repositories.  <br>Default: `true`  <br>**Note:** A parameter can override this parameter. See `members_allowed_repository_creation_type` in this table for details. **Note:** A parameter can override this parameter. See `members_allowed_repository_creation_type` in this table for details. |
@@ -5610,7 +6444,6 @@ This endpoint triggers [notifications](https://help.github.com/articles/about-no
 | draft | Indicates whether the pull request is a draft. See "[Draft Pull Requests](https://help.github.com/en/articles/about-pull-requests#draft-pull-requests)" in the GitHub Help documentation to learn more. |
 | issue |  |
 | maintainer_can_modify | Indicates whether [maintainers can modify](https://help.github.com/articles/allowing-changes-to-a-pull-request-branch-created-from-a-fork/) the pull request. |
-| sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must set this flag. |
 | title | The title of the new pull request. |
 
 ## pulls create-reply-for-review-comment
@@ -5776,7 +6609,6 @@ Pass the appropriate [media type](https://developer.github.com/v3/media/#commits
 |------|-------------|
 | pull_number | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
-| sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must set this flag. |
 
 ## pulls get-review
 
@@ -5846,7 +6678,6 @@ Draft pull requests are available in public repositories with GitHub Free and Gi
 | head | Filter pulls by head user or head organization and branch name in the format of `user:ref-name` or `organization:ref-name`. For example: `github:new-script-format` or `octocat:test-branch`. |
 | page | Page number of the results to fetch. |
 | per_page | Results per page (max 100) |
-| sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must set this flag. |
 | sort | What to sort results by. Can be either `created`, `updated`, `popularity` (comment count) or `long-running` (age, filtering by pulls updated in the last month). |
 | state | Either `open`, `closed`, or `all` to filter by state. |
 
@@ -6097,7 +6928,6 @@ To open or update a pull request in a public repository, you must have write acc
 | base | The name of the branch you want your changes pulled into. This should be an existing branch on the current repository. You cannot update the base branch on a pull request to point to another repository. |
 | body | The contents of the pull request. |
 | maintainer_can_modify | Indicates whether [maintainers can modify](https://help.github.com/articles/allowing-changes-to-a-pull-request-branch-created-from-a-fork/) the pull request. |
-| sailor-v-preview | You can now use the REST API to add a reason when you lock an issue, and you will see lock reasons in responses that include issues or pull requests. You will also see lock reasons in `locked` events. This feature is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2018-01-10-lock-reason-api-preview) for full details. To access this feature, you must set this flag. |
 | state | State of this Pull Request. Either `open` or `closed`. |
 | title | The title of the pull request. |
 
@@ -6755,46 +7585,44 @@ Shows whether dependency alerts are enabled or disabled for a repository. The au
 https://developer.github.com/v3/repos/commits/#compare-two-commits
 
 Both `:base` and `:head` must be branch names in `:repo`. To compare branches across other repositories in the same network as `:repo`, use the format `<USERNAME>:branch`.
-
 The response from the API is equivalent to running the `git log base..head` command; however, commits are returned in chronological order. Pass the appropriate [media type](https://developer.github.com/v3/media/#commits-commit-comparison-and-pull-requests) to fetch diff and patch formats.
-
 The response also includes details on the files that were changed between the two commits. This includes the status of the change (for example, if a file was added, removed, modified, or renamed), and details of the change itself. For example, files with a `renamed` status have a `previous_filename` field showing the previous filename of the file, and files with a `modified` status have a `patch` field showing the changes made to the file.
-
 **Working with large comparisons**
-
 The response will include a comparison of up to 250 commits. If you are working with a larger commit range, you can use the [List commits](https://developer.github.com/v3/repos/commits/#list-commits) to enumerate all commits in the range.
-
-For comparisons with extremely large diffs, you may receive an error response indicating that the diff took too long to generate. You can typically resolve this error by using a smaller commit range.
-
+For comparisons with extremely large diffs, you may receive an error response indicating that the diff took too long
+to generate. You can typically resolve this error by using a smaller commit range.
 **Signature verification object**
-
 The response will include a `verification` object that describes the result of verifying the commit's signature. The following fields are included in the `verification` object:
-
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `verified` | `boolean` | Indicates whether GitHub considers the signature in this commit to be verified. |
+| `reason` | `string` | The reason for verified value. Possible values and their meanings are enumerated in table below. |
+| `signature` | `string` | The signature that was extracted from the commit. |
+| `payload` | `string` | The value that was signed. |
 These are the possible values for `reason` in the `verification` object:
-
-| Value                    | Description                                                                                                                       |
-| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
-| `expired_key`            | The key that made the signature is expired.                                                                                       |
-| `not_signing_key`        | The "signing" flag is not among the usage flags in the GPG key that made the signature.                                           |
-| `gpgverify_error`        | There was an error communicating with the signature verification service.                                                         |
-| `gpgverify_unavailable`  | The signature verification service is currently unavailable.                                                                      |
-| `unsigned`               | The object does not include a signature.                                                                                          |
-| `unknown_signature_type` | A non-PGP signature was found in the commit.                                                                                      |
-| `no_user`                | No user was associated with the `committer` email address in the commit.                                                          |
-| `unverified_email`       | The `committer` email address in the commit was associated with a user, but the email address is not verified on her/his account. |
-| `bad_email`              | The `committer` email address in the commit is not included in the identities of the PGP key that made the signature.             |
-| `unknown_key`            | The key that made the signature has not been registered with any user's account.                                                  |
-| `malformed_signature`    | There was an error parsing the signature.                                                                                         |
-| `invalid`                | The signature could not be cryptographically verified using the key whose key-id was found in the signature.                      |
-| `valid`                  | None of the above errors applied, so the signature is considered to be verified.                                                  |
+| Value | Description |
+| ----- | ----------- |
+| `expired_key` | The key that made the signature is expired. |
+| `not_signing_key` | The "signing" flag is not among the usage flags in the GPG key that made the signature. |
+| `gpgverify_error` | There was an error communicating with the signature verification service. |
+| `gpgverify_unavailable` | The signature verification service is currently unavailable. |
+| `unsigned` | The object does not include a signature. |
+| `unknown_signature_type` | A non-PGP signature was found in the commit. |
+| `no_user` | No user was associated with the `committer` email address in the commit. |
+| `unverified_email` | The `committer` email address in the commit was associated with a user, but the email address is not verified on her/his account. |
+| `bad_email` | The `committer` email address in the commit is not included in the identities of the PGP key that made the signature. |
+| `unknown_key` | The key that made the signature has not been registered with any user's account. |
+| `malformed_signature` | There was an error parsing the signature. |
+| `invalid` | The signature could not be cryptographically verified using the key whose key-id was found in the signature. |
+| `valid` | None of the above errors applied, so the signature is considered to be verified. |
 
 ### parameters
 
 
 | name | description |
 |------|-------------|
-| base | __Required__ base parameter |
-| head | __Required__ head parameter |
+| base | __Required__  |
+| head | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos create-commit-comment
@@ -6848,7 +7676,7 @@ Note: there is a limit of 1000 statuses per `sha` and `context` within a reposit
 | name | description |
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
-| sha | __Required__ sha parameter |
+| sha | __Required__  |
 | state | __Required__ The state of the status. Can be one of `error`, `failure`, `pending`, or `success`. |
 | context | A string label to differentiate this status from the status of other systems. |
 | description | A short description of the status. |
@@ -6980,9 +7808,9 @@ This input example shows how you can use the `client_payload` as a test to debug
 
 | name | description |
 |------|-------------|
+| event_type | __Required__ A custom webhook event name. |
 | repo | __Required__ repository in OWNER/REPO form |
 | client_payload | JSON payload with extra information about the webhook event that your action or worklow may use. |
-| event_type | **Required:** A custom webhook event name. |
 
 ## repos create-for-authenticated-user
 
@@ -7105,7 +7933,7 @@ Creates a new file or replaces an existing file in a repository.
 
 https://developer.github.com/v3/repos/pages/#create-a-github-pages-site
 
-
+Configures a GitHub Pages site. For more information, see "[About GitHub Pages](/github/working-with-github-pages/about-github-pages)."
 
 ### parameters
 
@@ -7113,9 +7941,9 @@ https://developer.github.com/v3/repos/pages/#create-a-github-pages-site
 | name | description |
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
+| source.branch | __Required__ The repository branch used to publish your site's source files. |
 | switcheroo-preview | __Required__ Enabling and disabling Pages in the Pages API is currently available for developers to preview. See the [blog post](https://developer.github.com/changes/2019-03-14-enabling-disabling-pages/) preview for more details. To access the new endpoints during the preview period, you must set this flag. |
-| source.branch | The repository branch used to publish your [site's source files](https://help.github.com/articles/configuring-a-publishing-source-for-github-pages/). Can be either `master` or `gh-pages`. |
-| source.path | The repository directory that includes the source files for the Pages site. When `branch` is `master`, you can change `path` to `/docs`. When `branch` is `gh-pages`, you are unable to specify a `path` other than `/`. |
+| source.path | The repository directory that includes the source files for the Pages site. Allowed paths are `/` or `/docs`. Default: `/` |
 
 ## repos create-release
 
@@ -7158,8 +7986,8 @@ When using [OAuth](https://developer.github.com/apps/building-oauth-apps/underst
 |------|-------------|
 | baptiste-preview | __Required__ The `is_template` and `template_repository` keys are currently available for developer to preview. See [Create a repository using a template](https://developer.github.com/v3/repos/#create-a-repository-using-a-template) to learn how to create template repositories. To access these new response keys during the preview period, you must set this flag. |
 | name | __Required__ The name of the new repository. |
-| template_owner | __Required__ template_owner parameter |
-| template_repo | __Required__ template_repo parameter |
+| template_owner | __Required__  |
+| template_repo | __Required__  |
 | description | A short description of the new repository. |
 | owner | The organization or person who will own the new repository. To create a new repository in an organization, the authenticated user must be a member of the specified organization. |
 | private | Either `true` to create a new private repository or `false` to create a new public one. |
@@ -7481,7 +8309,7 @@ the `Location` header to make a second `GET` request.
 
 | name | description |
 |------|-------------|
-| ref | __Required__ ref parameter |
+| ref | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos download-zipball-archive
@@ -7498,7 +8326,7 @@ the `Location` header to make a second `GET` request.
 
 | name | description |
 |------|-------------|
-| ref | __Required__ ref parameter |
+| ref | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos enable-automated-security-fixes
@@ -7719,32 +8547,33 @@ Additionally, a combined `state` is returned. The `state` is one of:
 https://developer.github.com/v3/repos/commits/#get-a-commit
 
 Returns the contents of a single commit reference. You must have `read` access for the repository to use this endpoint.
-
-You can pass the appropriate [media type](https://developer.github.com/v3/media/#commits-commit-comparison-and-pull-requests) to fetch `diff` and `patch` formats. Diffs with binary data will have no `patch` property.
-
+**Note:** If there are more than 300 files in the commit diff, the response will include pagination link headers for the remaining files, up to a limit of 3000 files. Each page contains the static commit information, and the only changes are to the file listing.
+You can pass the appropriate [media type](https://developer.github.com/v3/media/#commits-commit-comparison-and-pull-requests) to  fetch `diff` and `patch` formats. Diffs with binary data will have no `patch` property.
 To return only the SHA-1 hash of the commit reference, you can provide the `sha` custom [media type](https://developer.github.com/v3/media/#commits-commit-comparison-and-pull-requests) in the `Accept` header. You can use this endpoint to check if a remote reference's SHA-1 hash is the same as your local reference's SHA-1 hash by providing the local SHA-1 reference as the ETag.
-
 **Signature verification object**
-
 The response will include a `verification` object that describes the result of verifying the commit's signature. The following fields are included in the `verification` object:
-
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `verified` | `boolean` | Indicates whether GitHub considers the signature in this commit to be verified. |
+| `reason` | `string` | The reason for verified value. Possible values and their meanings are enumerated in table below. |
+| `signature` | `string` | The signature that was extracted from the commit. |
+| `payload` | `string` | The value that was signed. |
 These are the possible values for `reason` in the `verification` object:
-
-| Value                    | Description                                                                                                                       |
-| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
-| `expired_key`            | The key that made the signature is expired.                                                                                       |
-| `not_signing_key`        | The "signing" flag is not among the usage flags in the GPG key that made the signature.                                           |
-| `gpgverify_error`        | There was an error communicating with the signature verification service.                                                         |
-| `gpgverify_unavailable`  | The signature verification service is currently unavailable.                                                                      |
-| `unsigned`               | The object does not include a signature.                                                                                          |
-| `unknown_signature_type` | A non-PGP signature was found in the commit.                                                                                      |
-| `no_user`                | No user was associated with the `committer` email address in the commit.                                                          |
-| `unverified_email`       | The `committer` email address in the commit was associated with a user, but the email address is not verified on her/his account. |
-| `bad_email`              | The `committer` email address in the commit is not included in the identities of the PGP key that made the signature.             |
-| `unknown_key`            | The key that made the signature has not been registered with any user's account.                                                  |
-| `malformed_signature`    | There was an error parsing the signature.                                                                                         |
-| `invalid`                | The signature could not be cryptographically verified using the key whose key-id was found in the signature.                      |
-| `valid`                  | None of the above errors applied, so the signature is considered to be verified.                                                  |
+| Value | Description |
+| ----- | ----------- |
+| `expired_key` | The key that made the signature is expired. |
+| `not_signing_key` | The "signing" flag is not among the usage flags in the GPG key that made the signature. |
+| `gpgverify_error` | There was an error communicating with the signature verification service. |
+| `gpgverify_unavailable` | The signature verification service is currently unavailable. |
+| `unsigned` | The object does not include a signature. |
+| `unknown_signature_type` | A non-PGP signature was found in the commit. |
+| `no_user` | No user was associated with the `committer` email address in the commit. |
+| `unverified_email` | The `committer` email address in the commit was associated with a user, but the email address is not verified on her/his account. |
+| `bad_email` | The `committer` email address in the commit is not included in the identities of the PGP key that made the signature. |
+| `unknown_key` | The key that made the signature has not been registered with any user's account. |
+| `malformed_signature` | There was an error parsing the signature. |
+| `invalid` | The signature could not be cryptographically verified using the key whose key-id was found in the signature. |
+| `valid` | None of the above errors applied, so the signature is considered to be verified. |
 
 ### parameters
 
@@ -7908,7 +8737,6 @@ https://developer.github.com/v3/repos/deployments/#get-a-deployment
 | deployment_id | __Required__ deployment_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | ant-man-preview | The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must set this flag. |
-| machine-man-preview | To access the API with your GitHub App, you must set this flag for your requests. |
 
 ## repos get-deployment-status
 
@@ -7923,10 +8751,9 @@ Users with pull access can view a deployment status for a deployment:
 |------|-------------|
 | deployment_id | __Required__ deployment_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
-| status_id | __Required__ status_id parameter |
+| status_id | __Required__  |
 | ant-man-preview | The `inactive` state and the `log_url`, `environment_url`, and `auto_inactive` parameters are currently available for developers to preview. Please see the [blog post](https://developer.github.com/changes/2016-04-06-deployment-and-deployment-status-enhancements) for full details.<br><br>To access the API during the preview period, you must set this flag. |
 | flash-preview | New features in the Deployments API on GitHub are currently available during a public beta. Please see the [blog post](https://developer.github.com/changes/2018-10-16-deployments-environments-states-and-auto-inactive-updates/) for full details.<br><br>To access the new `environment` parameter, the two new values for the `state` parameter (`in_progress` and `queued`), and use `auto_inactive` on production deployments during the public beta period, you must set this flag. |
-| machine-man-preview | To access the API with your GitHub App, you must set this flag for your requests. |
 
 ## repos get-latest-pages-build
 
@@ -7980,7 +8807,7 @@ https://developer.github.com/v3/repos/pages/#get-github-pages-build
 
 | name | description |
 |------|-------------|
-| build_id | __Required__ build_id parameter |
+| build_id | __Required__  |
 | repo | __Required__ repository in OWNER/REPO form |
 
 ## repos get-participation-stats
@@ -8299,26 +9126,29 @@ This resource is also available via a legacy route: `GET /repos/:owner/:repo/sta
 https://developer.github.com/v3/repos/commits/#list-commits
 
 **Signature verification object**
-
 The response will include a `verification` object that describes the result of verifying the commit's signature. The following fields are included in the `verification` object:
-
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `verified` | `boolean` | Indicates whether GitHub considers the signature in this commit to be verified. |
+| `reason` | `string` | The reason for verified value. Possible values and their meanings are enumerated in table below. |
+| `signature` | `string` | The signature that was extracted from the commit. |
+| `payload` | `string` | The value that was signed. |
 These are the possible values for `reason` in the `verification` object:
-
-| Value                    | Description                                                                                                                       |
-| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
-| `expired_key`            | The key that made the signature is expired.                                                                                       |
-| `not_signing_key`        | The "signing" flag is not among the usage flags in the GPG key that made the signature.                                           |
-| `gpgverify_error`        | There was an error communicating with the signature verification service.                                                         |
-| `gpgverify_unavailable`  | The signature verification service is currently unavailable.                                                                      |
-| `unsigned`               | The object does not include a signature.                                                                                          |
-| `unknown_signature_type` | A non-PGP signature was found in the commit.                                                                                      |
-| `no_user`                | No user was associated with the `committer` email address in the commit.                                                          |
-| `unverified_email`       | The `committer` email address in the commit was associated with a user, but the email address is not verified on her/his account. |
-| `bad_email`              | The `committer` email address in the commit is not included in the identities of the PGP key that made the signature.             |
-| `unknown_key`            | The key that made the signature has not been registered with any user's account.                                                  |
-| `malformed_signature`    | There was an error parsing the signature.                                                                                         |
-| `invalid`                | The signature could not be cryptographically verified using the key whose key-id was found in the signature.                      |
-| `valid`                  | None of the above errors applied, so the signature is considered to be verified.                                                  |
+| Value | Description |
+| ----- | ----------- |
+| `expired_key` | The key that made the signature is expired. |
+| `not_signing_key` | The "signing" flag is not among the usage flags in the GPG key that made the signature. |
+| `gpgverify_error` | There was an error communicating with the signature verification service. |
+| `gpgverify_unavailable` | The signature verification service is currently unavailable. |
+| `unsigned` | The object does not include a signature. |
+| `unknown_signature_type` | A non-PGP signature was found in the commit. |
+| `no_user` | No user was associated with the `committer` email address in the commit. |
+| `unverified_email` | The `committer` email address in the commit was associated with a user, but the email address is not verified on her/his account. |
+| `bad_email` | The `committer` email address in the commit is not included in the identities of the PGP key that made the signature. |
+| `unknown_key` | The key that made the signature has not been registered with any user's account. |
+| `malformed_signature` | There was an error parsing the signature. |
+| `invalid` | The signature could not be cryptographically verified using the key whose key-id was found in the signature. |
+| `valid` | None of the above errors applied, so the signature is considered to be verified. |
 
 ### parameters
 
@@ -9019,7 +9849,7 @@ https://developer.github.com/v3/repos/comments/#update-a-commit-comment
 
 https://developer.github.com/v3/repos/pages/#update-information-about-a-github-pages-site
 
-
+Updates information for a GitHub Pages site. For more information, see "[About GitHub Pages](/github/working-with-github-pages/about-github-pages).
 
 ### parameters
 
@@ -9027,8 +9857,8 @@ https://developer.github.com/v3/repos/pages/#update-information-about-a-github-p
 | name | description |
 |------|-------------|
 | repo | __Required__ repository in OWNER/REPO form |
+| source | __Required__  |
 | cname | Specify a custom domain for the repository. Sending a `null` value will remove the custom domain. For more about custom domains, see "[Using a custom domain with GitHub Pages](https://help.github.com/articles/using-a-custom-domain-with-github-pages/)." |
-| source |  |
 
 ## repos update-invitation
 
@@ -9180,8 +10010,8 @@ endpoint lists the renamed filenames. For more information and help, contact [Gi
 | release_id | __Required__ release_id parameter |
 | repo | __Required__ repository in OWNER/REPO form |
 | content-type | override the Content-Type header |
-| label | label parameter |
-| name | name parameter |
+| label |  |
+| name |  |
 
 # scim
 
@@ -10787,7 +11617,7 @@ https://developer.github.com/v3/users/followers/#check-if-a-user-follows-another
 
 | name | description |
 |------|-------------|
-| target_user | __Required__ target_user parameter |
+| target_user | __Required__  |
 | username | __Required__  |
 
 ## users check-person-is-followed-by-authenticated

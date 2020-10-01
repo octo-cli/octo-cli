@@ -17,14 +17,14 @@ type BillingCmd struct {
 }
 
 type BillingGetGithubActionsBillingGheCmd struct {
-	EnterpriseId string `name:"enterprise_id" required:"true"`
+	Enterprise string `name:"enterprise" required:"true"`
 	internal.BaseCmd
 }
 
 func (c *BillingGetGithubActionsBillingGheCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/enterprises/{enterprise_id}/settings/billing/actions")
-	c.UpdateURLPath("enterprise_id", c.EnterpriseId)
+	c.SetURLPath("/enterprises/{enterprise}/settings/billing/actions")
+	c.UpdateURLPath("enterprise", c.Enterprise)
 	return c.DoRequest("GET")
 }
 
@@ -53,14 +53,14 @@ func (c *BillingGetGithubActionsBillingUserCmd) Run(isValueSetMap map[string]boo
 }
 
 type BillingGetGithubPackagesBillingGheCmd struct {
-	EnterpriseId string `name:"enterprise_id" required:"true"`
+	Enterprise string `name:"enterprise" required:"true"`
 	internal.BaseCmd
 }
 
 func (c *BillingGetGithubPackagesBillingGheCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/enterprises/{enterprise_id}/settings/billing/packages")
-	c.UpdateURLPath("enterprise_id", c.EnterpriseId)
+	c.SetURLPath("/enterprises/{enterprise}/settings/billing/packages")
+	c.UpdateURLPath("enterprise", c.Enterprise)
 	return c.DoRequest("GET")
 }
 
@@ -89,14 +89,14 @@ func (c *BillingGetGithubPackagesBillingUserCmd) Run(isValueSetMap map[string]bo
 }
 
 type BillingGetSharedStorageBillingGheCmd struct {
-	EnterpriseId string `name:"enterprise_id" required:"true"`
+	Enterprise string `name:"enterprise" required:"true"`
 	internal.BaseCmd
 }
 
 func (c *BillingGetSharedStorageBillingGheCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
-	c.SetURLPath("/enterprises/{enterprise_id}/settings/billing/shared-storage")
-	c.UpdateURLPath("enterprise_id", c.EnterpriseId)
+	c.SetURLPath("/enterprises/{enterprise}/settings/billing/shared-storage")
+	c.UpdateURLPath("enterprise", c.Enterprise)
 	return c.DoRequest("GET")
 }
 
