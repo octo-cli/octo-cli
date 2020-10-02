@@ -233,10 +233,9 @@ func (c *OrgsGetWebhookCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type OrgsListAppInstallationsCmd struct {
-	MachineMan bool   `name:"machine-man-preview" required:"true"`
-	Org        string `name:"org" required:"true"`
-	Page       int64  `name:"page"`
-	PerPage    int64  `name:"per_page"`
+	Org     string `name:"org" required:"true"`
+	Page    int64  `name:"page"`
+	PerPage int64  `name:"per_page"`
 	internal.BaseCmd
 }
 
@@ -246,7 +245,6 @@ func (c *OrgsListAppInstallationsCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLPath("org", c.Org)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
-	c.UpdatePreview("machine-man", c.MachineMan)
 	return c.DoRequest("GET")
 }
 
@@ -580,6 +578,7 @@ type OrgsUpdateCmd struct {
 	Location                             string `name:"location"`
 	MembersAllowedRepositoryCreationType string `name:"members_allowed_repository_creation_type"`
 	MembersCanCreateInternalRepositories bool   `name:"members_can_create_internal_repositories"`
+	MembersCanCreatePages                bool   `name:"members_can_create_pages"`
 	MembersCanCreatePrivateRepositories  bool   `name:"members_can_create_private_repositories"`
 	MembersCanCreatePublicRepositories   bool   `name:"members_can_create_public_repositories"`
 	MembersCanCreateRepositories         bool   `name:"members_can_create_repositories"`
@@ -604,6 +603,7 @@ func (c *OrgsUpdateCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateBody("location", c.Location)
 	c.UpdateBody("members_allowed_repository_creation_type", c.MembersAllowedRepositoryCreationType)
 	c.UpdateBody("members_can_create_internal_repositories", c.MembersCanCreateInternalRepositories)
+	c.UpdateBody("members_can_create_pages", c.MembersCanCreatePages)
 	c.UpdateBody("members_can_create_private_repositories", c.MembersCanCreatePrivateRepositories)
 	c.UpdateBody("members_can_create_public_repositories", c.MembersCanCreatePublicRepositories)
 	c.UpdateBody("members_can_create_repositories", c.MembersCanCreateRepositories)
