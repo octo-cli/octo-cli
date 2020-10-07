@@ -229,7 +229,6 @@ func (c *IssuesGetCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesGetCommentCmd struct {
-	MachineMan   bool   `name:"machine-man-preview"`
 	SquirrelGirl bool   `name:"squirrel-girl-preview"`
 	Repo         string `name:"repo" required:"true"`
 	CommentId    int64  `name:"comment_id" required:"true"`
@@ -241,17 +240,14 @@ func (c *IssuesGetCommentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetURLPath("/repos/{repo}/issues/comments/{comment_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("comment_id", c.CommentId)
-	c.UpdatePreview("machine-man", c.MachineMan)
 	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	return c.DoRequest("GET")
 }
 
 type IssuesGetEventCmd struct {
-	MachineMan bool   `name:"machine-man-preview"`
-	SailorV    bool   `name:"sailor-v-preview"`
-	Starfox    bool   `name:"starfox-preview"`
-	Repo       string `name:"repo" required:"true"`
-	EventId    int64  `name:"event_id" required:"true"`
+	Starfox bool   `name:"starfox-preview"`
+	Repo    string `name:"repo" required:"true"`
+	EventId int64  `name:"event_id" required:"true"`
 	internal.BaseCmd
 }
 
@@ -261,8 +257,6 @@ func (c *IssuesGetEventCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("event_id", c.EventId)
 	c.UpdatePreview("starfox", c.Starfox)
-	c.UpdatePreview("machine-man", c.MachineMan)
-	c.UpdatePreview("sailor-v", c.SailorV)
 	return c.DoRequest("GET")
 }
 
@@ -311,7 +305,6 @@ func (c *IssuesListAssigneesCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesListCmd struct {
-	MachineMan   bool   `name:"machine-man-preview"`
 	SquirrelGirl bool   `name:"squirrel-girl-preview"`
 	Collab       bool   `name:"collab"`
 	Direction    string `name:"direction"`
@@ -343,7 +336,6 @@ func (c *IssuesListCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLQuery("pulls", c.Pulls)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
-	c.UpdatePreview("machine-man", c.MachineMan)
 	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	return c.DoRequest("GET")
 }
@@ -395,7 +387,6 @@ func (c *IssuesListCommentsForRepoCmd) Run(isValueSetMap map[string]bool) error 
 }
 
 type IssuesListEventsCmd struct {
-	SailorV     bool   `name:"sailor-v-preview"`
 	Starfox     bool   `name:"starfox-preview"`
 	Repo        string `name:"repo" required:"true"`
 	IssueNumber int64  `name:"issue_number" required:"true"`
@@ -412,12 +403,10 @@ func (c *IssuesListEventsCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
 	c.UpdatePreview("starfox", c.Starfox)
-	c.UpdatePreview("sailor-v", c.SailorV)
 	return c.DoRequest("GET")
 }
 
 type IssuesListEventsForRepoCmd struct {
-	SailorV bool   `name:"sailor-v-preview"`
 	Starfox bool   `name:"starfox-preview"`
 	Repo    string `name:"repo" required:"true"`
 	Page    int64  `name:"page"`
@@ -432,7 +421,6 @@ func (c *IssuesListEventsForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
 	c.UpdatePreview("starfox", c.Starfox)
-	c.UpdatePreview("sailor-v", c.SailorV)
 	return c.DoRequest("GET")
 }
 
@@ -459,7 +447,6 @@ func (c *IssuesListEventsForTimelineCmd) Run(isValueSetMap map[string]bool) erro
 }
 
 type IssuesListForAuthenticatedUserCmd struct {
-	MachineMan   bool   `name:"machine-man-preview"`
 	SquirrelGirl bool   `name:"squirrel-girl-preview"`
 	Direction    string `name:"direction"`
 	Filter       string `name:"filter"`
@@ -483,13 +470,11 @@ func (c *IssuesListForAuthenticatedUserCmd) Run(isValueSetMap map[string]bool) e
 	c.UpdateURLQuery("since", c.Since)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
-	c.UpdatePreview("machine-man", c.MachineMan)
 	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	return c.DoRequest("GET")
 }
 
 type IssuesListForOrgCmd struct {
-	MachineMan   bool   `name:"machine-man-preview"`
 	SquirrelGirl bool   `name:"squirrel-girl-preview"`
 	Org          string `name:"org" required:"true"`
 	Direction    string `name:"direction"`
@@ -515,13 +500,11 @@ func (c *IssuesListForOrgCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLQuery("since", c.Since)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
-	c.UpdatePreview("machine-man", c.MachineMan)
 	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	return c.DoRequest("GET")
 }
 
 type IssuesListForRepoCmd struct {
-	MachineMan   bool   `name:"machine-man-preview"`
 	SquirrelGirl bool   `name:"squirrel-girl-preview"`
 	Repo         string `name:"repo" required:"true"`
 	Assignee     string `name:"assignee"`
@@ -553,7 +536,6 @@ func (c *IssuesListForRepoCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLQuery("since", c.Since)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
-	c.UpdatePreview("machine-man", c.MachineMan)
 	c.UpdatePreview("squirrel-girl", c.SquirrelGirl)
 	return c.DoRequest("GET")
 }
@@ -633,7 +615,6 @@ func (c *IssuesListMilestonesCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type IssuesLockCmd struct {
-	SailorV     bool   `name:"sailor-v-preview"`
 	Repo        string `name:"repo" required:"true"`
 	IssueNumber int64  `name:"issue_number" required:"true"`
 	LockReason  string `name:"lock_reason"`
@@ -645,7 +626,6 @@ func (c *IssuesLockCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetURLPath("/repos/{repo}/issues/{issue_number}/lock")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("issue_number", c.IssueNumber)
-	c.UpdatePreview("sailor-v", c.SailorV)
 	c.UpdateBody("lock_reason", c.LockReason)
 	return c.DoRequest("PUT")
 }
