@@ -424,7 +424,7 @@ func (c *ReposCreateDeploymentStatusCmd) Run(isValueSetMap map[string]bool) erro
 type ReposCreateDispatchEventCmd struct {
 	Repo          string              `name:"repo" required:"true"`
 	ClientPayload internal.JSONObject `name:"client_payload"`
-	EventType     string              `name:"event_type"`
+	EventType     string              `name:"event_type" required:"true"`
 	internal.BaseCmd
 }
 
@@ -586,8 +586,8 @@ func (c *ReposCreateOrUpdateFileContentsCmd) Run(isValueSetMap map[string]bool) 
 type ReposCreatePagesSiteCmd struct {
 	Switcheroo   bool   `name:"switcheroo-preview" required:"true"`
 	Repo         string `name:"repo" required:"true"`
-	SourceBranch string `name:"source.branch"`
 	SourcePath   string `name:"source.path"`
+	SourceBranch string `name:"source.branch" required:"true"`
 	internal.BaseCmd
 }
 
@@ -1285,7 +1285,6 @@ func (c *ReposGetDeployKeyCmd) Run(isValueSetMap map[string]bool) error {
 
 type ReposGetDeploymentCmd struct {
 	AntMan       bool   `name:"ant-man-preview"`
-	MachineMan   bool   `name:"machine-man-preview"`
 	Repo         string `name:"repo" required:"true"`
 	DeploymentId int64  `name:"deployment_id" required:"true"`
 	internal.BaseCmd
@@ -1296,7 +1295,6 @@ func (c *ReposGetDeploymentCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetURLPath("/repos/{repo}/deployments/{deployment_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("deployment_id", c.DeploymentId)
-	c.UpdatePreview("machine-man", c.MachineMan)
 	c.UpdatePreview("ant-man", c.AntMan)
 	return c.DoRequest("GET")
 }
@@ -1304,7 +1302,6 @@ func (c *ReposGetDeploymentCmd) Run(isValueSetMap map[string]bool) error {
 type ReposGetDeploymentStatusCmd struct {
 	AntMan       bool   `name:"ant-man-preview"`
 	Flash        bool   `name:"flash-preview"`
-	MachineMan   bool   `name:"machine-man-preview"`
 	Repo         string `name:"repo" required:"true"`
 	DeploymentId int64  `name:"deployment_id" required:"true"`
 	StatusId     int64  `name:"status_id" required:"true"`
@@ -1317,7 +1314,6 @@ func (c *ReposGetDeploymentStatusCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("deployment_id", c.DeploymentId)
 	c.UpdateURLPath("status_id", c.StatusId)
-	c.UpdatePreview("machine-man", c.MachineMan)
 	c.UpdatePreview("flash", c.Flash)
 	c.UpdatePreview("ant-man", c.AntMan)
 	return c.DoRequest("GET")
@@ -2404,7 +2400,7 @@ func (c *ReposUpdateCommitCommentCmd) Run(isValueSetMap map[string]bool) error {
 type ReposUpdateInformationAboutPagesSiteCmd struct {
 	Repo   string `name:"repo" required:"true"`
 	Cname  string `name:"cname"`
-	Source string `name:"source"`
+	Source string `name:"source" required:"true"`
 	internal.BaseCmd
 }
 
