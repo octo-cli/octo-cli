@@ -49,7 +49,6 @@ func (c *PullsCheckIfMergedCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsCreateCmd struct {
-	SailorV             bool   `name:"sailor-v-preview"`
 	Repo                string `name:"repo" required:"true"`
 	Body                string `name:"body"`
 	Draft               bool   `name:"draft"`
@@ -65,7 +64,6 @@ func (c *PullsCreateCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/pulls")
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdatePreview("sailor-v", c.SailorV)
 	c.UpdateBody("base", c.Base)
 	c.UpdateBody("body", c.Body)
 	c.UpdateBody("draft", c.Draft)
@@ -201,7 +199,6 @@ func (c *PullsDismissReviewCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsGetCmd struct {
-	SailorV    bool   `name:"sailor-v-preview"`
 	Repo       string `name:"repo" required:"true"`
 	PullNumber int64  `name:"pull_number" required:"true"`
 	internal.BaseCmd
@@ -212,7 +209,6 @@ func (c *PullsGetCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetURLPath("/repos/{repo}/pulls/{pull_number}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("pull_number", c.PullNumber)
-	c.UpdatePreview("sailor-v", c.SailorV)
 	return c.DoRequest("GET")
 }
 
@@ -251,7 +247,6 @@ func (c *PullsGetReviewCommentCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsListCmd struct {
-	SailorV   bool   `name:"sailor-v-preview"`
 	Repo      string `name:"repo" required:"true"`
 	Base      string `name:"base"`
 	Direction string `name:"direction"`
@@ -274,7 +269,6 @@ func (c *PullsListCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLQuery("direction", c.Direction)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
-	c.UpdatePreview("sailor-v", c.SailorV)
 	return c.DoRequest("GET")
 }
 
@@ -521,7 +515,6 @@ func (c *PullsUpdateBranchCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type PullsUpdateCmd struct {
-	SailorV             bool   `name:"sailor-v-preview"`
 	Repo                string `name:"repo" required:"true"`
 	PullNumber          int64  `name:"pull_number" required:"true"`
 	Base                string `name:"base"`
@@ -537,7 +530,6 @@ func (c *PullsUpdateCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetURLPath("/repos/{repo}/pulls/{pull_number}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("pull_number", c.PullNumber)
-	c.UpdatePreview("sailor-v", c.SailorV)
 	c.UpdateBody("base", c.Base)
 	c.UpdateBody("body", c.Body)
 	c.UpdateBody("maintainer_can_modify", c.MaintainerCanModify)

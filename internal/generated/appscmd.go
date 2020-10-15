@@ -43,7 +43,6 @@ type AppsCmd struct {
 }
 
 type AppsAddRepoToInstallationCmd struct {
-	MachineMan     bool  `name:"machine-man-preview" required:"true"`
 	InstallationId int64 `name:"installation_id" required:"true"`
 	RepositoryId   int64 `name:"repository_id" required:"true"`
 	internal.BaseCmd
@@ -54,7 +53,6 @@ func (c *AppsAddRepoToInstallationCmd) Run(isValueSetMap map[string]bool) error 
 	c.SetURLPath("/user/installations/{installation_id}/repositories/{repository_id}")
 	c.UpdateURLPath("installation_id", c.InstallationId)
 	c.UpdateURLPath("repository_id", c.RepositoryId)
-	c.UpdatePreview("machine-man", c.MachineMan)
 	return c.DoRequest("PUT")
 }
 
@@ -117,7 +115,6 @@ func (c *AppsCreateFromManifestCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsCreateInstallationAccessTokenCmd struct {
-	MachineMan             bool     `name:"machine-man-preview" required:"true"`
 	InstallationId         int64    `name:"installation_id" required:"true"`
 	PermissionsContents    string   `name:"permissions.contents"`
 	PermissionsDefNotARepo string   `name:"permissions.def_not_a_repo"`
@@ -133,7 +130,6 @@ func (c *AppsCreateInstallationAccessTokenCmd) Run(isValueSetMap map[string]bool
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/app/installations/{installation_id}/access_tokens")
 	c.UpdateURLPath("installation_id", c.InstallationId)
-	c.UpdatePreview("machine-man", c.MachineMan)
 	c.UpdateBody("permissions.contents", c.PermissionsContents)
 	c.UpdateBody("permissions.def_not_a_repo", c.PermissionsDefNotARepo)
 	c.UpdateBody("permissions.deployments", c.PermissionsDeployments)
@@ -159,7 +155,6 @@ func (c *AppsDeleteAuthorizationCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsDeleteInstallationCmd struct {
-	MachineMan     bool  `name:"machine-man-preview" required:"true"`
 	InstallationId int64 `name:"installation_id" required:"true"`
 	internal.BaseCmd
 }
@@ -168,7 +163,6 @@ func (c *AppsDeleteInstallationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/app/installations/{installation_id}")
 	c.UpdateURLPath("installation_id", c.InstallationId)
-	c.UpdatePreview("machine-man", c.MachineMan)
 	return c.DoRequest("DELETE")
 }
 
@@ -187,20 +181,17 @@ func (c *AppsDeleteTokenCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsGetAuthenticatedCmd struct {
-	MachineMan bool `name:"machine-man-preview" required:"true"`
 	internal.BaseCmd
 }
 
 func (c *AppsGetAuthenticatedCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/app")
-	c.UpdatePreview("machine-man", c.MachineMan)
 	return c.DoRequest("GET")
 }
 
 type AppsGetBySlugCmd struct {
-	MachineMan bool   `name:"machine-man-preview" required:"true"`
-	AppSlug    string `name:"app_slug" required:"true"`
+	AppSlug string `name:"app_slug" required:"true"`
 	internal.BaseCmd
 }
 
@@ -208,12 +199,10 @@ func (c *AppsGetBySlugCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/apps/{app_slug}")
 	c.UpdateURLPath("app_slug", c.AppSlug)
-	c.UpdatePreview("machine-man", c.MachineMan)
 	return c.DoRequest("GET")
 }
 
 type AppsGetInstallationCmd struct {
-	MachineMan     bool  `name:"machine-man-preview" required:"true"`
 	InstallationId int64 `name:"installation_id" required:"true"`
 	internal.BaseCmd
 }
@@ -222,13 +211,11 @@ func (c *AppsGetInstallationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/app/installations/{installation_id}")
 	c.UpdateURLPath("installation_id", c.InstallationId)
-	c.UpdatePreview("machine-man", c.MachineMan)
 	return c.DoRequest("GET")
 }
 
 type AppsGetOrgInstallationCmd struct {
-	MachineMan bool   `name:"machine-man-preview" required:"true"`
-	Org        string `name:"org" required:"true"`
+	Org string `name:"org" required:"true"`
 	internal.BaseCmd
 }
 
@@ -236,13 +223,11 @@ func (c *AppsGetOrgInstallationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/orgs/{org}/installation")
 	c.UpdateURLPath("org", c.Org)
-	c.UpdatePreview("machine-man", c.MachineMan)
 	return c.DoRequest("GET")
 }
 
 type AppsGetRepoInstallationCmd struct {
-	MachineMan bool   `name:"machine-man-preview" required:"true"`
-	Repo       string `name:"repo" required:"true"`
+	Repo string `name:"repo" required:"true"`
 	internal.BaseCmd
 }
 
@@ -250,7 +235,6 @@ func (c *AppsGetRepoInstallationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/installation")
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdatePreview("machine-man", c.MachineMan)
 	return c.DoRequest("GET")
 }
 
@@ -279,8 +263,7 @@ func (c *AppsGetSubscriptionPlanForAccountStubbedCmd) Run(isValueSetMap map[stri
 }
 
 type AppsGetUserInstallationCmd struct {
-	MachineMan bool   `name:"machine-man-preview" required:"true"`
-	Username   string `name:"username" required:"true"`
+	Username string `name:"username" required:"true"`
 	internal.BaseCmd
 }
 
@@ -288,7 +271,6 @@ func (c *AppsGetUserInstallationCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/users/{username}/installation")
 	c.UpdateURLPath("username", c.Username)
-	c.UpdatePreview("machine-man", c.MachineMan)
 	return c.DoRequest("GET")
 }
 
@@ -334,7 +316,6 @@ func (c *AppsListAccountsForPlanStubbedCmd) Run(isValueSetMap map[string]bool) e
 
 type AppsListInstallationReposForAuthenticatedUserCmd struct {
 	Mercy          bool  `name:"mercy-preview"`
-	MachineMan     bool  `name:"machine-man-preview" required:"true"`
 	InstallationId int64 `name:"installation_id" required:"true"`
 	Page           int64 `name:"page"`
 	PerPage        int64 `name:"per_page"`
@@ -347,17 +328,15 @@ func (c *AppsListInstallationReposForAuthenticatedUserCmd) Run(isValueSetMap map
 	c.UpdateURLPath("installation_id", c.InstallationId)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
-	c.UpdatePreview("machine-man", c.MachineMan)
 	c.UpdatePreview("mercy", c.Mercy)
 	return c.DoRequest("GET")
 }
 
 type AppsListInstallationsCmd struct {
-	MachineMan bool   `name:"machine-man-preview" required:"true"`
-	Outdated   string `name:"outdated"`
-	Page       int64  `name:"page"`
-	PerPage    int64  `name:"per_page"`
-	Since      string `name:"since"`
+	Outdated string `name:"outdated"`
+	Page     int64  `name:"page"`
+	PerPage  int64  `name:"per_page"`
+	Since    string `name:"since"`
 	internal.BaseCmd
 }
 
@@ -368,14 +347,12 @@ func (c *AppsListInstallationsCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLQuery("page", c.Page)
 	c.UpdateURLQuery("since", c.Since)
 	c.UpdateURLQuery("outdated", c.Outdated)
-	c.UpdatePreview("machine-man", c.MachineMan)
 	return c.DoRequest("GET")
 }
 
 type AppsListInstallationsForAuthenticatedUserCmd struct {
-	MachineMan bool  `name:"machine-man-preview" required:"true"`
-	Page       int64 `name:"page"`
-	PerPage    int64 `name:"per_page"`
+	Page    int64 `name:"page"`
+	PerPage int64 `name:"per_page"`
 	internal.BaseCmd
 }
 
@@ -384,7 +361,6 @@ func (c *AppsListInstallationsForAuthenticatedUserCmd) Run(isValueSetMap map[str
 	c.SetURLPath("/user/installations")
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
-	c.UpdatePreview("machine-man", c.MachineMan)
 	return c.DoRequest("GET")
 }
 
@@ -417,10 +393,9 @@ func (c *AppsListPlansStubbedCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type AppsListReposAccessibleToInstallationCmd struct {
-	Mercy      bool  `name:"mercy-preview"`
-	MachineMan bool  `name:"machine-man-preview" required:"true"`
-	Page       int64 `name:"page"`
-	PerPage    int64 `name:"per_page"`
+	Mercy   bool  `name:"mercy-preview"`
+	Page    int64 `name:"page"`
+	PerPage int64 `name:"per_page"`
 	internal.BaseCmd
 }
 
@@ -429,7 +404,6 @@ func (c *AppsListReposAccessibleToInstallationCmd) Run(isValueSetMap map[string]
 	c.SetURLPath("/installation/repositories")
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
-	c.UpdatePreview("machine-man", c.MachineMan)
 	c.UpdatePreview("mercy", c.Mercy)
 	return c.DoRequest("GET")
 }
@@ -463,7 +437,6 @@ func (c *AppsListSubscriptionsForAuthenticatedUserStubbedCmd) Run(isValueSetMap 
 }
 
 type AppsRemoveRepoFromInstallationCmd struct {
-	MachineMan     bool  `name:"machine-man-preview" required:"true"`
 	InstallationId int64 `name:"installation_id" required:"true"`
 	RepositoryId   int64 `name:"repository_id" required:"true"`
 	internal.BaseCmd
@@ -474,7 +447,6 @@ func (c *AppsRemoveRepoFromInstallationCmd) Run(isValueSetMap map[string]bool) e
 	c.SetURLPath("/user/installations/{installation_id}/repositories/{repository_id}")
 	c.UpdateURLPath("installation_id", c.InstallationId)
 	c.UpdateURLPath("repository_id", c.RepositoryId)
-	c.UpdatePreview("machine-man", c.MachineMan)
 	return c.DoRequest("DELETE")
 }
 
