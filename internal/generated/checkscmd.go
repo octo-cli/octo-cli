@@ -19,7 +19,6 @@ type ChecksCmd struct {
 }
 
 type ChecksCreateCmd struct {
-	Antiope           bool                  `name:"antiope-preview" required:"true"`
 	Repo              string                `name:"repo" required:"true"`
 	Actions           []internal.JSONObject `name:"actions"`
 	CompletedAt       string                `name:"completed_at"`
@@ -42,7 +41,6 @@ func (c *ChecksCreateCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/check-runs")
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdatePreview("antiope", c.Antiope)
 	c.UpdateBody("actions", c.Actions)
 	c.UpdateBody("completed_at", c.CompletedAt)
 	c.UpdateBody("conclusion", c.Conclusion)
@@ -61,7 +59,6 @@ func (c *ChecksCreateCmd) Run(isValueSetMap map[string]bool) error {
 }
 
 type ChecksCreateSuiteCmd struct {
-	Antiope bool   `name:"antiope-preview" required:"true"`
 	Repo    string `name:"repo" required:"true"`
 	HeadSha string `name:"head_sha" required:"true"`
 	internal.BaseCmd
@@ -71,13 +68,11 @@ func (c *ChecksCreateSuiteCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/check-suites")
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdatePreview("antiope", c.Antiope)
 	c.UpdateBody("head_sha", c.HeadSha)
 	return c.DoRequest("POST")
 }
 
 type ChecksGetCmd struct {
-	Antiope    bool   `name:"antiope-preview" required:"true"`
 	Repo       string `name:"repo" required:"true"`
 	CheckRunId int64  `name:"check_run_id" required:"true"`
 	internal.BaseCmd
@@ -88,12 +83,10 @@ func (c *ChecksGetCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetURLPath("/repos/{repo}/check-runs/{check_run_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("check_run_id", c.CheckRunId)
-	c.UpdatePreview("antiope", c.Antiope)
 	return c.DoRequest("GET")
 }
 
 type ChecksGetSuiteCmd struct {
-	Antiope      bool   `name:"antiope-preview" required:"true"`
 	Repo         string `name:"repo" required:"true"`
 	CheckSuiteId int64  `name:"check_suite_id" required:"true"`
 	internal.BaseCmd
@@ -104,12 +97,10 @@ func (c *ChecksGetSuiteCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetURLPath("/repos/{repo}/check-suites/{check_suite_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("check_suite_id", c.CheckSuiteId)
-	c.UpdatePreview("antiope", c.Antiope)
 	return c.DoRequest("GET")
 }
 
 type ChecksListAnnotationsCmd struct {
-	Antiope    bool   `name:"antiope-preview" required:"true"`
 	Repo       string `name:"repo" required:"true"`
 	CheckRunId int64  `name:"check_run_id" required:"true"`
 	Page       int64  `name:"page"`
@@ -124,12 +115,10 @@ func (c *ChecksListAnnotationsCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLPath("check_run_id", c.CheckRunId)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
-	c.UpdatePreview("antiope", c.Antiope)
 	return c.DoRequest("GET")
 }
 
 type ChecksListForRefCmd struct {
-	Antiope   bool   `name:"antiope-preview" required:"true"`
 	Repo      string `name:"repo" required:"true"`
 	Ref       string `name:"ref" required:"true"`
 	CheckName string `name:"check_name"`
@@ -150,12 +139,10 @@ func (c *ChecksListForRefCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLQuery("filter", c.Filter)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
-	c.UpdatePreview("antiope", c.Antiope)
 	return c.DoRequest("GET")
 }
 
 type ChecksListForSuiteCmd struct {
-	Antiope      bool   `name:"antiope-preview" required:"true"`
 	Repo         string `name:"repo" required:"true"`
 	CheckSuiteId int64  `name:"check_suite_id" required:"true"`
 	CheckName    string `name:"check_name"`
@@ -176,12 +163,10 @@ func (c *ChecksListForSuiteCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLQuery("filter", c.Filter)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
-	c.UpdatePreview("antiope", c.Antiope)
 	return c.DoRequest("GET")
 }
 
 type ChecksListSuitesForRefCmd struct {
-	Antiope   bool   `name:"antiope-preview" required:"true"`
 	Repo      string `name:"repo" required:"true"`
 	Ref       string `name:"ref" required:"true"`
 	AppId     int64  `name:"app_id"`
@@ -200,12 +185,10 @@ func (c *ChecksListSuitesForRefCmd) Run(isValueSetMap map[string]bool) error {
 	c.UpdateURLQuery("check_name", c.CheckName)
 	c.UpdateURLQuery("per_page", c.PerPage)
 	c.UpdateURLQuery("page", c.Page)
-	c.UpdatePreview("antiope", c.Antiope)
 	return c.DoRequest("GET")
 }
 
 type ChecksRerequestSuiteCmd struct {
-	Antiope      bool   `name:"antiope-preview" required:"true"`
 	Repo         string `name:"repo" required:"true"`
 	CheckSuiteId int64  `name:"check_suite_id" required:"true"`
 	internal.BaseCmd
@@ -216,12 +199,10 @@ func (c *ChecksRerequestSuiteCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetURLPath("/repos/{repo}/check-suites/{check_suite_id}/rerequest")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("check_suite_id", c.CheckSuiteId)
-	c.UpdatePreview("antiope", c.Antiope)
 	return c.DoRequest("POST")
 }
 
 type ChecksSetSuitesPreferencesCmd struct {
-	Antiope           bool                  `name:"antiope-preview" required:"true"`
 	Repo              string                `name:"repo" required:"true"`
 	AutoTriggerChecks []internal.JSONObject `name:"auto_trigger_checks"`
 	internal.BaseCmd
@@ -231,13 +212,11 @@ func (c *ChecksSetSuitesPreferencesCmd) Run(isValueSetMap map[string]bool) error
 	c.SetIsValueSetMap(isValueSetMap)
 	c.SetURLPath("/repos/{repo}/check-suites/preferences")
 	c.UpdateURLPath("repo", c.Repo)
-	c.UpdatePreview("antiope", c.Antiope)
 	c.UpdateBody("auto_trigger_checks", c.AutoTriggerChecks)
 	return c.DoRequest("PATCH")
 }
 
 type ChecksUpdateCmd struct {
-	Antiope           bool                  `name:"antiope-preview" required:"true"`
 	Repo              string                `name:"repo" required:"true"`
 	CheckRunId        int64                 `name:"check_run_id" required:"true"`
 	Actions           []internal.JSONObject `name:"actions"`
@@ -261,7 +240,6 @@ func (c *ChecksUpdateCmd) Run(isValueSetMap map[string]bool) error {
 	c.SetURLPath("/repos/{repo}/check-runs/{check_run_id}")
 	c.UpdateURLPath("repo", c.Repo)
 	c.UpdateURLPath("check_run_id", c.CheckRunId)
-	c.UpdatePreview("antiope", c.Antiope)
 	c.UpdateBody("actions", c.Actions)
 	c.UpdateBody("completed_at", c.CompletedAt)
 	c.UpdateBody("conclusion", c.Conclusion)
